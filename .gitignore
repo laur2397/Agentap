@@ -8,3 +8,8 @@ __pycache__/
 venv/
 .DS_Store
 redesign_idei.json
+market_research.json
+idei2.json
+reviews.json
+idei_ranked.json
+concept_final.md
