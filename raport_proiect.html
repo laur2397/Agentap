@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agentap — Raport de proiect</title>
+<style>
+  :root {
+    --bg:#0e1220; --panel:#161c2e; --panel2:#1d2438; --ink:#e8ecf6; --muted:#9aa6c4;
+    --accent:#6ea8fe; --accent2:#9b8cff; --good:#46d39a; --line:#283150;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+    font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+  .wrap { max-width:1080px; margin:0 auto; padding:0 20px 80px; }
+  header.hero { background:linear-gradient(135deg,#1c2748,#241c52); padding:54px 20px 40px;
+    text-align:center; border-bottom:1px solid var(--line); }
+  .hero h1 { margin:0 0 6px; font-size:30px; letter-spacing:.3px; }
+  .hero .sub { color:var(--muted); max-width:760px; margin:0 auto 22px; }
+  .stats { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  .stat { background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:14px;
+    padding:14px 22px; min-width:120px; }
+  .stat b { display:block; font-size:28px; background:linear-gradient(90deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+  .stat span { color:var(--muted); font-size:12.5px; text-transform:uppercase; letter-spacing:.5px; }
+  section { margin-top:38px; }
+  h2 { font-size:20px; margin:0 0 4px; }
+  h2 .em { color:var(--accent); }
+  .lead { color:var(--muted); margin:0 0 18px; }
+  .flow { display:flex; align-items:stretch; gap:0; flex-wrap:wrap; }
+  .step { flex:1; min-width:150px; background:var(--panel); border:1px solid var(--line);
+    border-radius:12px; padding:14px 16px; position:relative; }
+  .step h4 { margin:0 0 4px; font-size:14px; }
+  .step p { margin:0; color:var(--muted); font-size:13px; }
+  .arrow { display:flex; align-items:center; color:var(--accent); font-size:22px; padding:0 8px; }
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:22px 24px; }
+  .rezumat { font-size:16px; border-left:3px solid var(--accent); padding-left:14px; color:#dde4f5; }
+  .faze-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:18px 0; }
+  .faza { background:var(--panel2); border:1px solid var(--line); border-radius:12px; padding:14px 18px; }
+  .faza h4 { margin:0 0 8px; color:var(--accent2); }
+  .faza ul { margin:0; padding-left:18px; } .faza li { margin:4px 0; }
+  table.riscuri { width:100%; border-collapse:collapse; margin:10px 0 4px; font-size:14px; }
+  .riscuri th, .riscuri td { text-align:left; padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  .riscuri th { color:var(--muted); font-weight:600; font-size:12px; text-transform:uppercase; }
+  .lvl { font-size:11px; padding:2px 9px; border-radius:20px; text-transform:uppercase; font-weight:700; }
+  .lvl-critic { background:#3a1b22; color:#ff8a9c; } .lvl-ridicat { background:#3a2f17; color:#ffce6e; }
+  .lvl-mediu { background:#1f3326; color:#7fe0ad; }
+  ol.pasi { list-style:none; padding:0; margin:8px 0 0; }
+  ol.pasi li { display:flex; gap:12px; align-items:flex-start; margin:10px 0; }
+  .num { flex:none; width:26px; height:26px; border-radius:50%; background:var(--accent); color:#0b1020;
+    font-weight:700; display:grid; place-items:center; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px; }
+  .dept { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; }
+  .dept-head { display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
+  .dept h3 { margin:0; font-size:16px; }
+  .hc { flex:none; background:rgba(110,168,254,.15); color:var(--accent); border-radius:20px;
+    padding:2px 10px; font-size:12px; font-weight:600; }
+  .intro { color:var(--muted); font-size:13px; margin:8px 0; }
+  .poz { font-size:13.5px; background:var(--panel2); border-radius:10px; padding:10px 12px; margin:8px 0; }
+  .tag { display:inline-block; font-size:10px; text-transform:uppercase; letter-spacing:.6px;
+    color:var(--good); border:1px solid var(--good); border-radius:6px; padding:1px 7px; margin-right:8px; }
+  details summary { cursor:pointer; color:var(--accent); font-size:13px; margin-top:6px; }
+  ul.roluri { columns:2; font-size:13px; color:var(--muted); margin:8px 0 0; padding-left:18px; }
+  .note { background:#23202e; border:1px solid #4a3d6b; border-radius:12px; padding:12px 16px;
+    color:#d8cdf0; font-size:13px; margin-top:14px; }
+  footer { text-align:center; color:var(--muted); font-size:12.5px; margin-top:40px; }
+  @media (max-width:680px) { .faze-grid { grid-template-columns:1fr; } ul.roluri { columns:1; } }
+</style>
+</head>
+<body>
+<header class="hero">
+  <h1>🏢 Memorie colectiva si potriviri pentru un cerc de business</h1>
+  <p class="sub">O aplicatie privata pentru un cerc de oameni de afaceri, care aduna informatia generata in discutii (cine ofera ce, cine cauta ce), o intelege si face proactiv legaturi intre membri, cu tact si cu acordul fiecaruia.</p>
+  <div class="stats">
+    <div class="stat"><b>239</b><span>agenți AI</span></div>
+    <div class="stat"><b>18</b><span>departamente</span></div>
+    <div class="stat"><b>220</b><span>angajați</span></div>
+    <div class="stat"><b>3</b><span>niveluri</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <h2>Cum lucrează firma <span class="em">— fan-out → fan-in</span></h2>
+    <p class="lead">Brief-ul intră o dată; ies un plan executiv și pozițiile fiecărui departament.</p>
+    <div class="flow">
+      <div class="step"><h4>1 · Brief</h4><p>Specificația proiectului intră în firmă.</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><h4>2 · 220 angajați</h4><p>Fiecare contribuie din rolul lui.</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><h4>3 · 18 manageri</h4><p>Sintetizează poziția echipei.</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><h4>4 · CEO</h4><p>Consolidează planul executiv.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>📋 Plan executiv consolidat <span class="em">(CEO)</span></h2>
+    <p class="lead">Livrabilul final al firmei pentru acest proiect.</p>
+    <div class="panel">
+    <p class="rezumat">Construim un intermediar discret pentru un cerc privat de business: o aplicație care adună informația din discuții (cine oferă ce, cine caută ce), o înțelege și propune proactiv conexiuni — mereu cu sursă citată și cu acordul ambelor părți. Diferențiatorul nu e o bază de date, ci tactul: relații făcute la momentul potrivit.</p>
+    <div class="faze-grid"><div class="faza"><h4>v1 — Validare în grupul propriu</h4><ul><li>Chat / grupuri native (informația intră direct în aplicație)</li><li>Note rapide cu marcaj „important”</li><li>Profil ce ofer / ce caut + control fin pe vizibilitate</li><li>Dictare după apel cu extragere AI (ofer/caut + rezumat)</li><li>Potrivire de bază + fluxul cu dublu consimțământ „vrei să te prezint?”</li><li>Secretară personală (briefing, sarcini, pe cine să contactezi)</li></ul></div><div class="faza"><h4>v2 — Creștere, dacă v1 prinde</h4><ul><li>Înregistrare live a întâlnirilor față în față (sensibil la consimțământ)</li><li>Feedback „a ieșit ceva?” + învățare automată în timp</li><li>Deschiderea spre mai multe comunități / rețea mai mare</li></ul></div></div>
+    <h3>Top riscuri &amp; mitigare</h3>
+    <table class="riscuri"><thead><tr><th>Nivel</th><th>Risc</th><th>Mitigare</th></tr></thead>
+      <tbody><tr><td><span class="lvl lvl-critic">critic</span></td><td>Captarea informației e prea greoaie</td><td>Dictare simplă după apel + chat nativ; zero formulare lungi.</td></tr><tr><td><span class="lvl lvl-ridicat">ridicat</span></td><td>AI marchează prea mult automat</td><td>Sugestiile automate stau separat de ce marchează omul.</td></tr><tr><td><span class="lvl lvl-critic">critic</span></td><td>Expunere fără acord la conexiuni</td><td>Dublu consimțământ înainte de orice prezentare.</td></tr><tr><td><span class="lvl lvl-ridicat">ridicat</span></td><td>Informație despre persoane din afară</td><td>Doar membrii intră în creierul de potriviri.</td></tr><tr><td><span class="lvl lvl-mediu">mediu</span></td><td>Mecanici de dependență / dark patterns</td><td>Behavioral Science validează etic fiecare mecanism de engagement.</td></tr></tbody></table>
+    <h3>Primii 3 pași</h3>
+    <ol class="pasi"><li><span class="num">1</span>Prototip al fluxului „dictare după apel → extragere ofer/caut” (efectul wow, cel mai ieftin de validat).</li><li><span class="num">2</span>Schema celor două straturi de date (ce știe app-ul vs. ce văd ceilalți) + motorul de potrivire în stratul ascuns.</li><li><span class="num">3</span>Fluxul de dublu consimțământ end-to-end pe un grup-pilot de 8-12 membri.</li></ol></div>
+  </section>
+
+  <section>
+    <h2>🗂️ Pozițiile departamentelor</h2>
+    <p class="lead">Toate cele 18 departamente, cu headcount-ul real. Cele cheie au și poziția pe proiect.</p>
+    <div class="grid">
+        <div class="dept">
+          <div class="dept-head">
+            <h3>Engineering / Dezvoltare software</h3>
+            <span class="hc">32 agenți</span>
+          </div>
+          <p class="intro">Nucleul tehnic si cel mai mare departament al firmei. Organizat pe mai multe echipe (squad-uri) cross-functionale, fiecare responsabila de o zona de produs. Construieste efectiv aplicatiile web, mobile si serviciile backend.</p>
+          <p class="poz"><span class="tag">poziție de departament</span>Livrăm v1 ca aplicație mobilă cu backend de chat în timp real. Squad-uri pe: Chat/Grupuri, Captare (dictare→extragere), Potriviri, Secretară. Primii pași: schema de date pe două straturi, API de potrivire ofer↔caut, integrarea cu serviciul AI de extragere.</p>
+          <details><summary>Roluri (10)</summary><ul class="roluri"><li><b>1×</b> Head of Engineering / VP Eng</li><li><b>3×</b> Engineering Manager</li><li><b>2×</b> Software Architect</li><li><b>3×</b> Tech Lead</li><li><b>5×</b> Senior Backend Developer</li><li><b>4×</b> Backend Developer</li><li><b>4×</b> Senior Frontend Developer</li><li><b>3×</b> Frontend Developer</li><li><b>3×</b> Senior Mobile Developer</li><li><b>4×</b> Mobile Developer</li></ul></details>
+        </div>
+
+        <div class="dept">
+          <div class="dept-head">
+            <h3>DevOps / Infrastructure / Cloud</h3>
+            <span class="hc">13 agenți</span>
+          </div>
+          <p class="intro">Asigura livrarea continua, stabilitatea si scalarea sistemelor. Creste proportional cu Engineering-ul pentru a nu deveni blocaj.</p>
+          
+          <details><summary>Roluri (7)</summary><ul class="roluri"><li><b>1×</b> DevOps Lead</li><li><b>3×</b> DevOps Engineer</li><li><b>3×</b> Site Reliability Engineer (SRE)</li><li><b>3×</b> Cloud Engineer</li><li><b>1×</b> System Administrator</li><li><b>1×</b> Network Engineer</li><li><b>1×</b> Database Administrator (DBA)</li></ul></details>
+        </div>
+
+        <div class="dept">
+          <div class="dept-head">
+            <h3>QA / Asigurarea calitatii</h3>
+            <span class="hc">14 agenți</span>
+          </div>
+          <p class="intro">Garanteaza ca produsul functioneaza corect. Dimensionat la circa un tester la 3-4 developeri, deci creste odata cu Engineering-ul.</p>
+          
+          <details><summary>Roluri (6)</summary><ul class="roluri"><li><b>1×</b> QA Lead</li><li><b>3×</b> Senior QA Automation Engineer</li><li><b>3×</b> QA Automation Engineer</li><li><b>4×</b> Manual QA Tester</li><li><b>2×</b> Performance Test Engineer</li><li><b>1×</b> Quality Engineer (Process)</li></ul></details>
+        </div>
+
+        <div class="dept">
+          <div class="dept-head">
+            <h3>Securitate</h3>
+            <span class="hc">10 agenți</span>
+          </div>
+          <p class="intro">Protejeaza produsul, datele si infrastructura impotriva amenintarilor.</p>
+          <p class="poz"><span class="tag">poziție de departament</span>Cerc privat = confidențialitate maximă. Criptare în tranzit și la repaus, control de acces strict pe cele două straturi de date, și o regulă fermă: persoanele din afară nu intră în motorul de potrivire. Pregătim un checklist de securitate înainte de pilot.</p>
+          <details><summary>Roluri (6)</summary><ul class="roluri"><li><b>1×</b> CISO Deputy / Security Lead</li><li><b>2×</b> Information Security Specialist</li><li><b>2×</b> Application Security Engineer</li><li><b>2×</b> Penetration Tester</li><li><b>2×</b> Compliance &amp; Audit Specialist</li><li><b>1×</b> Security Analyst (SOC)</li></ul></details>
+        </div>
+
+        <div class="dept">
+          <div class="dept-head">
+            <h3>Date, AI si Analytics</h3>
+            <span class="hc">11 agenți</span>
+          </div>
+          <p class="intro">Transforma datele in informatii utile si alimenteaza functionalitatile inteligente. Include analiza specifica de produs mobil (retentie, onboarding, notificari).</p>
+          <p class="poz"><span class="tag">poziție de departament</span>Măsurăm ce contează pentru validare: rata de captare a informației, calitatea potrivirilor, „a ieșit ceva?”. Construim palnia de onboarding și instrumentăm efectul wow ca să știm dacă pilotul reușește.</p>
+          <details><summary>Roluri (8)</summary><ul class="roluri"><li><b>1×</b> Data / AI Lead</li><li><b>2×</b> Data Engineer</li><li><b>2×</b> Data Scientist</li><li><b>2×</b> Machine Learning Engineer</li><li><b>1×</b> MLOps Engineer</li><li><b>1×</b> Mobile Product Analyst</li><li><b>1×</b> Data Analyst</li><li><b>1×</b> BI Developer</li></ul></details>
+        </div>
+
+        <div class="dept">
+          <div class="dept-head">
+            <h3>Artificial Intelligence (AI)</h3>
+            <span class="hc">14 agenți</span>
+          </div>
+          <p class="intro">Departament dedicat construirii si integrarii functionalitatilor inteligente in aplicatie: de la cercetare proprie si modele antrenate intern, pana la AI generativ si integrarea cu modele externe. Lucreaza strans cu Engineering, Produs si Behavioral Science pentru ca functiile AI sa fie utile si responsabile.</p>
+          <p class="poz"><span class="tag">poziție de departament</span>Suntem creierul: extragem „ce oferă / ce caută” din text și dictare, și rulăm motorul de potrivire în stratul ascuns. Începem cu extragere prin LLM + un scor de potrivire explicabil (cu sursă citată). Sugestiile AI rămân separate de ce marchează omul, ca să nu devină zgomot.</p>
+          <details><summary>Roluri (10)</summary><ul class="roluri"><li><b>1×</b> Head of AI</li><li><b>2×</b> AI Research Scientist</li><li><b>2×</b> Senior ML Engineer</li><li><b>2×</b> ML Engineer</li><li><b>2×</b> Generative AI Engineer</li><li><b>1×</b> LLM / Integration Engineer</li><li><b>1×</b> Conversational AI Designer</li><li><b>1×</b> AI Data Specialist</li><li><b>1×</b> Responsible AI / AI Ethics Specialist</li><li><b>1×</b> MLOps Engineer (AI)</li></ul></details>
+        </div>
+
+        <div class="dept">
+          <div class="dept-head">
+            <h3>Produs (Product)</h3>
+            <span class="hc">13 agenți</span>
+          </div>
+          <p class="intro">Defineste ce se construieste, pentru cine si de ce. Cate un Product Manager / Owner pentru fiecare squad de Engineering.</p>
+          <p class="poz"><span class="tag">poziție de departament</span>Prioritizăm strict v1 pe ipoteza centrală: oamenii chiar pun informație și chiar le plac potrivirile. Definim cele 4 ecrane (Potriviri, Grupuri, Dictează, Secretară) și criteriile de succes măsurabile pentru pilotul intern.</p>
+          <details><summary>Roluri (6)</summary><ul class="roluri"><li><b>1×</b> Head of Product / CPO Deputy</li><li><b>3×</b> Senior Product Manager</li><li><b>3×</b> Product Manager</li><li><b>3×</b> Product Owner</li><li><b>2×</b> Business Analyst</li><li><b>1×</b> Product Operations Specialist</li></ul></details>
+        </div>
+
+        <div class="dept">
+          <div class="dept-head">
+            <h3>Design / UX</h3>
+            <span class="hc">10 agenți</span>
+          </div>
+          <p class="intro">Modeleaza experienta si interfata cu care interactioneaza utilizatorul.</p>
+          <p class="poz"><span class="tag">poziție de departament</span>Ton: intermediar discret și de încredere, nu bază de date rece. Cardul de potrivire arată clar motivul și sursa, cu acțiuni simple Prezintă-mă / Refuz. Dictarea trebuie să fie o singură apăsare; secretara — caldă, în limbaj natural.</p>
+          <details><summary>Roluri (7)</summary><ul class="roluri"><li><b>1×</b> Design Lead</li><li><b>2×</b> Senior UX Designer</li><li><b>2×</b> UI Designer</li><li><b>1×</b> Interaction Designer</li><li><b>2×</b> UX Researcher</li><li><b>1×</b> Design System Specialist</li><li><b>1×</b> Graphic / Brand Designer</li></ul></details>
+        </div>
+
+        <div class="dept">
+          <div class="dept-head">
+            <h3>Behavioral Science &amp; Ethical Product Design</h3>
+            <span class="hc">10 agenți</span>
+          </div>
+          <p class="intro">Proiecteaza produse pe care oamenii le folosesc cu placere si din proprie vointa, fara mecanisme de dependenta. Maximizeaza valoarea reala pentru utilizator si protejeaza atentia si bunastarea acestuia.</p>
+          <p class="poz"><span class="tag">poziție de departament</span>Garantăm că produsul ajută fără să creeze dependență. Fluxul „vrei să te prezint?” trebuie să fie respectuos, nu insistent; notificările — utile, nu compulsive. Validăm fiecare mecanism de engagement și definim metrici de engagement sănătos vs. compulsiv.</p>
+          <details><summary>Roluri (9)</summary><ul class="roluri"><li><b>1×</b> Behavioral Science Lead</li><li><b>2×</b> Behavioral Scientist / Psiholog cognitiv</li><li><b>1×</b> Cercetator neurostiinte / stiinte cognitive</li><li><b>1×</b> Ethical / Responsible Design Lead</li><li><b>1×</b> UX Researcher (well-being focus)</li><li><b>1×</b> Digital Wellbeing Specialist</li><li><b>1×</b> Behavioral / Marketing Psychologist</li><li><b>1×</b> Data Scientist (engagement quality)</li><li><b>1×</b> Ethics &amp; Policy Advisor</li></ul></details>
+        </div>
+
+        <div class="dept">
+          <div class="dept-head">
+            <h3>Project &amp; Program Management</h3>
+            <span class="hc">10 agenți</span>
+          </div>
+          <p class="intro">Coordoneaza echipele, planurile si livrarile.</p>
+          
+          <details><summary>Roluri (5)</summary><ul class="roluri"><li><b>1×</b> Head of PMO</li><li><b>2×</b> Program Manager</li><li><b>3×</b> Project Manager</li><li><b>3×</b> Scrum Master</li><li><b>1×</b> Delivery Manager</li></ul></details>
+        </div>
+
+        <div class="dept">
+          <div class="dept-head">
+            <h3>Marketing</h3>
+            <span class="hc">13 agenți</span>
+          </div>
+          <p class="intro">Genereaza vizibilitate, interes si cerere pentru produs. Pentru o aplicatie mobila, include functii specifice de crestere in magazinele de aplicatii.</p>
+          
+          <details><summary>Roluri (11)</summary><ul class="roluri"><li><b>1×</b> Marketing Lead</li><li><b>2×</b> Digital Marketing Specialist</li><li><b>2×</b> Content Marketer</li><li><b>1×</b> SEO / SEM Specialist</li><li><b>1×</b> ASO Specialist (App Store Optimization)</li><li><b>1×</b> Social Media Manager</li><li><b>1×</b> Community Manager</li><li><b>1×</b> Growth Marketer</li><li><b>1×</b> Brand / PR Specialist</li><li><b>1×</b> Technical Writer</li><li><b>1×</b> Marketing Operations</li></ul></details>
+        </div>
+
+        <div class="dept">
+          <div class="dept-head">
+            <h3>Sales / Vanzari</h3>
+            <span class="hc">10 agenți</span>
+          </div>
+          <p class="intro">Transforma interesul in venituri si contracte.</p>
+          
+          <details><summary>Roluri (6)</summary><ul class="roluri"><li><b>1×</b> Sales Director</li><li><b>3×</b> Account Executive</li><li><b>2×</b> Inside Sales Representative</li><li><b>2×</b> Sales Engineer / Pre-sales</li><li><b>1×</b> Business Development Manager</li><li><b>1×</b> Sales Operations Specialist</li></ul></details>
+        </div>
+
+        <div class="dept">
+          <div class="dept-head">
+            <h3>Customer Success &amp; Support</h3>
+            <span class="hc">18 agenți</span>
+          </div>
+          <p class="intro">Asigura ca utilizatorii obtin valoare si raman fideli. Scaleaza cu baza de clienti, nu cu marimea firmei, deci este unul dintre cele mai mari departamente non-tehnice.</p>
+          
+          <details><summary>Roluri (6)</summary><ul class="roluri"><li><b>1×</b> Customer Success Lead</li><li><b>5×</b> Customer Success Manager</li><li><b>6×</b> Technical Support Engineer</li><li><b>3×</b> Onboarding / Implementation Specialist</li><li><b>2×</b> Customer Experience Analyst</li><li><b>1×</b> Support Team Lead</li></ul></details>
+        </div>
+
+        <div class="dept">
+          <div class="dept-head">
+            <h3>HR / People</h3>
+            <span class="hc">11 agenți</span>
+          </div>
+          <p class="intro">Atrage, dezvolta si pastreaza oamenii potriviti. Include recrutare tehnica dedicata, esentiala pentru o firma cu pondere mare de roluri inginieresti.</p>
+          
+          <details><summary>Roluri (8)</summary><ul class="roluri"><li><b>1×</b> HR Director / Head of People</li><li><b>2×</b> Technical Recruiter / Sourcer</li><li><b>2×</b> Recruiter / Talent Acquisition</li><li><b>2×</b> People Operations Specialist</li><li><b>1×</b> Learning &amp; Development Specialist</li><li><b>1×</b> Compensation &amp; Benefits Specialist</li><li><b>1×</b> Employer Branding / Internal Comms</li><li><b>1×</b> HR Business Partner</li></ul></details>
+        </div>
+
+        <div class="dept">
+          <div class="dept-head">
+            <h3>Finance</h3>
+            <span class="hc">10 agenți</span>
+          </div>
+          <p class="intro">Gestioneaza banii, bugetele si conformitatea financiara.</p>
+          
+          <details><summary>Roluri (6)</summary><ul class="roluri"><li><b>1×</b> Finance Director / CFO Deputy</li><li><b>3×</b> Accountant / Contabil</li><li><b>2×</b> FP&amp;A Analyst</li><li><b>1×</b> Payroll Specialist</li><li><b>1×</b> Procurement / Achizitii</li><li><b>2×</b> Billing / Revenue Operations</li></ul></details>
+        </div>
+
+        <div class="dept">
+          <div class="dept-head">
+            <h3>Legal &amp; Compliance</h3>
+            <span class="hc">5 agenți</span>
+          </div>
+          <p class="intro">Acopera aspectele juridice, contractuale si de reglementare. Echipa interna mica, sprijinita de consultanta externa la nevoie.</p>
+          <p class="poz"><span class="tag">poziție de departament</span>GDPR by design: consimțământ explicit, dreptul de a controla vizibilitatea, și clarificarea statutului persoanelor pomenite dar nemembre. Pregătim termenii pentru un cerc privat și politica de date pentru v2 (înregistrarea live).</p>
+          <details><summary>Roluri (5)</summary><ul class="roluri"><li><b>1×</b> Head of Legal</li><li><b>1×</b> Corporate Lawyer</li><li><b>1×</b> Contracts Manager</li><li><b>1×</b> Privacy / GDPR Officer (DPO)</li><li><b>1×</b> Regulatory Compliance Specialist</li></ul></details>
+        </div>
+
+        <div class="dept">
+          <div class="dept-head">
+            <h3>IT intern / Internal IT</h3>
+            <span class="hc">6 agenți</span>
+          </div>
+          <p class="intro">Sustine functionarea tehnica a companiei la nivel intern. Dimensionat la baza de angajati, nu la baza de clienti.</p>
+          
+          <details><summary>Roluri (4)</summary><ul class="roluri"><li><b>1×</b> Internal IT Manager</li><li><b>2×</b> Internal Help Desk</li><li><b>1×</b> Endpoint Management Specialist</li><li><b>2×</b> Internal Tools / Systems Admin</li></ul></details>
+        </div>
+
+        <div class="dept">
+          <div class="dept-head">
+            <h3>Operations / Business Operations</h3>
+            <span class="hc">10 agenți</span>
+          </div>
+          <p class="intro">Optimizeaza modul in care functioneaza afacerea.</p>
+          
+          <details><summary>Roluri (6)</summary><ul class="roluri"><li><b>1×</b> Head of Operations / COO Deputy</li><li><b>2×</b> Business Operations Analyst</li><li><b>2×</b> Strategy &amp; Planning Specialist</li><li><b>2×</b> Revenue Operations (RevOps)</li><li><b>1×</b> Vendor Management</li><li><b>2×</b> Facilities / Office Manager</li></ul></details>
+        </div></div>
+  </section>
+
+  <p class="note">ℹ️ Conținutul narativ (plan + poziții) este generat de <b>claude-opus-4-8</b> —
+  exact modelul folosit de agenți — ca substitut al rulării live a celor 239 de agenți,
+  care necesită o cheie API. Structura, departamentele și headcount-urile sunt datele reale din proiect.
+  Mediu simulat, în scop educativ.</p>
+
+  <footer>Generat de Agentap · raport de proiect · Memorie colectiva si potriviri pentru un cerc de business</footer>
+</div>
+</body>
+</html>
