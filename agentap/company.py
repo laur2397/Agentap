@@ -90,6 +90,54 @@ _PROMPT_CEO = (
 )
 
 
+# Prompturi pentru rularea unui PROIECT cu toata firma.
+def _prompt_contributie_angajat(brief: str, emp: "Employee") -> str:
+    return (
+        f"Firma lucrează la un proiect nou. Brief:\n\n{brief}\n\n"
+        f"Din rolul tău de „{emp.rol}” (departamentul {nume_curat(emp.departament)}), "
+        "răspunde CONCIS (3-5 puncte la obiect):\n"
+        "1) Ce contribui concret la acest proiect, în aria ta de competență?\n"
+        "2) Ce ai face tu, primii pași?\n"
+        "3) Ce riscuri sau dependențe vezi din perspectiva ta?\n"
+        "Nu repeta brief-ul; mergi direct la contribuția ta."
+    )
+
+
+def _prompt_sinteza_dept(brief: str, dep: "Department", contributii: dict[str, str]) -> str:
+    blob = "\n\n".join(f"### {eticheta}\n{txt}" for eticheta, txt in contributii.items())
+    return (
+        f"Ești managerul departamentului „{nume_curat(dep.nume)}”. Echipa ta a analizat "
+        "un proiect nou și fiecare a contribuit mai jos.\n\n"
+        f"Brief (prima linie): {brief.splitlines()[0]}\n\n"
+        f"Contribuțiile echipei:\n{blob}\n\n"
+        "Sintetizează o poziție de departament (max ~10 rânduri): ce livrează departamentul "
+        "tău pentru proiect, primii pași concreți și principalele riscuri/dependențe."
+    )
+
+
+def _prompt_contributie_dept(brief: str, dep: "Department") -> str:
+    return (
+        f"Firma lucrează la un proiect nou. Brief:\n\n{brief}\n\n"
+        f"Ca departament „{nume_curat(dep.nume)}”, deleagă rolurilor potrivite și "
+        "sintetizează: ce livrează departamentul vostru, primii pași și riscurile cheie."
+    )
+
+
+def _prompt_sinteza_ceo(brief: str, rapoarte: dict[str, str]) -> str:
+    blob = "\n\n".join(f"## {nume_curat(dep)}\n{txt}" for dep, txt in rapoarte.items())
+    return (
+        "Ești CEO-ul. Toate departamentele au analizat proiectul de mai jos și au trimis "
+        f"poziția lor.\n\nBrief (prima linie): {brief.splitlines()[0]}\n\n"
+        f"Pozițiile departamentelor:\n{blob}\n\n"
+        "Livrează un PLAN EXECUTIV consolidat, structurat:\n"
+        "- Rezumat (3-4 rânduri): ce construim și de ce contează\n"
+        "- Plan pe faze (v1 / v2), aliniat la brief\n"
+        "- Cine ce face: contribuția cheie a departamentelor majore\n"
+        "- Top 5 riscuri și cum le mitigăm\n"
+        "- Primii 3 pași concreți de început"
+    )
+
+
 # --------------------------------------------------------------------------- #
 # Modele de date
 # --------------------------------------------------------------------------- #
@@ -289,6 +337,67 @@ class Company:
                 for k, v in emp.agent.usage.items():
                     total[k] += v
         return total
+
+    # -- rularea unui proiect cu toata firma ---------------------------- #
+    def project_plan(self, mode: str = "everyone") -> dict[str, Any]:
+        """Dry-run: cine ar fi implicat, FĂRĂ apeluri API.
+
+        mode="everyone" → fiecare angajat contribuie individual (toți cei 239 de agenți).
+        mode="departments" → doar managerii deleagă (CEO + manageri + roluri delegate).
+        """
+        plan: dict[str, Any] = {"mode": mode, "ceo": self.ceo.name, "departamente": {}}
+        n_implicati = 1  # CEO
+        for nume, dep in self.departments.items():
+            membri = [e.eticheta for e in dep.employees] if mode == "everyone" else list(dep.by_role)
+            plan["departamente"][nume] = {"manager": dep.manager.name, "membri": membri}
+            n_implicati += 1 + (dep.headcount if mode == "everyone" else 0)
+        plan["agenti_implicati"] = n_implicati
+        return plan
+
+    def run_project(
+        self,
+        brief: str,
+        *,
+        mode: str = "everyone",
+        on_progress: Callable[[str, dict[str, Any]], None] | None = None,
+    ) -> dict[str, Any]:
+        """Pune firma să lucreze la un proiect și întoarce planul consolidat.
+
+        Fan-out → fan-in:
+          - mode="everyone": fiecare ANGAJAT contribuie; managerul sintetizează echipa.
+          - mode="departments": fiecare DEPARTAMENT deleagă singur prin uneltele lui.
+          Apoi CEO-ul consolidează totul într-un plan executiv.
+
+        Returnează: {"rapoarte": {dept: text}, "plan": text, "usage": {...}}.
+        """
+
+        def progres(event: str, payload: dict[str, Any]) -> None:
+            if on_progress:
+                on_progress(event, payload)
+
+        rapoarte: dict[str, str] = {}
+        n_dep = len(self.departments)
+
+        for i, (nume, dep) in enumerate(self.departments.items(), start=1):
+            progres("dept_start", {"departament": nume, "i": i, "din": n_dep, "mode": mode})
+
+            if mode == "everyone":
+                contributii: dict[str, str] = {}
+                for j, emp in enumerate(dep.employees, start=1):
+                    progres("angajat", {"departament": nume, "eticheta": emp.eticheta, "j": j, "din": dep.headcount})
+                    contributii[emp.eticheta] = emp.run(_prompt_contributie_angajat(brief, emp))
+                raport = dep.manager.run(_prompt_sinteza_dept(brief, dep, contributii))
+            else:
+                raport = dep.run(_prompt_contributie_dept(brief, dep))
+
+            rapoarte[nume] = raport
+            progres("dept_done", {"departament": nume, "raport": raport})
+
+        progres("ceo_start", {})
+        plan = self.ceo.run(_prompt_sinteza_ceo(brief, rapoarte))
+        progres("ceo_done", {"plan": plan})
+
+        return {"rapoarte": rapoarte, "plan": plan, "usage": self.total_usage()}
 
 
 def build_company(

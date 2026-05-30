@@ -103,6 +103,41 @@ python examples/firma_demo.py    # rulează firma vie (necesită ANTHROPIC_API_K
 | `Department` | `company.py` | Manager-agent + delegare pe roluri |
 | `Company` / `build_company` | `company.py` | CEO + toate departamentele |
 
+## 📱 Pune toată firma să lucreze la un proiect
+
+Firma poate primi un **brief de produs** și îl rezolvă cu *toți* agenții:
+fiecare angajat contribuie din rolul lui → managerii sintetizează echipele →
+CEO-ul livrează un plan executiv consolidat (pattern **fan-out → fan-in**).
+
+Brief-ul inclus: *„Memorie colectivă și potriviri pentru un cerc de business"*
+(`agentap/proiect.py`, modul pur — `python -m agentap.proiect` afișează brief-ul).
+
+```python
+from agentap import build_company, brief_text
+
+firma = build_company()
+
+# Dry-run: cine ar lucra, fără apeluri API (gratis)
+plan = firma.project_plan(mode="everyone")
+print(plan["agenti_implicati"], "agenți implicați")   # 239 — toți
+
+# Rulare reală: toți cei 239 contribuie (necesită cheie API)
+rezultat = firma.run_project(brief_text(), mode="everyone")
+print(rezultat["plan"])        # planul executiv al CEO-ului
+print(rezultat["rapoarte"])    # poziția fiecărui departament
+```
+
+| Mod | Cine lucrează | Cost |
+|---|---|---|
+| `everyone` | **toți cei 239** (fiecare angajat contribuie individual) | mare (~239 apeluri) |
+| `departments` | CEO + 18 manageri (delegă singuri pe roluri) | mic |
+
+```bash
+python examples/proiect_demo.py                  # dry-run (gratis), arată toți agenții
+python examples/proiect_demo.py --mode departments
+python examples/proiect_demo.py --live           # rulare reală cu toți agenții
+```
+
 ## Extindere
 
 Adaugă un worker nou:

@@ -13,6 +13,7 @@ from .orchestrator import Orchestrator
 from .team import build_team
 from .company import Company, Department, Employee, build_company, slug
 from .organizatie import ORGANIZATIE, total_general, total_pe_departament
+from .proiect import PROIECT, brief_text
 
 __all__ = [
     "Agent",
@@ -28,4 +29,6 @@ __all__ = [
     "ORGANIZATIE",
     "total_general",
     "total_pe_departament",
+    "PROIECT",
+    "brief_text",
 ]
