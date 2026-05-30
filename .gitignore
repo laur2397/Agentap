@@ -1,6 +1,7 @@
 .env
 app/data.db
 workspace/
+idei_agenti.json
 __pycache__/
 *.pyc
 .venv/
