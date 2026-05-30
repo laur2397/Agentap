@@ -16,9 +16,9 @@ import asyncio, json, os, re, sys, time, urllib.request, urllib.error, itertools
 
 KEYS=[k.strip() for k in os.environ.get("GEMINI_KEYS","").split(",") if k.strip()]
 _rr=itertools.cycle(KEYS)
-MODEL="gemini-2.5-flash-lite"  # are cota zilnica proaspata + limite generoase
-LOT=3                           # ritmat sub limita pe minut a proiectului
-PACE=13                         # ~13 cereri/min total (sub limita de 15/min)
+MODEL="gemini-flash-lite-latest"  # cota proaspata, rapid
+LOT=3                              # ritmat sub limita pe minut a proiectului
+PACE=13                            # ~13 cereri/min total (sub limita de 15/min)
 
 def parse_roles(md_path):
     """Extrage (cod, nume, count, fisa) din fisierul de departament."""
