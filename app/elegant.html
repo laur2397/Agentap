@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cercul — memorie colectiva si potriviri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#faf8f3;--paper2:#f3efe6;--card:#ffffff;--ink:#1a1f2b;--ink2:#4a5160;--muted:#8a8f9c;
+  --navy:#1a2f4b;--navy2:#24405f;--gold:#b8924a;--gold-soft:#e9dcc2;
+  --good:#2f7d5b;--good-bg:#e8f3ec;--warn:#9a7320;--warn-bg:#f6efdd;
+  --line:#e7e1d4;--line2:#d8d0bf;--shadow:0 12px 40px rgba(26,47,75,.10);
+  --serif:'Playfair Display',Georgia,serif;--sans:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;
+  -webkit-font-smoothing:antialiased}
+.app{max-width:780px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;
+  background:linear-gradient(180deg,#fff,var(--paper) 280px)}
+
+/* header */
+header{position:sticky;top:0;z-index:8;background:rgba(250,248,243,.9);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);padding:18px 26px;display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .mark{width:38px;height:38px;border-radius:11px;background:var(--navy);color:var(--gold-soft);
+  display:grid;place-items:center;font-family:var(--serif);font-size:20px;font-weight:700;
+  box-shadow:0 6px 18px rgba(26,47,75,.25)}
+.brand .name{font-family:var(--serif);font-size:21px;font-weight:700;color:var(--navy);letter-spacing:.2px}
+.brand .name small{display:block;font-family:var(--sans);font-size:10px;font-weight:500;color:var(--muted);
+  letter-spacing:1.5px;text-transform:uppercase;margin-top:-2px}
+.who{display:flex;align-items:center;gap:9px}
+.who label{color:var(--muted);font-size:12px}
+select,input,textarea{background:#fff;color:var(--ink);border:1px solid var(--line2);border-radius:10px;
+  padding:10px 12px;font:inherit;outline:none;transition:border-color .15s,box-shadow .15s}
+select:focus,input:focus,textarea:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,47,75,.08)}
+button{background:var(--navy);color:#fff;border:0;border-radius:10px;padding:10px 17px;font:inherit;
+  font-weight:600;cursor:pointer;transition:background .15s,transform .08s,box-shadow .15s;letter-spacing:.2px}
+button:hover{background:var(--navy2);box-shadow:0 6px 18px rgba(26,47,75,.22)}
+button:active{transform:translateY(1px)}
+button.ghost{background:transparent;color:var(--navy);border:1px solid var(--line2)}
+button.ghost:hover{background:var(--paper2);box-shadow:none;border-color:var(--navy)}
+button.gold{background:var(--gold);color:#fff}button.gold:hover{background:#a37f3c}
+button.small{padding:7px 13px;font-size:13px;border-radius:9px}
+#addMember{padding:9px 13px}
+
+main{flex:1;padding:26px 26px 110px;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.view{display:none}.view.active{display:block}
+.view-head{margin-bottom:20px}
+h2{font-family:var(--serif);font-size:27px;font-weight:700;color:var(--navy);letter-spacing:.2px}
+.lead{color:var(--ink2);font-size:14px;margin-top:4px;max-width:560px}
+.rule{height:1px;background:linear-gradient(90deg,var(--gold-soft),transparent);margin:14px 0 0}
+.row-between{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media(max-width:640px){.cols{grid-template-columns:1fr}main{padding:22px 18px 110px}}
+
+/* potriviri */
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;
+  margin-bottom:16px;box-shadow:var(--shadow)}
+.match{position:relative;overflow:hidden}
+.match::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold)}
+.match.conectat::before{background:var(--good)}
+.match .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.who2{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-size:18px;font-weight:600;color:var(--navy)}
+.av{width:40px;height:40px;border-radius:50%;background:var(--navy);color:var(--gold-soft);display:grid;
+  place-items:center;font-family:var(--serif);font-weight:700;font-size:15px}
+.pill{font-size:11px;padding:4px 12px;border-radius:30px;font-weight:600;letter-spacing:.4px;text-transform:uppercase}
+.pill.score{background:var(--paper2);color:var(--navy);border:1px solid var(--line2)}
+.pill.propus{background:var(--warn-bg);color:var(--warn)}
+.pill.conectat{background:var(--good-bg);color:var(--good)}
+.pair{font-size:15px;margin:9px 0;color:var(--ink2)}
+.pair b{color:var(--ink);font-weight:600}
+.pair .tag{display:inline-block;min-width:96px;font-size:10px;color:var(--muted);text-transform:uppercase;
+  letter-spacing:.8px;font-weight:600}
+.src{color:var(--muted);font-size:12.5px;margin-top:13px;padding-top:13px;border-top:1px solid var(--line);
+  display:flex;align-items:center;gap:7px}
+.src .seal{color:var(--gold)}
+.actions{margin-top:16px;display:flex;gap:10px}
+.statusline{font-size:13px;margin-top:14px;color:var(--ink2);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+
+/* profil */
+.section-t{display:flex;align-items:center;gap:10px;margin:6px 0 12px;font-family:var(--serif);
+  font-size:17px;font-weight:600;color:var(--navy)}
+.badge{font-size:10px;padding:3px 10px;border-radius:30px;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+.badge.vis{background:var(--good-bg);color:var(--good)}.badge.priv{background:var(--warn-bg);color:var(--warn)}
+.item{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);
+  border:1px solid var(--line);border-radius:13px;padding:13px 15px;margin-bottom:10px;box-shadow:0 4px 14px rgba(26,47,75,.05)}
+.item .x{background:transparent;color:#b94a4a;border:0;font-size:20px;cursor:pointer;padding:0 4px;line-height:1}
+.item .x:hover{box-shadow:none}
+.item .meta{color:var(--muted);font-size:12px;margin-top:3px}
+.addbox{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}.addbox input{flex:1;min-width:140px}
+textarea{width:100%;font-family:var(--sans)}#dictText{margin-bottom:14px}
+
+/* secretara */
+.briefing{background:linear-gradient(120deg,#fff,var(--paper2));border:1px solid var(--gold-soft);
+  border-left:3px solid var(--gold);border-radius:16px;padding:18px 22px;margin-bottom:22px;
+  font-family:var(--serif);font-size:17px;color:var(--navy);font-style:italic;box-shadow:var(--shadow)}
+.task{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+.task.done span{text-decoration:line-through;color:var(--muted)}
+.task input{width:18px;height:18px;accent-color:var(--good)}
+.contact{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px 15px;
+  margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:14px;
+  box-shadow:0 4px 14px rgba(26,47,75,.05)}
+
+/* grupuri */
+.group{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:17px 19px;margin-bottom:13px;
+  cursor:pointer;transition:transform .1s,box-shadow .15s;box-shadow:0 4px 14px rgba(26,47,75,.05)}
+.group:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.group .gtop{display:flex;justify-content:space-between;align-items:center}
+.group .gname{display:flex;align-items:center;gap:13px;font-family:var(--serif);font-size:17px;font-weight:600;color:var(--navy)}
+.group .gicon{width:44px;height:44px;border-radius:12px;background:var(--paper2);display:grid;place-items:center;font-size:21px}
+.group .last{color:var(--ink2);font-size:13px;margin-top:10px;padding-left:57px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px var(--gold-soft)}
+.signal{font-size:12px;color:var(--warn);background:var(--warn-bg);border:1px solid var(--gold-soft);
+  border-radius:30px;padding:4px 13px;display:inline-flex;align-items:center;gap:6px;margin-top:11px;margin-left:57px}
+
+/* chat overlay */
+.overlay{position:fixed;inset:0;background:rgba(26,31,43,.45);backdrop-filter:blur(4px);display:flex;
+  align-items:center;justify-content:center;z-index:20;padding:18px}
+.overlay.hidden{display:none}
+.chat{background:var(--paper);border:1px solid var(--line2);border-radius:22px;width:min(560px,96vw);
+  max-height:86vh;display:flex;flex-direction:column;box-shadow:0 40px 90px rgba(26,31,43,.4);overflow:hidden}
+.chat-head{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;
+  border-bottom:1px solid var(--line);background:#fff}
+.chat-head .t{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--navy)}
+.chat-head .sub{font-size:12px;color:var(--muted);margin-top:2px}
+.chat-head button{background:transparent;color:var(--muted);font-size:26px;padding:0 6px;line-height:1}
+.chat-head button:hover{box-shadow:none;color:var(--ink)}
+.chat-msgs{flex:1;overflow:auto;padding:20px 22px;display:flex;flex-direction:column;gap:11px;background:var(--paper)}
+.msg{max-width:80%;padding:11px 15px;border-radius:16px;font-size:14px;line-height:1.5}
+.msg.app{align-self:center;background:#fff;color:var(--ink2);font-family:var(--serif);font-style:italic;
+  max-width:96%;text-align:center;border:1px solid var(--gold-soft);box-shadow:0 4px 14px rgba(26,47,75,.06)}
+.msg.app .seal{color:var(--gold);font-style:normal}
+.msg.me{align-self:flex-end;background:var(--navy);color:#fff;border-bottom-right-radius:5px}
+.msg.them{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:5px}
+.msg .nm{font-size:11px;color:var(--gold);font-weight:700;display:block;margin-bottom:3px;letter-spacing:.3px}
+.chat-input{display:flex;gap:10px;padding:16px 20px;border-top:1px solid var(--line);background:#fff}
+.chat-input input{flex:1}
+.empty{color:var(--muted);font-size:14px;padding:30px 0;text-align:center;font-style:italic}
+
+/* bottom nav */
+nav{position:fixed;bottom:0;left:0;right:0;z-index:9;background:rgba(255,255,255,.92);
+  backdrop-filter:blur(16px);border-top:1px solid var(--line)}
+.navin{max-width:780px;margin:0 auto;display:flex}
+.tab{flex:1;background:transparent;color:var(--muted);border:0;border-radius:0;padding:12px 4px 10px;
+  display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10.5px;font-weight:600;
+  letter-spacing:.3px;transition:color .15s}
+.tab:hover{box-shadow:none;background:transparent}
+.tab .ic{font-size:20px;line-height:1}
+.tab.active{color:var(--navy)}
+.tab.active .ic{filter:none}
+.tab.active::after{content:"";position:absolute;bottom:0;width:30px;height:3px;border-radius:3px 3px 0 0;
+  background:var(--gold);transform:translateY(38px)}
+.note{text-align:center;color:var(--muted);font-size:12px;padding:8px 0 0}
+.note a{color:var(--navy);cursor:pointer;text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="brand"><span class="mark">C</span>
+    <span class="name">Cercul<small>memorie &amp; potriviri</small></span></div>
+  <div class="who"><label>Esti:</label><select id="member"></select><button id="addMember" title="Adauga membru">+</button></div>
+</header>
+
+<main>
+  <!-- POTRIVIRI -->
+  <section id="potriviri" class="view active">
+    <div class="view-head"><div class="row-between"><h2>Potriviri</h2><button id="rematch" class="ghost small">↻ Recalculeaza</button></div>
+      <p class="lead">Comparam discret ce cauti cu ce ofera ceilalti. Nicio legatura nu se deschide fara acordul ambelor parti.</p><div class="rule"></div></div>
+    <div id="matchList"></div>
+  </section>
+
+  <!-- GRUPURI -->
+  <section id="grupuri" class="view">
+    <div class="view-head"><div class="row-between"><h2>Grupuri</h2><button id="addGroup" class="ghost small">+ Grup</button></div>
+      <p class="lead">Discutiile cercului se petrec aici. Aplicatia urmareste si semnaleaza cand apare informatie utila.</p><div class="rule"></div></div>
+    <div id="groupList"></div>
+  </section>
+
+  <!-- PROFIL -->
+  <section id="profil" class="view">
+    <div class="view-head"><h2>Profilul tau</h2>
+      <p class="lead">Ce oferi e vizibil celorlalti. Ce cauti ramane privat — folosit doar pentru potriviri.</p><div class="rule"></div></div>
+    <div class="cols">
+      <div><div class="section-t">Ce ofer <span class="badge vis">vizibil</span></div><div id="oferList"></div>
+        <div class="addbox"><input id="oferText" placeholder="ex: cariera de carbune in Gorj"><input id="oferSrc" placeholder="sursa"><button onclick="addItem('ofer')">Adauga</button></div></div>
+      <div><div class="section-t">Ce caut <span class="badge priv">privat</span></div><div id="cautList"></div>
+        <div class="addbox"><input id="cautText" placeholder="ex: furnizor de carbune"><input id="cautSrc" placeholder="sursa"><button onclick="addItem('caut')">Adauga</button></div></div>
+    </div>
+  </section>
+
+  <!-- DICTARE -->
+  <section id="dictare" class="view">
+    <div class="view-head"><h2>Dicteaza dupa apel</h2>
+      <p class="lead">Asterne cateva fraze dupa o discutie; aplicatia extrage singura ce oferi si ce cauti. Sugestiile raman de verificat in profil.</p><div class="rule"></div></div>
+    <textarea id="dictText" rows="5" placeholder="ex: Am vorbit cu un domn care ofera transport marfa. Eu caut un contabil bun pentru firma."></textarea>
+    <button onclick="dicteaza()">Extrage</button>
+    <div id="dictResult" style="margin-top:18px"></div>
+  </section>
+
+  <!-- SECRETARA -->
+  <section id="secretara" class="view">
+    <div class="view-head"><h2>Secretara ta</h2><div class="rule"></div></div>
+    <div id="briefing" class="briefing"></div>
+    <div class="cols">
+      <div><div class="section-t">Pe cine sa contactez</div><div id="contacte"></div></div>
+      <div><div class="section-t">Sarcini</div><div id="tasks"></div>
+        <div class="addbox"><input id="taskText" placeholder="ex: de sunat domnul Vasile maine"><button onclick="addTask()">Adauga</button></div></div>
+    </div>
+  </section>
+
+  <p class="note">Datele se pastreaza local, in acest browser. <a onclick="resetAll()">Reseteaza la demo</a></p>
+</main>
+
+<nav><div class="navin">
+  <button class="tab active" data-tab="potriviri"><span class="ic">✦</span>Potriviri</button>
+  <button class="tab" data-tab="grupuri"><span class="ic">❖</span>Grupuri</button>
+  <button class="tab" data-tab="profil"><span class="ic">◷</span>Profil</button>
+  <button class="tab" data-tab="dictare"><span class="ic">✎</span>Dicteaza</button>
+  <button class="tab" data-tab="secretara"><span class="ic">❦</span>Secretara</button>
+</div></nav>
+</div>
+
+<div id="chatOverlay" class="overlay hidden">
+  <div class="chat">
+    <div class="chat-head"><div><div class="t" id="chatTitle">Conexiune</div><div class="sub" id="chatSub"></div></div><button onclick="closeChat()">×</button></div>
+    <div id="chatMsgs" class="chat-msgs"></div>
+    <div class="chat-input"><input id="chatText" placeholder="Scrie un mesaj..."><button onclick="sendMsg()">Trimite</button></div>
+  </div>
+</div>
+
+<script>
+const KEY="cercul_v1";
+const STOP=new Set(["si","sau","de","la","in","un","o","cu","pe","pentru","din","ca","care","este","are","am","ai","vreau","caut","ofer","cineva","zona","bun","buna","nou","noua","the","a","al","ale","lui","mea","meu","domn","domnul","tip"]);
+let DB=null,ME=null,CHAT=null,CHATKIND=null;
+const today=()=>new Date().toISOString().slice(0,10);
+const $=(s)=>document.querySelector(s);
+const esc=(s)=>(s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const initials=(n)=>{const p=n.trim().split(/\s+/);return (p[0][0]+(p[1]?p[1][0]:"")).toUpperCase();};
+
+function save(){localStorage.setItem(KEY,JSON.stringify(DB));}
+function load(){const r=localStorage.getItem(KEY);DB=r?JSON.parse(r):seed();save();}
+
+function seed(){
+  const d={members:[],items:[],matches:[],messages:[],tasks:[],groups:[],gmsgs:[],seq:1};
+  const add=(n)=>{const id=d.seq++;d.members.push({id,name:n});return id;};
+  const A=add("Ana Popescu"),B=add("Bogdan Marin"),C=add("Cristina Ilie");
+  const it=(m,k,t,v,s)=>d.items.push({id:d.seq++,member_id:m,kind:k,text:t,visible:v?1:0,source:s,created_at:today()});
+  it(B,"ofer","Cariera de carbune in zona Gorj",1,"nota din 3 martie");
+  it(B,"caut","Investitor pentru proiect imobiliar",0,"discutie telefonica");
+  it(A,"caut","Furnizor de carbune pentru fabrica",0,"dictare dupa apel");
+  it(A,"ofer","Spatii comerciale de inchiriat in centru",1,"profil");
+  it(C,"ofer","Prieten cu firma de excavari, utilaje in zona Brasov",1,"audio din 12 ianuarie");
+  it(C,"caut","Contabil bun pentru firma noua",0,"nota rapida");
+  d.tasks.push({id:d.seq++,member_id:A,text:"De sunat furnizorul recomandat de grup",done:0,created_at:today()});
+  const g1=d.seq++;d.groups.push({id:g1,name:"Networking Joi",icon:"❖",members:[A,B,C]});
+  const g2=d.seq++;d.groups.push({id:g2,name:"Imobiliare",icon:"⌂",members:[A,B]});
+  const gm=(g,s,t)=>d.gmsgs.push({id:d.seq++,group_id:g,sender:s,text:t,created_at:today()});
+  gm(g1,B,"Buna seara! Cine stie un furnizor serios de carbune?");
+  gm(g1,A,"Eu caut exact asta de o luna.");
+  gm(g1,C,"Va pun in legatura, am pe cineva de incredere.");
+  gm(g2,A,"Am spatii comerciale libere in centru, daca stie cineva interesati.");
+  DB=d;runMatching();return d;
+}
+function resetAll(){if(confirm("Stergi tot si revii la datele demo?")){localStorage.removeItem(KEY);DB=seed();save();ME=DB.members[0].id;loadMembers();refresh();}}
+
+function tokens(t){return new Set((t.toLowerCase().match(/[a-z0-9]+/g)||[]).filter(w=>w.length>=3&&!STOP.has(w)));}
+function name(id){const m=DB.members.find(x=>x.id===id);return m?m.name:"?";}
+
+function runMatching(){
+  const cauta=DB.items.filter(i=>i.kind==="caut"),ofera=DB.items.filter(i=>i.kind==="ofer"&&i.visible);let noi=0;
+  for(const s of cauta){const st=tokens(s.text);
+    for(const o of ofera){if(o.member_id===s.member_id)continue;
+      const ot=tokens(o.text);let sc=0;st.forEach(w=>{if(ot.has(w))sc++;});if(sc<1)continue;
+      if(DB.matches.some(m=>m.offer_item===o.id&&m.seek_item===s.id))continue;
+      DB.matches.push({id:DB.seq++,offer_item:o.id,seek_item:s.id,offer_member:o.member_id,seek_member:s.member_id,score:sc,status:"propus",offer_consent:0,seek_consent:0});noi++;}}
+  save();return noi;
+}
+function applyConsent(mid,member,accept){
+  const m=DB.matches.find(x=>x.id===mid);if(!m)return;
+  if(!accept){m.status="respins";save();return;}
+  if(member===m.offer_member)m.offer_consent=1;else if(member===m.seek_member)m.seek_consent=1;
+  if(m.offer_consent&&m.seek_consent&&m.status!=="conectat"){m.status="conectat";
+    const o=DB.items.find(i=>i.id===m.offer_item),s=DB.items.find(i=>i.id===m.seek_item);
+    DB.messages.push({id:DB.seq++,match_id:mid,sender:null,text:`Cercul v-a pus in legatura. ${name(m.seek_member)} cauta „${s.text}”, iar ${name(m.offer_member)} ofera „${o.text}”. Sursa: ${o.source}. Va las sa continuati de aici.`,created_at:today()});}
+  save();
+}
+function naiveExtract(text){const out=[];
+  for(const part of text.split(/[.\n;]+/)){const p=part.trim();if(p.length<4)continue;const low=p.toLowerCase();
+    if(["caut","am nevoie","vreau","imi trebuie"].some(k=>low.includes(k)))out.push(["caut",p]);
+    else if(["ofer","am un","am o","vand","detin","furnizor","cunosc","prieten"].some(k=>low.includes(k)))out.push(["ofer",p]);
+    else out.push(["ofer",p]);}
+  return out;
+}
+function briefing(nume,nt,nc){const prenume=nume.split(" ")[0];const p=[`Buna ziua, ${prenume}.`];
+  if(nc)p.push(`Aveti ${nc} legatura/legaturi de urmarit.`);if(nt)p.push(`${nt} sarcina/sarcini deschise.`);
+  if(!nt&&!nc)p.push("Sunteti la zi. Adaugati ce oferiti sau ce cautati pentru a gasi potriviri.");else p.push("Mai jos, cu cine merita sa vorbiti astazi.");
+  return p.join(" ");}
+function groupSignal(gid){const msgs=DB.gmsgs.filter(m=>m.group_id===gid);
+  for(let i=msgs.length-1;i>=0;i--){const low=msgs[i].text.toLowerCase();
+    if(["caut","ofer","furnizor","am nevoie","vand","libere","interesati"].some(k=>low.includes(k)))return msgs[i];}
+  return null;}
+
+function loadMembers(){const sel=$("#member");
+  sel.innerHTML=DB.members.map(m=>`<option value="${m.id}">${esc(m.name)}</option>`).join("");
+  if(!ME&&DB.members.length)ME=DB.members[0].id;if(ME)sel.value=ME;}
+$("#member").onchange=e=>{ME=+e.target.value;refresh();};
+$("#addMember").onclick=()=>{const n=prompt("Nume membru nou:");if(!n)return;const id=DB.seq++;DB.members.push({id,name:n.trim()});ME=id;save();loadMembers();refresh();};
+
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));
+  t.classList.add("active");$("#"+t.dataset.tab).classList.add("active");window.scrollTo(0,0);refresh();});
+const activeTab=()=>document.querySelector(".tab.active").dataset.tab;
+
+function loadMatches(){
+  const rows=DB.matches.filter(m=>(m.offer_member===ME||m.seek_member===ME)&&m.status!=="respins").sort((a,b)=>b.score-a.score||b.id-a.id);
+  const box=$("#matchList");
+  if(!rows.length){box.innerHTML='<p class="empty">Nicio potrivire inca. Adaugati ce oferiti sau ce cautati in Profil.</p>';return;}
+  box.innerHTML=rows.map(m=>{
+    const o=DB.items.find(i=>i.id===m.offer_item),s=DB.items.find(i=>i.id===m.seek_item);
+    const lat=m.offer_member===ME?"ofer":"caut",cel=name(lat==="ofer"?m.seek_member:m.offer_member);
+    const eu_c=lat==="ofer"?m.offer_consent:m.seek_consent;
+    const eu=lat==="ofer"?`<span class="tag">tu oferi</span><b>${esc(o.text)}</b>`:`<span class="tag">tu cauti</span><b>${esc(s.text)}</b>`;
+    const el=lat==="ofer"?`<span class="tag">${esc(cel)} cauta</span><b>${esc(s.text)}</b>`:`<span class="tag">${esc(cel)} ofera</span><b>${esc(o.text)}</b>`;
+    let jos;
+    if(m.status==="conectat")jos=`<div class="statusline"><span class="pill conectat">conectat</span><button class="small" onclick="openMatch(${m.id})">Deschide conversatia</button></div>`;
+    else if(eu_c)jos=`<div class="statusline"><span class="pill propus">propus</span> Ati acceptat — asteptam confirmarea: ${esc(cel)}.</div>`;
+    else jos=`<div class="actions"><button class="small" onclick="consent(${m.id},true)">Prezinta-ma</button><button class="small ghost" onclick="consent(${m.id},false)">Refuz</button></div>`;
+    return `<div class="card match ${m.status==="conectat"?"conectat":""}">
+      <div class="top"><span class="who2"><span class="av">${initials(cel)}</span>${esc(cel)}</span><span class="pill score">scor ${m.score}</span></div>
+      <div class="pair">${eu}</div><div class="pair">${el}</div>
+      <div class="src"><span class="seal">❧</span> sursa: ${esc(o.source)}</div>${jos}</div>`;}).join("");
+}
+function consent(id,a){applyConsent(id,ME,a);loadMatches();}
+$("#rematch").onclick=()=>{runMatching();loadMatches();};
+
+function loadGroups(){const mine=DB.groups.filter(g=>g.members.includes(ME));const box=$("#groupList");
+  if(!mine.length){box.innerHTML='<p class="empty">Niciun grup. Creati unul cu „+ Grup”.</p>';return;}
+  box.innerHTML=mine.map(g=>{const msgs=DB.gmsgs.filter(m=>m.group_id===g.id);const last=msgs[msgs.length-1];const sig=groupSignal(g.id);
+    const lastTxt=last?`${esc(name(last.sender))}: ${esc(last.text)}`:"(niciun mesaj)";
+    const sigHtml=sig?`<div class="signal">✦ informatie utila: „${esc(sig.text.slice(0,42))}…”</div>`:"";
+    return `<div class="group" onclick="openGroup(${g.id})"><div class="gtop"><span class="gname"><span class="gicon">${g.icon||"❖"}</span>${esc(g.name)}</span>${sig?'<span class="dot"></span>':''}</div>
+      <div class="last">${lastTxt}</div>${sigHtml}</div>`;}).join("");}
+$("#addGroup").onclick=()=>{const n=prompt("Nume grup nou:");if(!n)return;DB.groups.push({id:DB.seq++,name:n.trim(),icon:"❖",members:[ME]});save();loadGroups();};
+
+function loadProfile(){const mine=DB.items.filter(i=>i.member_id===ME);
+  const render=(k,el)=>{const list=mine.filter(i=>i.kind===k);
+    el.innerHTML=list.length?list.map(i=>`<div class="item"><div><div>${esc(i.text)}</div><div class="meta">sursa: ${esc(i.source)}</div></div><button class="x" onclick="delItem(${i.id})">×</button></div>`).join(""):'<p class="empty">Nimic inca.</p>';};
+  render("ofer",$("#oferList"));render("caut",$("#cautList"));}
+function addItem(k){const text=$("#"+k+"Text").value.trim();if(!text)return;const source=$("#"+k+"Src").value.trim()||"profil";
+  DB.items.push({id:DB.seq++,member_id:ME,kind:k,text,visible:k==="ofer"?1:0,source,created_at:today()});
+  $("#"+k+"Text").value="";$("#"+k+"Src").value="";save();runMatching();loadProfile();}
+function delItem(id){DB.items=DB.items.filter(i=>i.id!==id);save();loadProfile();}
+
+function dicteaza(){const text=$("#dictText").value.trim();if(!text)return;const ex=naiveExtract(text),src="dictare "+today();
+  ex.forEach(([k,t])=>DB.items.push({id:DB.seq++,member_id:ME,kind:k,text:t,visible:k==="ofer"?1:0,source:src,created_at:today()}));save();runMatching();
+  $("#dictResult").innerHTML='<div class="section-t">Extras (salvat in profil):</div>'+(ex.length?ex.map(([k,t])=>`<div class="item"><div>${esc(t)}</div><span class="badge ${k==="ofer"?"vis":"priv"}">${k}</span></div>`).join(""):'<p class="empty">Nu am gasit nimic.</p>');
+  $("#dictText").value="";}
+
+function loadSecretary(){const tasks=DB.tasks.filter(t=>t.member_id===ME&&!t.done);
+  const rel=DB.matches.filter(m=>(m.offer_member===ME||m.seek_member===ME)&&(m.status==="propus"||m.status==="conectat"));
+  const contacte=rel.map(m=>{const lat=m.offer_member===ME?"ofer":"caut",cel=name(lat==="ofer"?m.seek_member:m.offer_member);
+    return {match_id:m.id,status:m.status,text:`${cel}: potrivire ${m.status==="conectat"?"confirmata":"propusa"} (${lat==="ofer"?"tu oferi":"tu cauti"})`};});
+  $("#briefing").textContent=briefing(name(ME),tasks.length,contacte.length);
+  $("#contacte").innerHTML=contacte.length?contacte.map(c=>`<div class="contact"><span>${esc(c.text)}</span>${c.status==="conectat"?`<button class="small" onclick="openMatch(${c.match_id})">Chat</button>`:""}</div>`).join(""):'<p class="empty">Nimic de urmarit.</p>';
+  const all=DB.tasks.filter(t=>t.member_id===ME).sort((a,b)=>a.done-b.done||b.id-a.id);
+  $("#tasks").innerHTML=all.length?all.map(t=>`<div class="task ${t.done?"done":""}"><input type="checkbox" ${t.done?"checked":""} onchange="toggleTask(${t.id})"><span>${esc(t.text)}</span></div>`).join(""):'<p class="empty">Nicio sarcina.</p>';}
+function addTask(){const text=$("#taskText").value.trim();if(!text)return;DB.tasks.push({id:DB.seq++,member_id:ME,text,done:0,created_at:today()});$("#taskText").value="";save();loadSecretary();}
+function toggleTask(id){const t=DB.tasks.find(x=>x.id===id);if(t)t.done=t.done?0:1;save();loadSecretary();}
+
+function openMatch(id){CHAT=id;CHATKIND="match";const m=DB.matches.find(x=>x.id===id);const cel=name(m.offer_member===ME?m.seek_member:m.offer_member);
+  $("#chatTitle").textContent="↔ "+cel;$("#chatSub").textContent="conexiune deschisa cu acordul ambelor parti";$("#chatOverlay").classList.remove("hidden");loadChat();}
+function openGroup(id){CHAT=id;CHATKIND="group";const g=DB.groups.find(x=>x.id===id);
+  $("#chatTitle").textContent=(g.icon||"❖")+" "+g.name;$("#chatSub").textContent=g.members.length+" membri";$("#chatOverlay").classList.remove("hidden");loadChat();}
+function loadChat(){const msgs=CHATKIND==="match"?DB.messages.filter(m=>m.match_id===CHAT):DB.gmsgs.filter(m=>m.group_id===CHAT);
+  $("#chatMsgs").innerHTML=msgs.map(m=>{if(m.sender===null)return `<div class="msg app"><span class="seal">❧</span> ${esc(m.text)}</div>`;
+    const mine=m.sender===ME,who=mine?"":`<span class="nm">${esc(name(m.sender))}</span>`;return `<div class="msg ${mine?"me":"them"}">${who}${esc(m.text)}</div>`;}).join("");
+  const b=$("#chatMsgs");b.scrollTop=b.scrollHeight;}
+function sendMsg(){const text=$("#chatText").value.trim();if(!text)return;
+  if(CHATKIND==="match")DB.messages.push({id:DB.seq++,match_id:CHAT,sender:ME,text,created_at:today()});
+  else DB.gmsgs.push({id:DB.seq++,group_id:CHAT,sender:ME,text,created_at:today()});
+  $("#chatText").value="";save();loadChat();}
+function closeChat(){$("#chatOverlay").classList.add("hidden");CHAT=null;CHATKIND=null;refresh();}
+$("#chatText").addEventListener("keydown",e=>{if(e.key==="Enter")sendMsg();});
+
+function refresh(){const t=activeTab();if(t==="potriviri")loadMatches();else if(t==="grupuri")loadGroups();else if(t==="profil")loadProfile();else if(t==="secretara")loadSecretary();}
+load();loadMembers();refresh();
+</script>
+</body>
+</html>
