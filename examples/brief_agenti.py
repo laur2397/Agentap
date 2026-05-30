@@ -16,9 +16,9 @@ import asyncio, json, os, re, sys, time, urllib.request, urllib.error, itertools
 
 KEYS=[k.strip() for k in os.environ.get("GEMINI_KEYS","").split(",") if k.strip()]
 _rr=itertools.cycle(KEYS)
-MODEL="gemini-2.0-flash"   # free tier are RPM mai mare, fara overhead de thinking
-LOT=3                       # cate o cerere per cheie, ritmat
-PACE=4.5                    # secunde minim per slot (ramane sub limita RPM)
+MODEL="gemini-2.5-flash-lite"  # are cota zilnica proaspata + limite generoase
+LOT=3                           # ritmat sub limita pe minut a proiectului
+PACE=13                         # ~13 cereri/min total (sub limita de 15/min)
 
 def parse_roles(md_path):
     """Extrage (cod, nume, count, fisa) din fisierul de departament."""
@@ -59,7 +59,7 @@ async def brief_one(sem, dep, rol, idx):
     )
     async with sem:
         result=None
-        for a in range(9):
+        for a in range(3):  # retry minim, ca sa nu irosim cota
             key=next(_rr)
             try:
                 txt=await asyncio.to_thread(_gen_sync,key,prompt,500)
