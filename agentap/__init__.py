@@ -14,6 +14,8 @@ from .team import build_team
 from .company import Company, Department, Employee, build_company, slug
 from .organizatie import ORGANIZATIE, total_general, total_pe_departament
 from .proiect import PROIECT, brief_text
+from .tools_fs import file_tools, list_workspace
+from .builder import build_app
 
 __all__ = [
     "Agent",
@@ -31,4 +33,7 @@ __all__ = [
     "total_pe_departament",
     "PROIECT",
     "brief_text",
+    "file_tools",
+    "list_workspace",
+    "build_app",
 ]
