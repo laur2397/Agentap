@@ -16,8 +16,9 @@ import asyncio, json, os, re, sys, time, urllib.request, urllib.error, itertools
 
 KEYS=[k.strip() for k in os.environ.get("GEMINI_KEYS","").split(",") if k.strip()]
 _rr=itertools.cycle(KEYS)
-MODEL="gemini-2.5-flash"
-LOT=6
+MODEL="gemini-2.0-flash"   # free tier are RPM mai mare, fara overhead de thinking
+LOT=3                       # cate o cerere per cheie, ritmat
+PACE=4.5                    # secunde minim per slot (ramane sub limita RPM)
 
 def parse_roles(md_path):
     """Extrage (cod, nume, count, fisa) din fisierul de departament."""
@@ -57,18 +58,23 @@ async def brief_one(sem, dep, rol, idx):
         "care e contributia ta principala, plus 1 KPI dupa care vei fi masurat>."
     )
     async with sem:
-        for a in range(6):
+        result=None
+        for a in range(9):
             key=next(_rr)
             try:
-                txt=await asyncio.to_thread(_gen_sync,key,prompt,400)
+                txt=await asyncio.to_thread(_gen_sync,key,prompt,500)
                 ok=txt.upper().startswith("CONFIRM")
-                return {"rol":rol['nume'],"cod":rol['cod'],"persoana":idx,"confirmare":txt,"ok":ok}
+                result={"rol":rol['nume'],"cod":rol['cod'],"persoana":idx,"confirmare":txt,"ok":ok}
+                break
             except urllib.error.HTTPError as e:
-                if e.code==429: await asyncio.sleep(2*(2**a)); continue
-                return {"rol":rol['nume'],"cod":rol['cod'],"persoana":idx,"confirmare":f"[HTTP{e.code}]","ok":False}
+                if e.code==429: await asyncio.sleep(min(60,4*(1.7**a))); continue
+                result={"rol":rol['nume'],"cod":rol['cod'],"persoana":idx,"confirmare":f"[HTTP{e.code}]","ok":False}; break
             except Exception as e:
-                return {"rol":rol['nume'],"cod":rol['cod'],"persoana":idx,"confirmare":f"[{type(e).__name__}]","ok":False}
-        return {"rol":rol['nume'],"cod":rol['cod'],"persoana":idx,"confirmare":"[rate limit]","ok":False}
+                result={"rol":rol['nume'],"cod":rol['cod'],"persoana":idx,"confirmare":f"[{type(e).__name__}]","ok":False}; break
+        if result is None:
+            result={"rol":rol['nume'],"cod":rol['cod'],"persoana":idx,"confirmare":"[rate limit]","ok":False}
+        await asyncio.sleep(PACE)  # ritmare ca sa ramanem sub limita
+        return result
 
 async def run(md_path):
     dep, roles=parse_roles(md_path)
