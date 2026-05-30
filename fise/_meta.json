@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "firma": "Firma IT (aplicatie mobila B2C)",
+    "total_angajati": 220,
+    "total_roluri_unice": 126,
+    "total_departamente": 18
+  },
+  "instructiuni_briefing": "Briefeaza fiecare din cei 220 de agenti cu rolul lui din departamentul corespunzator. Pentru fiecare agent, transmite-i sectiunea specifica din departamentul sau (rolul cu detaliile complete). Dupa briefing, cere confirmare de intelegere. NU porni proiectul - doar briefing."
+}
