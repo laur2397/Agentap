@@ -11,5 +11,21 @@ from .base import Agent
 from .tools import Tool, tool
 from .orchestrator import Orchestrator
 from .team import build_team
+from .company import Company, Department, Employee, build_company, slug
+from .organizatie import ORGANIZATIE, total_general, total_pe_departament
 
-__all__ = ["Agent", "Tool", "tool", "Orchestrator", "build_team"]
+__all__ = [
+    "Agent",
+    "Tool",
+    "tool",
+    "Orchestrator",
+    "build_team",
+    "Company",
+    "Department",
+    "Employee",
+    "build_company",
+    "slug",
+    "ORGANIZATIE",
+    "total_general",
+    "total_pe_departament",
+]

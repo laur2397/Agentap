@@ -64,6 +64,45 @@ raspuns = team.run("Calculează 20! rulând cod și explică ce e factorialul.")
 print(raspuns)
 ```
 
+## 🏢 Firmă simulată de agenți (CEO → departamente → angajați)
+
+Pe lângă echipa de bază, Agentap conține o **organizație IT completă simulată**:
+**18 departamente, 220 de angajați**, fiecare cu propriul agent AI, organizați
+într-o ierarhie pe trei niveluri (**239 de agenți** în total). Mediu pur
+**educativ**, pentru cercetare pe sisteme multi-agent.
+
+```python
+from agentap import build_company
+
+firma = build_company()
+print(firma.headcount, "angajați,", firma.n_agenti, "agenți")
+
+# Cerere către întreaga firmă (CEO-ul deleagă pe departamente, care deleagă pe roluri)
+print(firma.run("Vrem să lansăm o funcție de notificări. Cum procedăm?"))
+
+# Vorbește direct cu un angajat
+hai = firma.employee("AI", "Head of AI")
+print(hai.run("Care e strategia noastră AI?"))
+
+# Trimite o sarcină unui departament întreg
+print(firma.department("Securitate").run("Faceți un checklist de securitate pentru lansare."))
+```
+
+Datele organizației trăiesc în `agentap/organizatie.py` (modul **pur**, fără API —
+poți inspecta structura fără cheie):
+
+```bash
+python -m agentap.organizatie   # afișează toate departamentele și rolurile
+python examples/firma_demo.py    # rulează firma vie (necesită ANTHROPIC_API_KEY)
+```
+
+| Componentă | Unde | Rol |
+|---|---|---|
+| `ORGANIZATIE` | `organizatie.py` | Datele: 18 departamente, roluri, descrieri |
+| `Employee` | `company.py` | Un agent per angajat, cu prompt de rol |
+| `Department` | `company.py` | Manager-agent + delegare pe roluri |
+| `Company` / `build_company` | `company.py` | CEO + toate departamentele |
+
 ## Extindere
 
 Adaugă un worker nou:
