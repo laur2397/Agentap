@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Memorie colectiva</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+  <div class="brand">🤝 Memorie colectiva</div>
+  <div class="who">
+    <label>Esti:</label>
+    <select id="member"></select>
+    <button id="addMember" title="Adauga membru">+</button>
+  </div>
+</header>
+
+<nav>
+  <button class="tab active" data-tab="potriviri">Potriviri</button>
+  <button class="tab" data-tab="profil">Profil</button>
+  <button class="tab" data-tab="dictare">Dicteaza</button>
+  <button class="tab" data-tab="secretara">Secretara</button>
+</nav>
+
+<main>
+  <!-- POTRIVIRI -->
+  <section id="potriviri" class="view active">
+    <div class="row-between">
+      <h2>Potriviri propuse</h2>
+      <button id="rematch" class="ghost">Recalculeaza</button>
+    </div>
+    <p class="hint">Aplicatia compara intern ce cauti tu cu ce ofera ceilalti. Nimic nu se deschide fara acordul ambelor parti.</p>
+    <div id="matchList"></div>
+  </section>
+
+  <!-- PROFIL -->
+  <section id="profil" class="view">
+    <h2>Profilul tau</h2>
+    <p class="hint">Ce oferi e vizibil celorlalti. Ce cauti ramane privat — folosit doar pentru potriviri.</p>
+    <div class="cols">
+      <div>
+        <h3>Ce ofer <span class="badge vis">vizibil</span></h3>
+        <div id="oferList"></div>
+        <div class="addbox">
+          <input id="oferText" placeholder="ex: cariera de carbune in Gorj">
+          <input id="oferSrc" placeholder="sursa (ex: nota 3 martie)">
+          <button onclick="addItem('ofer')">Adauga</button>
+        </div>
+      </div>
+      <div>
+        <h3>Ce caut <span class="badge priv">privat</span></h3>
+        <div id="cautList"></div>
+        <div class="addbox">
+          <input id="cautText" placeholder="ex: furnizor de carbune">
+          <input id="cautSrc" placeholder="sursa (optional)">
+          <button onclick="addItem('caut')">Adauga</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DICTARE -->
+  <section id="dictare" class="view">
+    <h2>Dicteaza dupa apel</h2>
+    <p class="hint">Scrie cateva fraze dupa o discutie; aplicatia extrage singura ce oferi si ce cauti. (Prototip: extragere prin reguli simple — sugestiile raman de verificat in profil.)</p>
+    <textarea id="dictText" rows="5" placeholder="ex: Am vorbit cu un tip care ofera transport marfa. Eu caut un contabil bun."></textarea>
+    <button onclick="dicteaza()">Extrage</button>
+    <div id="dictResult"></div>
+  </section>
+
+  <!-- SECRETARA -->
+  <section id="secretara" class="view">
+    <h2>Secretara ta</h2>
+    <div id="briefing" class="briefing"></div>
+    <div class="cols">
+      <div>
+        <h3>Pe cine sa contactez</h3>
+        <div id="contacte"></div>
+      </div>
+      <div>
+        <h3>Sarcini</h3>
+        <div id="tasks"></div>
+        <div class="addbox">
+          <input id="taskText" placeholder="ex: de sunat Vasile maine">
+          <button onclick="addTask()">Adauga</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- CHAT conexiune -->
+<div id="chatOverlay" class="overlay hidden">
+  <div class="chat">
+    <div class="chat-head"><span id="chatTitle">Conexiune</span><button onclick="closeChat()">×</button></div>
+    <div id="chatMsgs" class="chat-msgs"></div>
+    <div class="chat-input">
+      <input id="chatText" placeholder="Scrie un mesaj...">
+      <button onclick="sendMsg()">Trimite</button>
+    </div>
+  </div>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>
