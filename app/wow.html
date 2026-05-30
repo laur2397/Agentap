@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cercul - Potriviri de incredere</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf8f3; --ink:#1a2f4b; --gold:#b8924a; --card:#ffffff;
+  --line:#e8e2d6; --muted:#7a8494; --teal:#2f8f83;
+  --shadow:0 4px 20px rgba(26,47,75,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);padding-bottom:78px;font-size:15px;line-height:1.5}
+h1,h2,h3,.serif{font-family:'Playfair Display',serif}
+.app{max-width:520px;margin:0 auto;min-height:100vh}
+header.top{padding:22px 20px 14px;position:sticky;top:0;background:linear-gradient(var(--bg),var(--bg) 80%,rgba(250,248,243,0));z-index:20}
+header.top h1{font-size:26px;font-weight:600;letter-spacing:.3px}
+header.top .sub{color:var(--muted);font-size:13px;margin-top:3px}
+.screen{display:none;padding:0 16px 20px}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:18px;margin-bottom:14px;border:1px solid var(--line)}
+.card-h{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:600;color:#fff;flex-shrink:0;font-size:17px}
+.name{font-weight:600;font-size:16px}
+.role{color:var(--muted);font-size:12.5px}
+.scorewrap{margin-left:auto;text-align:center}
+.score-ring{width:48px;height:48px}
+.score-num{font-family:'Playfair Display',serif;font-weight:700;font-size:15px}
+.match-pair{display:flex;align-items:center;gap:10px;margin:6px 0}
+.match-pair .ico{color:var(--gold);font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;min-width:42px}
+.quote{background:#f7f4ec;border-left:3px solid var(--gold);padding:8px 11px;border-radius:0 8px 8px 0;font-size:13.5px;font-style:italic;flex:1}
+.tealtag{color:var(--teal);font-weight:600}
+.btn{display:inline-block;border:none;cursor:pointer;font-family:'Inter';font-weight:600;border-radius:10px;padding:11px 16px;font-size:14px}
+.btn-primary{background:var(--ink);color:#fff;width:100%}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+.btn-sm{padding:7px 12px;font-size:12.5px;border-radius:8px}
+.expander{font-size:13px;color:var(--ink);cursor:pointer;display:flex;align-items:center;gap:6px;padding:9px 0;border-top:1px solid var(--line);user-select:none}
+.expander .chev{transition:transform .25s;color:var(--gold)}
+.expander.open .chev{transform:rotate(90deg)}
+.exp-body{display:none;padding:4px 0 8px;font-size:13px;color:var(--muted)}
+.exp-body.open{display:block}
+.trail-item{display:flex;gap:9px;padding:5px 0;align-items:flex-start}
+.trail-dot{width:9px;height:9px;border-radius:50%;background:var(--teal);margin-top:5px;flex-shrink:0;position:relative}
+.trail-dot::after{content:'';position:absolute;left:4px;top:9px;width:1px;height:22px;background:var(--line)}
+.trail-item:last-child .trail-dot::after{display:none}
+.trail-when{color:var(--gold);font-weight:600;font-size:11.5px}
+/* consent slider */
+.consent{margin-top:12px;background:#f3f0e8;border-radius:30px;height:52px;position:relative;overflow:hidden;user-select:none;touch-action:none}
+.consent .track-label{position:absolute;width:100%;text-align:center;line-height:52px;font-size:13.5px;color:var(--muted);font-weight:500;pointer-events:none}
+.consent .knob{position:absolute;left:3px;top:3px;width:46px;height:46px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:grab;transition:background .2s;z-index:2}
+.consent.done{background:var(--teal)}
+.consent.done .knob{background:#fff;color:var(--teal)}
+.consent.done .track-label{color:#fff}
+.warm{background:#eef4f3;border:1px solid #d4e6e2;border-radius:10px;padding:10px 12px;font-size:13px;margin-top:10px;display:flex;align-items:center;gap:8px}
+.recip{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12.5px}
+.recip-bar{flex:1;height:7px;background:#eee;border-radius:5px;overflow:hidden}
+.recip-fill{height:100%;border-radius:5px}
+.decay{font-size:12px;color:var(--gold);margin-top:8px;display:flex;align-items:center;gap:6px}
+.brief{background:#f7f4ec;border-radius:10px;padding:12px;font-size:13px;margin-top:10px;white-space:pre-line;border:1px dashed var(--gold)}
+nav.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;max-width:520px;margin:0 auto;box-shadow:0 -2px 16px rgba(26,47,75,.05)}
+nav.bottom button{flex:1;background:none;border:none;padding:9px 2px 10px;cursor:pointer;color:var(--muted);font-size:10.5px;font-family:'Inter';font-weight:500;display:flex;flex-direction:column;align-items:center;gap:3px}
+nav.bottom button.active{color:var(--ink)}
+nav.bottom .ic{font-size:19px;line-height:1}
+nav.bottom button.active .ic{filter:none}
+.sec-title{font-family:'Playfair Display';font-size:18px;font-weight:600;margin:6px 4px 12px}
+textarea,input{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px;font-family:'Inter';font-size:14px;background:#fff;color:var(--ink);resize:vertical}
+textarea:focus,input:focus{outline:none;border-color:var(--gold)}
+.label{font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin:14px 4px 6px}
+.chip{display:inline-block;background:#f3f0e8;border-radius:20px;padding:5px 11px;font-size:12.5px;margin:3px 4px 3px 0;color:var(--ink)}
+.chip.caut{background:#eef4f3;color:var(--teal)}
+.chip.x{cursor:pointer}
+.chat-msg{max-width:80%;padding:9px 13px;border-radius:14px;margin:5px 0;font-size:13.5px;clear:both}
+.chat-msg.them{background:#fff;border:1px solid var(--line);float:left;border-bottom-left-radius:4px}
+.chat-msg.me{background:var(--ink);color:#fff;float:right;border-bottom-right-radius:4px}
+.chat-msg .mn{font-size:11px;font-weight:600;color:var(--gold);margin-bottom:2px}
+.chat-area{min-height:280px;overflow:hidden}
+.chat-input{display:flex;gap:8px;margin-top:10px}
+.priv{font-size:11px;color:var(--gold);font-weight:600}
+.intent-card{border:1px solid var(--gold);background:#fffdf8}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 18px;border-radius:24px;font-size:13px;z-index:50;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+.task{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.task:last-child{border:none}
+.task .tk{width:20px;height:20px;border:2px solid var(--gold);border-radius:6px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--teal)}
+.task.done span{text-decoration:line-through;color:var(--muted)}
+small.cite{color:var(--muted);font-size:11.5px;font-style:italic}
+.fade{animation:fade .4s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.thread-svg{height:30px;width:100%;margin:2px 0}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+  <h1 id="topTitle">Potriviri</h1>
+  <div class="sub" id="topSub">Conexiuni explicabile, cu sursa citata</div>
+</header>
+
+<!-- POTRIVIRI -->
+<section class="screen active" id="scr-potriviri"></section>
+
+<!-- GRUPURI -->
+<section class="screen" id="scr-grupuri">
+  <div class="sec-title">Cercul Carbune & Energie</div>
+  <div class="card">
+    <div class="chat-area" id="chatArea"></div>
+    <div class="chat-input">
+      <input id="chatInput" placeholder="Scrie in grup...">
+      <button class="btn btn-gold btn-sm" onclick="sendChat()">Trimite</button>
+    </div>
+  </div>
+</section>
+
+<!-- PROFIL -->
+<section class="screen" id="scr-profil">
+  <div class="card">
+    <div class="card-h">
+      <div class="avatar" style="background:#1a2f4b">TU</div>
+      <div><div class="name">Profilul tau</div><div class="role">Membru Cercul</div></div>
+    </div>
+    <div class="label">Ce ofer <span style="color:var(--teal)">(vizibil)</span></div>
+    <div id="offerChips"></div>
+    <div style="display:flex;gap:8px;margin-top:6px"><input id="newOffer" placeholder="Adauga ce oferi..."><button class="btn btn-ghost btn-sm" onclick="addTag('offer')">+</button></div>
+    <div class="label">Ce caut <span class="priv">(privat · doar pt. potriviri)</span></div>
+    <div id="seekChips"></div>
+    <div style="display:flex;gap:8px;margin-top:6px"><input id="newSeek" placeholder="Adauga ce cauti..."><button class="btn btn-ghost btn-sm" onclick="addTag('seek')">+</button></div>
+  </div>
+  <div class="card">
+    <div class="sec-title" style="margin:0 0 8px">Pasaport de consimtamant</div>
+    <small class="cite">Exporta dovada auditabila a conexiunilor confirmate (dublu accept + sursa + timestamp).</small>
+    <button class="btn btn-primary" style="margin-top:10px" onclick="exportPassport()">Exporta GDPR (.json)</button>
+  </div>
+</section>
+
+<!-- DICTEAZA -->
+<section class="screen" id="scr-dicteaza">
+  <div class="sec-title">Dicteaza dupa apel</div>
+  <div class="card">
+    <small class="cite">Scrie / lipeste notele apelului. Folosim cuvinte-cheie ("ofer", "caut", "are nevoie", "vinde", "cumpara") pentru a extrage intentii.</small>
+    <textarea id="dictText" rows="5" style="margin-top:10px" placeholder="ex: Am vorbit cu Ana. Ofera carbune cocsificabil din Valea Jiului. Caut transport feroviar pentru livrari lunare..."></textarea>
+    <button class="btn btn-primary" style="margin-top:10px" onclick="parseDictare()">Extrage intentii</button>
+  </div>
+  <div id="intentResult"></div>
+</section>
+
+<!-- SECRETARA -->
+<section class="screen" id="scr-secretara">
+  <div class="sec-title">Secretara</div>
+  <div class="card">
+    <div class="card-h"><div class="avatar" style="background:var(--gold)">S</div><div><div class="name">Briefing de azi</div><div class="role" id="todayDate"></div></div></div>
+    <div id="briefBox"></div>
+  </div>
+  <div class="card">
+    <div class="sec-title" style="margin:0 0 6px">Sarcini</div>
+    <div id="taskList"></div>
+  </div>
+</section>
+
+</div>
+
+<nav class="bottom">
+  <button class="active" data-scr="potriviri" onclick="nav('potriviri')"><span class="ic">&#9883;</span>Potriviri</button>
+  <button data-scr="grupuri" onclick="nav('grupuri')"><span class="ic">&#128172;</span>Grupuri</button>
+  <button data-scr="profil" onclick="nav('profil')"><span class="ic">&#128100;</span>Profil</button>
+  <button data-scr="dicteaza" onclick="nav('dicteaza')"><span class="ic">&#127908;</span>Dicteaza</button>
+  <button data-scr="secretara" onclick="nav('secretara')"><span class="ic">&#128221;</span>Secretara</button>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const TITLES={potriviri:['Potriviri','Conexiuni explicabile, cu sursa citata'],grupuri:['Grupuri','Discutii pe cercuri de interes'],profil:['Profil','Ce oferi este vizibil. Ce cauti, privat.'],dicteaza:['Dicteaza','Transforma apelul in intentii'],secretara:['Secretara','Briefing si sarcinile zilei']};
+
+// ---------- SEED ----------
+function seed(){
+  if(localStorage.getItem('cercul_v1')) return;
+  const members=[
+    {id:'ana',name:'Ana Popescu',role:'Comerciant carbune · Petrosani',color:'#1a2f4b',
+      offer:['carbune cocsificabil','livrari lunare Valea Jiului','certificate calitate'],
+      seek:['transport feroviar','depozitare portuara']},
+    {id:'bogdan',name:'Bogdan Marin',role:'Logistica feroviara · Constanta',color:'#2f8f83',
+      offer:['transport feroviar','vagoane marfa','depozitare portuara Constanta'],
+      seek:['volume constante carbune','contracte anuale']},
+    {id:'cristina',name:'Cristina Ilie',role:'Trader energie · Bucuresti',color:'#b8924a',
+      offer:['contracte anuale','finantare avans marfa','retea cumparatori industriali'],
+      seek:['certificate calitate','carbune cocsificabil']}
+  ];
+  const tu={offer:['intermediere contracte','introduceri in retea','due diligence furnizori'],
+            seek:['carbune cocsificabil','transport feroviar']};
+  const data={
+    members, tu,
+    sources:{
+      ana:[{q:'Ofera carbune cocsificabil din Valea Jiului, livrari lunare',when:'Dictare · 12 mai'},
+           {q:'Cauta transport feroviar pentru livrarile catre port',when:'Dictare · 12 mai'}],
+      bogdan:[{q:'Are vagoane libere si depozitare portuara la Constanta',when:'Apel · 8 mai'},
+              {q:'Vrea volume constante de carbune, contracte anuale',when:'Apel · 8 mai'}],
+      cristina:[{q:'Cere certificate de calitate pentru carbunele importat',when:'Email · 3 mai'},
+                {q:'Ofera finantare avans si retea de cumparatori',when:'Email · 3 mai'}]
+    },
+    consents:{}, favors:[
+      {from:'ana',to:'tu',type:'introducere'},
+      {from:'tu',to:'bogdan',type:'introducere'},
+      {from:'tu',to:'ana',type:'due diligence'}
+    ],
+    chat:[
+      {who:'Ana Popescu',color:'#1a2f4b',text:'Buna tuturor! Avem livrari noi de carbune in iunie.'},
+      {who:'Bogdan Marin',color:'#2f8f83',text:'Excelent, am vagoane libere saptamana viitoare.'}
+    ],
+    tasks:[
+      {t:'Confirma introducere Ana ↔ Bogdan',done:false},
+      {t:'Trimite certificate calitate catre Cristina',done:false},
+      {t:'Reconfirma volumele lunare cu Ana',done:true}
+    ],
+    decay:{}
+  };
+  localStorage.setItem('cercul_v1',JSON.stringify(data));
+}
+seed();
+let DB=JSON.parse(localStorage.getItem('cercul_v1'));
+function save(){localStorage.setItem('cercul_v1',JSON.stringify(DB))}
+
+// ---------- MATCH ENGINE ----------
+function tokens(s){return s.toLowerCase().split(/[\s,]+/).filter(w=>w.length>3)}
+function overlapScore(seekArr,offerArr){
+  let hits=[];
+  seekArr.forEach(seek=>{
+    offerArr.forEach(off=>{
+      const st=tokens(seek), ot=new Set(tokens(off));
+      const common=st.filter(t=>ot.has(t));
+      if(common.length){hits.push({seek,off,common})}
+    });
+  });
+  return hits;
+}
+function computeMatches(){
+  const out=[];
+  DB.members.forEach(m=>{
+    // tu cauti, ei ofera
+    const h1=overlapScore(DB.tu.seek, m.offer);
+    // ei cauta, tu oferi
+    const h2=overlapScore(m.seek, DB.tu.offer);
+    const total=h1.length+h2.length;
+    if(total>0){
+      const score=Math.min(98, 40+total*16+(h1.length&&h2.length?12:0));
+      out.push({m,h1,h2,score});
+    }
+  });
+  return out.sort((a,b)=>b.score-a.score);
+}
+
+// warm intro: shortest path from a member to tu via favors graph
+function warmIntro(targetId){
+  // build adj
+  const adj={};
+  DB.favors.forEach(f=>{(adj[f.from]=adj[f.from]||[]).push(f.to);(adj[f.to]=adj[f.to]||[]).push(f.from)});
+  // BFS from targetId to 'tu'
+  const q=[[targetId]], seen=new Set([targetId]);
+  while(q.length){
+    const path=q.shift(), last=path[path.length-1];
+    if(last==='tu'&&path.length>2) return path;
+    (adj[last]||[]).forEach(n=>{if(!seen.has(n)){seen.add(n);q.push([...path,n])}});
+  }
+  return null;
+}
+function nameOf(id){if(id==='tu')return'tu';const m=DB.members.find(x=>x.id===id);return m?m.name.split(' ')[0]:id}
+
+// ---------- RENDER POTRIVIRI ----------
+function renderMatches(){
+  const el=document.getElementById('scr-potriviri');
+  const matches=computeMatches();
+  el.innerHTML='';
+  matches.forEach((mt,i)=>{
+    const m=mt.m;
+    if(DB.decay[m.id]===undefined)DB.decay[m.id]=mt.score;
+    const consent=DB.consents[m.id]||{};
+    const wp=warmIntro(m.id);
+    // reciprocity
+    const give=DB.favors.filter(f=>f.from==='tu'&&f.to===m.id).length;
+    const get=DB.favors.filter(f=>f.from===m.id&&f.to==='tu').length;
+    const bal=give+get===0?50:Math.round(give/(give+get)*100);
+    const balColor=Math.abs(bal-50)<25?'#2f8f83':'#b8924a';
+    const balTxt=Math.abs(bal-50)<25?'Schimb echilibrat':'Atentie: dezechilibru';
+    const decayVal=DB.decay[m.id];
+
+    const c=document.createElement('div');c.className='card fade';
+    c.innerHTML=`
+      <div class="card-h">
+        <div class="avatar" style="background:${m.color}">${m.name[0]}</div>
+        <div><div class="name">${m.name}</div><div class="role">${m.role}</div></div>
+        <div class="scorewrap">${ring(decayVal)}</div>
+      </div>
+      <div class="match-pair"><span class="ico">Tu cauti</span><div class="quote">${mt.h1.length?'"'+mt.h1[0].off+'"':'profil general'}</div></div>
+      <div class="match-pair"><span class="ico">El ofera</span><div class="quote">${mt.h2.length?'"'+mt.h2[0].off+'"':'reciprocitate posibila'}</div></div>
+      <div class="decay">&#9203; Scor in scadere: ${decayVal} pct · actioneaza acum (potrivire neactionata)</div>
+
+      ${wp?`<div class="warm">&#129309; <span>Te poate prezenta <b>${nameOf(wp[1])}</b></span><button class="btn btn-gold btn-sm" style="margin-left:auto" onclick="reqIntro('${m.id}','${nameOf(wp[1])}')">Cere introducere</button></div>`:''}
+
+      <div class="recip"><span>Reciprocitate</span><div class="recip-bar"><div class="recip-fill" style="width:${bal}%;background:${balColor}"></div></div><span style="color:${balColor};font-weight:600">${balTxt}</span></div>
+
+      <div class="expander" onclick="toggleExp(this)"><span class="chev">&#9656;</span><b>De ce aceasta potrivire?</b></div>
+      <div class="exp-body">${whyHTML(mt)}</div>
+
+      <div class="expander" onclick="toggleExp(this)"><span class="chev">&#9656;</span>Sursa citata · lant de incredere</div>
+      <div class="exp-body">${trailHTML(m.id)}</div>
+
+      <div id="consentArea-${m.id}">${consentHTML(m.id,consent)}</div>
+    `;
+    el.appendChild(c);
+  });
+  save();
+  // attach sliders
+  matches.forEach(mt=>setupSlider(mt.m.id));
+}
+function ring(score){
+  const r=20,c=2*Math.PI*r,off=c-(score/100)*c;
+  const col=score>75?'#2f8f83':score>55?'#b8924a':'#7a8494';
+  return `<svg class="score-ring" viewBox="0 0 48 48"><circle cx="24" cy="24" r="${r}" fill="none" stroke="#eee" stroke-width="4"/><circle cx="24" cy="24" r="${r}" fill="none" stroke="${col}" stroke-width="4" stroke-dasharray="${c}" stroke-dashoffset="${off}" stroke-linecap="round" transform="rotate(-90 24 24)"/><text x="24" y="28" text-anchor="middle" class="score-num" fill="${col}">${score}</text></svg>`;
+}
+function whyHTML(mt){
+  let s='';
+  mt.h1.forEach(h=>s+=`<div style="margin:4px 0"><span class="tealtag">Match cuvant:</span> "${h.common.join(', ')}"<br><small class="cite">tu cauti "${h.seek}" ↔ el ofera "${h.off}"</small></div>`);
+  mt.h2.forEach(h=>s+=`<div style="margin:4px 0"><span class="tealtag">Reciproc:</span> "${h.common.join(', ')}"<br><small class="cite">el cauta "${h.seek}" ↔ tu oferi "${h.off}"</small></div>`);
+  return s||'Potrivire pe profil general.';
+}
+function trailHTML(id){
+  const src=DB.sources[id]||[];
+  let s='';
+  src.forEach(x=>s+=`<div class="trail-item"><div class="trail-dot"></div><div><span class="trail-when">${x.when}</span><br>"${x.q}"</div></div>`);
+  return s||'Fara surse inregistrate.';
+}
+function consentHTML(id,consent){
+  if(consent.both){
+    return `<div style="border-top:1px solid var(--line);margin-top:8px;padding-top:10px">
+      <div class="tealtag" style="font-size:13px">&#10003; Dublu consimtamant confirmat · contact deblocat</div>
+      <div class="brief">${genBrief(id)}</div>
+      <button class="btn btn-ghost btn-sm" style="margin-top:8px;width:100%" onclick="copyBrief('${id}')">Copiaza brief-ul de introducere</button>
+    </div>`;
+  }
+  const mine=consent.mine;
+  return `<div class="consent ${mine?'half':''}" id="slider-${id}">
+    <div class="track-label">${mine?'Tu ai confirmat · gliseaza din nou pt. cealalta parte':'Gliseaza pentru a strange mana &#129309;'}</div>
+    <div class="knob" id="knob-${id}">&#129309;</div>
+  </div>`;
+}
+function genBrief(id){
+  const m=DB.members.find(x=>x.id===id);
+  const off=m.offer[0], src=(DB.sources[id]&&DB.sources[id][0])?DB.sources[id][0].when:'sursa interna';
+  return `INTRODUCERE: Tu ↔ ${m.name}\n• Tu oferi: ${DB.tu.offer[0]}\n• ${m.name.split(' ')[0]} ofera: ${off} (sursa: ${src})\n• Deschidere: "Va pun in legatura — ambii cautati exact ce ofera celalalt. Sa stabilim un apel?"`;
+}
+
+// ---------- SLIDER ----------
+function setupSlider(id){
+  const sl=document.getElementById('slider-'+id);
+  if(!sl)return;
+  const knob=document.getElementById('knob-'+id);
+  let drag=false,startX,max;
+  function start(e){drag=true;knob.style.transition='none';startX=(e.touches?e.touches[0].clientX:e.clientX)-knob.offsetLeft;max=sl.offsetWidth-knob.offsetWidth-6;e.preventDefault()}
+  function move(e){if(!drag)return;let x=(e.touches?e.touches[0].clientX:e.clientX)-startX;x=Math.max(3,Math.min(max,x));knob.style.left=x+'px'}
+  function end(){if(!drag)return;drag=false;knob.style.transition='left .2s';
+    if(knob.offsetLeft>max-8){confirmConsent(id);}else{knob.style.left='3px'}}
+  knob.addEventListener('mousedown',start);knob.addEventListener('touchstart',start,{passive:false});
+  window.addEventListener('mousemove',move);window.addEventListener('touchmove',move,{passive:false});
+  window.addEventListener('mouseup',end);window.addEventListener('touchend',end);
+}
+function confirmConsent(id){
+  DB.consents[id]=DB.consents[id]||{};
+  if(!DB.consents[id].mine){
+    DB.consents[id].mine=true;DB.consents[id].t1=new Date().toISOString();
+    toast('Ai confirmat. Asteptam cealalta parte...');
+    save();
+    // simulate other party after delay
+    setTimeout(()=>{
+      DB.consents[id].both=true;DB.consents[id].t2=new Date().toISOString();
+      save();renderMatches();toast('&#129309; Dublu consimtamant! Contact deblocat.');
+    },1100);
+  }
+  renderMatches();
+}
+
+function reqIntro(id,via){toast('Cerere de introducere trimisa catre '+via);}
+function copyBrief(id){
+  const t=genBrief(id);
+  navigator.clipboard&&navigator.clipboard.writeText(t);
+  toast('Brief copiat in clipboard');
+}
+
+// ---------- EXPANDERS ----------
+function toggleExp(el){el.classList.toggle('open');const b=el.nextElementSibling;b.classList.toggle('open')}
+
+// ---------- NAV ----------
+function nav(s){
+  document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
+  document.getElementById('scr-'+s).classList.add('active');
+  document.querySelectorAll('nav.bottom button').forEach(b=>b.classList.toggle('active',b.dataset.scr===s));
+  document.getElementById('topTitle').textContent=TITLES[s][0];
+  document.getElementById('topSub').textContent=TITLES[s][1];
+  if(s==='profil')renderProfile();
+  if(s==='grupuri')renderChat();
+  if(s==='secretara')renderSecretara();
+  window.scrollTo(0,0);
+}
+
+// ---------- PROFIL ----------
+function renderProfile(){
+  const oe=document.getElementById('offerChips'),se=document.getElementById('seekChips');
+  oe.innerHTML=DB.tu.offer.map((t,i)=>`<span class="chip x" onclick="delTag('offer',${i})">${t} ✕</span>`).join('');
+  se.innerHTML=DB.tu.seek.map((t,i)=>`<span class="chip caut x" onclick="delTag('seek',${i})">${t} ✕</span>`).join('');
+}
+function addTag(k){
+  const inp=document.getElementById(k==='offer'?'newOffer':'newSeek');
+  const v=inp.value.trim();if(!v)return;
+  DB.tu[k==='offer'?'offer':'seek'].push(v);inp.value='';save();renderProfile();
+}
+function delTag(k,i){DB.tu[k==='offer'?'offer':'seek'].splice(i,1);save();renderProfile()}
+
+function exportPassport(){
+  const confirmed=Object.entries(DB.consents).filter(([k,v])=>v.both).map(([k,v])=>{
+    const m=DB.members.find(x=>x.id===k);
+    return {membru:m.name,consimtamant_tu:v.t1,consimtamant_parte:v.t2,sursa_citata:DB.sources[k],status:'dublu accept confirmat'};
+  });
+  const doc={pasaport_consimtamant:'Cercul',generat:new Date().toISOString(),conexiuni_confirmate:confirmed,nota:'Proba auditabila locala fara criptografie reala'};
+  const blob=new Blob([JSON.stringify(doc,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='pasaport-consimtamant.json';a.click();
+  toast('Pasaport exportat');
+}
+
+// ---------- CHAT ----------
+function renderChat(){
+  const a=document.getElementById('chatArea');
+  a.innerHTML=DB.chat.map(m=>m.who==='Tu'?`<div class="chat-msg me">${m.text}</div>`:`<div class="chat-msg them"><div class="mn" style="color:${m.color}">${m.who}</div>${m.text}</div>`).join('')+'<div style="clear:both"></div>';
+  a.scrollTop=a.scrollHeight;
+}
+function sendChat(){
+  const i=document.getElementById('chatInput');if(!i.value.trim())return;
+  DB.chat.push({who:'Tu',text:i.value.trim()});i.value='';save();renderChat();
+}
+
+// ---------- DICTARE ----------
+function parseDictare(){
+  const txt=document.getElementById('dictText').value;
+  const res=document.getElementById('intentResult');
+  if(!txt.trim()){res.innerHTML='';return}
+  const sentences=txt.split(/[.!?\n]+/).map(s=>s.trim()).filter(Boolean);
+  const offers=[],seeks=[];
+  const offerKw=/(ofer|ofera|vinde|are|dispune|livreaza|produce)/i;
+  const seekKw=/(caut|cauta|are nevoie|vrea|doreste|cumpara|necesita)/i;
+  sentences.forEach(s=>{
+    if(seekKw.test(s))seeks.push(s);
+    else if(offerKw.test(s))offers.push(s);
+  });
+  let proposed=[];
+  offers.concat(seeks).forEach(s=>{
+    DB.members.forEach(m=>{
+      const t=tokens(s), pool=new Set([...m.offer,...m.seek].flatMap(tokens));
+      if(t.some(w=>pool.has(w))&&!proposed.find(p=>p.id===m.id))proposed.push({id:m.id,name:m.name,why:t.filter(w=>pool.has(w)).join(', ')});
+    });
+  });
+  proposed=proposed.slice(0,3);
+  res.innerHTML=`
+   <div class="card intent-card fade">
+    <div class="sec-title" style="margin:0 0 10px">Card de intentie extras</div>
+    <div class="label" style="margin-top:0">Oferte detectate</div>
+    ${offers.length?offers.map(o=>`<div class="quote" style="margin:4px 0">"${o}"</div>`).join(''):'<small class="cite">niciuna</small>'}
+    <div class="label">Nevoi detectate</div>
+    ${seeks.length?seeks.map(o=>`<div class="quote" style="margin:4px 0;border-color:var(--teal)">"${o}"</div>`).join(''):'<small class="cite">niciuna</small>'}
+    <small class="cite">Editeaza textul si reextrage daca e nevoie.</small>
+   </div>
+   ${proposed.length?`<div class="card fade"><div class="sec-title" style="margin:0 0 8px">Potriviri propuse instant</div>${proposed.map(p=>`<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--line)"><div class="avatar" style="width:34px;height:34px;font-size:14px;background:var(--gold)">${p.name[0]}</div><div><div class="name" style="font-size:14px">${p.name}</div><small class="cite">match pe: ${p.why}</small></div></div>`).join('')}<button class="btn btn-primary" style="margin-top:10px" onclick="nav('potriviri')">Vezi potrivirile complete</button></div>`:'<div class="card"><small class="cite">Nicio potrivire instant. Adauga mai multe detalii.</small></div>'}
+  `;
+}
+
+// ---------- SECRETARA ----------
+function renderSecretara(){
+  document.getElementById('todayDate').textContent=new Date().toLocaleDateString('ro-RO',{weekday:'long',day:'numeric',month:'long'});
+  const matches=computeMatches();
+  const top=matches[0];
+  const confirmed=Object.values(DB.consents).filter(v=>v.both).length;
+  document.getElementById('briefBox').innerHTML=`
+    <div style="font-size:14px;line-height:1.7">
+    • Ai <b>${matches.length}</b> potriviri active, top scor <b class="tealtag">${top?top.score:'-'}</b> cu ${top?top.m.name:'-'}.<br>
+    • <b>${confirmed}</b> conexiuni cu dublu consimtamant confirmat.<br>
+    • Cea mai urgenta: ${top?top.m.name:'-'} — scorul scade daca nu actionezi.</div>
+    <small class="cite">Generat din datele locale · ${new Date().toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit'})}</small>`;
+  const tl=document.getElementById('taskList');
+  tl.innerHTML=DB.tasks.map((t,i)=>`<div class="task ${t.done?'done':''}"><div class="tk" onclick="toggleTask(${i})">${t.done?'✓':''}</div><span>${t.t}</span></div>`).join('');
+}
+function toggleTask(i){DB.tasks[i].done=!DB.tasks[i].done;save();renderSecretara()}
+
+// ---------- TOAST ----------
+let toastT;
+function toast(msg){const t=document.getElementById('toast');t.innerHTML=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2200)}
+
+// decay tick (slowly reduce neglected matches)
+setInterval(()=>{
+  let ch=false;
+  Object.keys(DB.decay).forEach(id=>{
+    if(!(DB.consents[id]&&DB.consents[id].both)&&DB.decay[id]>30){DB.decay[id]-=1;ch=true}
+  });
+  if(ch&&document.getElementById('scr-potriviri').classList.contains('active')){save();renderMatches()}
+},9000);
+
+renderMatches();
+</script>
+</body>
+</html>
