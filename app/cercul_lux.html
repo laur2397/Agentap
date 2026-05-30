@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cercul — exclusiv</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0b;--bg2:#101012;--card:#151517;--card2:#1b1b1e;--line:#262629;--line2:#33333a;
+  --ink:#f3efe6;--ink2:#b9b3a6;--muted:#7e7a70;
+  --gold:#c9a227;--gold2:#d9b94e;--gold-dim:#8a7530;--gold-soft:rgba(201,162,39,.13);
+  --teal:#5fb89a;--teal-soft:rgba(95,184,154,.14);
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',system-ui,sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#000;color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;font-weight:300}
+.shell{max-width:440px;margin:0 auto;min-height:100vh;background:
+  radial-gradient(120% 60% at 50% -10%, rgba(201,162,39,.10), transparent 60%),
+  linear-gradient(180deg,#0c0c0e,#0a0a0b 320px);
+  display:flex;flex-direction:column;position:relative;overflow:hidden;
+  box-shadow:0 0 80px rgba(0,0,0,.6)}
+
+/* header */
+header{padding:26px 22px 16px;position:sticky;top:0;z-index:9;
+  background:rgba(10,10,11,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.htop{display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .mk{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
+  border:1px solid var(--gold);color:var(--gold);font-family:var(--serif);font-size:23px;font-weight:700;
+  background:radial-gradient(circle at 30% 30%,rgba(201,162,39,.18),transparent)}
+.brand .t{font-family:var(--serif);font-size:23px;font-weight:700;letter-spacing:.5px;line-height:1}
+.brand .t small{display:block;font-family:var(--sans);font-size:8.5px;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold-dim);margin-top:3px;font-weight:500}
+.memsel{background:var(--card2);border:1px solid var(--line2);border-radius:30px;padding:8px 12px;color:var(--ink);font:inherit;font-size:12.5px;max-width:130px}
+.scarcity{margin-top:15px;display:flex;align-items:center;gap:9px;font-size:11px;color:var(--ink2);letter-spacing:.4px}
+.scarcity .bar{flex:1;height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+.scarcity .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));border-radius:2px}
+.scarcity b{color:var(--gold);font-weight:600}
+
+main{flex:1;overflow:auto;padding:22px 22px 96px}
+.view{display:none}.view.on{display:block;animation:rise .5s var(--ease)}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.eyebrow{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim);font-weight:500}
+h2.title{font-family:var(--serif);font-size:30px;font-weight:600;letter-spacing:.3px;margin:3px 0 4px}
+.sub{color:var(--muted);font-size:12.5px;margin-bottom:20px}
+.hr{height:1px;background:linear-gradient(90deg,var(--gold-dim),transparent);margin:18px 0;opacity:.6}
+
+/* greeting / wellbeing */
+.greet{font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.25}
+.greet .em{color:var(--gold)}
+.greetp{color:var(--ink2);font-size:13.5px;margin-top:8px}
+.wellbe{margin-top:16px;display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--muted);
+  border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--card)}
+.wellbe .ic{color:var(--teal)}
+
+/* stats row */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:18px}
+.stat{border:1px solid var(--line);border-radius:14px;padding:15px 12px;background:linear-gradient(180deg,var(--card),#0e0e10);text-align:center}
+.stat .n{font-family:var(--serif);font-size:30px;font-weight:700;color:var(--gold);line-height:1}
+.stat .l{font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-top:6px}
+
+.section-h{display:flex;justify-content:space-between;align-items:baseline;margin:28px 0 14px}
+.section-h .h{font-family:var(--serif);font-size:21px;font-weight:600}
+.section-h a{color:var(--gold);font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer}
+
+/* match card */
+.card{background:linear-gradient(180deg,var(--card),#0e0e10);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:14px;transition:.5s var(--ease)}
+.match{position:relative;overflow:hidden}
+.match::before{content:"";position:absolute;inset:0;border-radius:18px;padding:1px;
+  background:linear-gradient(140deg,rgba(201,162,39,.5),transparent 40%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.match.conectat::before{background:linear-gradient(140deg,rgba(95,184,154,.5),transparent 40%)}
+.match:active{transform:scale(.99)}
+.mtop{display:flex;align-items:center;gap:13px}
+.av{border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-weight:700;flex:none;
+  background:#000;border:1px solid var(--gold-dim);color:var(--gold2)}
+.mtop .nm{font-family:var(--serif);font-size:19px;font-weight:600;line-height:1.1}
+.mtop .co{font-size:11.5px;color:var(--muted);margin-top:2px}
+.mtop .sc{margin-left:auto;text-align:center}
+.mtop .sc .n{font-family:var(--serif);font-size:27px;font-weight:700;color:var(--gold)}
+.mtop .sc .l{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.pairing{margin:14px 0 0;font-size:13px}
+.pairing .r{display:flex;gap:10px;padding:5px 0}
+.pairing .r .tag{min-width:74px;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--gold-dim);font-weight:600;padding-top:3px}
+.pairing .r b{color:var(--ink);font-weight:400}
+.why{margin-top:12px}
+.why summary{cursor:pointer;color:var(--gold);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;list-style:none}
+.why summary::-webkit-details-marker{display:none}
+.why summary::before{content:"— ";color:var(--gold-dim)}
+.why .b{margin-top:10px;font-size:12.5px;color:var(--ink2);border-left:1px solid var(--gold-dim);padding-left:12px;line-height:1.6}
+.src{margin-top:14px;padding-top:13px;border-top:1px solid var(--line);font-size:11px;color:var(--muted);letter-spacing:.3px}
+.src .seal{color:var(--gold)}
+.acts{display:flex;gap:10px;margin-top:15px;align-items:center}
+.btn{border:0;border-radius:30px;padding:11px 20px;font:inherit;font-size:13px;font-weight:500;letter-spacing:.5px;cursor:pointer;transition:.4s var(--ease)}
+.btn.gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1404;font-weight:600}
+.btn.gold:hover{box-shadow:0 6px 24px rgba(201,162,39,.35)}
+.btn.ghost{background:transparent;color:var(--ink2);border:1px solid var(--line2)}
+.btn.ghost:hover{border-color:var(--gold-dim);color:var(--ink)}
+.btn.sm{padding:8px 15px;font-size:12px}
+.pill{font-size:9px;padding:4px 12px;border-radius:30px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.pill.propus{background:var(--gold-soft);color:var(--gold)}
+.pill.conectat{background:var(--teal-soft);color:var(--teal)}
+.empty{color:var(--muted);font-style:italic;text-align:center;padding:30px;font-family:var(--serif);font-size:16px}
+
+/* members */
+.filters{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:16px;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line2);border-radius:30px;padding:7px 15px;font-size:12px;color:var(--ink2);cursor:pointer;white-space:nowrap;transition:.3s var(--ease)}
+.chip.on{background:var(--gold);color:#1a1404;border-color:var(--gold);font-weight:500}
+.mcard{background:linear-gradient(180deg,var(--card),#0e0e10);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px;cursor:pointer;transition:.4s var(--ease)}
+.mcard:active{transform:scale(.99)}
+.mcard .h{display:flex;gap:13px;align-items:center}
+.mcard .nm{font-family:var(--serif);font-size:18px;font-weight:600}
+.mcard .role{font-size:11.5px;color:var(--muted)}
+.mcard .ind{margin-left:auto}
+.mcard .off{margin-top:13px;font-size:12.5px;color:var(--ink2)}
+.mcard .off .o{padding-left:14px;position:relative;margin:3px 0}
+.mcard .off .o::before{content:"◦";position:absolute;left:0;color:var(--gold-dim)}
+
+/* network */
+.netwrap{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--card),#0c0c0e);padding:6px;overflow:hidden}
+.netlegend{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;font-size:11px;color:var(--ink2)}
+.netlegend i{display:inline-block;width:13px;height:2px;border-radius:2px;margin-right:6px;vertical-align:middle}
+svg .node circle{transition:.3s var(--ease)}
+svg .node:active circle{stroke:var(--gold2);stroke-width:3}
+svg text{font-family:var(--sans);font-size:9px;fill:var(--ink2)}
+
+/* profile */
+.phead{display:flex;gap:16px;align-items:center;margin-bottom:8px}
+.panel{border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,var(--card),#0e0e10);padding:18px;margin-top:14px}
+.panel h3{font-family:var(--serif);font-size:18px;font-weight:600;display:flex;align-items:center;gap:9px;margin-bottom:14px}
+.badge{font-size:8.5px;padding:3px 9px;border-radius:30px;font-weight:600;letter-spacing:.8px;text-transform:uppercase}
+.badge.vis{background:var(--teal-soft);color:var(--teal)}.badge.priv{background:var(--gold-soft);color:var(--gold)}
+.linei{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.linei .meta{font-size:11px;color:var(--muted);margin-top:2px}
+.linei .x{background:none;border:0;color:var(--muted);font-size:18px;cursor:pointer}
+.addrow{display:flex;gap:8px;margin-top:13px}
+.addrow input{flex:1;background:var(--card2);border:1px solid var(--line2);border-radius:10px;padding:10px 12px;color:var(--ink);font:inherit;font-size:13px}
+
+/* weekly digest (psychology: no vanity notifs) */
+.digest{border:1px solid var(--gold-dim);border-radius:16px;padding:18px 20px;margin-bottom:8px;
+  background:linear-gradient(135deg,rgba(201,162,39,.10),transparent)}
+.digest .e{font-size:9.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold)}
+.digest .t{font-family:var(--serif);font-size:19px;font-weight:600;margin:5px 0 8px}
+.digest p{font-size:13px;color:var(--ink2)}
+
+/* bottom nav */
+nav{position:sticky;bottom:0;z-index:9;background:rgba(8,8,9,.92);backdrop-filter:blur(18px);border-top:1px solid var(--line)}
+.navin{display:flex}
+.tab{flex:1;background:none;border:0;padding:13px 4px 14px;display:flex;flex-direction:column;align-items:center;gap:5px;
+  color:var(--muted);font-size:9.5px;letter-spacing:.5px;cursor:pointer;transition:.3s var(--ease);position:relative}
+.tab .ic{font-size:17px;line-height:1}
+.tab.on{color:var(--gold)}
+.tab.on::before{content:"";position:absolute;top:0;width:24px;height:2px;background:var(--gold);border-radius:2px}
+
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(5px);display:none;align-items:flex-end;justify-content:center;z-index:30}
+.overlay.on{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--line2);border-radius:24px 24px 0 0;width:100%;max-width:440px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;animation:up .5s var(--ease)}
+@keyframes up{from{transform:translateY(100%)}to{transform:none}}
+.modal .h{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.modal .h .t{font-family:var(--serif);font-size:19px;font-weight:600}
+.modal .h .s{font-size:11px;color:var(--muted);margin-top:2px}
+.modal .h button{background:none;border:0;color:var(--muted);font-size:24px;cursor:pointer}
+.msgs{flex:1;overflow:auto;padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:82%;padding:10px 14px;border-radius:16px;font-size:13px;line-height:1.5}
+.msg.app{align-self:center;max-width:96%;text-align:center;border:1px solid var(--gold-dim);color:var(--ink2);font-family:var(--serif);font-style:italic;font-size:14px}
+.msg.me{align-self:flex-end;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1404}
+.msg.them{align-self:flex-start;background:var(--card2);border:1px solid var(--line)}
+.msg .nm{font-size:10px;color:var(--gold);font-weight:600;display:block;margin-bottom:2px;letter-spacing:.5px}
+.cinput{display:flex;gap:9px;padding:14px 18px;border-top:1px solid var(--line)}
+.cinput input{flex:1;background:var(--card2);border:1px solid var(--line2);border-radius:30px;padding:11px 16px;color:var(--ink);font:inherit;font-size:13px}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(70px);background:#000;border:1px solid var(--gold-dim);color:var(--gold2);
+  padding:12px 22px;border-radius:30px;font-size:13px;letter-spacing:.3px;opacity:0;transition:.5s var(--ease);z-index:50;white-space:nowrap}
+.toast.on{transform:translateX(-50%) translateY(0);opacity:1}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header>
+    <div class="htop">
+      <div class="brand"><div class="mk">C</div><div class="t">Cercul<small>Membership privé</small></div></div>
+      <select class="memsel" id="member"></select>
+    </div>
+    <div class="scarcity"><span>Cerc privat</span><div class="bar"><i id="scarBar"></i></div><b id="scarTxt">47 / 50</b></div>
+  </header>
+
+  <main>
+    <!-- ACASA -->
+    <section id="acasa" class="view on">
+      <div class="greet">Bun venit, <span class="em" id="gName">Ana</span>.</div>
+      <p class="greetp" id="gSub"></p>
+      <div class="wellbe"><span class="ic">◷</span> <span id="wellTxt">3 minute petrecute azi · networking cu intentie, fara graba</span></div>
+      <div class="stats" id="stats"></div>
+
+      <!-- digest saptamanal (recomandare psihologi: fara notificari de vanitate) -->
+      <div class="section-h"><span class="h">Rezumatul saptamanii</span></div>
+      <div class="digest"><div class="e">Sapt. curenta</div><div class="t" id="digT"></div><p id="digP"></p></div>
+
+      <div class="section-h"><span class="h">Potriviri alese</span><a data-go="potriviri">Toate →</a></div>
+      <div id="topMatches"></div>
+    </section>
+
+    <!-- POTRIVIRI -->
+    <section id="potriviri" class="view">
+      <div class="eyebrow">Oportunitati</div><h2 class="title">Potriviri</h2>
+      <p class="sub">Comparam discret ce cauti cu ce ofera ceilalti. Nimic nu se deschide fara consimtamant reciproc.</p>
+      <div id="matchList"></div>
+    </section>
+
+    <!-- MEMBRI -->
+    <section id="membri" class="view">
+      <div class="eyebrow">Directorul cercului</div><h2 class="title">Membri</h2>
+      <p class="sub">Profesionisti selectati. Atinge un membru pentru a vedea potrivirea.</p>
+      <div class="filters" id="filters"></div>
+      <div id="memList"></div>
+    </section>
+
+    <!-- RETEA -->
+    <section id="retea" class="view">
+      <div class="eyebrow">Capital relational</div><h2 class="title">Reteaua</h2>
+      <p class="sub">Conexiunile confirmate din cerc. Nodul tau e in centru; firele aurii sunt legaturi facute prin Cercul.</p>
+      <div class="netwrap"><div id="netHost"></div></div>
+      <div class="netlegend"><span><i style="background:var(--gold)"></i>Conexiune confirmata</span><span><i style="background:var(--line2)"></i>Membru</span></div>
+    </section>
+
+    <!-- PROFIL -->
+    <section id="profil" class="view">
+      <div id="phead" class="phead"></div>
+      <div class="panel"><h3>Ce ofer <span class="badge vis">vizibil</span></h3><div id="oferList"></div>
+        <div class="addrow"><input id="oferText" placeholder="ex: cariera de carbune in Gorj"><button class="btn gold sm" onclick="addItem('ofer')">+</button></div></div>
+      <div class="panel"><h3>Ce caut <span class="badge priv">privat</span></h3><div id="cautList"></div>
+        <div class="addrow"><input id="cautText" placeholder="ex: investitor pentru proiect"><button class="btn gold sm" onclick="addItem('caut')">+</button></div></div>
+    </section>
+  </main>
+
+  <nav><div class="navin">
+    <button class="tab on" data-v="acasa"><span class="ic">⌂</span>Acasa</button>
+    <button class="tab" data-v="potriviri"><span class="ic">✦</span>Potriviri</button>
+    <button class="tab" data-v="membri"><span class="ic">⊞</span>Membri</button>
+    <button class="tab" data-v="retea"><span class="ic">◈</span>Reteaua</button>
+    <button class="tab" data-v="profil"><span class="ic">◷</span>Profil</button>
+  </div></nav>
+</div>
+
+<div class="overlay" id="overlay"><div class="modal">
+  <div class="h"><div><div class="t" id="mTitle"></div><div class="s" id="mSub"></div></div><button onclick="closeModal()">×</button></div>
+  <div class="msgs" id="mMsgs"></div>
+  <div class="cinput"><input id="mInput" placeholder="Scrie un mesaj..."><button class="btn gold sm" onclick="sendMsg()">→</button></div>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const SEED_MEMBERS=[["Ana Popescu","Director, Popescu Imobiliare","Imobiliare"],["Bogdan Marin","Fondator, Marin Energy","Energie"],["Cristina Ilie","CEO, Excavari Ilie SRL","Constructii"],["Darius Enache","Investitor privat","Finante"],["Elena Voicu","Owner, Voicu Logistic","Transport"],["Florin Dobre","Antreprenor, Dobre AgriFarm","Agricultura"],["Gabriela Stan","Avocat, Stan & Asociatii","Juridic"],["Horia Lungu","Director tehnic, NordSoft","IT"],["Irina Pavel","Contabil-sef, FinPro","Finante"],["Janos Kovacs","Importator, Kovacs Trade","Comert"],["Liviu Toma","Dezvoltator, Toma Construct","Constructii"],["Maria Radu","Marketing, Radu Media","Marketing"],["Nicolae Barbu","Producator, Barbu Mobila","Productie"],["Oana Dinu","HR, TalentHub","Resurse umane"],["Paul Georgescu","Broker, AsigPlus","Asigurari"],["Raluca Neagu","Owner, Neagu Catering","HoReCa"],["Sorin Apostol","Inginer, Apostol Instalatii","Constructii"],["Teodora Mihai","Designer, Mihai Studio","Creative"],["Victor Stoica","Distribuitor, Stoica Auto","Auto"],["Bianca Lazar","Fondator, Lazar Cosmetics","Productie"]];
+const SEED_OFFERS={0:[["Spatii comerciale de inchiriat in centru","profil"],["Teren intravilan langa centura","discutie 4 mai"]],1:[["Cariera de carbune in zona Gorj","nota 3 martie"],["Contracte furnizare energie firme","profil"]],2:[["Utilaje de excavat in Brasov","audio 12 ian"],["Echipa de constructii civile","profil"]],3:[["Capital pentru investitii imobiliare si energie","profil"]],4:[["Flota transport marfa national si UE","profil"],["Depozit logistic Bucuresti","nota 8 apr"]],5:[["Cereale en-gros la pret de producator","profil"],["Teren agricol arendabil","discutie 1 mai"]],6:[["Consultanta juridica comerciala si M&A","profil"]],7:[["Dezvoltare software si aplicatii","profil"]],8:[["Contabilitate si fiscalitate","profil"]],9:[["Import produse din Asia","profil"]],10:[["Antrepriza constructii rezidentiale","profil"]],11:[["Campanii marketing si video","profil"]],12:[["Mobilier la comanda HoReCa","profil"]],13:[["Recrutare IT si management","profil"]],14:[["Asigurari de firma si flote","profil"]],15:[["Catering evenimente corporate","profil"]],16:[["Instalatii electrice industriale","profil"]],17:[["Branding premium","profil"]],18:[["Distributie piese auto","profil"]],19:[["Productie cosmetice private-label","profil"]]};
+const SEED_SEEKS={0:[["Investitor pentru proiect imobiliar","dictare dupa apel"],["Furnizor de carbune pentru centrala","nota 2 mai"]],1:[["Investitor pentru proiect energetic","discutie telefonica"],["Transport marfa agabaritic","profil"]],2:[["Contabil bun pentru firma noua","nota rapida"],["Asigurare pentru flota","profil"]],3:[["Oportunitati in energie si agricultura","profil"]],4:[["Spatii de depozitare in vest","profil"]],5:[["Utilaje agricole si excavatoare","discutie 1 mai"],["Capital pentru extindere ferma","profil"]],6:[["Clienti firme pentru retainer","profil"]],7:[["Investitor pentru produs SaaS","profil"],["Recrutor IT","nota 21 apr"]],8:[["Clienti noi pentru contabilitate","profil"]],9:[["Spatii de depozitare Bucuresti","profil"]],10:[["Teren pentru dezvoltare","profil"],["Materiale de constructii en-gros","nota 5 mai"]],11:[["Clienti corporate","profil"]],12:[["Distribuitor mobilier","profil"]],13:[["Firme care recruteaza","profil"]],14:[["Firme cu flote de asigurat","profil"]],15:[["Spatii pentru evenimente","profil"]],16:[["Proiecte cu instalatii","profil"]],17:[["Clienti pentru rebranding","profil"]],18:[["Firme cu flote auto","profil"]],19:[["Distribuitor cosmetice","profil"]]};
+const COLORS=["#c9a227","#5fb89a","#b08a5a","#a78bca","#cf7a6e","#6fa8c9","#c9a227","#7db38a"];
+const STOP=new Set("si sau de la in un o cu pe pentru din ca care este are am ai vreau caut ofer cineva zona bun buna nou noua a al ale lui langa".split(" "));
+const KEY="cercul_lux_v1";
+let DB=null,ME=null,VIEW="acasa",CHAT=null,FILTER="Toate",T0=Date.now();
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+const esc=s=>(s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const ini=n=>{const p=n.trim().split(/\s+/);return(p[0][0]+(p[1]?p[1][0]:"")).toUpperCase();};
+const today=()=>new Date().toISOString().slice(0,10);
+function save(){localStorage.setItem(KEY,JSON.stringify(DB));}
+function load(){const r=localStorage.getItem(KEY);DB=r?JSON.parse(r):seed();}
+
+function seed(){
+  const d={members:[],items:[],matches:[],messages:[],seq:1};
+  SEED_MEMBERS.forEach((m,i)=>d.members.push({id:i+1,name:m[0],role:m[1],industry:m[2],color:COLORS[i%COLORS.length]}));
+  d.seq=d.members.length+1;
+  const ai=(mid,kind,arr)=>(arr||[]).forEach(([t,s])=>d.items.push({id:d.seq++,member_id:mid,kind,text:t,visible:kind==="ofer"?1:0,source:s}));
+  SEED_MEMBERS.forEach((_,i)=>{ai(i+1,"ofer",SEED_OFFERS[i]);ai(i+1,"caut",SEED_SEEKS[i]);});
+  DB=d;runMatching();[[1,2],[3,1],[5,4],[2,3],[7,3]].forEach(([a,b])=>preConnect(a,b));save();return d;
+}
+function preConnect(a,b){const m=DB.matches.find(x=>(x.offer_member===a&&x.seek_member===b)||(x.offer_member===b&&x.seek_member===a));
+  if(m){m.offer_consent=1;m.seek_consent=1;m.status="conectat";if(!DB.messages.some(x=>x.match_id===m.id))ctxMsg(m);}}
+function tokens(t){return new Set((t.toLowerCase().match(/[a-z0-9]+/g)||[]).filter(w=>w.length>=3&&!STOP.has(w)));}
+function mem(id){return DB.members.find(m=>m.id===id);}
+function name(id){const m=mem(id);return m?m.name:"?";}
+function runMatching(){const cauta=DB.items.filter(i=>i.kind==="caut"),ofera=DB.items.filter(i=>i.kind==="ofer"&&i.visible);
+  for(const s of cauta)for(const o of ofera){if(o.member_id===s.member_id)continue;
+    const st=tokens(s.text),ot=tokens(o.text),common=[...st].filter(w=>ot.has(w));if(!common.length)continue;
+    if(DB.matches.some(m=>m.offer_item===o.id&&m.seek_item===s.id))continue;
+    DB.matches.push({id:DB.seq++,offer_item:o.id,seek_item:s.id,offer_member:o.member_id,seek_member:s.member_id,score:Math.min(99,42+common.length*21+(o.id*7+s.id*3)%11),common,status:"propus",offer_consent:0,seek_consent:0});}
+  save();}
+function ctxMsg(m){const o=DB.items.find(i=>i.id===m.offer_item),s=DB.items.find(i=>i.id===m.seek_item);
+  DB.messages.push({id:DB.seq++,match_id:m.id,sender:null,text:`Cercul v-a pus in legatura. ${name(m.seek_member)} cauta „${s.text}”, iar ${name(m.offer_member)} ofera „${o.text}”. Sursa: ${o.source}.`});}
+function consent(mid,accept){const m=DB.matches.find(x=>x.id===mid);if(!m)return;
+  if(!accept){m.status="respins";save();render();toast("Potrivire refuzata");return;}
+  if(ME===m.offer_member)m.offer_consent=1;else if(ME===m.seek_member)m.seek_consent=1;else m.offer_consent=1;
+  const other=ME===m.offer_member?"seek":"offer";
+  if(m.offer_consent&&m.seek_consent)finalize(m);
+  else{toast("Ai acceptat — cerem confirmarea celeilalte parti");setTimeout(()=>{m[other+"_consent"]=1;finalize(m);save();render();},1500);}
+  save();render();}
+function finalize(m){if(m.status==="conectat")return;m.status="conectat";ctxMsg(m);
+  toast("✦ Conexiune deschisa cu "+(ME===m.offer_member?name(m.seek_member):name(m.offer_member)));}
+function myMatches(){return DB.matches.filter(m=>(m.offer_member===ME||m.seek_member===ME)&&m.status!=="respins").sort((a,b)=>b.score-a.score);}
+
+function setView(v){VIEW=v;$$(".tab").forEach(t=>t.classList.toggle("on",t.dataset.v===v));
+  $$(".view").forEach(s=>s.classList.toggle("on",s.id===v));$("main").scrollTop=0;render();}
+
+function render(){
+  // scarcity (etic: numar real)
+  const n=DB.members.length,cap=50;$("#scarBar").style.width=(n/cap*100)+"%";$("#scarTxt").textContent=n+" / "+cap;
+  if(VIEW==="acasa")renderHome();
+  else if(VIEW==="potriviri")$("#matchList").innerHTML=renderMatches(myMatches())||emptyMsg();
+  else if(VIEW==="membri")renderMembers();
+  else if(VIEW==="retea")renderNet();
+  else if(VIEW==="profil")renderProfile();
+}
+function emptyMsg(){return'<div class="empty">Nicio potrivire inca.</div>';}
+
+function renderHome(){const me=mem(ME),mm=myMatches();
+  const prop=mm.filter(m=>m.status==="propus").length,con=mm.filter(m=>m.status==="conectat").length;
+  $("#gName").textContent=me.name.split(" ")[0];
+  $("#gSub").textContent=`Aveti ${prop} potriviri de evaluat si ${con} conexiuni active. Selectate cu grija pentru relevanta, nu cantitate.`;
+  const mins=Math.max(1,Math.round((Date.now()-T0)/60000));
+  $("#wellTxt").textContent=mins+" minut"+(mins>1?"e":"")+" petrecute azi · networking cu intentie, fara graba";
+  const st=(n,l)=>`<div class="stat"><div class="n">${n}</div><div class="l">${l}</div></div>`;
+  const avg=mm.length?Math.round(mm.reduce((s,m)=>s+m.score,0)/mm.length):0;
+  $("#stats").innerHTML=st(prop,"potriviri noi")+st(con,"conexiuni")+st(avg,"scor mediu");
+  $("#digT").textContent=`${prop} oportunitati relevante, ${con} legaturi confirmate`;
+  $("#digP").textContent="In loc de notificari constante, primesti un rezumat asezat. Reveni cand iti convine — relatiile bune nu cer graba.";
+  $("#topMatches").innerHTML=renderMatches(mm.slice(0,2))||emptyMsg();
+}
+
+function renderMatches(list){if(!list.length)return'';
+  return list.map(m=>{const o=DB.items.find(i=>i.id===m.offer_item),s=DB.items.find(i=>i.id===m.seek_item);
+    const off=m.offer_member===ME,cel=mem(off?m.seek_member:m.offer_member),euc=off?m.offer_consent:m.seek_consent;
+    const why=(m.common||[]).map(w=>`teme comune: „${esc(w)}”`).join(" · ");
+    let acts;
+    if(m.status==="conectat")acts=`<span class="pill conectat">conectat</span><button class="btn ghost sm" onclick="openMatch(${m.id})">Conversatie</button>`;
+    else if(euc)acts=`<span class="pill propus">in asteptare</span><span style="color:var(--muted);font-size:12px">asteptam ${esc(cel.name.split(" ")[0])}</span>`;
+    else acts=`<button class="btn gold sm" onclick="consent(${m.id},true)">Prezinta-ma</button><button class="btn ghost sm" onclick="consent(${m.id},false)">Refuz</button>`;
+    return `<div class="card match ${m.status==="conectat"?"conectat":""}">
+      <div class="mtop"><div class="av" style="width:46px;height:46px;font-size:16px">${ini(cel.name)}</div>
+        <div><div class="nm">${esc(cel.name)}</div><div class="co">${esc(cel.role)}</div></div>
+        <div class="sc"><div class="n">${m.score}</div><div class="l">afinitate</div></div></div>
+      <div class="pairing"><div class="r"><span class="tag">${off?"tu oferi":"tu cauti"}</span><b>${esc(off?o.text:s.text)}</b></div>
+        <div class="r"><span class="tag">${esc(cel.name.split(" ")[0])} ${off?"cauta":"ofera"}</span><b>${esc(off?s.text:o.text)}</b></div></div>
+      <details class="why"><summary>De ce v-am potrivit</summary><div class="b">${why||"teme de business comune"}</div></details>
+      <div class="src"><span class="seal">❧</span> sursa: ${esc(o.source)}</div>
+      <div class="acts">${acts}</div></div>`;}).join("");}
+
+function renderMembers(){const inds=["Toate",...new Set(DB.members.map(m=>m.industry))];
+  $("#filters").innerHTML=inds.map(i=>`<div class="chip ${FILTER===i?"on":""}" onclick="setFilter('${i}')">${esc(i)}</div>`).join("");
+  let list=DB.members.filter(m=>m.id!==ME);if(FILTER!=="Toate")list=list.filter(m=>m.industry===FILTER);
+  $("#memList").innerHTML=list.map(m=>{const off=DB.items.filter(i=>i.member_id===m.id&&i.kind==="ofer"&&i.visible).slice(0,2);
+    return `<div class="mcard" onclick="openMemberMatch(${m.id})"><div class="h"><div class="av" style="width:46px;height:46px;font-size:16px">${ini(m.name)}</div>
+      <div><div class="nm">${esc(m.name)}</div><div class="role">${esc(m.role)}</div></div><span class="pill propus ind">${esc(m.industry)}</span></div>
+      <div class="off">${off.map(o=>`<div class="o">${esc(o.text)}</div>`).join("")}</div></div>`;}).join("")||emptyMsg();}
+function setFilter(i){FILTER=i;renderMembers();}
+
+function renderNet(){const W=400,H=400,cx=W/2,cy=H/2,R=150,others=DB.members.filter(m=>m.id!==ME),pos={};pos[ME]=[cx,cy];
+  others.forEach((m,i)=>{const a=(i/others.length)*Math.PI*2-Math.PI/2;pos[m.id]=[cx+R*Math.cos(a),cy+R*Math.sin(a)];});
+  const conn=DB.matches.filter(m=>m.status==="conectat");let e="",n="";
+  conn.forEach(m=>{const a=pos[m.offer_member],b=pos[m.seek_member];if(a&&b)e+=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="#c9a227" stroke-width="1.5" opacity=".7"/>`;});
+  DB.members.forEach(m=>{const p=pos[m.id];if(!p)return;const me=m.id===ME,deg=conn.filter(c=>c.offer_member===m.id||c.seek_member===m.id).length,r=me?22:11+Math.min(7,deg*2);
+    n+=`<g class="node" onclick="openMemberMatch(${m.id})"><circle cx="${p[0]}" cy="${p[1]}" r="${r}" fill="${me?'#1a1404':'#151517'}" stroke="${me?'#c9a227':'#33333a'}" stroke-width="${me?2.5:1.5}"/>
+      <text x="${p[0]}" y="${p[1]+4}" text-anchor="middle" fill="${me?'#d9b94e':'#b9b3a6'}" font-weight="600">${ini(m.name)}</text>
+      <text x="${p[0]}" y="${p[1]+r+12}" text-anchor="middle">${esc(m.name.split(" ")[0])}</text></g>`;});
+  $("#netHost").innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block">${e}${n}</svg>`;}
+
+function renderProfile(){const me=mem(ME),con=DB.matches.filter(x=>x.status==="conectat"&&(x.offer_member===ME||x.seek_member===ME)).length;
+  $("#phead").innerHTML=`<div class="av" style="width:62px;height:62px;font-size:23px">${ini(me.name)}</div>
+    <div><div style="font-family:var(--serif);font-size:24px;font-weight:600">${esc(me.name)}</div><div style="color:var(--ink2);font-size:13px">${esc(me.role)}</div>
+    <div style="margin-top:7px"><span class="pill propus">${esc(me.industry)}</span> <span style="color:var(--muted);font-size:12px;margin-left:6px">${con} conexiuni</span></div></div>`;
+  const r=(k,el)=>{const l=DB.items.filter(i=>i.member_id===ME&&i.kind===k);
+    $(el).innerHTML=l.map(i=>`<div class="linei"><div><div>${esc(i.text)}</div><div class="meta">sursa: ${esc(i.source)}</div></div><button class="x" onclick="delItem(${i.id})">×</button></div>`).join("")||'<div class="empty" style="padding:14px;font-size:14px">Nimic inca.</div>';};
+  r("ofer","#oferList");r("caut","#cautList");}
+function addItem(k){const t=$("#"+k+"Text").value.trim();if(!t)return;DB.items.push({id:DB.seq++,member_id:ME,kind:k,text:t,visible:k==="ofer"?1:0,source:"profil"});$("#"+k+"Text").value="";runMatching();save();render();toast("Adaugat — am recalculat potrivirile");}
+function delItem(id){DB.items=DB.items.filter(i=>i.id!==id);save();render();}
+function openMemberMatch(mid){if(mid===ME){setView("profil");return;}
+  let m=DB.matches.find(x=>x.status!=="respins"&&((x.offer_member===ME&&x.seek_member===mid)||(x.offer_member===mid&&x.seek_member===ME)));
+  if(m&&m.status==="conectat"){openMatch(m.id);return;}
+  if(m){setView("potriviri");setTimeout(()=>{const el=[...$$(".match")].find(e=>e.innerHTML.includes(name(mid)));if(el){el.scrollIntoView({behavior:"smooth",block:"center"});}},250);}
+  else toast("Nicio potrivire directa cu "+name(mid)+" acum");}
+
+function openMatch(id){CHAT=id;const m=DB.matches.find(x=>x.id===id),cel=mem(ME===m.offer_member?m.seek_member:m.offer_member);
+  $("#mTitle").textContent=cel.name;$("#mSub").textContent=cel.role+" · conexiune confirmata";$("#overlay").classList.add("on");loadChat();}
+function loadChat(){const msgs=DB.messages.filter(m=>m.match_id===CHAT);
+  $("#mMsgs").innerHTML=msgs.map(m=>{if(m.sender===null)return`<div class="msg app">❧ ${esc(m.text)}</div>`;
+    const mine=m.sender===ME;return`<div class="msg ${mine?"me":"them"}">${mine?"":`<span class="nm">${esc(name(m.sender))}</span>`}${esc(m.text)}</div>`;}).join("");
+  const b=$("#mMsgs");b.scrollTop=b.scrollHeight;}
+function sendMsg(){const t=$("#mInput").value.trim();if(!t)return;DB.messages.push({id:DB.seq++,match_id:CHAT,sender:ME,text:t});$("#mInput").value="";save();loadChat();}
+function closeModal(){$("#overlay").classList.remove("on");CHAT=null;}
+$("#mInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendMsg();});
+function toast(t){const el=$("#toast");el.textContent=t;el.classList.add("on");clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove("on"),2600);}
+
+function loadMembers(){$("#member").innerHTML=DB.members.map(m=>`<option value="${m.id}">${esc(m.name)}</option>`).join("");if(!ME)ME=DB.members[0].id;$("#member").value=ME;}
+$("#member").onchange=e=>{ME=+e.target.value;render();};
+$$(".tab").forEach(t=>t.onclick=()=>setView(t.dataset.v));
+$$("[data-go]").forEach(a=>a.onclick=()=>setView(a.dataset.go));
+load();loadMembers();render();
+</script>
+</body>
+</html>
