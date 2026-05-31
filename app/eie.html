@@ -774,7 +774,7 @@ function renderConn(){const host=$("#connList");if(!host)return;
     if(q&&!fuzzy(q,cel.name+" "+(cel.industry||"")))return null;
     const common=(m.common||[]).join(", ");
     const av=h("div",{class:"av sq",style:{width:"44px",height:"44px",fontSize:"15px"}},ini(cel.name));av.style.background=cel.color||"#6366F1";
-    return h("div",{class:"connrow","data-act":"msg","data-id":m.id},av,
+    return h("div",{class:"connrow","data-act":"msg","data-id":m.id,tabindex:"0",role:"button","aria-label":"Deschide conversatia cu "+cel.name},av,
       h("div",{class:"ci"},h("div",{class:"cn",text:cel.name}),h("div",{class:"cr",text:cel.role}),
         h("div",{class:"cmeta",text:common?"prin interes comun: "+common:"conexiune confirmata"})),
       h("div",{class:"cdate",text:m.at?new Date(m.at).toLocaleDateString("ro-RO",{day:"numeric",month:"short"}):""}));}).filter(Boolean);
@@ -1129,9 +1129,9 @@ function runSearch(){const host=$("#searchRes");if(!host||!DB)return;
   const notes=(DB.notes||[]).filter(n=>n.member_id===ME&&n.text.toLowerCase().includes(q)).slice(0,6);
   const tasks=(DB.tasks||[]).filter(t=>t.member_id===ME&&t.text.toLowerCase().includes(q)).slice(0,6);
   if(people.length){out.push(sec("Persoane"));people.forEach(m=>{const av=h("div",{class:"av sq",style:{width:"34px",height:"34px",fontSize:"13px"}},ini(m.name));av.style.background=m.color||"#6366F1";
-    out.push(h("div",{class:"srrow","data-act":"srperson","data-id":m.id},av,h("div",{class:"sri"},h("div",{class:"srn",text:m.name}),h("div",{class:"srm",text:m.industry||""}))));});}
-  if(notes.length){out.push(sec("Notite"));notes.forEach(n=>out.push(h("div",{class:"srrow","data-act":"srgo","data-v":"secretara"},h("div",{class:"sric"},"📝"),h("div",{class:"sri"},h("div",{class:"srn",text:n.text})))));}
-  if(tasks.length){out.push(sec("Task-uri"));tasks.forEach(t=>out.push(h("div",{class:"srrow","data-act":"srgo","data-v":"secretara"},h("div",{class:"sric"},t.done?"✅":"⬜"),h("div",{class:"sri"},h("div",{class:"srn",text:t.text})))));}
+    out.push(h("div",{class:"srrow","data-act":"srperson","data-id":m.id,tabindex:"0",role:"button"},av,h("div",{class:"sri"},h("div",{class:"srn",text:m.name}),h("div",{class:"srm",text:m.industry||""}))));});}
+  if(notes.length){out.push(sec("Notite"));notes.forEach(n=>out.push(h("div",{class:"srrow","data-act":"srgo","data-v":"secretara",tabindex:"0",role:"button"},h("div",{class:"sric"},"📝"),h("div",{class:"sri"},h("div",{class:"srn",text:n.text})))));}
+  if(tasks.length){out.push(sec("Task-uri"));tasks.forEach(t=>out.push(h("div",{class:"srrow","data-act":"srgo","data-v":"secretara",tabindex:"0",role:"button"},h("div",{class:"sric"},t.done?"✅":"⬜"),h("div",{class:"sri"},h("div",{class:"srn",text:t.text})))));}
   const empty=estateBox("Niciun rezultat");
   setKids(host, out.length?out:empty);}
 
@@ -1210,6 +1210,11 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="mfilter")setMatchFilter(el.dataset.f);
   else if(a==="nfilter")setNoteFilter(el.dataset.f);
   else if(a==="go")setView(el.dataset.v);});
+// backlog #13: accesibilitate — Enter/Space activeaza randuri/switch-uri focusate
+document.addEventListener("keydown",e=>{if(e.key!=="Enter"&&e.key!==" ")return;
+  const t=e.target;if(t&&(t.tagName==="INPUT"||t.tagName==="TEXTAREA"||t.tagName==="BUTTON"||t.tagName==="SELECT"||t.isContentEditable))return;
+  const el=t&&t.closest&&t.closest("[data-act],.sw");
+  if(el&&el.tagName!=="BUTTON"){e.preventDefault();el.click();}});
 
 // error boundary global (remediaza constatarea de audit #4)
 function safeReset(){try{if(PROC)hideProc();pendingLock=false;}catch(_){}} // reset determinist al starii async (audit s5r2 #3)

@@ -20,7 +20,7 @@ Reguli pentru fiecare item:
 10. [x] Potriviri: filtru pe industrie (chips).
 11. [x] Notite: tag-uri simple (#client, #idee) + filtrare pe tag.
 12. [x] Setari: format data (reinterpretat — vezi log) de inceput (luni/duminica) pt. afisarea datelor.
-13. [ ] Accesibilitate: trecere completa cu tastatura pe carduri (Enter/Space).
+13. [x] Accesibilitate: trecere completa cu tastatura pe carduri (Enter/Space).
 14. [ ] Pulse de retea reintrodus, dar compact si onest (1 rand).
 15. [ ] Confirmare la stergere (task/nota/conexiune) — anti-accident.
 16. [ ] „Ultima activitate” per conexiune in lista din Reteaua.

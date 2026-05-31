@@ -15,3 +15,5 @@
 - 2026-05-31 · Item 10 (Filtru industrie la Potriviri) · chips Toate + industrii distincte, filtreaza pipeline-ul; validat, 0 erori.
 - 2026-05-31 · Item 11 (Tag-uri la notite) · #tag extras din text, chips de filtrare (Toate + tag-uri distincte) deasupra jurnalului; validat, 0 erori.
 - 2026-05-31 · Item 12 (Setari format data) · REINTERPRETAT onest: 'zi de inceput saptamana' n-avea efect real (nu exista grid de calendar), deci am livrat o setare reala si vizibila: toggle Date relative/absolute folosit in jurnal/task-uri/audit; persista; validat, 0 erori.
+- 2026-05-31 · AUDIT item 12 (loop12): APROBAT 6/6 + CAE.
+- 2026-05-31 · Item 13 (Navigare cu tastatura) · listener global Enter/Space pe randuri [data-act]/.sw + tabindex/role pe connrow/srrow; validat, 0 erori.
