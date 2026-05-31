@@ -13,6 +13,7 @@
 - 2026-05-31 · Item 9 (Mini-calendar saptamanal) · banda 7 zile cu azi evidentiat + bulina/numar pe zilele cu intalniri; tap -> toast cu intalnirile zilei; validat, 0 erori.
 - 2026-05-31 · AUDIT item 9 (secloop9): APROBAT 6/6 + CAE.
 - 2026-05-31 · Item 10 (Rezultat intalnire) · notita 'cum a mers' atasata intalnirilor confirmate (adauga/editeaza/afiseaza); validat, 0 erori.
+- 2026-05-31 · AUDIT item 15 (secloop15): APROBAT 6/6 + CAE (recomandari neblocante: wipe() in finally, user-select:none pe elemente sensibile, validare Blob la export .ics).
 - 2026-05-31 · Item 15 (Remindere <24h) · intalnirile confirmate din urmatoarele 24h capata chenar accent + pastila "⏰ in ~Nh / in curand" (hoursUntil/soonLabel); validat Playwright (1 din 2 evidentiata, badge "in ~2h"), 0 erori.
 - 2026-05-31 · Item 14 (Timeline persoana) · in brief-ul de 1 minut, sectiune "Istoric": notite + task-uri + intalniri legate de persoana, cronologic (recent->vechi), max 6, cu marca de timp relativa; validat Playwright (3 randuri: notita+task+intalnire), 0 erori.
 - 2026-05-31 · Item 13 (Rezumat antet) · doua pastile sub titlul Secretarei: N task-uri active · M intalniri viitoare (acord gramatical singular/plural); se actualizeaza la fiecare render; validat Playwright (eticheta + actualizare la adaugare task), 0 erori.
