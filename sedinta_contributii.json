@@ -1,0 +1,1762 @@
+[
+  {
+    "cod": "3.5",
+    "rol": "Performance Test Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Contribuția mea:** Implementăm o arhitectură asincronă bazată pe cozi de mesaje (Kafka/RabbitMQ) pentru procesarea potrivirilor și a transcrierilor AI. Astfel, izolăm spike-urile de trafic de baza de date, prevenind blocarea interfeței și asigurând disponibilitatea sistemului în timpul evenimentelor cu utilizatori simultani masivi.",
+    "ok": true
+  },
+  {
+    "cod": "8.7",
+    "rol": "Graphic / Brand Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "contributie": "Implementez un **Design System scalabil în Figma**, bazat pe un limbaj vizual \"premium & minimalist\". Acesta va asigura coerența între interfața aplicației și materialele de marketing, eliminând fragmentarea vizuală și oferind utilizatorilor o experiență de business sofisticată, demnă de o companie cu 200+ angajați.",
+    "ok": true
+  },
+  {
+    "cod": "11.8",
+    "rol": "Growth Marketer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "contributie": "**Propunere:** Implementarea unui „Growth Loop” bazat pe referințe verificate. În loc de invitații clasice, fiecare conexiune reușită generează un „Trust Score” vizibil. Recompensez utilizatorii care facilitează introduceri de succes cu acces prioritar la matching-uri premium, accelerând rețeaua organic și validând calitatea datelor.",
+    "ok": true
+  },
+  {
+    "cod": "6.4",
+    "rol": "ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 2,
+    "contributie": "Propun implementarea unui sistem de *Vector Search* (Pinecone/Milvus) pentru matching-ul semantic între nevoi și oferte. În loc de simple cuvinte-cheie, vom mapa profilurile în spații latente, crescând relevanța conexiunilor și reducând zgomotul pentru utilizatori. Voi asigura latenta prin optimizarea modelelor via ONNX.",
+    "ok": true
+  },
+  {
+    "cod": "1.9",
+    "rol": "Senior Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "contributie": "**Propun trecerea la o arhitectură modulară bazată pe Server-Driven UI (SDUI).** Acest lucru permite actualizarea fluxurilor de „Potriviri” și „Secretară AI” instantaneu, fără a aștepta aprobările din App Store/Google Play, asigurând o experiență fluidă și scalabilă pentru utilizatorii VIP.",
+    "ok": true
+  },
+  {
+    "cod": "1.9",
+    "rol": "Senior Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "contributie": "Implementăm o arhitectură **Clean Architecture cu modularizare (SwiftUI/Compose)** pentru scalabilitate. Trecem pe un **API-first design cu gRPC** pentru performanță, integrăm un **sistem robust de CI/CD (Fastlane)** și monitorizare **Sentry/Firebase**, garantând zero crash-uri și un time-to-market de sub 24h pentru orice hotfix.",
+    "ok": true
+  },
+  {
+    "cod": "13.5",
+    "rol": "Customer Experience Analyst",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "**Contribuția mea:** Implementăm un sistem de „In-App CES” (Customer Effort Score) declanșat imediat după finalizarea unei conexiuni. Corelăm datele calitative cu rata de succes a match-urilor pentru a identifica blocajele din algoritm și a optimiza „Secretara AI” în funcție de efortul perceput de utilizator.",
+    "ok": true
+  },
+  {
+    "cod": "6.5",
+    "rol": "Generative AI Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "contributie": "Implementez un sistem RAG (Retrieval-Augmented Generation) care indexează vectorial ofertele și nevoile membrilor, asigurând conexiuni precise. Adaug un strat de „AI Guardrails” pentru anonimizarea PII și validarea etică a propunerilor, optimizând costurile prin caching-ul prompturilor și utilizarea modelelor locale pentru sarcini de sumarizare.",
+    "ok": true
+  },
+  {
+    "cod": "17.2",
+    "rol": "Internal Help Desk",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 2,
+    "contributie": "**Contribuția mea:** Implementarea unui modul de „Self-Service Portal” integrat în aplicație pentru gestionarea automată a acceselor și a tichetelor de suport. Utilizatorii trebuie să poată raporta erori sau solicita funcționalități direct din profil, cu status vizibil și bază de cunoștințe (Knowledge Base) pentru rezolvare rapidă.",
+    "ok": true
+  },
+  {
+    "cod": "3.5",
+    "rol": "Performance Test Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "**Contribuția mea:** Implementăm o arhitectură asincronă pentru procesarea *matchmaking-ului* și a *Secretarei AI* folosind cozi (Kafka/RabbitMQ). Introducem teste de *spike* automate în CI/CD pentru a valida scalabilitatea granulară a microserviciilor sub sarcini de 10x, prevenind blocarea bazei de date în timpul evenimentelor.",
+    "ok": true
+  },
+  {
+    "cod": "13.6",
+    "rol": "Support Team Lead",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Integrare „Support-to-Product”:** Implementați un sistem de marcare automată a tichetelor în CRM, care să trimită feedback-ul clienților direct în backlog-ul Engineering. Reducem „friction-ul” prin automatizarea raportării bug-urilor din aplicație, scăzând timpul de rezolvare și presiunea pe echipa de suport.",
+    "ok": true
+  },
+  {
+    "cod": "17.3",
+    "rol": "Endpoint Management Specialist",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm „Zero Trust Networking” pentru aplicație: accesul la datele membrilor trebuie să fie condiționat de starea de securitate a dispozitivului (Device Compliance). Nu permitem autentificarea pe terminale compromise (jailbroken/rooted) sau fără criptare activă, pentru a proteja confidențialitatea business a rețelei.",
+    "ok": true
+  },
+  {
+    "cod": "9.1",
+    "rol": "Behavioral Science Lead",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "contributie": "<Propun implementarea unui algoritm de „Serendipitate Etică” în locul optimizării pentru frecvența logărilor. Eliminăm notificările de tip „push” agresive și introducem „Calitatea Conexiunii” ca metrică principală de succes, în detrimentul timpului petrecut în aplicație, pentru a proteja capitalul cognitiv al utilizatorilor.>",
+    "ok": true
+  },
+  {
+    "cod": "6.5",
+    "rol": "Generative AI Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 2,
+    "contributie": "Implementez un agent RAG cu „Memory Graph” pentru a corela ofertele și cererile membrilor în timp real. Folosesc embedding-uri vectoriale pentru potriviri semantice precise și un strat de validare LLM pentru a elimina halucinațiile, garantând că fiecare conexiune propusă este bazată strict pe datele din profil.",
+    "ok": true
+  },
+  {
+    "cod": "1.10",
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "contributie": "Propun implementarea unui sistem de *Optimistic UI* cu *Offline-First sync* pentru ecranul de „Potriviri”. Astfel, reducem latența percepută la interacțiunile cu AI-ul și asigurăm o experiență fluidă pentru utilizatorii noștri de top, indiferent de fluctuațiile de rețea din timpul conferințelor de business.",
+    "ok": true
+  },
+  {
+    "cod": "11.9",
+    "rol": "Brand / PR Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "contributie": "**Propunere:** Implementarea funcției „Verified Trust Score” (bazată pe feedback anonim și istoric de tranzacții), esențială pentru PR. Transformăm aplicația dintr-un simplu tool într-un standard de integritate profesională. Această „barieră de intrare” calitativă devine argumentul nostru principal în comunicarea cu presa și partenerii strategici.",
+    "ok": true
+  },
+  {
+    "cod": "9.2",
+    "rol": "Behavioral Scientist / Psiholog cognitiv",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "contributie": "**Propun implementarea „Focus-Driven Batching”:** în loc de notificări în timp real care fragmentează atenția, aplicația va livra „Digest-ul de Conexiuni” la ore fixe, aliniate cu workflow-ul de business. Eliminăm dopamina din notificări și creștem calitatea interacțiunilor prin reflecție, nu prin impuls.",
+    "ok": true
+  },
+  {
+    "cod": "3.6",
+    "rol": "Quality Engineer Process",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm **„Definition of Done” (DoD) cu validare AI**: nicio funcționalitate (ex: potriviri) nu trece în producție fără testare automată de contract și confirmarea că algoritmul respectă criteriul „double opt-in”. Introducem **Quality Gates** automatizate în pipeline pentru a reduce rata de erori critice post-lansare.",
+    "ok": true
+  },
+  {
+    "cod": "11.10",
+    "rol": "Technical Writer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "contributie": "Implementez un sistem de **Contextual In-App Help**: în fiecare ecran (Potriviri, Secretara AI), utilizatorul accesează un buton \"Info\" ce deschide un ghid Markdown scurt. Această documentare activă reduce tichetele de suport cu 30% și crește adopția funcționalităților prin acces instant la context.",
+    "ok": true
+  },
+  {
+    "cod": "6.6",
+    "rol": "LLM / Integration Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un strat de orchestrare cu **RAG asincron** pentru matching-ul dintre profiluri, utilizând **LangGraph** pentru fluxuri cu dublu consimțământ. Introducem **caching semantic în Redis** pentru a reduce latența la 200ms și costurile API, asigurând anonimizarea datelor prin **PII scrubbing** înainte de orice apel extern.",
+    "ok": true
+  },
+  {
+    "cod": "4.1",
+    "rol": "CISO Deputy / Security Lead",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm **Zero Trust Architecture** și **End-to-End Encryption (E2EE)** pentru toate datele tranzacționate prin „Secretara AI”. Accesul la datele membrilor va fi strict reglementat prin **RBAC (Role-Based Access Control)** și **Just-in-Time privilege**, eliminând stocarea persistentă a transcrierilor necriptate pentru a asigura conformitatea SOC 2.",
+    "ok": true
+  },
+  {
+    "cod": "14.1",
+    "rol": "HR Director / Head of People",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "contributie": "<Pentru a scala la 200+ oameni, propun integrarea unui modul de \"Cultural Matching\" bazat pe valori și stil de leadership. Sistemul trebuie să faciliteze conexiuni nu doar pe nevoi de business, ci și pe compatibilitate organizațională, transformând aplicația într-un ecosistem de retenție și networking intern.>",
+    "ok": true
+  },
+  {
+    "cod": "17.4",
+    "rol": "Internal Tools / Systems Admin",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un sistem centralizat de *Identity & Access Management* (SSO) integrat cu CRM-ul, pentru a automatiza *onboarding-ul* membrilor. Orice \"potrivire\" confirmată trebuie declanșată automat în Slack/Jira via Make pentru *accountability*, eliminând introducerea manuală a datelor și asigurând trasabilitatea completă a fluxului de business.",
+    "ok": true
+  },
+  {
+    "cod": "11.11",
+    "rol": "Marketing Operations",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "contributie": "**Contribuție:** Implementăm un sistem de *Event Tracking* granular prin Segment, conectat la un depozit de date (BigQuery). Vom atribui fiecare \"conexiune reușită\" sursei de achiziție, integrând datele în CRM pentru a calcula *Customer Lifetime Value* și a optimiza automat bugetele de *Growth*.",
+    "ok": true
+  },
+  {
+    "cod": "1.10",
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "contributie": "Implementarea unui sistem de caching local (SQLite/MMKV) și optimizarea \"optimistic UI updates\" pentru fluxul de potriviri. Eliminăm latența la interacțiunea cu butonul de \"Accept\", oferind utilizatorului o experiență fluidă, similară aplicațiilor de tip enterprise, chiar și în condiții de conexiune slabă.",
+    "ok": true
+  },
+  {
+    "cod": "14.2",
+    "rol": "Technical Recruiter / Sourcer",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "contributie": "**Contribuția mea:** Integrați un modul de „Skill-Graph” automatizat, care extrage competențele tehnice din profilul utilizatorului și istoricul de proiecte. Astfel, potrivirile nu se bazează pe self-assessment, ci pe competențe verificate, facilitând recrutarea internă sau parteneriatele strategice bazate pe expertiză reală, nu pe percepție.",
+    "ok": true
+  },
+  {
+    "cod": "1.10",
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "contributie": "Propun implementarea unui sistem de *Deep Linking* și *Push Notifications* condiționate de starea de \"online\" a utilizatorului, pentru a reduce latența la 0. Trebuie să optimizăm fluxul de *Double Opt-in* prin *Optimistic UI Updates* pentru a oferi o experiență nativă ultra-rapidă, specifică aplicațiilor de business high-end.",
+    "ok": true
+  },
+  {
+    "cod": "9.2",
+    "rol": "Behavioral Scientist / Psiholog cognitiv",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 2,
+    "contributie": "**Contribuție:** Înlocuim notificările de tip \"push\" bazate pe frecvență cu un sistem de \"Batch Digest\" (rezumate periodice). Aceasta reduce stresul cognitiv și FOMO, transformând aplicația dintr-o sursă de distragere într-un instrument utilitar, crescând calitatea interacțiunilor și retenția pe termen lung.",
+    "ok": true
+  },
+  {
+    "cod": "17.4",
+    "rol": "Internal Tools / Systems Admin",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 2,
+    "contributie": "Propun integrarea API-ului aplicației cu CRM-ul centralizat (HubSpot/Salesforce) prin Make/Workato pentru sincronizarea automată a \"cerințelor/ofertelor\" cu lead-urile din pipeline. Astfel, eliminăm introducerea manuală a datelor și permitem echipelor de Sales Ops să acționeze imediat pe conexiunile validate de AI.",
+    "ok": true
+  },
+  {
+    "cod": "6.7",
+    "rol": "Conversational AI Designer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "contributie": "**Propun implementarea „AI Contextual Concierge”**: Asistentul nu doar transcrie, ci extrage proactiv „intentii de business” din apeluri, generând *draft-uri* de potrivire validate prin double-opt-in. Tonul: executiv, discret, concis. Evităm „chat-ul” inutil; focus pe acțiune rapidă și acuratețe procedurală.",
+    "ok": true
+  },
+  {
+    "cod": "1.1",
+    "rol": "Head of Engineering / VP Engineering",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm o arhitectură *Event-Driven* bazată pe microservicii în AWS, utilizând un *Graph Database* (Neo4j) pentru algoritmii de potrivire. Introducem un pipeline CI/CD cu *Infrastructure as Code* și standarde stricte de securitate (SOC2), asigurând scalabilitatea necesară pentru o experiență de utilizator premium și performantă.",
+    "ok": true
+  },
+  {
+    "cod": "9.3",
+    "rol": "Cercetator neurostiinte / stiinte cognitive",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "contributie": "Implementați „frecvența optimă de notificare” bazată pe *teoria încărcăturii cognitive*. Evitați întreruperile fragmentate care distrug „starea de flux”. Propun un sistem de tip *batching* pentru recomandări: notificări grupate doar în momente de tranziție cognitivă, prevenind epuizarea atenției și oboseala decizională a executivilor.",
+    "ok": true
+  },
+  {
+    "cod": "12.1",
+    "rol": "Sales Director",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "<Implementăm un modul de „Corporate Sponsorship” cu dashboard pentru companii: acces la analytics pe networkingul angajaților și API pentru CRM-ul intern. Transformăm produsul dintr-o simplă aplicație într-un instrument de business intelligence B2B, permițând vânzarea de licențe enterprise pe bază de abonament per utilizator.>",
+    "ok": true
+  },
+  {
+    "cod": "18.1",
+    "rol": "Head of Operations / COO Deputy",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un ecosistem de date unificat (Data Warehouse), integrând „Secretara AI” direct în CRM-ul centralizat. Obiectivul: automatizarea fluxurilor de calificare și conversie, reducând intervenția manuală cu 40% și scalând procesul de matching prin procese operaționale riguroase, predictibile și măsurabile prin OKR-uri trimestriale.",
+    "ok": true
+  },
+  {
+    "cod": "1.10",
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 4,
+    "contributie": "**<Contribuția mea>**: Propun implementarea unui sistem de „Offline-First” cu sincronizare prin WebSockets și stocare locală (Realm/SQLite). Aceasta va asigura fluiditatea fluxului de „Potriviri” chiar și în zone cu semnal slab, esențial pentru utilizatorii noștri mobili, reducând latența percepută și eliminând erorile de tip „loading” în timpul networking-ului.",
+    "ok": true
+  },
+  {
+    "cod": "4.2",
+    "rol": "Information Security Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm **Zero Trust Architecture** prin IAM cu MFA obligatoriu și RBAC granular pentru accesul la baza de date. Introducem **Data Masking** pentru profilurile membrilor și criptare end-to-end pentru \"Secretara AI\", asigurând trasabilitatea completă a logurilor de acces pentru audit extern.",
+    "ok": true
+  },
+  {
+    "cod": "1.2",
+    "rol": "Engineering Manager",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "contributie": "<Propun implementarea unei arhitecturi bazate pe evenimente (Event-Driven) pentru motorul de matching, asigurând scalabilitatea procesării AI în timp real. Prioritizez integrarea unui pipeline CI/CD cu teste automate de regresiune, esențiale pentru a menține viteza de livrare și stabilitatea platformei la creșterea bazei de utilizatori.>",
+    "ok": true
+  },
+  {
+    "cod": "14.2",
+    "rol": "Technical Recruiter / Sourcer",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 2,
+    "contributie": "<Implementați un modul de „Referral Verified” integrat: utilizatorii să poată recomanda candidați din rețeaua lor pentru rolurile tehnice deschise în companiile partenere, cu tracking de status și recompensă automatizată. Creșteți calitatea pipeline-ului prin validarea socială a competențelor, reducând time-to-hire cu 30%.>",
+    "ok": true
+  },
+  {
+    "cod": "6.8",
+    "rol": "AI Data Specialist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "contributie": "Implementez un pipeline de \"Data Sanitization & Intent Extraction\" pentru funcția de *Secretară AI*. Vom anonimiza automat datele din apeluri (GDPR-compliant) și vom structura \"ce oferă/caută\" prin tag-uri vectoriale, asigurând un set de date curat pentru un algoritm de matching cu precizie ridicată.",
+    "ok": true
+  },
+  {
+    "cod": "4.2",
+    "rol": "Information Security Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "Implementăm **Zero Trust Architecture** prin IAM cu MFA obligatoriu și control granular (ABAC) pentru datele de business. Orice interacțiune cu AI-ul necesită un *data masking* strict, prevenind scurgerile de informații sensibile între membrii grupului. Audităm automat logurile pentru conformitate GDPR și prevenirea exfiltrării.",
+    "ok": true
+  },
+  {
+    "cod": "14.3",
+    "rol": "Recruiter / Talent Acquisition",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "contributie": "<Propun integrarea unui modul de „Talent Mapping & Networking” care să permită utilizatorilor să eticheteze și să recomande activ contacte pentru roluri specifice. Această funcționalitate transformă platforma într-un instrument de headhunting pasiv și calitativ, esențial pentru scalarea unei echipe de 200+ oameni.>",
+    "ok": true
+  },
+  {
+    "cod": "12.2",
+    "rol": "Account Executive",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Contribuția mea:** Introducem un modul de „Executive Intent Data” în profil: integrarea cu CRM-ul clientului pentru a extrage automat nevoile reale de business (nu doar dorințe declarate). Astfel, transformăm aplicația dintr-un simplu tool de networking într-o sursă predictivă de oportunități calificate pentru clienții Enterprise.",
+    "ok": true
+  },
+  {
+    "cod": "2.1",
+    "rol": "DevOps Lead",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm infrastructură *Infrastructure as Code* (Terraform) în medii multi-regionale pentru latență minimă. Introducem strategii *Blue-Green deployment* cu *feature flags* pentru lansări sigure. Monitorizarea se va baza pe *Service Level Objectives* (SLO) și *Observability* (OpenTelemetry), asigurând disponibilitate 99.9% și control strict al costurilor FinOps.",
+    "ok": true
+  },
+  {
+    "cod": "9.4",
+    "rol": "Ethical / Responsible Design Lead",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "contributie": "**Audit flux \"Secretara AI\":** Eliminăm \"nudge-ul\" de confirmare automată prin care AI-ul trimite mesaje în numele utilizatorului. Implementăm un ecran obligatoriu de \"Human-in-the-loop\" cu preview clar, asigurând consimțământul explicit pentru fiecare interacțiune, evitând astfel manipularea încrederii membrilor.",
+    "ok": true
+  },
+  {
+    "cod": "1.2",
+    "rol": "Engineering Manager",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "contributie": "**Contribuția mea:** Implementăm o arhitectură de microservicii bazată pe evenimente pentru motorul de matching, asigurând scalabilitatea. Prioritizăm integrarea unui sistem de CI/CD cu teste automate de regresie pentru a livra feature-uri AI săptămânal, menținând zero downtime și o rată de bug-uri sub 2%.",
+    "ok": true
+  },
+  {
+    "cod": "18.2",
+    "rol": "Business Operations Analyst",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Audit flux \"Feedback-to-Feature\":** Implementăm un workflow automatizat de colectare a feedback-ului din \"Secretara AI\" direct în Jira via Notion. Reducem timpul de prioritizare a funcționalităților cu 30% prin validare cross-funcțională imediată, eliminând \"bottleneck-ul\" de comunicare între departamente.",
+    "ok": true
+  },
+  {
+    "cod": "9.5",
+    "rol": "UX Researcher (well-being focus)",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "contributie": "Propun implementarea unui „Mod Focus” ce limitează notificările de matchmaking la intervale orare prestabilite. Analizele mele indică riscul de „oboseală decizională” și anxietate socială; trebuie să transformăm aplicația dintr-o sursă de întreruperi constante într-un instrument de networking asincron, predictibil și controlabil pentru utilizatori.",
+    "ok": true
+  },
+  {
+    "cod": "14.3",
+    "rol": "Recruiter / Talent Acquisition",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 2,
+    "contributie": "**Contribuția mea:** Implementarea unui modul de „Talent Mapping” în aplicație. Membrii să poată marca vizibilitatea expertizei lor (ex: „disponibil pentru consultanță/board seats”). Acest lucru transformă networking-ul într-o sursă de recrutare de top-tier pentru echipa noastră, facilitând headhunting-ul de precizie în interiorul cercului de încredere.",
+    "ok": true
+  },
+  {
+    "cod": "6.9",
+    "rol": "Responsible AI / AI Ethics Specialist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "contributie": "**Contribuția mea:** Implementăm un cadru de „Explainable Matching”. Fiecare sugestie AI va fi însoțită de un *Model Card* sumarizat: „De ce te-am conectat cu X?”. Audităm setul de date pentru bias de gen/industrie și introducem un buton de „Feedback transparent” pentru corectarea algoritmului în timp real.",
+    "ok": true
+  },
+  {
+    "cod": "12.2",
+    "rol": "Account Executive",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "**Contribuția mea:** Implementați integrarea nativă cu CRM-ul clienților (Salesforce/HubSpot). Pentru a închide conturi enterprise, networking-ul trebuie să fie fluid: conexiunile validate și istoricul interacțiunilor trebuie să se sincronizeze automat în profilul de client, eliminând munca manuală de introducere a datelor.",
+    "ok": true
+  },
+  {
+    "cod": "4.3",
+    "rol": "Application Security Engineer",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm *Zero Trust Architecture* prin autentificare biometrică obligatorie și criptare E2EE pentru mesajele din \"Secretara AI\". Introducem *Privacy by Design* prin stocarea datelor de business în containere izolate și scanări SAST/SCA în pipeline-ul CI/CD pentru a preveni scurgerile de date din surse terțe.",
+    "ok": true
+  },
+  {
+    "cod": "2.2",
+    "rol": "DevOps Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm **Infrastructure as Code (Terraform)** și **GitOps (ArgoCD)** pentru a elimina deriva între medii. Introducem **Ephemeral Environments** pe fiecare Pull Request, permițând testarea izolată a funcțiilor de AI/Matching în condiții de producție înainte de merge. Stabilitatea și viteza de livrare devin astfel garantate.",
+    "ok": true
+  },
+  {
+    "cod": "6.10",
+    "rol": "MLOps Engineer (AI)",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un pipeline de evaluare automată (RAGAS/DeepEval) pentru \"Secretara AI\". Orice modificare a prompt-ului sau a modelului va trece obligatoriu prin teste de regresie pentru halucinații și relevanța potrivirilor, asigurând calitatea conexiunilor B2C înainte de deploy-ul în producție.",
+    "ok": true
+  },
+  {
+    "cod": "18.2",
+    "rol": "Business Operations Analyst",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "**Propun implementarea unui „Feedback Loop Automatizat” între Secretara AI și CRM-ul intern.** Astfel, datele din discuții devin structurate instantaneu, eliminând introducerea manuală. Rezultatul: optimizarea timpului de procesare a lead-urilor cu 30% și creșterea acurateței potrivirilor prin input-uri actualizate în timp real.",
+    "ok": true
+  },
+  {
+    "cod": "9.6",
+    "rol": "Digital Wellbeing Specialist",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm „Focus Mode” nativ: utilizatorii pot seta ferestre de disponibilitate zilnică. În afara acestora, notificările sunt grupate într-un „Daily Briefing” sumarizat de AI. Astfel, protejăm timpul de deep work al membrilor, transformând aplicația dintr-o sursă de întreruperi într-un instrument de eficiență predictibilă.",
+    "ok": true
+  },
+  {
+    "cod": "12.2",
+    "rol": "Account Executive",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 3,
+    "contributie": "[HTTP503]",
+    "ok": false
+  },
+  {
+    "cod": "14.4",
+    "rol": "People Operations Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "contributie": "**Propun integrarea unui modul de „Onboarding & Networking pentru noi angajați”:** Automatizează conectarea noilor veniți cu mentori relevanți din companie, bazat pe competențe și interese, folosind AI-ul pentru a facilita transferul de cunoștințe și integrarea culturală rapidă, reducând astfel timpul de „time-to-productivity”.",
+    "ok": true
+  },
+  {
+    "cod": "4.3",
+    "rol": "Application Security Engineer",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "Implementăm **Zero Trust Architecture**: autentificare MFA obligatorie și criptare end-to-end pentru datele din \"Secretara AI\". Introducem **Threat Modeling** obligatoriu înainte de fiecare sprint și scanare automată SCA/SAST în CI/CD pentru a bloca orice build cu vulnerabilități critice, asigurând integritatea rețelei B2C.",
+    "ok": true
+  },
+  {
+    "cod": "1.2",
+    "rol": "Engineering Manager",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "contributie": "**Propunere:** Implementăm o arhitectură de microservicii cu evenimente asincrone pentru motorul de matching, asigurând scalabilitate. Introducem un proces riguros de CI/CD cu testare automată (unit/E2E) și monitorizare (Sentry/Datadog) pentru a menține uptime-ul de 99.9% și a livra sprinturi predictibile, eliminând blocajele tehnice din ecosistemul AI.",
+    "ok": true
+  },
+  {
+    "cod": "2.2",
+    "rol": "DevOps Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 2,
+    "contributie": "Implementez un sistem de *Infrastructure as Code* cu *GitOps* (ArgoCD), asigurând paritate totală între medii. Introducem *Canary Deployments* automate pentru noile funcționalități AI, cu rollback imediat dacă metricele de performanță (latență/erori) scad sub pragul setat, garantând stabilitatea platformei pentru membrii VIP.",
+    "ok": true
+  },
+  {
+    "cod": "9.7",
+    "rol": "Behavioral / Marketing Psychologist",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm „Consimțământul Informat Activ” în procesul de potrivire: utilizatorul vede exact *de ce* a fost propusă conexiunea, bazat pe nevoile declarate, fără algoritmi „black-box”. Eliminăm notificările de tip FOMO; comunicarea rămâne utilitară, transparentă și respectuoasă față de timpul limitat al membrilor.",
+    "ok": true
+  },
+  {
+    "cod": "4.4",
+    "rol": "Penetration Tester",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Contribuție:** Implementați *Certificate Pinning* și *Encryption at rest* pentru datele de networking. Având în vedere funcția \"Secretara AI\" și \"Dictează după apel\", este critică izolarea sandbox-ului pentru procesarea audio și criptarea end-to-end a tranzacțiilor API pentru a preveni exfiltrarea datelor sensibile de business.",
+    "ok": true
+  },
+  {
+    "cod": "7.1",
+    "rol": "Head of Product / CPO Deputy",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Prioritizarea „Contextual Matchmaking”:** Implementăm un motor de recomandări bazat pe grafuri de cunoștințe (Knowledge Graphs) care analizează *intent-data* în timp real. Abandonăm listele statice pentru un feed de „Opportunities” dinamice, validate prin AI, transformând aplicația dintr-un director de contacte într-un motor de tranzacționare business.",
+    "ok": true
+  },
+  {
+    "cod": "1.3",
+    "rol": "Software Architect",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "contributie": "**Implementăm Event-Driven Architecture (EDA) cu un Event Mesh (ex. NATS/Kafka).** Separăm logic serviciul de *Matching* (compute-intensive) de *Core API* (CRUD). Adoptăm *Schema Registry* pentru contracte stricte între microservicii, asigurând scalabilitatea procesării asincrone a AI-ului și integritatea datelor în timp real.",
+    "ok": true
+  },
+  {
+    "cod": "14.4",
+    "rol": "People Operations Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 2,
+    "contributie": "Integrați un modul de „Onboarding & Compliance Automat” în aplicație. Membrii își pot seta fluxuri de aprobare pentru contracte și semnături electronice direct din profil, asigurând trasabilitate juridică. HRIS-ul devine astfel o sursă unică de date, eliminând haosul administrativ și riscurile de conformitate.",
+    "ok": true
+  },
+  {
+    "cod": "18.3",
+    "rol": "Strategy & Planning Specialist",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "**Propunere:** Implementarea unui algoritm de „Graph-Based Matching” (nu doar keyword matching) care să cuantifice „calitatea conexiunii” prin analiza istoricului de succes. Mutăm focusul de la simpla listare a nevoilor la un scor de compatibilitate predictiv, validat prin feedback-ul post-întâlnire pentru optimizarea continuă a AI-ului.",
+    "ok": true
+  },
+  {
+    "cod": "2.2",
+    "rol": "DevOps Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 3,
+    "contributie": "Implementăm o arhitectură bazată pe „GitOps” (ArgoCD) și module Terraform standardizate. Eliminăm configurările manuale, asigurând paritatea mediilor (Dev/Prod) și trasabilitatea completă a modificărilor. Astfel, orice update al motorului de matching AI este livrat rapid, sigur și cu rollback automat în caz de eroare.",
+    "ok": true
+  },
+  {
+    "cod": "12.3",
+    "rol": "Inside Sales Representative",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Integrare CRM nativă:** Aplicația trebuie să sincronizeze automat „ce caută/oferă” cu HubSpot/Salesforce. Utilizatorul trebuie să poată exporta un lead calificat direct în pipeline-ul său, transformând networking-ul în venit măsurabil. Fără fricțiune la importul de date, rata de adopție va crește exponențial.",
+    "ok": true
+  },
+  {
+    "cod": "1.3",
+    "rol": "Software Architect",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "contributie": "**ADR: Implementarea unei arhitecturi bazate pe evenimente (Event-Driven) cu CQRS.** \n\nSeparăm citirea (potriviri, profil) de scrierea (tranzacții, matching AI). Utilizăm un *Message Broker* (Kafka/NATS) pentru procesarea asincronă a fluxurilor AI și a notificărilor, asigurând scalabilitate orizontală și decuplarea serviciului de \"Secretara AI\" de restul platformei.",
+    "ok": true
+  },
+  {
+    "cod": "9.8",
+    "rol": "Data Scientist (engagement quality)",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "contributie": "Înlocuiesc \"Time Spent\" cu **\"Intentionality Score\"**: raportul dintre conexiunile finalizate prin dublu consimțământ și numărul de swipe-uri/vizualizări. Optimizez algoritmul de potrivire pentru a minimiza \"doomscrolling-ul\" în feed, prioritizând notificările de înaltă relevanță care generează acțiuni offline concrete.",
+    "ok": true
+  },
+  {
+    "cod": "7.2",
+    "rol": "Senior Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Prioritizarea funcției \"Secretara AI\" ca motor de Discovery.** \n\nÎn loc de input manual, implementăm transcrierea și analiza automată a întâlnirilor pentru a extrage \"Oferte/Căutări\" în timp real. Astfel, eliminăm frecarea utilizatorului și creștem calitatea potrivirilor prin date comportamentale, nu doar declarative.",
+    "ok": true
+  },
+  {
+    "cod": "4.4",
+    "rol": "Penetration Tester",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "Implementați **End-to-End Encryption (E2EE)** pentru chat și metadate. Riscul major în networking-ul exclusivist este interceptarea \"potrivirilor\" și a datelor de business. Fără o arhitectură **Zero-Knowledge**, orice breach expune IP-ul intelectual al membrilor, distrugând reputația platformei și încrederea cercului VIP.",
+    "ok": true
+  },
+  {
+    "cod": "12.3",
+    "rol": "Inside Sales Representative",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "**Integrare CRM nativă:** Aplicația trebuie să sincronizeze automat „ce oferă/caută” utilizatorul cu CRM-ul nostru (HubSpot/Salesforce). Astfel, transformăm networking-ul în lead-uri calificate instant, permițându-mi să prioritizez prospectarea pe baza intenției reale, nu a presupunerilor, scurtând ciclul de vânzare și crescând rata de conversie.",
+    "ok": true
+  },
+  {
+    "cod": "2.3",
+    "rol": "Site Reliability Engineer (SRE)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm \"Error Budgets\" stricte: dacă SLO-ul de disponibilitate (ex: 99.9%) este încălcat, oprim orice release de feature nou și pivotăm echipa exclusiv pe stabilitate și reducerea \"toil-ului\". Fără fiabilitate garantată, valoarea networking-ului în rețeaua noastră privată scade sub pragul critic de business.",
+    "ok": true
+  },
+  {
+    "cod": "18.4",
+    "rol": "Revenue Operations (RevOps)",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "<Implementăm un model de date unificat (CRM-Product-Usage) care să lege calitatea potrivirilor (AI Match Score) direct de LTV-ul membrului. Obiectiv: transformăm „Secretara AI” dintr-o unealtă de asistență într-un motor de captare a intenției, automatizând pipeline-ul de vânzări și corelând direct activitatea cu veniturile recurente.>",
+    "ok": true
+  },
+  {
+    "cod": "18.3",
+    "rol": "Strategy & Planning Specialist",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Propunere:** Implementarea unui algoritm de „Graph-based Matching” pentru a prioritiza conexiunile bazate pe „trust-score” din rețeaua extinsă, nu doar pe nevoi declarate. Mutăm focusul de la „potriviri simple” la „valoare predictivă”, integrând API-uri de date externe pentru validarea automată a oportunităților.",
+    "ok": true
+  },
+  {
+    "cod": "14.5",
+    "rol": "Learning & Development Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "contributie": "<Integrează un modul de \"Micro-Learning Peer-to-Peer\" bazat pe potrivirile AI. Dacă sistemul cuplează un expert cu un membru care caută o competență, propune automat o sesiune de mentorat flash de 15 minute. Transformăm networking-ul în dezvoltare continuă, măsurabilă prin rata de adopție a cunoștințelor.>",
+    "ok": true
+  },
+  {
+    "cod": "1.4",
+    "rol": "Tech Lead",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un sistem de *Event-Driven Architecture* cu *Vector Search* pentru matching-ul semantic între nevoi și oferte. Introducem un pipeline de procesare asincronă pentru „Secretara AI”, asigurând scalabilitatea prin microservicii și latență redusă, garantând integritatea datelor cu un model de consens strict pentru conexiuni.",
+    "ok": true
+  },
+  {
+    "cod": "7.2",
+    "rol": "Senior Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "**Prioritizarea algoritmului de \"Smart Matching\" bazat pe grafuri de cunoștințe (Knowledge Graphs).** Înlocuim matching-ul simplu cu un motor care analizează contextul și istoricul tranzacțional al utilizatorilor, validând relevanța conexiunilor prin feedback loop-ul \"Secretarei AI\" pentru a crește rata de conversie a întâlnirilor.",
+    "ok": true
+  },
+  {
+    "cod": "4.5",
+    "rol": "Compliance & Audit Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm „Privacy by Design” prin criptare end-to-end pentru datele din „Secretara AI” și anonimizarea seturilor de date pentru antrenarea modelelor. Introducem log-uri imutabile pentru fiecare accesare a profilurilor și un modul de consimțământ granular, automatizat, pentru a asigura trasabilitatea totală necesară certificărilor SOC 2 și GDPR.",
+    "ok": true
+  },
+  {
+    "cod": "9.9",
+    "rol": "Ethics & Policy Advisor",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "contributie": "**Propun implementarea unui mecanism de „Ethical AI Disclosure” în interfața Secretarei AI. Orice sinteză sau recomandare trebuie să conțină un flag vizual care indică sursa datelor, asigurând transparența algoritmului (AI Act Compliance) și prevenind manipularea deciziilor utilizatorilor prin nudging algoritmic opac.**",
+    "ok": true
+  },
+  {
+    "cod": "12.4",
+    "rol": "Sales Engineer / Pre-sales",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un API de integrare nativă cu CRM-urile utilizate de membrii (Salesforce/HubSpot). Astfel, profilul și nevoile se actualizează automat, eliminând input-ul manual. Creștem rata de adopție prin reducerea \"friction\" la onboarding și oferim date în timp real pentru matching-ul AI.",
+    "ok": true
+  },
+  {
+    "cod": "14.6",
+    "rol": "Compensation & Benefits Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "contributie": "Implementează un modul de „Equity & Valuation Benchmarking” în aplicație. Utilizatorii să poată raporta anonim pachetele salariale, generând insight-uri de piață pentru comunitate. Această valoare adăugată de date tip „Radford” va crește retenția și atractivitatea produsului pentru executivii de top.",
+    "ok": true
+  },
+  {
+    "cod": "18.4",
+    "rol": "Revenue Operations (RevOps)",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "**Contribuție:** Implementăm un sistem de *Revenue Attribution* integrat în aplicație. Fiecare conexiune validată trebuie marcată cu un \"intent tag\" sincronizat în CRM. Astfel, măsurăm direct impactul networking-ului asupra pipeline-ului de vânzări și calculăm ROI-ul real pe membru, esențial pentru retenție și scalare.",
+    "ok": true
+  },
+  {
+    "cod": "7.2",
+    "rol": "Senior Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 3,
+    "contributie": "**Prioritizare bazată pe „Value-to-Effort Matrix”:** Implementăm un motor de matchmaking bazat pe grafuri vectoriale (LLM RAG) pentru relevanță, eliminând \"noise-ul\" manual. KPI-ul principal: *Connection Conversion Rate*. Reducem frecarea prin AI-ul care extrage automat nevoile din apeluri, transformând profilul într-un \"living asset\".",
+    "ok": true
+  },
+  {
+    "cod": "2.3",
+    "rol": "Site Reliability Engineer (SRE)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 2,
+    "contributie": "Implementăm un sistem de **Circuit Breaker** pentru integrarea cu API-ul AI (Secretara). Dacă latența depășește SLO-ul de 800ms sau rata de eroare crește, izolăm componenta pentru a preveni propagarea eșecului către restul aplicației, garantând disponibilitatea funcțiilor de bază (Networking/Matching) în regim degradat.",
+    "ok": true
+  },
+  {
+    "cod": "10.1",
+    "rol": "Head of PMO",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un framework de prioritizare bazat pe valoare (RICE) și un sistem de raportare a progresului (OKRs) pentru a alinia echipa de produs la obiectivele de business. Eliminăm livrarea haotică prin standardizarea workflow-ului în Jira, asigurând trasabilitatea între cerințele membrilor și output-ul tehnic.",
+    "ok": true
+  },
+  {
+    "cod": "12.4",
+    "rol": "Sales Engineer / Pre-sales",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "Implementați un API de integrare cu CRM-urile utilizatorilor (Salesforce/HubSpot). „Secretara AI” trebuie să sincronizeze automat statusul conexiunilor și metadatele tranzacțiilor direct în pipeline-ul membrului. Fără integrare nativă, produsul rămâne un „siloz” izolat; cu ea, devine parte critică din stack-ul lor de business.",
+    "ok": true
+  },
+  {
+    "cod": "4.5",
+    "rol": "Compliance & Audit Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "Implementați arhitectura \"Privacy by Design\" cu logare imuabilă a consimțământului pentru fiecare conexiune și criptare end-to-end pentru datele din \"Secretara AI\". Integrați un dashboard de audit automatizat care să genereze dovezi în timp real pentru SOC 2, eliminând colectarea manuală de la echipele tehnice.",
+    "ok": true
+  },
+  {
+    "cod": "1.4",
+    "rol": "Tech Lead",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "contributie": "**Propun implementarea unui motor de matching bazat pe vector embeddings (vector database), care să proceseze semantic nevoile/ofertele. Abandonăm matching-ul bazat pe keyword-uri rigide pentru o arhitectură event-driven, scalabilă, ce garantează latență minimă și relevanță contextuală ridicată pentru utilizatori.**",
+    "ok": true
+  },
+  {
+    "cod": "14.7",
+    "rol": "Employer Branding / Internal Comms",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "contributie": "**Propunere:** Integrăm un modul de „Employee Advocacy” în aplicație. Membrii pot partaja oportunități verificate direct pe LinkedIn, cu template-uri personalizate de brand. Această funcționalitate transformă networking-ul individual într-un motor de recrutare pasivă și reputație, consolidând autoritatea membrilor și vizibilitatea firmei pe piață.",
+    "ok": true
+  },
+  {
+    "cod": "4.6",
+    "rol": "Security Analyst (SOC)",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Contribuție:** Implementăm autentificare MFA obligatorie și auditare granulară pentru \"Secretara AI\". Pentru a preveni scurgerea de date sensibile, trebuie să impunem politici stricte de Data Loss Prevention (DLP) și criptare end-to-end pe fluxul de \"Dictează după apel\", asigurând trasabilitatea completă a accesului la profiluri.",
+    "ok": true
+  },
+  {
+    "cod": "2.3",
+    "rol": "Site Reliability Engineer (SRE)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 3,
+    "contributie": "Implementăm un sistem de **Circuit Breaker** și **Rate Limiting** pentru motorul de matching AI. Fixăm SLO de disponibilitate la 99.9% și latență p99 sub 300ms. Eliminăm \"toil-ul\" prin infrastructură ca cod (IaC) și alerte bazate pe simptome, nu pe resurse, pentru a evita zgomotul.",
+    "ok": true
+  },
+  {
+    "cod": "1.4",
+    "rol": "Tech Lead",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "contributie": "**Contribuția mea:** Implementăm un sistem de tip *Graph Database* (Neo4j) pentru matching-ul semantic, nu doar keyword-based. Introducem un protocol *Event-Driven* (Kafka) pentru notificări în timp real și integrare asincronă cu LLM-ul (Secretara AI), garantând latență minimă și trasabilitatea strictă a surselor de date.",
+    "ok": true
+  },
+  {
+    "cod": "18.5",
+    "rol": "Vendor Management",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Propun implementarea unei strategii de „Multi-Vendor AI Orchestration” pentru funcția de Secretară AI.** În loc să depindem de un singur furnizor (ex. OpenAI), vom integra un gateway de API-uri pentru redundanță, cost-optimizare și conformitate GDPR, asigurând continuitatea serviciului și scalabilitatea pe măsură ce comunitatea crește.",
+    "ok": true
+  },
+  {
+    "cod": "7.3",
+    "rol": "Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un sistem de „Smart Intent Matching” bazat pe vector embedding-uri: transformăm nevoile/ofertele din input-ul vocal în date structurate, permițând algoritmului să identifice conexiuni latente, nu doar keyword-uri. Reducem fricțiunea utilizatorului și creștem rata de succes a potrivirilor prin validare AI înainte de „double opt-in”.",
+    "ok": true
+  },
+  {
+    "cod": "10.2",
+    "rol": "Program Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "contributie": "**Propunere:** Implementarea unui cadru de \"Dependency Mapping\" în Jira între modulele de AI și UX. Riscul principal este latența algoritmului de matching; propun un MVP cu arhitectură asincronă pentru a asigura scalabilitatea și feedback-ul rapid către utilizatori, conform roadmap-ului agreat cu stakeholderii.",
+    "ok": true
+  },
+  {
+    "cod": "18.6",
+    "rol": "Facilities / Office Manager",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "Propun integrarea funcției de „Smart Office Concierge”: aplicația să gestioneze automat rezervările de birouri, accesul în sălile de ședințe și cateringul pentru întâlnirile de networking organizate între membri. Transformăm digital experiența fizică, optimizând utilizarea spațiilor prin date de ocupare în timp real.",
+    "ok": true
+  },
+  {
+    "cod": "14.8",
+    "rol": "HR Business Partner",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "contributie": "Propun introducerea unui modul de „Network Health & Engagement”, unde AI-ul analizează calitatea conexiunilor, nu doar cantitatea. Similar cu HRIS-ul nostru, aplicatia trebuie să evidențieze „inactive members” sau „bottlenecks”, oferind managerilor insight-uri pentru a interveni proactiv și a menține coeziunea ecosistemului.",
+    "ok": true
+  },
+  {
+    "cod": "12.5",
+    "rol": "Business Development Manager",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Contributie:** Integrarea API-ului nostru în ecosistemele ERP/CRM ale marilor firme de consultanță și audit (ex. Big 4). Transformăm aplicația dintr-un instrument izolat într-un canal nativ de „deal flow” pentru clienții lor, garantând scalabilitatea prin parteneriate strategice de tip B2B2C cu acces la baze de date verificate.",
+    "ok": true
+  },
+  {
+    "cod": "7.3",
+    "rol": "Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "**Propunere:** Implementarea unui \"Smart Trust Score\" bazat pe calitatea feedback-ului post-conexiune. În loc de matching generic, prioritizăm conexiunile unde există complementaritate demonstrată de date (oferta-cerere), crescând rata de conversie prin validarea algoritmului de matching cu input-ul direct al utilizatorilor în sistem.",
+    "ok": true
+  },
+  {
+    "cod": "2.4",
+    "rol": "Cloud Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "contributie": "**Propun implementarea unei arhitecturi Serverless (AWS Lambda/DynamoDB) pentru scalabilitate la cerere și cost optimizat. Introducem un strat de izolare pentru AI (Private Link) și procesare asincronă via SQS pentru funcția „Secretara AI”, garantând securitatea datelor membrilor și performanță predictibilă sub sarcină.**",
+    "ok": true
+  },
+  {
+    "cod": "5.1",
+    "rol": "Data / AI Lead",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un **Data Mesh** pentru a izola datele de context (networking) de cele comportamentale, asigurând trasabilitatea completă pentru AI. Introducem **GDPR-by-design** prin anonimizare în sursă, transformând interacțiunile în \"Graph Embeddings\" pentru a optimiza motorul de matching și a monetiza insight-urile de piață.",
+    "ok": true
+  },
+  {
+    "cod": "10.2",
+    "rol": "Program Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 2,
+    "contributie": "Implementăm un **Dependency Mapping Matrix** între echipele de AI (Matching Engine) și UX (Flow-ul de consimțământ). Obiectiv: eliminarea blocajelor în integrarea \"Secretarei AI\" prin definirea unor API-uri contractuale stricte, asigurând predictibilitatea livrării și scalabilitatea arhitecturii înainte de faza de dezvoltare.",
+    "ok": true
+  },
+  {
+    "cod": "15.1",
+    "rol": "Finance Director / CFO Deputy",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Contributia mea:** Implementăm un model de monetizare bazat pe *usage-based pricing* pentru funcționalitățile AI (Secretara/Dicteare), integrat direct în API-ul de cloud. Analizăm marja brută per utilizator activ pentru a optimiza costurile de infrastructură și a asigura sustenabilitatea financiară la scalarea către 200+ angajați.",
+    "ok": true
+  },
+  {
+    "cod": "18.6",
+    "rol": "Facilities / Office Manager",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "Propun integrarea unui modul de „Office Experience”: utilizatorii să poată rezerva birouri sau sălii de ședințe direct prin aplicație în spațiile partenerilor de rețea. Astfel, networking-ul devine fizic, transformând aplicația dintr-un simplu instrument digital într-un hub logistic pentru întâlniri de business eficiente.",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm o arhitectură bazată pe **Event-Driven Microservices** cu **Redis Vector Database** pentru matching-ul semantic în timp real. Trecem la **GraphQL** pentru optimizarea traficului mobil și garantăm coerența datelor prin **Idempotency Keys** și **Distributed Tracing** (OpenTelemetry), asigurând scalabilitatea necesară pentru volume mari de networking.",
+    "ok": true
+  },
+  {
+    "cod": "12.6",
+    "rol": "Sales Operations Specialist",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Contribuția mea:** Implementăm un sistem de *lead scoring* automatizat în CRM, bazat pe datele de intenție din aplicație (ce caută/oferă). Integrarea bidirecțională CRM-Aplicație va permite Sales-ului să prioritizeze conexiunile cu rată mare de conversie, eliminând erorile de introducere manuală și asigurând un forecast precis.",
+    "ok": true
+  },
+  {
+    "cod": "2.4",
+    "rol": "Cloud Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 2,
+    "contributie": "Implementez o arhitectură *serverless* (AWS Lambda/DynamoDB) cu *event-driven scaling* pentru a minimiza costurile în perioadele de inactivitate. Configurez un sistem de *IAM granular* și *PrivateLink* pentru a securiza datele sensibile ale membrilor, asigurând conformitatea și performanța necesară unei scalări rapide.",
+    "ok": true
+  },
+  {
+    "cod": "7.3",
+    "rol": "Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 3,
+    "contributie": "Implementăm un sistem de „Smart Intent Matching” bazat pe vector embedding-uri: transformăm nevoile/ofertele nestructurate în grafuri de cunoaștere. Abandonăm matching-ul binar pentru un algoritm de relevanță contextuală, care prioritizează conexiunile pe baza istoricului de succes și a proximității de business, nu doar a cuvintelor cheie.",
+    "ok": true
+  },
+  {
+    "cod": "5.2",
+    "rol": "Data Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un layer de event-driven ingestion cu schemă strictă (Avro/Protobuf) pentru input-ul din \"Secretara AI\" și \"Dictează după apel\". Introducem un feature store pentru a stoca vectorii de interese, permițând modelului de matching să ruleze în timp real, cu latență minimă.",
+    "ok": true
+  },
+  {
+    "cod": "10.3",
+    "rol": "Project Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "contributie": "Propun implementarea unui **\"Value-Stream Mapping\"** pentru interacțiunea utilizatorului: optimizăm fluxul de la \"Cerere\" la \"Conexiune\" pentru a reduce timpul de *time-to-match* cu 30%. Eliminăm \"zgomotul\" din profil prin validarea automată a ofertelor cu AI, asigurând acuratețea datelor pentru scalabilitate.",
+    "ok": true
+  },
+  {
+    "cod": "13.1",
+    "rol": "Customer Success Lead",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "<Implementăm un „Retention Health Score” integrat în profilul utilizatorului, care corelează calitatea potrivirilor (feedback-ul post-conexiune) cu activitatea în aplicație. Dacă scorul scade, „Secretara AI” declanșează proactiv un workflow de re-engagement, asigurând valoarea livrată înainte ca utilizatorul să ia în calcul churn-ul.>",
+    "ok": true
+  },
+  {
+    "cod": "2.4",
+    "rol": "Cloud Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 3,
+    "contributie": "**Propun migrarea procesării AI și a matching-ului pe arhitectură Serverless (AWS Lambda/EventBridge), cu stocare vectorizată în RDS. Reducem costurile operaționale cu 40% față de instanțe EC2 constante și garantăm scalabilitate automată pentru volumele mari de date din sesiunile de \"Secretară AI\".**",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "contributie": "Implementăm un motor de potrivire asincron bazat pe **vector embeddings** (Pinecone/Milvus) pentru matching semantic în timp real. Trecem la **GraphQL cu Subscription-uri** pentru a reduce latența la 200ms și izolăm procesarea AI într-un microserviciu dedicat, scalabil, complet decuplat de API-ul principal.",
+    "ok": true
+  },
+  {
+    "cod": "7.4",
+    "rol": "Product Owner",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un sistem de **\"Quality Gate\"** în backlog: orice user story trebuie să includă criterii de acceptanță bazate pe scenarii de tip *happy path* și *edge cases* (ex: eșecul AI-ului), pentru a reduce rework-ul și a crește predictibilitatea livrării la standard enterprise.",
+    "ok": true
+  },
+  {
+    "cod": "15.2",
+    "rol": "Accountant / Contabil",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Contribuție:** Trebuie să integrăm modulul de „Secretară AI” cu un sistem de facturare și reconciliere automată. Fiecare conexiune validată trebuie să genereze automat metadate pentru trasabilitatea veniturilor/comisioanelor, asigurând auditabilitatea completă și conformitatea fiscală în timp real, direct din aplicație către ERP.",
+    "ok": true
+  },
+  {
+    "cod": "10.3",
+    "rol": "Project Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 2,
+    "contributie": "Implementăm un backlog structurat în Jira cu *Definition of Ready* riguros pentru fiecare funcționalitate. Introducem un proces de *Sprint Planning* bisăptămânal și *Risk Register* activ, asigurând alinierea între AI-ul secretar și UX, pentru a livra o versiune MVP stabilă, fără blocaje tehnice.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Propunere:** Implementarea unui „Success Dashboard” în aplicație, vizibil pentru client și CSM. Să includă vizualizarea ROI-ului (conexiuni convertite în business) și un buton de „Request Intro” direct din profilul partenerului. Aceasta transformă percepția produsului din „tool de networking” în „motor de creștere garantat”.",
+    "ok": true
+  },
+  {
+    "cod": "15.2",
+    "rol": "Accountant / Contabil",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "<Pentru scalabilitate și audit, implementați un modul de \"Audit Trail\" pentru fiecare tranzacție de networking (matching/conexiune). Este esențial să trasăm istoric valoarea generată per membru, facilitând facturarea automată și raportarea veniturilor conforme, esențiale pentru o companie cu 200+ angajați și audituri recurente.>",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "contributie": "Implementăm o arhitectură bazată pe **Event-Driven Microservices** cu **gRPC** pentru latență minimă. Introducem **Vector Database (Pinecone/Milvus)** pentru matching semantic avansat între „oferte/cereri” și un **API Gateway cu GraphQL** pentru agregarea eficientă a datelor din profiluri, asigurând scalabilitate și consistență strictă a datelor.",
+    "ok": true
+  },
+  {
+    "cod": "5.2",
+    "rol": "Data Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 2,
+    "contributie": "Implementăm un strat de **Data Contracts** între Backend și Data Warehouse. Vom valida schema datelor la sursă, prevenind erorile în pipeline-urile de matching și AI. Fără date curate și tipizate, \"Secretara AI\" va genera conexiuni irelevante; integritatea datelor este prioritatea zero.",
+    "ok": true
+  },
+  {
+    "cod": "2.5",
+    "rol": "System Administrator",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "contributie": "Pentru a susține scalarea, propun implementarea unei infrastructuri de tip *Infrastructure as Code* (Terraform/Ansible) pentru mediile non-prod. Astfel, eliminăm configurațiile manuale (\"snowflake servers\"), garantând replicabilitatea mediilor de test și securitatea acceselor prin auditarea centralizată a oricărei modificări de sistem.",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 4,
+    "contributie": "Implementăm un sistem de **Graph Database (Neo4j)** pentru matching-ul inteligent, în locul interogărilor SQL complexe. Această abordare permite scalarea algoritmilor de recomandare în timp real și relații n-la-n complexe, garantând latență minimă și precizie ridicată la peste 10.000 de utilizatori activi.",
+    "ok": true
+  },
+  {
+    "cod": "5.3",
+    "rol": "Data Scientist",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un algoritm de *graph embedding* pentru a mapa afinitățile de business, nu doar matching-ul bazat pe cuvinte cheie. Vom măsura succesul prin *Network Density Score* și vom rula teste A/B pe fluxul de „dublu consimțământ” pentru a optimiza rata de conversie a conexiunilor.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "**Propunere:** Implementarea unui „Success Dashboard” în aplicație, integrat cu profilul utilizatorului, care să vizualizeze ROI-ul conexiunilor (ex: deal-uri închise, lead-uri calificate). Datele concrete validează valoarea „Secretarei AI” și justifică expansiunea, facilitând QBR-urile bazate pe impact real, nu doar pe promisiuni.",
+    "ok": true
+  },
+  {
+    "cod": "7.4",
+    "rol": "Product Owner",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "**Propun implementarea unui sistem de \"Contextual Scoring\" pentru matching-ul AI.** Limităm backlog-ul la prioritizarea algoritmului de relevanță bazat pe interacțiuni reale, nu doar profil. Eliminăm funcționalitățile \"zgomot\" pentru a crește rata de conversie a conexiunilor și a asigura valoarea livrată utilizatorului.",
+    "ok": true
+  },
+  {
+    "cod": "2.6",
+    "rol": "Network Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm **Zero Trust Network Access (ZTNA)** în locul VPN-ului clasic pentru accesul angajaților la resursele interne și izolăm microserviciile prin **Service Mesh (mTLS)**. Astfel, securizăm traficul între modulele AI și bazele de date, garantând confidențialitatea datelor sensibile ale membrilor conform standardelor enterprise.",
+    "ok": true
+  },
+  {
+    "cod": "10.3",
+    "rol": "Project Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 3,
+    "contributie": "**Propun implementarea unui „Value-Stream Mapping” pentru funcționalitățile de matching.** Trebuie să prioritizăm MVP-ul pe reducerea „timpului până la prima conexiune validată” (TTFC). Voi integra Jira cu un dashboard de monitorizare a ratei de adopție pentru a elimina orice funcționalitate care nu generează activitate directă.",
+    "ok": true
+  },
+  {
+    "cod": "5.3",
+    "rol": "Data Scientist",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 2,
+    "contributie": "**Propun implementarea unui motor de recomandare bazat pe grafuri (Graph Neural Networks) pentru \"Potriviri\".** Analizând similaritatea semantică dintre „oferte/cereri” și istoricul de interacțiuni, vom crește rata de conversie prin scoruri de relevanță predictivă, reducând zgomotul și optimizând retenția pe termen lung.",
+    "ok": true
+  },
+  {
+    "cod": "7.4",
+    "rol": "Product Owner",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 3,
+    "contributie": "Prioritizez implementarea unui sistem de \"Smart Scoring\" pentru potriviri bazat pe grafuri de interese, nu doar keyword-uri. Introduc în backlog definirea unor criterii de acceptanță stricte pentru \"Secretara AI\" (latență <2s, acuratețe context), asigurând scalabilitatea arhitecturii și reducerea fluxului de rework în sprint-urile următoare.",
+    "ok": true
+  },
+  {
+    "cod": "15.2",
+    "rol": "Accountant / Contabil",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 3,
+    "contributie": "**Contribuția mea:** Implementarea unei trasabilități digitale stricte (audit trail) pentru fiecare tranzacție și conexiune din aplicație. Este esențială monetizarea prin abonamente cu facturare automatizată și reconciliere bancară integrată (API-uri tip Stripe/NetSuite), asigurând conformitatea fiscală și trasabilitatea sursei pentru fiecare flux financiar generat.",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 5,
+    "contributie": "**Implementarea unui sistem de Matching asincron bazat pe vectori (Embeddings) în PostgreSQL/pgvector.** Trecem de la interogări SQL clasice la căutări de similaritate semantică pentru nevoi/oferte. Asigură latență sub 100ms, scalabilitate pe volume mari și relevanță crescută prin context, nu doar keyword matching.",
+    "ok": true
+  },
+  {
+    "cod": "10.4",
+    "rol": "Scrum Master",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "contributie": "Propun implementarea unui flux de **\"Value Stream Mapping\"** pentru feature-ul de *Secretară AI*. Vom prioritiza dezvoltarea pe baza feedback-ului din mini-demo-uri săptămânale cu utilizatorii, eliminând riscul de \"feature creep\" și asigurând că fiecare iterație aduce valoare directă în rata de conversie a conexiunilor.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 3,
+    "contributie": "Implementăm un sistem de **\"Health Scoring\" predictiv** în aplicație, integrat cu datele din utilizarea funcțiilor (AI, potriviri). Astfel, anticipez riscul de churn înainte ca membrul să devină inactiv și ofer sugestii punctuale de „re-engagement” pentru a menține valoarea networking-ului la standarde înalte.",
+    "ok": true
+  },
+  {
+    "cod": "15.3",
+    "rol": "FP&A Analyst",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Propun modelarea financiară a modelului de monetizare (Subscription vs. Transactional).** Trebuie să validăm dacă valoarea adusă (AI & Matching) susține un ARPU care să acopere costurile de server și operare AI, asigurând o marjă brută de minim 70% pentru scalabilitate sustenabilă.",
+    "ok": true
+  },
+  {
+    "cod": "7.5",
+    "rol": "Business Analyst",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "Propun implementarea unui flux de \"Smart Matching Validation\" bazat pe BPMN, cu un set strict de criterii de eligibilitate. Vom introduce un \"Acceptance Criteria Matrix\" în Jira pentru a elimina ambiguitatea algoritmului și a asigura trasabilitatea cerințelor între nevoile utilizatorilor și output-ul AI.",
+    "ok": true
+  },
+  {
+    "cod": "1.6",
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "contributie": "Propun implementarea unui sistem de event-driven architecture pentru matching-ul inteligent (Kafka/RabbitMQ). Decuplăm procesarea asincronă a potrivirilor de API-ul principal, asigurând scalabilitate și latență scăzută, esențiale pentru experiența de real-time a utilizatorilor într-o rețea de afaceri premium.",
+    "ok": true
+  },
+  {
+    "cod": "5.4",
+    "rol": "Machine Learning Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un **Feature Store (ex: Feast)** pentru a sincroniza în timp real ofertele și cererile membrilor. Vom trece de la batch processing la **inferență asincronă prin vector embeddings**, asigurând potriviri cu latență sub 200ms și monitorizând continuu *model drift-ul* pentru a menține relevanța conexiunilor.",
+    "ok": true
+  },
+  {
+    "cod": "10.4",
+    "rol": "Scrum Master",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 2,
+    "contributie": "Propun implementarea unui flux de \"Feedback Loop\" integrat: fiecare conexiune finalizată să declanșeze automat un micro-sondaj de calibrare în app. Datele colectate vor alimenta un dashboard de predictibilitate pentru algoritmul de matching, transformând feedback-ul subiectiv în îmbunătățire continuă a experienței de utilizator.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 4,
+    "contributie": "**Propunere:** Implementarea unui „Success Dashboard” în aplicație care să vizualizeze ROI-ul conexiunilor (ex: valoarea deal-urilor închise prin platformă). Datele trebuie să alimenteze automat QBR-urile, transformând aplicația dintr-un simplu tool de networking într-o platformă de raportare a impactului de business, esențială pentru reînnoirea contractelor.",
+    "ok": true
+  },
+  {
+    "cod": "15.3",
+    "rol": "FP&A Analyst",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "**Propun implementarea unui model de \"Unit Economics\" per utilizator (CAC vs. LTV).** Trebuie să cuantificăm costul de procesare pentru \"Secretara AI\" și să fundamentăm un model de abonament tiered, asigurându-ne că rata de retenție a conexiunilor generează o marjă brută sustenabilă pentru scalare.",
+    "ok": true
+  },
+  {
+    "cod": "2.7",
+    "rol": "Database Administrator (DBA)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm o arhitectură **CQRS** cu baze de date separate pentru scriere (PostgreSQL) și citire (Elasticsearch pentru căutări complexe de matching). Aceasta asigură latență minimă la interogări, scalabilitate orizontală și izolare a proceselor AI, garantând performanța în timp real necesară unui produs premium.",
+    "ok": true
+  },
+  {
+    "cod": "3.1",
+    "rol": "QA Lead",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm o strategie de „Shift-Left Testing”: automatizăm 80% din flow-urile critice (matching & AI) prin framework-uri mobile native (Appium/XCUITest). Introducem „Quality Gates” obligatorii în CI/CD: nicio iterație nu trece în producție fără 100% succes pe testele de regresie și zero bug-uri blocate.",
+    "ok": true
+  },
+  {
+    "cod": "5.4",
+    "rol": "Machine Learning Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 2,
+    "contributie": "Implementăm un **Feature Store (ex: Feast)** pentru a sincroniza în timp real datele din „Ce ofer/Ce caut” cu vectorii de embedding ai membrilor. Optimizăm latența prin **model serving via Triton Inference Server**, asigurând matching-ul contextual instantaneu cu feedback loop pentru re-antrenare continuă.",
+    "ok": true
+  },
+  {
+    "cod": "7.5",
+    "rol": "Business Analyst",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "**Propunere:** Implementarea unui flux de \"Smart Matching\" bazat pe ontologii de business (taxonomie standardizată). În loc de input liber, utilizatorii vor selecta din seturi de date structurate pentru a elimina ambiguitatea algoritmului, reducând rata de eroare a potrivirilor și efortul de procesare AI.",
+    "ok": true
+  },
+  {
+    "cod": "1.6",
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "contributie": "Propun implementarea unui sistem de event-driven architecture cu Apache Kafka pentru matching-ul inteligent. Astfel, decuplăm procesarea asincronă de API, asigurând scalabilitatea în timp real a sugestiilor și menținând latența scăzută pentru utilizatori, esențială într-o platformă cu volum mare de date.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 5,
+    "contributie": "Implementați un **\"Value-Realization Dashboard\"** în aplicație. Clienții au nevoie să vadă ROI-ul concret: câte conexiuni au dus la tranzacții închise. Fără vizibilitatea valorii, riscul de churn este iminent. Trebuie să transformăm tool-ul de networking într-un instrument de monitorizare a eficienței business-ului.",
+    "ok": true
+  },
+  {
+    "cod": "10.4",
+    "rol": "Scrum Master",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 3,
+    "contributie": "Propun trecerea de la dezvoltarea liniară la **Value Stream Mapping**. Pentru a scala, trebuie să prioritizăm *Feedback Loop-ul* între \"Secretara AI\" și utilizatori. Implementăm un **Sprint de Discovery** pentru a valida ipotezele de \"smart matching\" înainte de orice linie de cod.",
+    "ok": true
+  },
+  {
+    "cod": "15.4",
+    "rol": "Payroll Specialist",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Propunerea mea:** Integrarea unui modul de \"Compliance & Equity Reporting\" în profilul utilizatorului. Pentru o firmă de top, networking-ul trebuie să includă transparența beneficiilor și a structurilor de tip stock-options, facilitând parteneriate conforme și sigure între membrii care interacționează profesional.",
+    "ok": true
+  },
+  {
+    "cod": "7.6",
+    "rol": "Product Operations Specialist",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un **Product Taxonomy Framework** strict în Amplitude și Linear. Standardizăm colectarea datelor despre \"match-uri\" și \"conversii\" prin template-uri de ticket-uri automatizate. Eliminăm ambiguitatea între echipe: fiecare feature nou trebuie să aibă definit succesul prin metrici măsurabile, nu doar funcționalități.",
+    "ok": true
+  },
+  {
+    "cod": "5.5",
+    "rol": "MLOps Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un Feature Store unificat (ex: Feast) pentru a centraliza datele de context ale membrilor (cereri/oferte). Aceasta asigură consistența între training și inferență în timp real, eliminând „training-serving skew” și permițând potriviri inteligente precise, scalabile, cu latență minimă pentru utilizatorul final.",
+    "ok": true
+  },
+  {
+    "cod": "10.5",
+    "rol": "Delivery Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un „Client Dashboard” integrat în aplicație, unde membrii văd în timp real statusul conexiunilor propuse și feedback-ul primit. Eliminăm incertitudinea prin transparență totală, transformând experiența de networking dintr-o „cutie neagră” într-un proces predictibil, măsurabil și gestionabil direct din interfață.",
+    "ok": true
+  },
+  {
+    "cod": "1.6",
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "contributie": "Propun implementarea unui sistem de tip \"Event-Driven\" cu Apache Kafka pentru matching-ul în timp real. Aceasta arhitectură decuplează serviciul de \"Secretară AI\" de restul API-ului, asigurând scalabilitatea procesării asincrone și stabilitatea sistemului în fața volumului ridicat de date B2C.",
+    "ok": true
+  },
+  {
+    "cod": "3.2",
+    "rol": "Senior QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "Implementăm o strategie de „Contract Testing” (Pact) între backend și aplicația mobilă. Eliminăm astfel dependența de medii de testare instabile pentru fluxurile critice (potriviri, plăți) și reducem drastic *flakiness*-ul, garantând că orice schimbare în API este validată instant, fără a bloca echipa.",
+    "ok": true
+  },
+  {
+    "cod": "3.2",
+    "rol": "Senior QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm \"Contract-Driven Development\" (Pact/Swagger) pentru a decupla testarea API de mediile mobile instabile. Introducem *Test Data Injection* via API în pipeline-ul CI/CD, eliminând dependența de datele din UI și asigurând o regresie deterministică, 100% scalabilă pentru funcționalitățile critice de matching și networking.",
+    "ok": true
+  },
+  {
+    "cod": "8.1",
+    "rol": "Design Lead",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un **Design System atomic** axat pe „contextual clarity”. Prioritizăm un flux de on-boarding bazat pe *progressive disclosure* pentru AI-ul de matching, asigurând că fiecare conexiune propusă păstrează transparența sursei prin micro-interacțiuni intuitive. Reducem fricțiunea cognitivă prin uniformizarea vizuală a fluxului de „Double Opt-in”.",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Propunere:** Implementarea unui SDK de telemetrie pentru \"user session replay\" (ex. LogRocket) și loguri contextuale automate la eșuarea potrivirilor. Astfel, eliminăm tichetele vagi, scurtăm timpul de investigare cu 70% și oferim echipei de Engineering date exacte pentru a reproduce bug-urile intermitente.",
+    "ok": true
+  },
+  {
+    "cod": "15.5",
+    "rol": "Procurement / Achizitii",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Contribuția mea:** Implementăm un modul de „Vendor Marketplace” integrat, unde membrii pot recomanda și evalua furnizori (B2B). Vom utiliza un sistem de *procurement-as-a-service* prin AI-ul aplicației pentru a centraliza cererile de ofertă și a negocia discounturi de volum între membrii cercului, optimizând costurile operaționale.",
+    "ok": true
+  },
+  {
+    "cod": "1.6",
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 4,
+    "contributie": "Propun implementarea unui sistem de tip \"Event-Driven Architecture\" pentru motorul de matching. Astfel, separăm logica de procesare a ofertelor/cerințelor de API-ul principal, asigurând scalabilitatea necesară când baza de utilizatori crește, evitând blocajele și permițând testarea izolată a algoritmilor de potrivire.",
+    "ok": true
+  },
+  {
+    "cod": "11.1",
+    "rol": "Marketing Lead",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "contributie": "<Introducem „Contextual Smart-Match”: algoritmul trebuie să coreleze nu doar nevoile declarate, ci și istoricul interacțiunilor din „Secretara AI”. Transformăm aplicația dintr-un simplu director într-un motor de business intelligence care generează oportunități validate, crescând valoarea percepută și rata de retenție (LTV).>",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "**Contribuție:** Implementați un sistem de \"Contextual Telemetry\" integrat în aplicație. La orice eroare raportată, utilizatorul să poată trimite un log cu snapshot-ul stării de networking (potriviri active/stadiu apel). Reducem timpul de investigare cu 60% și eliminăm ambiguitatea tichetelor vagi pentru echipa Engineering.",
+    "ok": true
+  },
+  {
+    "cod": "3.2",
+    "rol": "Senior QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 3,
+    "contributie": "**Implementăm „Contract Testing” (Pact) între API și aplicația mobilă.** Astfel, eliminăm dependența de medii de test instabile și detectăm erorile de integrare la nivel de build, asigurând stabilitatea fluxului critic de potriviri și a datelor pentru „Secretara AI” înainte de orice deploy.",
+    "ok": true
+  },
+  {
+    "cod": "5.6",
+    "rol": "Mobile Product Analyst",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un \"Onboarding bazat pe valoare imediată\": eliminăm setările lungi și trecem direct la vizualizarea a 3 potriviri relevante (bazate pe datele de profil). Activarea utilizatorului trebuie să se producă prin prima conexiune confirmată, nu prin completarea profilului. Reducem friction-ul, accelerăm \"Time-to-Value\".",
+    "ok": true
+  },
+  {
+    "cod": "5.7",
+    "rol": "Data Analyst",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "contributie": "**Contribuție:** Propun implementarea unui model de atribuire a valorii pentru fiecare conexiune realizată (ROI per match). Vom integra în dbt metrici de „Network Velocity” și „Conversion to Opportunity”, permițând echipei de Sales să prioritizeze membrii activi și să monetizăm pe baza succesului tranzacțional generat.",
+    "ok": true
+  },
+  {
+    "cod": "11.2",
+    "rol": "Digital Marketing Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm deep linking personalizat pentru fiecare membru (referral tracking) și integrăm API-ul AppsFlyer direct în flow-ul de onboarding. Astfel, optimizăm campaniile pe evenimente in-app de tip \"conexiune realizată\" (nu doar install), reducând CAC-ul prin targetarea exclusivă a audiențelor cu probabilitate mare de retenție.",
+    "ok": true
+  },
+  {
+    "cod": "15.6",
+    "rol": "Billing / Revenue Operations",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un sistem de *billing* automatizat și modular (Stripe/Chargebee) integrat nativ cu profilul de membru. Introducem opțiunea de plată „auto-renew” și facturare pro-rata pentru upgrade-uri, eliminând fricțiunea la reînnoire. Raportăm MRR/Churn în timp real pentru a asigura predictibilitatea financiară necesară scalării.",
+    "ok": true
+  },
+  {
+    "cod": "1.7",
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "contributie": "**Contribuția mea:** Implementăm o arhitectură *Micro-Frontends* pentru scalabilitate și un *Design System* bazat pe *Atomic Design* în Storybook. Prioritizăm *Server-Side Rendering* pentru dashboard-ul de business și optimizăm *Critical Rendering Path* pentru a atinge un scor Lighthouse de 95+, garantând performanță instantanee pe orice dispozitiv.",
+    "ok": true
+  },
+  {
+    "cod": "8.2",
+    "rol": "Senior UX Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "contributie": "**Contribuția mea:** Implementăm un sistem de *Intent Matching* bazat pe grafuri, nu pe simple keyword-uri. Introducem „Double-Opt-In” asincron în fluxul de *Potriviri*, eliminând zgomotul. Secretara AI trebuie să extragă acțiuni direct din transcript, transformând *Dictează după apel* într-un motor automat de creare sarcini/conexiuni.",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 3,
+    "contributie": "**Contribuția mea:** Implementarea unui SDK de telemetrie pentru *event-logging* în timp real pe funcționalitățile de „Potriviri” și „Secretara AI”. Acest lucru ne va permite să identificăm bug-urile intermitente înainte ca utilizatorii să raporteze tichete, reducând rata de churn și timpul de investigare tehnică.",
+    "ok": true
+  },
+  {
+    "cod": "3.3",
+    "rol": "QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "Propun implementarea unei strategii de \"Test-Driven Development\" pentru modulele de matching AI. Vom integra teste de contract (Pact) pentru API-urile de networking, asigurând stabilitatea între microservicii și eliminând testele flaky cauzate de fluxurile asincrone, esențiale pentru o scalare la nivel enterprise.",
+    "ok": true
+  },
+  {
+    "cod": "15.6",
+    "rol": "Billing / Revenue Operations",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "Implementăm un model de facturare \"Usage-Based\" integrat direct în algoritmul de potrivire. Fiecare conexiune validată cu succes generează un credit consumat sau o taxă micro-facturată automat prin Stripe, asigurând monetizarea valorii livrate, nu doar a accesului, cu reconciliere fiscală automatizată în timp real.",
+    "ok": true
+  },
+  {
+    "cod": "8.2",
+    "rol": "Senior UX Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 2,
+    "contributie": "Propun implementarea unui flux de „Contextual Matchmaking” declanșat prin „Secretara AI”. În loc de liste statice, AI-ul va genera prompt-uri de introducere personalizate, bazate pe nevoile exprimate în apeluri, optimizând rata de acceptare prin evidențierea valorii adăugate specifice pentru ambii interlocutori.",
+    "ok": true
+  },
+  {
+    "cod": "1.7",
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "contributie": "Implementăm o arhitectură de tip *Micro-frontends* pentru scalabilitate și un *Design System* bazat pe *Atomic Design*. Optimizăm performanța prin *Server Components* (Next.js) și *lazy loading* agresiv, asigurând un audit WCAG 2.1 AA continuu în CI/CD pentru a garanta o experiență enterprise impecabilă.",
+    "ok": true
+  },
+  {
+    "cod": "11.2",
+    "rol": "Digital Marketing Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 2,
+    "contributie": "<Implementăm deep-linking pe baza sursei de achiziție pentru a măsura calitatea lead-urilor în AppsFlyer. Reducem CAC prin campanii de retargeting bazate pe „Secretara AI” ca USP. Prioritizăm A/B testing pe creative video cu testimonial, eliminând audiențele necalificate și optimizând strict pentru conversia în business networking activ.>",
+    "ok": true
+  },
+  {
+    "cod": "5.8",
+    "rol": "BI Developer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un „Semantic Layer” centralizat care să definească unitar „calitatea conexiunii” și „rata de succes a potrivirii”. Astfel, validăm algoritmii de matching prin date reale, nu intuiții, oferind stakeholderilor dashboard-uri de performanță cu metrici standardizate și acționabile pentru optimizarea UX-ului.",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 4,
+    "contributie": "**Contributie:** Implementarea unui SDK de telemetrie pentru erori de tip „silent fail” în procesul de matching. În prezent, pierdem utilizatori când algoritmul eșuează invizibil. Datele din Sentry ne vor permite să convertim bug-urile intermitente în ticket-uri proactive, eliminând frustrarea membrilor VIP.",
+    "ok": true
+  },
+  {
+    "cod": "8.3",
+    "rol": "UI Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "contributie": "Propun implementarea unui **Design System bazat pe Figma Tokens**, cu o ierarhie vizuală strictă (scale tipografice și spacing 4px grid). Vom integra **componente cu stări variabile (lottie-ready)** pentru \"Secretara AI\", asigurând consistența UI-ului pe orice device și eficiența predării către ingineri.",
+    "ok": true
+  },
+  {
+    "cod": "6.1",
+    "rol": "Head of AI",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un motor de recomandare hibrid (Collaborative Filtering + LLM Graph) care analizează *intent-ul* din \"Dictează după apel\" pentru a elimina matching-ul static. Prioritizez un „Privacy-Preserving AI”: procesare on-device pentru datele sensibile și anonimizare pentru antrenarea modelelor, garantând încrederea membrilor de calibru.",
+    "ok": true
+  },
+  {
+    "cod": "1.7",
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "contributie": "Implementăm un Design System bazat pe Headless UI și Tailwind, integrând un strat de caching (React Query) pentru a elimina latența în dashboard. Optimizăm bundle-ul prin code-splitting agresiv și SSR, garantând scoruri Lighthouse 95+ pentru o experiență enterprise fluidă și accesibilă.",
+    "ok": true
+  },
+  {
+    "cod": "16.1",
+    "rol": "Head of Legal",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm „Privacy by Design” și arhitectură de trasabilitate a datelor pentru funcția „Secretara AI”. Obligatoriu: contracte de prelucrare date (DPA) cu furnizorii LLM, mecanism riguros de consimțământ granular și auditare a surselor pentru a evita răspunderea juridică privind confidențialitatea și proprietatea intelectuală a membrilor.",
+    "ok": true
+  },
+  {
+    "cod": "11.3",
+    "rol": "Content Marketer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "contributie": "<Propun implementarea funcției „Content-as-a-Service” în aplicație: membrii să poată genera automat postări de tip „Thought Leadership” pe LinkedIn, extrase direct din interacțiunile lor de succes. Astfel, transformăm networking-ul privat într-o mașinărie de personal branding care atrage organic utilizatori noi prin autoritatea membrilor.>",
+    "ok": true
+  },
+  {
+    "cod": "16.2",
+    "rol": "Corporate Lawyer",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "contributie": "Implementați un modul de \"Compliance & KYC/KYB\" integrat nativ, cu semnătură electronică calificată (eIDAS) pentru acordurile de confidențialitate (NDA) dintre membri. Aceasta transformă aplicația dintr-un simplu tool de networking într-o platformă de tranzacționare securizată, eliminând riscurile juridice și crescând valoarea corporativă a rețelei.",
+    "ok": true
+  },
+  {
+    "cod": "3.3",
+    "rol": "QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "Pentru a susține scalarea, propun implementarea unei strategii de *Contract Testing* (Pact) între API și clientul mobil. Vom reduce dependența de mediile de testare instabile și vom detecta erorile de integrare la nivel de design, asigurând stabilitatea ecosistemului AI înainte de fiecare release.",
+    "ok": true
+  },
+  {
+    "cod": "8.3",
+    "rol": "UI Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 2,
+    "contributie": "Implementez un „Design System-driven UI” în Figma, folosind Figma Tokens pentru a asigura consistența între Dark/Light Mode. Prioritizez ierarhia vizuală prin spacing generos și tipografie scalabilă pentru a transforma „Secretara AI” și „Potrivirile” într-o experiență premium, curată și rapidă, gata pentru implementare.",
+    "ok": true
+  },
+  {
+    "cod": "3.3",
+    "rol": "QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 3,
+    "contributie": "Propun implementarea unui framework de testare bazat pe \"Contract Testing\" (Pact) între API-ul de matching și UI. Vom valida automat integrarea cu AI-ul și sursele de date, eliminând testele UI fragile și asigurând stabilitatea fluxurilor critice de networking înainte de orice release.",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 5,
+    "contributie": "**Contribuție:** Implementați un sistem de telemetrie \"User-Action Snapshot\" care să atașeze automat starea aplicației (loguri și context) la fiecare tichet deschis prin butonul \"Raportare eroare\". Reducem timpul de diagnosticare cu 60% și eliminăm ambiguitatea cererilor, permițând echipei de Engineering să reproducă bug-urile intermitente instantaneu.",
+    "ok": true
+  },
+  {
+    "cod": "11.3",
+    "rol": "Content Marketer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 2,
+    "contributie": "<Propun implementarea funcției „Content-Driven Networking”: utilizatorii pot partaja automat articolele scrise în aplicație direct în fluxul de „Potriviri”. Astfel, expertiza devine moneda de schimb, transformând profilul într-un portofoliu viu care atrage conexiuni calificate prin valoare, nu doar prin cerere/ofertă.>",
+    "ok": true
+  },
+  {
+    "cod": "6.2",
+    "rol": "AI Research Scientist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "contributie": "**Contributie:** Implementăm un model de *Graph Neural Networks (GNN)* antrenat pe grafuri de interacțiune pentru a prezice *intent-matching* dincolo de cuvinte cheie. Modelul va evalua similaritatea semantică a profilurilor prin *contrastive learning*, reducând zgomotul din *Secretara AI* și crescând rata de succes a conexiunilor propuse.",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 6,
+    "contributie": "**Contribuția mea:** Implementarea unui \"Feedback Loop\" automatizat: integrarea Sentry/Crashlytics direct în tichetele Zendesk. Astfel, fiecare raport de eroare al utilizatorului va fi pre-completat cu stack trace-ul și starea dispozitivului, reducând timpul de investigație cu 60% și eliminând ambiguitatea cererilor clienților.",
+    "ok": true
+  },
+  {
+    "cod": "1.7",
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 4,
+    "contributie": "Implementăm un Design System bazat pe Atomic Design (Storybook) și implementăm React Server Components pentru a optimiza Core Web Vitals. Prioritizăm accesibilitatea WCAG 2.1 AA prin teste automate în CI/CD, garantând un dashboard performant, scalabil și consistent pentru utilizatorii noștri premium.",
+    "ok": true
+  },
+  {
+    "cod": "3.4",
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Contribuție:** Implementarea testării \"Adversarial UX\" pe fluxul de matchmaking: voi simula scenarii de \"social engineering\" și input-uri ambigue în funcția de dictare, pentru a valida că AI-ul nu generează conexiuni irelevante sau erori de confidențialitate care ar compromite reputația rețelei private.",
+    "ok": true
+  },
+  {
+    "cod": "1.8",
+    "rol": "Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "contributie": "Propun implementarea unei arhitecturi bazate pe **Atomic Design** pentru sistemul de componente UI. Aceasta va asigura scalabilitatea interfeței, consistența între ecranele de potriviri și profil, reducând timpul de dezvoltare pentru noi funcționalități și facilitând testarea unitară a componentelor izolate în Storybook.",
+    "ok": true
+  },
+  {
+    "cod": "11.4",
+    "rol": "SEO / SEM Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "contributie": "[HTTP503]",
+    "ok": false
+  },
+  {
+    "cod": "6.2",
+    "rol": "AI Research Scientist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 2,
+    "contributie": "**Propunere:** Implementarea unui model GNN (Graph Neural Network) antrenat pe grafuri de interacțiune pentru a prezice „serendipitatea” conexiunilor. Spre deosebire de matching-ul semantic clasic, acesta va optimiza rata de acceptare în „dublu consimțământ” prin modelarea influenței și relevanței contextuale specifice cercului nostru privat.",
+    "ok": true
+  },
+  {
+    "cod": "13.4",
+    "rol": "Onboarding / Implementation Specialist",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "**Propunere:** Implementarea unui „Onboarding Wizard” ghidat, integrat direct în aplicație, care populează automat profilul prin scanarea conversațiilor din „Secretara AI”. Reducem timpul până la prima potrivire (Time to Value) de la zile la minute, eliminând fricțiunea completării manuale a datelor de către utilizatorii ocupați.",
+    "ok": true
+  },
+  {
+    "cod": "8.4",
+    "rol": "Interaction Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un sistem de feedback haptic și animații \"spring-based\" pentru conexiunile propuse. La acceptare, cardul se transformă fluid într-un chat, oferind o tranziție tactilă premium. Toate micro-interacțiunile vor fi exportate via Lottie pentru a garanta 60fps constant pe orice dispozitiv.",
+    "ok": true
+  },
+  {
+    "cod": "16.3",
+    "rol": "Contracts Manager",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "contributie": "**Propun implementarea unui modul de „Smart Contract Lifecycle” direct în aplicație.** Acesta va automatiza fluxul de aprobări între parteneri (NDA-uri, contracte de colaborare), integrând semnătura electronică și stocarea securizată. Reducem timpul de negociere prin template-uri pre-aprobate, asigurând conformitatea juridică a fiecărei conexiuni.",
+    "ok": true
+  },
+  {
+    "cod": "3.4",
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "**Propun implementarea unei matrice de testare pe \"stări de rețea instabile\" și \"întreruperi de fundal\" pentru funcția de Dictare AI.** În networking-ul de business, pierderea contextului unui apel din cauza unui crash sau a unei deconectări scade drastic încrederea utilizatorului în acuratețea datelor.",
+    "ok": true
+  },
+  {
+    "cod": "8.5",
+    "rol": "UX Researcher",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "contributie": "**Propun implementarea unui \"Discovery Sprint\" bazat pe 10 interviuri contextuale cu membrii actuali pentru a mapa barierele de încredere în algoritmul de matching. Obiectiv: validarea valorii \"Secretarei AI\" înainte de dezvoltare, eliminând riscul de a construi funcționalități pe ipoteze subiective.**",
+    "ok": true
+  },
+  {
+    "cod": "6.3",
+    "rol": "Senior ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm un motor de recomandare hibrid (Content-based + Graph Neural Networks) pentru a mapa relațiile B2B. Abandonăm matching-ul static în favoarea unui model de ranking contextualizat (Learning to Rank) care prioritizează „serendipitatea” și minimizează *cold start*-ul prin *embedding*-uri dinamice derivate din transcrierile apelurilor.",
+    "ok": true
+  },
+  {
+    "cod": "11.5",
+    "rol": "ASO Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "contributie": "**Contribuție:** Optimizează onboarding-ul pentru a colecta date structurate (oferă/caută) imediat după instalare. Implementează ASO bazat pe „intentie de business” (ex: „networking privat”, „AI business match”) și testează screenshots care evidențiază „Secretara AI” ca USP, crescând rata de conversie vizită-instalare cu peste 15%.",
+    "ok": true
+  },
+  {
+    "cod": "13.4",
+    "rol": "Onboarding / Implementation Specialist",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 2,
+    "contributie": "Pentru a reduce „Time to First Value”, propun implementarea unui **„Onboarding Wizard” ghidat de AI** care să extragă automat datele din profilul de LinkedIn/CV și să genereze instant primele 3 potriviri. Eliminăm setarea manuală, transformând aplicația dintr-un instrument static într-unul care livrează valoare din minutul 1.",
+    "ok": true
+  },
+  {
+    "cod": "16.4",
+    "rol": "Privacy / GDPR Officer (DPO)",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm „Privacy by Design” prin anonimizarea metadatelor din funcția „Dictare după apel” și criptarea end-to-end a fluxurilor de date către AI. Vom integra un modul automat de gestionare a consimțământului granular pentru fiecare conexiune, asigurând trasabilitatea completă în ROPA și respectarea dreptului la portabilitate.",
+    "ok": true
+  },
+  {
+    "cod": "1.8",
+    "rol": "Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "contributie": "Propun implementarea unui sistem de *State Management* bazat pe *React Query* pentru caching-ul inteligent al potrivirilor. Vom reduce latența la preluarea datelor din API și vom asigura o experiență fluidă pentru utilizator, esențială într-o aplicație de networking unde viteza de interacțiune este critică.",
+    "ok": true
+  },
+  {
+    "cod": "3.4",
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 3,
+    "contributie": "Implementarea testării „dogfooding” cu scenarii de *interrupție* (apeluri primite, schimbări de rețea, fundal) este critică. Propun integrarea unui protocol de validare a stării UI post-dictare, pentru a asigura integritatea datelor introduse de „Secretara AI” înainte de trimiterea către motorul de potrivire.",
+    "ok": true
+  },
+  {
+    "cod": "16.5",
+    "rol": "Regulatory Compliance Specialist",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "contributie": "**Contribuție:** Implementăm „Compliance-by-Design” prin *Privacy Impact Assessment* obligatoriu pentru funcția de Secretară AI și log-uri transparente pentru potriviri. Vom integra maparea cerințelor AI Act în fluxul de dezvoltare, asigurând trasabilitatea datelor și consimțământul granular necesar pentru procesarea profilurilor de business.",
+    "ok": true
+  },
+  {
+    "cod": "8.5",
+    "rol": "UX Researcher",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 2,
+    "contributie": "**Propunere:** Implementarea unui „Feedback Loop” post-conexiune. Analizăm calitativ succesul potrivirilor prin interviuri scurte cu utilizatorii. Datele vor popula biblioteca de insights pentru a rafina algoritmul de matching (AI), transformând presupunerile echipei în decizii bazate pe succesul real al interacțiunilor de business.",
+    "ok": true
+  },
+  {
+    "cod": "6.3",
+    "rol": "Senior ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 2,
+    "contributie": "Implementăm un sistem de recomandări hibrid (Collaborative Filtering + Graph Embeddings) pentru a rezolva „Cold Start-ul”. În loc de matching static, utilizăm *contextual bandits* pentru a optimiza în timp real relevanța propunerilor bazate pe feedback-ul implicit și explicit, asigurând latență <100ms prin vector database.",
+    "ok": true
+  },
+  {
+    "cod": "13.4",
+    "rol": "Onboarding / Implementation Specialist",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 3,
+    "contributie": "**Contribuția mea:** Implementăm un flux de „Onboarding Asistat de AI” care extrage automat nevoile/ofertele din istoricul de comunicări (integrat prin API), reducând efortul manual al utilizatorului la zero. Astfel, *Time to First Value* scade drastic, asigurând activarea instantanee a rețelei încă din prima zi.",
+    "ok": true
+  },
+  {
+    "cod": "11.6",
+    "rol": "Social Media Manager",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "contributie": "**Contribuția mea:** Implementăm funcția „Social Proof automată”: integrarea AI pentru a genera rezumate de tip *success story* din conexiunile validate (anonim și cu acord). Acestea vor fi exportabile nativ din aplicație în postări LinkedIn, transformând utilizatorii în ambasadori care cresc vizibilitatea și autoritatea brandului nostru.",
+    "ok": true
+  },
+  {
+    "cod": "17.1",
+    "rol": "Internal IT Manager",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 1,
+    "contributie": "Implementați **Zero Trust Access** și **SSO (Okta/Azure AD)** pentru autentificarea în aplicație. Integrați **MDM (Intune/Jamf)** pentru a asigura că dispozitivele membrilor sunt conforme și securizate. Datele sensibile de business necesită o izolare strictă, conform standardelor ISO 27001/SOC2, pentru a garanta încrederea clienților.",
+    "ok": true
+  },
+  {
+    "cod": "3.4",
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 4,
+    "contributie": "**Propun implementarea testării pe „condiții de rețea degradată” și „întreruperi de fundal” pentru funcția de dictare/AI.** În networking-ul de business, eșecul capturării contextului la semnal slab compromite încrederea utilizatorului. Trebuie să validăm reziliența procesării asincrone și integritatea datelor post-reconexiune.",
+    "ok": true
+  },
+  {
+    "cod": "1.9",
+    "rol": "Senior Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "contributie": "Adoptăm arhitectura **Clean Architecture cu un strat de prezentare MVI** pentru consistența stării și testabilitate. Implementăm **Server-Driven UI** pentru a actualiza rapid logica de business (matching) fără release-uri noi, și integrăm **gRPC** pentru comunicare eficientă, reducând latența la minim pe rețele mobile.",
+    "ok": true
+  },
+  {
+    "cod": "1.8",
+    "rol": "Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "contributie": "Propun implementarea unui sistem de **Design System atomar în Storybook** cu token-uri de design partajate. Aceasta va asigura consistența vizuală între ecrane, va accelera dezvoltarea componentelor complexe de tip \"Matching\" și va facilita testarea izolata, eliminând regresiile în fluxurile de date ale utilizatorilor.",
+    "ok": true
+  },
+  {
+    "cod": "8.6",
+    "rol": "Design System Specialist",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "contributie": "Trecem de la componente statice la un **Design System bazat pe Tokens (Style Dictionary)** integrat direct în Figma și Xcode/Android. Eliminăm variațiile neautorizate prin sincronizare bidirecțională; orice schimbare de UI se propagă automat în cod, asigurând viteză de scalare și coerență vizuală totală.",
+    "ok": true
+  },
+  {
+    "cod": "6.4",
+    "rol": "ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "contributie": "Propun trecerea de la matching static la un sistem de recomandare bazat pe grafuri (GNN) pentru a captura relații de ordin superior între membrii. Implementez un pipeline de inferență asincronă cu vector database (Qdrant) pentru a reduce latența la <100ms și a asigura recomandări contextuale în timp real.",
+    "ok": true
+  },
+  {
+    "cod": "13.5",
+    "rol": "Customer Experience Analyst",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "contributie": "Implementăm **Customer Effort Score (CES)** direct în fluxul de \"Potriviri\". Dacă utilizatorul refuză o conexiune, declanșăm un prompt micro-survey: „De ce nu a fost relevantă?”. Corelăm datele calitative cu algoritmii de matching pentru a reduce fricțiunea și a crește rata de acceptare.",
+    "ok": true
+  },
+  {
+    "cod": "11.7",
+    "rol": "Community Manager",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "contributie": "<Propun implementarea unui „Reputation Score” vizibil în profil, bazat pe calitatea conexiunilor validate și feedback-ul primit post-întâlnire. Acest mecanism gamificat va stimula engagement-ul, va asigura calitatea rețelei și va oferi date calitative esențiale echipei de Product pentru a rafina algoritmul de matching.>",
+    "ok": true
+  },
+  {
+    "cod": "17.2",
+    "rol": "Internal Help Desk",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 1,
+    "contributie": "<Implementați un sistem de autentificare SSO (Single Sign-On) și integrare cu MDM pentru securizarea accesului la aplicație. Pentru suport, integrați un widget de ticketing direct în „Secretara AI”, permițând raportarea bug-urilor în timp real, cu log-uri atașate automat pentru diagnosticare rapidă.>",
+    "ok": true
+  }
+]
