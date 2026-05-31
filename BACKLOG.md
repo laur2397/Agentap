@@ -24,7 +24,7 @@ Reguli pentru fiecare item:
 14. [x] Pulse de retea reintrodus, dar compact si onest (1 rand).
 15. [x] Confirmare la stergere (task/nota/conexiune) — anti-accident.
 16. [x] „Ultima activitate” per conexiune in lista din Reteaua.
-17. [ ] Dark mode: rafinare contraste pe carduri noi (task/meet).
+17. [x] Dark mode: rafinare contraste pe carduri noi (task/meet).
 18. [ ] Performanta: debounce la cautari.
 19. [ ] Onboarding: pas optional „adauga prima notita/task”.
 20. [ ] Documentatie: README scurt pt. app (cum se ruleaza, ce face, limitari).
