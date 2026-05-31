@@ -350,6 +350,9 @@ details.why2>summary::-webkit-details-marker{display:none}
 .meetcard .moview{margin-top:10px;font-size:13px;color:var(--ink2);background:var(--card2);border-radius:10px;padding:10px 12px;display:flex;align-items:flex-start;gap:6px}
 .meetcard .moview b{color:var(--ink)}.meetcard .moview .x{margin-left:auto;background:none;border:0;color:var(--muted);cursor:pointer;font-size:15px}
 .meetcard .moedit{margin-top:10px}
+/* loop2 #15: remindere intalniri <24h */
+.meetcard.soon{border-color:var(--primary);box-shadow:0 0 0 1px var(--primary),var(--shadow)}
+.soonbadge{display:inline-flex;align-items:center;gap:4px;background:var(--primary);color:#fff;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:700;margin-top:7px}
 .calrow{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
 .calrow .btn{flex:1;min-width:118px;font-size:12px}
 /* loop2 #1: ecran Azi */
@@ -1210,6 +1213,11 @@ function editMeetOutcome(id){EDITMEET=id;renderMeetings();}
 function cancelMeetOutcome(){EDITMEET=null;renderMeetings();}
 function saveMeetOutcome(id){const m=(DB.meetings||[]).find(x=>x.id===id);if(!m){EDITMEET=null;renderMeetings();return;}
   m.outcome=clean((($("#moText")||{}).value||"").trim());EDITMEET=null;logA("Rezultat intalnire notat");save();renderMeetings();toast("Rezultat salvat");}
+// loop2 #15: ore pana la intalnire (null daca invalid/trecut peste 24h fereastra)
+function hoursUntil(when){if(!when)return null;const[d,t]=String(when).split("T");const tm=t||"09:00";
+  const[Y,M,D]=d.split("-").map(Number),[hh,mm]=tm.split(":").map(Number);
+  const dt=new Date(Y,(M||1)-1,D||1,hh||0,mm||0,0);if(isNaN(dt))return null;return(dt-Date.now())/36e5;}
+function soonLabel(hu){if(hu==null||hu<0||hu>24)return null;if(hu<1)return"in curand";return"in ~"+Math.round(hu)+"h";}
 function renderMeetings(){const host=$("#meetList");if(!host)return;
   const mine=(DB.meetings||[]).filter(x=>x.a===ME||x.b===ME);
   const toAccept=mine.filter(x=>x.status==="propus"&&x.b===ME);
@@ -1237,8 +1245,10 @@ function renderMeetings(){const host=$("#meetList");if(!host)return;
           ? h("div",{class:"moview"},h("b",{text:"Rezultat: "}),x.outcome,h("button",{class:"x","data-act":"moedit","data-id":x.id,"aria-label":"Editeaza rezultat",text:"✎"}))
           : h("button",{class:"btn ghost sm","data-act":"moedit","data-id":x.id,style:{marginTop:"9px"},text:"✎ Noteaza rezultatul"});
     }
-    return h("div",{class:"meetcard"},
+    const sl=x.status==="confirmat"?soonLabel(hoursUntil(x.when)):null;
+    return h("div",{class:"meetcard"+(sl?" soon":"")},
       h("div",{class:"mtop2"},h("div",{class:"mw",text:fmtWhen(x.when)}),h("div",{class:"mwho",text:"cu "+cel.name})),
+      sl?h("div",{class:"soonbadge",text:"⏰ "+sl}):null,
       x.place?h("div",{class:"mplace",text:"📍 "+x.place}):null,acts,oc);};
   const out=[];
   if(toAccept.length){out.push(h("div",{class:"pipe-h a"},h("span",{class:"pd"}),"De confirmat",h("span",{class:"pn",text:String(toAccept.length)})));toAccept.forEach(x=>out.push(card(x,"accept")));}

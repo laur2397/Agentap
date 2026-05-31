@@ -22,7 +22,7 @@ Validare: node --check + smoke Playwright zero erori. Audit (examples/audit.py) 
 12. [x] Quick-add global (buton + / tasta) pentru notita sau task de oriunde.
 13. [x] Rezumat in antetul Secretarei: N task-uri active · M intalniri viitoare.
 14. [x] Timeline per persoana: notite + task-uri + intalniri, cronologic, in brief.
-15. [ ] Remindere intalniri: evidentiaza intalnirile din urmatoarele 24h.
+15. [x] Remindere intalniri: evidentiaza intalnirile din urmatoarele 24h.
 16. [ ] Notificari browser (opt-in, Notification API) pentru task-uri scadente — onest despre permisiune.
 17. [ ] Filtrare jurnal pe interval de timp (azi / saptamana / tot).
 18. [ ] Duplicare task (sablon rapid pentru sarcini recurente).
