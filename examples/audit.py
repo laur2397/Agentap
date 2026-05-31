@@ -22,6 +22,22 @@ def P(f): return os.path.join(ROOT,f)
 
 # Descrierea EXACTA a solutiei auditate (iteratia 2 + remedieri runda 1). Onesta — doar ce e implementat.
 SOLUTIE=(
+ "REMEDIERI RUNDA 3 (peste cele din runda 2, toate verificate automat cu Playwright):\n"
+ "(R3#1) CHEIA NU MAI E PE DISC: criptarea foloseste o cheie AES-GCM derivata din PAROLA de sesiune "
+ "prin PBKDF2-SHA256 (150.000 iteratii, salt aleatoriu de 16 octeti). Cheia e ne-exportabila "
+ "(extractable:false) si traieste DOAR in memorie (RAM); pe disc se salveaza doar salt-ul, niciodata "
+ "cheia. Verificat: nu exista cheie in localStorage. La fiecare pornire/refresh aplicatia cere parola "
+ "(ecran de deblocare); parola gresita e respinsa; fara parola datele nu pot fi decriptate.\n"
+ "(R3#2) INTEGRITATE ANTI-MANIPULARE: pe langa tag-ul de autentificare AES-GCM, payload-ul include un "
+ "checksum SHA-256 al continutului, verificat la decriptare. Verificat: alterarea blob-ului din "
+ "localStorage (ex. via DevTools, inclusiv a starii de consimtamant/conexiune) e detectata si respinsa.\n"
+ "(R3#3) SANITIZARE SVG: etichetele si initialele din graful SVG trec printr-un whitelist strict "
+ "(doar litere/cifre/spatiu/./-). Input-ul utilizatorului e sanitizat la INTRARE (clean(): elimina "
+ "caractere de control si <>), nu doar la afisare (esc() la randare).\n"
+ "(R3#4) ANTI-PIERDERE: buton de Export date (JSON) pentru backup manual; la resetare se pastreaza "
+ "automat un backup criptat al datelor curente inainte de stergere (backupRaw).\n"
+ "(transparenta R3) Avertisment XSS explicit in UI: prototip client-side, nu introduce date sensibile, "
+ "utilizatorul e responsabil de backup.\n\n"
  "SOLUTIE AUDITATA — app/eie.html, iteratia 2 dupa remedierea constatarilor din runda 1. Single-file "
  "HTML/JS, localStorage, fara backend (aplicatie Local-Only, declarata explicit in UI). Paleta "
  "'Executive Hybrid': Light 'Quiet Luxury Sand' implicit + comutator Soft-Dark navy. Contrast 8.4:1.\n"
