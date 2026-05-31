@@ -82,6 +82,14 @@ h2.title{font-family:var(--serif);font-size:27px;font-weight:600;margin:2px 0 14
 .phrow b{color:var(--ink)}
 .phdot{width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}
 .phdot.ok{background:var(--success)}
+/* loop3 #20: pagina despre / valoarea ta */
+.about-col{margin-top:12px}
+.about-h{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.about-h.good{color:var(--success)}
+.about-h.bad{color:var(--primary-dim)}
+.about-list{margin:0;padding-left:18px}
+.about-list li{font-size:12.5px;color:var(--ink2);line-height:1.5;margin:4px 0}
+.about-list li b{color:var(--ink)}
 /* loop3 #12: control de ordonare relevanta<->diversitate */
 .ctrlrow{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin:2px 0 14px}
 .ctrllab{font-size:12.5px;color:var(--ink2);display:block;margin-bottom:7px}
@@ -641,6 +649,23 @@ details.why2>summary::-webkit-details-marker{display:none}
         <div class="sw" id="daSw" role="switch" tabindex="0" aria-label="Date absolute" onclick="toggleDateAbs()"><i></i></div></div>
       <div class="toggle"><span>Notificari task-uri scadente <span style="color:var(--muted);font-size:11px">(doar cat timp aplicatia e deschisa — fara server/push)</span></span>
         <div class="sw" id="ntSw" role="switch" tabindex="0" aria-label="Notificari task-uri scadente" onclick="toggleNotify()"><i></i></div></div></div>
+    <div class="panel"><h3>Despre · valoarea ta</h3>
+      <p style="font-size:12.5px;color:var(--ink2);line-height:1.55;margin:0 0 4px">Un cerc privat de afaceri care lucrează pentru tine, nu pe seama atenției tale.</p>
+      <div class="about-col"><div class="about-h good">Ce face</div>
+        <ul class="about-list">
+          <li>Îți ține datele criptate, doar pe acest dispozitiv.</li>
+          <li>Îți sugerează oameni potriviți pe baza a ce oferi și ce cauți — și îți arată <b>de ce</b>.</li>
+          <li>Te ajută să programezi întâlniri, să ții notițe și task-uri (secretara).</li>
+          <li>Tu alegi când exporți sau predai datele (Google Calendar / .ics / e-mail).</li>
+        </ul></div>
+      <div class="about-col"><div class="about-h bad">Ce NU face — promisiunea noastră</div>
+        <ul class="about-list">
+          <li>Nu trimite datele tale către niciun server (Local-Only).</li>
+          <li>Nu vinde și nu partajează datele; nu are reclame.</li>
+          <li>Nu folosește streak-uri, FOMO sau notificări intruzive.</li>
+          <li>Nu ascunde butonul de export sau ștergere — pleci oricând cu datele tale.</li>
+        </ul></div>
+    </div>
   </section>
 </main>
 

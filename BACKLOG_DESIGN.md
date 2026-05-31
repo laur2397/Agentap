@@ -33,4 +33,4 @@ Validare: node --check + smoke Playwright zero erori. Audit (examples/audit.py) 
 17. [x] Skip-to-content + landmark-uri ARIA (acces rapid la continut, accesibilitate reala).
 18. [x] Next-step ghidat contextual: cand o sectiune e goala, un singur buton catre actiunea utila.
 19. [x] Confirmare calda dupa o intalnire confirmata: rezumat „ce urmeaza" (follow-up sugerat, optional).
-20. [ ] Pagina „Despre / Valoarea ta": ce face app-ul si ce NU face (anti dark-pattern, transparent).
+20. [x] Pagina „Despre / Valoarea ta": ce face app-ul si ce NU face (anti dark-pattern, transparent).
