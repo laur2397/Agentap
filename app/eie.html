@@ -367,6 +367,21 @@ details.why2>summary::-webkit-details-marker{display:none}
 .fudet>summary::-webkit-details-marker{display:none}
 .furow{display:flex;flex-wrap:wrap;gap:7px;margin-top:7px}
 .furow .btn{flex:1;min-width:104px;font-size:12px}
+/* backlog #6: cautare globala */
+.searchov{position:fixed;inset:0;z-index:55;background:var(--bg);display:none;flex-direction:column}
+.searchov.on{display:flex}
+.searchov-h{display:flex;align-items:center;gap:10px;padding:16px 18px;border-bottom:1px solid var(--line);background:var(--card)}
+.searchov-h .ic{color:var(--muted);font-size:17px}
+.searchov-h input{flex:1;background:none;border:0;font-size:16px;color:var(--ink);padding:6px 0}
+.searchov-h .sclose{background:none;border:0;color:var(--muted);font-size:26px;cursor:pointer;min-width:44px;min-height:44px}
+.searchov-res{flex:1;overflow:auto;padding:10px 14px;max-width:440px;width:100%;margin:0 auto}
+.srhead{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);font-weight:700;margin:14px 4px 6px}
+.srrow{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:12px;cursor:pointer}
+.srrow:hover{background:var(--card2)}
+.srrow .sric{width:34px;height:34px;display:grid;place-items:center;font-size:18px;flex:none}
+.srrow .sri{flex:1;min-width:0}
+.srrow .srn{font-size:14px;color:var(--ink);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srrow .srm{font-size:12px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -375,6 +390,7 @@ details.why2>summary::-webkit-details-marker{display:none}
   <div class="htop">
     <div class="brand"><div class="mk">C</div><div class="t">Cercul EIE<small>Network Capital</small></div></div>
     <div class="hright">
+      <button class="themebtn" id="searchBtn" title="Cauta" aria-label="Cauta global" onclick="openSearch()">⌕</button>
       <button class="themebtn" id="lockBtnHd" title="Blocheaza acum (sterge cheia din memorie)" onclick="lockNow()">🔒</button>
       <button class="themebtn" id="themeBtn" title="Comuta tema" onclick="toggleTheme()">☾</button>
       <select class="memsel" id="member"></select>
@@ -504,6 +520,14 @@ details.why2>summary::-webkit-details-marker{display:none}
   <div class="msgs" id="mMsgs"></div>
   <div class="cinput"><input id="mInput" placeholder="Scrie un mesaj..."><button class="btn gold sm" onclick="sendMsg()">→</button></div>
 </div></div>
+<div class="searchov" id="searchOv">
+  <div class="searchov-h">
+    <span class="ic">⌕</span>
+    <input id="globalSearch" placeholder="Cauta persoane, notite, task-uri…" aria-label="Cautare globala" oninput="runSearch()" onkeydown="if(event.key==='Escape')closeSearch()">
+    <button class="sclose" onclick="closeSearch()" aria-label="Inchide">×</button>
+  </div>
+  <div id="searchRes" class="searchov-res"></div>
+</div>
 <div class="procmask" id="procMask" role="status" aria-live="polite"><span class="spin"></span> Procesez…</div>
 <div class="toast" id="toast"></div>
 
@@ -1030,6 +1054,23 @@ function followUp(id,kind){const m=(DB.meetings||[]).find(x=>x.id===id);if(!m)re
   openExt(mailtoBody("Follow-up",txt));}
 function mailtoBody(subj,body){return "mailto:?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(body);}
 
+/* ---- backlog #6: cautare globala ---- */
+function openSearch(){if(!DB)return;$("#searchOv").classList.add("on");const i=$("#globalSearch");if(i){i.value="";setTimeout(()=>i.focus(),80);}runSearch();}
+function closeSearch(){$("#searchOv").classList.remove("on");}
+function runSearch(){const host=$("#searchRes");if(!host||!DB)return;
+  const q=(($("#globalSearch")||{}).value||"").toLowerCase().trim();
+  if(!q){const hint=h("div",{class:"estate",style:{padding:"30px"}},h("div",{class:"t",text:"Cauta in cercul tau"}),h("div",{style:{fontSize:"12px",marginTop:"4px"},text:"Scrie un nume, o notita sau un task."}));setKids(host,hint);return;}
+  const out=[],sec=t=>h("div",{class:"srhead",text:t});
+  const people=DB.members.filter(m=>m.id!==ME&&(m.name+" "+(m.industry||"")).toLowerCase().includes(q)).slice(0,6);
+  const notes=(DB.notes||[]).filter(n=>n.member_id===ME&&n.text.toLowerCase().includes(q)).slice(0,6);
+  const tasks=(DB.tasks||[]).filter(t=>t.member_id===ME&&t.text.toLowerCase().includes(q)).slice(0,6);
+  if(people.length){out.push(sec("Persoane"));people.forEach(m=>{const av=h("div",{class:"av sq",style:{width:"34px",height:"34px",fontSize:"13px"}},ini(m.name));av.style.background=m.color||"#6366F1";
+    out.push(h("div",{class:"srrow","data-act":"srperson","data-id":m.id},av,h("div",{class:"sri"},h("div",{class:"srn",text:m.name}),h("div",{class:"srm",text:m.industry||""}))));});}
+  if(notes.length){out.push(sec("Notite"));notes.forEach(n=>out.push(h("div",{class:"srrow","data-act":"srgo","data-v":"secretara"},h("div",{class:"sric"},"📝"),h("div",{class:"sri"},h("div",{class:"srn",text:n.text})))));}
+  if(tasks.length){out.push(sec("Task-uri"));tasks.forEach(t=>out.push(h("div",{class:"srrow","data-act":"srgo","data-v":"secretara"},h("div",{class:"sric"},t.done?"✅":"⬜"),h("div",{class:"sri"},h("div",{class:"srn",text:t.text})))));}
+  const empty=h("div",{class:"estate",style:{padding:"30px"}},h("div",{class:"t",text:"Niciun rezultat"}));
+  setKids(host, out.length?out:empty);}
+
 function openMemberMatch(mid){if(mid===ME){setView("profil");return;}
   let m=DB.matches.find(x=>x.status!=="respins"&&((x.offer_member===ME&&x.seek_member===mid)||(x.offer_member===mid&&x.seek_member===ME)));
   if(m&&m.status==="conectat"){openMatch(m.id);return;}
@@ -1096,6 +1137,8 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="tasktoggle")toggleTask(id);
   else if(a==="deltask")delTask(id);
   else if(a==="tfilter")setTaskFilter(el.dataset.f);
+  else if(a==="srperson"){closeSearch();openMemberMatch(id);}
+  else if(a==="srgo"){closeSearch();setView(el.dataset.v);}
   else if(a==="go")setView(el.dataset.v);});
 
 // error boundary global (remediaza constatarea de audit #4)
