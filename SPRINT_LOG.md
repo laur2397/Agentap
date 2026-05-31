@@ -17,3 +17,4 @@
 - 2026-05-31 · Item 12 (Setari format data) · REINTERPRETAT onest: 'zi de inceput saptamana' n-avea efect real (nu exista grid de calendar), deci am livrat o setare reala si vizibila: toggle Date relative/absolute folosit in jurnal/task-uri/audit; persista; validat, 0 erori.
 - 2026-05-31 · AUDIT item 12 (loop12): APROBAT 6/6 + CAE.
 - 2026-05-31 · Item 13 (Navigare cu tastatura) · listener global Enter/Space pe randuri [data-act]/.sw + tabindex/role pe connrow/srrow; validat, 0 erori.
+- 2026-05-31 · Item 14 (Pulse retea compact) · 1 rand 'Acoperire retea: X din Y membri' + bara, raport REAL (nu scor fabricat); validat, 0 erori.

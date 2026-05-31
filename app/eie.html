@@ -361,6 +361,10 @@ details.why2>summary::-webkit-details-marker{display:none}
 .nextmeet .nmlabel{font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--primary-dim);font-weight:700}
 .nextmeet .nmwhen{font-family:var(--sans);font-size:19px;font-weight:800;color:var(--ink);letter-spacing:-.3px;margin-top:4px}
 .nextmeet .nmwho{font-size:13px;color:var(--ink2);margin-top:2px}
+/* backlog #14: pulse retea compact */
+.netpulse{margin-top:14px}
+.netpulse .npr{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;color:var(--ink2);margin-bottom:5px}
+.netpulse .npv{color:var(--primary-dim);font-weight:600}
 /* backlog #4: follow-up cu 3 sabloane */
 .fudet{margin-top:9px}
 .fudet>summary{list-style:none;cursor:pointer;font-size:12.5px;font-weight:600;color:var(--primary);padding:4px 0}
@@ -404,6 +408,7 @@ details.why2>summary::-webkit-details-marker{display:none}
     <div class="digest"><div class="e">Azi</div><div class="g" id="digG"></div><p id="digP"></p></div>
     <div id="nextMeet"></div>
     <div class="statstrip" id="kpis"></div>
+    <div id="netpulse"></div>
     <div class="sec">Persoane de contactat<a data-go="potriviri">toate →</a></div>
     <div id="topMatches"></div>
     <div class="sec">Conexiuni recente<a data-go="retea">reteaua →</a></div>
@@ -762,6 +767,11 @@ function home(){const me=mem(ME),mm=myMatches();
   }else setKids($("#nextMeet"));
   const stat=(v,l)=>h("div",{class:"st"},h("div",{class:"sv",text:String(v)}),h("div",{class:"sl",text:l}));
   setKids($("#kpis"),stat(con,"Conexiuni"),stat(prop,"Sugestii noi"),stat(avg||"—","Potrivire medie"));
+  // pulse de retea compact & onest (raport real, backlog #14)
+  const total=Math.max(0,DB.members.length-1),pct=total?Math.round(con/total*100):0;
+  setKids($("#netpulse"),h("div",{class:"netpulse"},
+    h("div",{class:"npr"},h("span",{text:"Acoperire retea"}),h("span",{class:"npv",text:con+" din "+total+" membri"})),
+    h("div",{class:"bar"},h("i",{style:{width:pct+"%"}}))));
   const conx=mm.filter(m=>m.status==="conectat").sort((a,b)=>(b.at||0)-(a.at||0));
   renderLedger(conx);
   const top=mm.filter(m=>m.status!=="conectat").slice(0,2),list=top.length?top:mm.slice(0,2);
