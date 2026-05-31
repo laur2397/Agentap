@@ -52,6 +52,10 @@ header{padding:22px 20px 14px;position:sticky;top:0;z-index:9;background:color-m
 .hright{display:flex;align-items:center;gap:8px}
 .themebtn{width:34px;height:34px;border-radius:50%;border:1px solid var(--line2);background:var(--card);color:var(--ink2);font-size:15px;cursor:pointer;display:grid;place-items:center;transition:.3s var(--ease)}
 .themebtn:active{transform:scale(.92)}
+/* loop3 #3: badge de incredere permanent, discret */
+.trustchip{display:inline-flex;align-items:center;gap:5px;height:34px;padding:0 10px;border-radius:30px;border:1px solid var(--line2);background:var(--card);color:var(--muted);font:inherit;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap}
+.trustchip .tdot{width:7px;height:7px;border-radius:50%;background:var(--success);flex:none}
+.trustchip:active{transform:scale(.94)}
 .memsel{background:var(--card);border:1px solid var(--line2);border-radius:30px;padding:7px 11px;color:var(--ink);font:inherit;font-size:12px;max-width:112px}
 main{padding:20px 18px 92px;animation:rise .4s var(--ease)}
 @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
@@ -461,6 +465,7 @@ details.why2>summary::-webkit-details-marker{display:none}
   <div class="htop">
     <div class="brand"><div class="mk">C</div><div class="t">Cercul EIE<small>Network Capital</small></div></div>
     <div class="hright">
+      <button class="trustchip" data-act="trustinfo" title="Local-Only · 0 date trimise" aria-label="Confidentialitate: Local-Only, zero date trimise"><span class="tdot"></span>Local</button>
       <button class="themebtn" id="quickBtn" title="Adauga rapid (tasta N)" aria-label="Adauga rapid notita sau task" onclick="openQuick()">＋</button>
       <button class="themebtn" id="searchBtn" title="Cauta" aria-label="Cauta global" onclick="openSearch()">⌕</button>
       <button class="themebtn" id="lockBtnHd" title="Blocheaza acum (sterge cheia din memorie)" onclick="lockNow()">🔒</button>
@@ -1519,6 +1524,7 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="gcal"){const mt=(DB.meetings||[]).find(x=>x.id===id);if(mt){openExt(gcalUrl(mt));logA("Deschis Google Calendar pt. o intalnire");}}
   else if(a==="ics"){const mt=(DB.meetings||[]).find(x=>x.id===id);if(mt)downloadICS(mt);}
   else if(a==="exportAgenda")exportAllICS();
+  else if(a==="trustinfo")toast("Local-Only: datele tale raman criptate pe acest dispozitiv. Aplicatia nu trimite nimic catre niciun server.");
   else if(a==="email"){const mt=(DB.meetings||[]).find(x=>x.id===id);if(mt){openExt(mailtoUrl(mt));logA("Deschis email pt. o intalnire");}}
   else if(a==="fu")followUp(id,el.dataset.fk);
   else if(a==="addtask")addTask();
