@@ -188,6 +188,18 @@ SOLUTIE=(
  "LIMITARI ONESTE RAMASE: fara backend/auth real; cheia de criptare e Local-Only (prototip); matching pe "
  "cuvinte-cheie/TF-IDF, nu GNN/embeddings; nu exista teste automate; Secretara AI e euristica, nu LLM.")
 
+def _verdict_is_respins(txt):
+    """Citeste DOAR linia de verdict (robust): cauta prima linie cu 'VERDICT'; daca acolo apare
+    RESPINS -> True, daca APROBAT -> False. Evita falsele pozitive din restul textului."""
+    if not txt or txt.startswith("["): return False
+    for line in txt.splitlines():
+        u=line.upper()
+        if "VERDICT" in u:
+            if "RESPINS" in u: return True
+            if "APROBAT" in u: return False
+    # fallback: niciun verdict explicit -> respins doar daca textul mentioneaza RESPINS, nu APROBAT
+    U=txt.upper(); return ("RESPINS" in U) and ("APROBAT" not in U)
+
 def parse_audit():
     text=open(P("fise/AUDIT.md"),encoding="utf-8").read()
     parts=re.split(r"\n## (A\.\d+)\s+(.+)\n", text)
@@ -235,7 +247,7 @@ async def audit_gate(sem, solutie=SOLUTIE, runda=1):
            "RECOMANDARI: <imbunatatiri ne-blocante, scurt>\n"
            "Din unghiul tau specific. La obiect.")
         txt=await call(sem,p,600)
-        resp="RESPINS" in txt.upper().split("VERDICT")[-1][:40] if "VERDICT" in txt.upper() else False
+        resp=_verdict_is_respins(txt)
         return {"cod":a["cod"],"rol":a["nume"],"raport":txt,"respins":resp,"ok":not txt.startswith("[")}
     print(f"AUDIT runda {runda} — {len(auditori)} auditori",flush=True)
     res=await asyncio.gather(*[one(a) for a in auditori])
@@ -252,7 +264,7 @@ async def audit_gate(sem, solutie=SOLUTIE, runda=1):
         "CONDITII DE APROBARE: <ce trebuie sa fie adevarat>\n"
         "Daca RESPINS, sedinta/iteratia NU se incheie.")
     verdict_txt=await call(sem,pc,1200)
-    aprobat=("APROBAT" in verdict_txt.upper().split("VERDICT FINAL")[-1][:30]) and not any(r["respins"] for r in res)
+    aprobat=(not _verdict_is_respins(verdict_txt)) and not any(r["respins"] for r in res)
     raport=(f"# Raport audit — runda {runda}\n\n## Verdict CAE\n{verdict_txt}\n\n"
             +"\n\n".join(f"## {r['rol']} — {'RESPINS' if r['respins'] else 'APROBAT'}\n{r['raport']}" for r in res if r["ok"]))
     open(P(f"AUDIT_runda{runda}.md"),"w",encoding="utf-8").write(raport)

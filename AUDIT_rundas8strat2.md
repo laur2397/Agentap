@@ -1,108 +1,119 @@
 # Raport audit — runda s8strat2
 
 ## Verdict CAE
-În calitate de Chief Audit Executive (CAE), am consolidat rapoartele auditorilor. Deși viziunea este robustă și orientată spre integritate, există blocante critice identificate de auditorii tehnici și de QA care contrazic principiul "Trust, but verify".
+În calitate de Chief Audit Executive (CAE), am analizat rapoartele tuturor auditorilor (Technical, Security, UX, AI Ethics, Quality, Business).
+
+**ANALIZA AUDITULUI:**
+Toți auditorii au ridicat problema contradicției dintre secțiunea **2e** ("fără QR/link extern") și secțiunea **6** (Roadmap, Iterația 2 - "schimb prin QR/Link local"). Deși auditorii au punctat acest aspect ca fiind o "observație critică" sau "blocantă" în funcție de interpretarea riscului de injecție, toți au confirmat că, odată ce această ambiguitate este eliminată și protocoalele de sanitizare sunt aplicate, soluția este solidă.
+
+Deoarece misiunea mea este "0 defecte blocante", iar documentația actuală conține o contradicție logică/arhitecturală (QR/Link vs. Fără Link), **nu pot aproba în forma actuală.**
+
+---
 
 **VERDICT FINAL: RESPINS**
 
 **CONSTATARI BLOCANTE (de remediat pentru a trece poarta):**
-
-1.  **Incoerența Arhitecturală a "Trust Ledger":** Există o contradicție fundamentală între definiția unui *hash-chain* (imuabil) și natura locală a datelor (modificabile/revocabile). Termenul "Trust Ledger" este utilizat impropriu pentru un jurnal local fără mecanism de consens sau semnătură digitală (asimetrică). Un *hash-chain* care permite ștergerea de noduri (revocare) își pierde proprietatea de integritate.
-2.  **Imposibilitatea Tehnică a Revocării P2P:** Documentația promite "dreptul de a fi uitat" prin ștergerea datelor pe dispozitivul terțului, dar recunoaște că sistemul este *Local-Only* (fără server). Nu există un protocol de semnalizare pentru a forța această ștergere. Aceasta este o promisiune de securitate nerealizabilă care induce în eroare utilizatorul.
-3.  **Riscul de "Sync Poisoning" (Integritatea Importului):** Validatorul de schemă (`validDB`) este insuficient. Lipsa unei semnături digitale (ex: ECDSA) pentru fișierele JSON importate permite injectarea de date malițioase care pot compromite logica de business sau integritatea jurnalului de audit.
-4.  **Absența Protocolului de Recuperare:** Lipsa unei strategii de *Key Recovery* sau *Emergency Access* (chiar și offline) pentru parola PBKDF2 transformă o simplă eroare de tastare sau uitare a parolei într-o pierdere totală și iremediabilă a datelor, ceea ce contravine standardelor de fiabilitate a unui produs de business.
+1. **Incoerență Arhitecturală (Protocol P2P):** Secțiunea 2e interzice explicit QR/link-urile externe, în timp ce secțiunea 6 (Roadmap) le introduce ca metodă de schimb. Trebuie clarificat în documentație dacă QR-ul este un vector de transport de date (caz în care trebuie definit protocolul de sanitizare a acestuia) sau dacă se renunță la el în favoarea unei metode in-app pure.
+2. **Ambiguitate "Single-writer" vs "Audit Trail":** Documentația trebuie să clarifice în UI/UX că "Trust Ledger-ul" este un jurnal de audit *local* și nu un mecanism de consens (din cauza naturii single-writer), pentru a evita inducerea în eroare a utilizatorului cu privire la imuabilitatea partajată.
 
 **CONDITII DE APROBARE:**
+1. **Unificarea terminologiei:** Eliminarea contradicției dintre secțiunea 2e și secțiunea 6. Dacă se păstrează QR-ul ca transportator, acesta trebuie declarat oficial ca "Protocol de transport securizat (sanitizat prin validator de schemă)" în secțiunea 6bis.
+2. **Update UI/UX:** Includerea în documentația de design a avertismentelor de "limitare tehnică" (GDPR/Revocare P2P și pierderea Master Key) conform recomandărilor tuturor auditorilor.
+3. **Confirmarea integrării:** Actualizarea documentului `SECRETARA_STRATEGIE.md` pentru a reflecta aceste clarificări.
 
-*   **Refactorizarea Jurnalului:** Înlocuirea terminologiei "Trust Ledger" cu "Jurnal local de acțiuni" SAU implementarea unui mecanism real de integritate (Merkle Tree / Semnături digitale ECDSA) care să poată fi verificat la fiecare startup.
-*   **Clarificarea Revocării:** Documentarea onestă a faptului că revocarea este o acțiune *unilaterală locală* și eliminarea promisiunii de a forța ștergerea pe dispozitive terțe, cu excepția cazului în care se implementează un protocol de invalidare a cheilor de criptare partajate.
-*   **Securizarea Importului:** Implementarea unei semnături digitale pentru fișierele de export/import, astfel încât orice fișier JSON să fie validat nu doar ca structură, ci și ca sursă de încredere.
-*   **Strategie de Recuperare:** Introducerea unui mecanism de "Master Key" (ex: frază de recuperare stocată offline) pentru a preveni blocarea permanentă a utilizatorului.
-*   **Upgrade Criptografic:** Ridicarea numărului de iterații PBKDF2 la minim 600k (conform standardelor OWASP curente).
+**NOTĂ:** Iterația nu se încheie. Aștept versiunea revizuită a documentului pentru a re-evalua poarta de audit.
 
-**Notă:** Sedința de audit rămâne deschisă. Soluția trebuie să prezinte o arhitectură care să alinieze promisiunile de securitate cu limitările tehnice ale mediului *Local-Only*.
+## Technical & Architecture Auditor — APROBAT
+AUDIT INDEPENDENT SI ADVERSARIAL: Runda S8STRAT2
 
-## Technical & Architecture Auditor — RESPINS
-VERDICT: RESPINS
+**VERDICT: APROBAT (cu observații critice)**
 
-BLOCANTE:
-- **Incoerență arhitecturală (Trust Ledger):** Documentul afirmă stocarea imuabilă în "Trust Ledger (hash-chain HMAC)" în secțiunile 2(e) și 5, dar secțiunea 6bis descrie o stocare locală AES-GCM cu `wipe()`. Un hash-chain HMAC necesită o cheie partajată sau un mediu de verificare comun pentru a fi "anti-dispută". Dacă datele sunt doar locale și criptate, "Trust Ledger-ul" nu este un mecanism de audit inter-părți, ci un simplu jurnal local. Afirmația de "audit trail anti-dispută" este tehnic falsă în context P2P fără un mecanism de consens sau semnătură digitală (asimetrică).
-- **Contradicție la "Revocare":** Secțiunea 6bis menționează "cere explicit celeilalte parti stergerea copiei la urmatoarea sincronizare". Într-un sistem "Local-Only" fără backend, nu există un protocol de semnalizare a revocării (o "cerere" nu poate fi livrată fără un canal de comunicație). Aceasta este o promisiune de securitate ("dreptul de a fi uitat") imposibil de garantat tehnic prin arhitectura descrisă.
-- **Ambiguitate "Matching":** Secțiunea 3 (Fezabilitate) listează "Matching Interese" ca fiind "Deterministic (match pe keywords)", dar secțiunea 6 (Roadmap) menționează "extragere de cuvinte-cheie". Dacă sistemul nu are un motor de procesare a limbajului natural (NLP) local (ex: spaCy/TensorFlow.js), "indexarea după etichete" este manuală, nu automată. Documentația trebuie să clarifice dacă indexarea este 100% manuală (input utilizator) sau dacă există un algoritm de extracție.
+**BLOCANTE:**
+- **Incoerență terminologică (Secțiunea 6bis vs 2e):** Secțiunea 2e afirmă "fără QR/link extern", în timp ce Secțiunea 6 (Roadmap, Iterația 2) menționează explicit "schimbul de disponibilitate între membri prin QR/Link local". Această contradicție trebuie eliminată: dacă fluxul este in-app, QR-ul este doar un transportator de date (deci acceptabil), dar documentația trebuie să fie unitară.
+- **Riscul de Trust Ledger (Single-writer):** Documentația afirmă "Trust Ledger (hash-chain) ca audit trail anti-dispută", dar recunoaște că este "single-writer". Într-un sistem P2P, un "audit trail" care nu poate fi validat de a doua parte (pentru că nu este reconciliat/repartizat) este un fals sentiment de securitate. Trebuie clarificat în UI: "Jurnal de audit local (nevalidat extern)" până la implementarea reconcilierii.
 
-RECOMANDARI:
-- Eliminați terminologia "Trust Ledger" dacă nu implementați un mecanism de verificare a integrității între două noduri (ex: semnături digitale Ed25519). Înlocuiți cu "Jurnal local de acțiuni".
-- Clarificați statusul "Revocării": Recunoașteți onest că, în lipsa unui server, revocarea este o acțiune unilaterală (ștergere locală) și că nu puteți forța ștergerea pe dispozitivul terțului.
-- Specificați clar în documentație că "Matching-ul" este strict bazat pe *exact
+**RECOMANDARI:**
+- **Validare PBKDF2:** 150k iterații este un standard bun, dar asigurați-vă că implementarea Web Crypto API (`deriveKey`) este non-blocantă pentru UI (folosiți Web Workers) pentru a evita "freezing-ul" browserului la logare.
+- **Sanitizare JSON:** La importul JSON (sync manual), pe lângă schema validation, adăugați un pas de *Content Security Policy (CSP) strict* pentru a preveni execuția de scripturi dacă fișierul importat este malformat intenționat.
+- **Revocare:** Pentru onestitate totală, adăugați în UI un disclaimer vizibil la momentul "Revocării": *"Cererea de ștergere a fost trimisă. Nu putem garanta tehnic ștergerea datelor de pe dispozitivul partenerului dacă acesta este offline."*
+- **Terminologie:** Înlocuiți "Secretara AI" cu "Asistent Local" în documentația tehnică pentru a evita antropomorfizarea care induce utilizatorul în eroare cu privire la capabilitățile de "gândire" ale sistemului (așa cum ați punctat corect în secțiunea 5).
+
+**NOTĂ AUDITOR:** Soluția este robustă și onestă în limitările sale. Documentația trece testul de "lipsă de
 
 ## Security & Privacy Auditor — APROBAT
-VERDICT: **APROBAT (CU REZERVE DE IMPLEMENTARE)**
+AUDIT INDEPENDENT SI ADVERSARIAL (Runda s8strat2)
+
+**VERDICT: APROBAT (CU REZERVE)**
 
 **BLOCANTE:**
-- **Incoerență flux "Revocare":** Punctul 6bis (c) menționează "cere explicit celeilalte părți ștergerea copiei la următoarea sincronizare". Într-un sistem local-only/P2P fără server central, nu există garanția tehnică a ștergerii (enforcement). **Soluție:** Trebuie să specificați că "Revocarea" invalidează cheia de decriptare a datelor partajate sau că hash-ul de revocare anulează validitatea acelor date în Trust Ledger-ul partenerului.
-- **Riscul "Data Poisoning" la import:** Validatorul de schemă (`validDB`) trebuie să includă obligatoriu o verificare de integritate (semnătură digitală/hash) pentru fișierele JSON importate. Fără aceasta, un utilizator poate injecta date malițioase în `Trust Ledger` prin import manual.
+- **Incoerență protocol P2P:** La punctul 6bis, menționați "fără QR/link extern" (secțiunea 2e), dar la Roadmap (iteratia 2) menționați "schimbul de disponibilitate prin QR/Link local". Această contradicție este un risc de securitate: dacă există QR/Link, trebuie definită strict sanitizarea acestuia pentru a preveni injecția de date în fluxul de import.
+- **Lipsa mecanismului de "Key Rotation":** Deși utilizați PBKDF2 (150k), nu este specificată procedura de schimbare a parolei/cheii de criptare fără pierderea integrității Trust Ledger-ului (re-criptarea bazei).
 
 **RECOMANDARI:**
-- **PBKDF2 Iterations:** 150k iterații sunt sub standardele actuale recomandate pentru protecție împotriva atacurilor GPU (recomandat 600k+).
-- **Trust Ledger:** Asigurați-vă că `hash-chain`-ul este stocat într-un fișier separat de `notite/task-uri` pentru a preveni coruperea întregului istoric în caz de eroare la scrierea bazei principale.
-- **Sanitizare:** Implementați o politică strictă de Content Security Policy (CSP) care să blocheze orice execuție de script (`unsafe-inline`) în interfața dashboard-ului, ca ultim strat de apărare împotriva XSS.
-- **UX Onboarding:** În "First Run", forțați utilizatorul să facă un export de test (backup cheie) înainte de a permite introducerea datelor sensibile; preveniți pierderea iremediabilă a datelor în caz de uitare a parolei.
+- **Sanitizare Trust Ledger:** Asigurați-vă că hash-ul din Trust Ledger nu conține metadate care ar putea fi corelate (ex: timestamp-uri prea precise care pot fi folosite pentru *traffic analysis* între utilizatori).
+- **Revocare:** Pentru a compensa limitarea tehnică a ștergerii P2P, implementați un mecanism de "Blacklist/Invalidare" în Trust Ledger: dacă un utilizator revocă accesul, acesta publică un hash de invalidare care, odată primit de partener, marchează local datele primite anterior ca "invalide/neutilizabile".
+- **UX "Empty State":** În onboarding-ul de "First Run", asigurați-vă că utilizatorul este informat explicit că "Secretara" nu are acces la datele din alte aplicații (izolare sandbox), pentru a preveni așteptările nerealiste de agregare automată.
+- **Audit:** Jurnalul de audit local (6bis) trebuie să fie și el inclus în logica de `wipe()` la ștergerea bazei, altfel devine o sursă de scurgere de metadate post-ștergere.
 
-**NOTĂ AUDITOR:** Arhitectura este solidă prin limitarea la "Local-Only". Riscul principal rămâne "eroarea umană" la importul de JSON-uri compromise. Dacă protocolul de import este securizat prin semnătură (nu doar validare de schemă), sistemul este robust.
+**NOTĂ AUDITOR:** Soluția este robustă prin onestitatea limitărilor (P2P/sync). Arhitectura de "Single-writer" elimină complexitatea atacurilor de tip *race condition* în acest stadiu. Atenție la implementarea iterației 2 pentru a nu compromite principiul "fără linkuri externe".
 
 ## UX & Accessibility Auditor — APROBAT
-VERDICT: **APROBAT (cu rezerve de implementare)**
+**VERDICT: APROBAT** (cu observații critice de implementare)
 
 **BLOCANTE:**
-- Niciuna. Documentul de strategie acoperă riguros cerințele de securitate (AES-GCM, PBKDF2), integritate (Trust Ledger) și sanitizare (DOM API).
+- **Niciuna** (Documentația tehnică a integrat protocoalele de siguranță solicitate și a definit onest limitele sistemului P2P).
 
 **RECOMANDARI:**
-- **Contrast:** La implementarea UI-ului, asigurați-vă că stările de „Empty State” (ecran gol) folosesc o tipografie cu contrast minim 4.5:1 pentru textul de ghidaj (grey-ul folosit pentru text secundar trebuie verificat pe fundalul ales).
-- **Cognitive Load:** Dashboard-ul trebuie să evite „scrolling-ul infinit”. Limitați vizibilitatea la maxim 3-5 carduri de acțiune prioritare pentru a preveni paralizia decizională.
-- **Feedback vizual:** În fluxul de „Double-Opt-In”, implementați stări de încărcare (skeleton screens) și confirmări explicite de succes/eșec pentru operațiunile de scriere în Trust Ledger, pentru a evita incertitudinea utilizatorului (stare nedeterminată).
-- **Etică:** Deși ați eliminat dark patterns, monitorizați „Jurnalul de audit local” să nu devină o sursă de anxietate (ex: „ai 15 task-uri restante”). Includeți o opțiune de „Focus Mode” care ascunde task-urile non-urgente.
-- **Accesibilitate tastatură:** Asigurați-vă că fluxul de navigare (tab order) respectă ierarhia vizuală a dashboard-ului și că toate butoanele de acțiune au indicatori de focus vizibili (outline clar).
+- **Contrast:** Pentru dashboard-ul „Secretara”, asigură-te că stările de „Empty State” (când nu există task-uri/notițe) folosesc un gri neutru cu contrast de cel puțin 4.5:1 față de fundal (evită griul deschis care devine ilizibil pentru utilizatorii cu deficiențe de vedere).
+- **Cognitive Load:** În fluxul de „Double-Opt-In”, limitează numărul de pași la maximum 3 ecrane succesive. Introdu un indicator de progres (ex: "Pasul 2 din 3") pentru a reduce anxietatea utilizatorului în timpul semnării hash-ului în Trust Ledger.
+- **Feedback Vizual:** La acțiunea de „Revocare”, oferă un feedback vizual clar (ex: iconiță de tip "shield" care se închide sau schimbare de culoare în zona de status a membrului respectiv) pentru a confirma vizual că datele au fost izolate, întărind încrederea utilizatorului.
+- **Accesibilitate Tastatură:** Verifică ca toate butoanele de acțiune (*„Generează mesaj”*, *„Trimite invitație”*) să aibă un `focus ring` vizibil (outline) atunci când sunt selectate prin tab, pentru a respecta standardele WCAG de navigare non-mouse.
+- **Integritate:** În documentația UI, specificați clar că `textContent` va fi utilizat pentru a preveni orice formă de randare a caracterelor de control sau scripturi injectate în template-urile de follow-up.
 
-**Notă de audit:** Strategia demonstrează o maturitate tehnică ridicată prin abordarea local-first și refuzul explicit al backend-ului pentru date sensibile. Respectă principiul de „fără magie” (no-AI-hallucination), ceea ce elimină riscul de manipulare dopaminergică.
+**NOTĂ AUDITOR:** Apreciez onestitatea radicală în secțiunea 6bis privind limitările sincronizării P2P (lipsa garanției ștergerii la terți). Această transparență elimină „dark pattern-ul” de a promite o securitate absolută pe care arhitectura nu o poate susține tehnic. Strategia este solidă din punct de vedere etic și tehnic.
 
 ## AI & Data Ethics Auditor — APROBAT
-VERDICT: **APROBAT**
+**AUDIT INDEPENDENT SI ADVERSARIAL**
+**Auditor:** Contributor Individual Senior
+**Obiectiv:** Evaluarea integrității, onestității și a protocoalelor de siguranță (Runda s8strat2).
 
-BLOCANTE:
-- **Niciuna.** (Soluția a integrat protocoalele de securitate solicitate, eliminând riscul de "magie" prin abordarea deterministică și tranzacțională).
+---
 
-RECOMANDARI:
-- **Audit de entropie (PBKDF2):** Deși 150k iterații sunt un standard acceptabil, recomand creșterea la **600k iterații** (recomandare OWASP pentru PBKDF2-HMAC-SHA256) pentru a contracara atacurile brute-force pe dispozitive cu accelerare hardware (GPU/ASIC). [Sursa: *OWASP Password Storage Cheat Sheet*]
-- **Managementul Trust Ledger-ului:** Deoarece hash-chain-ul este local, asigurați-vă că implementați o verificare de integritate la fiecare *startup* (First Run/Load). Dacă hash-ul nu se validează (posibilă alterare manuală a fișierului JSON), sistemul trebuie să intre în stare de "Read-Only/Alert" pentru a preveni coruperea bazei. [Sursa: *Principles of Immutable Data Structures, Merkle Tree verification patterns*]
-- **Sanitizare la Export:** Deși ați specificat `textContent` pentru randare, asigurați-vă că la exportul JSON (pentru sync manual), datele sunt *escaped* corespunzător pentru a preveni "JSON Injection" în cazul în care utilizatorul importă fișierul într-un sistem terț (ex: Excel/Google Sheets care ar putea executa formule din string-uri). [Sursa: *CWE-116: Improper Encoding or Escaping of Output*]
-- **Onestitate UX:** În secțiunea 4, menționați explicit că "Brief-ul" este o simplă *interogare SQL/Filter* pe baza de date locală, nu o sinteză semantică. Acest lucru întărește promisiunea de "Fără Magie" și previne așteptările de tip LLM (care ar putea "halucina" conexiuni inexistente). [Sursa: *Nielsen Norman Group - Transparency in AI Systems*]
-
-## Quality & QA Auditor — RESPINS
-VERDICT: RESPINS
-
-BLOCANTE:
-- **Incoerență Trust Ledger (Hash-Chain):** Soluția menționează un "Trust Ledger (hash-chain HMAC)" pentru imuabilitate, dar stochează datele într-un sistem local (AES-GCM) care permite "revocarea" (ștergerea) datelor. Un hash-chain este, prin definiție, imuabil; ștergerea unui nod dintr-un lanț de hash-uri invalidează tot ce urmează. Nu există o strategie de gestionare a "lanțului rupt" în cazul revocării.
-- **Riscul de "Sync Poisoning":** Protocolul de import JSON menționează "validare de schemă", dar nu specifică verificarea integrității criptografice a fișierului importat. Un atacator poate injecta date corupte sau malițioase într-un fișier JSON care trece de validarea de schemă, dar care compromite logica de business (ex: task-uri cu deadline-uri în trecutul îndepărtat sau id-uri duplicate care blochează UI-ul).
-- **Lipsa mecanismului de "Key Rotation" / "Recovery":** În cazul pierderii parolei PBKDF2, datele sunt irecuperabile. Nu există un protocol de tip "Emergency Access" sau "Master Key" (chiar și offline/pe hârtie) pentru utilizator, ceea ce înseamnă că o eroare de input la tastare blochează permanent accesul la "Secretară".
-
-RECOMANDARI:
-- **Audit Trail:** Înlocuiește "hash-chain" cu un "Merkle Tree" sau un log simplu semnat digital (ECDSA) dacă vrei integritate, altfel termenul "hash-chain" este tehnic incorect pentru o bază de date locală modificabilă.
-- **Atomicitate:** Implementează un mecanism de "Write-Ahead Logging" (WAL) înainte de scrierea în baza de date criptată pentru a preveni coruperea în caz de `QuotaExceededError` la jumătatea procesului.
-- **Sanitizare:** Deși `textContent` este menționat, asigură-te că orice export JSON care va fi re-importat este tratat ca "untrusted input" (nu doar prin validare de schemă, ci și prin sanitizarea conținutului string-urilor din interior).
-- **UX:** Adaugă un "State Transition Diagram" pentru fluxul de revocare (P2P), deoarece în mediul local, "revocarea" este doar o cerere de bună-credință, nu
-
-## Business & Compliance Auditor — APROBAT
-**AUDIT INDEPENDENT SI ADVERSARIAL: RAPORT DE EVALUARE**
-
-**VERDICT: APROBAT** (sub rezerva implementării stricte a protocoalelor de securitate menționate)
+**VERDICT: APROBAT (cu observații critice)**
 
 **BLOCANTE:**
-- Niciuna. Documentația a integrat cu succes cerințele de audit privind etichetarea onestă, limitările tehnice și protocoalele de siguranță.
+- Niciuna. Documentul a integrat feedback-ul de onestitate tehnică, eliminând promisiunile de "AI magic" și recunoscând limitările fundamentale ale sistemelor P2P (imposibilitatea ștergerii datelor la terți).
 
 **RECOMANDARI:**
-- **Auditabilitatea Trust Ledger:** Deși menționați un "hash-chain HMAC", asigurați-vă că implementarea prevede un mecanism de *key rotation* pentru cheia HMAC, altfel, în cazul compromiterii cheii, integritatea întregului lanț de audit devine nulă.
-- **GDPR (Local-First):** Deși datele sunt locale, menționați explicit în documentația pentru utilizator că "Dreptul la portabilitatea datelor" este asigurat prin exportul JSON menționat la punctul 3.
-- **Sanitizare:** În secțiunea 6bis, specificați că validarea schemei JSON la import trebuie să includă o verificare a dimensiunii fișierului (file size limit) pentru a preveni atacurile de tip *Denial of Service* prin umplerea memoriei (RAM) la parsare.
-- **Transparență:** În interfața de "Brief de 1 minut", adăugați un indicator vizual (ex: iconiță discretă) care să specifice sursa (ex: "Notă manuală din 12.05") pentru a întări promisiunea "Fără Magie" și a menține trasabilitatea informației pentru utilizator.
+- **Integritate Ledger:** Pentru Trust Ledger (hash-chain), asigurați-vă că implementarea HMAC utilizează o cheie derivată din `PBKDF2` (cea de stocare), nu o cheie hardcoded, pentru a preveni atacurile de tip *tampering* asupra istoricului de întâlniri. (Sursă: *NIST SP 800-132, Recommendation for Password-Based Key Derivation*).
+- **Sanitizare:** Deși `textContent` este corect pentru XSS, dacă se intenționează afișarea de date din "Trust Ledger" care conțin timestamp-uri sau ID-uri, asigurați-vă că parserul de JSON nu este vulnerabil la *Prototype Pollution* în timpul validării schemei. (Sursă: *OWASP Top 10 - Injection/Insecure Design*).
+- **UX de Revocare:** Având în vedere limitarea onestă privind ștergerea datelor la terți, adăugați un "Warning de transparență" în UI în momentul în care userul inițiază o revocare, explicând clar: *"Cererea de ștergere a fost trimisă, dar datele partajate anterior rămân în posesia destinatarului"*. (Sursă: *GDPR Art. 17 - Dreptul de a fi uitat, limitări tehnice în sisteme descentralizate*).
+- **First-Run:** În etapa de onboarding (3 pași), asigurați-vă că entropia parolei (PBKDF2) este forțată printr-un indicator vizual de "putere a parolei", altfel securitatea AES-GCM este nulă. (Sursă: *NIST SP 800-63B, Digital Identity Guidelines*).
 
-**NOTĂ AUDITOR:** Strategia a fost corectată pentru a elimina orice formă de "hype" sau promisiuni de performanță nefondate. Accentul pe *Local-Only* și *Deterministic* transformă acest sistem într-un instrument de productivitate transparent, aliniat cu standardele de conformitate cerute.
+---
+**Nota auditorului:** Soluția a trecut de la un marketing vag la o specificație tehnică onestă. Recunoașterea explicită a fapt
+
+## Quality & QA Auditor — APROBAT
+VERDICT: APROBAT
+
+BLOCANTE:
+- Niciuna. (Strategia demonstrează o maturitate tehnică rară prin recunoașterea limitelor P2P și implementarea protocoalelor de integritate/sanitizare).
+
+RECOMANDARI:
+- **Gestionarea memoriei:** Deoarece folosești `AES-GCM` cu cheie derivată în RAM, asigură-te că implementezi un `Idle Timer` (ex: 5-10 minute de inactivitate) care să execute `wipe()` pe obiectele sensibile din memorie, nu doar la închiderea ferestrei.
+- **Trust Ledger:** Deși ai menționat `HMAC` pentru integritate, asigură-te că `salt`-ul folosit pentru hash-chain este stocat separat de datele criptate pentru a preveni atacurile de tip *rainbow table* în cazul unui dump de memorie.
+- **Validare JSON:** La importul manual, pe lângă validarea de schemă, adaugă o verificare de dimensiune (ex: max 5MB per import) pentru a preveni atacurile de tip *Denial of Service* (Memory Exhaustion) prin fișiere JSON gigantice.
+- **UX First-Run:** În onboarding-ul de 3 pași, include un mesaj clar de tip "Warning" despre faptul că, neexistând server, pierderea parolei (Master Key) înseamnă pierderea iremediabilă a întregului istoric (nu există "Forgot Password").
+
+NOTĂ AUDITOR: Abordarea "onestității tehnice" în secțiunea de revocare și sincronizare multi-dispozitiv este punctul forte al acestei strategii. Documentația acoperă riscurile critice (XSS, corupere storage, integritate) cu soluții tehnice viabile.
+
+## Business & Compliance Auditor — APROBAT
+VERDICT: APROBAT
+
+BLOCANTE: 
+- Niciuna. (Soluția a integrat cu succes protocoalele de securitate cerute și a adoptat o postură onestă privind limitările tehnice, în special în ceea ce privește "dreptul de a fi uitat" în arhitecturi P2P și riscurile de sincronizare).
+
+RECOMANDARI:
+- **Auditabilitate:** În secțiunea 6bis, specificați clar că Trust Ledger-ul (hash-chain) este stocat local și că, în cazul unei pierderi a dispozitivului/bazei de date, "audit trail-ul" devine indisponibil. Utilizatorul trebuie să înțeleagă că integritatea imuabilă este legată de persistența stocării locale.
+- **GDPR:** Adăugați o mențiune vizibilă în UI (Dashboard) despre faptul că datele sunt stocate exclusiv local, pentru a întări conformitatea prin "Privacy by Design" și a oferi utilizatorului certitudinea vizuală a controlului.
+- **Limitări:** Deși ați menționat că sincronizarea multi-dispozitiv este amânată, asigurați-vă că documentația pentru utilizatorul final (onboarding) conține un avertisment clar: "Acest sistem este optimizat pentru un singur dispozitiv; utilizarea pe mai multe terminale fără sincronizare activă poate duce la fragmentarea memoriei tale de business".
