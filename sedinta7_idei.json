@@ -1,0 +1,1762 @@
+[
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 6,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Cardul \"Social-Action\":** Înlocuim scorurile tehnice cu *Context-Cards*. Hex: `#6366F1` (Indigo). Microcopy uman: „Recomandat pentru: Interese comune în Energie”. Butoane clare: „Cere introducere” (primar), „Vezi profil” (secundar).\n2. **Dashboard \"Airy-Light\":** Fundal `#F9FAFB`. Eliminăm jargonul. „Trust Score 88%” devine „Conexiune verificată prin Bogdan”.\n3. **Status-Pastile:** Buline colorate (ex: `#10B981` pentru „Activ”) în loc de grafuri complexe.",
+    "ok": true
+  },
+  {
+    "cod": "3.3",
+    "rol": "QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 3,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Smart Action Cards**: Înlocuiește cardurile statice cu layout modular: nume/avatar sus, \"De ce să te conectezi?\" (text uman, ex: „Ai 3 conexiuni comune”) în centru și butoane \"Cere introducere\" / \"Mesaj\" stil pastilă (Indigo #6366F1).\n2. **Human-First UI**: Elimină jargonul (TF-IDF/SHA-256) pentru UI; afișează doar statusuri calitative (ex: „Potrivire excelentă”).\n3. **White-Space Hierarchy**: Fundal #FAFAFA, font Inter, carduri cu shadow-uri difuze și colțuri rotunjite (16px).",
+    "ok": true
+  },
+  {
+    "cod": "1.7",
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 4,
+    "idei": "Iată direcția pentru refacerea frontend-ului:\n\n1. **Clean UI & Indigo:** Înlocuim sepia cu `#F9FAFB` (background) și `#6366F1` (acțiuni). Carduri cu `border-radius: 12px`, `box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1)`. Font: Inter.\n2. **Human-Centric Copy:** Eliminăm jargonul. În loc de „TF-IDF: 0.8”, folosim: „Conexiune recomandată: Amândoi activați în Energie; ați lucrat cu Andrei Popescu.”\n3. **Action-Driven Layout:** Înlocuim statusurile pasive cu un `flex-row` de butoane: [Trimite Mesaj] (primar), [Cere Introducere] (secundar).",
+    "ok": true
+  },
+  {
+    "cod": "8.3",
+    "rol": "UI Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea rapidă:\n\n1. **Rebranding vizual:** Paletă *Clean White* (#F8FAFC) cu accente Indigo (#6366F1). Înlocuim serifele cu *Inter* (semibold/medium). Eliminăm scorurile tehnice; folosim „pastile” de context: *„Interese comune: Energie, Infrastructură”*.\n2. **Carduri „Action-First”:** Înlocuim blocul de text cu layout pe 2 coloane: profil stânga, acțiuni (buton primar *„Cere introducere”*, icon *„Ignoră”*) dreapta.\n3. **Micro-copy uman:** „Afinitate 68” devine „Potrivire bună: 3 conexiuni comune”.",
+    "ok": true
+  },
+  {
+    "cod": "11.3",
+    "rol": "Content Marketer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Card \"Human-First\":** Înlocuiește scorurile tehnice cu *social proof*. Ex: „Bogdan caută furnizor cărbune. Aveți 3 interese comune și o conexiune comună: Maria”. Butoane de acțiune clare (indigo #6366F1, colțuri rotunjite) sub text.\n2. **Interfață Airy:** Background `#FAFAFA`, font *Inter*. Elimină jargonul; înlocuiește „TF-IDF” cu „Interese complementare”.\n3. **Statusuri Pastilă:** Folosește culori vibrante (ex: indigo pentru „Potrivire”) pentru statusuri, eliminând aspectul „bancar”.",
+    "ok": true
+  },
+  {
+    "cod": "6.2",
+    "rol": "AI Research Scientist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul social-light:\n\n1. **Interfață \"Human-First\":** Înlocuim scorurile tehnice cu *Insight Cards* (fundal #FFFFFF, border-radius 16px, umbră #0000000a). Text: \"Bogdan caută furnizori. Aveți 3 conexiuni comune în Energie.\" Acțiune: Buton primar Indigo (#6366F1) \"Cere introducere\".\n2. **Vizualizare \"Social Flow\":** Eliminăm grafurile rigide. Înlocuim cu un layout Timeline curat, statusuri tip \"Pastilă\" (ex: \"Potrivire 85%\" devine \"Conexiune de încredere\").\n3. **Micro-interacțiuni:** Animații tip *fade-in* la scroll și hover pe carduri; folosim font Inter pentru lizibilitate maximă și curățenie vizuală.",
+    "ok": true
+  },
+  {
+    "cod": "1.8",
+    "rol": "Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea rapidă:\n\n1. **Rebranding Vizual:** Fond `#FAFAFA`, text `#1F2937`. Înlocuiesc cardurile gri cu containere albe, umbră `0 4px 6px -1px #00000005`, bordură `border-radius: 16px`. Accent: Indigo vibrant (`#6366F1`) pentru butoane primare.\n2. **Human-First Copy:** Elimin jargonul. Înlocuiesc scorurile cu: *\"Potrivire excelentă: 3 interese comune și conexiune prin Ana Popescu\"*.\n3. **Action-Driven UI:** Butoane clare (tip \"Ghost\" pentru ignorare, \"Solid\" pentru conectare). Statusuri: pastile `bg-indigo-50` cu text indigo.",
+    "ok": true
+  },
+  {
+    "cod": "16.3",
+    "rol": "Contracts Manager",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul vizual și uman:\n\n- **Carduri \"Action-First\":** Fond alb, umbre #000/5%. Eliminăm scorurile; înlocuim cu: *\"Bogdan caută furnizor: interese comune în Energie. Conectează-te prin Maria.\"* Butoane indigo (#6366F1) text alb: [Mesaj direct], [Cere introducere]. \n- **Statusuri \"Pastilă\":** Înlocuim jargonul cu limbaj cald: \"Prospect\" devine \"Nou\", \"Meeting\" devine \"Discuție activă\". \n- **Ierarhie \"Human-Centric\":** Tipografie Inter, titluri Bold 16px. Informația tehnică, ascunsă sub un link \"Vezi detalii securizate\".",
+    "ok": true
+  },
+  {
+    "cod": "6.2",
+    "rol": "AI Research Scientist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 2,
+    "idei": "1. **Interfață \"Human-First\"**: Înlocuiește scorurile matematice cu \"Smart Snippets\": *„Bogdan caută furnizori; aveți 3 conexiuni comune în Energie”*. Paletă: `bg #FFFFFF`, carduri `border #F3F4F6`, accente `Indigo #6366F1`.\n2. **Action-Card Layout**: Carduri compacte cu butoane de tip *Ghost* și *Primary* (ex: \"Cere introducere\"). Statusurile devin pastile discrete (ex: `bg-indigo-50`, `text-indigo-700`).\n3. **Micro-interacțiuni**: Elimină jargonul (SHA/TF-IDF) în favoarea unor metafore vizuale: indicatori de \"Vibe\" (avataruri suprapuse pentru conexiuni).",
+    "ok": true
+  },
+  {
+    "cod": "3.4",
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile mele pentru pivotarea UX/UI:\n\n1. **Card \"Human-First\":** Înlocuiește scorurile tehnice cu un \"Reason to Connect\" (ex: \"Bogdan caută cărbune. Aveți 2 conexiuni comune\"). Buton primar indigo (`#6366F1`) \"Cere Introducere\".\n2. **Dashboard Air-Clean:** Fundal `#FAFAFA`, elimină graficele `force-directed`. Folosește liste de carduri albe, umbre `0 2px 4px rgba(0,0,0,0.05)`, font `Inter`, text gri-închis (`#1F2937`).\n3. **Statusuri Sociale:** Înlocuiește \"Trust Ledger\" cu pastile colorate (Ex: \"Verificat\" - indigo deschis).",
+    "ok": true
+  },
+  {
+    "cod": "1.8",
+    "rol": "Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea rapidă:\n\n1. **UX \"Human-First\":** Înlocuim scorurile tehnice cu *Insight-uri Conversaționale*: „Bogdan caută furnizor de cărbune” (Titlu H3, font Inter, negru #1A1A1A) + „Aveți 3 interese comune și o conexiune mutuală” (Subtitle, gri #6B7280).\n2. **Action-Driven Cards:** Eliminăm cardurile pasive. Adăugăm un \"Quick Action Row\" (Butoane: [Trimite Mesaj] - indigo #6366F1, [Cere Introducere] - outline). Statusul devine o pastilă discretă în colțul dreapta-sus.\n3. **Design System \"Airy\":** Fond alb (#FFFFFF), umbre diffuse (`box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05)`), border-radius 12px. Eliminăm jargonul; folosim iconițe rotunjite pentru context social.",
+    "ok": true
+  },
+  {
+    "cod": "16.4",
+    "rol": "Privacy / GDPR Officer (DPO)",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n*   **Human-First Cards:** Înlocuiește scorurile tehnice cu „Context Card”: *„Bogdan caută furnizor; aveți 3 interese comune (Energie/Infrastructură) și o conexiune comună.”* Butoane de acțiune (Indigo #6366F1, colțuri 12px) înlocuiesc tabelele.\n*   **Status-Driven UI:** Elimină jargonul; statusuri tip pastilă (bg: #EEF2FF, text: #4F46E5) pentru claritate.\n*   **Clean Typography:** Inter, font-weight 500/700. Alb (#FFFFFF) dominant, griuri calde pentru text, zero sepia.",
+    "ok": true
+  },
+  {
+    "cod": "13.4",
+    "rol": "Onboarding / Implementation Specialist",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Interfață \"Human-First\":** Background `#FAFAFA`, carduri `#FFFFFF` cu umbră `0 4px 12px rgba(0,0,0,0.05)`. Înlocuim jargonul tehnic cu microcopy: „Bogdan caută parteneri în Energie” în loc de „Scor TF-IDF 0.8”.\n2. **Action-Driven Layout:** Butoane primare Indigo `#6366F1` pentru „Trimite Mesaj” direct pe card. Statusuri tip pastilă (ex: `bg-indigo-50 text-indigo-700`) pentru a elimina vizual „activele financiare”.\n3. **Context Social:** Adăugăm „De ce acum?” – un rând sub nume: „3 interese comune prin Andrei Popescu”.",
+    "ok": true
+  },
+  {
+    "cod": "8.4",
+    "rol": "Interaction Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul spre „Social-Energetic”:\n\n1. **Card „Human-First”**: Înlocuiește scorurile tehnice cu un „Badge de Afinitate” (ex: „3 interese comune”). Layout: Avatar rotund, nume bold (Inter), text simplu (ex: „Caută furnizor cărbune”), buton primar Indigo (#6366F1) cu micro-interacțiune „Pulse” la hover pentru acțiuni: „Cere introducere”.\n\n2. **Micro-feedback vizual**: Înlocuiește log-ul tehnic cu un „Stare de conexiune” animată (ex: bulină verde pulsatorie: „Conexiune verificată prin Andrei V.”).\n\n3. **Layout „Airy”**: Fundal #FAFAFA, carduri #FFFFFF cu shadow `0 4px 12px rgba(0,0,0,0.05)`, font `Inter`, titluri compacte (20px). Elimină jargonul; folosește limbaj natural: „Merită contactat acum”.",
+    "ok": true
+  },
+  {
+    "cod": "11.4",
+    "rol": "SEO / SEM Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul „Bloom/Clay”:\n\n1. **Card \"Human-First\"**: Înlocuiește scorurile tehnice cu *Smart Context*: „Recomandat pentru tine: 3 interese comune în energie”. Hex #6366F1 pe butonul principal „Cere introducere”.\n2. **UI Airy & Clean**: Fundal #FAFAFA, carduri cu `border-radius: 16px` și umbră `0 4px 12px rgba(0,0,0,0.05)`. Font: Inter, fără serife.\n3. **Status Vizual**: Pastile colorate (ex: verde deschis pentru „Disponibil”) în locul ledger-ului obscur.",
+    "ok": true
+  },
+  {
+    "cod": "6.3",
+    "rol": "Senior ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul vizual și UX:\n\n1. **Human-Centric Cards:** Înlocuim scorurile obscure cu „Reason-to-Meet”. Hex: `#6366F1` (Indigo). Exemplu: „Bogdan vrea să exporte cărbune. Aveți 3 conexiuni comune.” Buton principal tip „pill” cu acțiune: „Cere introducere”.\n2. **Clean Dashboard:** Fundal `#F9FAFB`. Carduri cu `border-radius: 16px` și shadow `0 4px 6px -1px rgba(0,0,0,0.05)`. Font: Inter, 400-600.\n3. **Action-Oriented Status:** Statusul „Conectat” devine un indicator discret, nu buton. Elimini jargonul; afișezi doar valoarea umană a legăturii.",
+    "ok": true
+  },
+  {
+    "cod": "3.4",
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile mele pentru pivotarea UX/UI:\n\n1. **Card \"Human-First\":** Înlocuiește scorurile tehnice cu un header uman: „Bogdan caută furnizori. Aveți 3 conexiuni comune”. Elimină jargonul; păstrează doar acțiuni clare: [Trimite Mesaj] (primar, #6366F1), [Vezi Profil].\n2. **Design \"Airy\":** Fundal #FAFAFA, carduri #FFFFFF (shadow #0000000a), font Inter. Statusurile devin pastile colorate (ex: #DCFCE7 pentru „Meeting”).\n3. **Micro-copy:** Rescrie „Afinitate 68” în „Recomandat pentru tine”.",
+    "ok": true
+  },
+  {
+    "cod": "11.5",
+    "rol": "ASO Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Interfață \"Human-First\":** Înlocuiește scorurile tehnice cu „Context Carduri”. Exemplu: „Conexiune mutuală prin Andrei” și „Recomandat pentru experiența în Energie”. Paletă: bg `#FFFFFF`, text `#1A1A1A`, accente `#6366F1`.\n2. **Action-Driven Layout:** Butoane primare stil „pill” (`#6366F1`, text alb) pentru „Cere Introducere”. Statusuri: buline colorate pe fundal deschis.\n3. **Microcopy Emoțional:** Înlocuiește jargonul (TF-IDF/HMAC) cu limbaj natural: „Am găsit 3 interese comune”.",
+    "ok": true
+  },
+  {
+    "cod": "16.5",
+    "rol": "Regulatory Compliance Specialist",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "idei": "- **Human-Centric Insights:** Înlocuim scorul \"Trust 84%\" cu \"Conexiune de încredere prin Andrei Popescu\". În loc de \"TF-IDF: Energie\", folosim \"Interese comune: Energie verde\".\n- **Visual Refresh:** Paletă #FFFFFF fundal, text #1F2937, accente #6366F1. Carduri cu `border-radius: 16px` și `box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05)`.\n- **Action-First UX:** Butoane primare \"Trimite mesaj\" (indigo) lângă card; eliminăm jargonul, punem acțiunile în prim-plan.",
+    "ok": true
+  },
+  {
+    "cod": "13.4",
+    "rol": "Onboarding / Implementation Specialist",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată direcția pentru un UI \"Human-First\":\n\n1. **Carduri \"Conversation-Starter\":** Înlocuiește scorurile tehnice cu *Human Insights*. Ex: „Bogdan caută furnizori. Aveți 3 conexiuni comune.” Butoane active (Indigo #6366F1): [Cere Introducere], [Trimite Mesaj].\n2. **Design \"Airy & Clean\":** Fundal #F8FAFC, carduri albe cu shadow `0 4px 6px -1px rgba(0,0,0,0.05)`. Font *Inter*, ierarhie clară (Titlu Bold 16px, Text 14px).\n3. **Statusuri Vizuale:** Pastile colorate (`bg-indigo-50 text-indigo-700`) pentru context, nu cifre reci.",
+    "ok": true
+  },
+  {
+    "cod": "8.5",
+    "rol": "UX Researcher",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "idei": "Iată soluțiile bazate pe insight-urile utilizatorilor:\n\n1. **Card \"Human-First\":** Înlocuiește scorurile tehnice cu context social. Header: \"Bogdan caută furnizor cărbune\". Body: \"Aveți 3 conexiuni comune și interes în Energie\". Buton primar: \"Cere introducere\" (indigo #6366F1).\n2. **UI \"Airy & Light\":** Fundal alb, carduri #FFFFFF cu shadow `0 4px 12px rgba(0,0,0,0.05)`. Font: Inter, fără serif.\n3. **Statusuri Sociale:** Pastile cu font mic, bold. Ex: `Prospect` (bulină indigo).",
+    "ok": true
+  },
+  {
+    "cod": "1.8",
+    "rol": "Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "idei": "Iată propunerile pentru pivotarea rapidă:\n\n1. **Rebranding Vizual:** Background `#F9FAFB`, carduri albe cu `shadow: 0 4px 6px -1px rgba(0,0,0,0.05)`, font `Inter`. Eliminăm sepia; introducem Indigo `#6366F1` pentru butoane principale.\n2. **UX Umanizat:** Înlocuim scorurile tehnice cu *Human Insights*: „Potrivire: Bogdan caută cărbune; tu ai conexiuni în energie”. Butoane de acțiune: „Cere introducere” (primar), „Ignoră” (ghost).\n3. **Micro-interacțiuni:** Statusuri tip pastilă (bg `#EEF2FF`, text `#4338CA`) pentru context imediat.",
+    "ok": true
+  },
+  {
+    "cod": "6.3",
+    "rol": "Senior ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea către stilul \"Bloom/Clay\":\n\n1. **Card \"Human-First\":** Înlocuim scorurile cu *„Motiv de conexiune”* (text, nu cifre). Paletă: bg #FFFFFF, bordură #F1F5F9, accent indigo #6366F1. Butoane de acțiune directe („Cere introducere”) în loc de statusuri pasive.\n2. **Dashboard \"Event-Driven\":** Timeline vertical stil feed social. Înlocuim jargonul tehnic cu limbaj natural: „Ai o conexiune comună cu X” în loc de „Afinitate 68”.",
+    "ok": true
+  },
+  {
+    "cod": "3.4",
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 3,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n*   **UI Refresh:** Fundal #FAFAFA, carduri albe cu `box-shadow: 0 4px 12px rgba(0,0,0,0.05)`. Înlocuiește scorurile tehnice cu „Human Labels” (ex: „Interese comune: Energie, Tech”).\n*   **Action-First Cards:** Butoane de acțiune „Cere introducere” (Indigo #6366F1) direct pe card. Elimină jargonul; înlocuiește „Afinitate 68” cu „Potrivire excelentă: 3 conexiuni comune”.\n*   **Status Pills:** Statusuri cu bulină discretă (ex: `bg-indigo-50 text-indigo-600`) pentru a înlocui graficele complexe.",
+    "ok": true
+  },
+  {
+    "cod": "8.5",
+    "rol": "UX Researcher",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile mele bazate pe feedback-ul utilizatorilor:\n\n1. **Card \"Human-First\"**: Înlocuiește scorurile tehnice cu context: „Bogdan caută furnizor cărbune. Aveți 3 interese comune și conexiuni mutuale”. Layout: fundal alb, umbră soft (#00000008), accent Indigo (#6366F1).\n2. **Action-Driven Interface**: Înlocuiește \"Afinitate 68\" cu un buton primar clar: „Cere introducere”.\n3. **Micro-Copy Social**: Terminologie simplă: „Potrivire bună” în loc de „TF-IDF”. Statusuri tip pastilă (Inter, 12px) pentru vizibilitate.",
+    "ok": true
+  },
+  {
+    "cod": "11.6",
+    "rol": "Social Media Manager",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul vizual și uman:\n\n- **UI „Human-First”**: Fundal `#F9FAFB`, carduri `#FFFFFF` cu `box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05)`. Înlocuiește scorurile tehnice cu „Insight uman”: *„Bogdan caută furnizori de carbune; aveți 3 conexiuni comune”*.\n- **Action-Bar Indigo**: Butoane primare `#6366F1` (font Inter, 600) pentru „Cere Introducere”. Statusuri sub formă de pastile: `bg-#EEF2FF` + `text-#4338CA`.\n- **Micro-Copy**: Elimină jargonul (SHA/TF-IDF). Folosește tonul: *„De ce acum? Bogdan a postat recent despre investiții în energie”*.",
+    "ok": true
+  },
+  {
+    "cod": "1.9",
+    "rol": "Senior Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul vizual (stil 'Bloom'):\n\n1. **Interfață \"Social-First\":** Fundal `#F9FAFB`, carduri albe cu shadow `0 2px 8px rgba(0,0,0,0.05)`. Înlocuim scorurile cu \"Human Context\": *„Bogdan caută furnizori. Aveți 3 conexiuni comune.”* \n2. **Design Modular:** Butoane de acțiune tip *pill* (`#6366F1`) sub fiecare card. Eliminăm jargonul tech; afișăm doar statusuri clare (Prospect, Conectat) cu bulină colorată.\n3. **Tipografie Modernă:** Inter, font-weight bold pentru titluri, spacing generos.",
+    "ok": true
+  },
+  {
+    "cod": "17.1",
+    "rol": "Internal IT Manager",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către interfața „Bloom/Clay”:\n\n- **Human-Centric Cards:** Înlocuim scorurile cu un „Reason to Connect” (ex: „3 interese comune”). Culori: fundal `#F9FAFB`, umbre `#00000008`, buton primary `#6366F1`.\n- **Action-Driven Layout:** Înlocuim jargonul cu „Cere introducere” sau „Trimite mesaj”. Eliminăm grafurile, folosim liste aerisite cu avataruri colorate.\n- **Micro-Copy Refresh:** Eliminăm „TF-IDF”, „Trust Ledger”. Mesaj: „Bogdan este un partener strategic pentru proiectele tale în energie”.",
+    "ok": true
+  },
+  {
+    "cod": "13.4",
+    "rol": "Onboarding / Implementation Specialist",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 3,
+    "idei": "1. **UX Social:** Înlocuiește scorurile tehnice cu „Context de conectare”: *„Bogdan caută furnizor; aveți 3 interese comune prin Andrei.”* Butoane de acțiune (Indigo #6366F1) direct pe card: [Mesaj] [Cere Intro].\n2. **UI Airy:** Fundal #FAFAFA, carduri albe cu shadow `0 4px 6px -1px rgba(0,0,0,0.05)`. Font Inter, titluri Bold. Elimină jargonul; folosește etichete prietenoase: „Top Potrivire” (pastilă, nu cifră).",
+    "ok": true
+  },
+  {
+    "cod": "6.4",
+    "rol": "ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul social/modern, păstrând rigurozitatea tehnică în background:\n\n1. **Interfață \"Human-First\":** Înlocuim scorurile aride cu \"Context Cards\": fundal alb (#FFFFFF), shadow `0 4px 12px rgba(0,0,0,0.05)`, colțuri 12px. Mesaj: \"Potrivire bună: 3 interese comune în Energie\".\n2. **Action-Driven Layout:** Înlocuim tabelele cu butoane primare Indigo (#6366F1). Acțiunile sunt clare: \"Cere introducere\" sau \"Trimite mesaj\".\n3. **Status Vizual:** Pastile status cu culori vibrante (ex: `bg-indigo-50 text-indigo-700`).",
+    "ok": true
+  },
+  {
+    "cod": "8.6",
+    "rol": "Design System Specialist",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea rapidă:\n\n1. **Tokens & Palette:** Treci pe *Semantic Tokens*. Background `#F9FAFB`, Cards `#FFFFFF`, Accent Indigo `#6366F1`. Elimină sepia; înlocuiește statusurile medicale cu pastile vibrante: `bg-indigo-50 text-indigo-700` (Meeting).\n2. **Human-First UI:** Înlocuiește scorurile tehnice cu *Contextual Snippets*. Ex: \"3 interese comune în Energie\" în loc de \"Afinitate 68\".\n3. **Action-Driven Cards:** Grupează butoanele de acțiune (\"Trimite mesaj\", \"Cere introducere\") în subsolul cardului; folosește iconițe generoase pentru a elimina jargonul.",
+    "ok": true
+  },
+  {
+    "cod": "11.7",
+    "rol": "Community Manager",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru a transforma interfața dintr-un audit bancar într-un hub social:\n\n*   **Human-First Cards:** Înlocuim scorurile cu \"De ce să contactezi\": *„Potrivire: Interese comune în Energie. Conexiune: Bogdan vă recomandă.”* Butoane acționabile (Primary Indigo `#6366F1`) „Cere introducere” în loc de statistici.\n*   **Bright & Airy UI:** Fundal `#F9FAFB`, carduri albe cu `shadow-sm`, font *Inter*. Eliminăm jargonul. Statusul „Prospect” devine bulină indigo discretă.\n*   **Social Feed:** Timeline cu activități recente (nu grafuri complexe).",
+    "ok": true
+  },
+  {
+    "cod": "13.5",
+    "rol": "Customer Experience Analyst",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată recomandările mele, bazate pe feedback-ul radical al clientului:\n\n1. **Interfață „Social-First”:** Fond alb (#FFFFFF), font Inter, carduri cu *border-radius* 16px și *box-shadow* 0 4px 12px rgba(0,0,0,0.05). Înlocuim jargonul cu „De ce să-l contactezi: Bogdan caută furnizor cărbune; aveți 3 conexiuni comune”.\n2. **Action-Bar dinamic:** Buton primar „Cere introducere” (Indigo #6366F1, text alb) și secundar „Ignoră” (ghost).\n3. **Status umanizat:** Înlocuim scorurile tehnice cu etichete prietenoase: „Potrivire excelentă” (bulină violet).",
+    "ok": true
+  },
+  {
+    "cod": "17.2",
+    "rol": "Internal Help Desk",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru un redesign social și uman:\n\n- **Carduri „Human-First”**: Fundal alb, umbră soft, layout modular. Înlocuim scorurile obscure cu etichete de context: „Conexiune comună: Maria Ionescu” și „Interese: Energie, Tech”. Acțiune principală (buton indigo vibrant): „Cere introducere”.\n- **Limbaj Prietenos**: Înlocuim jargonul tehnic cu beneficii. „Trust Score 85%” devine „Profil verificat: 3 conexiuni comune”.\n- **Interfață „Airy”**: Spațiu alb generos, font Inter, statusuri tip pastilă (verde pal/indigo).",
+    "ok": true
+  },
+  {
+    "cod": "6.4",
+    "rol": "ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Interfață Human-First**: Înlocuim scorurile cu „Insight-uri naturale”. Exemplu: în loc de „Afinitate 68”, afișăm „Conexiune recomandată: Amândoi activați în Energie”. Culoare: `#6366F1` pentru butoane/tag-uri, fundal `#F9FAFB`.\n2. **Carduri Active**: Reducem dimensiunea, eliminăm jargonul (SHA/TF-IDF) și adăugăm butoane de acțiune rapidă: „Trimite mesaj”/„Ignoră”.\n3. **Status Vizual**: Înlocuim „Trust Ledger” cu pastile vizuale (ex: „🟢 Verificat de Bogdan”).",
+    "ok": true
+  },
+  {
+    "cod": "1.9",
+    "rol": "Senior Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea rapidă:\n\n1. **UX \"Human-First\":** Înlocuim scorurile obscure cu \"Smart Badges\": *„Bogdan caută furnizori. Aveți 3 conexiuni comune”*. Culori: fundal `#F8FAFC`, text `#1E293B`, accent `#6366F1`.\n2. **Carduri \"Action-Ready\":** Eliminăm jargonul. Cardul devine un obiect social cu butoane clare: *[Mesaj] [Cere Intro]*. \n3. **Interfață Aerisită:** Trecem pe font *Inter*, padding-uri generoase, carduri cu `shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05)`.",
+    "ok": true
+  },
+  {
+    "cod": "3.4",
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 4,
+    "idei": "Iată propunerile mele pentru pivotarea UX/UI:\n\n* **Carduri \"Human-First\":** Înlocuiește scorurile tehnice cu \"Puncte de legătură\": *„Interese comune: Energie, Infrastructură”*. Layout: Avatar stânga, text clar (Inter, #111827), buton principal stil „pill” (#6366F1, alb) pentru acțiuni (ex: *Cere Introducere*).\n* **Paletă & Micro-interacțiuni:** Fundal #F9FAFB, carduri #FFFFFF, umbre `0 1px 3px rgba(0,0,0,0.1)`. Statusuri cu bulină vibrantă.\n* **Simplificare Jargon:** Ascunde datele tehnice în subsolul cardului; accent pe valoarea relațională.",
+    "ok": true
+  },
+  {
+    "cod": "8.7",
+    "rol": "Graphic / Brand Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "idei": "Iată soluțiile imediate pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Rebranding Vizual Radical:** Înlocuiește fundalul sepia cu `#F9FAFB`, carduri albe cu shadow `0 4px 6px -1px rgba(0,0,0,0.05)`, font `Inter`. Accent: `#6366F1` (Indigo).\n2. **Human-Centric Copy:** Elimină jargonul tehnic. Înlocuiește \"Afinitate 68%\" cu \"Conexiune solidă: 3 interese comune în Energie\".\n3. **Action-First Layout:** Carduri compacte cu butoane primare (ex: „Cere introducere”) și statusuri tip pastilă (ex: `bg-indigo-50 text-indigo-700`).",
+    "ok": true
+  },
+  {
+    "cod": "3.5",
+    "rol": "Performance Test Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către „Social-Clean”:\n\n* **UI: Card „Action-First”** – Alb (#FFFFFF), umbră soft `0 4px 12px rgba(0,0,0,0.05)`, font Inter. Elimină scorurile; înlocuiește cu „Potrivire: 3 interese comune în Energie”. Adaugă 2 butoane primare (Indigo #6366F1) pentru „Trimite mesaj”/„Cere introducere”.\n* **UX: „Human-Centric Layer”** – Ascunde jargonul (TF-IDF/SHA) în tab-ul „Detalii”. Afișează prioritar cine garantează conexiunea și „De ce acum”.\n* **Vizual: Statusuri Pastilă** – Înlocuiește gradienții grei cu fundaluri pastel (#E0E7FF) și text indigo pentru statusuri (ex: „Apel azi”).",
+    "ok": true
+  },
+  {
+    "cod": "13.5",
+    "rol": "Customer Experience Analyst",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată recomandările mele, bazate pe feedback-ul clientului și viziunea „Bloom/Clay”:\n\n1. **Card „Social Match”:** Înlocuiește scorurile tehnice cu „De ce să-l contactezi”: *„Aveți 3 interese comune în energie. Ionel te poate introduce.”* Butoane de acțiune clare (ex: *Trimite mesaj*) în colțul dreapta-jos. \n2. **Interfață „Airy & Vibrant”:** Fond `#FFFFFF`, accent Indigo `#6366F1`. Elimină serifele; folosește `Inter` pentru tot.\n3. **Status „Human-first”:** Înlocuiește „Trust Ledger” cu pastile vizuale: *„Conexiune verificată”* (verde deschis).",
+    "ok": true
+  },
+  {
+    "cod": "17.2",
+    "rol": "Internal Help Desk",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Interfață \"Human-First\":** Fundal `#F9FAFB`, carduri albe cu `box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05)`. Înlocuiește scorurile tehnice cu *Badges* narative: \"Conexiune comună prin Ion\" în loc de \"Afinitate 68\".\n2. **Acțiuni Active:** Butoane `indigo-600` (`#6366F1`) pentru *Cere Introducere*, grupate sub text. Statusurile devin pastile colorate (`bg-indigo-50`, text `indigo-700`).\n3. **Typography Clean:** Totul pe *Inter*. Titluri bold, compacte (14px/16px). Elimină jargonul (TF-IDF/HMAC) în favoarea contextului: „Vă potriviți pe energie”.",
+    "ok": true
+  },
+  {
+    "cod": "6.5",
+    "rol": "Generative AI Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul vizual și de UX:\n\n1. **Card \"Match Social\"**: Înlocuiește scorurile tehnice cu un badge: *\"Potrivire: 3 interese comune\"*. Layout: Avatar stânga, titlu bold, descriere în limbaj natural, acțiuni (buton \"Cere introducere\" indigo, link \"Vezi profil\" ghost). \n2. **Interfață \"Human-First\"**: Paletă alb/indigo (#6366F1). Elimină jargonul; transformă \"TF-IDF match\" în \"Amândoi sunteți activi în Energie\".\n3. **Micro-interacțiuni**: Statusuri tip pastilă cu dot colorat (ex: verde: \"Disponibil\").",
+    "ok": true
+  },
+  {
+    "cod": "1.9",
+    "rol": "Senior Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Interfață \"Human-First\":** Fundal `#FAFAFA`, carduri albe cu shadow `0 4px 12px rgba(0,0,0,0.05)`. Înlocuim scorurile tehnice cu *Insight Cards*: \"Bogdan caută furnizor cărbune. Aveți 3 conexiuni comune.\" \n2. **Action-Row:** Butoane primare indigo `#6366F1` (rotunjite, padding generos) pentru \"Cere introducere\".\n3. **Typography & Status:** Font *Inter* (semibold 14px pt titluri). Pastile status: `bg: #EEF2FF, text: #4F46E5`.",
+    "ok": true
+  },
+  {
+    "cod": "3.5",
+    "rol": "Performance Test Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată soluțiile pentru a transforma UX-ul din „bancar-opac” în „social-dinamic”:\n\n* **Layout „Smart-Summary”**: Înlocuiește scorurile tehnice cu un „Human Hook”: *„Conexiune recomandată: Bogdan caută cărbune, tu ești expert în energie. Aveți 2 contacte comune.”* (Font Inter, 14px, albastru #6366F1).\n* **Carduri „Action-First”**: Elimină jargonul; adaugă butoane flotante (Indigo #5B5BD6) cu iconițe clare: [Mesaj] [Cere Intro]. Statusurile devin pastile discrete (background #F3F4F6).\n* **Zero-Jargon UI**: Curăță interfața de SHA/TF-IDF. Folosește micro-interacțiuni pentru „Trust”: un badge discret „Verificat prin conexiuni” în loc de grafice complexe.",
+    "ok": true
+  },
+  {
+    "cod": "11.8",
+    "rol": "Growth Marketer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul de design:\n\n1. **Card \"Human-First\"**: Înlocuiește scorurile tehnice cu *insight* narativ: „Potrivire: Bogdan caută cărbune; tu ai 3 conexiuni comune”. Hex: `#6366F1` pentru butonul „Cere introducere”.\n2. **Interfață \"Airy\"**: Fundal `#FAFAFA`, carduri `#FFFFFF` cu `box-shadow: 0 4px 12px rgba(0,0,0,0.05)`.\n3. **Status Actionabil**: Pastile colorate (ex: `#EEF2FF` fundal, `#4F46E5` text) pentru „Întâlnire” și „Prospect”. Elimină jargonul; păstrează doar acțiuni clare.",
+    "ok": true
+  },
+  {
+    "cod": "9.1",
+    "rol": "Behavioral Science Lead",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru a transforma „bancarul” în „uman”:\n\n1. **Card \"Contextual\":** Eliminăm scorurile reci. Înlocuim \"Afinitate 68\" cu: *\"Bogdan caută furnizor. Aveți 3 interese comune (Energie/Infrastructură) și o conexiune comună: Maria Ionescu.\"* Layout: Alb, umbră 0px 4px 12px rgba(0,0,0,0.05), font Inter, buton indigo (#6366F1) \"Cere introducere\".\n\n2. **Status \"Uman\":** În loc de \"Trust Ledger\", folosim \"Certificat de încredere\" (icon mic bifă). Statusul devine o pastilă discretă: *[● Deschis la discuții]* în loc de statusuri tehnice.\n\n3. **Interfață \"Aerisită\":** Eliminăm jargonul. \"SHA-256/TF-IDF\" devin mesaje de tip *„Am găsit o potrivire organică”*. Fundal #F9FAFB, text #1F2937, accent Indigo pentru acțiuni.",
+    "ok": true
+  },
+  {
+    "cod": "11.9",
+    "rol": "Brand / PR Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul de brand:\n\n1. **Human-First Cards:** Înlocuim scorurile (ex: \"Afinitate 68\") cu micro-copy narativ: „Vă potrivește: ambii investiți în energie verde”. Design: Fundal alb, shadow `#00000008`, buton indigo `#6366F1` (text alb) pentru acțiuni directe.\n2. **Action-Oriented Dashboard:** Eliminăm graficele complexe. Introducem un timeline „Azi”: Carduri mici, rotunjite, cu iconițe colorate. Statusuri tip pastilă (ex: `bg-#E0E7FF` text `#4338CA`).\n3. **Typography Upgrade:** Inter font, titluri Bold (700) compacte. Eliminăm jargonul tech; totul devine conversație.",
+    "ok": true
+  },
+  {
+    "cod": "13.6",
+    "rol": "Support Team Lead",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n*   **Human-First Cards:** Înlocuim scorurile tehnice cu „Motivul conexiunii”: *„Bogdan caută furnizori de energie; aveți 3 interese comune”*. Butoane de acțiune clare (ex: „Trimite mesaj” – Indigo #6366F1), eliminând jargonul.\n*   **Interfață „Airy”:** Fundal alb (#FAFAFA), carduri cu umbre difuze (box-shadow: 0 4px 12px rgba(0,0,0,0.05)), font Inter. Statusurile devin pastile colorate (ex: Verde deschis pentru „Disponibil”).\n*   **Focus pe Relații:** Vizualizarea „Force-directed” devine o listă socială prietenoasă, cu avatare rotunjite, punând accent pe cine garantează introducerea, nu pe hash-uri criptografice.",
+    "ok": true
+  },
+  {
+    "cod": "17.3",
+    "rol": "Endpoint Management Specialist",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul vizual și UX:\n\n*   **Interfață \"Human-First\":** Fundal `#F9FAFB`, carduri albe cu `border-radius: 12px`, umbră `0 4px 6px -1px rgba(0,0,0,0.05)`. Înlocuim jargonul cu „Potrivire: Bogdan caută cărbune; aveți 3 conexiuni comune”.\n*   **Acțiuni Contextuale:** Butoane `Primary` (Indigo `#6366F1`) pentru \"Cere introducere\" și `Ghost` pentru \"Ignoră\". Eliminăm scorurile brute; folosim etichete tip pastilă cu iconițe pentru statusuri.\n*   **Focus Vizual:** Tipografie `Inter` (sans-serif), ierarhie clară: nume persoană (Bold 16px) > Context uman (Normal 14px) > Acțiuni.",
+    "ok": true
+  },
+  {
+    "cod": "1.10",
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul vizual și UX:\n\n* **Carduri \"Human-First\":** Înlocuim scorurile cu \"De ce acum\": *\"Bogdan caută furnizori în energie; aveți 3 conexiuni comune.\"* Butoane de acțiune (text albastru indigo #6366F1) direct pe card.\n* **UI \"Airy\":** Fond #F9FAFB, font Inter, carduri albe cu shadow `0 4px 6px -1px rgba(0,0,0,0.05)`.\n* **Status Social:** Înlocuim \"Trust Ledger\" cu \"Verificat prin: [Avatar]\" + pastile colorate pentru context.",
+    "ok": true
+  },
+  {
+    "cod": "3.6",
+    "rol": "Quality Engineer Process",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea rapidă:\n\n1. **Dashboard „Human-First”**: Înlocuiește scorurile tehnice cu „Carduri de Conexiune”. Layout grid cu fundal #FFFFFF, umbre #00000008, accent #6366F1. Microcopy: „Bogdan caută furnizor. Aveți 3 interese comune în energie”. \n2. **Action-Driven Interface**: Elimină jargonul; transformă „Trust Ledger” în „Verificat prin conexiuni comune”. Adaugă butoane de acțiune directă: „Cere introducere” (primar), „Ignoră” (ghost).\n3. **Sistem vizual aerisit**: Font Inter, titluri Bold #1F2937, statusuri pastilă (bg #EEF2FF, text #6366F1).",
+    "ok": true
+  },
+  {
+    "cod": "9.2",
+    "rol": "Behavioral Scientist / Psiholog cognitiv",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "idei": "Iată recomandările mele de Behavioral Scientist pentru a transforma anxietatea „bancară” în încredere socială:\n\n*   **Human-First Context:** Înlocuiește scorurile matematice (Trust/ROI) cu „Social Proof” calitativ: „Conexiune comună: Maria Popescu”. Folosește microcopy empatic: „Bogdan caută furnizori; aveți interese comune în energie”. \n*   **Action-Oriented Cards:** Redu cardurile la 2 acțiuni primare (ex: *Cere introducere*). Statusul „Conectat” devine o emblemă discretă, nu un buton, eliminând zgomotul vizual.\n*   **Lumină și Ierarhie:** Fundal `#FAFAFA`, accent Indigo `#6366F1`. Ierarhie bazată pe nevoi, nu pe date (ex: titlu bold `Inter-font` > detalii ascunse sub \"Mai mult\").",
+    "ok": true
+  },
+  {
+    "cod": "11.10",
+    "rol": "Technical Writer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru redefinirea experienței:\n\n*   **Interfață \"Social-First\"**: Fond alb (#FAFAFA), accente Indigo (#6366F1). Înlocuim scorurile obscure cu \"Insights Umane\": *„Potrivire excelentă: 3 interese comune în Energie”*.\n*   **Carduri Acționabile**: Layout curat, 2 rânduri. Butoane vizibile: „Cere introducere”, „Mesaj”. Statusuri ca pastile colorate (ex: *Verde – Disponibil*).\n*   **Microcopy Umanizat**: Eliminăm jargonul tech. \"SHA-256/Trust Ledger\" devine \"Protejat prin criptare avansată\".",
+    "ok": true
+  },
+  {
+    "cod": "6.5",
+    "rol": "Generative AI Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Card \"Match Uman\":** Înlocuiește scorurile tehnice cu *Human Insights*. Layout aerisit: Avatar mare, titlu „Te-ar putea ajuta cu [Interes]”, buton primar „Cere introducere” (Indigo #6366F1). Elimină jargonul (TF-IDF), pune context: „Ați lucrat amândoi la [Proiect]”.\n2. **UI \"Clean Air\":** Fundal #FAFAFA, carduri albe cu shadow 0px 4px 12px rgba(0,0,0,0.05). Font: Inter. Statusuri pastilă (bg #E0E7FF, text #4338CA).\n3. **Conversație Generativă:** În loc de „Trust Ledger”, folosește un asistent care sintetizează: „Bogdan e activ în energie. Iată de ce merită contactat acum: [Motiv]”.",
+    "ok": true
+  },
+  {
+    "cod": "14.1",
+    "rol": "HR Director / Head of People",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile mele pentru a transforma platforma într-un instrument de *people-connection*:\n\n- **Carduri \"Human-First\"**: Înlocuim scorurile cu context cald: „Bogdan are nevoie de furnizor cărbune — aveti 2 conexiuni comune”. Culori: fundal `#FFFFFF`, borduri `#E5E7EB`, text `#1F2937`, butoane indigo `#6366F1`.\n- **Interfață Airy**: Eliminăm jargonul. „Trust Score” devine „Profil verificat”. Layout curat, font *Inter*, mult spațiu negativ.\n- **Acțiuni imediate**: Înlocuim pasivitatea cu butoane stil pastilă: „Mesaj” / „Cere introducere”.",
+    "ok": true
+  },
+  {
+    "cod": "17.4",
+    "rol": "Internal Tools / Systems Admin",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n*   **Human-First Cards:** Înlocuiește scorurile tehnice cu „Insight-uri de Relație”: *„Bogdan caută furnizori. Aveți 3 conexiuni comune în Energie”*. Butoane de acțiune (Indigo `#6366F1`) „Cere introducere” imediat vizibile; elimină jargonul (SHA/TF-IDF) în tooltips.\n*   **Airy UI & Color Palette:** Fundal `#F9FAFB`, carduri albe cu shadow `0 4px 6px -1px rgba(0,0,0,0.05)`. Statusuri: pastile cu opacity 10% (ex: `bg-indigo-50 text-indigo-700`).\n*   **Action-Centric Timeline:** Înlocuiește lista densă cu un feed aerisit. Fiecare activitate devine o conversație: „Azi: Bogdan a publicat un brief despre cărbune. E momentul să interacționezi.”",
+    "ok": true
+  },
+  {
+    "cod": "1.10",
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "idei": "Iată soluțiile tehnice pentru pivotul vizual (CSS/UI):\n\n* **Interfață \"Human-First\":** Înlocuiesc cardurile greoaie cu layout-uri tip listă (shadow: `0 4px 12px rgba(0,0,0,0.05)`). În loc de scoruri, folosesc microcopy: „Conexiune comună: Ion Popescu”.\n* **Design Indigo-Vibrant:** Background `#F9FAFB`, accente `button { background: #6366F1 }`. Eliminăm jargonul: „Potrivire: 68%” devine „Relevanță ridicată”.\n* **Butoane de Acțiune:** În loc de statusuri pasive, introducem acțiuni rapide (Tap to Connect) cu iconițe lucide.",
+    "ok": true
+  },
+  {
+    "cod": "6.6",
+    "rol": "LLM / Integration Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Interfață \"Human-First\"**: Înlocuiește scorurile tehnice cu *Insight Cards*. Hex: `#6366F1` (Indigo). Exemplu microcopy: „Potrivire bună: aveți 3 interese comune”. Layout: Carduri cu umbră `0 4px 6px -1px rgba(0,0,0,0.05)`, font `Inter`, colțuri `16px`.\n2. **Orchestrare Acțiune**: Butoane primare stil „pill” (`bg: #6366F1`, text alb) pentru „Cere introducere”, nu doar afișare status. Elimină tot jargonul criptografic din UI; păstrează-l doar în log-uri pentru debugging.",
+    "ok": true
+  },
+  {
+    "cod": "4.1",
+    "rol": "CISO Deputy / Security Lead",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru redefinirea experienței, echilibrând securitatea robustă cu estetica \"Bloom/Clay\":\n\n1. **Interfață \"Human-First\":** Înlocuiește scorurile tehnice cu \"Insights de Relație\". Ex: Afinitate 68 -> \"Conexiune de încredere: 3 interese comune în Energie\". Folosește background `#FFFFFF`, text `#1F2937` și accente `#6366F1`.\n2. **Action-Driven Cards:** Carduri cu margini rotunjite (16px), shadow subtil. Elimină jargonul; adaugă butoane de acțiune clare: \"Cere introducere\" (primary indigo) vs \"Ignoră\" (ghost).\n3. **Status Vizual:** Înlocuiește Trust Ledger cu \"Verified Connection Badge\" (bulină indigo, text \"Verificat prin rețea\").",
+    "ok": true
+  },
+  {
+    "cod": "14.2",
+    "rol": "Technical Recruiter / Sourcer",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul către un „Social Tech Hub”:\n\n1. **Card „Human-First”:** Înlocuiește scorurile cu un text de context: „Potrivire bună: ați lucrat amândoi la [Proiect X]”. Folosește `#6366F1` pentru butonul „Cere Introducere” (acțiune primară) și fundal alb imaculat.\n2. **Status „Social Pulse”:** Înlocuiește terminologia tehnică (Trust/ROI) cu statusuri vizuale: „Disponibil acum” (bulină verde) sau „Întâlnire săptămâna viitoare” (pastilă indigo).\n3. **Typography UI:** Inter, font-weight 600 pentru nume, 400 pentru detalii.",
+    "ok": true
+  },
+  {
+    "cod": "11.11",
+    "rol": "Marketing Operations",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către un vibe social, uman și performant:\n\n* **UX \"Human-First\":** Înlocuim scorurile tehnice cu \"Insights de Relație\". Exemplu: În loc de \"Trust 82%\", afișăm \"Conexiune validă prin [Nume comun] • Interese: Energie, Infrastructură\". Paletă: `bg-white`, accente `#6366F1` pentru butoane primare, text `#1F2937` (Inter font).\n* **Carduri Acționabile:** Layout compact, white-space generos. Butoane de acțiune tip \"Ghost\" (border `#6366F1`) pentru *Mesaj* și *Introducere*. Statusul \"Conectat\" devine o bulină discretă.\n* **Micro-Interacțiuni:** Eliminăm jargonul. Înlocuim \"SHA-256/Ledger\" cu un status vizual: \"Verificat prin Rețeaua Ta\". Stil: carduri cu `rounded-2xl` și `shadow-sm` foarte fin.",
+    "ok": true
+  },
+  {
+    "cod": "17.4",
+    "rol": "Internal Tools / Systems Admin",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea către „Social CRM”:\n\n*   **Human-First Card:** Înlocuiește scorurile tehnice cu „De ce să contactezi?” (ex: „Interese comune în energie”). Butoane vizibile: [Mesaj] [Cere Intro] pe fundal alb (#FFFFFF), umbre soft (0 4px 12px #0000000a), font Inter.\n*   **Status-uri Vii:** Înlocuiește „Trust Ledger” cu „Conexiune verificată prin [Nume]”. Folosește pastile indigo (#6366F1) pentru context: „Potrivire bună”.\n*   **Micro-interacțiuni:** Navigație jos, iconițe minimaliste, fundal #FAFAFA.",
+    "ok": true
+  },
+  {
+    "cod": "1.10",
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "idei": "Iată propunerile pentru pivotul vizual și UX:\n\n1. **Carduri \"Human-First\":** Înlocuim scorurile cu pastile de context: „3 interese comune” (accent #6366F1). Acțiune directă: Buton „Cere introducere” vizibil, restul în meniul „...”.\n2. **Design \"Airy\":** Background #F9FAFB, carduri #FFFFFF cu `box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05)`.\n3. **Limbaj:** Eliminăm jargonul: „Afinitate 68” devine „Potrivire: Bogdan caută energie, tu ai expertiza”.",
+    "ok": true
+  },
+  {
+    "cod": "6.7",
+    "rol": "Conversational AI Designer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către un vibe social, uman și acționabil:\n\n- **Human-Centric Cards:** Înlocuiește scorurile tehnice cu „De ce acum”: „Bogdan caută furnizori. Aveți 3 conexiuni comune în Energie”. Butoane de acțiune clare (indigo #6366F1): „Trimite mesaj” sau „Cere introducere”.\n- **Conversational UI:** Înlocuiește jargonul cu un ton cald. Secretara AI devine un chat tip *bubble* ce oferă context: „Iată cu cine merită să te conectezi azi”.\n- **Clean Palette:** Fundal alb, font Inter, statusuri cu pastile (ex: „Prospect” - #6366F1).",
+    "ok": true
+  },
+  {
+    "cod": "1.1",
+    "rol": "Head of Engineering / VP Engineering",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea rapidă:\n\n* **UX \"Human-First\":** Înlocuim scorurile obscure cu \"Smart Context\" (ex: \"Bogdan caută furnizori; aveți 3 interese comune\"). Cardurile devin acționabile: buton primar indigo (`#6366F1`) \"Cere introducere\", fără jargon tehnic.\n* **Design \"Bloom UI\":** Fond alb, font *Inter* 14/16px, umbre fine. Statusuri pe pastile (ex: \"Disponibil\" cu bulină `#10B981`).\n* **Simplificare:** Eliminăm grafurile dense; introducem vizualizarea tip timeline pentru activități.",
+    "ok": true
+  },
+  {
+    "cod": "4.2",
+    "rol": "Information Security Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru o tranziție către un UI social, uman și sigur:\n\n1. **Human-First Matching**: Înlocuiește scorurile tehnice (ex. Afinitate 68) cu „Context Card”: *„Potrivire excelentă: aveți 3 interese comune și o conexiune verificată”*.\n2. **Action-Oriented Cards**: Carduri albe (shadow: 0 4px 6px -1px #0000000a), font Inter, acțiuni clare (butoane Indigo #6366F1). Statusul „Conectat” devine o bulină discretă, nu buton.\n3. **Status Vizual**: Înlocuiește verdele medical cu Indigo vibrant pentru statusuri active.",
+    "ok": true
+  },
+  {
+    "cod": "12.1",
+    "rol": "Sales Director",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile mele pentru a transforma „banca” într-un motor social:\n\n1. **Carduri \"Human-First\":** Renunță la scoruri. Înlocuiește „Afinitate 68” cu „Potrivire: 3 interese comune în Energie”. Adaugă un buton secundar „Cere introducere” direct pe card.\n2. **Paletă Vibrantă:** Fundal #FAFAFA, carduri albe, umbre #00000008. Accent #6366F1 pentru butoane.\n3. **Micro-context:** În loc de „TF-IDF”, folosește „Sunteți amândoi în consiliul de administrație”. Claritate, nu cod.",
+    "ok": true
+  },
+  {
+    "cod": "9.3",
+    "rol": "Cercetator neurostiinte / stiinte cognitive",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "idei": "Iată recomandările bazate pe încărcătura cognitivă și teoria atenției:\n\n*   **Ierarhie „Gist-First”:** Redu jargonul. Înlocuiește scorurile (68%) cu *narațiuni de afinitate* („3 interese comune”). Creierul procesează povești, nu date brute. (#FFFFFF fundal, #6366F1 accente).\n*   **Afișaj Progresiv:** Ascunde metadatele tehnice (SHA, TF-IDF) în *tooltips* sau detalii expandabile. Minimalizarea „zgomotului” vizual reduce oboseala cognitivă (Cognitive Load Theory).\n*   **Action-Oriented Cards:** Transformă cardurile în *triggeri* comportamentali cu butoane de acțiune clare (ex: „Trimite mesaj”). Oamenii nu decid când sunt blocați în analiză, ci în execuție.",
+    "ok": true
+  },
+  {
+    "cod": "9.2",
+    "rol": "Behavioral Scientist / Psiholog cognitiv",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 2,
+    "idei": "Iată recomandările mele, focusate pe psihologia atracției sociale:\n\n1. **Reîncadrare Cognitivă:** Înlocuiți scorurile (ex: 68%) cu „Context Social” (ex: „3 interese comune cu Bogdan”). Creierul preferă povestea în locul cifrelor reci.\n2. **Design Air-Light:** Paletă `#FFFFFF` (fundal) + `#6366F1` (accent). Carduri cu `border-radius: 16px` și umbră `0 4px 12px rgba(0,0,0,0.05)`.\n3. **Micro-interacțiuni umane:** Butoane tip „Acțiune” (ex: „Cere introducere”) vizibile doar la hover, reducând zgomotul vizual și presiunea decizională.",
+    "ok": true
+  },
+  {
+    "cod": "18.1",
+    "rol": "Head of Operations / COO Deputy",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată strategia de pivotare pentru a salva UI-ul și adopția produsului:\n\n1. **Human-First Cards**: Înlocuim scorurile cu „Insight Contextual” (ex: „3 conexiuni comune în Tech”). Paletă: bg #FFFFFF, accente #6366F1, texte #1F2937. Eliminăm jargonul.\n2. **Action-Driven Layout**: Carduri compacte cu butoane de acțiune primară (ex: „Cere introducere”) vizibile imediat.\n3. **Status-Driven Navigation**: Navigație curată jos, pastile colorate pentru status (Prospect/Meeting) pentru a prioritiza fluxul de lucru social peste cel tehnic.",
+    "ok": true
+  },
+  {
+    "cod": "1.10",
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 4,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n*   **UI Modern & Aero:** Fundal alb (#FAFAFA), carduri cu `border-radius: 16px` și umbră `0 4px 12px rgba(0,0,0,0.05)`. Înlocuim fontul serif cu `Inter`.\n*   **Copy Uman:** Înlocuim scorurile tehnice cu „Insight-uri”: „Potrivire bună: 3 interese comune în energie”.\n*   **Acțiuni Rapide:** Buton „Cere introducere” (Indigo #6366F1) direct pe card, eliminând jargonul. Statusul „Conectat” devine o bulină discretă.",
+    "ok": true
+  },
+  {
+    "cod": "6.8",
+    "rol": "AI Data Specialist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n*   **Human-First UI:** Înlocuim scorurile tehnice cu „Context Card”: fundal alb (#FFFFFF), umbre soft, text sans-serif (Inter). Exemplu microcopy: „Potrivire mare: Bogdan caută energie, tu ai 2 conexiuni comune”.\n*   **Action-Driven Tiles:** Carduri compacte cu butoane stil pastilă (#6366F1). Înlocuim jargonul cu acțiuni: „Cere Introducere” în loc de „Trust Ledger Sync”.\n*   **Status Vizual:** Pastile status (ex: „Prospect” în #E0E7FF cu text #4338CA).",
+    "ok": true
+  },
+  {
+    "cod": "1.2",
+    "rol": "Engineering Manager",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "idei": "Iată direcția pentru squad-ul nostru, pivotând spre limbaj uman și estetică *airy*:\n\n1. **UX \"Human-First\":** Înlocuim scorurile (ex: \"Afinitate 68\") cu microcopy narativ: \"Aveți 3 interese comune și un contact în rețeaua [Nume]\". Paletă: bg #FAFAFA, accent #6366F1.\n2. **Action-Driven Cards:** Eliminăm jargonul. Cardul devine: Titlu Bold (Inter), motiv de contact, 2 butoane primare (Send Message, Ask Intro).\n3. **Status Pastille:** Înlocuim Trust Ledger/HMAC cu status vizual (bulină #6366F1: \"Verified Connection\").",
+    "ok": true
+  },
+  {
+    "cod": "4.2",
+    "rol": "Information Security Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n*   **Human-First Cards:** Înlocuim scorurile obscure cu un „Connection Insight” vizibil: *„Potrivire excelentă: 3 interese comune în Energie”*. Butoane cu iconițe (Indigo #6366F1) pentru „Mesaj” sau „Cere Intro”, eliminând jargonul tehnic.\n*   **Visual Trust:** Înlocuim „Trust Ledger” cu un avatar-stack (bule mici) cu conexiuni comune. Statusuri sub formă de pastile colorate (ex: Verde/Prospect, Albastru/Meeting) pe fundal alb, eliminând tonurile sepia.",
+    "ok": true
+  },
+  {
+    "cod": "12.2",
+    "rol": "Account Executive",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată soluțiile pentru a transforma UX-ul din „bancar” în „social/acționabil”:\n\n1. **Social-First Cards:** Înlocuiește scorurile matematice cu „Context de Conectare”. Exemplu: „Bogdan caută: furnizor cărbune. Aveți 3 conexiuni comune.” Butoane primare stil „Action-bar” (Trimite mesaj / Cere introducere) integrate jos, vizibile imediat.\n2. **Design System:** Background `#F9FAFB`, carduri `#FFFFFF` cu `shadow: 0 4px 6px -1px rgba(0,0,0,0.05)`. Accent `#6366F1`. Font Inter. Statusuri: pastile cu opacity 10% (ex: bg-indigo-100, text-indigo-700).\n3. **Human-Language Layer:** Elimină jargonul tehnic. În loc de „Trust Ledger HMAC”, afișează „Verificat prin rețeaua ta”.",
+    "ok": true
+  },
+  {
+    "cod": "9.4",
+    "rol": "Ethical / Responsible Design Lead",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către un UX uman și responsabil:\n\n- **Human-First UI:** Înlocuiește scorurile reci cu „Context de Conexiune”: în loc de „Afinitate 68”, afișează „Aveți 3 interese comune și o conexiune mutuală”. Paletă: fundal `#FAFAFA`, accent `#6366F1`, font `Inter`.\n- **Actionable Cards:** Carduri compacte cu \"Acțiuni Directe\": [Trimite Mesaj], [Cere Introducere]. Elimină jargonul (SHA/TF-IDF) în favoarea beneficiilor clare: „De ce acum?”.\n- **Trust-by-Design:** Elimină indicatorii medicali; folosește statusuri de tip pastilă (verde pal `#DCFCE7`, text `#166534`) pentru a semnala validarea socială, nu „scorul de risc”.",
+    "ok": true
+  },
+  {
+    "cod": "14.3",
+    "rol": "Recruiter / Talent Acquisition",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către un vibe social și uman:\n\n1. **Card \"Match-Story\":** Înlocuim scorurile cu limbaj natural: „Bogdan caută furnizori în Energie. Aveți 3 conexiuni comune”. Hex: `#6366F1` pentru butonul \"Cere introducere\" (acțiune principală). \n2. **Interfață Airy:** Fundal `#FAFAFA`, font `Inter` 14px, carduri albe cu shadow `0 4px 6px -1px rgba(0,0,0,0.05)`.\n3. **Status Vizual:** Pastile colorate (ex: `#EEF2FF` cu text `#4338CA`) pentru context, eliminând jargonul.",
+    "ok": true
+  },
+  {
+    "cod": "18.2",
+    "rol": "Business Operations Analyst",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru reconfigurarea `eie.html`:\n\n1. **Card \"Human-First\":** Înlocuiește scorurile tehnice cu \"De ce să te conectezi\": *„3 interese comune (Energie, Tech)”* și *„Recomandat de [Nume]”*. Design: fundal alb, font Inter, butoane acțiune tip *Ghost/Primary* indigo (#6366F1).\n2. **Dashboard \"Social Stream\":** Înlocuiește grafurile complexe cu un timeline aerisit. Statusuri tip pastilă (verde deschis pt. *Meeting*, albastru pt. *Prospect*).\n3. **Micro-copy uman:** Traducerea jargonului: *„Trust Ledger”* devine *„Verificat de rețea”*.",
+    "ok": true
+  },
+  {
+    "cod": "2.1",
+    "rol": "DevOps Lead",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n*   **UI/UX:** Trecere totală la `bg-gray-50`. Înlocuim cardurile dense cu containere `bg-white`, shadow `shadow-sm`, border `border-gray-100`, colțuri `rounded-2xl`. Accent `#6366F1` pentru butoane primare. Eliminăm jargonul: „Scor 68” devine „Conexiune recomandată: 3 interese comune”.\n*   **Acțiuni:** Înlocuim statusurile pasive cu un `flex` de butoane (ex: „Trimite mesaj” – buton solid, „Ignoră” – link text).\n*   **Observabilitate:** Statusurile devin pastile colorate `bg-indigo-50 text-indigo-700`.",
+    "ok": true
+  },
+  {
+    "cod": "14.2",
+    "rol": "Technical Recruiter / Sourcer",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru un redesign orientat pe uman și conversie, cu stilul Bloom/Clay:\n\n1. **Carduri \"Human-First\"**: Înlocuiește scorurile (68%) cu *Smart Snippets* (ex: „Interese comune în React/Cloud” + buton „Cere introducere”). Paletă: bg `#FAFAFA`, accent `#6366F1`, font `Inter`.\n2. **Statusuri de Acțiune**: Înlocuiește „Trust Ledger” cu „Conexiuni Verificate”. Folosește pastile colorate pentru etape (ex: „Interviu programat” - indigo deschis).\n3. **Focus Vizual**: Elimină jargonul tehnic. Afișează clar „De ce acum?” (context social) sub numele candidatului.",
+    "ok": true
+  },
+  {
+    "cod": "6.9",
+    "rol": "Responsible AI / AI Ethics Specialist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "idei": "Iată soluțiile de la *Responsible AI Expert* pentru a umaniza sistemul și a elimina biasul vizual:\n\n1. **Human-Centric UX:** Înlocuiește scorurile matematice (ex: 'Afinitate 68') cu *Context Narrative*: „Potrivire: Bogdan și tu împărtășiți interesul pentru Energie (bazat pe postări recente)”. Hex accent: #6366F1.\n2. **Action-First Cards:** Carduri albe, umbre #0000000a, butoane primare 'Cere introducere'. Elimină jargonul tehnic (TF-IDF/SHA-256) în favoarea unor *Explicabilitate Label*: „De ce vezi asta? -> Ai conexiuni comune”.",
+    "ok": true
+  },
+  {
+    "cod": "1.2",
+    "rol": "Engineering Manager",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea rapidă:\n\n1. **Rebranding Vizual (Lumina & Social):** Schimbă fundalul în `#FAFAFA`, text `#1F2937`. Înlocuiește serifele cu `Inter`. Înlocuiește scorurile tehnice cu \"Human Insights\": *\"Conexiune comună prin Andrei Popescu\"* în loc de \"Trust 82\".\n2. **Action-First Cards:** Carduri compacte (colțuri 12px, umbră `#00000008`). Butoane de acțiune primară (`#6366F1` text alb) pentru \"Cere introducere\" sau \"Mesaj\". Elimină jargonul; înlocuiește \"TF-IDF\" cu \"Interese comune: Energie, Tech\".",
+    "ok": true
+  },
+  {
+    "cod": "9.5",
+    "rol": "UX Researcher (well-being focus)",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile mele pentru a umaniza experiența și a reduce anxietatea de performanță:\n\n1. **Context Uman, nu Scoruri:** Înlocuim „Afinitate 68%” cu „Motiv de contact: Interese comune în Energie & Infrastructură”. Eliminăm graficele complexe care induc FOMO.\n2. **Interfață „Airy”:** Fundal `#FAFAFA`, carduri `#FFFFFF` cu umbră `0 4px 12px rgba(0,0,0,0.05)`. Accent Indigo `#6366F1`.\n3. **Butoane de Intenție:** În loc de statusuri tehnice, introducem acțiuni directe: „Cere introducere”, „Trimite mesaj”.",
+    "ok": true
+  },
+  {
+    "cod": "4.3",
+    "rol": "Application Security Engineer",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către un design social și sigur:\n\n*   **Human-First UI:** Înlocuiește scorurile tehnice cu \"Insights\": *\"Conexiune comună: Ion Popescu\"* (Indigo #6366F1). Folosește carduri cu bordură fină (1px #E5E7EB, border-radius 12px) și font *Inter*.\n*   **Security Contextual:** Afișează \"Verificat prin Trust Ledger\" ca o bifă discretă, nu ca eroare/alertă.\n*   **Action-Oriented:** Înlocuiește jargonul cu acțiuni: buton \"Trimite mesaj\" (background #6366F1, text alb).",
+    "ok": true
+  },
+  {
+    "cod": "12.2",
+    "rol": "Account Executive",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată direcția pentru un UI care vinde:\n\n1. **Human-First Cards:** Înlocuiește scorurile tehnice cu „Context de conectare”: „Ați participat la același panel despre Energie”. Stil: background alb, umbră `#00000005`, bordură `8px`.\n2. **Action-Row:** Butoane primare stil „Ghost” sau „Solid Indigo” (`#6366F1`) direct pe card: *Mesaj* sau *Cere introducere*.\n3. **Smart Typography:** Inter 14px pentru detalii, 18px Bold pentru nume. Elimină tot jargonul, păstrează doar „Potrivire: Ridicată”.",
+    "ok": true
+  },
+  {
+    "cod": "14.3",
+    "rol": "Recruiter / Talent Acquisition",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 2,
+    "idei": "Iată soluțiile pentru a transforma portalul într-un tool social, energic:\n\n1. **Carduri \"Human-First\":** Înlocuiește scorurile tehnice cu \"De ce să te conectezi\": *„Amândoi lucrați în HR tech; Bogdan caută să scaleze echipa”*. Acțiuni clare pe hover: [Mesaj direct], [Cere introducere].\n2. **UI \"Clean-Airy\":** Background `#F9FAFB`, carduri albe, umbre `#00000008`. Accent `#6366F1` pentru butoane.\n3. **Status-uri intuitive:** Înlocuiește „Trust Ledger” cu pastile colorate: [Potrivire excelentă] (violet), [Conexiune mutuală] (verde).",
+    "ok": true
+  },
+  {
+    "cod": "18.2",
+    "rol": "Business Operations Analyst",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru reconfigurarea `eie.html`:\n\n1. **Interfață \"Human-First\":** Fond alb (#FFFFFF), carduri cu umbră `0 4px 12px rgba(0,0,0,0.05)`. Înlocuiește scorurile tehnice cu *Badges* de afinitate: „Legătură comună prin [Nume]” și „Interese: Energie, Infrastructură”.\n2. **Design Acțiune-Centric:** Butoane de tip *Primary* (Indigo #6366F1) pentru „Cere Introducere” și *Ghost* pentru „Ignoră”. Statusurile devin pastile discrete (ex: text Indigo pe fond Indigo-deschis).\n3. **Typography UI:** Inter/SF, titluri Bold (600), corp 14px/16px. Elimină jargonul (SHA, TF-IDF) în favoarea unui limbaj conversațional: „Recomandat pentru tine acum”.",
+    "ok": true
+  },
+  {
+    "cod": "2.2",
+    "rol": "DevOps Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "idei": "Iată soluțiile pentru pivotul vizual și uman:\n\n1. **Interfață \"Social-First\"**: Înlocuiește scorurile tehnice cu \"Human Insights\". Carduri albe, umbre (`rgba(0,0,0,0.05)`), accent indigo (`#6366F1`). În loc de `Afinitate 68`, afișează: \"Recomandat: 3 interese comune în energie\".\n2. **Design Actionabil**: Buton principal \"Cere introducere\" (indigo solid). Mută jargonul (`TF-IDF`, `Trust Ledger`) într-un subsol retractabil.\n3. **Statusuri Prietenoase**: Pastile cu margini rotunjite și culori pastel (`bg-indigo-50`, `text-indigo-600`) pentru statusuri active, eliminând aspectul de \"audit\".",
+    "ok": true
+  },
+  {
+    "cod": "6.10",
+    "rol": "MLOps Engineer (AI)",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "idei": "1. **Human-First UI:** Înlocuiește scorurile tehnice cu \"Human Insights\": carduri albe (#FFFFFF), umbre soft, indigo-violet (#6366F1) pentru CTA. Schimbă \"Afinitate 68\" cu: \"Potrivire excelentă: 3 interese comune în Energie\".\n2. **Action-Driven Layout:** Elimină jargonul; folosește butoane clare (Primar: \"Trimite mesaj\", Secundar: \"Cere introducere\").\n3. **Smart Context:** Afișează \"De ce acum?\" ca subtext: \"Bogdan caută furnizor – activitate recentă\".",
+    "ok": true
+  },
+  {
+    "cod": "4.3",
+    "rol": "Application Security Engineer",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotul vizual și uman:\n\n*   **Human-First Card UI:** Elimină scorurile tehnice. Înlocuiește \"Afinitate 68\" cu \"Conexiune garantată de Andrei: 3 interese comune\". Hex: `#6366F1` (Indigo) pentru acțiuni, fundal `#FFFFFF`, text `#1F2937`.\n*   **Action-Oriented Dashboard:** Butoane clare (Primary: `bg-[#6366F1]` text alb; Secondary: bordură `1px #E5E7EB`).\n*   **Status Pills:** Înlocuiește tabelele cu \"Pastile\" (`bg-[#F3F4F6]`) pentru statusuri, eliminând jargonul.",
+    "ok": true
+  },
+  {
+    "cod": "1.2",
+    "rol": "Engineering Manager",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "idei": "Iată soluțiile pentru schimbarea de paradigmă:\n\n* **UX \"Human-First\":** Înlocuim scorurile (ex: \"Afinitate 68\") cu un label uman: \"Potrivire excelentă: 3 interese comune în Energie\". Folosim font Inter, fundal #FAFAFA, carduri cu shadow: `0 4px 6px -1px rgba(0,0,0,0.05)`.\n* **Acțiuni imediate:** Înlocuim jargonul cu butoane de acțiune clare: \"Cere introducere\" (Indigo #6366F1, contrast mare) vs \"Ignoră\" (text gri).\n* **Ierarhie vizuală:** Eliminăm tot textul tehnic (SHA/HMAC). Prioritizăm: nume, rol, contextul potrivirii, buton de contact.",
+    "ok": true
+  },
+  {
+    "cod": "9.6",
+    "rol": "Digital Wellbeing Specialist",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul vizual și uman:\n\n1. **Carduri \"Human-First\"**: Înlocuim scorurile obscure cu \"De ce să contactezi\": *„Bogdan caută furnizor cărbune. Aveți 2 interese comune în energie.”* Butoane de acțiune clare (indigo #6366F1), font Inter, fundal alb imaculat.\n2. **Dashboard \"Zen Focus\"**: Eliminăm graficele tehnice; introducem un feed tip timeline cu pași mici: *„Săptămâna ta: 3 oportunități noi”*.\n3. **Statusuri Sociale**: Înlocuim „Trust Score” cu indicatori de relație: *„Verificat prin Andrei”*.",
+    "ok": true
+  },
+  {
+    "cod": "12.2",
+    "rol": "Account Executive",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 3,
+    "idei": "Iată propunerile mele pentru a transforma „bancarul” în „social”:\n\n1. **Interfață \"Human-First\"**: Fundal `#FAFBFF`, carduri albe cu shadow `0 4px 6px -1px rgba(0,0,0,0.05)`. Înlocuim scorurile aride cu \"Context Human\": *\"Bogdan caută furnizori. Aveți 2 conexiuni comune și interes în Energie.\"*\n2. **Action-Bar dinamic**: Butoane cu contur indigo `#6366F1` pe card: „Cere introducere”, „Trimite mesaj”.\n3. **Statusuri tactile**: Pastile `bg-indigo-50 text-indigo-700` în loc de cifre tehnice.",
+    "ok": true
+  },
+  {
+    "cod": "14.4",
+    "rol": "People Operations Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Interfață \"Human-First\":** Fundal `#F9FAFB`, carduri albe cu shadow `0 4px 6px -1px rgba(0,0,0,0.05)`. Eliminăm jargonul: în loc de „Afinitate 68”, folosim „Potrivire naturală: 3 interese comune”.\n2. **Action-Driven Cards:** Butoane primare indigo `#6366F1` pentru „Trimite mesaj”. Statusuri: pastile discrete (ex: `bg-indigo-50 text-indigo-700`) pentru „Prospect”.\n3. **Typography Reset:** Inter font, titluri Bold `text-gray-900`, corp `text-gray-600`. Zero serif.",
+    "ok": true
+  },
+  {
+    "cod": "18.3",
+    "rol": "Strategy & Planning Specialist",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către un UX social și uman:\n\n1. **Card \"Smart Match\":** Înlocuiește scorurile cu microcopy: „Conexiune recomandată: 3 interese comune în Energie”. Design: Alb imaculat, font *Inter* 14px, acțiuni tip \"Ghost Button\" (Indigo #6366F1).\n2. **Layering Vizual:** Elimină jargonul; afișează doar: Nume, Rol, \"De ce acum\" (context uman).\n3. **Status Pastille:** Înlocuiește \"Trust Ledger\" cu statusuri prietenoase: „Verificat de [Nume]” în pastile indigo-deschis.",
+    "ok": true
+  },
+  {
+    "cod": "7.1",
+    "rol": "Head of Product / CPO Deputy",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată direcția strategică pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Interfață \"Human-First\":** Fond alb (#FAFAFA), carduri cu umbre moi (0 4px 12px rgba(0,0,0,0.05)), font Inter. Înlocuim jargonul tehnic cu propoziții acționabile: „Bogdan caută furnizor de cărbune. Aveți 3 interese comune și o conexiune mutuală.”\n2. **Action-Card Layout:** Butoane primare indigo (#6366F1) pentru „Cere introducere”, statusuri ca pastile discrete (text mic, bold). Eliminăm scorurile abstracte; introducem context social.",
+    "ok": true
+  },
+  {
+    "cod": "2.2",
+    "rol": "DevOps Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 2,
+    "idei": "- **Interfață \"Human-First\":** Înlocuim scorurile obscure cu \"Insights\": \"Bogdan caută furnizor. Aveți 3 conexiuni comune în Energie.\" Paletă: `bg #FAFAFA`, carduri `white` cu umbră `0 4px 12px rgba(0,0,0,0.05)`, accent `Indigo #6366F1`.\n- **Carduri Acționabile:** Eliminăm jargonul. Butoane directe: \"Cere Introducere\" sau \"Trimite Mesaj\". Status \"Conectat\" ca pastilă discretă `bg #EEF2FF`, text `#4F46E5`.\n- **Vizualizare 'Social-Graph':** Înlocuim graficele tehnice cu o listă cronologică \"Upcoming\" clară, cu iconițe intuitive și font *Inter* pentru lizibilitate maximă.",
+    "ok": true
+  },
+  {
+    "cod": "9.7",
+    "rol": "Behavioral / Marketing Psychologist",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul etic și estetic:\n\n1. **Human-Centric Copy:** Înlocuiește scorurile opace (ex: \"Afinitate 68\") cu micro-copy narativ: *\"Bogdan caută furnizori. Aveți 3 conexiuni comune în Energie.\"*\n2. **Action-Oriented Cards:** Introdu butoane \"Ghost\" (contur #6366F1) pentru acțiuni clare: [Trimite mesaj] [Cere introducere].\n3. **Clean Visuals:** Fundal #FAFAFA, carduri albe cu shadow `0 4px 12px rgba(0,0,0,0.05)`, statusuri pastilă (bg #EEF2FF, text #6366F1).",
+    "ok": true
+  },
+  {
+    "cod": "4.4",
+    "rol": "Penetration Tester",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul vizual (stil 'Bloom'):\n\n*   **UI \"Human-First\":** Background `#F9FAFB`, carduri albe cu shadow `0 4px 6px -1px rgba(0,0,0,0.05)`. Înlocuiește scorurile tehnice cu \"Badges de Afinitate\": *„Conexiune comună: Ion Popescu”* (text `#4B5563`, font Inter).\n*   **Acțiuni Contextuale:** Înlocuiește butoanele pasive cu un rând de acțiuni clare: *[Mesaj Direct]* (Indigo `#6366F1`) și *[Cere Introducere]*. \n*   **UX Limbaj Uman:** Traducem „Trust Ledger HMAC” în „Verificat prin rețea”.",
+    "ok": true
+  },
+  {
+    "cod": "12.3",
+    "rol": "Inside Sales Representative",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată direcția pentru un flux social, axat pe conversie rapidă:\n\n- **Card de potrivire \"Human-First\":** Înlocuiește scorurile (Trust/ROI) cu text narativ: *\"Bogdan caută furnizori; aveți 3 interese comune în energie\"*. Butoane primare \"Cere introducere\" și \"Trimite mesaj\" (indigo #6366F1).\n- **Interfață Airy & Clean:** Fundal alb, font Inter, carduri cu shadow-uri subtile. Pastile colorate pentru status. \n- **Timeline \"Acțiune Zilnică\":** Navigație jos, focus pe \"Ce am de făcut azi\" (apeluri/demo-uri), nu pe date tehnice.",
+    "ok": true
+  },
+  {
+    "cod": "1.3",
+    "rol": "Software Architect",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru a transforma radical UX-ul, păstrând rigurozitatea tehnică:\n\n1. **Semantic UI Layer:** Înlocuim jargonul cu un strat \"Human-Readable\" (ex: `Score 84` -> `Potrivire excelentă`). UI-ul trece pe fundal `#FAFAFA`, accent `#6366F1`.\n2. **Action-Driven Cards:** Structură compactă: Titlu (bold/Inter), context personal (\"Interes comun în energie\") și 2 butoane primare (\"Mesaj\" / \"Introducere\").\n3. **Status Pill System:** Înlocuim scorurile complexe cu statusuri vizuale clare (buline colorate/pastile), eliminând zgomotul tehnic din prim-plan.",
+    "ok": true
+  },
+  {
+    "cod": "14.4",
+    "rol": "People Operations Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru un UX „human-first”:\n\n1. **Card \"Human-Match\":** Înlocuiește scorurile tehnice cu \"De ce să discuți?\": *„Potrivire excelentă: aveți 3 interese comune în Energie”*. Butoane de acțiune clare: *[Trimite Mesaj]*, *[Cere Introducere]* (Indigo #6366F1).\n2. **Interfață Airy:** Background #F9FAFB, carduri albe cu umbră `box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1)`. Tipografie *Inter* sans-serif, ierarhie bazată pe spațiu alb, nu pe linii/borduri.\n3. **Statusuri \"Pastilă\":** Elimină terminologia \"Trust/Ledger\". Folosește pastile discrete: *[Prospect]* (albastru deschis), *[Întâlnire]* (violet).",
+    "ok": true
+  },
+  {
+    "cod": "18.3",
+    "rol": "Strategy & Planning Specialist",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotul strategic:\n\n* **UX \"Human-First\":** Înlocuim scorurile (ex: \"Afinitate 68\") cu microcopy narativ: „Vă potriviți: aveți 3 interese comune și o conexiune mutuală”.\n* **UI \"Bloom-Light\":** Fundal alb (#FFFFFF), accente Indigo (#6366F1). Carduri cu *shadow* fin și *action-bar* vizibil: „Trimite mesaj”/„Cere introducere”.\n* **Ierarhie \"Actionable\":** Eliminăm jargonul (SHA-256/TF-IDF). Afișăm doar *contextul* decizional: „De ce acum: Bogdan caută activ furnizori”.",
+    "ok": true
+  },
+  {
+    "cod": "2.2",
+    "rol": "DevOps Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 3,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Social-Modern”:\n\n1. **Card \"Match-as-a-Story\":** Înlocuim scorurile cu copy uman: „Bogdan caută furnizor de cărbune. Aveți 3 conexiuni comune”. Culori: fundal alb, text #1F2937, accent #6366F1 pentru butonul „Cere introducere”.\n2. **Dashboard \"Airy\":** Layout cu spațiu alb generos. Înlocuim grafurile complexe cu liste curate, avataruri rotunjite și pastile de status (Ex: „Activ acum”, „Potrivire ideală”).\n3. **Interfață \"Action-First\":** Butoane de acțiune directe, nu tabele.",
+    "ok": true
+  },
+  {
+    "cod": "7.2",
+    "rol": "Senior Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru a transforma radical UX-ul și limbajul produsului:\n\n* **Pivot Social:** Înlocuim scorurile aride cu \"Context Human\": *\"Bogdan caută energie; aveți 3 interese comune și pe Maria ca punte\"*. Design: fundal #FFFFFF, carduri cu shadow-uri difuze, buton \"Cere introducere\" indigo (#6366F1).\n* **Interfață \"Action-First\":** Eliminăm jargonul tehnic. În loc de \"TF-IDF\", folosim etichete clare: \"Potrivire: Energie & Infrastructură\". Statusurile devin pastile (ex: \"Nou\", \"Discuție activă\").",
+    "ok": true
+  },
+  {
+    "cod": "1.3",
+    "rol": "Software Architect",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea rapidă:\n\n1. **UX Social:** Înlocuim scorurile tehnice cu \"Context Card\": *„Bogdan caută furnizor. Aveți 3 interese comune și o conexiune comună (Andrei).”* Font: Inter (Bold 600 pentru titluri).\n2. **Design UI:** Fundal `#F9FAFB`, carduri albe cu umbră `0 4px 6px -1px #00000008`, accent Indigo `#6366F1`.\n3. **Acțiuni:** Buton \"Cere introducere\" (Indigo, solid) vs \"Ignoră\" (Ghost). Statusuri: pastile `bg-indigo-50` text `#4F46E5`.",
+    "ok": true
+  },
+  {
+    "cod": "4.4",
+    "rol": "Penetration Tester",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "- **UI/UX \"Human-First\":** Înlocuiește fundalul sepia cu `#F9FAFB` și carduri albe (`#FFFFFF`) cu shadow `0 4px 6px -1px rgb(0 0 0 / 0.05)`. Accent: `#6366F1`.\n- **Microcopy:** Schimbă \"Scor Afinitate 68\" cu \"Potrivire bună: 3 interese comune\".\n- **Acțiuni:** Înlocuiește statusurile pasive cu butoane primare \"Cere introducere\" (`#6366F1`, text alb) și secundare \"Ignoră\" (ghost button). Elimină jargonul tehnic din interfața de utilizator.",
+    "ok": true
+  },
+  {
+    "cod": "9.8",
+    "rol": "Data Scientist (engagement quality)",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul spre „Social-Wellbeing”:\n\n1. **Interfață „Human-First”**: Înlocuiește scorurile tehnice cu „Carduri de Context” (fundal alb, umbră soft). Exemplu microcopy: „Bogdan caută furnizori. Aveți 3 conexiuni comune.” Butoane active (Indigo #6366F1): „Trimite mesaj”.\n2. **Metrici de Bunăstare**: Dashboard-ul elimină „ROI/Trust Ledger” în favoarea „Calității conexiunii”. În loc de scoruri, afișăm „Timp de reflecție necesar” sau „Impactul rețelei”.\n3. **Design Aerat**: Elimină serif-ul; Inter/Sans-Serif 14px. Statusuri ca pastile colorate (ex: #5B5BD6 pt „Întâlnire”).",
+    "ok": true
+  },
+  {
+    "cod": "12.3",
+    "rol": "Inside Sales Representative",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru un workflow rapid, uman și high-conversion:\n\n1. **Card \"Human-First\"**: Eliminăm scorurile tehnice. Înlocuim \"Afinitate 68\" cu \"Sunteți amândoi activi în Energie; Andrei te poate introduce\". Butoane CTA clare: [Trimite Mesaj] (primar, #6366F1), [Cere Introducere] (secundar).\n2. **Status \"Social-Pulse\"**: În loc de tabele, folosim pastile colorate: [🟢 Calificat], [🟡 Așteaptă Demo].\n3. **Dashboard \"Action-Stream\"**: Layout airy, fundal #FAFAFA. Ierarhie: Nume (Bold), Context (Regular), Acțiune (Button). Eliminăm jargonul.",
+    "ok": true
+  },
+  {
+    "cod": "14.5",
+    "rol": "Learning & Development Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul către un UX uman și vibrant:\n\n1. **Carduri \"Human-First\":** Înlocuiește scorurile tehnice cu \"De ce să te conectezi\": *„Bogdan caută parteneri în Energie. Aveți 3 conexiuni comune”*. Culori: fundal alb, text #1F2937, accent #6366F1.\n2. **Statusuri ca Pastile:** Înlocuiește jargonul cu statusuri vizuale: „Potrivire ideală” (bulină indigo), „Așteaptă introducere” (gri).\n3. **Acțiuni directe:** Butoane conturate pentru „Cere introducere” sau „Trimite mesaj”, eliminând zgomotul tehnic.",
+    "ok": true
+  },
+  {
+    "cod": "18.4",
+    "rol": "Revenue Operations (RevOps)",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul „Bloom/Clay CRM”:\n\n1. **Carduri \"Human-First\"**: Înlocuim scorurile cu limbaj natural: „Potrivire: 3 interese comune în Energie”. Design: Alb imaculat, font Inter, umbre fine. În loc de date tehnice, adăugăm buton activ „Cere introducere” (Indigo #6366F1).\n2. **Dashboard Social**: Eliminăm graficele complexe. Introducem un feed timeline aerisit. Statusurile devin pastile colorate (ex: Verde-mentă pentru „Proiect Activ”). \n3. **UX Conversațional**: În loc de „Trust Ledger”, folosim „Context de conectare”.",
+    "ok": true
+  },
+  {
+    "cod": "2.3",
+    "rol": "Site Reliability Engineer (SRE)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către un UX social, fiabil și uman:\n\n- **UI \"Action-First\":** Înlocuiește cardurile statice cu *Action-Cards* (white bg, shadow #0000000a). Înlocuiește scorul \"Afinitate 68\" cu un micro-copy uman: *\"Legătură caldă: 3 interese comune prin Andrei\"*. Buton primar #6366F1: „Cere introducere”.\n- **Limbaj \"Trust-by-Design\":** Elimină jargonul tehnic. În loc de \"Trust Ledger\", afișează badge-uri: „Verificat” (indigo). Totul devine „Conexiuni sigure”, nu „Date criptate”.",
+    "ok": true
+  },
+  {
+    "cod": "7.2",
+    "rol": "Senior Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată direcția strategică pentru pivotul către \"Social-First\":\n\n*   **Human-Centric Cards:** Eliminăm scorurile tehnice. Înlocuim cu \"Motiv de conectare\": *„Bogdan caută furnizori. Aveți 3 interese comune în Energie”*. Butoane de acțiune (primar Indigo #6366F1, secundar text) plasate vizibil sub profil.\n*   **Design Sistem Aerisit:** Fundal #FAFAFA, carduri #FFFFFF cu umbră `0 4px 12px rgba(0,0,0,0.05)`. Font *Inter*, ierarhie clară: Nume (Bold 16px), Context (Regular 14px, #64748B).\n*   **Statusuri \"Pastilă\":** Eliminăm jargonul. Înlocuim „Trust Ledger” cu „Conexiuni verificate” (iconiță badge). Statusuri cu fundal deschis (ex: Prospect #DCFCE7/verde pal).",
+    "ok": true
+  },
+  {
+    "cod": "1.4",
+    "rol": "Tech Lead",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul rapid:\n\n- **UI „Human-First”:** Fond alb (`#FAFAFA`), carduri `bg-white` cu `shadow-sm` și `rounded-2xl`. Accent indigo (`#6366F1`) doar pe butoanele primare. Eliminăm scorurile abstracte; introducem „Context Badges”: „Interese comune: 3”, „Recomandat de: Andrei”.\n- **Limbaj Acționabil:** Înlocuim jargonul tehnic cu microcopy conversational. Exemplu: în loc de „Trust Ledger HMAC”, afișăm „Conexiune verificată: 100% sigur”.\n- **Layout Focusat:** Carduri compacte cu ierarhie: Titlu (Nume), Subtitlu (Context: „Caută furnizor”), Acțiuni (Butoane „Mesaj”/„Introducere”).",
+    "ok": true
+  },
+  {
+    "cod": "4.5",
+    "rol": "Compliance & Audit Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n*   **Human-First Cards:** Înlocuiește scorurile tehnice cu „Context de conexiune” (ex: „3 interese comune”). Folosește fundal alb, umbre `#00000008` și font Inter. \n*   **Action-Driven Layout:** Înlocuiește „Trust Ledger” cu butoane clare (Indigo `#6366F1`) de tip „Cere introducere”.\n*   **Status-led UI:** Pastile colorate pentru status (ex: „Disponibil” - verde deschis, „În discuție” - albastru). Elimină jargonul tehnic din interfața primară.",
+    "ok": true
+  },
+  {
+    "cod": "9.9",
+    "rol": "Ethics & Policy Advisor",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "idei": "1. **Human-Centric Copy:** Elimină scorurile tehnice. Înlocuiește \"Afinitate 68\" cu \"Sunteți amândoi activi în Energie; conectați prin Maria Popescu\". Folosește `inter-font` (#1F2937), fundal alb (#FFFFFF).\n2. **Action-Oriented Cards:** Carduri cu margini rotunjite (12px), umbră `0 4px 6px -1px rgba(0,0,0,0.1)`. Buton \"Cere introducere\" (#6366F1, text alb) mereu vizibil.\n3. **Ethics Dashboard:** În loc de \"Trust Ledger\", afișează \"Conexiune verificată prin LinkedIn\" (iconiță verde). Simplu, etic, uman.",
+    "ok": true
+  },
+  {
+    "cod": "12.4",
+    "rol": "Sales Engineer / Pre-sales",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru a transforma radical experiența, din perspectiva SE:\n\n* **Sistem \"Human-First\"**: Înlocuim scorurile tehnice (TF-IDF/Trust) cu insight-uri narative. Exemplu: \"Potrivire: Bogdan și tu împărtășiți interesul pentru Energie; Ana (conexiune comună) recomandă introducerea.\"\n* **Layout \"Action-Centric\"**: Carduri albe, umbre #000/0.05. Butoane de acțiune clare (indigo #6366F1) pe rândul de jos: [Mesaj] [Cere Intro]. Statusul (ex: \"Prospect\") devine pastilă discretă.\n* **UI Airy**: Fundal #FAFAFA, font Inter. Eliminăm jargonul. În loc de \"SHA-256 Validated\", afișăm \"Profil Verificat\" cu un badge subțire.",
+    "ok": true
+  },
+  {
+    "cod": "14.6",
+    "rol": "Compensation & Benefits Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul vizual și de limbaj:\n\n1. **Interfață Socială (Bloom UI):** Înlocuim cardurile dense cu container alb (#FFFFFF), umbră `0 4px 12px rgba(0,0,0,0.05)`, font *Inter*. Înlocuim scorurile obscure cu etichete umane: „Conexiune comună: Ion Popescu” și „Interese: Energie, Tech”.\n2. **Action-First Layout:** Butoane de tip *Primary* (Indigo #6366F1) și *Ghost* pentru „Cere introducere” sau „Mesaj”. Eliminăm jargonul (TF-IDF -> „Potrivire ideală”).\n3. **Status Vizual:** Pastile cu font mic, bold, fundal soft (ex: verde deschis pentru „Disponibil”).",
+    "ok": true
+  },
+  {
+    "cod": "18.4",
+    "rol": "Revenue Operations (RevOps)",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată direcția pentru un *Revenue Engine* uman și agil:\n\n*   **Interfață \"Social-First\":** Fond alb (#FAFAFA), carduri cu umbră `0 4px 12px rgba(0,0,0,0.05)`, font Inter. Înlocuim scorurile aride cu \"Context Human\": *„Bogdan te caută – aveți 2 conexiuni comune și interes în energie”*.\n*   **Acțiuni de impact:** Butoane primare Indigo (#6366F1) pe card: „Cere introducere” sau „Trimite mesaj”. Statusurile devin pastile discrete (ex: *Prospect*).\n*   **Design \"Action-Driven\":** Eliminăm jargonul. În loc de *TF-IDF*, folosim *„Recomandare bazată pe experiența voastră comună”*.",
+    "ok": true
+  },
+  {
+    "cod": "2.3",
+    "rol": "Site Reliability Engineer (SRE)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea rapidă spre un UX uman și performant:\n\n1. **Interfață „Social-First”**: Înlocuiește layout-ul dens cu carduri `bg-white`, `rounded-2xl`, umbră `shadow-sm`. Introdu statusuri colorate (ex: Indigo `bg-indigo-50 text-indigo-600`) pentru context uman.\n2. **Human-Language Layer**: Traduce algoritmii în „Human Reason”: „Conexiune recomandată: Bogdan activează în Energie; 3 interese comune”.\n3. **Action-Dock**: Înlocuiește scorurile cu butoane `primary-action` (ex: „Trimite mesaj”) și `secondary` (ex: „Ignoră”).",
+    "ok": true
+  },
+  {
+    "cod": "7.2",
+    "rol": "Senior Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 3,
+    "idei": "Iată propunerile pentru pivotarea radicală către stilul „Bloom/Clay”:\n\n1. **Card \"Human-First\":** Înlocuiește scorurile tehnice cu *Insight-ul de Relație* (ex: „Interese comune în Energie”). Paletă: fundal alb, text #1F2937, accent #6366F1. Acțiuni clare: „Mesaj” (buton plin) și „Introducere” (ghost button). \n2. **Contextual UI:** Elimină jargonul; folosește carduri slim, borduri rotunjite (12px), umbre #0000000a. Statusuri tip pastilă (ex: „Prospect” în indigo deschis). \n3. **Micro-copy:** „Trust Ledger” devine „Cine garantează”.",
+    "ok": true
+  },
+  {
+    "cod": "1.4",
+    "rol": "Tech Lead",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea rapidă:\n\n*   **UI Modern & Airiness:** Eliminăm tonurile sepia. Fundal `#FAFAFA`, carduri `#FFFFFF` cu `shadow: 0 4px 12px rgba(0,0,0,0.05)`. Font **Inter**, greutate 600 pentru titluri. Accente indigo (`#6366F1`) doar pe butoanele de acțiune.\n*   **Human-First Copy:** Înlocuim scorurile tehnice cu \"insight-uri\": \"Bogdan caută furnizori. Aveți 3 conexiuni comune în Energie.\"\n*   **Action-Oriented Cards:** Butoane tip \"Primary\" (Trimite mesaj) și \"Ghost\" (Ignoră). Statusul devine badge discret.",
+    "ok": true
+  },
+  {
+    "cod": "10.1",
+    "rol": "Head of PMO",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "idei": "Iată direcția pentru a trece de la „bancar” la „social-smart”:\n\n1. **Human-Centric Cards:** Înlocuim scorurile obscure cu \"De ce să te conectezi\": *„Amândoi lucrați în Energie. Bogdan caută furnizori; tu ai conexiunea necesară.”* Paletă: bg #FFFFFF, text #1F2937, accent #6366F1.\n2. **Action-First UI:** Buton principal „Cere introducere” (Indigo solid). Statusurile (ex: „Prospect”) devin pastile discrete (bg #EEF2FF, text #4338CA).\n3. **Typography Reset:** Inter/SF, 14px pentru detalii, 18px bold pentru intenție.",
+    "ok": true
+  },
+  {
+    "cod": "4.5",
+    "rol": "Compliance & Audit Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotul vizual și uman:\n\n1. **Interfață \"Social-First\"**: Înlocuim scorurile aride cu \"Context Cards\". Fundal #F9FAFB, carduri albe cu umbră `0 4px 6px -1px rgba(0,0,0,0.05)`. În loc de \"Afinitate 68\", folosim: \"Recomandat de Andrei: 3 interese comune în Energie\". Accent Indigo (#6366F1) doar pentru butoane de acțiune.\n2. **Limbaj Uman (UX Writing)**: Eliminăm jargonul (TF-IDF/SHA). Înlocuim cu \"Beneficii directe\": \"Vă puteți ajuta reciproc în proiecte de infrastructură\".\n3. **Status Vizual Clar**: Pastile colorate (#EEF2FF pentru fundal, #4F46E5 text) pentru stări: \"Întâlnire confirmată\", \"Așteaptă răspuns\". Acțiuni tip \"Quick-swipe\" sau butoane iconice: [Mesaj] [Introducere].",
+    "ok": true
+  },
+  {
+    "cod": "12.4",
+    "rol": "Sales Engineer / Pre-sales",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Interfață \"Human-First\":** Renunțăm la scoruri (#5B5BD6). Înlocuim \"Afinitate 68\" cu text uman: *„Bună potrivire: ambii sunteți activi în energie”*. Carduri albe, umbre difuze (#0000000a), font Inter.\n2. **Action-Dock:** Butoane primare (Indigo #6366F1) „Cere introducere” direct pe card. Eliminăm jargonul tech; păstrăm „Trust Ledger” doar ca micro-badge discret („Verificat”).\n3. **Timeline Social:** Tablou de bord cu benzi orizontale (luni/zile) și carduri-avatar rotunjite, nu liste tabelare.",
+    "ok": true
+  },
+  {
+    "cod": "14.7",
+    "rol": "Employer Branding / Internal Comms",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru a transforma platforma dintr-un instrument de audit într-un hub de conexiuni umane:\n\n1. **Card \"Human-First\":** Renunță la scoruri matematice. Înlocuiește \"Afinitate 68\" cu un badge prietenos: *\"3 interese comune cu Bogdan\"*. Actiuni primare (butoane Indigo #6366F1): \"Trimite mesaj\" sau \"Cere introducere\".\n2. **Context Social:** Elimină jargonul tehnic. În loc de \"TF-IDF match\", afișează: *\"Bogdan caută parteneri în Energie. Vă potrivește expertiza ta în infrastructură\"*.\n3. **Interfață Airy:** Fundal alb, carduri cu umbre fine și tipografie Inter. Statusurile ca pastile pastel (ex: \"Prospect\" cu bulină violetă) pentru o navigare vizuală rapidă.",
+    "ok": true
+  },
+  {
+    "cod": "18.5",
+    "rol": "Vendor Management",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul către un design social și uman:\n\n- **Carduri \"Human-First\":** Elimină scorurile tehnice. Înlocuiește cu \"De ce să discuți\": *„Bogdan caută furnizori de energie (ca tine). Vă leagă 3 interese comune.”* Butoane de acțiune clare: [Trimite Mesaj], [Cere Introducere].\n- **UI \"Airy\":** Fundal #FAFAFA, carduri albe, umbre #00000005. Accent Indigo (#6366F1) pe call-to-action. Font Inter, ierarhie bazată pe greutate (Bold pentru nume, Normal pentru context).\n- **Statusuri intuitive:** În loc de \"Trust Ledger\", folosește \"Garantat de [Nume]\" cu avataruri mici în cerc. Statusuri ca pastile colorate: [Disponibil], [În negociere].",
+    "ok": true
+  },
+  {
+    "cod": "7.3",
+    "rol": "Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea rapidă spre „Bloom/Clay”:\n\n* **Layout „Social-First”:** Fond alb (#F9FAFB), carduri cu `border-radius: 16px` și umbră `0 4px 6px -1px #00000005`. Înlocuim scorurile cu „Context human”: „Bogdan caută furnizor. Aveți 3 interese comune prin Ionel.”\n* **Microcopy & Acțiuni:** Butoane Indigo (#6366F1) cu text clar („Cere introducere”, „Trimite mesaj”). Eliminăm jargonul tehnic în favoarea beneficiilor (ex: „Potrivire bună” în loc de „Afinitate 68”).\n* **Statusuri:** Pastile soft cu font `Inter` bold.",
+    "ok": true
+  },
+  {
+    "cod": "2.3",
+    "rol": "Site Reliability Engineer (SRE)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 3,
+    "idei": "Iată soluțiile de SRE pentru un UI „social-first”:\n\n1. **Human-Language Layer:** Înlocuiește scorurile tehnice cu *Insight Cards*. Ex: „Potrivire de top: Amândoi activați în Energie” (background `#F5F7FF`, text Indigo `#6366F1`).\n2. **Action-Driven Layout:** Carduri slim, alb imaculat. În loc de date, pune butoane de acțiune: „Cere introducere” (primar) și „Ignoră” (subtil).\n3. **Status-as-Context:** Înlocuiește „Trust Ledger” cu ecusoane prietenoase: „Recomandat de [Nume]”.",
+    "ok": true
+  },
+  {
+    "cod": "1.4",
+    "rol": "Tech Lead",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "idei": "Iată propunerile pentru pivotul vizual (CSS/Tailwind):\n\n*   **Design Card \"Action-First\":** Fond alb, umbră `shadow-sm`, colțuri `rounded-xl`. Elimină jargonul; înlocuiește scorurile cu un text uman: *\"Conexiune comună prin Andrei Popescu. Interese: Energie, Infrastructură\"*. Acțiuni: Butoane `bg-indigo-600` (text alb) pentru \"Cere introducere\" și `text-gray-500` pentru \"Ignoră\".\n*   **Sistem Vizual \"Human-Centric\":** Font `Inter` (sans-serif). Statusuri: pastile `bg-indigo-50 text-indigo-700`. Înlocuiește graficele complexe cu elemente grafice simple (ex: 3 avatare suprapuse pentru \"conexiuni comune\").\n*   **Interfață Aerisită:** Fundal `#F9FAFB`. Ierarhie: Titlu Bold (18px), subtitlu regular (14px). Accent indigo doar pe butoane și statusuri active.",
+    "ok": true
+  },
+  {
+    "cod": "4.6",
+    "rol": "Security Analyst (SOC)",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul vizual (stil 'Bloom'):\n\n1. **Dashboard \"Human-First\":** Înlocuiește scorurile tehnice cu \"Context Carduri\": `Bogdan caută furnizor. Aveți 3 conexiuni comune.` Folosește fundal alb (#FFFFFF), umbre soft și accent Indigo (#6366F1) pentru butoane \"Cere Introducere\".\n2. **Statusuri ca Pastile:** Elimină jargonul (SHA/TF-IDF). Înlocuiește statusurile gri cu \"Pastile\" (ex: `🟢 Potrivire Activă`, `🔵 Întâlnire Viitoare`).\n3. **Micro-interacțiuni:** Animații fluide la hover pe carduri.",
+    "ok": true
+  },
+  {
+    "cod": "12.5",
+    "rol": "Business Development Manager",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată direcția pentru un UI uman și energic:\n\n*   **UI \"Social-First\":** Fond alb (#FAFAFA), carduri cu umbră `0 4px 12px rgba(0,0,0,0.05)`, accent Indigo (#6366F1). Înlocuiește scorurile tehnice cu *Badges* text: „Potrivire: 3 interese comune”.\n*   **Microcopy Uman:** Transformă jargonul în acțiune: „Bogdan caută furnizori. Ai o conexiune relevantă – cere introducere acum.”\n*   **Acțiuni Contextuale:** Buton principal „Cere introducere” (Indigo) și „Ignoră” (ghost). Statusurile, tip pastilă discretă.",
+    "ok": true
+  },
+  {
+    "cod": "10.2",
+    "rol": "Program Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea rapidă:\n\n1. **Interfață „Human-First”**: Fundal `#FAFAFA`, carduri albe cu `shadow: 0 4px 12px rgba(0,0,0,0.05)`. Înlocuim jargonul tehnic cu microcopy: „Bogdan caută furnizor. Aveți 3 conexiuni comune.”\n2. **Action-Driven Tiles**: Înlocuim scorurile cu butoane `primary` indigo `#6366F1` („Cere introducere”) și `secondary` („Ignoră”).\n3. **Visual Clarity**: Statusuri tip pastilă (text mic, fundal soft), tipografie Inter, ierarhie bazată pe acțiune, nu pe date criptografice.",
+    "ok": true
+  },
+  {
+    "cod": "14.8",
+    "rol": "HR Business Partner",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru a transforma radical experiența, trecând de la „bancar” la „uman”:\n\n1. **Interfață „Human-First”**: Elimină jargonul tehnic. Înlocuiește scorurile (ex: Afinitate 68) cu *Insights* calitative: „Aveți 3 conexiuni comune în Energie”. Paletă: `#FFFFFF` (bg), text `#1F2937`, accent `#6366F1`.\n2. **Carduri Active**: Înlocuiește afișarea pasivă cu un set clar de butoane de acțiune: „Cere introducere” (primar) și „Mesaj direct” (secundar).\n3. **Statusuri Prietenoase**: Pastile cu colțuri rotunjite (ex: #DCFCE7 pentru „Potrivire ideală”).",
+    "ok": true
+  },
+  {
+    "cod": "18.6",
+    "rol": "Facilities / Office Manager",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru un redesign „uman & social”:\n\n*   **Interfață \"Warm Social\":** Fundal alb (#FAFAFA), carduri cu umbre moi (`box-shadow: 0 4px 12px rgba(0,0,0,0.05)`), font *Inter*. Înlocuim scorurile tehnice cu text uman: „Bogdan caută furnizor cărbune — aveți 3 interese comune”.\n*   **Acțiuni Rapide:** Înlocuim statusurile pasive cu un rând de butoane \"Ghost\" (Indigo #6366F1): *Mesaj direct*, *Cere introducere*.\n*   **Vizualizare Context:** În loc de grafuri complexe, folosim \"Avatar Stack\" pentru conexiuni comune.",
+    "ok": true
+  },
+  {
+    "cod": "2.4",
+    "rol": "Cloud Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către „Bloom/Clay CRM”:\n\n*   **UI Modern & Aerisit:** Trecem la fundal `#FAFAFA`, carduri albe cu `box-shadow: 0 4px 12px rgba(0,0,0,0.05)`, font **Inter** (fără serif). Înlocuim scorurile tehnice cu *Badges*: „Recomandat pentru tine” (indigo `#6366F1`).\n*   **Microcopy Uman:** În loc de „TF-IDF 0.85”, afișăm: „Aveți 3 conexiuni comune în Tech”. Transformăm „Trust Ledger” în „Verificat prin rețeaua ta”.\n*   **Carduri Acționabile:** Eliminăm jargonul. Butoane de tip „Ghost” pentru `Salvează` și „Primary” (Indigo) pentru `Cere Introducere`.",
+    "ok": true
+  },
+  {
+    "cod": "7.3",
+    "rol": "Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotul rapid:\n\n* **Card \"Human-First\":** Renunță la scoruri. Titlu: \"Bogdan caută furnizor cărbune\". Subtitlu: \"Potrivire: 3 interese comune în Energie\". Buton primar indigo (`#6366F1`): \"Cere introducere\".\n* **Dashboard \"Airy\":** Fundal `#FAFAFA`. Navigație jos, iconițe outline. Elimină jargonul tehnic; folosește etichete prietenoase: \"Interese complementare\", \"Conexiune verificată\".\n* **Statusuri-Pastilă:** Înlocuiește graficele cu pastile colorate (`bg-indigo-50`, text `#5B5BD6`). Totul în font *Inter*, ierarhie vizuală clară.",
+    "ok": true
+  },
+  {
+    "cod": "10.2",
+    "rol": "Program Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea rapidă spre stilul \"Bloom/Clay\":\n\n1. **Human-First Cards**: Înlocuim scorurile cu pastile de context: „3 interese comune • Apropiat de Andrei”. Folosim fundal #FFFFFF, umbre `0 4px 12px rgba(0,0,0,0.05)` și butoane primare indigo `#6366F1`.\n2. **Action-Driven Layout**: Eliminăm jargonul. În loc de „Trust Ledger”, afișăm „Conexiune verificată prin X”.\n3. **Typography Reset**: Inter font, titluri Bold `#111827`, text secundar `#6B7280`. Totul aerisit, cu padding generos.",
+    "ok": true
+  },
+  {
+    "cod": "5.1",
+    "rol": "Data / AI Lead",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către un UX social, uman și performant:\n\n*   **Human-Centric Cards:** Înlocuim scorurile obscure cu \"Context Card\" (Ex: „Bogdan caută furnizor. Aveți 3 conexiuni comune”). Butoane primare active: „Trimite mesaj” (Indigo #6366F1), „Cere introducere”.\n*   **Semantic Data Layer:** Traducem jargonul tehnic în insight-uri: „Potrivire bazată pe interese în energie” în loc de „TF-IDF 0.82”.\n*   **Visual Freshness:** Fundal #FAFAFA, carduri albe, umbre `0px 4px 12px rgba(0,0,0,0.05)`. Font Inter. Statusuri pastile (#E0E7FF text #4338CA).",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "idei": "Iată soluțiile tehnice pentru pivotarea către stilul „Social-Bright”:\n\n1. **Semantic Layer Transformation**: Înlocuim scorurile (ex. Trust 0.8) cu *Natural Language Fragments* generate backend: „Recomandat de [Nume] pentru expertiza în [Domeniu]”.\n2. **Action-Oriented Card UI**: CSS: `border-radius: 16px`, shadow: `0 4px 12px rgba(91,91,214,0.08)`. Eliminăm jargonul; adăugăm butoane primare Indigo (#6366F1) pentru „Cere Introducere”.\n3. **Ghost-Loading & Micro-States**: Înlocuim dashboard-ul dens cu un layout *Airy Grid*. Background: `#F9FAFB`. Statusuri: `.pill { background: #EEF2FF; color: #4F46E5; }`.",
+    "ok": true
+  },
+  {
+    "cod": "12.6",
+    "rol": "Sales Operations Specialist",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată direcția pentru un Sales Ops modern, orientat spre oameni, nu spre date tehnice:\n\n1. **Interfață \"Human-First\"**: Fundal #FAFAFB, font Inter, carduri cu umbre #00000008. Înlocuim scorurile obscure cu etichete calde: \"Conexiune de încredere prin [Nume]\" și \"Interese comune: Energie, Tech\".\n2. **Action-Driven CRM**: În loc de tabele, carduri cu butoane primare Indigo (#6366F1). Acțiune unică per card: \"Cere introducere\" sau \"Trimite mesaj\".\n3. **Visual Clarity**: Statusuri pastilă (ex: \"Prospect\" - verde pal). Eliminăm jargonul (TF-IDF), păstrăm doar contextul: \"De ce acum?\".",
+    "ok": true
+  },
+  {
+    "cod": "15.1",
+    "rol": "Finance Director / CFO Deputy",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile mele pentru pivotarea către un vibe „Social-Professional”:\n\n* **Layout „Human-First”:** Fond alb (#FAFAFA), carduri cu shadow `0 4px 12px rgba(0,0,0,0.05)`. Eliminăm jargonul: în loc de „Scor 68”, folosim „Conexiune recomandată: 3 interese comune în FinTech”.\n* **Action-Bar:** Butoane primare Indigo (#6366F1) pe card: „Cere introducere”, „Trimite mesaj”. Statusurile (ex: „În discuții”) devin pastile discrete cu fundal light-indigo.\n* **Vizualizare:** Înlocuim grafurile complexe cu elemente de profil calde (avataruri rotunjite, badge-uri de expertiză).",
+    "ok": true
+  },
+  {
+    "cod": "18.6",
+    "rol": "Facilities / Office Manager",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotul către „Social/Bloom”:\n\n1. **Carduri „Human-First”**: Înlocuim scorurile cu „De ce să te conectezi”: *„Bogdan caută furnizori. Aveți 2 conexiuni comune în Energie.”* (Font Inter, fundal #FAFAFA, umbră soft).\n2. **Statusuri Active**: Înlocuim jargonul cu butoane de acțiune rapidă: „Mesaj” (Indigo #6366F1), „Cere introducere”.\n3. **Navigație Aerisită**: Interfață albă, iconițe outline, eliminăm tot ce e sepia/serif.",
+    "ok": true
+  },
+  {
+    "cod": "2.4",
+    "rol": "Cloud Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru a transforma radical experiența utilizatorului:\n\n- **Dashboard \"Social-First\"**: Înlocuim scorurile aride cu \"Context Human\": *„Bogdan caută furnizor; aveți 3 conexiuni comune”*. Culori: fundal `#F8FAFC`, accent `#6366F1`.\n- **Carduri de Acțiune Rapidă**: Eliminăm jargonul; în loc de „Trust Ledger”, folosim „Verificat prin [Nume]”. Butoane de acțiune clare (e.g., „Cere introducere”) înlocuiesc statusurile pasive.\n- **Interfață Aerisită**: Font `Inter`, ierarhie bazată pe spațiu alb.",
+    "ok": true
+  },
+  {
+    "cod": "7.3",
+    "rol": "Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 3,
+    "idei": "Iată propunerile pentru pivotarea rapidă:\n\n*   **Carduri \"Social-First\":** Background alb, font Inter, umbră soft. Înlocuim scorurile cu \"De ce să te conectezi\": *„Bogdan caută furnizori. Aveți 3 interese comune în energie.”* Butoane primare: „Cere introducere” (Indigo #6366F1).\n*   **Statusuri \"Human-Centric\":** Pastile colorate (ex: Prospect) în loc de cifre tehnice.\n*   **Timeline Curat:** Bandă vizuală aerisită, iconițe minimaliste, eliminăm jargonul SHA/TF-IDF. Accent pe interacțiune, nu pe calcul.",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea către „Social-First”:\n\n1. **Backend Semantic & UI Layer:** Înlocuim scorurile obscure cu un strat de „Insight Human”: API-ul returnează `reason: \"Interese comune în energie\"` în loc de `TF-IDF: 0.8`. Vizual: carduri cu `border-radius: 12px`, fundal `#FFFFFF`, accent `#6366F1`.\n2. **Action-Driven Schema:** API-ul expune `actions: [\"message\", \"introduce\"]`. UI-ul devine compact: butoane *ghost* pentru acțiuni secundare și *filled* pentru primară. Eliminăm jargonul tech din view, mutându-l în secțiunea `Metadata` (colapsabilă).\n3. **Status System:** Înlocuim \"Trust Ledger\" cu \"Verified Connection\" (badge colorat). Culori: Indigo (`#6366F1`) pentru acțiuni, Green (`#22C55E`) pentru status activ.",
+    "ok": true
+  },
+  {
+    "cod": "10.3",
+    "rol": "Project Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "idei": "Iată planul de acțiune pentru pivotarea către „Bloom/Clay”:\n\n1. **Interfață Socială (Human-First):** Abandonăm sepia pentru fundal `#FAFAFA` și carduri albe cu shadow `0 4px 12px rgba(0,0,0,0.05)`. Înlocuim scorurile aride cu: „Potrivire: Bogdan caută cărbune; tu ai 2 conexiuni comune”.\n2. **Action-Driven Design:** Buton primar Indigo (`#6366F1`) pentru „Cere introducere”, secundar ghost pentru „Ignoră”. Status „Conectat” devine un badge gri discret.\n3. **Typography & Context:** Sans-serif (Inter), ierarhie clară: Titlu Bold (16px), detalii subtile (13px). Eliminăm jargonul tech; păstrăm „Increderea” în background, evidențiem doar „Contextul relațional”.",
+    "ok": true
+  },
+  {
+    "cod": "13.1",
+    "rol": "Customer Success Lead",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea radicală către stilul „Bloom/Clay”:\n\n1. **Interfața \"Human-First\":** Trecem pe fundal #FAFBFF, carduri albe cu shadow `0px 4px 12px rgba(0,0,0,0.05)`. Înlocuim scorurile tehnice cu *Insight-uri*: „Bogdan caută furnizori. Aveți 3 conexiuni comune”.\n2. **Action-Dock:** Butoane primare Indigo (#6366F1) cu hover state, plasate jos pentru mobilitate. Eliminăm jargonul: „Trust Ledger” devine „Profil verificat”.\n3. **Status Pastilles:** Înlocuim graficele complexe cu pastile colorate (ex: #EEF2FF text #4F46E5) pentru claritate instantanee.",
+    "ok": true
+  },
+  {
+    "cod": "5.2",
+    "rol": "Data Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "idei": "Iată cele 3 direcții pentru transformarea din \"bancar\" în \"social\":\n\n1. **UX \"Human-First\":** Înlocuim scorurile obscure cu etichete conversaționale (ex: \"Bogdan caută X; aveți 3 conexiuni comune\"). UI: Fundal `#F9FAFB`, carduri `#FFFFFF` cu umbră `0 4px 6px -1px rgba(0,0,0,0.05)`, font `Inter`.\n2. **Action-Driven Layout:** Înlocuim statusurile pasive cu un \"Action Bar\" vizibil: butoane `outline` pentru *Ignoră* și `solid` indigo (`#6366F1`) pentru *Mesaj*.\n3. **Micro-Interacțiuni:** Statusurile devin pastile (ex: `.prospect {background: #EEF2FF; color: #4F46E5}`).",
+    "ok": true
+  },
+  {
+    "cod": "15.2",
+    "rol": "Accountant / Contabil",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către estetica „Bloom/Clay”:\n\n* **Interfață „Human-First”:** Înlocuim scorurile tehnice cu *Smart Badges* (#6366F1, bg alb). Exemplu: în loc de „Afinitate 68”, folosim „Conexiune de încredere: 3 interese comune”.\n* **Carduri Acționabile:** Layout aerisit, colțuri rotunjite (12px). Eliminăm jargonul din titluri; introducem butoane clare (Primary/Ghost) pentru „Cere Introducere” sau „Mesaj direct”.\n* **Vizual:** Fundal #FAFAFA, tipografie Inter, ierarhie vizuală bazată pe spațiu alb.",
+    "ok": true
+  },
+  {
+    "cod": "2.4",
+    "rol": "Cloud Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 3,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n*   **UI Modern & Aerisit:** Fundal `#FAFAFA`, carduri `#FFFFFF` cu `box-shadow: 0 4px 12px rgba(0,0,0,0.05)`, font `Inter`. Eliminăm scorurile tehnice; introducem pastile status: `bg-indigo-50 text-indigo-600`.\n*   **Microcopy Uman:** Înlocuim „Afinitate 68 / TF-IDF” cu: „Puncte comune: Energie și Infrastructură. Bogdan este o conexiune verificată prin Andrei.”\n*   **Acțiuni Directe:** Butoane `Primary` (Indigo `#6366F1`) pentru „Cere introducere”, `Secondary` (Ghost) pentru „Ignoră”.",
+    "ok": true
+  },
+  {
+    "cod": "7.4",
+    "rol": "Product Owner",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru sprint-ul de urgență, focus pe conversie și UX uman:\n\n1. **UX \"Human-First\":** Înlocuim scorurile aride cu \"Context Cards\". Ex: „Potrivire bună: 3 interese comune în energie”. Font Inter, fundal alb, carduri cu `border-radius: 12px`, umbră `0 4px 6px -1px rgba(0,0,0,0.05)`.\n2. **Action-Row:** În loc de statusuri statice, adăugăm butoane `primary` indigo (#6366F1) pentru „Cere introducere” și `secondary` pentru „Salvează”. \n3. **Limbaj:** Eliminăm jargonul tech; „Trust Ledger” devine „Istoric de încredere”.",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **UX „Human-First”:** Înlocuim scorurile (ex: Afinitate 68) cu etichete narative: „Conexiune comună prin Andrei” sau „Interese comune: Energie, Tech”.\n2. **Design UI:** Fond alb (#FAFAFA), carduri cu `border-radius: 16px` și `box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05)`. Accent: buton primar `#6366F1` (Indigo).\n3. **Micro-interacțiuni:** Butoane clare (acțiune directă: „Cere introducere”) în locul jargonului tehnic. Statusuri: pastile discrete cu `bg-indigo-50`.",
+    "ok": true
+  },
+  {
+    "cod": "5.2",
+    "rol": "Data Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru a transforma radical experiența utilizatorului:\n\n*   **Human-First Cards:** Înlocuim scorurile tehnice cu \"Carduri de Context\". Exemplu: „Bogdan caută furnizori de cărbune. Aveți 3 conexiuni comune.” Butoane acționabile (CTA) stil *primary* (Indigo #6366F1) pentru „Trimite mesaj”, restul (Ignoră) discret.\n*   **Design „Airy” & Modern:** Fond alb, font *Inter* 14px, colțuri rotunjite (12px), umbre: `0 4px 6px -1px rgba(0,0,0,0.05)`. Statusuri (Prospect/Meeting) ca pastile cu background light-indigo.\n*   **Limbaj Uman:** Ascundem jargonul (TF-IDF/SHA) în spatele unor *tooltips* sau detalii secundare. Prioritizăm „De ce acum?” și „Cine garantează conexiunea”.",
+    "ok": true
+  },
+  {
+    "cod": "10.3",
+    "rol": "Project Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotul vizual (stil 'Bloom'):\n\n1. **Carduri \"Human-First\":** Înlocuiește scorurile tehnice cu *Insight-uri de Relație* (ex: \"Conexiune comună prin Andrei\"). Butoane primare \"Trimite mesaj\" (Indigo #6366F1), secundare \"Ignoră\".\n2. **Interfață Airy:** Background `#FAFAFA`, carduri albe cu `box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05)`. Font *Inter* (400/600), elimină serif-ul.\n3. **Status-uri Vii:** În loc de grafuri complexe, folosește pastile colorate (`bg: #E0E7FF`, `text: #4338CA`) pentru context (ex: \"Oportunitate Caldă\").",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Social-CRM”:\n\n1. **Interfața \"Human-First\":** Înlocuiește scorurile tehnice cu *Insight Cards* (fundal alb, border #EDF2F7, umbră #00000008). Schimbă „Afinitate 68” cu: „Conexiune recomandată: Amândoi activați în Energie; aveți 3 contacte comune.”\n2. **Action-Dock:** În loc de statusuri statice, adaugă o bandă de acțiuni rapide tip „swipe-like” (Butoane: *Mesaj, Introducere, Ignoră*) cu accent Indigo (#6366F1).\n3. **Typography UI:** Trece totul pe *Inter* (sans-serif), titluri boldate, spațiere generoasă.",
+    "ok": true
+  },
+  {
+    "cod": "15.2",
+    "rol": "Accountant / Contabil",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea către estetica \"Social-Light\":\n\n1. **Card \"Match Uman\":** Înlocuiește scorurile tehnice cu *microcopy* conversațional: „Vă potriviți: aveți 3 interese în Energie și o conexiune comună”. Butoane clare (Indigo #6366F1): [Cere introducere] [Vezi profil].\n2. **Dashboard \"Airy\":** Background alb, carduri cu `border-radius: 12px` și umbră `0 4px 6px -1px #0000000a`. Statusuri tip pastilă (ex: *Prospect* cu punct verde #22C55E).\n3. **Typography:** Inter 400/600, eliminăm seriful. Cifrele devin tabulare, aerisite.",
+    "ok": true
+  },
+  {
+    "cod": "2.5",
+    "rol": "System Administrator",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul vizual și UX:\n\n*   **Human-First Dashboard:** Elimină scorurile tehnice. Înlocuiește \"Afinitate 68\" cu \"Conexiune caldă: 3 interese comune și Andrei garantează\". Folosește carduri albe (#FFFFFF) cu shadow `0 4px 12px rgba(0,0,0,0.05)`, font Inter, accent Indigo (#6366F1) pentru butoane \"Cere introducere\".\n*   **Action-Oriented Cards:** Transformă cardurile pasive în widget-uri cu acțiuni clare: \"Mesaj\", \"Introducere\", \"Ignore\". Statusul \"Conectat\" devine un badge discret, nu buton.\n*   **Semantic UI Overhaul:** Înlocuiește jargonul (TF-IDF) cu insight-uri: \"Vă potriviți pe Energie & Infrastructură\". Statusuri cu pastile colorate (ex: Indigo pentru \"Potrivire\", Verde deschis pentru \"Activ\").",
+    "ok": true
+  },
+  {
+    "cod": "7.4",
+    "rol": "Product Owner",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată direcția pentru Sprintul de Redesign:\n\n- **UI „Human-First”:** Fond `#F9FAFB`, carduri albe cu `shadow: 0 4px 12px rgba(0,0,0,0.05)`, font `Inter`. Eliminăm scorurile tehnice; introducem „Insights umane”: *„Bogdan caută parteneri în Energie. Aveți 3 conexiuni comune.”*\n- **Action-Driven Layout:** Înlocuim statusurile pasive cu un rând de butoane (Primary: Indigo `#6366F1`, Secondary: Ghost).\n- **Statusuri de tip Pill:** Etichete colorate (ex: `#EEF2FF` cu text `#4F46E5`) pentru context social, nu audit.",
+    "ok": true
+  },
+  {
+    "cod": "5.3",
+    "rol": "Data Scientist",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către un design \"Social-First\":\n\n1. **Interfață \"Human-Centric\":** Înlocuiește scorurile matematice cu etichete calitative (ex: \"Conexiune de încredere\", \"Interese comune în Energie\"). Folosește fond alb (#FFFFFF), text #1F2937, accente Indigo (#6366F1).\n2. **Carduri Active:** Transformă cardurile în unități de acțiune: \"Cere introducere\" buton primar, \"Ignoră\" ghost button. Statusul \"Conectat\" devine o bulină discretă.\n3. **Traducere Vizuală:** Ascunde jargonul (TF-IDF/HMAC) în \"Detalii\". Afișează doar \"De ce acum?\": contextul relevant pentru networking.",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 4,
+    "idei": "Iată propunerile pentru pivotarea către un UX social, performant și uman:\n\n- **Data-to-Insight Mapping:** Înlocuim scorurile obscure cu proză umană: \"Potrivire 82%\" devine \"Aveți 3 interese comune în energie\". JSON-ul API-ului va trimite direct string-uri de context, nu coeficienți, reducând procesarea client-side.\n- **UI \"Light-Airy\" Framework:** Trecem pe `#F9FAFB` (background) cu carduri albe și umbre `0 4px 6px -1px rgba(0,0,0,0.05)`. Accent: `#6366F1` pentru butoane primare.\n- **Action-Driven Cards:** Înlocuim ierarhia densă cu un layout flex: Avatar(l) - Context(c) - Acțiuni (Mesaj/Introducere). Eliminăm jargonul tech din view-ul principal; detalii tehnice doar în `Collapsible`.",
+    "ok": true
+  },
+  {
+    "cod": "10.3",
+    "rol": "Project Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 3,
+    "idei": "Iată planul de acțiune pentru repunerea proiectului pe drumul cel bun:\n\n1. **Rebranding Vizual:** Fond alb (#FAFAFA), carduri cu umbră difuză (`shadow-sm`) și font `Inter`. Accent Indigo (#6366F1) pentru butoane CTA. Eliminăm seriful; titluri Bold, minuscule.\n2. **Human-First UI:** Înlocuim scorurile tehnice cu *Insight-uri*: „Potrivire: 3 interese comune în Energie”.\n3. **Carduri Active:** Eliminăm jargonul. Butoane explicite: „Cere Introducere” (Indigo) vs „Ignoră” (Gri subtil). Statusurile devin pastile colorate.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată direcția pentru a salva proiectul:\n\n1. **Interfață \"Social-First\"**: Fundal alb (#FAFAFA), carduri cu `border-radius: 16px` și `box-shadow: 0 4px 12px rgba(0,0,0,0.05)`. Accent: Indigo (#6366F1). Înlocuiește scorurile tehnice cu *Insight-uri Umane*: „Potrivire: 3 interese comune în Energie” (font Inter, bold).\n2. **Action-Bar Modular**: Butoane cu iconițe (fără text inutil): „Trimite mesaj” (primar, fundal Indigo), „Cere introducere” (secundar). Elimină jargonul (SHA-256/TF-IDF) în favoarea contextului relațional: „Conexiune verificată prin Andrei Popescu”.",
+    "ok": true
+  },
+  {
+    "cod": "2.6",
+    "rol": "Network Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul vizual și UX:\n\n*   **1. Cardul \"Human-First\":** Înlocuiește scorurile tehnice cu \"De ce acum?\". Exemplu: *„Bogdan caută furnizor. Aveți 3 conexiuni comune”*. Culori: fundal #FFFFFF, border #E5E7EB, buton primar #6366F1.\n*   **2. Statusuri \"Pastilă\":** Înlocuiește jargonul (Trust Ledger) cu statusuri clare: `[● Prospect]` sau `[● Conectat]`.\n*   **3. UI Airy:** Spațiere generoasă, font Inter, fără serife. Elimină datele brute; oferă acțiuni clare: *[Trimite mesaj]* (Indigo).",
+    "ok": true
+  },
+  {
+    "cod": "15.2",
+    "rol": "Accountant / Contabil",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 3,
+    "idei": "Iată propunerile pentru pivotarea către estetica \"Bloom\":\n\n* **Carduri \"Human-First\":** Înlocuiește scorurile tehnice cu *Context Cards*. Exemplu: „Bogdan caută energie. Aveți 3 conexiuni comune.” Butoane active (Indigo #6366F1): *Trimite Mesaj* / *Cere Introducere*.\n* **Dashboard \"Airy\":** Fundal #FAFAFA, carduri albe cu umbră `0 4px 6px -1px rgba(0,0,0,0.05)`. Elimină jargonul: „Potrivire bună” în loc de „Afinitate 68”.\n* **Micro-interacțiuni:** Statusuri sub formă de pastile colorate (ex: *Meeting* cu bulină #6366F1).",
+    "ok": true
+  },
+  {
+    "cod": "7.4",
+    "rol": "Product Owner",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 3,
+    "idei": "Iată propunerile mele pentru pivotarea rapidă spre stilul \"Bloom/Clay\":\n\n1. **UX \"Human-First\":** Înlocuim scorurile tehnice cu \"Insights de Relație\". Ex: \"Potrivire 84%\" devine \"Aveți 3 contacte comune în Energie\". Carduri cu margini rotunjite (16px), background #F9FAFB, umbră #00000008.\n2. **Action-Driven Layout:** Buton principal \"Cere introducere\" (indigo #6366F1), secundar \"Profil\".\n3. **UI Modern:** Font *Inter*, ierarhie: Nume (Bold 16px), Context (Normal 14px, gri închis).",
+    "ok": true
+  },
+  {
+    "cod": "5.3",
+    "rol": "Data Scientist",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea către un UX social și uman:\n\n1. **UX \"Human-First\"**: Înlocuim scorurile matematice (Trust/ROI) cu *Insights de Relație*. În loc de „Afinitate 68”, afișăm: „Bogdan și cu tine aveți 3 conexiuni comune în Energie”. Cardul devine o acțiune: „Cere introducere” (Button Indigo #6366F1).\n2. **Design \"Airy & Modern\"**: Fundal #FAFAFA, carduri albe cu `box-shadow: 0 4px 12px rgba(0,0,0,0.05)`. Font Inter, titluri Bold (600), corp 14px. Eliminăm jargonul: „TF-IDF” devine „Temă comună: Infrastructură”.\n3. **Micro-interacțiuni**: Statusuri tip pastilă (bg #EEF2FF, text #4F46E5). Totul curat, focus pe oameni, nu pe ledger.",
+    "ok": true
+  },
+  {
+    "cod": "10.4",
+    "rol": "Scrum Master",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru resetarea UX:\n\n1. **Human-First Cards**: Înlocuim scorurile tehnice cu „Motivul conexiunii”. Exemplu: „Bogdan vrea să discute despre Energie. Aveți 2 interese comune.” Butoane active (Indigo #6366F1) în loc de statusuri pasive.\n2. **Clean Dashboard**: Fundal alb (#FAFAFA), tipografie Inter. Eliminăm jargonul (SHA/TF-IDF). Afișăm doar: Nume, Context uman și Acțiune imediată.\n3. **Micro-Interacțiuni**: Statusuri stil pastilă (verde deschis #DCFCE7) pentru a înlocui „Trust Ledger”-ul rigid.",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 5,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Abstracție Back-end (Human-first):** Înlocuim scorurile algoritmice cu microcopy narativ: „Potrivire: 3 interese comune” (în loc de „Afinitate 68”). JSON-ul trimis către UI va expune doar chei de tip `human_reason: string` pentru a evita jargonul tehnic în front-end.\n2. **Componente „Action-Ready”:** Înlocuim cardurile dense cu layout-uri de tip „Activity Tile”. Culori: `#6366F1` (Indigo) pentru butoane, fundal `#FAFAFA`. Acțiuni clare: *„Trimite mesaj”* (Primary) vs *„Ignoră”* (Ghost).\n3. **Sistem de Status Vizual:** Înlocuim indicatorii de „Trust” cu pastile tip pastilă (ex: `bg-indigo-50 text-indigo-700`) pentru a evidenția starea relației, nu calculul matematic.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 3,
+    "idei": "Iată propunerile pentru a transforma radical experiența:\n\n1. **Interfața \"Human-First\":** Background #F9FAFB, carduri albe cu umbră `0 4px 6px -1px rgba(0,0,0,0.05)`. Înlocuim scorurile cu \"Insights Umane\": *„Bogdan caută furnizori în energie; aveți 3 conexiuni comune”*.\n2. **Action-Bar Radical:** Eliminăm textul tehnic. În card: buton primary indigo (#6366F1) „Cere introducere” și secundar „Vezi profil”. Statusuri ca pastile mici: `bg-indigo-50 text-indigo-700`.\n3. **Focus pe Relație:** Înlocuim graficele complexe cu o secțiune „De ce acum”: „Recent a postat despre infrastructură”.",
+    "ok": true
+  },
+  {
+    "cod": "2.7",
+    "rol": "Database Administrator (DBA)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către „Social-Core” (fără a sacrifica integritatea datelor):\n\n1. **Human-First View**: Înlocuim scorurile obscure cu \"Smart Context\" (ex: \"Bogdan caută furnizori. Aveți 3 conexiuni comune\"). UI: Card alb, font Inter, text gri-închis (#1F2937), accent indigo (#6366F1) doar pe butoane de acțiune.\n2. **Action-Driven Schema**: Transformăm interogările complexe în \"Actionable Triggers\". Vizual: statusuri tip pastilă (verde deschis #DCFCE7, text #166534). Eliminăm jargonul tech, păstrăm performanța prin indecși bazați pe *intentie*, nu pe algoritmi.",
+    "ok": true
+  },
+  {
+    "cod": "7.5",
+    "rol": "Business Analyst",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Interfață Social-First:** Înlocuim cardurile dense cu elemente airy (bg #FAFAFA, shadow 0 4px 12px #0000000a). Înlocuim scorurile tehnice cu *Human-Insights*: „Bogdan caută furnizori în energie; aveți 3 interese comune”.\n2. **Action-Driven Layout:** Butoane primare (bg #6366F1, text alb) pentru „Cere introducere”, secundare pentru „Ignoră”.\n3. **Tipografie & Status:** Inter 14px/16px, statusuri cu pastile pastelate. Eliminăm jargonul; folosim limbaj conversational.",
+    "ok": true
+  },
+  {
+    "cod": "1.6",
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Interfață \"Human-First\":** Înlocuim cardurile dense cu containere albe (`#FFFFFF`), shadow `0 4px 6px -1px rgba(0,0,0,0.05)`, font `Inter`. Eliminăm scorurile complexe; introducem \"Badges de Context\": *„3 interese comune”*, *„Recomandat de Andrei”*.\n2. **Action-Driven Layout:** Înlocuim statusurile pasive cu butoane primare indigo (`#6366F1`) în interiorul cardului: „Cere introducere”.\n3. **Traducere Limbaj:** Înlocuim jargonul tehnic cu microcopy: „Afinitate 68” devine „Potrivire excelentă”.",
+    "ok": true
+  },
+  {
+    "cod": "15.3",
+    "rol": "FP&A Analyst",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul vizual și de limbaj:\n\n1. **Interfață \"Human-First\":** Fundal `#F9FAFB`, carduri albe cu `box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05)`. Înlocuim scorurile aride cu \"Insight-uri\": *\"Recomandat: Bogdan caută expertiză în energie\"* (font Inter, bold, `text-indigo-600`).\n2. **Acțiuni rapide:** Butoane `flex` cu iconițe (fără text tehnic) pentru *Introduce* sau *Message*. Eliminăm jargonul: *Trust Ledger* devine *„Conexiune verificată prin [Nume]”*.\n3. **Statusuri vizuale:** Pastile colorate (`bg-indigo-50`, `text-indigo-700`) pentru context: *\"Potrivire bună\"*, *\"Ești conectat\"*.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 4,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Card \"Human-First\":** Înlocuiește scorurile tehnice cu *Insight-uri*: „Bogdan caută furnizori. Aveți 3 conexiuni comune.” Butoane acționabile (Primary: #6366F1, Secondary: Ghost).\n2. **UI \"Airy\":** Fundal #FAFAFA, carduri albe, umbră `0 4px 12px rgba(0,0,0,0.05)`. Font *Inter* 14px/16px.\n3. **Status Pastille:** Înlocuiește jargonul cu „Pregătit de contact” (Bulină Indigo). Vizual curat, fără grafice complexe.",
+    "ok": true
+  },
+  {
+    "cod": "10.4",
+    "rol": "Scrum Master",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotul rapid:\n\n1. **Rebranding Vizual:** Fundal `#FAFAFA`, text `#1F2937`. Înlocuiește serifele cu `Inter`. Înlocuiește scorurile tehnice cu \"Human Insights\": *\"Conexiune comună prin Andrei\"* (în loc de Afinitate 68).\n2. **Carduri \"Action-First\":** Design minimalist, shadow `0 2px 4px rgba(0,0,0,0.05)`, colțuri `12px`. Butoane primare Indigo `#6366F1` (\"Cere introducere\") vizibile instant.\n3. **Traducere Jargon:** Simplifică: \"TF-IDF\" devine *\"Interese comune: Energie & Infrastructură\"*.",
+    "ok": true
+  },
+  {
+    "cod": "15.3",
+    "rol": "FP&A Analyst",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotul vizual și uman:\n\n1. **Carduri \"Human-First\":** Fundal alb (#FFFFFF), umbre diffuse (`0 4px 12px rgba(0,0,0,0.05)`), colțuri 16px. Înlocuim scorurile cu copy uman: \"3 conexiuni comune\" în loc de \"Afinitate 68\".\n2. **Action Layer:** Buton \"Cere introducere\" indigo (#6366F1) prominent; restul acțiunilor (Vezi profil) ca link-uri discrete.\n3. **Status Pastile:** UI luminos: Statusuri cu fundal pal și text saturat (ex: #DCFCE7/Green-600 pentru \"Meeting\").",
+    "ok": true
+  },
+  {
+    "cod": "5.4",
+    "rol": "Machine Learning Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "idei": "Iată soluțiile pentru a transforma complexitatea ML în interfață umană:\n\n1. **Human-Centric Cards:** Înlocuiește scorurile (ex: \"Afinitate 68\") cu un label cald: *\"Conexiune recomandată: Bogdan și tu aveți 3 interese în energie\"*. Butoane primare (Indigo #5B5BD6) cu acțiuni clare: \"Trimite mesaj\" vs \"Cere introducere\".\n2. **Contextual Intelligence:** În loc de \"TF-IDF/SHA-256\", afișează insight-uri sub formă de buline: *„Ai un contact comun”*.\n3. **Clean Visuals:** Paletă albă (bg #FAFAFA) cu accente indigo; font Inter. Elimină graficele complexe; folosește carduri rotunjite (12px) și umbre fine (#0000000a).",
+    "ok": true
+  },
+  {
+    "cod": "3.1",
+    "rol": "QA Lead",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul vizual și funcțional:\n\n1. **Card \"Human-First\":** Înlocuiește scorurile tehnice cu *Context Cards* (Inter/14px, alb, border-radius 16px). Microcopy: *\"Potrivire: Interese comune în Energie. Conexiune: Andrei Popescu\"*. Buton primar Indigo (#6366F1): \"Cere introducere\".\n2. **UI \"Airy\":** Background #F9FAFB. Elimină graficele complexe. Introdu \"Status Pills\" (ex: *Prospect* - fundal Indigo-50, text #6366F1).\n3. **Smart Disclosure:** Ascunde jargonul în detalii. Prioritizează acțiunea: butoane \"Quick-Action\" (Mesaj/Introducere) în loc de date brute.",
+    "ok": true
+  },
+  {
+    "cod": "7.5",
+    "rol": "Business Analyst",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Interfață \"Social-First\":** Background `#FAFAFA`, carduri `#FFFFFF` cu umbră `0 4px 12px rgba(0,0,0,0.05)`. Înlocuim scorurile tehnice cu *Human Insights*: „Potrivire: Bogdan și tu aveți 3 interese comune”.\n2. **Acțiuni \"One-Tap\":** Butoane indigo (`#6366F1`) pentru acțiuni: „Cere introducere”, „Mesaj”. Statusuri: pastile `bg-indigo-50 text-indigo-700`.\n3. **Typography UI:** Sans-serif (Inter), ierarhie bazată pe greutate (`bold` pentru nume/acțiuni), eliminăm seriful.",
+    "ok": true
+  },
+  {
+    "cod": "1.6",
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotul vizual și UX:\n\n1. **Rebranding Vizual:** Fond alb (#F9FAFB), carduri cu `border-radius: 16px`, umbre `0 4px 6px -1px #00000005`. Accent Indigo (#6366F1). Înlocuim serifele cu Inter.\n2. **Umanizarea Datelor:** Înlocuim scorurile (TF-IDF/Trust) cu micro-copy contextual: „Potrivire: 3 interese comune în Energie” și „Recomandat de [Nume]”. \n3. **Action-First UI:** Butoane primare (Indigo) „Cere introducere” și secundare „Ignoră” plasate compact în footer-ul cardului.",
+    "ok": true
+  },
+  {
+    "cod": "5.4",
+    "rol": "Machine Learning Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 2,
+    "idei": "Iată soluțiile pentru a transforma complexitatea ML în valoare socială:\n\n1. **Card \"Match Uman\":** Înlocuiește scorurile (68%) cu *badges* calitative: \"Conexiune comună: Ion Popescu\" și \"Interese: Energie, Infrastructură\". Paletă: fundal `#FFFFFF`, borduri `#E5E7EB`, text `#1F2937`.\n2. **Action-First UI:** Înlocuiește vizualizarea `Force-Directed` cu un *timeline* clar. Adaugă butoane de acțiune primară indigo (`#6366F1`) \"Cere introducere\" direct în card, transformând datele pasive în oportunități.\n3. **Smart Summaries:** Ascunde jargonul (TF-IDF/SHA) în \"Detalii tehnice\". Afișează doar beneficiul: \"De ce acum? - Activitate recentă în sector\".",
+    "ok": true
+  },
+  {
+    "cod": "10.4",
+    "rol": "Scrum Master",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 3,
+    "idei": "Iată propunerile pentru pivotul vizual și UX:\n\n1. **Human-Centric Cards:** Înlocuim scorurile obscure cu \"De ce acum\": *\"Bogdan caută furnizori. Aveți 3 conexiuni comune în Energie.\"* Layout: Background alb, font Inter, accent Indigo (#6366F1). Buton primar \"Cere introducere\".\n2. **Status-Driven UI:** Eliminăm jargonul. \"Trust Ledger\" devine \"Verificat\". Înlocuim grafurile cu un Timeline curat (Daily/Upcoming) cu pastile colorate pentru statusuri.\n3. **Action-First Hierarchy:** Eliminăm activele financiare. Cardurile devin \"Oportunități de relație\" cu acțiuni clare: Mesaj/Introducere/Ignoră.",
+    "ok": true
+  },
+  {
+    "cod": "15.4",
+    "rol": "Payroll Specialist",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru transformarea interfeței:\n\n* **UI Fresh & Airy:** Fundal `#F9FAFB`, carduri albe cu `border-radius: 12px` și umbră `0 4px 6px -1px #0000000a`. Accent indigo `#6366F1`. Eliminăm serifele; folosim `Inter` bold pentru titluri, light pentru date.\n* **Human-First Cards:** Înlocuim scorurile cu copy uman: „Bogdan caută furnizori. Aveți 3 conexiuni comune”. Buton primar „Trimite mesaj” (indigo) vs „Ignoră” (ghost).\n* **Statusuri Vizuale:** Înlocuim jargonul cu pastile colorate: `#EEF2FF` cu text indigo pentru „Potrivire”.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 5,
+    "idei": "Iată propunerile pentru pivotul vizual și UX:\n\n1. **Carduri \"Human-First\":** Înlocuim scorurile cu un text uman: *\"Conexiune comună prin Andrei Popescu. Interese: Energie & Sustenabilitate.\"* Design: fundal alb, umbră soft (#000/0.05), buton primar Indigo (#6366F1) cu textul \"Cere Introducere\".\n2. **Dashboard \"Social-Stream\":** Înlocuim graficele cu un timeline aerisit. Statusuri tip pastilă (verde neon #22C55E pentru \"Activ\").\n3. **Design System:** Font Inter, titluri Bold. Eliminăm jargonul tech; totul devine conversațional.",
+    "ok": true
+  },
+  {
+    "cod": "3.2",
+    "rol": "Senior QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată direcția pentru redesign (executabil în single-file):\n\n1. **Interfață Social-First:** Trecem la fundal `#F9FAFB`, carduri albe cu `box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05)`. Înlocuim jargonul tehnic cu microcopy uman: \"Bogdan caută furnizor\" în loc de \"Score 88\".\n2. **Action-Driven Layout:** Înlocuim scorurile abstracte cu butoane de acțiune indigo (`#6366F1`): \"Cere introducere\" sau \"Trimite mesaj\".\n3. **Typography & Status:** Font `Inter`, statusuri tip pastilă (bg `#EEF2FF`, text `#4338CA`).",
+    "ok": true
+  },
+  {
+    "cod": "1.6",
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "idei": "Iată propunerile mele pentru pivotarea către stilul social/modern:\n\n1. **Dashboard \"Human-First\":** Înlocuim scorurile aride cu *badges* textuale (ex: \"Conexiune comună prin Andrei\"). Paletă: bg `#FFFFFF`, text `#1F2937`, accente `#6366F1`.\n2. **Carduri Active:** Eliminăm jargonul. Înlocuim \"TF-IDF\" cu \"Interese comune: Energie, Tech\". Buton primar \"Cere introducere\" (indigo solid), secundar \"Ignoră\" (text gri).\n3. **Typography System:** Inter 14px/16px, titluri Bold. Eliminăm serifele; totul devine aerisit, cu padding-uri de 16px.",
+    "ok": true
+  },
+  {
+    "cod": "7.6",
+    "rol": "Product Operations Specialist",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată soluțiile de Product Ops pentru pivotarea spre un design social, uman și agil:\n\n1. **Sistem \"Human-First\"**: Înlocuim scorurile (ex. 'Afinitate 68') cu microcopy acționabil: *\"Vă potriviți: aveți 3 interese comune și o conexiune comună\"*. \n2. **Layout \"Action-Card\"**: Carduri albe (#FFFFFF) cu shadow-uri difuze, eliminând jargonul tehnic. Butoane de acțiune primare (Indigo #6366F1) direct pe card: \"Cere introducere\" sau \"Trimite mesaj\".\n3. **Visual Refresh**: Eliminăm serifele și sepia. Paletă: alb, gri deschis (#F9FAFB) și Indigo vibrant. Statusuri sub formă de pastile colorate pentru claritate instantanee.",
+    "ok": true
+  },
+  {
+    "cod": "5.5",
+    "rol": "MLOps Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru a transforma platforma dintr-un tool de audit într-un hub de relații:\n\n1. **Card \"Smart Match\":** Înlocuiește scorurile (ex: 68) cu un badge vizual: \"Potrivire excelentă: 3 interese comune\". Butoane active: [Mesaj direct] (Indigo #6366F1), [Cere introducere].\n2. **Dashboard \"Human-First\":** Background alb (#FAFAFA), font Inter. Înlocuiește grafurile complexe cu un timeline simplu: \"De ce acum?\" (ex: \"Bogdan caută parteneri în energie\").\n3. **Statusuri tactile:** Pastile colorate (#EEF2FF text #4F46E5) pentru context uman, nu tehnic.",
+    "ok": true
+  },
+  {
+    "cod": "10.5",
+    "rol": "Delivery Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea rapidă:\n\n1. **Interfață \"Human-First\":** Fundal `#F9FAFB`, carduri albe cu shadow `0 4px 6px -1px rgba(0,0,0,0.05)`. Înlocuim scorurile obscure cu \"Insights\": *„Bogdan caută furnizor: aveți 3 interese comune și o conexiune mutuală”*.\n2. **Action-Driven Layout:** Buton primar Indigo (`#6366F1`) pentru „Cere Introducere”. Statusuri sub formă de pastile discrete: `bg-indigo-50 text-indigo-700`. \n3. **Microcopy Conversațional:** Eliminăm jargonul tech; afișăm doar statusuri acționabile (ex: „Pregătit pentru contact”).",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Card \"Human-First\":** Înlocuiește scorurile tehnice cu *Badges* de context: „Conexiune comună: Ion Popescu” și „Interese: Energie, Tech”. Culori: fundal `#F9FAFB`, umbră `#00000008`, buton principal indigo `#6366F1`.\n2. **Interfață \"Action-Oriented\":** Elimină jargonul; înlocuiește „TF-IDF” cu „Recomandat pentru tine”. Adaugă un *Floating Action Menu* (Mesaj, Introducere) direct pe card.\n3. **Status \"Social\":** Statusuri tip pastilă (e.g., `#DCFCE7` text verde pentru „Disponibil”) pentru a umaniza interacțiunea.",
+    "ok": true
+  },
+  {
+    "cod": "15.5",
+    "rol": "Procurement / Achizitii",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Card \"Match-First\":** Înlocuim scorurile cu limbaj uman. Exemplu: „Bogdan caută furnizor cărbune. Aveți 3 interese comune în energie”. Buton primar: „Cere introducere” (Indigo #6366F1).\n2. **Dashboard Aerat:** Fond #F8FAFC, carduri albe cu shadow `0 4px 6px -1px rgba(0,0,0,0.1)`. Eliminăm jargonul (TF-IDF/HMAC) în favoarea unor etichete de status (ex: „Partener verificat”).\n3. **Interacțiune Socială:** Înlocuim tabelele cu vizualizări tip \"Timeline\": avataruri rotunjite, acțiuni clare (Message/Save) și micro-copy inspirațional.",
+    "ok": true
+  },
+  {
+    "cod": "3.2",
+    "rol": "Senior QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotul vizual și UX:\n\n*   **UI \"Lumina & Social\":** Fond `#F9FAFB`, carduri albe cu umbră `0 4px 6px -1px rgba(0,0,0,0.05)`. Înlocuim scorurile tehnice cu \"Human Insights\": *\"Potrivire: 3 interese comune prin Andrei Popa\"*.\n*   **Action-First Layout:** Butoane Indigo `#6366F1` doar pentru acțiuni primare (\"Cere introducere\"). Statusuri sub formă de pastile: `bg-[#EEF2FF] text-[#4338CA]`.\n*   **Limbaj Uman:** Traducem jargonul: *\"Indicator: 92% Trust\"* devine *\"Garanția rețelei: Verificat de 5 parteneri\"*.",
+    "ok": true
+  },
+  {
+    "cod": "8.1",
+    "rol": "Design Lead",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "idei": "Iată direcția strategică pentru a reseta produsul:\n\n1. **Rebranding Vizual:** Fundal #FAFAFA, carduri albe cu umbre `0 2px 8px rgba(0,0,0,0.05)`. Accent: `#6366F1` pentru butoane primare. Elimină fontul serif; folosește Inter, greutate bold pentru titluri, regular pentru text.\n2. **UX Umanizat:** Înlocuiește scorurile tehnice cu „Insight-uri”: în loc de „Afinitate 68”, scrie „Sunteți pe aceeași lungime de undă: 3 interese comune în Energie”.\n3. **Carduri Active:** Transformă cardurile în „Action Cards” cu butoane clare (icon + text): „Trimite mesaj” și „Cere introducere”.",
+    "ok": true
+  },
+  {
+    "cod": "5.6",
+    "rol": "Mobile Product Analyst",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul de design:\n\n* **Human-Centric Cards**: Înlocuim scorurile obscure cu \"De ce acum\": *\"Bogdan caută furnizori în energie; aveți 3 contacte comune\"*. Stil: Fundal alb, umbre #E5E7EB, font Inter.\n* **Action-Driven Interface**: Butoane primare indigo (#6366F1) cu micro-interacțiuni. Eliminăm jargonul: \"Trust Ledger\" devine \"Verificat prin conexiuni\".\n* **Social Pulse**: Înlocuim graficele complexe cu o bară de timeline intuitivă, tip \"Stories\", pentru întâlniri și oportunități.",
+    "ok": true
+  },
+  {
+    "cod": "1.6",
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 4,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Interfață \"Human-First\":** Înlocuiesc scorurile tehnice cu *badges* descriptive: „3 interese comune” (Indigo #6366F1, fundal #F5F7FF). Elimin jargonul, afișez acțiuni directe: „Cere introducere” (buton primar) vs „Ignoră” (ghost).\n2. **Layout Airy:** Carduri albe, *border-radius* 16px, umbră `0 4px 12px rgba(0,0,0,0.05)`. Font: Inter, titluri Bold.\n3. **Status Vizual:** Pastile colorate pentru context: „Prospect” (Indigo), „Validat” (Green-Soft #10B981).",
+    "ok": true
+  },
+  {
+    "cod": "11.1",
+    "rol": "Marketing Lead",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "idei": "Iată direcția pentru redesign:\n\n1. **Card \"Human-First\":** Înlocuiește scorurile tehnice cu *Insight-ul de Relație* (ex: \"Bogdan caută furnizori. Aveți 2 conexiuni comune\"). Butoane primare \"Cere introducere\" cu gradient #5B5BD6.\n2. **Interfață \"Airy\":** Background #F8FAFC, font *Inter* 400/600. Statusuri: pastile cu opacity 10% (ex: bg #DCFCE7, text #166534 pentru \"Meeting\").\n3. **Micro-interacțiuni:** Navigație bottom-bar cu icon-uri outline; elimină jargonul, folosește \"Potrivire 80%\" în loc de TF-IDF.",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru a transforma radical experiența utilizatorului:\n\n1. **Card \"Human-First\":** Înlocuiește scorurile tehnice cu *Insight-uri*: „Bogdan caută furnizori. Aveți 3 interese comune și conexiuni verificate”. Accent indigo (#6366F1), fundal alb, umbre subtile.\n2. **Action Bar:** Elimină statusurile pasive. Adaugă 3 butoane clare (Indigo/Ghost): „Mesaj”, „Introducere”, „Ignoră”.\n3. **Typography Update:** Inter (Sans), titluri Bold (14px), text 12px. Elimină jargonul; înlocuiește „TF-IDF” cu „Interese potrivite”.",
+    "ok": true
+  },
+  {
+    "cod": "15.6",
+    "rol": "Billing / Revenue Operations",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul social-light:\n\n1. **Interfață \"Human-First\":** Înlocuim scorurile tehnice cu *Smart Badges*. Exemplu: în loc de \"Afinitate 68\", folosim o pastilă indigo (#6366F1) cu textul: \"3 interese comune în energie\".\n2. **Layout \"Card de Acțiune\":** Carduri aerisite (alb #FFFFFF, umbră `0 4px 6px -1px rgba(0,0,0,0.1)`) cu butoane de acțiune clare: \"Trimite mesaj\" (primar) și \"Cere introducere\" (secundar).\n3. **Typography UI:** Sans-serif curat (Inter), titluri boldate, spațiu negativ generos.",
+    "ok": true
+  },
+  {
+    "cod": "3.2",
+    "rol": "Senior QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 3,
+    "idei": "Iată propunerile pentru pivotul vizual și UX:\n\n*   **UI \"Human-First\":** Renunțăm la sepia pentru fundal `#FAFAFA` și carduri albe cu `box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05)`. Accent: `Indigo-600` (`#6366F1`) pentru butoane primary.\n*   **Copy \"Social\":** Înlocuim jargonul tehnic cu acțiuni clare: „Ai 3 conexiuni comune” în loc de „Afinitate 68%”.\n*   **Actionable Cards:** Mutăm scorurile tehnice în tooltip-uri; adăugăm butoane „Cere introducere” direct în cardul de match.",
+    "ok": true
+  },
+  {
+    "cod": "8.2",
+    "rol": "Senior UX Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea radicală către un ecosistem social, uman și acționabil:\n\n*   **Interfață „Human-First”**: Fundal #FAFAFA, carduri cu umbre fine (0 2px 8px rgba(0,0,0,0.05)). Înlocuim scorurile obscure cu etichete conversaționale: „Potrivire: 3 interese comune”. Butoane primare indigo (#6366F1) pentru acțiuni clare: [Conectează-te], [Trimite mesaj].\n*   **Microcopy Empatic**: Eliminăm jargonul tech. „TF-IDF Match” devine „Context: Interes comun în energie”. „Trust Ledger” devine „Garantat prin: Rețeaua ta”.\n*   **Layout Modular**: Carduri compacte (max 200px înălțime). Navigație fixată jos cu iconițe intuitive (Home, Rețea, Mesaje, Profil). Statusuri tip „pastilă” cu culori vibrante, contrastante.",
+    "ok": true
+  },
+  {
+    "cod": "1.7",
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea rapidă:\n\n1. **Rebranding Vizual (Zero-Weight):** Trecem la `#FFFFFF` (bg), `#F8FAFC` (carduri), `#6366F1` (accent). Eliminăm serifele; folosim `Inter`, font-weight 600 pentru titluri, 400 pentru text. Umbre: `0 4px 6px -1px rgba(0,0,0,0.05)`.\n2. **Umanizarea Datelor:** Înlocuim jargonul cu „Insight-uri”: în loc de „Scor 68”, scriem „Potrivire: 3 interese comune în Energie”.\n3. **Carduri Active:** Eliminăm metadatele tehnice. Adăugăm footer cu butoane clare (Primary/Ghost) și statusuri tip „Pastilă” (`bg-indigo-50 text-indigo-700`).",
+    "ok": true
+  },
+  {
+    "cod": "5.7",
+    "rol": "Data Analyst",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Card \"Human-First\"**: Înlocuim scorurile cu \"De ce să te conectezi\": *„Potrivire: Bogdan caută cărbune, tu ai expertiză în infrastructură. Conexiune comună: Maria Ionescu.”* Butoane de acțiune (Indigo #6366F1, rounded) active: „Cere introducere”, „Vezi profil”.\n2. **Dashboard Aerat**: Fundal #FAFAFA, carduri #FFFFFF cu umbră `0 4px 6px -1px rgba(0,0,0,0.05)`. Text: Inter 14px/16px, fără serif.\n3. **Micro-copy Social**: Traducem „Trust Ledger” în „Verificat prin rețea”. Statusuri ca pastile (#EEF2FF, text #4F46E5).",
+    "ok": true
+  },
+  {
+    "cod": "11.2",
+    "rol": "Digital Marketing Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile mele pentru pivotarea către un vibe social, energic:\n\n- **Card „Human-First”**: Înlocuim scorurile cu „De ce să-l contactezi”: *„Bogdan caută furnizori. Aveți 3 conexiuni comune”*. Butoane clare (Indigo #6366F1): „Trimite mesaj” vs „Ignoră”.\n- **Statusuri „Pastilă”**: Înlocuim cifrele tehnice cu etichete vizuale: *„Prospect Cald”* (bulină verde aprins) sau *„Întâlnire”* (indigo). \n- **Interfață Aerisită**: Fundal alb (#FAFAFA), font Inter, carduri cu umbre fine `shadow-sm`. Elimini jargonul; totul devine conversație.",
+    "ok": true
+  },
+  {
+    "cod": "15.6",
+    "rol": "Billing / Revenue Operations",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotul către un UX „Social-First”:\n\n1. **Interfață \"Action-Card\":** Eliminăm jargonul. În loc de scoruri, afișăm „De ce acum?” (ex: „Voi doi aveți 3 interese în SaaS”). Butoane primare (Indigo #6366F1) cu acțiuni clare: „Trimite mesaj”.\n2. **Statusuri Umane:** Înlocuim „Trust Ledger” cu „Verificat prin [Nume]”. Pastile vizuale: „Conexiune comună” (Indigo soft), „Activ” (Verde neon).\n3. **Layout \"Airy\":** Background #F9FAFB, carduri albe cu umbră `0px 4px 12px rgba(0,0,0,0.05)`.",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 3,
+    "idei": "Iată soluțiile pentru a transforma experiența din „bancar-opac” în „social-uman”:\n\n1. **Card \"Human-First\"**: Înlocuim scorurile (TF-IDF) cu un limbaj natural: „Ai 3 interese comune cu Bogdan în energie”. Design: Card alb, umbră soft, buton indigo `[Cere introducere]` proeminent.\n2. **Statusuri de Acțiune**: Înlocuim graficele cu pastile colorate: „Prospect” (Blue #6366F1), „Întâlnire” (Emerald #10B981).\n3. **Typography Refresh**: Inter font, titluri Bold 16px, text secundar gri (#64748B).",
+    "ok": true
+  },
+  {
+    "cod": "3.3",
+    "rol": "QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Card „Human-First”**: Înlocuim scorurile cu propoziții: „Bogdan caută cărbune; aveți 3 interese comune”. În loc de butoane pasive, adăugăm acțiuni clare: „Trimite mesaj” (indigo #6366F1).\n2. **Design Air/Light**: Fundal `#F9FAFB`, carduri `#FFFFFF` cu umbră `0 4px 6px -1px rgba(0,0,0,0.05)`. Font `Inter`, statusuri tip pastilă (ex: `#ECFDF5` pt „Meeting”).\n3. **Micro-interacțiuni**: Butoane cu tranziție lină și hover scale.",
+    "ok": true
+  },
+  {
+    "cod": "8.2",
+    "rol": "Senior UX Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotul vizual și UX:\n\n1. **Carduri \"Human-First\":** Fundal alb, umbră soft `rgba(0,0,0,0.04)`. Înlocuim scorurile (TF-IDF) cu un \"Motiv de conectare\" (ex: „Interese comune în Energie”). Buton primar Indigo (`#6366F1`) pentru acțiuni directe: „Cere introducere”.\n2. **Status \"Social-Lean\":** Renunțăm la jargon. Indicatori vizuali minimali: pastile rotunjite cu fundal light-grey pentru status, accentuând doar numele și contextul relațional.\n3. **Navigare aerisită:** Bară de jos fixă cu icon-uri outline. Tipografie Inter, titluri Bold, spațiu alb generos. Totul respiră.",
+    "ok": true
+  },
+  {
+    "cod": "1.7",
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea rapidă spre stilul \"Bloom/Clay\":\n\n* **UI/UX:** Trecere la *Background #FAFAFA*, carduri albe cu `shadow: 0 4px 12px rgba(0,0,0,0.05)`, font *Inter* 400/600. Înlocuim jargonul tehnic cu microcopy uman: \"Bogdan caută furnizori\" (în loc de TF-IDF). \n* **Acțiuni:** Butoane `primary` indigo (#6366F1) cu colțuri rotunjite (12px). Statusuri tip \"pastilă\": fond deschis, text saturat. \n* **Ierarhie:** Context vizual (avatar + \"3 interese comune\") pus înaintea scorurilor.",
+    "ok": true
+  },
+  {
+    "cod": "5.8",
+    "rol": "BI Developer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "idei": "Iată soluțiile pentru pivotarea către „Social/Bloom”:\n\n1. **Interfață „Human-First”**: Înlocuim scorurile obscure cu etichete narative: „Conexiune comună: Ion Popescu”. Paletă: `bg-[#F8FAFC]`, text `neutral-900`, accent `indigo-600`.\n2. **Carduri „Action-Driven”**: Eliminăm jargonul. În loc de *TF-IDF*, folosim: „Interese comune: Energie, Tech”. Butoane de acțiune clare: „Trimite mesaj” (primar), „Ignoră” (ghost).\n3. **Micro-interacțiuni**: Statusuri stil „Pastilă” (`bg-indigo-50`, `text-indigo-600`). Eliminăm grafurile complexe; afișăm doar insight-ul: „Gata de contactat”.",
+    "ok": true
+  },
+  {
+    "cod": "11.2",
+    "rol": "Digital Marketing Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n*   **Interfață \"Human-First\":** Înlocuim scorurile tehnice cu \"Povestea conexiunii\". Ex: „Bogdan: 3 interese comune în Energie”. Paletă: fundal #F9FAFB, accente #6366F1, carduri albe cu shadow `0 4px 6px -1px rgba(0,0,0,0.05)`.\n*   **Carduri Acționale:** Eliminăm statusurile pasive. Înlocuim „Trust Ledger” cu un buton „Cere introducere” (activ) lângă avatarul celui care garantează.\n*   **Micro-copy:** Simplificăm limbajul: „Afinitate 68” devine „Potrivire ideală”.",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 4,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Carduri „Action-First”:** Fond alb (#FFFFFF), umbră soft `0 4px 12px rgba(0,0,0,0.05)`. Înlocuim scorurile obscure cu un badge „Potrivire bună: 3 interese comune”. Butoane primare indigo (#6366F1) pentru „Cere introducere”.\n2. **Limbaj Uman:** Înlocuim jargonul tehnic cu microcopy: „Analizăm interesele” devine „Am găsit puncte comune în energie”. \n3. **Statusuri Vizuale:** Pastile colorate (ex: #DCFCE7 fundal, #166534 text pentru „Disponibil”).",
+    "ok": true
+  },
+  {
+    "cod": "16.1",
+    "rol": "Head of Legal",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către un UX social, uman și performant:\n\n1. **Interfață „Conversațională”:** Înlocuim scorurile tehnice cu *Insight-uri Umane*. Exemplu: „Bogdan caută furnizor cărbune. Aveți 3 conexiuni comune.” (Font Inter, fundal #FAFAFA, accent #6366F1).\n2. **Action-First Cards:** Carduri compacte cu butoane de acțiune clare: „Trimite mesaj”/„Cere introducere”. Eliminăm jargonul (TF-IDF/SHA-256) în favoarea unor etichete prietenoase: „Interese comune: Energie”.\n3. **Status Vizual:** Pastile colorate (#E0E7FF cu text #4338CA) pentru statutul relației, eliminând sentimentul de „audit bancar”.",
+    "ok": true
+  },
+  {
+    "cod": "3.3",
+    "rol": "QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 2,
+    "idei": "Iată propunerile pentru a transforma radical experiența, păstrând simplitatea tehnică:\n\n*   **UI Social:** Înlocuiește cardurile dense cu layout \"Feed de conexiuni\": fundal alb, carduri rotunjite (16px), accent Indigo (#6366F1). Înlocuiește scorurile (ex: Trust 80) cu *microcopy uman*: „Recomandat: Bogdan are 3 interese comune și un contact comun”.\n*   **Acțiuni clare:** Adaugă butoane de tip *Primary* (fill indigo) și *Secondary* (ghost) sub fiecare card: „Cere introducere”, „Trimite mesaj”. Statusurile (ex: \"Prospect\") devin pastile discrete cu fundal light-gray.\n*   **Limbaj:** Traduce jargonul tehnic în beneficii: „Algoritm TF-IDF” devine „Potrivire bazată pe interesele tale în Energie”.",
+    "ok": true
+  },
+  {
+    "cod": "8.3",
+    "rol": "UI Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Rebranding vizual:** Paletă alb/off-white, fundal `#F8FAFC`, accente indigo `#6366F1`. Înlocuire font serif cu `Inter`, titluri `semi-bold` 16px.\n2. **Carduri \"Action-First\":** Redimensionare compactă, umbre `0px 2px 8px rgba(0,0,0,0.06)`. Buton primar \"Cere introducere\" vizibil, eliminat jargonul tehnic (ex: „3 interese comune” în loc de „TF-IDF 0.8”).\n3. **Statusuri umane:** Pastile soft cu iconițe: „Conectat” (gri deschis), „Recomandat” (indigo light).",
+    "ok": true
+  },
+  {
+    "cod": "1.7",
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "idei": "Iată direcția pentru refactorizarea *app/eie.html*:\n\n*   **Paletă & Layout:** Background `#FAFAFA`, carduri `#FFFFFF` cu `shadow: 0 4px 12px rgba(0,0,0,0.05)`. Accent Indigo `#6366F1`. Eliminăm serifele pentru `Inter`.\n*   **Human-First UI:** Înlocuim scorurile tehnice cu *badges* de context: „Conexiune comună: Ion Popescu”.\n*   **Action-Driven Cards:** Butoane primare stilizate (text alb, bg indigo) pentru „Cere introducere”; statusuri („Prospect”) ca pastile mici, discrete.",
+    "ok": true
+  },
+  {
+    "cod": "11.3",
+    "rol": "Content Marketer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotul vizual și de limbaj:\n\n1. **Interfața \"Human-First\":** Fond alb (#FAFAFA), carduri cu umbră `0 4px 12px rgba(0,0,0,0.05)`, font Inter. Înlocuiește scorurile tehnice cu \"Povestea conexiunii\": *„Bogdan caută furnizori. Aveți 3 interese comune (Energie, Tech) și o conexiune mutuală.”*\n2. **Action-Bar dinamic:** Înlocuiește listele pasive cu acțiuni vizibile: butoane indigo (#6366F1) \"Trimite mesaj\" și \"Cere introducere\" direct pe card.\n3. **Statusuri intuitive:** Elimină jargonul (ROI/TF-IDF) pentru etichete calde: \"Potrivire excelentă\" în loc de \"Afinitate 68\".",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 5,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Card \"Human-First\"**: Înlocuiește scorurile tehnice cu *Insight-uri*: „Potrivire: 3 interese comune în Energie”. Background alb (#FFFFFF), umbră `#00000008`, font Inter. Buton primar indigo (#6366F1) pentru „Cere introducere”.\n2. **Status \"Social-Pills\"**: Elimină jargonul; folosește pastile discrete (ex: `bg-#EEF2FF` pentru „Prospect”) în loc de Trust Ledger.\n3. **Layout \"Airy-Mobile\"**: Navigație bottom-bar iconizată, eliminând graficele complexe.",
+    "ok": true
+  },
+  {
+    "cod": "16.2",
+    "rol": "Corporate Lawyer",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "idei": "Iată propunerile pentru pivotarea către stilul „Bloom/Clay”:\n\n1. **Card \"Human-First\":** Înlocuiește scorurile tehnice cu *Insight-uri*: „Recomandat de Andrei: aveți 3 conexiuni comune”. Culori: fundal #F9FAFB, text primar #111827.\n2. **Action-Bar:** Înlocuiește butoanele pasive cu un *footer* de card activ: „Mesaj” (buton Indigo #6366F1), „Introducere” (ghost button).\n3. **Status Pastile:** Înlocuiește jargonul cu etichete vizuale clare (ex: #DCFCE7/verde pal pentru „Disponibil”).",
+    "ok": true
+  },
+  {
+    "cod": "6.1",
+    "rol": "Head of AI",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "idei": "Iată direcția strategică pentru a transforma „bancarul” în „social-human”:\n\n1. **Human-Centric UI**: Înlocuim scorurile obscure cu **\"Why Connect\"** (ex: „3 interese comune în Energie”). Paletă: `bg-[#FAFAFA]`, carduri `white` cu `shadow-[0_2px_8px_rgba(0,0,0,0.04)]`, accent `indigo-600`.\n2. **Action-First Cards**: Eliminăm jargonul. Cardul devine o acțiune: buton primar \"Cere introducere\" (indigo solid), secundar \"Ignoră\" (ghost).\n3. **Conversational Insights**: Înlocuim logica tehnică (TF-IDF) cu un **AI Summary** scurt: „Bogdan caută furnizor. Tu ai conexiunea potrivită.”",
+    "ok": true
+  }
+]

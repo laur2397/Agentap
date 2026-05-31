@@ -9,34 +9,35 @@
 <title>Cercul EIE — Network Capital</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* ====== PALETA "Executive Hybrid" — decisa de board (directori + Cxx) ====== */
+/* ====== PALETA "Bloom" — luminos, social, modern (redesign sedinta 7, 220 agenti) ====== */
 :root{
-  /* LIGHT — Quiet Luxury Sand (implicit, daytime) */
-  --bg:#F7F4EF;--bg2:#EDEAE5;--card:#FFFFFF;--card2:#F5F3EF;--line:#E5E0D8;--line2:#D8D2C8;
-  --ink:#1A202C;--ink2:#4A5568;--muted:#9aa0ad;
-  --primary:#B88E56;--primary2:#cda468;--primary-dim:#9a743f;--primary-soft:rgba(184,142,86,.14);
-  --accent:#1A2B3C;--accent-soft:rgba(26,43,60,.07);
-  --success:#2E7D32;--success-soft:rgba(46,125,50,.12);--warn:#D97706;
+  /* LIGHT — bright & airy */
+  --bg:#FAFAFB;--bg2:#F1F2F6;--card:#FFFFFF;--card2:#F5F6FA;--line:#ECEDF2;--line2:#E0E2EC;
+  --ink:#1E293B;--ink2:#475569;--muted:#64748B;
+  --primary:#6366F1;--primary2:#818CF8;--primary-dim:#4F46E5;--primary-soft:rgba(99,102,241,.10);
+  --accent:#4F46E5;--accent-soft:rgba(99,102,241,.08);
+  --success:#10B981;--success-soft:rgba(16,185,129,.12);--warn:#F59E0B;--warn-soft:rgba(245,158,11,.13);
   --on-primary:#ffffff;
-  --shadow:0 4px 20px rgba(40,30,10,.07);--shadow-lg:0 12px 36px rgba(40,30,10,.12);
-  --glow:rgba(184,142,86,.14);
-  /* alias-uri (folosite mai jos) */
+  --shadow:0 1px 2px rgba(16,24,40,.04),0 6px 16px -6px rgba(16,24,40,.10);
+  --shadow-lg:0 12px 40px -8px rgba(16,24,40,.22);
+  --glow:rgba(99,102,241,.10);
   --gold:var(--primary);--gold2:var(--primary2);--gold-dim:var(--primary-dim);--gold-soft:var(--primary-soft);
   --teal:var(--success);--teal-soft:var(--success-soft);
-  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',system-ui,sans-serif;--ease:cubic-bezier(.22,1,.36,1);
+  --serif:'Inter',system-ui,sans-serif;--sans:'Inter',system-ui,sans-serif;--ease:cubic-bezier(.22,1,.36,1);
 }
 [data-theme="dark"]{
-  /* SOFT-DARK — Navy lounge (night) */
-  --bg:#121625;--bg2:#1A202C;--card:#1E2536;--card2:#252D3E;--line:#2D3748;--line2:#3a4660;
-  --ink:#F8F9FA;--ink2:#CBD5E0;--muted:#718096;
-  --primary:#D4AF37;--primary2:#e6c85f;--primary-dim:#9a7d28;--primary-soft:rgba(212,175,55,.14);
-  --accent:#94A3B8;--accent-soft:rgba(148,163,184,.12);
-  --success:#54C2A0;--success-soft:rgba(84,194,160,.14);--warn:#F6AD55;
-  --on-primary:#15110a;
-  --shadow:0 4px 20px rgba(0,0,0,.3);--shadow-lg:0 14px 40px rgba(0,0,0,.45);
-  --glow:rgba(212,175,55,.12);
+  /* DARK — slate + indigo */
+  --bg:#0F1117;--bg2:#15171F;--card:#1B1E27;--card2:#222633;--line:#2A2F3C;--line2:#363C4B;
+  --ink:#F1F5F9;--ink2:#CBD5E1;--muted:#94A3B8;
+  --primary:#818CF8;--primary2:#A5B4FC;--primary-dim:#A5B4FC;--primary-soft:rgba(129,140,248,.16);
+  --accent:#A5B4FC;--accent-soft:rgba(129,140,248,.14);
+  --success:#34D399;--success-soft:rgba(52,211,153,.16);--warn:#FBBF24;--warn-soft:rgba(251,191,36,.16);
+  --on-primary:#15131f;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 20px -8px rgba(0,0,0,.5);
+  --shadow-lg:0 16px 44px -10px rgba(0,0,0,.6);
+  --glow:rgba(129,140,248,.14);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg2);color:var(--ink);font-family:var(--sans);font-weight:400;-webkit-font-smoothing:antialiased}
@@ -255,6 +256,52 @@ nav{position:sticky;bottom:0;z-index:9;background:color-mix(in srgb,var(--bg) 88
 .ob .nav2{display:flex;gap:10px;justify-content:space-between;align-items:center;max-width:340px;width:100%}
 .ob .dots{display:flex;gap:6px}.ob .dots i{width:7px;height:7px;border-radius:50%;background:var(--line2)}.ob .dots i.on{background:var(--primary)}
 .ob .skip{background:none;border:0;color:var(--muted);font-size:12px;cursor:pointer;margin-top:16px}
+
+/* ============ REDESIGN "Bloom" (iteratia 5) — luminos, social, modern ============ */
+.brand .mk{border-radius:13px;border:0;background:linear-gradient(135deg,var(--primary),var(--primary-dim));color:#fff;font-weight:800;font-size:19px}
+.brand .t{font-weight:800;font-size:19px;letter-spacing:-.3px}
+.brand .t small{color:var(--muted);letter-spacing:2px}
+h2.title{font-weight:800;font-size:24px;letter-spacing:-.5px;margin:2px 0 4px}
+.eyebrow{color:var(--primary);letter-spacing:1.5px;font-weight:600}
+.sec{font-weight:700;font-size:16px;letter-spacing:-.2px}
+.sub{font-size:13px;line-height:1.5}
+.digest .g,.kpi .v,.nm,.modal .h .t,.panel h3,.ob h1,.estate .t,.lr-name{font-family:var(--sans)}
+.kpi .v{font-weight:800;letter-spacing:-.5px}
+.btn{border-radius:11px;min-height:44px;font-weight:600;letter-spacing:0;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.btn.gold{background:linear-gradient(135deg,var(--primary),var(--primary-dim));box-shadow:0 4px 12px rgba(99,102,241,.28)}
+.btn.gold:active{transform:scale(.97)}
+.btn.sm{min-height:38px;border-radius:10px}
+.card{border-radius:18px;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.card.match::before,.card.conectat::before{display:none}
+.card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.av.sq{border-radius:13px;border:0;color:#fff;font-weight:700;font-family:var(--sans)}
+.ghead{display:flex;align-items:flex-start;gap:12px}
+.ghead .gi{flex:1;min-width:0}
+.ghead .gn{font-weight:700;font-size:16px;color:var(--ink);letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ghead .gt{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.statuspill{flex:none;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:5px 10px;border-radius:30px;background:var(--card2);color:var(--ink2)}
+.statuspill .sd{width:6px;height:6px;border-radius:50%;background:var(--muted)}
+.statuspill.ok{background:var(--success-soft);color:var(--success)}.statuspill.ok .sd{background:var(--success)}
+.statuspill.warn{background:var(--warn-soft);color:#B45309}.statuspill.warn .sd{background:var(--warn)}
+.gline{font-size:14px;color:var(--ink);line-height:1.5;margin:13px 0 2px}
+.gline b{font-weight:700}
+.hbadges{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.hbadge{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--ink2);background:var(--card2);border-radius:30px;padding:5px 11px}
+.hbadge.v{color:var(--success)}
+.adock{display:flex;gap:8px;margin-top:14px;align-items:center}
+.adock .btn{flex:1}
+.menu-dots{flex:none;width:44px;height:44px;border-radius:11px;border:1px solid var(--line2);background:var(--card);color:var(--muted);font-size:18px;cursor:pointer;display:grid;place-items:center}
+.waiting{font-size:13px;color:var(--ink2);background:var(--warn-soft);border-radius:11px;padding:11px 13px;margin-top:14px;display:flex;align-items:center;gap:8px}
+details.why2{margin-top:11px}
+details.why2>summary{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;color:var(--primary);cursor:pointer;font-weight:500;list-style:none}
+details.why2>summary::-webkit-details-marker{display:none}
+.whybody{margin-top:9px;background:var(--card2);border-radius:12px;padding:13px;font-size:12.5px;color:var(--ink2);line-height:1.6}
+.whybody .mono{font-family:ui-monospace,monospace;font-size:11px;color:var(--muted)}
+.shield{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);margin-top:11px}
+:focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:8px}
+.tab:focus-visible,.themebtn:focus-visible,.menu-dots:focus-visible{outline-offset:-2px}
+.pill{text-transform:none;letter-spacing:0;font-weight:600}
+.tab .ic{font-size:18px}
 </style>
 </head>
 <body>
@@ -274,21 +321,21 @@ nav{position:sticky;bottom:0;z-index:9;background:color-mix(in srgb,var(--bg) 88
   <!-- ACASA -->
   <section id="acasa" class="view on">
     <div class="digest"><div class="e">Focus Digest · azi</div><div class="g" id="digG"></div><p id="digP"></p><div id="trend"></div></div>
-    <div class="sec">Exec-Concierge</div>
-    <p class="sub" style="margin:-6px 0 10px">Estimari euristice — indicatori de colaborare, nu valori financiare garantate.</p>
+    <div class="sec">Pe scurt azi</div>
+    <p class="sub" style="margin:-6px 0 10px">Estimari orientative — indicatori de colaborare, nu valori financiare garantate.</p>
     <div class="kpis" id="kpis"></div>
-    <div class="sec">Network Health Pulse</div>
+    <div class="sec">Sanatatea retelei</div>
     <div class="pulse" id="pulse"></div>
-    <div class="sec">Trust Ledger<a data-go="retea">reteaua →</a></div>
+    <div class="sec">Conexiuni confirmate<a data-go="retea">reteaua →</a></div>
     <div class="ledger" id="ledger"></div>
-    <div class="sec">Oportunitati de top<a data-go="potriviri">toate →</a></div>
+    <div class="sec">Persoane de contactat<a data-go="potriviri">toate →</a></div>
     <div id="topMatches"></div>
   </section>
 
   <!-- POTRIVIRI -->
   <section id="potriviri" class="view">
-    <div class="eyebrow">Graph Matchmaker</div><h2 class="title">Potriviri</h2>
-    <p class="sub">Afinitati calculate semantic (TF-IDF / cosine). Dublu consimtamant, sursa citata, Trust Score verificat.</p>
+    <div class="eyebrow">Pentru tine</div><h2 class="title">Cine merita contactat</h2>
+    <p class="sub">Oameni din cerc cu care ai legaturi relevante. Identitatea se dezvaluie cu acordul ambelor parti.</p>
     <div id="matchList"></div>
   </section>
 
@@ -303,10 +350,10 @@ nav{position:sticky;bottom:0;z-index:9;background:color-mix(in srgb,var(--bg) 88
 
   <!-- SECRETARA AI -->
   <section id="secretara" class="view">
-    <div class="eyebrow">Secretara AI</div><h2 class="title">Dicteaza dupa apel</h2>
-    <p class="sub">Scrie dupa o discutie. Extrag automat „intentiile de business” (ofer/caut) si le adaug in profil.</p>
+    <div class="eyebrow">Asistent</div><h2 class="title">Noteaza dupa o intalnire</h2>
+    <p class="sub">Scrie cu cuvintele tale ce ai discutat. Iti notez singur ce cauti si ce oferi, si caut potriviri.</p>
     <textarea id="dictText" rows="5" placeholder="ex: Am vorbit cu un investitor interesat de energie. Eu caut un contabil bun si ofer spatii comerciale."></textarea>
-    <div style="margin-top:10px"><button class="btn gold" id="dictBtn" onclick="dicteaza()">Extrage intentiile</button></div>
+    <div style="margin-top:10px"><button class="btn gold" id="dictBtn" onclick="dicteaza()">Noteaza si cauta potriviri</button></div>
     <div id="dictRes" style="margin-top:14px"></div>
   </section>
 
@@ -381,9 +428,9 @@ nav{position:sticky;bottom:0;z-index:9;background:color-mix(in srgb,var(--bg) 88
 const SEED=[["Ana Popescu","Director, Popescu Imobiliare","Imobiliare",92],["Bogdan Marin","Fondator, Marin Energy","Energie",88],["Cristina Ilie","CEO, Excavari Ilie","Constructii",90],["Darius Enache","Investitor privat","Finante",95],["Elena Voicu","Owner, Voicu Logistic","Transport",84],["Florin Dobre","Antreprenor, AgriFarm","Agricultura",80],["Gabriela Stan","Avocat, Stan & Asociatii","Juridic",93],["Horia Lungu","Director, NordSoft","IT",87],["Irina Pavel","Contabil-sef, FinPro","Finante",89],["Janos Kovacs","Importator, Kovacs Trade","Comert",78],["Liviu Toma","Dezvoltator, Toma Construct","Constructii",85],["Maria Radu","Marketing, Radu Media","Marketing",82],["Nicolae Barbu","Producator, Barbu Mobila","Productie",81],["Oana Dinu","HR, TalentHub","HR",86],["Paul Georgescu","Broker, AsigPlus","Asigurari",83],["Raluca Neagu","Owner, Neagu Catering","HoReCa",79],["Sorin Apostol","Inginer, Apostol Instalatii","Constructii",84],["Teodora Mihai","Designer, Mihai Studio","Creative",88],["Victor Stoica","Distribuitor, Stoica Auto","Auto",80],["Bianca Lazar","Fondator, Lazar Cosmetics","Productie",85]];
 const OFF={0:[["Spatii comerciale de inchiriat in centru","profil"],["Teren intravilan langa centura","nota 4 mai"]],1:[["Cariera de carbune in zona Gorj","nota 3 martie"],["Contracte furnizare energie firme","profil"]],2:[["Utilaje de excavat in Brasov","audio 12 ian"]],3:[["Capital pentru investitii energie si imobiliare","profil"]],4:[["Flota transport marfa national si UE","profil"]],5:[["Cereale en-gros la pret de producator","profil"]],6:[["Consultanta juridica M&A si contracte","profil"]],7:[["Dezvoltare software si AI la comanda","profil"]],8:[["Contabilitate si fiscalitate firme","profil"]],9:[["Import produse din Asia, logistica","profil"]],10:[["Antrepriza constructii rezidentiale","profil"]],11:[["Campanii marketing si productie video","profil"]],12:[["Mobilier la comanda HoReCa si birouri","profil"]],13:[["Recrutare IT si management","profil"]],14:[["Asigurari de firma si flote","profil"]],15:[["Catering evenimente corporate","profil"]],16:[["Instalatii electrice industriale","profil"]],17:[["Branding premium si identitate","profil"]],18:[["Distributie piese auto","profil"]],19:[["Productie cosmetice private-label","profil"]]};
 const SEEK={0:[["Investitor pentru proiect imobiliar","dictare"],["Furnizor de carbune pentru centrala","nota 2 mai"]],1:[["Investitor pentru proiect energetic","apel"],["Transport marfa agabaritic","profil"]],2:[["Contabil bun pentru firma","nota"],["Asigurare pentru flota utilaje","profil"]],3:[["Oportunitati in energie si agricultura","profil"]],4:[["Spatii de depozitare in vest","profil"]],5:[["Utilaje agricole si excavatoare","apel"]],6:[["Clienti firme pentru retainer juridic","profil"]],7:[["Investitor pentru produs SaaS","profil"]],8:[["Clienti noi pentru contabilitate","profil"]],9:[["Spatii de depozitare Bucuresti","profil"]],10:[["Teren pentru dezvoltare","profil"],["Materiale de constructii en-gros","nota"]],11:[["Clienti corporate","profil"]],12:[["Distribuitor mobilier","profil"]],13:[["Firme care recruteaza","profil"]],14:[["Firme cu flote de asigurat","profil"]],15:[["Spatii pentru evenimente","profil"]],16:[["Proiecte cu instalatii","profil"]],17:[["Clienti pentru rebranding","profil"]],18:[["Firme cu flote auto","profil"]],19:[["Distribuitor cosmetice si showroom","nota"]]};
-const COLORS=["#B88E56","#2E7D32","#1A2B3C","#8a6fa8","#cf7a6e","#3d7ea6","#b08a5a","#4f9d77"];
+const COLORS=["#6366F1","#10B981","#F59E0B","#8B5CF6","#EC4899","#0EA5E9","#14B8A6","#F97316","#EF4444","#22C55E"];
 const STOP=new Set("si sau de la in un o cu pe pentru din ca care este are am ai vreau caut ofer cineva zona bun buna nou noua a al ale lui langa".split(" "));
-const KEY="cercul_eie_v4",TKEY="cercul_theme",SKEY="cercul_salt";
+const KEY="cercul_eie_v5",TKEY="cercul_theme",SKEY="cercul_salt";
 let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false;
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
 const esc=s=>(s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
@@ -519,15 +566,14 @@ function home(){const me=mem(ME),mm=myMatches();
   const prop=mm.filter(m=>m.status==="propus").length,con=mm.filter(m=>m.status==="conectat").length;
   $("#digG").textContent="Buna ziua, "+me.name.split(" ")[0]+".";
   $("#digP").textContent=`Ai ${prop} oportunitati noi de mare afinitate si ${con} conexiuni active. Ti-am grupat tot intr-un singur rezumat — fara intreruperi pe parcursul zilei.`;
-  const dealflow=con*42+prop*12,roi=(con*3.4).toFixed(1),avg=mm.length?Math.round(mm.reduce((s,m)=>s+m.score,0)/mm.length):0;
-  // mini-trend (est.) — vizualizare, nu cifre garantate
-  const trend=[dealflow*.4,dealflow*.55,dealflow*.5,dealflow*.7,dealflow*.85,dealflow||4].map(Math.round);
-  $("#trend").innerHTML='<div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary-dim);margin-top:8px">Tendinta deal flow (est.)</div>'+sparkline(trend);
-  const k=(l,v,d)=>`<div class="kpi"><div class="l">${l}</div><div class="v">${v}</div><div class="d">${d}</div></div>`;
+  const avg=mm.length?Math.round(mm.reduce((s,m)=>s+m.score,0)/mm.length):0,tot=con+prop;
+  // mini-trend — activitate recenta (vizualizare orientativa)
+  const trend=[Math.max(0,tot-4),Math.max(0,tot-3),Math.max(1,tot-2),Math.max(1,tot-1),tot,tot+1].map(Math.round);
+  $("#trend").innerHTML='<div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary-dim);margin-top:8px">Activitatea ta recenta</div>'+sparkline(trend);
   const kc=(l,id,d)=>`<div class="kpi"><div class="l">${l}</div><div class="v" id="${id}">0</div><div class="d">${d}</div></div>`;
-  $("#kpis").innerHTML=k("Network Capital","€"+dealflow+"k (est.)","deal flow ipotetic")+k("ROI conexiuni",roi+"x (est.)","ipotetic, nu garantat")
-    +kc("Trust Score","kpiTrust","verificat")+kc("Afinitate medie","kpiAff","din 99");
-  countUp($("#kpiTrust"),me.trust,"");countUp($("#kpiAff"),avg,"");
+  $("#kpis").innerHTML=kc("Conexiuni active","kpiCon","persoane")+kc("Sugestii noi","kpiSug","de verificat")
+    +kc("Profil","kpiTrust","verificat")+kc("Potrivire medie","kpiAff","din 99");
+  countUp($("#kpiCon"),con,"");countUp($("#kpiSug"),prop,"");countUp($("#kpiTrust"),me.trust,"");countUp($("#kpiAff"),avg,"");
   const reach=Math.min(100,40+con*9),depth=Math.min(100,30+con*12),fresh=Math.min(100,55+prop*5);
   $("#pulse").innerHTML=pl("Acoperire retea",reach)+pl("Adancime relatii",depth)+pl("Prospetime oportunitati",fresh);
   const conx=mm.filter(m=>m.status==="conectat").sort((a,b)=>(b.at||0)-(a.at||0));
@@ -554,32 +600,39 @@ function exportLedger(){try{const blob=new Blob([JSON.stringify(LEDGER_CHAIN,nul
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="trust-ledger-"+today()+".json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);toast("Trust Ledger exportat (JSON)");}catch(e){toast("Export esuat");}}
 function pl(l,v){return`<div><div class="row"><span>${l}</span><span style="color:var(--primary-dim)">${v}%</span></div><div class="bar"><i style="width:${v}%"></i></div></div>`;}
 
+function scoreLabel(s){return s>=85?"Potrivire excelenta":s>=70?"Potrivire foarte buna":s>=60?"Potrivire buna":"Posibila potrivire";}
 function matches(list){if(!list.length)return'';
   return list.map(m=>{const o=DB.items.find(i=>i.id===m.offer_item)||{text:"",source:""},s=DB.items.find(i=>i.id===m.seek_item)||{text:"",source:""};
-    const off=m.offer_member===ME,cel=mem(off?m.seek_member:m.offer_member)||{name:"?",industry:"",role:"",trust:0},euc=off?m.offer_consent:m.seek_consent;
-    // privacy-by-design: pana la DUBLU consimtamant, identitatea si cererea privata raman ascunse
-    const rev=m.status==="conectat";
-    const nm=rev?esc(cel.name):"Membru din Cerc",ro=rev?esc(cel.role):esc(cel.industry)+" · identitate ascunsa",av=rev?ini(cel.name):"✦";
-    const mineTxt=esc(off?o.text:s.text),celTxt=rev?esc(off?s.text:o.text):"••• se dezvaluie la dublu consimtamant";
-    const why=rev?((m.common||[]).map(w=>`temă comună „${esc(w)}”`).join(" · ")||"teme de business comune")
-                 :"Afinitate pe teme de business comune. Detaliile si identitatea se dezvaluie doar dupa ce ambele parti accepta.";
-    const src=rev?("sursa: "+esc(o.source)):"sursa citata · se dezvaluie la consimtamant";
-    let acts;
-    if(m.status==="conectat")acts=`<span class="pill conectat">conectat</span><button class="btn ghost sm" onclick="openMatch(${m.id})">Conversatie</button>`;
-    else if(euc)acts=`<span class="pill propus">in asteptare</span><span style="color:var(--muted);font-size:12px">cealalta parte trebuie sa confirme</span>`;
-    else acts=`<button class="btn gold sm" onclick="consent(${m.id},true)">Prezinta-ma</button><button class="btn ghost sm" onclick="consent(${m.id},false)">Refuz</button>`;
-    return `<div class="card match ${m.status==="conectat"?"conectat":""}">
-      <div class="mtop"><div class="av" style="width:46px;height:46px;font-size:16px">${av}</div>
-        <div><div class="nm">${nm}</div><div class="co">${ro}</div></div>
-        <div class="sc"><div class="n">${m.score}</div><div class="l">afinitate</div></div></div>
-      <span class="trust">✦ Trust Score ${cel.trust}/100 · verificat</span>
-      <div class="pair"><div class="r"><span class="tag">${off?"tu oferi":"tu cauti"}</span><b>${mineTxt}</b></div>
-        <div class="r"><span class="tag">${rev?esc(cel.name.split(" ")[0]):"membrul"} ${off?"cauta":"ofera"}</span><b>${celTxt}</b></div></div>
-      <details class="why"><summary>De ce v-am potrivit</summary><div class="b">${why}</div></details>
-      <div style="font-size:10.5px;color:var(--muted);margin-top:8px">⚙ metoda: TF-IDF + cosine · ${(m.common||[]).length} ${rev?"teme comune":"semnale (detalii dupa consimtamant)"}</div>
-      ${rev?`<div class="radarwrap">${radar([Math.min(100,(m.common||[]).length*22),m.score,cel.trust])}<div class="rk"><b>De ce s-a potrivit</b> · Dimensiuni 0–100: <b>Interese</b> = teme comune ×22 · <b>Afinitate</b> = scor TF-IDF/cosine · <b>Incredere</b> = Trust Score. Metoda transparenta, fara cifre fabricate.</div></div>`:""}
-      <div class="src"><span class="seal">❧</span> ${src}</div>
-      <div class="acts">${acts}</div></div>`;}).join("");}
+    const off=m.offer_member===ME,cel=mem(off?m.seek_member:m.offer_member)||{name:"?",industry:"",role:"",trust:0,color:"#6366F1"};
+    const euc=off?m.offer_consent:m.seek_consent,rev=m.status==="conectat",nC=(m.common||[]).length;
+    const nm=rev?esc(cel.name):"Membru din Cerc",ro=rev?esc(cel.role):esc(cel.industry||"Business")+" · identitate ascunsa";
+    const avBg=rev?(cel.color||"#6366F1"):"var(--primary)",avTx=rev?svgSafe(ini(cel.name)):"✦";
+    const pill=rev?'<span class="statuspill ok"><span class="sd"></span>Conectat</span>'
+              :euc?'<span class="statuspill warn"><span class="sd"></span>In asteptare</span>'
+              :'<span class="statuspill"><span class="sd"></span>Sugestie</span>';
+    const fn=rev?esc(cel.name.split(" ")[0]):"Acest membru",ind=esc(cel.industry||"cerc");
+    let gline;
+    if(off) gline=rev?`<b>${fn}</b> cauta „${esc(s.text)}” — exact ce oferi tu.`:`<b>Cineva din ${ind}</b> cauta ceva ce <b>tu oferi</b>.`;
+    else    gline=rev?`<b>${fn}</b> ofera „${esc(o.text)}” — fix ce cauti tu.`:`<b>Cineva din ${ind}</b> ofera ceva ce <b>tu cauti</b>.`;
+    const interese=nC>0?`${nC} ${nC===1?"interes comun":"interese comune"}`:"teme de business comune";
+    const badges=`<span class="hbadge">★ ${scoreLabel(m.score)}</span><span class="hbadge">🔗 ${interese}</span>`+
+      (cel.trust>=80?'<span class="hbadge v">✓ Profil verificat</span>':'<span class="hbadge">Profil activ</span>');
+    let dock;
+    if(rev) dock=`<div class="adock"><button class="btn gold" onclick="openMatch(${m.id})">Trimite mesaj</button><button class="btn ghost" onclick="openMatch(${m.id})">Vezi profil</button></div>`;
+    else if(euc) dock=`<div class="waiting">⏳ Asteptam confirmarea celeilalte parti ca sa va punem in legatura.</div>`;
+    else dock=`<div class="adock"><button class="btn gold" onclick="consent(${m.id},true)">Cere introducere</button><button class="btn ghost" onclick="consent(${m.id},false)">Nu acum</button></div>`;
+    const why=rev?`Aveti ${interese}${nC?" ("+(m.common||[]).map(w=>esc(w)).join(", ")+")":""}. Conexiune confirmata de ambele parti.`
+                 :"Potrivire pe teme de business comune. Identitatea si detaliile se dezvaluie doar dupa ce ambele parti accepta (dublu consimtamant).";
+    const details=`<details class="why2"><summary>De ce vad asta? ⌄</summary><div class="whybody">${why}`+
+      `<div class="mono" style="margin-top:8px">Metoda: TF-IDF + cosine · ${nC} semnale comune · scor ${m.score}/99 · Trust ${cel.trust}/100. Estimari, nu garantii.</div></div></details>`;
+    return `<div class="card match ${rev?"conectat":""}">
+      <div class="ghead"><div class="av sq" style="width:46px;height:46px;font-size:16px;background:${avBg}">${avTx}</div>
+        <div class="gi"><div class="gn">${nm}</div><div class="gt">${ro}</div></div>${pill}</div>
+      <div class="gline">${gline}</div>
+      <div class="hbadges">${badges}</div>
+      ${dock}
+      ${details}
+      <div class="shield">🛡 Conexiune protejata${rev?" · sursa: "+esc(o.source):""}</div></div>`;}).join("");}
 
 /* ---- iteratia 4: radar "de ce s-a potrivit" (metodologie documentata, fara cifre fabricate) ---- */
 function radar(vals){const cx=52,cy=50,R=36,ax=[-90,30,150];

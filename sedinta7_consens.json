@@ -1,0 +1,1542 @@
+[
+  {
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\nMOTIV: Redesign-ul simplifică interfața și limbajul, reducând considerabil riscul de erori de interpretare pentru utilizator și ușurând crearea scenariilor de testare UX.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Facilities / Office Manager",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul „Human-Centric” elimină barierele tehnice inutile, transformând complexitatea datelor în oportunități de networking intuitive și acționabile.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul \"Bloom/Clay\" și traducerea jargonului tehnic în limbaj natural reduc drastic bariera de intrare, transformând interfața dintr-un instrument de audit într-o experiență de networking fluidă și intuitivă.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "AI Research Scientist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele de adopție prin simplificarea semantică și oferă un cadru vizual modern, esențial pentru tranziția către un ecosistem de networking intuitiv.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul sistemului de design (tokens) și simplificarea limbajului reduc drastic complexitatea UI, facilitând o dezvoltare predictibilă și o experiență utilizator mult mai intuitivă.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Sales Operations Specialist",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele tehnice, permițând echipei de vânzări să se concentreze pe relațiile umane, esențiale pentru conversia în networking high-end.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Finance Director / CFO Deputy",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul \"Bloom/Clay\" și transpunerea jargonului tehnic în limbaj uman elimină barierele de adopție, transformând datele brute într-un instrument intuitiv de decizie pentru utilizatorii noștri.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Program Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul vizual și umanizarea limbajului elimină barierele de adopție, transformând platforma dintr-un instrument tehnic într-o experiență intuitivă orientată spre networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Project Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus reduce barierele de utilizare prin umanizarea limbajului și o estetică minimalistă, facilitând adopția platformei ca motor de networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Customer Success Lead",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Această schimbare reduce radical barierele de adopție pentru utilizatori și aliniază limbajul interfeței cu obiectivele noastre de networking, facilitând munca echipei de suport.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Accountant / Contabil",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Eliminarea jargonului tehnic și adoptarea unei interfețe \"clean\" vor reduce considerabil timpul necesar echipei pentru a evalua oportunitățile, crescând rata de adopție a platformei.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul elimină bariera de adopție prin simplificarea limbajului, permițându-ne să abstractizăm complexitatea algoritmică în beneficii directe pentru utilizator.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul elimină barierele tehnice inutile, însă voi monitoriza riguros ca simplificarea limbajului să nu compromită trasabilitatea datelor critice în procesul de audit.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul sistemului de design este scalabil, iar traducerea limbajului tehnic în beneficii orientate spre utilizator va reduce drastic rata de abandon la onboarding.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplificarea limbajului și rafinarea vizuală reduc bariera de adopție a utilizatorului, permițând motorului de ML să livreze valoare direct în contextul de business, fără zgomot tehnic.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistem-agnostic și limbajul simplificat reduc drastic riscul de erori de interpretare din partea utilizatorului, facilitând totodată crearea unor seturi de testare (test cases) mult mai clare și axate pe experiența reală a utilizatorului.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplificarea limbajului și estetica \"human-centric\" vor reduce drastic timpul de adopție al utilizatorului, transformând complexitatea tehnică în valoare intuitivă pentru echipa mea.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Project Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele tehnice inutile, accelerând rata de adopție a utilizatorilor prin claritate și intuitivitate.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Accountant / Contabil",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Eliminarea jargonului tehnic opac în favoarea limbajului contextual va crește rata de adopție a platformei în rândul partenerilor noștri de business, reducând totodată timpul necesar pentru validarea oportunităților.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului de design (Design Tokens) este clar și scalabil, iar traducerea jargonului tehnic în limbaj natural va reduce semnificativ rata de abandon (churn) a utilizatorilor non-tehnici.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistem-centric (\"Bloom/Clay\") și transpunerea jargonului tehnic în limbaj natural reduc radical barierele de adopție pentru utilizatorii non-tehnici, facilitând conversia către un ecosistem de networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistem-centric inlocuit cu cel uman-centric reduce semnificativ riscul de erori de interpretare din partea utilizatorului, facilitand testarea fluxurilor de UX in conformitate cu noile standarde de lizibilitate.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Project Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus reduce barierele cognitive și umanizează limbajul tehnic, accelerând adoptarea platformei prin claritate și estetică intuitivă.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplificarea limbajului și estetica „Human-Centric” reduc drastic bariera de intrare pentru utilizatori, facilitând adopția și transformând platforma dintr-un instrument tehnic într-un catalizator de networking intuitiv.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul vizual și umanizarea limbajului reduc semnificativ bariera de adopție, permițând echipei de mobile să se concentreze pe un UX fluid în locul complexității tehnice brute.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Accountant / Contabil",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Eliminarea jargonului tehnic și adoptarea unei interfețe \"human-centric\" reduc erorile de interpretare și cresc rata de adopție a utilizatorilor în Departamentul 13.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistem-agnostic și traducerea limbajului tehnic în indicatori de valoare umană reduc semnificativ bariera de adopție pentru utilizatorii non-tehnici, facilitând integrarea modelelor noastre de recomandare în fluxul de lucru natural al utilizatorului.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Scrum Master",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului de comunicare umanizează datele complexe, facilitând adopția utilizatorilor și reducând timpul de instruire (onboarding) pentru parteneri.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Performance Test Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul minimalist și limbajul simplificat vor reduce sarcina pe UI thread și vor îmbunătăți experiența utilizatorului, facilitând totodată maparea mai clară a scenariilor de testare a performanței pentru noile componente.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplificarea limbajului și estetica \"human-centric\" vor reduce drastic timpul de on-boarding și vor crește rata de adopție a utilizatorilor în platformă.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "FP&A Analyst",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplificarea limbajului și estetica \"Bloom\" reduc bariera de adopție, transformând datele brute în insight-uri de business acționabile pentru echipa noastră.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul vizual și conversia limbajului reduc drastic bariera de intrare, permițându-ne să encapsulăm logica complexă de backend în experiențe UX intuitive și scalabile.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Generative AI Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul \"Bloom/Clay\" și traducerea semantică a jargonului tehnic elimină barierele de adopție, transformând datele brute în insight-uri acționabile pentru utilizatorul final.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Performance Test Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul minimalist și limbajul simplificat reduc încărcarea procesării pe frontend, optimizând astfel timpul de randare și experiența utilizatorului.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior UX Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele tehnice inutile, transformând complexitatea algoritmica într-o experiență de utilizare fluidă și orientată spre valoarea relațională.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Scrum Master",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului și traducerea jargonului tehnic în limbaj orientat către utilizator elimină barierele de adopție, aliniindu-se perfect cu obiectivul de a transforma platforma într-un ecosistem de networking intuitiv.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Umanizarea limbajului și estetica minimalistă reduc bariera de adopție pentru utilizatori, permițându-ne să ne concentrăm pe valoarea relațională în locul complexității tehnice.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "FP&A Analyst",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul umanizează datele complexe, facilitând adopția utilizatorilor și accelerând procesul de luare a deciziilor prin eliminarea barierelor tehnice.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Reducerea complexității limbajului și alinierea vizuală la standardele moderne de UX vor crește semnificativ rata de retenție și engagement-ul utilizatorilor.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Generative AI Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistem-agnostic și traducerea limbajului tehnic în beneficii de networking elimină barierele de adopție, transformând datele brute în valoare socială imediată pentru utilizatori.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Quality Engineer Process",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul vizual și simplificarea limbajului reduc drastic erorile de interpretare ale utilizatorului, facilitând o testare de tip UX mai eficientă și un proces de QA axat pe fluxul logic, nu pe descifrarea jargonului.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Scrum Master",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul „Human-Centric” reduce barierele de utilizare și aliniază interfața cu obiectivele de business pentru creșterea ratei de adopție a platformei.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplificarea limbajului și estetica „Human-Centric” reduc drastic bariera de adopție pentru utilizatori, facilitând astfel rolul echipei de succes în creșterea ratei de retenție.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Payroll Specialist",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului elimină barierele tehnice, transformând datele brute în insight-uri acționabile care fluidizează colaborarea între cele 6 roluri ale departamentului.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistem-agnostic și limbajul natural reduc drastic bariera de adopție, facilitând migrarea de la un instrument utilitar la o experiență intuitivă.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "LLM / Integration Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul vizual și umanizarea limbajului reduc drastic bariera de intrare, transformând datele tehnice în insights acționabile pentru utilizatorul non-tehnic.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "CISO Deputy / Security Lead",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Umanizarea limbajului reduce erorile de interpretare ale utilizatorului, iar estetica minimalistă facilitează monitorizarea securității prin evidențierea clară a elementelor critice.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Tech Lead",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul elimină barierele cognitive, permițând echipei de front-end să prioritizeze experiența utilizatorului în detrimentul complexității tehnice inutile.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Delivery Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul „Human-Centric” reduce bariera de adopție și aliniază interfața cu obiectivul strategic de a transforma platforma dintr-un instrument tehnic rigid într-un ecosistem de networking intuitiv.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Limbajul umanizat reduce drastic timpul de instruire al utilizatorilor și scade numărul de tichete de suport generate de ambiguitatea terminologiei tehnice.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Procurement / Achizitii",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele tehnice, transformând datele brute în insight-uri acționabile care facilitează networking-ul strategic.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul „Human-Centric” reduce complexitatea vizuală și tehnică, facilitând un UX intuitiv care crește retenția utilizatorilor pe platforma de networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Conversational AI Designer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului și transformarea limbajului reduc drastic bariera de intrare, facilitând adopția prin claritate emoțională și vizuală.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Information Security Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul vizual și limbajul simplificat reduc vectorii de atac prin \"social engineering\" și cresc rata de adoptare a controalelor de securitate prin transparență.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "UI Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele tehnice inutile, umanizând interfața și transformând complexitatea datelor în oportunități de networking acționabile.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Marketing Lead",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul umanizează datele complexe, eliminând bariera tehnică și facilitând conversia utilizatorilor către acțiuni de networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplificarea limbajului și estetica \"human-centric\" vor reduce drastic volumul de tichete legate de neînțelegerile tehnice, permițându-ne să ne concentrăm pe succesul real al clienților.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Billing / Revenue Operations",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus reduce barierele cognitive prin umanizarea datelor, transformând complexitatea tehnică în oportunități de business acționabile pentru echipa de Revenue Operations.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul sistemului de design (DS) este coerent, iar \"umanizarea\" limbajului va reduce drastic rata de abandon a utilizatorilor non-tehnici prin simplificarea interfeței cognitive.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Engineering Manager",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistem-agnostic și limbajul centrat pe utilizator reduc bariera de adopție, facilitând tranziția către un produs orientat spre networking fără a compromite arhitectura din spate.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Information Security Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Abstracția tehnică propusă reduce suprafața de atac prin simplificarea interfeței, menținând în același timp integritatea securității în backend.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Design Lead",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul elimină barierele tehnice, transformând datele brute în insight-uri relaționale care susțin direct obiectivul de networking high-end.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "AI Data Specialist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul elimină barierele tehnice, transformând datele complexe în insight-uri acționabile care cresc rata de adopție a utilizatorilor.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Digital Marketing Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Eliminarea jargonului tehnic în favoarea beneficiului uman va crește rata de conversie și retenția utilizatorilor, transformând produsul într-un instrument intuitiv de networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Billing / Revenue Operations",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Eliminarea fricțiunii cognitive prin limbaj natural și estetică minimalistă transformă un instrument rigid de conformitate într-o interfață intuitivă, orientată către valoarea de business și networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "DevOps Lead",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului de design (Design Tokens) și maparea limbajului umanizat simplifică semnificativ mentenanța frontend-ului și reduc sarcina cognitivă asupra infrastructurii de date.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplificarea limbajului și estetica \"human-centric\" vor reduce drastic timpul de on-boarding și tichetele de suport generate de confuzia tehnică a utilizatorilor non-tehnici.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Responsible AI / AI Ethics Specialist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Umanizarea limbajului reduce riscul de \"black-box bias\" și crește transparența algoritmică, facilitând o înțelegere intuitivă a deciziilor AI pentru utilizator.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Application Security Engineer",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Abstracția tehnică îmbunătățește UX-ul fără a compromite securitatea, atâta timp cât mecanismele de backend (criptare, validare, logare) rămân neschimbate în spatele interfeței simplificate.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Head of Engineering / VP Engineering",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistem-agnostic și traducerea limbajului tehnic în beneficii de business reduc drastic bariera de adopție a utilizatorului, facilitând migrarea către un model de networking axat pe valoare.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior UX Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele tehnice inutile și prioritizează experiența utilizatorului prin claritate vizuală și umanizarea limbajului, facilitând tranziția necesară către o platformă de networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Digital Marketing Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplificarea limbajului și estetica \"Bloom/Clay\" elimină barierele de adopție, transformând datele tehnice reci într-o experiență de networking intuitivă și umană.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplificarea limbajului și estetica \"human-centric\" vor reduce drastic timpul de on-boarding și tichetele de suport generate de confuzia tehnică a utilizatorilor non-tehnici.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Head of Legal",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Umanizarea limbajului reduce riscurile de interpretare eronată și crește rata de adopție a utilizatorilor, menținând în același timp rigoarea tehnică în background.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "DevOps Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\nMOTIV: Simplificarea limbajului și uniformizarea design-ului reduc complexitatea operațională și facilitează mentenanța frontend-ului prin componente standardizate.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "MLOps Engineer (AI)",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului va beneficia enorm de pe urma abstractizării output-ului tehnic în limbaj natural, reducând sarcina cognitivă a utilizatorului fără a compromite integritatea modelelor ML din backend.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Application Security Engineer",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Umanizarea limbajului și simplificarea interfeței reduc erorile de interpretare ale utilizatorului, facilitând totodată implementarea unor mecanisme de securitate (precum autentificarea și consimțământul) care sunt mai intuitiv de gestionat și auditat.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Tech Lead",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul vizual și conversia limbajului reduc drastic barierele de adopție, permițându-ne să ne concentrăm resursele de backend pe scalarea algoritmilor de potrivire, nu pe explicarea lor.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "UX Researcher",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Umanizarea limbajului și estetica \"Bloom\" reduc drastic încărcătura cognitivă, permițând utilizatorului să se concentreze pe esența socială a platformei, nu pe complexitatea algoritmică din spate.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Content Marketer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplificarea limbajului și estetica \"Bloom\" reduc bariera de adopție, transformând platforma dintr-un instrument tehnic rigid într-o experiență intuitivă orientată spre networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplificarea limbajului și estetica \"human-centric\" vor reduce drastic volumul de tichete legate de neînțelegeri tehnice, permițându-ne să ne concentrăm pe succesul utilizatorilor, nu pe explicarea algoritmilor.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Corporate Lawyer",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus reduce barierele de utilizare prin claritate semantică și estetică, facilitând conformitatea prin transparență și accesibilitate pentru utilizatorul final.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "DevOps Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Reducerea fricțiunii cognitive îmbunătățește adoptabilitatea platformei, iar separarea logică între backend (complexitate) și frontend (uman-centric) permite optimizarea pipeline-urilor noastre de livrare.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Head of Product / CPO Deputy",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul „Bloom/Clay” și simplificarea semantică reduc radical bariera de adopție, transformând datele brute în oportunități de business acționabile pentru utilizator.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Penetration Tester",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "vot": "VOT: OBIECTIE\nMOTIV: Simplificarea limbajului ascunde metadate critice de securitate, creând riscul ca utilizatorii să ignore avertismentele de sistem în favoarea unei interfețe estetice (UI vs. Security awareness).",
+    "acord": false,
+    "ok": true
+  },
+  {
+    "rol": "UI Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul elimină barierele tehnice, transformând datele brute în insight-uri relaționale care susțin direct obiectivul de networking high-end.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Content Marketer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplificarea limbajului și estetica \"Bloom\" elimină barierele psihologice, transformând datele brute într-o experiență intuitivă care va crește semnificativ rata de retenție a utilizatorilor.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplificarea limbajului și estetica \"human-centric\" vor reduce drastic timpul de on-boarding și numărul de tichete de suport pe care echipa mea trebuie să le gestioneze pentru clarificarea jargonului tehnic.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Contracts Manager",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Umanizarea limbajului reduce riscul de interpretare eronată în relațiile contractuale, menținând în același timp rigoarea tehnică în backend.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "DevOps Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\nMOTIV: Simplificarea limbajului și uniformizarea design-ului reduc riscul de eroare umană în utilizarea sistemului și facilitează scalarea infrastructurii prin experiențe de utilizator mai intuitive.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul vizual și umanizarea limbajului reduc drastic bariera de intrare, transformând datele tehnice complexe în insight-uri acționabile și de încredere pentru utilizator.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Tech Lead",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul elimină barierele cognitive pentru utilizatori, iar arhitectura de date devine intuitivă, facilitând adopția fără a compromite securitatea backend-ului.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Engineering Manager",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul vizual curat și traducerea jargonului tehnic în limbaj natural reduc drastic barierele de adopție, aliniindu-se perfect cu obiectivele de business pentru creșterea engagement-ului.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Penetration Tester",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "vot": "VOT: OBIECTIE\n\nMOTIV: Simplificarea limbajului ascunde procese critice de securitate, ceea ce poate induce utilizatorul în eroare cu privire la natura reală a datelor și a riscurilor cibernetice asociate.",
+    "acord": false,
+    "ok": true
+  },
+  {
+    "rol": "UX Researcher",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplificarea limbajului și estetica \"human-centric\" reduc direct bariera de intrare, transformând datele tehnice reci în oportunități acționabile de networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "SEO / SEM Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplificarea limbajului crește rata de click (CTR) prin reducerea barierelor de înțelegere, iar designul curat îmbunătățește indicatorii de retenție și engagement (Time on Page/Bounce Rate).",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Onboarding / Implementation Specialist",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Eliminarea jargonului tehnic și adoptarea esteticii \"Bloom/Clay\" reduc drastic bariera de intrare pentru utilizatorii non-tehnici, accelerând adopția și timpul până la prima valoare livrată (Time-to-Value).",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Privacy / GDPR Officer (DPO)",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Limbajul umanizat reduce riscul de eroare în consimțământ și transparență, facilitând o conformitate GDPR prin design (Privacy by Design) mult mai intuitivă pentru utilizator.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Site Reliability Engineer (SRE)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Reducerea complexității cognitive prin limbaj natural și estetică minimalistă va scădea rata de eroare a utilizatorului și va simplifica suportul pentru infrastructura de front-end.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemic propus elimină barierele tehnice inutile, transformând datele brute în insight-uri acționabile care facilitează conexiunile umane autentice.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplificarea limbajului și alinierea estetică reduc drastic barierele de adopție, permițându-ne să ne concentrăm pe scalarea logicii de matching în backend fără a compromite UX-ul.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Compliance & Audit Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Umanizarea limbajului reduce bariera de adopție, iar estetica propusă asigură o experiență premium, aliniată cu standardele actuale de securitate și usability.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Interaction Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele cognitive prin umanizarea limbajului și simplificarea estetică, transformând datele tehnice în oportunități acționabile pentru utilizator.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "ASO Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Umanizarea limbajului și estetica minimalistă vor crește rata de conversie (CVR) în store prin reducerea barierei psihologice de descărcare.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Onboarding / Implementation Specialist",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Eliminarea jargonului tehnic și adoptarea esteticii \"Bloom/Clay\" reduc drastic bariera de intrare pentru utilizatorii non-tehnici, accelerând rata de adopție (Time-to-Value) în procesul de onboarding.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Regulatory Compliance Specialist",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul umanizează interfețele complexe fără a compromite trasabilitatea datelor necesară pentru auditul de conformitate.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Site Reliability Engineer (SRE)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Reducerea complexității limbajului și uniformizarea vizuală vor diminua rata de eroare a utilizatorului și vor facilita mentenanța interfeței front-end prin standardizarea componentelor de design.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemic propus elimină barierele tehnocrate și aliniază interfața cu comportamentul natural de networking, accelerând rata de adopție a utilizatorilor.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Software Architect",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul vizual și umanizarea limbajului reduc drastic barierele de adopție, transformând complexitatea tehnică într-o experiență intuitivă aliniată cu obiectivele de business.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Compliance & Audit Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul elimină barierele tehnice, iar traducerea jargonului în limbaj natural crește rata de adopție fără a compromite rigurozitatea proceselor de verificare din spate.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Product Operations Specialist",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Eliminarea jargonului tehnic și adoptarea esteticii \"Bloom/Clay\" reduc drastic bariera de adopție, transformând produsul dintr-o unealtă rigidă de analiză într-o platformă intuitivă de networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Social Media Manager",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul \"Human-Centric\" și simplificarea jargonului vor scădea drastic rata de abandon a utilizatorilor și vor facilita conversia organică prin claritate.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Onboarding / Implementation Specialist",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Eliminarea jargonului tehnic și adoptarea esteticii \"Bloom\" reduc drastic bariera de intrare, facilitând procesul de adopție pentru utilizatorii noi pe care îi coordonez.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Internal IT Manager",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistem-agnostic și limbajul intuitiv reduc drastic timpul de training pentru utilizatorii finali și simplifică mentenanța suportului intern.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Site Reliability Engineer (SRE)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului de traducere a jargonului în limbaj natural reduce semnificativ încărcarea cognitivă a utilizatorului, facilitând o adoptare mai rapidă a platformei fără a compromite integritatea datelor din backend.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului și traducerea jargonului tehnic în limbaj orientat spre beneficiu elimină barierele de adopție, transformând platforma într-un instrument intuitiv de networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Software Architect",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului devine intuitiv prin abstractizarea complexității tehnice, facilitând adopția utilizatorilor fără a compromite integritatea datelor în backend.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Security Analyst (SOC)",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul \"Human-Centric\" reduce eroarea umană prin claritate, iar abstractizarea jargonului tehnic în limbaj natural facilitează un control al accesului mai intuitiv pentru utilizatori.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Design System Specialist",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus reduce eficient sarcina cognitivă prin umanizarea limbajului și o estetică minimalistă care prioritizează claritatea acțiunilor de networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Community Manager",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplificarea limbajului și estetica \"Bloom\" reduc barierele psihologice, transformând datele brute într-o experiență de utilizare intuitivă și orientată spre networking de calitate.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Customer Experience Analyst",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul \"Human-Centric\" și traducerea jargonului tehnic în limbaj natural vor reduce drastic timpul de on-boarding și vor crește rata de adopție a utilizatorilor non-tehnici.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Internal Help Desk",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele cognitive și umanizează limbajul tehnic, facilitând adopția rapidă în rândul utilizatorilor non-tehnici.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Cloud Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul vizual și simplificarea terminologiei reduc drastic barierele de adopție, permițându-ne să ne concentrăm resursele de infrastructură pe scalarea motorului de matching, nu pe explicarea complexității tehnice.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului și traducerea limbajului tehnic în valoare umană reduc drastic bariera de adopție și aliniază produsul cu așteptările unui utilizator premium.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Engineering Manager",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistem-agnostic și limbajul centrat pe utilizator reduc barierele de adopție, facilitând tranziția arhitecturală către un model de engagement social fără a compromite securitatea backend-ului.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Data / AI Lead",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul „human-centric” reduce barierele de adopție, transformând datele brute în insight-uri acționabile care cresc rata de conversie și engagement-ul utilizatorilor.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Graphic / Brand Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Estetica \"Bloom/Clay\" și umanizarea jargonului elimină barierele psihologice, transformând un instrument tehnic rigid într-o interfață intuitivă și invitantă pentru networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Customer Experience Analyst",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul \"Human-Centric\" reduce bariera de adopție a utilizatorului, transformând datele tehnice complexe în insight-uri acționabile care facilitează natural interacțiunea umană.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Growth Marketer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplificarea limbajului și estetica \"Human-Centric\" reduc bariera de adopție, transformând platforma dintr-un instrument tehnic într-o resursă strategică de networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Internal Help Desk",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină bariera tehnică și aliniază interfața cu nevoile de networking ale utilizatorilor, facilitând adopția rapidă a platformei.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului de limbaj transformă complexitatea tehnică în valoare intuitivă, facilitând adopția rapidă a platformei ca instrument de networking strategic.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Cloud Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul vizual și umanizarea limbajului reduc semnificativ overhead-ul de procesare pentru utilizator, facilitând o adoptare mai rapidă a platformei fără a compromite securitatea din backend.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul vizual și umanizarea limbajului reduc drastic barierele de adopție, permițându-ne să encapsulăm complexitatea algoritmică în spatele unei experiențe de utilizator fluide și intuitive.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Data Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului de traducere a metadatelor în limbaj natural simplifică fluxul de date pentru end-user, reducând efortul de procesare al aplicației și al utilizatorului final.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Behavioral Science Lead",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul reduce sarcina cognitivă prin abstractizarea complexității tehnice în beneficii relaționale, facilitând astfel angajamentul intuitiv al utilizatorului.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Brand / PR Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Eliminarea jargonului tehnic și adoptarea esteticii \"Bloom/Clay\" reduc barierele de utilizare, transformând platforma dintr-un instrument rigid într-un spațiu intuitiv de networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Support Team Lead",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Umanizarea limbajului și estetica \"Bloom\" vor reduce dramatic volumul de tichete generate de neînțelegerea terminologiei tehnice, permițând echipei mele să se concentreze pe succesul utilizatorului, nu pe educație tehnică.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Endpoint Management Specialist",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele tehnice inutile, facilitând adopția rapidă prin UX intuitiv și comunicare orientată pe valoarea umană.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Cloud Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul „Human-Centric” reduce complexitatea inutilă a interfeței, permițându-mi să optimizez infrastructura de tip backend pentru latență scăzută, în loc să susțin procesări grele de prezentare a datelor brute.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Product Owner",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului și traducerea limbajului tehnic în valoare umană elimină bariera de adopție, transformând platforma dintr-un instrument de raportare într-o experiență intuitivă de networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul vizual și umanizarea jargonului reduc semnificativ barierele de adopție, permițându-ne să encapsulăm logica complexă de backend într-o interfață intuitivă și scalabilă.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Data Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului de traducere a metadatelor în limbaj natural facilitează expunerea valorii datelor către utilizatorul non-tehnic, fără a compromite integritatea arhitecturii din backend.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Behavioral Scientist / Psiholog cognitiv",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Eliminarea jargonului tehnic și adoptarea unei estetici „calme” reduc încărcătura cognitivă, facilitând trecerea utilizatorului de la o stare de analiză critică la una de angajament relațional.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Technical Writer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistematic și traducerea jargonului tehnic în limbaj orientat către beneficii elimină barierele de adopție și aliniază interfața cu noua strategie de poziționare ca motor de networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Internal Tools / Systems Admin",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus reduce barierele de utilizare și aliniază interfața cu obiectivele de engagement, facilitând adoptarea rapidă în cadrul echipei.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "HR Director / Head of People",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul \"Human-Centric\" elimină barierele tehnice și rafinează experiența utilizatorului, transformând datele brute în oportunități de colaborare autentice și intuitive.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "System Administrator",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului de design (Design System) este modular și scalabil, facilitând o implementare curată prin componente UI reutilizabile și abstractizarea logică a backend-ului în limbaj natural.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Product Owner",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele tehnice inutile, transformând datele brute în insight-uri acționabile care vor crește retenția și calitatea interacțiunilor în platformă.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul vizual și umanizarea limbajului reduc drastic barierele de adopție, permițându-ne să encapsulăm logica complexă de matching în microservicii backend eficiente, fără a sacrifica UX-ul.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Marketing Operations",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele tehnice și orientează platforma către utilizator, facilitând adopția prin claritate și context uman.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Technical Recruiter / Sourcer",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistem-centric elimină barierele de adopție, iar transformarea jargonului tehnic în limbaj natural crește direct rata de conversie a utilizatorilor pe platformă.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Internal Tools / Systems Admin",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul vizual și umanizarea limbajului reduc drastic bariera de adopție a utilizatorului, facilitând o tranziție eficientă de la un sistem de procesare a datelor la unul de interacțiune umană.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Data Scientist",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\nMOTIV: Trecerea de la complexitate algoritmică la limbaj orientat către beneficiar reduce rata de abandon și accelerează conversia utilizatorilor în ecosistemul de networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Behavioral Scientist / Psiholog cognitiv",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul reduce sarcina cognitivă prin traducerea abstracțiunilor tehnice în indicatori de relevanță socială, facilitând astfel angajamentul intuitiv al utilizatorului.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Network Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului devine intuitiv prin abstractizarea jargonului, facilitând adopția rapidă a platformei fără a compromite integritatea infrastructurii din spate.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului de tip \"abstraction layer\" pentru limbaj reduce încărcătura cognitivă fără a compromite integritatea datelor din backend, facilitând adopția rapidă a platformei.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Sales Director",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul elimină bariera tehnică, permițând echipei mele de vânzări să se concentreze pe relaționare în loc de interpretarea datelor brute.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Data Scientist",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Umanizarea output-ului algoritmic va crește rata de retenție și adopție, transformând datele complexe în acțiuni intuitive pentru utilizatorul final.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Cercetator neurostiinte / stiinte cognitive",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Reducerea încărcăturii cognitive prin traducerea abstractului în context relațional facilitează „fluierul” neuronal și scade rezistența la utilizare în interacțiunile de networking high-end.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Technical Recruiter / Sourcer",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul \"Bloom/Clay\" și transpunerea jargonului tehnic în limbaj uman vor crește drastic rata de adopție a utilizatorilor și calitatea interacțiunilor în platformă.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Head of Operations / COO Deputy",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus reduce barierele de adopție prin simplificarea limbajului și o estetică intuitivă, aliniind experiența utilizatorului cu obiectivele noastre de scalare în networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Database Administrator (DBA)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplitatea limbajului reduce erorile de interpretare ale utilizatorului, iar estetica \"Bloom\" facilitează un design de interfață mai curat, optimizând astfel maparea datelor în backend.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Account Executive",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Noul limbaj umanizat elimină barierele tehnice, facilitând un proces de vânzare mult mai natural și orientat pe relație.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Machine Learning Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistem-centric ascundea valoarea de business, iar noua abordare UX va crește rata de retenție și adopția utilizatorilor prin simplificarea procesului decizional.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul vizual și umanizarea limbajului reduc drastic bariera de intrare, facilitând adopția fără a sacrifica integritatea arhitecturii backend.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Ethical / Responsible Design Lead",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "vot": "VOT: OBIECTIE\n\nMOTIV: Simplificarea limbajului ascunde decizii algoritmice critice, riscând să creeze o falsă percepție de obiectivitate care subminează transparența și autonomia utilizatorului în procesul de networking.",
+    "acord": false,
+    "ok": true
+  },
+  {
+    "rol": "Business Operations Analyst",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul \"Bloom/Clay\" și transpunerea jargonului tehnic în limbaj relațional reduc barierele de adopție, transformând platforma dintr-un tool de monitorizare într-un activ de networking intuitiv.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "QA Lead",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistem-agnostic și limbajul simplificat reduc drastic riscul de erori de interpretare în utilizarea platformei, facilitând în același timp testarea experienței utilizatorului (UX) prin metrici clare de conversie.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Recruiter / Talent Acquisition",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul elimină barierele tehnice inutile și transformă experiența utilizatorului într-una intuitivă, facilitând adopția rapidă și conexiunile autentice.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Business Analyst",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplificarea limbajului și alinierea estetică elimină barierele de adopție, transformând platforma dintr-un instrument tehnic rigid într-o experiență intuitivă orientată spre valoarea de business.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul vizual modern și umanizarea terminologiei vor reduce drastic bariera de intrare a utilizatorului, facilitând o rată de adopție mai mare a funcționalităților complexe din backend.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Machine Learning Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul umanizează output-urile algoritmice, crescând rata de adopție a utilizatorilor fără a compromite precizia modelului din backend.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "UX Researcher (well-being focus)",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "vot": "VOT: OBIECTIE\n\nMOTIV: Trecerea la un limbaj excesiv de umanizat riscă să creeze o falsă senzație de siguranță (deceptive design), fiind necesară o validare etică suplimentară pentru a ne asigura că simplificarea jargonului nu ascunde responsabilitatea utilizatorului față de deciziile financiare.",
+    "acord": false,
+    "ok": true
+  },
+  {
+    "rol": "Account Executive",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Noul limbaj umanizat și estetica minimalistă reduc barierele de comunicare, permițându-mi să mă concentrez pe construcția relațiilor în loc să traduc date tehnice pentru clienți.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Recruiter / Talent Acquisition",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul elimină barierele tehnice inutile, permițând candidaților să se concentreze pe conexiuni umane autentice în loc de metrici obscure.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Business Operations Analyst",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Această tranziție reduce bariera psihologică de adopție, transformând datele complexe într-un limbaj intuitiv care facilitează interacțiunea umană imediată.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului de testare va fi simplificat semnificativ prin înlocuirea logicii complexe de backend cu validări UI bazate pe etichete textuale ușor de asertat.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Business Analyst",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul „Human-Centric” elimină bariera tehnică, crescând rata de adopție prin transformarea datelor abstracte în valoare conversațională imediată.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul vizual și umanizarea limbajului reduc drastic barierele de adopție, permițându-ne să abstractizăm logica complexă din backend fără a sacrifica integritatea datelor.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "MLOps Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Umanizarea interfeței și eliminarea jargonului tehnic reduc bariera de adopție a utilizatorului, permițând modelului nostru de ML să livreze valoare prin networking intuitiv, nu prin complexitate afișată.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Digital Wellbeing Specialist",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus reduce eficient sarcina cognitivă prin traducerea parametrilor tehnici în valoare relațională, aliniindu-se perfect principiilor de ethical product design.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Account Executive",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Noul limbaj umanizat elimină barierele tehnice, permițându-mi să mă concentrez pe construirea relațiilor de business în loc să explic algoritmi clienților.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "People Operations Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele tehnice, umanizând interfața și facilitând adopția platformei ca instrument intuitiv de networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Strategy & Planning Specialist",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele tehnice, transformând datele brute în insight-uri acționabile care accelerează adopția utilizatorilor și calitatea networking-ului.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului de testare va fi simplificat semnificativ prin eliminarea complexității algoritmice din interfață, permițându-ne să ne concentrăm automatizarea pe validarea fluxurilor de business și a experienței de utilizator (UX).",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Inside Sales Representative",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul elimină bariera tehnică, permițându-ne să ne concentrăm pe construirea relațiilor în loc să traducem date brute pentru clienți.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul umanizează datele brute și simplifică arhitectura informațională, facilitând tranziția către un ecosistem de networking scalabil.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Mobile Product Analyst",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemic și simplificarea limbajului elimină bariera tehnică, permițând utilizatorului să se concentreze pe valoarea de networking în loc de complexitatea algoritmului.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "People Operations Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele tehnice inutile și umanizează experiența utilizatorului, transformând platforma într-un instrument intuitiv de networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului de testare va fi simplificat semnificativ prin eliminarea ambiguităților tehnice, permițând trecerea de la validări de date rigide la teste de UX și consistență semantică.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Strategy & Planning Specialist",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul reduce barierele cognitive și umanizează limbajul tehnic, transformând tool-ul într-un instrument intuitiv de networking, aliniat cu strategia de scalare a echipei.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Product Owner",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele tehnice inutile, transformând complexitatea algoritmica într-o experiență intuitivă și umană care va crește rata de retenție a utilizatorilor.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Behavioral / Marketing Psychologist",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Reducerea încărcăturii cognitive prin traducerea jargonului tehnic în beneficii relaționale crește rata de retenție și scade bariera psihologică la intrarea în ecosistem.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul sistemului de design (DS) propus și umanizarea limbajului reduc drastic încărcătura cognitivă, permițând implementarea unui UI curat, ușor de întreținut și aliniat cu noile standarde de UX.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Data Analyst",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Umanizarea interfeței și eliminarea jargonului tehnic vor crește rata de adopție în rândul utilizatorilor non-tehnici, păstrând în același timp integritatea datelor în back-end.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Data Scientist (engagement quality)",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Reducerea fricțiunii cognitive prin abstractizarea algoritmilor în limbaj natural crește rata de retenție și calitatea interacțiunilor prin eliminarea barierelor psihologice de adoptare.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Inside Sales Representative",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul elimină barierele tehnice inutile și pune accentul pe valoarea relațională, facilitând discuțiile comerciale directe și calificate.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Learning & Development Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele tehnice și umanizează interfața, facilitând adopția rapidă și calitatea networkingului în cadrul echipei.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Revenue Operations (RevOps)",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului de limbaj transformă complexitatea tehnică în valoare predictibilă, reducând timpul de adopție și eliminând barierele mentale ale utilizatorului final.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul \"Human-Centric\" simplifică testarea validărilor UI și a mesajelor de eroare, eliminând ambiguitățile tehnice din experiența utilizatorului final.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Sales Engineer / Pre-sales",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Umanizarea interfeței și eliminarea jargonului tehnic reduc bariera de adopție a utilizatorului, transformând datele brute în oportunități de business acționabile.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "BI Developer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele tehnice inutile și prioritizează experiența utilizatorului, facilitând adopția prin claritate și estetică modernă.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul sistemului de design propus reduce drastic încărcătura cognitivă și aliniază interfața cu așteptările utilizatorilor non-tehnici dintr-o rețea de networking high-end.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Ethics & Policy Advisor",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "vot": "VOT: OBIECTIE\n\nMOTIV: Reducerea „fricțiunii cognitive” prin mascarea completă a indicatorilor de încredere (Hash/Ledger) riscă să scadă transparența decizională, creând o iluzie de siguranță care poate induce erori în evaluarea riscului de networking.",
+    "acord": false,
+    "ok": true
+  },
+  {
+    "rol": "Compensation & Benefits Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele tehnice inutile, mutând focusul de pe validarea algoritmului pe valoarea relațională și experiența utilizatorului.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Sales Engineer / Pre-sales",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Eliminarea jargonului tehnic și adoptarea esteticii \"Bloom/Clay\" reduc bariera de intrare, facilitând vânzarea consultativă și adoptarea platformei în segmentele non-tehnice.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Revenue Operations (RevOps)",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Design-ul „Human-Centric” elimină bariera tehnică și aliniază interfața cu obiectivul strategic de a transforma datele brute în oportunități calificate de networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistem-agnostic și simplificarea terminologiei reduc drastic complexitatea testării fluxurilor de utilizator și elimină ambiguitatea în maparea cerințelor de business.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Head of AI",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Eliminarea jargonului tehnic și adoptarea esteticii \"Bloom\" reduc barierele de adopție, transformând datele brute în valoare relațională intuitivă.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus reduce eficient zgomotul vizual și semantic, facilitând o experiență de utilizare intuitivă care va crește rata de engagement prin umanizarea datelor complexe.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Head of PMO",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul umanizează datele complexe, transformând barierele tehnice în oportunități intuitive de networking, exact ce are nevoie echipa pentru scalare.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Employer Branding / Internal Comms",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistemului de limbaj transformă complexitatea tehnică în context relațional, eliminând bariera psihologică și accelerând adopția platformei de către utilizatori.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Vendor Management",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele cognitive și transformă datele brute într-un limbaj intuitiv, facilitând adopția rapidă și calitatea networking-ului în ecosistemul nostru.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul simplificat reduce complexitatea testării UI/UX și standardizează fluxurile, permițându-ne să automatizăm validarea elementelor vizuale și a stărilor fără ambiguități tehnice.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "AI Research Scientist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele cognitive și umanizează output-ul tehnic, facilitând adopția prin claritate semantică și estetică minimalistă.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Business Development Manager",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Simplificarea limbajului și estetica curată vor reduce semnificativ durata ciclului de vânzare prin creșterea încrederii și a adopției utilizatorilor în platformă.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus reduce eficient complexitatea cognitivă și aliniază limbajul interfeței cu obiectivele de business, facilitând o experiență de utilizare fluidă și orientată către networking.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "HR Business Partner",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul \"Human-Centric\" reduce barierele cognitive și umanizează tehnologia, facilitând adopția utilizatorilor prin eliminarea jargonului tehnic opac.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Program Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul sistem-agnostic și limbajul centrat pe utilizator elimină barierele de adopție, transformând complexitatea tehnică într-o propunere de valoare intuitivă pentru stakeholderi.",
+    "acord": true,
+    "ok": true
+  },
+  {
+    "rol": "Facilities / Office Manager",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "vot": "VOT: DE ACORD\n\nMOTIV: Designul propus elimină barierele tehnice și optimizează experiența utilizatorului prin claritate vizuală și limbaj intuitiv, facilitând adopția rapidă a platformei.",
+    "acord": true,
+    "ok": true
+  }
+]
