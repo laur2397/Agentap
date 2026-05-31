@@ -560,7 +560,7 @@ const SEEK={0:[["Investitor pentru proiect imobiliar","dictare"],["Furnizor de c
 const COLORS=["#6366F1","#10B981","#F59E0B","#8B5CF6","#EC4899","#0EA5E9","#14B8A6","#F97316","#EF4444","#22C55E"];
 const STOP=new Set("si sau de la in un o cu pe pentru din ca care este are am ai vreau caut ofer cineva zona bun buna nou noua a al ale lui langa".split(" "));
 const KEY="cercul_eie_v5",TKEY="cercul_theme",SKEY="cercul_salt";
-let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false,MATCHFILTER="all",NOTEFILTER="all",EDITTASK=null;
+let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false,MATCHFILTER="all",NOTEFILTER="all",EDITTASK=null,EDITNOTE=null;
 // suprascrie cu zerouri bufferele pe care le controlam (audit s5r #1). CryptoKey-urile sunt
 // non-extractabile/opace (WebCrypto nu expune heap-ul lor) -> le eliberam pt. GC; parolele sunt
 // string-uri imutabile in JS si nu pot fi zeroizate — limitare documentata, nu ascunsa.
@@ -1008,14 +1008,25 @@ function renderNotes(){const host=$("#notesList");if(!host)return;
   let list=mine;
   if(NOTEFILTER!=="all")list=list.filter(n=>noteTags(n.text).includes(NOTEFILTER));
   list=list.filter(n=>!q||n.text.toLowerCase().includes(q)).sort((a,b)=>b.t-a.t);
-  setKids(host, list.length?list.map(n=>h("div",{class:"notecard"},
+  const row=n=>{if(EDITNOTE===n.id)return h("div",{class:"notecard"},
+      h("div",{class:"nt"},h("input",{id:"enText",value:n.text,"aria-label":"Text notita",style:{width:"100%"}}),
+        h("div",{style:{display:"flex",gap:"7px",marginTop:"8px"}},
+          h("button",{class:"btn gold sm","data-act":"notesave","data-id":n.id,text:"Salveaza"}),
+          h("button",{class:"btn ghost sm","data-act":"notecancel",text:"Renunta"}))));
+    return h("div",{class:"notecard"},
       h("div",{class:"nt"},h("div",{class:"ntx",text:n.text}),h("div",{class:"ndate",text:relTime(n.t)})),
-      h("button",{class:"x","data-act":"delnote","data-id":n.id,"aria-label":"Sterge notita",text:"×"}))):
+      h("button",{class:"x","data-act":"noteedit","data-id":n.id,"aria-label":"Editeaza notita",text:"✎"}),
+      h("button",{class:"x","data-act":"delnote","data-id":n.id,"aria-label":"Sterge notita",text:"×"}));};
+  setKids(host, list.length?list.map(row):
     estateBox(q||NOTEFILTER!=="all"?"Nicio notita gasita":"Inca nicio notita", q||NOTEFILTER!=="all"?"Incearca alt filtru.":"Scrie prima ta idee — poti folosi #tag-uri."));}
 function addNote(){if(!DB)return;const inp=$("#noteText"),t=clean((inp&&inp.value||"").trim());if(!t)return;
   DB.notes.push({id:DB.seq++,member_id:ME,text:t,t:Date.now()});if(inp)inp.value="";
   logA("Notita adaugata in jurnal");save();renderNotes();toast("Notita salvata");}
 function delNote(id){if(!confirm("Stergi aceasta notita?"))return;const n=(DB.notes||[]).find(x=>x.id===id);DB.notes=(DB.notes||[]).filter(x=>x.id!==id);if(n)logA("Notita stearsa din jurnal");save();renderNotes();}
+function editNote(id){EDITNOTE=id;renderNotes();}
+function cancelNoteEdit(){EDITNOTE=null;renderNotes();}
+function saveNote(id){const n=(DB.notes||[]).find(x=>x.id===id);if(!n){EDITNOTE=null;renderNotes();return;}
+  const nt=clean((($("#enText")||{}).value||"").trim());if(nt)n.text=nt;EDITNOTE=null;logA("Notita editata");save();renderNotes();toast("Notita actualizata");}
 /* ---- Secretara iteratia 1: brief de 1 minut (doar din datele tale) ---- */
 function buildBrief(m){const cel=mem(ME===m.offer_member?m.seek_member:m.offer_member);if(!cel)return null;
   const common=new Set();
@@ -1252,6 +1263,9 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="taskedit")editTask(id);
   else if(a==="tasksave")saveTask(id);
   else if(a==="taskcancel")cancelTaskEdit();
+  else if(a==="noteedit")editNote(id);
+  else if(a==="notesave")saveNote(id);
+  else if(a==="notecancel")cancelNoteEdit();
   else if(a==="srperson"){closeSearch();openMemberMatch(id);}
   else if(a==="srgo"){closeSearch();setView(el.dataset.v);}
   else if(a==="importbtn")importData();

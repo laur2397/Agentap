@@ -2,3 +2,4 @@
 
 - 2026-05-31 · Item 1 (Ecran Azi) · sus pe Secretara: intalnirile de azi + task-urile scadente azi; validat, 0 erori.
 - 2026-05-31 · Item 2 (Editare task) · buton ✎ -> inputuri text+termen inline -> Salveaza/Renunta; validat, 0 erori.
+- 2026-05-31 · Item 3 (Editare notita) · buton ✎ -> input inline -> Salveaza; reactualizeaza #tag-urile; validat, 0 erori.
