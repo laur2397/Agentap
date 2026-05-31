@@ -361,6 +361,7 @@ details.why2>summary::-webkit-details-marker{display:none}
 .taskcard .tdue{font-size:11.5px;color:var(--muted);margin-top:3px}
 .taskcard .tdue.over{color:var(--warn);font-weight:600}
 .taskcard .x{background:none;border:0;color:var(--muted);font-size:18px;cursor:pointer;min-height:44px;min-width:28px}
+.taskcard .x.prio{color:var(--warn)}
 .navbadge{position:absolute;top:7px;left:calc(50% + 7px);min-width:16px;height:16px;padding:0 4px;border-radius:9px;background:var(--warn);color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center;line-height:1}
 /* backlog #2: urmatoarea intalnire pe Acasa */
 .nextmeet{background:linear-gradient(135deg,var(--primary-soft),transparent);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-top:14px;box-shadow:var(--shadow)}
@@ -652,7 +653,7 @@ function validDB(d){if(!d||typeof d!=="object")return false;
     if(["propus","confirmat","refuzat"].indexOf(x.status)<0)x.status="propus";});
   if(!Array.isArray(d.tasks))d.tasks=[];
   d.tasks=d.tasks.filter(t=>t&&typeof t==="object"&&t.id!=null);
-  d.tasks.forEach(t=>{t.text=clean(t.text);t.member_id=+t.member_id;t.done=t.done?1:0;t.due=clean(t.due||"").slice(0,10);t.t=+t.t||Date.now();});
+  d.tasks.forEach(t=>{t.text=clean(t.text);t.member_id=+t.member_id;t.done=t.done?1:0;t.due=clean(t.due||"").slice(0,10);t.t=+t.t||Date.now();t.prio=t.prio?1:0;});
   if(!d.members.length)return false;
   d.members.forEach(m=>{m.trust=Math.max(0,Math.min(100,+m.trust||0));m.name=clean(m.name).slice(0,80)||"?";m.id=+m.id;m.industry=clean(m.industry||"");m.role=clean(m.role||"Membru");});
   d.items.forEach(i=>{i.text=clean(i.text);i.visible=i.visible?1:0;i.member_id=+i.member_id;});
@@ -1125,6 +1126,7 @@ function addTask(){if(!DB)return;const t=clean((($("#taskText")||{}).value||"").
 function toggleTask(id){const x=(DB.tasks||[]).find(t=>t.id===id);if(!x)return;x.done=x.done?0:1;
   logA(x.done?"Task finalizat":"Task redeschis");save();renderTasks();updateBadges();}
 function delTask(id){if(!confirm("Stergi acest task?"))return;DB.tasks=(DB.tasks||[]).filter(t=>t.id!==id);logA("Task sters");save();renderTasks();updateBadges();}
+function toggleTaskPrio(id){const t=(DB.tasks||[]).find(x=>x.id===id);if(!t)return;t.prio=t.prio?0:1;logA(t.prio?"Task marcat important":"Task: prioritate scoasa");save();renderTasks();}
 function editTask(id){EDITTASK=id;renderTasks();}
 function cancelTaskEdit(){EDITTASK=null;renderTasks();}
 function saveTask(id){const t=(DB.tasks||[]).find(x=>x.id===id);if(!t){EDITTASK=null;renderTasks();return;}
@@ -1135,7 +1137,7 @@ function renderTasks(){const host=$("#taskList");if(!host)return;
   const td=today();let list=(DB.tasks||[]).filter(t=>t.member_id===ME);
   if(TASKFILTER==="active")list=list.filter(t=>!t.done);
   else if(TASKFILTER==="due")list=list.filter(t=>!t.done&&t.due&&t.due<=td);
-  const open=list.filter(t=>!t.done).sort((a,b)=>(a.due||"9999").localeCompare(b.due||"9999")),done=list.filter(t=>t.done);
+  const open=list.filter(t=>!t.done).sort((a,b)=>(b.prio||0)-(a.prio||0)||(a.due||"9999").localeCompare(b.due||"9999")),done=list.filter(t=>t.done);
   const row=t=>{const overdue=!t.done&&t.due&&t.due<td;
     if(EDITTASK===t.id)return h("div",{class:"taskcard"},
       h("div",{class:"ti"},h("input",{id:"etText",value:t.text,"aria-label":"Text task",style:{width:"100%",marginBottom:"6px"}}),
@@ -1146,6 +1148,7 @@ function renderTasks(){const host=$("#taskList");if(!host)return;
     return h("div",{class:"taskcard"+(t.done?" done":"")},
       h("button",{class:"tcheck"+(t.done?" on":""),"data-act":"tasktoggle","data-id":t.id,role:"checkbox","aria-checked":t.done?"true":"false","aria-label":"Marcheaza finalizat"},t.done?"✓":""),
       h("div",{class:"ti"},h("div",{class:"ttx",text:t.text}),t.due?h("div",{class:"tdue"+(overdue?" over":""),text:(overdue?"scadent: ":"termen: ")+fmtWhen(t.due)}):null),
+      h("button",{class:"x"+(t.prio?" prio":""),"data-act":"taskprio","data-id":t.id,"aria-label":t.prio?"Scoate prioritatea":"Marcheaza important",title:"Prioritate",text:t.prio?"★":"☆"}),
       h("button",{class:"x","data-act":"taskedit","data-id":t.id,"aria-label":"Editeaza task",text:"✎"}),
       h("button",{class:"x","data-act":"deltask","data-id":t.id,"aria-label":"Sterge task",text:"×"}));};
   const out=[...open.map(row),...done.map(row)];
@@ -1260,6 +1263,7 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="tasktoggle")toggleTask(id);
   else if(a==="deltask")delTask(id);
   else if(a==="tfilter")setTaskFilter(el.dataset.f);
+  else if(a==="taskprio")toggleTaskPrio(id);
   else if(a==="taskedit")editTask(id);
   else if(a==="tasksave")saveTask(id);
   else if(a==="taskcancel")cancelTaskEdit();

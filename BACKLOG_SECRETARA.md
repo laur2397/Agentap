@@ -11,7 +11,7 @@ Validare: node --check + smoke Playwright zero erori. Audit (examples/audit.py) 
 1. [x] Ecran „Azi”: task-urile scadente azi + intalnirile de azi, intr-un singur loc pe Secretara.
 2. [x] Editare task (text + termen), nu doar adaugare/stergere.
 3. [x] Editare notita existenta (inline), nu doar adaugare/stergere.
-4. [ ] Prioritate task (normal/important) + sortare cu importantele sus.
+4. [x] Prioritate task (normal/important) + sortare cu importantele sus.
 5. [ ] „Snooze” task: buton care impinge termenul cu +1 zi.
 6. [ ] Quick-add task cu detectie de data in text („maine”, „luni”, „in 3 zile”).
 7. [ ] Pin la notite: notitele fixate apar sus in jurnal.
