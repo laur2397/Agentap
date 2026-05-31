@@ -369,6 +369,9 @@ h2.title{font-weight:800;font-size:24px;letter-spacing:-.5px;margin:2px 0 4px}
 .exchwrap>summary::-webkit-details-marker{display:none}
 .exchwrap .exchbody{padding:0 15px 15px}
 .exchwrap textarea{background:var(--card2);border:1px solid var(--line);border-radius:10px;color:var(--ink2);padding:9px 11px;resize:none}
+/* loop4 #8: sabloane notite */
+.ntpl{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:9px}
+.ntpl-lbl{font-size:11px;color:var(--muted)}
 .connqr{margin-top:12px;display:flex;justify-content:center}
 .connqr svg{border-radius:10px;border:6px solid #fff;box-shadow:var(--shadow)}
 .adock{display:flex;gap:8px;margin-top:14px;align-items:center}
@@ -647,6 +650,13 @@ details.why2>summary::-webkit-details-marker{display:none}
     <p class="sub">Idei, notite si lucruri de tinut minte. Cauta-le oricand; brief-ul de intalnire le foloseste.</p>
     <div class="searchbar"><span class="ic">⌕</span><input id="noteSearch" placeholder="Cauta in notite…" aria-label="Cauta in notite"></div>
     <div class="addrow"><input id="noteText" placeholder="Scrie o idee… foloseste #tag-uri (ex: #client)" aria-label="Notita noua" onkeydown="if(event.key==='Enter')addNote()"><button class="btn gold sm" data-act="addnote" aria-label="Adauga notita">+</button></div>
+    <div class="ntpl">
+      <span class="ntpl-lbl">Șabloane:</span>
+      <button class="chip" data-act="notetpl" data-tpl="După apel cu @: discutat — ; pași — ; #follow-up">📞 După apel</button>
+      <button class="chip" data-act="notetpl" data-tpl="Follow-up cu @: de făcut — ; termen — ; #follow-up">↩ Follow-up</button>
+      <button class="chip" data-act="notetpl" data-tpl="Idee: — ; util pentru — ; #idee">💡 Idee</button>
+      <button class="chip" data-act="notetpl" data-tpl="Întâlnire cu @: context — ; next — ; #intalnire">🗓 Întâlnire</button>
+    </div>
     <div class="filters" id="noteRange" style="margin-top:10px">
       <button class="chip" data-act="nrange" data-r="today">Azi</button>
       <button class="chip" data-act="nrange" data-r="week">Saptamana</button>
@@ -1557,6 +1567,10 @@ function renderNotes(){const host=$("#notesList");if(!host)return;
       h("button",{class:"x","data-act":"delnote","data-id":n.id,"aria-label":"Sterge notita",text:"×"}));};
   setKids(host, list.length?list.map(row):
     estateBox(q||NOTEFILTER!=="all"?"Nicio notita gasita":"Inca nicio notita", q||NOTEFILTER!=="all"?"Incearca alt filtru.":"Scrie prima ta idee — poti folosi #tag-uri."));}
+/* loop4 #8: sabloane de notite — un click insereaza structura, cursorul dupa primul ':' */
+function noteTemplate(tpl){const inp=$("#noteText");if(!inp||!tpl)return;inp.value=tpl;inp.focus();
+  const k=tpl.indexOf(":");const pos=k>=0?Math.min(k+2,tpl.length):tpl.length;
+  try{inp.setSelectionRange(pos,pos);}catch(_){}}
 function addNote(){if(!DB)return;const inp=$("#noteText"),t=clean((inp&&inp.value||"").trim());if(!t)return;
   DB.notes.push({id:DB.seq++,member_id:ME,text:t,t:Date.now()});if(inp)inp.value="";
   logA("Notita adaugata in jurnal");save();renderNotes();toast("Notita salvata");}
@@ -1909,6 +1923,7 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="verify")verifyLedger();
   else if(a==="exportL")exportLedger();
   else if(a==="addnote")addNote();
+  else if(a==="notetpl")noteTemplate(el.dataset.tpl);
   else if(a==="delnote")delNote(id);
   else if(a==="propmeet")proposeMeeting(id);
   else if(a==="meetyes")meetRespond(id,true);
