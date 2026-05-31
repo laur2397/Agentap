@@ -17,7 +17,7 @@ Reguli pentru fiecare item:
 7. [x] Empty-states ilustrate consistente (SVG) pe toate ecranele goale.
 8. [x] Export complet (toate datele) + Import cu validare de schema + confirmare.
 9. [x] Profil: editare nume/domeniu (nu doar onboarding).
-10. [ ] Potriviri: filtru pe industrie (chips).
+10. [x] Potriviri: filtru pe industrie (chips).
 11. [ ] Notite: tag-uri simple (#client, #idee) + filtrare pe tag.
 12. [ ] Setari: alegerea zilei de inceput (luni/duminica) pt. afisarea datelor.
 13. [ ] Accesibilitate: trecere completa cu tastatura pe carduri (Enter/Space).

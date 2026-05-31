@@ -414,6 +414,7 @@ details.why2>summary::-webkit-details-marker{display:none}
   <section id="potriviri" class="view">
     <div class="eyebrow">Pentru tine</div><h2 class="title">Cine merita contactat</h2>
     <p class="sub">Oameni din cerc cu care ai legaturi relevante. Identitatea se dezvaluie cu acordul ambelor parti.</p>
+    <div class="filters" id="matchFilters"></div>
     <div id="matchList"></div>
   </section>
 
@@ -542,7 +543,7 @@ const SEEK={0:[["Investitor pentru proiect imobiliar","dictare"],["Furnizor de c
 const COLORS=["#6366F1","#10B981","#F59E0B","#8B5CF6","#EC4899","#0EA5E9","#14B8A6","#F97316","#EF4444","#22C55E"];
 const STOP=new Set("si sau de la in un o cu pe pentru din ca care este are am ai vreau caut ofer cineva zona bun buna nou noua a al ale lui langa".split(" "));
 const KEY="cercul_eie_v5",TKEY="cercul_theme",SKEY="cercul_salt";
-let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false;
+let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false,MATCHFILTER="all";
 // suprascrie cu zerouri bufferele pe care le controlam (audit s5r #1). CryptoKey-urile sunt
 // non-extractabile/opace (WebCrypto nu expune heap-ul lor) -> le eliberam pt. GC; parolele sunt
 // string-uri imutabile in JS si nu pot fi zeroizate — limitare documentata, nu ascunsa.
@@ -717,7 +718,7 @@ function setView(v){if(PROC){toast("Asteapta — Secretara AI proceseaza…");re
 function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("div",{class:"sk l w80"}),h("div",{class:"sk l w40"}));}
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
 function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
-  if(VIEW==="acasa")home();else if(VIEW==="potriviri")setKids($("#matchList"),pipeline(myMatches()));else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){renderMeetings();renderTasks();renderNotes();}else if(VIEW==="profil")prof();
+  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();setKids($("#matchList"),pipeline(myMatches().filter(matchIndOk)));}else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){renderMeetings();renderTasks();renderNotes();}else if(VIEW==="profil")prof();
   updateBadges();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 // backlog #7: empty-state ilustrat, consistent
 function estateBox(title,sub){return h("div",{class:"estate",style:{padding:"26px 20px"}},
@@ -827,6 +828,15 @@ function matches(list){return list.map(m=>{
       h("div",{class:"ghead"},av,h("div",{class:"gi"},h("div",{class:"gn",text:nm}),h("div",{class:"gt",text:ro})),pill),
       gline,badges,dock,details,h("div",{class:"shield",text:"🛡 Conexiune protejata"+(rev?" · sursa: "+o.source:"")}));});}
 
+/* backlog #10: filtru pe industrie la Potriviri */
+function matchInd(m){const c=mem(m.offer_member===ME?m.seek_member:m.offer_member);return c&&c.industry||"";}
+function matchIndOk(m){return MATCHFILTER==="all"||matchInd(m)===MATCHFILTER;}
+function setMatchFilter(f){MATCHFILTER=f;render();}
+function renderMatchFilters(){const host=$("#matchFilters");if(!host)return;
+  const inds=[...new Set(myMatches().map(matchInd).filter(Boolean))].sort();
+  const chip=(f,label)=>h("button",{class:"chip"+(MATCHFILTER===f?" on":""),"data-act":"mfilter","data-f":f,text:label});
+  if(!inds.length){setKids(host);return;}
+  setKids(host, chip("all","Toate"), ...inds.map(i=>chip(i,i)));}
 function pipeline(list){if(!list.length)return emp();
   const g={p:[],a:[],c:[]};
   list.forEach(m=>{const euc=m.offer_member===ME?m.offer_consent:m.seek_consent;
@@ -1180,6 +1190,7 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="profedit")editProfile();
   else if(a==="profsave")saveProfile();
   else if(a==="profcancel")cancelProfile();
+  else if(a==="mfilter")setMatchFilter(el.dataset.f);
   else if(a==="go")setView(el.dataset.v);});
 
 // error boundary global (remediaza constatarea de audit #4)

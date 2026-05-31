@@ -11,3 +11,5 @@
 - 2026-05-31 · Item 7 (Empty-states ilustrate consistente) · helper estateBox() cu SVG, folosit in notite/task-uri/intalniri/conexiuni/cautare; validat, 0 erori.
 - 2026-05-31 · Item 8 (Import JSON cu validare) · buton Importa in panoul Confidentialitate -> FileReader -> validDB -> confirmare overwrite -> backup criptat -> inlocuire; fisier invalid tratat gratios; validat, 0 erori.
 - 2026-05-31 · Item 9 (Editare profil) · buton ✎ Editeaza in Profil -> inputuri nume/domeniu -> Salveaza/Renunta, actualizeaza si dropdown-ul; persista; validat, 0 erori.
+- 2026-05-31 · AUDIT item 9 (loop9): APROBAT 6/6 + CAE.
+- 2026-05-31 · Item 10 (Filtru industrie la Potriviri) · chips Toate + industrii distincte, filtreaza pipeline-ul; validat, 0 erori.
