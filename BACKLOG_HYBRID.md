@@ -23,4 +23,4 @@ Audit (examples/audit.py) la fiecare al 3-lea item.
 6. [x] QR pentru codul de conexiune: randare QR (encoder vanilla, fara biblioteci) pentru schimb fata-in-fata.
 7. [x] Ecran „Schimba contacte la intalnire": genereaza codul/QR-ul tau + camp de lipit codul celuilalt, intr-un loc.
 8. [x] Template-uri de notite (dupa apel / follow-up / idee) — un click insereaza structura.
-9. [ ] Pozitionare Local-Only clara: onboarding scurt „de ce datele raman la tine" + nota ICP in „Despre".
+9. [x] Pozitionare Local-Only clara: onboarding scurt „de ce datele raman la tine" + nota ICP in „Despre".
