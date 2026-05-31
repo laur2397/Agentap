@@ -188,6 +188,15 @@ input,textarea,select{background:var(--card2);border:1px solid var(--line2);bord
 svg .node{cursor:pointer;transition:opacity .3s var(--ease)}
 svg .node.dim{opacity:.22}svg .edge{transition:opacity .3s var(--ease)}svg .edge.dim{opacity:.06}
 svg .node.sdim{opacity:.14}svg .edge.sdim{opacity:.05}
+/* iteratia 4: pipeline + radar */
+.pipe-h{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink2);font-weight:600;margin:18px 0 10px}
+.pipe-h:first-child{margin-top:2px}
+.pipe-h .pd{width:8px;height:8px;border-radius:50%;flex:none}
+.pipe-h.p .pd{background:var(--primary)}.pipe-h.a .pd{background:var(--warn)}.pipe-h.c .pd{background:var(--success)}
+.pipe-h .pn{margin-left:auto;background:var(--card2);border:1px solid var(--line);border-radius:20px;padding:1px 9px;font-size:11px;letter-spacing:0;color:var(--ink2)}
+.radarwrap{display:flex;gap:11px;align-items:center;margin-top:11px;padding:11px;background:var(--card2);border:1px solid var(--line);border-radius:12px}
+.radar{flex:none}
+.rk{font-size:10.5px;color:var(--ink2);line-height:1.5}.rk b{color:var(--primary-dim);font-weight:600}
 
 /* ledger hash */
 .ledger .lr-hash{font-family:ui-monospace,monospace;font-size:9px;color:var(--muted);letter-spacing:.3px}
@@ -248,6 +257,7 @@ nav{position:sticky;bottom:0;z-index:9;background:color-mix(in srgb,var(--bg) 88
   <div class="htop">
     <div class="brand"><div class="mk">C</div><div class="t">Cercul EIE<small>Network Capital</small></div></div>
     <div class="hright">
+      <button class="themebtn" id="lockBtnHd" title="Blocheaza acum (sterge cheia din memorie)" onclick="lockNow()">🔒</button>
       <button class="themebtn" id="themeBtn" title="Comuta tema" onclick="toggleTheme()">☾</button>
       <select class="memsel" id="member"></select>
     </div>
@@ -415,7 +425,8 @@ function validDB(d){if(!d||typeof d!=="object")return false;
   d.members.forEach(m=>{m.trust=Math.max(0,Math.min(100,+m.trust||0));m.name=clean(m.name).slice(0,80)||"?";m.id=+m.id;});
   d.items.forEach(i=>{i.text=clean(i.text);i.visible=i.visible?1:0;});
   if(typeof d.seq!=="number"||d.seq<1)d.seq=Math.max(d.members.length,...d.members.map(m=>m.id))+1;
-  if(!Array.isArray(d.audit))d.audit=[];return true;}
+  if(!Array.isArray(d.audit))d.audit=[];
+  if(!d.ledgerSalt)d.ledgerSalt=b64(crypto.getRandomValues(new Uint8Array(8)));return true;}
 let saveTimer=null;
 function save(){if(!CK)return;clearTimeout(saveTimer);saveTimer=setTimeout(async()=>{try{localStorage.setItem(KEY,await encJSON(DB));}catch(e){console.warn("save esuat",e);}},120);}
 async function flush(){if(!CK)return;try{localStorage.setItem(KEY,await encJSON(DB));}catch(e){console.warn(e);}}
@@ -431,7 +442,7 @@ function seed(){
   d.seq=d.members.length+1;
   const ai=(m,k,arr)=>(arr||[]).forEach(([t,s])=>d.items.push({id:d.seq++,member_id:m,kind:k,text:t,visible:k==="ofer"?1:0,source:s}));
   SEED.forEach((_,i)=>{ai(i+1,"ofer",OFF[i]);ai(i+1,"caut",SEEK[i]);});
-  DB=d;buildIDF();runMatching();[[1,2],[3,1],[5,4],[2,3],[7,3],[3,5]].forEach(([a,b])=>preConnect(a,b));save();return d;
+  DB=d;d.ledgerSalt=b64(crypto.getRandomValues(new Uint8Array(8)));buildIDF();runMatching();[[1,2],[3,1],[5,4],[2,3],[7,3],[3,5]].forEach(([a,b])=>preConnect(a,b));save();return d;
 }
 function preConnect(a,b){const m=DB.matches.find(x=>(x.offer_member===a&&x.seek_member===b)||(x.offer_member===b&&x.seek_member===a));if(m){m.offer_consent=1;m.seek_consent=1;m.status="conectat";if(!m.at)m.at=Date.now()-Math.floor(Math.random()*9+1)*864e5;if(!DB.messages.some(x=>x.match_id===m.id))ctx(m);}}
 function tok(t){return new Set((t.toLowerCase().match(/[a-z0-9]+/g)||[]).filter(w=>w.length>=3&&!STOP.has(w)));}
@@ -467,13 +478,14 @@ function fin(m){if(m.status==="conectat")return;m.status="conectat";m.at=Date.no
 function myMatches(){return DB.matches.filter(m=>(m.offer_member===ME||m.seek_member===ME)&&m.status!=="respins").sort((a,b)=>b.score-a.score);}
 
 function setView(v){if(PROC){toast("Asteapta — Secretara AI proceseaza…");return;}
+  if(VIEW==="retea"&&v!=="retea")stopNet();
   VIEW=v;$$(".tab").forEach(t=>t.classList.toggle("on",t.dataset.v===v));
   transition(()=>{$$(".view").forEach(s=>s.classList.toggle("on",s.id===v));window.scrollTo(0,0);});
   skeleton(v);setTimeout(render,anim()?170:0);}
 function skeleton(v){const sk='<div class="skel"><div class="sk box"></div><div class="sk l w80"></div><div class="sk l w40"></div></div>';
   if(v==="potriviri")$("#matchList").innerHTML=sk+sk;
   else if(v==="acasa")$("#topMatches").innerHTML=sk;}
-function render(){try{if(VIEW==="acasa")home();else if(VIEW==="potriviri")$("#matchList").innerHTML=matches(myMatches())||emp();else if(VIEW==="retea")net();else if(VIEW==="profil")prof();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
+function render(){try{if(VIEW==="acasa")home();else if(VIEW==="potriviri")$("#matchList").innerHTML=pipeline(myMatches());else if(VIEW==="retea")net();else if(VIEW==="profil")prof();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 function emp(){return'<div class="estate"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2"><circle cx="27" cy="27" r="15"/><path d="M38 38 L53 53" stroke-linecap="round"/><path d="M21 27 h12 M27 21 v12" stroke-linecap="round" opacity=".5"/></svg><div class="t">Nicio potrivire inca</div><div style="font-size:12px;margin-top:4px">Adauga in profil sau dicteaza dupa un apel — recalculez afinitatile pe loc.</div></div>';}
 
 function home(){const me=mem(ME),mm=myMatches();
@@ -499,15 +511,16 @@ function home(){const me=mem(ME),mm=myMatches();
 async function renderLedger(conx){
   if(!conx.length){$("#ledger").innerHTML='<div class="estate" style="padding:18px"><div class="t">Nicio conexiune confirmata inca.</div></div>';LEDGER_CHAIN=[];return;}
   const chrono=conx.slice().sort((a,b)=>(a.at||0)-(b.at||0));let prev="GENESIS";const hsh={};
-  for(const m of chrono){const h=await shaHex(prev+"|"+m.offer_member+"|"+m.seek_member+"|"+(m.at||0));hsh[m.id]=h;prev=h;}
+  const SALT=DB.ledgerSalt||"";
+  for(const m of chrono){const h=await shaHex(SALT+"|"+prev+"|"+m.offer_member+"|"+m.seek_member+"|"+(m.at||0));hsh[m.id]=h;prev=h;}
   LEDGER_CHAIN=chrono.map(m=>({id:m.id,a:m.offer_member,b:m.seek_member,at:m.at||0,hash:hsh[m.id]}));
   const rows=conx.slice(0,4).map(m=>{const cel=mem(m.offer_member===ME?m.seek_member:m.offer_member);
     return`<div class="lrow"><span class="dot"></span><div><div class="lr-name">${esc(cel.name)}</div><div class="lr-hash">⛓ ${(hsh[m.id]||"").slice(0,12)}…</div></div><span class="lr-date">${m.at?new Date(m.at).toLocaleDateString("ro-RO",{day:"numeric",month:"short"}):""}</span></div>`;}).join("");
   $("#ledger").innerHTML=rows+`<div class="lgverify"><span id="lgState">⛓ lant de ${chrono.length} verigi (SHA-256)</span>
     <button class="btn ghost sm" style="margin-left:auto;padding:5px 11px;font-size:11px" onclick="verifyLedger()">Verifica</button>
     <button class="btn ghost sm" style="padding:5px 11px;font-size:11px" onclick="exportLedger()">Export</button></div>`;}
-async function verifyLedger(){let prev="GENESIS",ok=true;
-  for(const e of LEDGER_CHAIN){if(await shaHex(prev+"|"+e.a+"|"+e.b+"|"+e.at)!==e.hash){ok=false;break;}prev=e.hash;}
+async function verifyLedger(){let prev="GENESIS",ok=true;const SALT=DB.ledgerSalt||"";
+  for(const e of LEDGER_CHAIN){if(await shaHex(SALT+"|"+prev+"|"+e.a+"|"+e.b+"|"+e.at)!==e.hash){ok=false;break;}prev=e.hash;}
   const el=$("#lgState");if(el)el.innerHTML=ok?`<span class="ok">✓ lant integru (${LEDGER_CHAIN.length} verigi)</span>`:'<span class="bad">✗ lant alterat — integritate compromisa</span>';
   toast(ok?"Trust Ledger: lant integru ✓":"Trust Ledger: alterare detectata ✗");}
 function exportLedger(){try{const blob=new Blob([JSON.stringify(LEDGER_CHAIN,null,2)],{type:"application/json"});
@@ -537,22 +550,69 @@ function matches(list){if(!list.length)return'';
         <div class="r"><span class="tag">${rev?esc(cel.name.split(" ")[0]):"membrul"} ${off?"cauta":"ofera"}</span><b>${celTxt}</b></div></div>
       <details class="why"><summary>De ce v-am potrivit</summary><div class="b">${why}</div></details>
       <div style="font-size:10.5px;color:var(--muted);margin-top:8px">⚙ metoda: TF-IDF + cosine · ${(m.common||[]).length} ${rev?"teme comune":"semnale (detalii dupa consimtamant)"}</div>
+      ${rev?`<div class="radarwrap">${radar([Math.min(100,(m.common||[]).length*22),m.score,cel.trust])}<div class="rk"><b>De ce s-a potrivit</b> · Dimensiuni 0–100: <b>Interese</b> = teme comune ×22 · <b>Afinitate</b> = scor TF-IDF/cosine · <b>Incredere</b> = Trust Score. Metoda transparenta, fara cifre fabricate.</div></div>`:""}
       <div class="src"><span class="seal">❧</span> ${src}</div>
       <div class="acts">${acts}</div></div>`;}).join("");}
 
-function net(){const W=400,H=400,cx=W/2,cy=H/2,R=150,others=DB.members.filter(m=>m.id!==ME),pos={};pos[ME]=[cx,cy];
-  others.forEach((m,i)=>{const a=(i/others.length)*Math.PI*2-Math.PI/2;pos[m.id]=[cx+R*Math.cos(a),cy+R*Math.sin(a)];});
-  const conn=DB.matches.filter(m=>m.status==="conectat");let e="",n="";
-  const q=(($("#netSearch")||{}).value||"").trim();const match=id=>{const m=mem(id);return fuzzy(q,m.name+" "+(m.industry||""));};
+/* ---- iteratia 4: radar "de ce s-a potrivit" (metodologie documentata, fara cifre fabricate) ---- */
+function radar(vals){const cx=52,cy=50,R=36,ax=[-90,30,150];
+  const grid=[100,66,33].map(g=>`<polygon points="${ax.map(d=>{const a=d*Math.PI/180,r=R*g/100;return (cx+r*Math.cos(a)).toFixed(1)+","+(cy+r*Math.sin(a)).toFixed(1);}).join(" ")}" fill="none" stroke="var(--line2)" stroke-width=".6"/>`).join("");
+  const poly=vals.map((v,i)=>{const a=ax[i]*Math.PI/180,r=R*Math.max(4,Math.min(100,v))/100;return (cx+r*Math.cos(a)).toFixed(1)+","+(cy+r*Math.sin(a)).toFixed(1);}).join(" ");
+  const labels=["Interese","Afinitate","Incredere"].map((l,i)=>{const a=ax[i]*Math.PI/180,r=R+10;return `<text x="${(cx+r*Math.cos(a)).toFixed(1)}" y="${(cy+r*Math.sin(a)+2).toFixed(1)}" text-anchor="middle" font-size="6.5" fill="var(--muted)">${l}</text>`;}).join("");
+  return `<svg class="radar" viewBox="0 0 104 100" width="100" height="96" aria-label="Dimensiunile potrivirii">${grid}<polygon points="${poly}" fill="var(--primary-soft)" stroke="var(--primary)" stroke-width="1.3"/>${labels}</svg>`;}
+
+/* ---- iteratia 4: pipeline (funnel) pe Potriviri ---- */
+function pipeline(list){if(!list.length)return emp();
+  const g={p:[],a:[],c:[]};
+  list.forEach(m=>{const euc=m.offer_member===ME?m.offer_consent:m.seek_consent;
+    if(m.status==="conectat")g.c.push(m);else if(euc)g.a.push(m);else g.p.push(m);});
+  const col=(t,arr,cls)=>arr.length?`<div class="pipe-h ${cls}"><span class="pd"></span>${t}<span class="pn">${arr.length}</span></div>`+matches(arr):"";
+  return (col("Noi — de decis",g.p,"p")+col("In asteptare",g.a,"a")+col("Conectate",g.c,"c"))||emp();}
+
+/* ---- iteratia 4: graf FORCE-DIRECTED (fizica vanilla, fara dependinte) ---- */
+let FSIM=null;
+function stopNet(){if(FSIM&&FSIM.raf){cancelAnimationFrame(FSIM.raf);FSIM.raf=null;}}
+function net(){const host=$("#netHost");if(!host||!DB)return;
+  const W=400,H=400,cx=W/2,cy=H/2;
+  const conn=DB.matches.filter(m=>m.status==="conectat"),members=DB.members;
+  if(!FSIM||FSIM.n!==members.length){const pos={};members.forEach((m,i)=>{const a=(i/members.length)*Math.PI*2;pos[m.id]={x:cx+120*Math.cos(a)+(Math.random()*8-4),y:cy+120*Math.sin(a)+(Math.random()*8-4),vx:0,vy:0};});FSIM={pos,n:members.length,raf:null,drag:0};}
+  const pos=FSIM.pos;members.forEach(m=>{if(!pos[m.id])pos[m.id]={x:cx+(Math.random()*40-20),y:cy+(Math.random()*40-20),vx:0,vy:0};});
+  const q=(($("#netSearch")||{}).value||"").trim(),matchq=id=>{const m=mem(id);return fuzzy(q,m.name+" "+(m.industry||""));};
   const cPri=cssv("--primary"),cCard=cssv("--card2"),cLine=cssv("--line2"),cInk=cssv("--ink2"),cBg=cssv("--bg2");
-  conn.forEach(m=>{const a=pos[m.offer_member],b=pos[m.seek_member];if(a&&b){const sd=q&&!(match(m.offer_member)||match(m.seek_member));
-    e+=`<line class="edge${sd?' sdim':''}" data-a="${m.offer_member}" data-b="${m.seek_member}" x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="${cPri}" stroke-width="1.5" opacity=".7"/>`;}});
-  DB.members.forEach(m=>{const p=pos[m.id];if(!p)return;const meN=m.id===ME,deg=conn.filter(c=>c.offer_member===m.id||c.seek_member===m.id).length,r=meN?22:11+Math.min(7,deg*2),sd=q&&!meN&&!match(m.id);
-    n+=`<g class="node${sd?' sdim':''}" data-id="${m.id}" onclick="openMemberMatch(${m.id})" onmouseover="netFocus(${m.id})" onmouseout="netFocus(0)">
-      <circle cx="${p[0]}" cy="${p[1]}" r="${r}" fill="${meN?cPri:cCard}" stroke="${meN?cPri:cLine}" stroke-width="${meN?2.5:1.5}"/>
-      <text x="${p[0]}" y="${p[1]+4}" text-anchor="middle" fill="${meN?cBg:cInk}" font-weight="600">${svgSafe(ini(m.name))}</text>
-      <text x="${p[0]}" y="${p[1]+r+12}" text-anchor="middle">${svgSafe(m.name.split(" ")[0])}</text></g>`;});
-  $("#netHost").innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block" role="img" aria-label="Graful retelei tale: ${conn.length} conexiuni confirmate intre membrii Cercului">${e}${n}</svg>`;}
+  const deg=id=>conn.filter(c=>c.offer_member===id||c.seek_member===id).length;
+  function step(){const ids=members.map(m=>m.id);
+    for(const id of ids){const p=pos[id];if(id===ME){p.x=cx;p.y=cy;p.vx=p.vy=0;continue;}if(FSIM.drag===id)continue;
+      let fx=(cx-p.x)*0.012,fy=(cy-p.y)*0.012;
+      for(const j of ids){if(j===id)continue;const o=pos[j];let dx=p.x-o.x,dy=p.y-o.y,d2=dx*dx+dy*dy||1,f=950/d2;fx+=dx*f;fy+=dy*f;}
+      p.vx=(p.vx+fx)*0.82;p.vy=(p.vy+fy)*0.82;}
+    for(const c of conn){const a=pos[c.offer_member],b=pos[c.seek_member];if(!a||!b)continue;let dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1,k=(d-80)/d*0.04;
+      if(c.offer_member!==ME&&FSIM.drag!==c.offer_member){a.vx+=dx*k;a.vy+=dy*k;}
+      if(c.seek_member!==ME&&FSIM.drag!==c.seek_member){b.vx-=dx*k;b.vy-=dy*k;}}
+    for(const id of ids){const p=pos[id];if(id===ME||FSIM.drag===id)continue;p.x=Math.max(24,Math.min(W-24,p.x+p.vx));p.y=Math.max(28,Math.min(H-28,p.y+p.vy));}
+    draw();const moving=ids.some(id=>Math.abs(pos[id].vx)+Math.abs(pos[id].vy)>0.06);
+    FSIM.raf=(moving&&!RM&&!FSIM.drag)?requestAnimationFrame(step):null;}
+  function draw(){let e="",n="";
+    conn.forEach(m=>{const a=pos[m.offer_member],b=pos[m.seek_member];if(a&&b){const sd=q&&!(matchq(m.offer_member)||matchq(m.seek_member));
+      e+=`<line class="edge${sd?' sdim':''}" data-a="${m.offer_member}" data-b="${m.seek_member}" x1="${a.x.toFixed(1)}" y1="${a.y.toFixed(1)}" x2="${b.x.toFixed(1)}" y2="${b.y.toFixed(1)}" stroke="${cPri}" stroke-width="1.5" opacity=".55"/>`;}});
+    members.forEach(m=>{const p=pos[m.id],meN=m.id===ME,r=meN?22:11+Math.min(7,deg(m.id)*2),sd=q&&!meN&&!matchq(m.id);
+      n+=`<g class="node${sd?' sdim':''}" data-id="${m.id}" style="cursor:grab">
+        <circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${r}" fill="${meN?cPri:cCard}" stroke="${meN?cPri:cLine}" stroke-width="${meN?2.5:1.5}"/>
+        <text x="${p.x.toFixed(1)}" y="${(p.y+4).toFixed(1)}" text-anchor="middle" fill="${meN?cBg:cInk}" font-weight="600" pointer-events="none">${svgSafe(ini(m.name))}</text>
+        <text x="${p.x.toFixed(1)}" y="${(p.y+r+12).toFixed(1)}" text-anchor="middle" pointer-events="none">${svgSafe(m.name.split(" ")[0])}</text></g>`;});
+    let svg=host.querySelector("svg");
+    if(svg)svg.innerHTML=e+n;
+    else host.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block;touch-action:none" role="img" aria-label="Graful retelei: ${conn.length} conexiuni, ${members.length} membri. Trage nodurile pentru a explora.">${e+n}</svg>`;}
+  draw();
+  const svg=host.querySelector("svg");
+  if(svg&&!svg._wired){svg._wired=1;let cur=0;
+    const pt=ev=>{const r=svg.getBoundingClientRect();return{x:(ev.clientX-r.left)/r.width*W,y:(ev.clientY-r.top)/r.height*H};};
+    svg.addEventListener("pointerdown",ev=>{const g=ev.target.closest(".node");if(!g)return;cur=+g.dataset.id;FSIM.drag=cur;try{svg.setPointerCapture(ev.pointerId);}catch(_){}g._moved=false;g._t=Date.now();});
+    svg.addEventListener("pointermove",ev=>{if(!cur)return;const o=pt(ev);pos[cur].x=o.x;pos[cur].y=o.y;pos[cur].vx=pos[cur].vy=0;const g=svg.querySelector(`.node[data-id="${cur}"]`);if(g)g._moved=true;draw();});
+    svg.addEventListener("pointerup",ev=>{const id=cur;cur=0;FSIM.drag=0;const g=svg.querySelector(`.node[data-id="${id}"]`);
+      if(g&&!g._moved&&Date.now()-(g._t||0)<260)openMemberMatch(id);else{stopNet();if(!RM)FSIM.raf=requestAnimationFrame(step);}});
+    svg.addEventListener("mouseover",ev=>{const g=ev.target.closest(".node");if(g)netFocus(+g.dataset.id);});
+    svg.addEventListener("mouseout",ev=>{if(ev.target.closest(".node"))netFocus(0);});}
+  stopNet();if(!RM)FSIM.raf=requestAnimationFrame(step);}
 function netFocus(id){const host=$("#netHost");if(!host)return;
   if(!id){host.querySelectorAll(".node,.edge").forEach(el=>el.classList.remove("dim"));return;}
   const nb=new Set([id]);DB.matches.filter(m=>m.status==="conectat"&&(m.offer_member===id||m.seek_member===id)).forEach(m=>{nb.add(m.offer_member);nb.add(m.seek_member);});
@@ -648,16 +708,22 @@ async function lockSubmit(){const pass=$("#lockPass").value,err=$("#lockErr");er
     if(LOCKMODE==="setup"){const salt=crypto.getRandomValues(new Uint8Array(16));
       CK=await deriveKey(pass,salt);localStorage.setItem(SKEY,b64(salt));
       DB=seed();await flush();$("#lockPass").value="";$("#lock").classList.remove("on");
-      loadMembers();render();obGo(0);obShow();}
+      loadMembers();render();obGo(0);obShow();resetIdle();}
     else{const salt=unb64(localStorage.getItem(SKEY));CK=await deriveKey(pass,salt);
       const d=await decJSON(localStorage.getItem(KEY));if(!validDB(d))throw new Error("schema");DB=d;
-      $("#lockPass").value="";$("#lock").classList.remove("on");loadMembers();render();}
+      $("#lockPass").value="";$("#lock").classList.remove("on");loadMembers();render();resetIdle();}
   }catch(e){console.warn("lock",e);CK=null;err.style.display="block";
     err.textContent=LOCKMODE==="setup"?"Eroare la initializare. Reincearca.":"Parola gresita sau date alterate/corupte.";}
   $("#lockBtn").disabled=false;}
 function lockReset(){if(!confirm("Reseteaza? Datele criptate actuale raman ca backup in browser, dar vei porni un cont nou."))return;
   backupRaw();localStorage.removeItem(KEY);localStorage.removeItem(SKEY);CK=null;
   $("#lockPass").value="";$("#lockErr").style.display="none";showLock("setup");}
+/* ---- auto-lock: cryptographic shredding — sterge cheia din RAM la inactivitate (audit s5 #3) ---- */
+let idleT=null;const IDLE_MS=180000;
+function lockNow(){if(!CK)return;stopNet();clearTimeout(idleT);CK=null;DB=null;LEDGER_CHAIN=[];
+  $("#lockPass").value="";showLock("unlock");toast("Blocat — cheia stearsa din memorie");}
+function resetIdle(){if(!CK)return;clearTimeout(idleT);idleT=setTimeout(lockNow,IDLE_MS);}
+["pointerdown","keydown","touchstart"].forEach(ev=>window.addEventListener(ev,resetIdle,{passive:true}));
 
 applyTheme(localStorage.getItem(TKEY)||"light");
 RM=localStorage.getItem("cercul_rm")==="1";applyRM();

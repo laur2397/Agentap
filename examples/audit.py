@@ -22,6 +22,22 @@ def P(f): return os.path.join(ROOT,f)
 
 # Descrierea EXACTA a solutiei auditate (iteratia 2 + remedieri runda 1). Onesta — doar ce e implementat.
 SOLUTIE=(
+ "ITERATIA 4 — imbunatatiri notabile peste iteratia 3, respectand constrangerile auditului s5spec "
+ "(ZERO dependinte externe, fara ONNX/D3/RAG = fara 'magie tehnologica', totul pur client-side vanilla; "
+ "verificate automat cu Playwright, zero erori de consola):\n"
+ "(i4-vizual) GRAF FORCE-DIRECTED: reteaua nu mai e statica, ci simulare de fizica vanilla (repulsie + "
+ "arcuri pe muchii + centrare, damping), noduri care se pot TRAGE, hover evidentiaza vecinii, cautare "
+ "fuzzy; respecta prefers-reduced-motion (animatia se opreste la cerere).\n"
+ "(i4-functional) PIPELINE/FUNNEL pe Potriviri: grupate in 3 coloane (Noi-de-decis / In asteptare / "
+ "Conectate) cu numaratori.\n"
+ "(i4-vizual+transparenta) RADAR 'de ce s-a potrivit' pe cardurile conectate: 3 dimensiuni (Interese="
+ "teme comune x22, Afinitate=scor TF-IDF/cosine, Incredere=Trust Score) cu METODOLOGIA documentata "
+ "vizibil — fara cifre fabricate.\n"
+ "(i4-securitate) HASH-CHAIN INTARIT CU SALT secret per-cont in fiecare veriga SHA-256; verificare+export "
+ "pastrate.\n"
+ "(i4-securitate) AUTO-LOCK = CRYPTOGRAPHIC SHREDDING: la 3 min inactivitate sau buton manual, cheia AES "
+ "(CK) si DB se sterg din RAM si se cere parola; datele pe disc raman criptate. Verificat: dupa blocare "
+ "apare ecranul de deblocare.\n\n"
  "ITERATIA 3 — imbunatatiri NOTABILE peste iteratia 2 (toate verificate automat cu Playwright, "
  "zero erori de consola, pure vanilla JS, fara dependinte externe — fara D3/Fuse):\n"
  "(vizual) Skeleton shimmer la schimbarea ecranului; contoare KPI animate (count-up cu easing); "

@@ -1,0 +1,1762 @@
+[
+  {
+    "cod": "1.8",
+    "rol": "Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este statică și inutilă, bazată doar pe cuvinte-cheie rigide, oferind o experiență de tip chat-bot rudimentar.\n\nIMBUNATATIRE: Implementez un sistem de \"Context-Aware Intent Parsing\" prin regex avansat și stocare locală, simulând răspunsuri dinamice pe baza istoricului de căutări și scorului de încredere.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "13.4",
+    "rol": "Onboarding / Implementation Specialist",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este doar un script static, iar utilizatorii abandonează rapid fără un \"Time to First Value\" clar, neștiind cum să interacționeze cu datele criptate.\n\nIMBUNATATIRE: Implementează un \"Workflow Wizard\" pas-cu-pas în overlay care ghidează popularea profilului și declanșează un \"Deep-Scan\" simulat.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "11.4",
+    "rol": "SEO / SEM Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Reteaua este un graf static, imposibil de explorat intuitiv la volum mare, iar lipsa \"social proof\" face ca scorul de încredere să pară arbitrar.\n\nIMBUNATATIRE: Implementare \"Force-Directed Graph\" (D3.js) cu noduri expansibile pe click și vizualizarea legăturilor ca \"Trust-Edges\" animate.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "16.4",
+    "rol": "Privacy / GDPR Officer (DPO)",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Lipsa controlului utilizatorului asupra \"dreptului de a fi uitat\" (GDPR Art. 17). Datele rămân în \"Local Storage\" fără o metodă securizată de ștergere completă, auditabilă.\n\nIMBUNATATIRE: Buton \"Purjare Digitală\" cu ștergere criptografică (Zero-fill RAM) + Export JSON securizat conform DSAR.\n\nTIP: Funcțional.",
+    "ok": true
+  },
+  {
+    "cod": "3.4",
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Reteaua interactivă devine haotică la peste 20 noduri, iar input-ul de căutare este static. Lipsa feedback-ului vizual la interacțiunea cu nodurile (ex: selecție/focus) face navigarea obositoare.\n\nIMBUNATATIRE: Implementează \"Force-Directed Layout\" cu atracție/respingere în D3.js și un \"Breadcrumb\" de navigare pentru selecția nodurilor.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "6.2",
+    "rol": "AI Research Scientist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Matching-ul TF-IDF este rudimentar și rigid; Secretara AI este doar un script de căutare. Lipsa inteligenței semantice face ca experiența să pară un simplu director static.\n\nIMBUNATATIRE: Integrarea `Transformers.js` (onnx-web) pentru vectorizare locală (Xenova/all-MiniLM-L6-v2) și comparare prin `cosine similarity` reală.\n\nTIP: Funcțional și vizual (relevanță îmbunătățită).",
+    "ok": true
+  },
+  {
+    "cod": "1.8",
+    "rol": "Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Secretara AI este rudimentară și statică, iar filtrarea pe Potriviri lipsește, limitând utilitatea reală a aplicației într-un context de networking.\n\nIMBUNATATIRE: Implementez un filtru \"Smart-Sort\" cu slider dinamic și un modul de \"Contextual Prompting\" pentru Secretară, folosind un set de reguli ierarhice.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "8.4",
+    "rol": "Interaction Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Tranzițiile între ecrane sunt statice, iar interacțiunile cu \"Secretara AI\" par rigide, rupând imersiunea. Lipseste feedback-ul tactil/vizual la acțiuni critice (criptare/salvare).\n\nIMBUNATATIRE: Implementarea unei biblioteci de tip *View Transition API* pentru morphing fluid între ecrane și *Lottie-web* (inline JSON) pentru feedback-ul la statusul criptării.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "3.4",
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Reteaua interactivă devine un haos vizual pe ecrane mici (clutter), iar lipsa unui \"onboarding\" contextual face ca utilizatorul să ignore funcțiile avansate (ex: export/hash).\n\nIMBUNATATIRE: Implementează un \"Lens Mode\" (zoom/pan pe noduri) și Tooltips ghidate (Joyride light) pentru funcțiile critice.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "13.4",
+    "rol": "Onboarding / Implementation Specialist",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Onboarding-ul static e un blocaj; utilizatorii nu înțeleg valoarea rețelei fără date.\n\nIMBUNATATIRE: Implementează un \"Guided Interactive Tour\" (driver JS) care populează automat 5 noduri demo și ghidează utilizatorul prin primul \"Match\" real, activând succesul imediat.\n\nTIP: ambele.",
+    "ok": true
+  },
+  {
+    "cod": "11.5",
+    "rol": "ASO Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Screenshots-urile actuale sunt generice, nu vând \"valoarea de încredere\" a ecosistemului criptat. Utilizatorul nu înțelege instant beneficiul tehnologic (Trust Ledger).\n\nIMBUNATATIRE: Implementare \"Screenshot Generator\" nativ în app: export automat de carduri vizuale (Trust Score + Rețea) optimizate pentru store.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "8.5",
+    "rol": "UX Researcher",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Utilizatorii se simt izolați; interfața \"Secretarei AI\" e rigidă, iar lipsa feedback-ului contextual face ca matching-ul să pară o cutie neagră, erodând încrederea în calitatea sugestiilor.\n\nIMBUNATATIRE: Implementare \"Explainability Modal\" pe fiecare potrivire: buton \"De ce?\" care afișează vizual overlap-ul tematic (barchart) și scorul de încredere explicat.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "16.5",
+    "rol": "Regulatory Compliance Specialist",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Transparența AI și conformitatea ePrivacy. „Secretara AI” actuală este o cutie neagră; utilizatorul nu știe ce date procesează local, riscând sancțiuni sub AI Act pentru lipsa „transparenței algoritmice”.\n\nIMBUNATATIRE: Dashboard \"Privacy & Logic\": un modal care afișează în timp real input-ul procesat, ponderea temelor și log-ul de ștergere a memoriei.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "6.3",
+    "rol": "Senior ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Matching-ul euristic actual e static și rigid, oferind rezultate plate. Lipsa contextului dinamic face ca \"Secretara AI\" să pară un simplu căutător de string-uri, nu un asistent inteligent.\n\nIMBUNATATIRE: Implementez **Vector Scoring (JS)**: calcularea distanței euclidiene între profiluri prin embedding-uri simple (TF-IDF ponderat), cu un slider de \"Relevanță Contextuală\" care re-sorteazăamicicamicamic dinamica rețelei în timp real.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "1.8",
+    "rol": "Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este statică și inutilă; lipsa feedback-ului vizual la interacțiune o face să pară un simplu text-box.\n\nIMBUNATATIRE: Implementez un \"Intent Parser\" bazat pe regex avansat și stări logice, cu animație tip \"typing effect\" și sugestii de acțiuni rapide (chips) post-răspuns.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "6.3",
+    "rol": "Senior ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Matching-ul euristic e static și rigid, oferind zero valoare predictivă. Utilizatorul nu înțelege *de ce* vede o recomandare.\n\nIMBUNATATIRE: Implementare \"Semantic Match Score\" via Tiny-Embeddings (in-browser, vectori mici). Vizual: Adaugă tooltips pe fiecare potrivire cu \"Top 3 Conectori Semantici\" (tag-uri evidențiate).\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "3.4",
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Interacțiunea cu \"Secretara AI\" este statică și frustrantă; lipsa feedback-ului de tip \"typing\" și a unui istoric vizual clar face dialogul să pară un simplu formular, nu o conversație.\n\nIMBUNATATIRE: Implementează un \"Message Bubble UI\" cu scroll automat și animație de tip \"typing indicator\".\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "8.5",
+    "rol": "UX Researcher",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Utilizatorii se simt \"orbi\" în rețea; graficul interactiv e doar vizual, nu oferă context decizional pentru matching.\n\nIMBUNATATIRE: Implementarea unui \"Insight Panel\" la hover pe nod: afișarea a 3 \"Puncte de Convergență\" (teme comune) extrase din datele locale.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "11.6",
+    "rol": "Social Media Manager",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Reteaua pare un \"cimitir\" static; utilizatorii nu simt progresul social, iar datele criptate sunt invizibile. Lipseste validarea sociala a entitatii.\n\nIMBUNATATIRE: Implementeaza un \"Social Proof Ledger\" vizual: fiecare conexiune genereaza un card \"Proof-of-Trust\" animat, exportabil ca PNG (Canvas API).\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "13.4",
+    "rol": "Onboarding / Implementation Specialist",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Onboarding-ul static actual e un simplu tutorial text. Utilizatorii nu înțeleg valoarea rețelei până nu văd date \"vii\", deci rata de activare stagnează.\n\nIMBUNATATIRE: Implementează un \"Interactive Product Tour\" (via driver.js inline) care evidențiază live Trust Score și network-ul, forțând un \"Quick Win\" prin configurarea profilului în 30s.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "6.4",
+    "rol": "ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Matching-ul euristic (TF-IDF) este static și superficial; nu simulează „inteligența” promisă, oferind rezultate irelevante pentru utilizator.\n\nIMBUNATATIRE: Implementarea unui motor de vectorizare locală (Universal Sentence Encoder via TensorFlow.js) pentru calculul distanței cosine între embedding-uri reale direct în browser.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "17.1",
+    "rol": "Internal IT Manager",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Gestionarea manuală a datelor și lipsa unui \"Audit Trail\" pentru utilizatori în onboarding. Utilizatorii se pierd în date fără un workflow de import/export securizat, iar profilul static îngreunează deciziile de networking.\n\nIMBUNATATIRE: Implementarea unui modul \"Data Vault\" (import/export JSON criptat) și vizualizarea profilului prin \"Radar Chart\" (capacități/interese).\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "1.9",
+    "rol": "Senior Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa stării persistente a \"Secretarei\" face ca interacțiunile să pară rudimentare, iar graficul de rețea devine ilizibil pe ecrane mici sub sarcini mari.\n\nIMBUNATATIRE: Implementare *State-Machine* pentru dialoguri contextuale și *Canvas-based Force-Directed Graph* cu zoom/pan fluid.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "3.4",
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 4,
+    "text": "NEMULTUMIRE: Reteaua interactivă devine un haos vizual pe ecrane mici, iar \"Secretara AI\" pare un simplu filtru de text, nefiind integrată nativ în fluxul de interacțiune al utilizatorului.\n\nIMBUNATATIRE: Implementează \"Canvas Zoom-to-Node\" și un sidebar \"Quick-Actions\" pentru Secretară, declanșabil prin swipe.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "8.6",
+    "rol": "Design System Specialist",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Design System-ul este fragmentat; stilurile hardcoded în HTML/JS creează inconsistente vizuale și dificultăți la scalarea componentelor.\n\nIMBUNATATIRE: Implementarea unui \"Design Token Engine\" (CSS Variables map) și a unei biblioteci de UI-Primitives bazate pe clase utilitare, asigurând coerența vizuală și rapiditatea iterațiilor.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.5",
+    "rol": "Customer Experience Analyst",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este doar un bot rudimentar, frustrant prin lipsa de context. Utilizatorii percep matching-ul ca pe o \"cutie neagră\" statică, generând un Customer Effort Score (CES) ridicat.\n\nIMBUNATATIRE: Implementează \"Contextual Prompting\" în UI: un sidebar care explică *de ce* a fost recomandat un match, bazat pe vectori de similaritate dinamici.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "6.4",
+    "rol": "ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Matching-ul euristic (TF-IDF) este static și superficial; nu înțelege contextul semantic al utilizatorului, oferind rezultate irelevante care subminează încrederea în aplicație.\n\nIMBUNATATIRE: Implementare *Client-side Embedding* cu `Transformers.js` (model `all-MiniLM-L6-v2`) pentru vectorizarea profilurilor și calcul de similaritate cosinus în JS.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "17.2",
+    "rol": "Internal Help Desk",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Onboarding-ul e static, iar Secretara AI e rudimentară, generând frustrare prin lipsa contextului. Utilizatorii nu învață să folosească instrumentul.\n\nIMBUNATATIRE: Implementare \"Guided Tour\" (driver.js) și sistem de \"Smart Context\" (stocare locală a istoricului conversațiilor).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "11.7",
+    "rol": "Community Manager",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Onboarding-ul static lasă utilizatorii \"în aer\" după prima rulare; lipsa contextului transformă potențialii ambasadori în utilizatori pasivi.\n\nIMBUNATATIRE: Implementarea unui \"Interactive Tour\" (overlay pas-cu-pas care evidențiază elemente UI via `getBoundingClientRect`) și a unui sistem de \"Gamified Profile Setup\" (progres vizual 0-100%).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "3.5",
+    "rol": "Performance Test Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Reteaua devine o \"ciorbă\" ilizibilă pe ecrane mici la 20+ noduri; performanța SVG scade exponențial la interacțiuni, blocând UI-ul.\n\nIMBUNATATIRE: Implementează `Canvas API` cu `OffscreenCanvas` pentru graf și un sistem de `LOD` (Level of Detail) care ascunde etichetele la zoom-out.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.9",
+    "rol": "Senior Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interacțiunea cu \"Secretara AI\" este rudimentară și statică, rupând fluxul premium. Lipsa stării persistente a conversației și a unui context vizual face ca experiența să pară un simplu search pe cuvinte-cheie, nu un asistent inteligent.\n\nIMBUNATATIRE: Implementează un \"Chat Bubble Interface\" cu animații de tip typing și un motor de matching bazat pe vectori simpli (similitudine cosinus pe tag-uri vectorizate).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "8.7",
+    "rol": "Graphic / Brand Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică; feedback-ul vizual pentru \"Trust Score\" și \"Rețea\" e izolat, lipsind o ierarhie vizuală care să comunice progresul sau importanța conexiunilor la nivel intuitiv.\n\nIMBUNATATIRE: Implementarea unui \"Glassmorphism Depth System\" și tranzitii CSS fluide (View Transitions API) pentru a unifica experiența.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.5",
+    "rol": "Customer Experience Analyst",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este doar un motor rudimentar de căutare, frustrant prin lipsa de context. Utilizatorii percep interacțiunea ca pe un formular static, nu ca pe un asistent inteligent.\n\nIMBUNATATIRE: Implementarea unui \"Contextual Prompting Engine\" cu stări (State Machine) pentru a simula fluxuri de conversație și integrarea unui UI de chat \"bubble\" cu animații de tip \"typing\".\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "11.8",
+    "rol": "Growth Marketer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Onboarding-ul static nu convinge; utilizatorul abandonează înainte de „aha-moment”. Lipsa contextului dinamic face rețeaua să pară un depozit de date mort, nu o comunitate vie.\n\nIMBUNATATIRE: Implementarea unui „Interactive Tour” ghidat (intro-overlay) și badge-uri de tip „Online/Recent” dinamice pe profiluri bazate pe timestamp-uri locale.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.9",
+    "rol": "Senior Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Interacțiunea cu \"Secretara AI\" e rigidă, bazată pe cuvinte-cheie, iar datele sunt statice, oferind o experiență de \"document\", nu de \"aplicație vie\".\n\nIMBUNATATIRE: Implementarea unui motor de căutare vectorial local (TinySegmenter + Cosine Similarity în JS) și un sistem de \"Conversație Contextuală\" cu stări salvate.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "17.2",
+    "rol": "Internal Help Desk",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Gestionarea tăcută a datelor; utilizatorii nu pot exporta/importa un backup local structurat (JSON criptat), riscând pierderea totală a profilului la refresh accidental.\n\nIMBUNATATIRE: Implementare \"Vault Manager\" în setări: Export/Import criptat (Blob/URL) și auto-save în `localStorage` cu criptare AES.\n\nTIP: Funcțional.",
+    "ok": true
+  },
+  {
+    "cod": "6.5",
+    "rol": "Generative AI Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este doar un script static de cuvinte-cheie; pare un bot rudimentar din 2010, lipsit de contextul interacțiunilor trecute.\n\nIMBUNATATIRE: Integrare `LLM.js` (WebLLM) pentru inferență locală (Phi-3) în browser, cu un `VectorStore` (IndexedDB) pentru RAG contextual pe istoricul utilizatorului.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "3.5",
+    "rol": "Performance Test Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Rețeaua interactivă devine un \"ghem\" ilizibil la peste 50 de noduri, iar calculul TF-IDF pe browser blochează UI-ul (main thread hang) la volume mari de date.\n\nIMBUNATATIRE: Implementare Web Worker pentru procesare asincronă și motor de forțe (D3.js-force) cu simulare de fizică optimizată (Canvas rendering).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "9.1",
+    "rol": "Behavioral Science Lead",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este un simplu keyword-match rigid, lipsit de context, care mimează inteligența, generând frustrare și neîncredere în valoarea sistemului.\n\nIMBUNATATIRE: Implementarea unui algoritm de \"Weighted Semantic Scoring\" (stocare locală vectori pre-calculați) cu interfață de \"Conversational Filter\" care ajustează vizual Trust Score-ul.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "11.9",
+    "rol": "Brand / PR Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" pare un chatbot rudimentar, scăzând prestigiul brandului prin lipsa de inteligență perceptibilă.\n\nIMBUNATATIRE: Implementarea unui \"Contextual Prompt Builder\" care generează sugestii de răspuns bazate pe profilul utilizatorului și istoricul de matching, oferind iluzia de inteligență predictivă prin manipularea vectorilor locali.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.6",
+    "rol": "Support Team Lead",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este inutilă; e doar un search rudimentar care frustrează utilizatorul, scăzând CSAT-ul prin lipsa de context.\n\nIMBUNATATIRE: Implementează un motor de \"Semantic Context\" folosind un dicționar vectorizat local (Tiny-Embeddings) pentru potriviri bazate pe intenție, nu cuvinte-cheie.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.10",
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este doar un set de reguli rigide, inutilă pentru recomandări contextuale.\n\nIMBUNATATIRE: Implementez un algoritm de \"Semantic Scoring\" local folosind un vector de relevanță bazat pe ponderile TF-IDF calculate în timp real. Rezultatele devin recomandări ierarhizate, nu simple potriviri.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "17.3",
+    "rol": "Endpoint Management Specialist",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Gestionarea cheii de criptare este vulnerabilă; utilizatorii pot pierde parola sau pot fi victimele unui atac de tip screen-scraping/keylogger, iar datele rămân expuse local fără un mecanism de \"kill-switch\" rapid.\n\nIMBUNATATIRE: Implementare \"Panic Button\" (auto-wipe RAM/LocalStorage) și integrare WebCrypto API pentru *Hardware-Backed Key Storage* (IndexedDB + Suble Crypto).\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "6.5",
+    "rol": "Generative AI Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Secretara AI este un simplu parser rudimentar de cuvinte-cheie, lipsit de context și empatie, ceea ce subminează promisiunea unei experiențe premium.\n\nIMBUNATATIRE: Integrează un motor de *semantic matching* (TinyLLM/Transformers.js) local pentru sumarizări inteligente și recomandări contextuale.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "3.6",
+    "rol": "Quality Engineer Process",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Trust Ledger-ul este un simplu log text, static și greu de auditat vizual. Lipsa feedback-ului de integritate în timp real creează incertitudine asupra stării datelor.\n\nIMBUNATATIRE: Vizualizator \"Blockchain-Style\" cu status live (verde/roșu) pentru fiecare hash, animații de validare și bară de progres integritate.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "9.2",
+    "rol": "Behavioral Scientist / Psiholog cognitiv",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este un simplu keyword-matcher static, generând iluzia de inteligență care frustrează utilizatorul prin rigiditate și lipsa contextului.\n\nIMBUNATATIRE: Implementarea unui \"Vector-Space Lite\" (stocare embedding-uri simple în JSON) pentru matching semantic și un istoric de interacțiuni local (localStorage) pentru a simula continuitatea.\n\nTIP: Funcțional.",
+    "ok": true
+  },
+  {
+    "cod": "11.10",
+    "rol": "Technical Writer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Utilizatorii se pierd în interfața complexă fără un ghid \"in-app\" contextual, generând confuzie la funcțiile criptografice și rețea.\nIMBUNATATIRE: Implementarea unui \"Smart Tooltip Overlay\" interactiv care explică funcționalitățile la hover/click și un \"Quick Tour\" (progresie stadii) declanșat on-demand.\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "14.1",
+    "rol": "HR Director / Head of People",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Secretara AI este doar un bot rudimentar pe cuvinte-cheie; nu oferă valoare strategică în decizia de recrutare.\n\nIMBUNATATIRE: Implementăm \"Smart Context Scoring\": un motor de weighting care prioritizează candidații pe baza suprapunerii competențelor critice vs. nevoile curente ale departamentelor.\n\nTIP: Funcțional.",
+    "ok": true
+  },
+  {
+    "cod": "1.10",
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Matching-ul euristic este static și „mort”, iar Secretara AI pare un simplu script de căutare; lipsesc conexiunile dinamice.\n\nIMBUNATATIRE: Implementez \"Weight-Slider\" pentru teme în Potriviri (ajustează scorul în timp real) și un mod \"Chat Simulator\" local cu prompt-engineering pe contextul stocat.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "17.4",
+    "rol": "Internal Tools / Systems Admin",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Gestionarea manuală a datelor (JSON local) blochează scalabilitatea. Nu există \"flow\" între module, iar \"Secretara AI\" este statică și inutilă fără contextualizare.\n\nIMBUNATATIRE: Implementare *Local-Storage Sync* cu indexare tip \"Event Bus\" și un motor de templatizare pentru răspunsuri dinamice.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "4.1",
+    "rol": "CISO Deputy / Security Lead",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Gestionarea cheii în RAM este vulnerabilă la exfiltrarea prin XSS sau snapshot-uri de memorie; lipsa unui mecanism de \"Panic Mode\" (auto-distrugere date la eșec autentificare) riscă expunerea datelor sensibile pe dispozitive pierdute.\n\nIMBUNATATIRE: Implementare \"Panic Wipe\" (ștergere cheie/date la 3 eșecuri PIN) și obfuscator de memorie (xor-masking) pentru cheile AES.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "6.6",
+    "rol": "LLM / Integration Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este doar un script static bazat pe cuvinte-cheie, lipsit de context real și capabil doar de răspunsuri rigide, distrugând iluzia de inteligență a aplicației.\n\nIMBUNATATIRE: Integrare client-side prin `transformers.js` (model `Xenova/all-MiniLM-L6-v2`) pentru vectorizarea locală a profilurilor și matching semantic real, fără API extern.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "9.2",
+    "rol": "Behavioral Scientist / Psiholog cognitiv",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este un simplu keyword-matcher static, generând iluzia de inteligență fără utilitate reală. Utilizatorul simte disonanță cognitivă între designul \"premium\" și interacțiunea primitivă.\n\nIMBUNATATIRE: Implementarea unui \"Semantic Intent Mapper\" (min-vector) care sortează rezultatele după relevanță contextuală, nu doar frecvență.\n\nTIP: Funcțional.",
+    "ok": true
+  },
+  {
+    "cod": "11.11",
+    "rol": "Marketing Operations",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este doar un script static de cuvinte-cheie; nu învață nimic, oferind un feedback rigid care blochează personalizarea experienței de utilizator și calitatea datelor colectate pentru matching.\n\nIMBUNATATIRE: Implementarea unui sistem de \"Weighting & Tagging\" local: Secretara va atribui scoruri ponderate temelor extrase din input, stocate în `localStorage` ca vectori de preferințe, ajustând dinamic recomandările în ecranul \"Potriviri\".\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "14.2",
+    "rol": "Technical Recruiter / Sourcer",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Secretara AI este doar un bot rudimentar pe cuvinte-cheie; nu înțelege contextul tehnic al profilelor, oferind sugestii irelevante care blochează pipeline-ul.\n\nIMBUNATATIRE: Implementarea unui sistem de \"Scoring Contextual\" (ponderare vectori tematici) direct în JS, cu vizualizare \"Why this match?\" explicată prin tag-uri colorate.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "17.4",
+    "rol": "Internal Tools / Systems Admin",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Reteaua vizuală devine un haos static la scalare, iar lipsa unui flux de lucru între Secretara AI și Potriviri blochează productivitatea (date izolate).\n\nIMBUNATATIRE: Implementare Force-Directed Graph cu fizică simulată (D3.js) + \"Action-Queue\" pentru Secretara, permițând conversia directă a insight-urilor în \"invitații\" salvate local.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "1.10",
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este doar un placeholder static pentru cuvinte-cheie; experiența este rigidă și neinteligentă.\n\nIMBUNATATIRE: Implementez un motor de \"Semantic Context Scoring\" local, folosind vectori simpli (bag-of-words ponderat) pentru a sugera acțiuni contextuale dinamice în funcție de profil.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "6.7",
+    "rol": "Conversational AI Designer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este un simplu matcher static, rigid și rece; lipsește contextul, iar utilizatorul nu simte valoarea reală a unei interacțiuni empatice.\n\nIMBUNATATIRE: Implementarea unui \"Contextual Prompt Orchestrator\" care injectează starea curentă a utilizatorului în prompt, plus un efect de \"typing\" fluid.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "12.1",
+    "rol": "Sales Director",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Pipeline-ul de parteneriate B2B este invizibil. Lipsește un dashboard pentru \"Sales Funnel\" care să transforme membri/rețele în oportunități de venit, făcând aplicația inutilă pentru scalare comercială.\n\nIMBUNATATIRE: Dashboard \"Executive Pipeline\" (drag-and-drop cards) pentru managementul lead-urilor B2B și proiecții de venit integrate.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "9.3",
+    "rol": "Cercetator neurostiinte / stiinte cognitive",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" bazată pe cuvinte-cheie provoacă frustrare cognitivă prin rezultate irelevante, inducând oboseala decizională. Lipsa feedback-ului de încredere în conversație blochează angajamentul.\n\nIMBUNATATIRE: Implementează un sistem de *Reranking* bazat pe proximitatea vectorilor TF-IDF și un \"Trust Badge\" dinamic în chat.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "4.2",
+    "rol": "Information Security Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Riscul de exfiltrare prin clipboard și lipsa auditului granular al accesului la datele decriptate. Utilizatorul vede tot \"în clar\" fără control.\n\nIMBUNATATIRE: Implementarea unui \"Privacy Shield\" (blurare auto după 30s de inactivitate) și un log local de acces auditabil per sesiune.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.1",
+    "rol": "Head of Engineering / VP Engineering",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este doar un script static de keyword-matching; e inutil pentru decizii strategice. Lipsa contextului istoric face ca interacțiunile să pară rigide și nesigure.\n\nIMBUNATATIRE: Implementează \"Contextual Memory Bank\" (LocalStorage) cu indexare semantică simplă. Adaugă un \"Semantic Chat Bubble\" pentru interogări contextuale.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "14.2",
+    "rol": "Technical Recruiter / Sourcer",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este doar un motor de căutare rudimentar; nu simulez inteligența necesară filtrării calitative a candidaților pentru hiring managers.\n\nIMBUNATATIRE: Implementarea unui algoritm de \"Weighted Scoring\" cu slider-uri de importanță pentru skill-uri (ex: Python 40%, AWS 60%) care recalculează dinamic Trust Score-ul.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "18.1",
+    "rol": "Head of Operations / COO Deputy",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Gestionarea contactelor e statică; matching-ul euristic e opac, iar lipsa profilului bogat face rețeaua inutilă pentru networking real.\n\nIMBUNATATIRE: Implementăm \"Carduri de Profil Extensibile\" cu vizualizare radar chart (skill-uri) și filtrare multi-criterială (slider-e dinamice).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.10",
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 4,
+    "text": "NEMULTUMIRE: Secretara AI e rigidă; interacțiunea pe bază de cuvinte-cheie e frustrantă și pare \"fake\".\n\nIMBUNATATIRE: Implementez un motor simplu de \"Semantic Intent\" prin vectori pre-calculați (TF-IDF pe vocabular controlat) pentru a simula înțelegerea contextului, plus un chat-bubble overlay.\n\nTIP: Funcțional.",
+    "ok": true
+  },
+  {
+    "cod": "6.8",
+    "rol": "AI Data Specialist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Matching-ul euristic este rigid și opac. Utilizatorul nu înțelege de ce un membru primește \"Trust Score\" mare, generând neîncredere în algoritmul local.\n\nIMBUNATATIRE: Implementarea unui \"Explainable Match Panel\" cu vizualizare SVG a vectorilor de similaritate (radar chart) și tooltips explicative pentru fiecare criteriu.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.2",
+    "rol": "Engineering Manager",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Secretara AI este rudimentară și statică, rupând imersiunea „premium”. Experiența pare o simplă listă, nu o asistență proactivă.\n\nIMBUNATATIRE: Implementează un \"Chat Bubble\" cu animație de tip \"Typing\" și un sistem de \"Contextual Quick-Replies\" bazat pe vectori simplificați în JS pentru sugestii inteligente.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "4.2",
+    "rol": "Information Security Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Riscul de „data leakage” prin persistența în RAM și lipsa unui mecanism de auto-distrugere a sesiunii (timeout). Utilizatorul poate lăsa aplicația deschisă, expunând date critice.\n\nIMBUNATATIRE: Implementare \"Auto-Lock\" (inactivitate) cu blurare imediată a UI și ștergerea cheii AES din memorie.\n\nTIP: functional.",
+    "ok": true
+  },
+  {
+    "cod": "9.4",
+    "rol": "Ethical / Responsible Design Lead",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este un placeholder pasiv, iar lipsa feedback-ului la matching creează opacitate, generând neîncredere în algoritmul local.\n\nIMBUNATATIRE: Implementează un motor de \"Logic Explainability\" care evidențiază grafic motivele potrivirii și un mod \"Drafting\" interactiv pentru Secretara AI.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "12.2",
+    "rol": "Account Executive",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Demo-ul actual este static și \"rece\". Nu pot convinge clienții enterprise fără un flux de \"Deal Simulation\" care să demonstreze valoarea reală a potrivirilor.\n\nIMBUNATATIRE: Integrarea unui modul \"Deal Simulator\" interactiv: utilizatorul alege 3 criterii (KPIs), iar rețeaua vizuală se reconfigurează dinamic, evidențiind ROI-ul potențial.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "14.3",
+    "rol": "Recruiter / Talent Acquisition",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Ecranul de \"Potriviri\" este static și rece; nu pot evalua \"soft skills\" sau contextul cultural al candidaților non-tehnici prin simple procente.\n\nIMBUNATATIRE: Carduri cu \"Timeline de Progresie\" și \"Tag-uri de Competențe\" (color-coded). Adăugarea unui slider de \"Fit Cultural\" ajustabil manual.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "18.2",
+    "rol": "Business Operations Analyst",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interacțiunea cu \"Secretara AI\" este plată, bazată pe keyword-uri rigide, distrugând iluzia de inteligență și utilitate a aplicației.\n\nIMBUNATATIRE: Implementarea unui motor de \"Semantic Context Switching\" (stocare locală în memorie a istoricului sesiunii) pentru a simula continuitatea dialogului.\n\nTIP: Funcțional.",
+    "ok": true
+  },
+  {
+    "cod": "6.9",
+    "rol": "Responsible AI / AI Ethics Specialist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este un simplu keyword-matcher opac, generând iluzia de inteligență, ceea ce compromite încrederea utilizatorului.\n\nIMBUNATATIRE: Implementează un \"Explainability Overlay\" (Tooltip) pe fiecare răspuns AI care afișează fragmentele exacte din profilul sursă ce au declanșat recomandarea.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "2.1",
+    "rol": "DevOps Lead",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Absența persistenței datelor și a unui mecanism de integritate la nivel de fișier face ca utilizatorul să piardă totul la refresh. Lipsa unui sistem de \"Snapshot\" face auditul ineficient.\n\nIMBUNATATIRE: Implementare `IndexedDB` pentru stocare locală persistentă și un sistem de \"Versioned Export\" (JSON cu semnătură SHA-256) pentru backup extern.\n\nTIP: Funcțional.",
+    "ok": true
+  },
+  {
+    "cod": "9.5",
+    "rol": "UX Researcher (well-being focus)",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Focus Digest\" creează anxietate prin grafice rigide și KPI-uri reci, ignorând starea emoțională a utilizatorului. Lipsesc contextul calitativ și mecanisme de \"calmare\" după sesiuni de networking.\n\nIMBUNATATIRE: Integrarea unui \"Mood Check-in\" rapid și a unei interfețe \"Zen Mode\" (filtru blur/grayscale) pentru reducerea dopaminei.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "4.3",
+    "rol": "Application Security Engineer",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Gestionarea cheii în RAM este volatilă, iar lipsa unei validări de integritate a stării curente expune la atacuri de tip „man-in-the-browser”.\n\nIMBUNATATIRE: Implementează Web Crypto API cu `subtle.deriveKey` și un sistem de *Auto-Lock* pe inactivitate (idle timer) ce șterge cheia din memorie.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "1.2",
+    "rol": "Engineering Manager",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Secretara AI este rudimentară și statică, rupând imersiunea „premium”. Interacțiunea bazată pe cuvinte-cheie pare un script din anii '90.\n\nIMBUNATATIRE: Implementarea unui motor de predicție bazat pe vectori simplificați în JS și un sistem de \"Contextual Awareness\" pentru răspunsuri, cu animație de tip \"typing\".\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "12.2",
+    "rol": "Account Executive",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este un placeholder inert. Clienții mari cumpără valoare predictivă, nu cuvinte-cheie. Lipsa unui profil bogat face imposibilă justificarea unui \"Trust Score\" ridicat în fața decidenților.\n\nIMBUNATATIRE: Implementează un \"Deep Match Preview\" (modal): vizualizează suprapunerea de competențe prin radar-chart SVG și integrează un sistem de note dinamice (cripate) per profil.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "14.3",
+    "rol": "Recruiter / Talent Acquisition",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Ecranul \"Potriviri\" e static și abstract; nu simt \"omul\" din spatele datelor, ceea ce blochează decizia de angajare.\n\nIMBUNATATIRE: Implementează un \"Candidate Preview Card\" expandabil cu tag-uri de competențe colorate și un slider de \"Fit Score\" interactiv pentru ajustarea manuală a ponderii criteriilor.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "18.2",
+    "rol": "Business Operations Analyst",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Gestionarea stării și a datelor este statică; lipsa feedback-ului vizual la editarea profilului și matching-ul rigid pe cuvinte-cheie blochează utilitatea reală.\n\nIMBUNATATIRE: Implementează un \"State Manager\" bazat pe Proxy pentru reactivitate instantanee și un motor de matching vectorial (JS-only) pentru similitudine semantică.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "2.2",
+    "rol": "DevOps Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Absența testării automate și a unui flux de build fac imposibilă verificarea integrității datelor la actualizarea versiunilor, riscând coruperea stării locale (AES-GCM).\n\nIMBUNATATIRE: Integrarea unui \"Integrity Check Suite\" (Jasmine/Jest mini-runner) direct în UI și un mecanism de \"Versioned Migration Script\" pentru schema JSON.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "6.10",
+    "rol": "MLOps Engineer (AI)",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Matching-ul euristic este static și ineficient. Lipsa unei ierarhii semantice face ca rețeaua să pară plată, neprofesională.\n\nIMBUNATATIRE: Implementarea unui algoritm de \"Vector Space Projection\" în JS (fără backend) pentru a calcula distanța cosinus pe vectori TF-IDF, generând un graf de proximitate dinamic în SVG.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.2",
+    "rol": "Engineering Manager",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Secretara AI este rudimentară; interacțiunea e statică și impersonală, limitând utilitatea aplicației la un simplu dicționar de cuvinte-cheie.\n\nIMBUNATATIRE: Implementare \"Semantic Context Engine\" local: indexare vectori simplificați în JS pentru matching contextual și UI de chat \"bubbles\" cu auto-completare inteligentă.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "4.3",
+    "rol": "Application Security Engineer",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Gestionarea cheii în RAM este vulnerabilă la exfiltrare prin scripturi XSS injectate. Lipsa unui mecanism de \"Auto-Lock\" expune datele dacă utilizatorul uită aplicația deschisă.\n\nIMBUNATATIRE: Implementează `Idle-Timeout` cu ștergerea cheii din RAM și `SubtleCrypto` (WebCrypto API) pentru criptare nativă.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "12.2",
+    "rol": "Account Executive",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Reteaua e doar un graf static inutil pentru \"closing\". Clientii mari vor dovezi de valoare (ROI), nu linii. Nu pot demonstra puterea ecosistemului meu in timpul demo-ului.\n\nIMBUNATATIRE: Dashboard \"Executive Insights\" cu simulare de impact (ROI calculator) si export PDF al retelei.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "9.6",
+    "rol": "Digital Wellbeing Specialist",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Utilizatorii devin anxioși din cauza „scrolling-ului infinit” și a lipsei feedback-ului asupra timpului pierdut, ducând la utilizare compulsivă, nu calitativă.\n\nIMBUNATATIRE: Implementarea unui \"Focus Session Timer\" cu \"Mindful Blur\" (ecranul se încețoșează după 20 min) și un dashboard de \"Digital Diet\" (vizualizarea timpului petrecut vs. acțiuni productive).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "14.4",
+    "rol": "People Operations Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Onboarding-ul e static și ineficient. Lipsa unui flux ghidat pentru noii membri blochează HRIS-ul, lăsând datele incomplete și neconforme.\n\nIMBUNATATIRE: Implementare \"Progress Stepper\" vizual cu validare în timp real a câmpurilor și generare automată de PDF/eSign (blob) pentru contract.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "18.3",
+    "rol": "Strategy & Planning Specialist",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Secretara AI este doar un script static de cuvinte-cheie, lipsit de context, iar lipsa filtrării avansate pe Potriviri face ca datele să pară \"moarte\".\n\nIMBUNATATIRE: Implementează un \"Semantic Filter\" (vectori simpli) și un istoric de chat local-storage cu context persistent.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "2.2",
+    "rol": "DevOps Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Absența testării automate și a persistenței structurate face ca orice modificare să fie un risc de corupere a datelor, iar UI-ul este static la nivel de workflow.\n\nIMBUNATATIRE: Implementare *Test Runner* in-browser (TinyTest) și *Schema Migration Manager* pentru indexarea IndexedDB.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "7.1",
+    "rol": "Head of Product / CPO Deputy",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Lipsa profunzimii în \"Secretara AI\" și potriviri; experiența este statică și superficială, bazată pe keyword-uri rigide care nu oferă valoare predictivă utilizatorului.\n\n**IMBUNATATIRE:** Implementarea unui \"Vector Scoring\" local (JavaScript) pentru potriviri și un prompt-system pentru Secretară, permițând interogări în limbaj natural peste datele criptate.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.3",
+    "rol": "Software Architect",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Matching-ul euristic este static și opac; utilizatorul nu poate ajusta parametrii, iar lipsa feedback-ului contextual face ca \"Potrivirile\" să pară arbitrare.\n\nIMBUNATATIRE: Implementarea unui \"Vector Slider\" interactiv (Weighting Matrix) pentru a ajusta în timp real ponderile (competențe vs. valori) cu vizualizare dinamică a graficului.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "4.4",
+    "rol": "Penetration Tester",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Cheia PBKDF2 în RAM este vulnerabilă la exfiltrare prin scripturi injectate (XSS) sau dump de memorie; lipsa unui mecanism de \"kill-switch\" sau ștergere securizată la inactivitate expune datele sensibile.\n\nIMBUNATATIRE: Implementează auto-lock cu timeout și ștergerea bufferelor în `onbeforeunload`.\n\nTIP: Functional.",
+    "ok": true
+  },
+  {
+    "cod": "9.7",
+    "rol": "Behavioral / Marketing Psychologist",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Onboarding-ul actual este o simplă prezentare pasivă, forțând utilizatorul să accepte promisiuni fără a înțelege mecanismul de protecție a datelor.\n\nIMBUNATATIRE: Implementează un \"Interactive Privacy Sandbox\" în onboarding: un slider care simulează criptarea datelor, arătând transformarea textului clar în ciphertext AES.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "12.3",
+    "rol": "Inside Sales Representative",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Lead-urile nu sunt calificate, iar „Secretara AI” este doar un script static ineficient. Nu pot închide deal-uri dacă nu văd *de ce* un profil e valoros.\n\nIMBUNATATIRE: Implementare \"Scor de Calificare\" dinamic în profil, bazat pe slider-uri de intenție și istoric.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "14.4",
+    "rol": "People Operations Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Onboarding-ul e static și HRIS-ul e greu de auditat; lipsa unui flux de lucru (workflow) pentru documente blochează scalabilitatea și creează erori.\n\nIMBUNATATIRE: Implementarea unui \"HR Task Dashboard\" cu statusuri (Pending/Signed) și generarea dinamică a PDF-urilor local pentru contracte/anexe.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "18.3",
+    "rol": "Strategy & Planning Specialist",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Secretara AI e o simplă căutare de cuvinte-cheie, inutilă pentru decizii strategice. Utilizatorul nu simte valoarea adăugată a inteligenței în datele sale.\n\nIMBUNATATIRE: Implementează un \"Semantic Vector Lite\" (TF-IDF + Cosine Similarity în JS) pentru a sugera conexiuni contextuale între profiluri.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "2.2",
+    "rol": "DevOps Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Absența testelor automate și a validării integrității compromite stabilitatea la update-uri. Totul e \"blind deployment\".\n\nIMBUNATATIRE: Implementez o suită minimală de unit-testing (Jest-like) injectată în DOM și un mecanism de \"Integrity Self-Check\" la load, afișat printr-un indicator vizual (Status Badge) în header.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "7.2",
+    "rol": "Senior Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Secretara AI este doar un bot de cuvinte-cheie inutil; nu oferă valoare tactică. Utilizatorul nu simte că are un asistent inteligent, ci un simplu filtru static.\n\nIMBUNATATIRE: Implementare \"Contextual Suggestion Engine\": un sistem bazat pe seturi de reguli (if-then) care generează \"Smart Action Cards\" (ex: \"Contactează X pentru Y\") bazate pe relevanța scorului de potrivire.\n\nTIP: Funcțional și vizual.",
+    "ok": true
+  },
+  {
+    "cod": "4.4",
+    "rol": "Penetration Tester",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Stocarea cheii în RAM este vulnerabilă la atacuri de tip „memory dumping” și XSS-uri injectate. Lipsa unei salt-uri/obfuscări dinamice a memoriei expune datele imediat ce utilizatorul este „logged in”.\n\nIMBUNATATIRE: Implementează „Key Shredding” (zeroizare RAM la blur/timeout) și un sistem de Web-Worker pentru criptare.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "1.3",
+    "rol": "Software Architect",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este doar un script static de matching, frustrant prin rigiditate. Utilizatorul simte lipsa de context și inteligență în recomandări.\n\nIMBUNATATIRE: Implementarea unui motor de *Semantic Vector Search* (in-memory) folosind `compromise.js` pentru NLP și *Jaccard Similarity* ponderat, permițând interogări în limbaj natural pentru filtrarea membrilor.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "9.8",
+    "rol": "Data Scientist (engagement quality)",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Trust Score\" este static și opac; utilizatorul nu vede legătura dintre acțiuni și sănătatea rețelei, riscând un comportament compulsiv (colectare de date inutilă).\n\nIMBUNATATIRE: Introduc un dashboard \"Wellbeing Pulse\" cu trendline săptămânal al calității interacțiunilor și un indicator \"Deep-Connection vs. Shallow-Swipe\".\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "14.5",
+    "rol": "Learning & Development Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este doar un motor de căutare static, lipsit de context pedagogic. Nu ajută utilizatorul să învețe sau să evolueze, ci doar sortează datele.\n\nIMBUNATATIRE: Implementează un \"Growth Path\" în profil: modulul AI generează recomandări de mentorat bazate pe \"gaps\" în setul de competențe.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "12.3",
+    "rol": "Inside Sales Representative",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Procesul de calificare este manual și greoi; lipsesc „cârligele” de conversie rapidă în profilul membrilor, ceea ce blochează închiderea deal-urilor mici.\n\nIMBUNATATIRE: Adaugă un \"Quick-Action Panel\" cu butoane de calificare (Lead/Hot/Cold) și export CSV instant pe profil, plus un selector de \"Next Step\" (Set Meeting/Follow-up).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "18.4",
+    "rol": "Revenue Operations (RevOps)",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Palnia de conversie (Lead-to-Cash) este invizibila. Utilizatorul nu vede unde \"se blocheaza\" relatiile in reteaua mea.\n\nIMBUNATATIRE: Dashboard \"Revenue Funnel\" cu stadii vizuale (Discovery, Matched, Engaged, Connected) si rata de conversie in timp real per etapa.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "2.3",
+    "rol": "Site Reliability Engineer (SRE)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Gestionarea stării în RAM riscă pierderea datelor la crash/refresh accidental; lipsa persistenței locale (IndexedDB) face aplicația fragilă în fața erorilor de browser.\n\nIMBUNATATIRE: Implementare Auto-Save în IndexedDB (criptat AES-GCM) cu mecanism de Snapshot-Recovery și \"Integrity Check\" la boot.\n\nTIP: Funcțional.",
+    "ok": true
+  },
+  {
+    "cod": "7.2",
+    "rol": "Senior Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este un simplu keyword-matcher static, inutil pentru utilizator. Nu creează valoare reală sau context.\n\nIMBUNATATIRE: Implementăm un motor de \"Contextual Scoring\" (n-gram matching) care afișează scorul de relevanță în timp real sub fiecare răspuns.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.4",
+    "rol": "Tech Lead",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Secretara AI este doar un cautator rudimentar de cuvinte-cheie; experienta utilizatorului este statica si lipsita de context.\n\nIMBUNATATIRE: Implementarea unui motor de \"Semantic Context Scoring\" (TF-IDF ponderat) si adaugarea unui layout \"Card-Stack\" pentru Potriviri cu gesturi swipe.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "4.5",
+    "rol": "Compliance & Audit Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Lipsa trasabilității și a integrității datelor pentru audit (GDPR/ISO). Hash-chain-ul este izolat; utilizatorul nu are dovezi de audit exportabile care să demonstreze conformitatea stocării locale.\n\nIMBUNATATIRE: Implementarea unui „Compliance Export” (JSON semnat/criptat) ce generează un raport auditabil de integritate a datelor și log-uri de acces.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "9.9",
+    "rol": "Ethics & Policy Advisor",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Lipsa consimțământului informat și controlului asupra datelor în \"Secretara AI\". Utilizatorul nu știe ce date sunt prelucrate local, încălcând transparența AI Act.\n\n**IMBUNATATIRE:** Adăugarea unui „AI Privacy Dashboard” (modul modal) care afișează *ce* cuvinte-cheie sunt stocate și permite ștergerea lor selectivă/totală.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "12.4",
+    "rol": "Sales Engineer / Pre-sales",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Secretara AI este rigidă, bazată pe cuvinte-cheie, și îi lipsește contextul interactiv. Utilizatorul nu simte valoarea reală a \"inteligenței\" în procesul de potrivire.\n\nIMBUNATATIRE: Implementează un \"Contextual AI Mockup\" cu sugestii dinamice de prompturi și răspunsuri tip \"typing-effect\" care simulează analiza semantică.\n\nTIP: Funcțional & Vizual.",
+    "ok": true
+  },
+  {
+    "cod": "14.6",
+    "rol": "Compensation & Benefits Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Sistemul de matching actual e opac și static, ignorând dinamica valorii în rețea. Nu există o corelație între \"Trust Score\" și \"Potriviri\".\n\nIMBUNATATIRE: Implementează \"Weighted Affinity Scoring\": un algoritm care ponderează scorul de încredere cu proximitatea tematică, vizualizat printr-un heatmap pe cardurile de profil.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "18.4",
+    "rol": "Revenue Operations (RevOps)",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Fragmentarea datelor în \"Secretara AI\" și \"Potriviri\". Lipsa unui flux unitar de calificare transformă utilizatorul într-un operator manual, nu într-un strateg care vede evoluția lead-to-cash.\n\nIMBUNATATIRE: Implementarea unui \"Revenue Pipeline View\" (Kanban drag-and-drop) care integrează direct scorul de potrivire cu stadiul relației.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "2.3",
+    "rol": "Site Reliability Engineer (SRE)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Starea sistemului este opacă. În caz de corupere a datelor sau eroare JS, utilizatorul pierde tot fără nicio metodă de diagnosticare sau recuperare automată (nicio strategie de backup/rollback).\n\nIMBUNATATIRE: Implementarea unui `Snapshot Manager` cu `Version History` (auto-backup în LocalStorage) și un `Health Dashboard` care verifică integritatea hash-chain-ului la fiecare inițializare.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "7.2",
+    "rol": "Senior Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Secretara AI este doar un bot de cuvinte-cheie inutil; lipsa filtrarii pe Potriviri blocheaza navigarea eficienta in retea.\n\nIMBUNATATIRE: Integrare `FlexSearch` pentru cautare vectoriala locala si un sistem de \"Filtre Inteligente\" (dropdown tags) direct pe vizualizarea in retea.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.4",
+    "rol": "Tech Lead",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Secretara AI este doar un cautator rudimentar de cuvinte-cheie, lipsit de context, iar vizualul este static în timpul procesarii.\n\nIMBUNATATIRE: Implementare vector-matching local (TinyML/Transformers.js) pentru relevanță semantică și un flux de \"Thought Stream\" cu animație tip typewriter pentru a simula procesarea.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "4.5",
+    "rol": "Compliance & Audit Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Lipsa trasabilității și a integrității datelor pentru utilizator. Nu putem demonstra conformitatea (GDPR/SOC 2) fără un jurnal de audit imuabil, ușor de verificat, care să ateste că datele locale nu au fost compromise.\n\nIMBUNATATIRE: Implementarea unui \"Audit Log\" vizual, criptat, cu semnătură SHA-256 pentru fiecare acțiune critică.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "10.1",
+    "rol": "Head of PMO",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este doar un script static de cuvinte-cheie; pare o jucărie, nu un asistent executiv. Lipsa contextului istoric face experiența să pară plată și inutilă pentru un utilizator premium.\n\nIMBUNATATIRE: Implementează un \"Contextual Memory Buffer\" (localStorage JSON) care stochează rezumate ale interacțiunilor anterioare pentru a simula continuitatea.\n\nTIP: Funcțional și vizual.",
+    "ok": true
+  },
+  {
+    "cod": "12.4",
+    "rol": "Sales Engineer / Pre-sales",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "**NEMULTUMIRE:** Secretara AI este doar un cautator static; nu simuleaza o conversatie proactiva, ceea ce scade increderea clientului in valoarea \"inteligenta\" a produsului.\n\n**IMBUNATATIRE:** Implementeaza un \"Chat-Bubble\" cu streaming text efect (Typewriter) si sugestii contextuale dinamice bazate pe profilul utilizatorului.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "14.7",
+    "rol": "Employer Branding / Internal Comms",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este inertă și rigidă; e doar un search avansat, nu un partener de networking. Lipsa unei interacțiuni empatice scade retenția și implicarea.\n\nIMBUNATATIRE: Implementarea unui \"Simulated Chat\" cu bule de dialog stil iMessage și sugestii contextuale (Quick Replies).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "18.5",
+    "rol": "Vendor Management",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Gestionarea riscului și calității datelor este opacă; utilizatorii nu pot valida calitatea \"furnizorilor\" din rețea. Lipsa unui sistem de \"Scorecard\" face deciziile subiective.\n\nIMBUNATATIRE: Implementare \"Vendor Scorecard\" vizual (radar chart SVG) pe fiecare profil, integrat în Trust Ledger pentru auditabilitate.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "2.3",
+    "rol": "Site Reliability Engineer (SRE)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Starea sistemului (Trust Ledger) este opacă; utilizatorul nu are dovezi de integritate în timp real. Lipsa mecanismelor de recovery/backup forțat face ca datele să fie la risc de \"Single Point of Failure\" (pierderea cheii/browser storage).\n\nIMBUNATATIRE: Implementare \"Self-Healing Snapshot\": export automat criptat în IndexedDB + UI de verificare checksum la fiecare load.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "1.4",
+    "rol": "Tech Lead",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Secretara AI e o simplă căutare de cuvinte; pare un \"mockup\" utilitar care rupe imersiunea premium.\n\nIMBUNATATIRE: Implementăm un motor de \"Semantic Context\" via vectori simplificați în JS (TF-IDF pe atribute). Adăugăm un chat-bubble cu animație de tip \"typing\" și sugestii contextuale dinamice.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "7.3",
+    "rol": "Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Lipsa contextului pentru \"Secretara AI\" și staticitatea profilelor. Utilizatorul nu simte valoare adăugată din interacțiune, iar matching-ul pare un simplu tabel, nu un partener strategic.\n\n**IMBUNATATIRE:** Implementare \"Contextual Insight Cards\": un sistem de matching bazat pe scoruri de compatibilitate explicate prin fraze naturale generate local.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "4.6",
+    "rol": "Security Analyst (SOC)",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Lipsa unui audit trail pentru acțiunile utilizatorului și starea de securitate. Logurile sunt invizibile, iar orice tentativă de acces neautorizat trece neobservată.\n\nIMBUNATATIRE: Implementarea unui \"Security Dashboard\" (tab nou) cu loguri criptate, exportabile, și alertare vizuală (flash roșu) la erori de decriptare/acces.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "10.2",
+    "rol": "Program Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Lipsa unei experiențe de navigare contextuale și a unor „nudge-uri” proactive; utilizatorul se pierde în ecrane statice fără a primi recomandări active bazate pe Trust Score.\n\n**IMBUNATATIRE:** Implementarea unui „Smart Action Bar” (floating) cu context-aware triggers și un mini-dashboard de notificări locale (toast-uri simulate) pentru a ghida interacțiunile.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "14.8",
+    "rol": "HR Business Partner",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este doar un script static de cuvinte-cheie, inutil pentru decizii manageriale complexe. Managerii nu au un suport real pentru planuri de acțiune.\n\nIMBUNATATIRE: Implementează un \"Contextual Action Engine\" care generează template-uri de 1:1/PIP bazate pe datele din profil.\n\nTIP: Funcțional.",
+    "ok": true
+  },
+  {
+    "cod": "12.5",
+    "rol": "Business Development Manager",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Pipeline-ul de parteneriate este \"orb\". Lipsa unui sistem de vizualizare a stadiului negocierilor (Kanban) în ecranul \"Potriviri\" blochează conversia.\n\nIMBUNATATIRE: Integrare Kanban drag-and-drop peste \"Potriviri\" cu statusuri personalizabile și badge-uri de urgență.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "18.6",
+    "rol": "Facilities / Office Manager",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Onboarding-ul e static, iar spațiul de lucru (UI) e aglomerat, creând „zgomot” vizual care obosește utilizatorul nou.\n\nIMBUNATATIRE: Implementarea unui „Guided Tour” (overlay interactiv tip spotlight) și a unui „Smart Dashboard” modular (widgets drag-and-drop) pentru a personaliza afișarea KPI-urilor.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "2.4",
+    "rol": "Cloud Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Aplicația este un siloz izolat; lipsa sincronizării criptate (E2EE) între dispozitive face ca \"rețeaua\" să fie statică și inutilă în scenarii reale de mobilitate.\n\nIMBUNATATIRE: Implementarea unui modul de sincronizare via WebRTC Data Channels (peer-to-peer) pentru schimbul direct de date criptate între noduri.\n\nTIP: Funcțional.",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Matching-ul euristic este static și rigid; lipsa unei stări persistente face ca aplicația să pară o simplă broșură, nu un instrument de networking viu.\n\nIMBUNATATIRE: Implementarea unui motor local \"Vector-Lite\" (TF-IDF + sortare scor) cu persistență în IndexedDB pentru stocarea profilului îmbogățit.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "10.2",
+    "rol": "Program Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Secretara AI este rudimentară și izolată; lipsește contextul vizual al interacțiunilor.\n\nIMBUNATATIRE: Implementarea unui \"Contextual Chat Overlay\" cu stări persistente (JSON local) și vizualizarea grafică a topicelor comune în timp real în timpul conversației.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "7.3",
+    "rol": "Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "**NEMULTUMIRE:** Lipsa contextului dinamic în \"Secretara AI\" și lipsa filtrării pe \"Potriviri\" fac experiența rigidă; utilizatorul se simte blocat în date statice, neputând rafina rezultatele.\n\n**IMBUNATATIRE:** Implementare filtrare multi-criterială (sidebar/modal) și un sistem de \"Context-Window\" local (memorie temporară JSON) pentru Secretară.\n\n**TIP:** Functional.",
+    "ok": true
+  },
+  {
+    "cod": "5.1",
+    "rol": "Data / AI Lead",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Matching-ul euristic este static și opac; lipsa unui sistem de feedback (like/dislike) blochează orice formă de învățare și personalizare a relevanței pentru utilizator.\n\nIMBUNATATIRE: Implementarea unui \"Relevance Scoring\" local: butoane feedback +/- care ponderează dinamic vectorii TF-IDF. Vizual: bara de progres \"Relevance Match\" animată lângă fiecare profil.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "12.6",
+    "rol": "Sales Operations Specialist",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Lipsa datelor structurate în „Secretara AI” și imposibilitatea de a segmenta pipeline-ul în „Potriviri”. Datele sunt „murdare”, fără context de business (stage/probabilitate).\n\nIMBUNATATIRE: Implementarea unui \"Pipeline Kanban\" interactiv cu drag-and-drop și filtrare multicriterială a potrivirilor pe scor/stage.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "15.1",
+    "rol": "Finance Director / CFO Deputy",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Lipsa unei analize financiare a \"rețelei\". Deciziile sunt luate pe intuiție, nu pe date; nu văd ROI-ul conexiunilor și nicio proiecție a \"valorii\" membrilor din rețea.\n\n**IMBUNATATIRE:** Adăugarea unui modul \"Network Valuation\" cu grafice de tip *Burn-down* și *Value-per-Node* bazat pe interacțiuni.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "18.6",
+    "rol": "Facilities / Office Manager",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Onboarding-ul e static și rece; utilizatorii noi se simt rătăciți în interfață, afectând eNPS-ul.\n\nIMBUNATATIRE: Implementarea unui \"Smart Tour\" interactiv (overlay semi-transparent) care evidențiază funcțiile cheie pas cu pas, cu animații tip \"puls\" pe butoane.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "2.4",
+    "rol": "Cloud Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Aplicația este un siloz izolat; stocarea locală limitează portabilitatea și colaborarea, iar lipsa unui \"Cloud Sync\" criptat face experiența fragilă.\n\nIMBUNATATIRE: Implementarea unui modul de export/import automatizat către AWS S3 (pre-signed URLs) pentru backup securizat și sincronizare între instanțe.\n\nTIP: Funcțional.",
+    "ok": true
+  },
+  {
+    "cod": "7.3",
+    "rol": "Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Secretara AI este doar un script static de cuvinte-cheie, lipsit de contextul conversațional necesar pentru a simula un asistent real. \n\nIMBUNATATIRE: Implementarea unui \"Context Buffer\" (JSON în memorie) și a unui motor de sugestii bazat pe istoricul interacțiunilor din `localStorage`.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Matching-ul euristic este static și plat; utilizatorul nu simte „inteligența” aplicației, iar lipsa persistenței face ca efortul de curare a rețelei să dispară la un refresh.\n\nIMBUNATATIRE: Implementez un algoritm de *Weighted Vector Similarity* local și *LocalStorage persistence* cu indexare inversă pentru sugestii dinamice.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "10.3",
+    "rol": "Project Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Secretara AI este rudimentară și statică, iar lipsa filtrării pe Potriviri face utilizatorul să piardă timp prețios.\n\nIMBUNATATIRE: Implementează un motor de filtrare multi-criterial (dropdowns) și un \"Chat Contextual\" (local) care analizează istoric profilul curent vs. candidați.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "5.2",
+    "rol": "Data Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Structura datelor (JSON plat) blochează scalabilitatea și validarea. Fără un \"Data Schema Manager\" intern, integritatea hash-chain-ului este fragilă la orice modificare manuală a profilurilor.\n\nIMBUNATATIRE: Implementarea unui \"Schema Validator\" (Zod-lite) și a unei structuri de date normalizate (Entities/Relations) pentru a permite interogări performante în RAM.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "13.1",
+    "rol": "Customer Success Lead",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Utilizatorul este pasiv; \"Secretara AI\" e doar un filtru static care nu generează valoare recurentă, cauzând churn după euforia inițială.\n\nIMBUNATATIRE: Implementează un \"Daily Pulse\" care generează provocări de networking personalizate bazate pe graf, cu notificări desktop simulate (Toast).\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "15.2",
+    "rol": "Accountant / Contabil",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Lipsa trasabilității și a unui \"Audit Trail\" imuabil pentru modificările survenite în profiluri. Datele par statice, riscând integritatea deciziilor.\n\nIMBUNATATIRE: Implementarea unui \"Ledger de Audit\" (listă cronologică semnată SHA-256) vizibil în Profil, care să logheze fiecare modificare a datelor sensibile.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "2.4",
+    "rol": "Cloud Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Aplicația este un siloz izolat; stocarea locală limitează portabilitatea și colaborarea, fiind un punct unic de eșec (data loss).\n\nIMBUNATATIRE: Implementarea unui modul de sincronizare E2EE via Cloud Storage (S3/GCS) cu versiune de backup, menținând cheia criptografică locală.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "7.4",
+    "rol": "Product Owner",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este doar un placeholder static. Lipsa unei experiențe interactive reale o face să pară un simplu widget decorativ, subminând promisiunea aplicației.\n\nIMBUNATATIRE: Implementează un motor de matching bazat pe vectori (în JS) și un chat UI cu răspunsuri contextuale, bazate pe datele stocate local.\n\nTIP: ambele.",
+    "ok": true
+  },
+  {
+    "cod": "5.2",
+    "rol": "Data Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Structura datelor (JSON plat) blochează scalarea și interogările complexe pentru potriviri. Lipsa validării integrității datelor la import/export cauzează riscuri de corupere.\n\nIMBUNATATIRE: Implementarea unui \"Schema Validator\" (JSON Schema) și normalizarea datelor într-un model OBT (One Big Table) în memorie, cu indexare inversată pentru căutări instantanee.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Matching-ul euristic este static și rigid; utilizatorul primește rezultate \"înghețate\" care nu reflectă evoluția interacțiunilor.\n\nIMBUNATATIRE: Implementarea unui \"Vector Scoring Engine\" (JS) care recalculează dinamic relevanța în timp real la fiecare tastare/acțiune, actualizând vizual ordinea listei cu tranziții animate FLIP.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "10.3",
+    "rol": "Project Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Secretara AI este rudimentară și statică, iar profilurile membrilor sunt bidimensionale. Experiența pare un \"formular glorificat\" fără context uman.\n\nIMBUNATATIRE: Implementarea unui \"Contextual Agent\" (JSON-based) cu interfață de chat fluidă și carduri de profil extensibile (modal) cu mini-timeline istoric.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Onboarding-ul e o simplă prezentare statică, nu o inițiere interactivă, cauzând abandon prematur. Utilizatorul nu înțelege valoarea rețelei din start.\n\nIMBUNATATIRE: Implementare \"Guided Tour\" cu tooltips focusate pe UI și un prompt \"Populează-ți Profilul\" stil wizard (progress bar) care deblochează vizualizarea rețelei.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "15.2",
+    "rol": "Accountant / Contabil",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Lipsa trasabilității financiare și a unui jurnal de audit pentru „tranzacții” (relații/match-uri). Datele sunt statice, fără o cronologie verificabilă a evoluției Trust Ledger-ului.\n\nIMBUNATATIRE: Integrarea unui „Ledger de Audit” (tabel cu timestamp, hash anterior și tip acțiune) exportabil CSV, vizualizat prin grafic de serii temporale.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "2.5",
+    "rol": "System Administrator",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Lipsa persistenței datelor în afara memoriei RAM face aplicația fragilă; un refresh accidental șterge tot, anulând efortul de configurare.\n\nIMBUNATATIRE: Implementarea unui modul de auto-save criptat (AES-GCM) în `localStorage` cu compresie LZ-string și backup auto-descarcabil JSON la fiecare modificare majoră.\n\nTIP: Funcțional.",
+    "ok": true
+  },
+  {
+    "cod": "7.4",
+    "rol": "Product Owner",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este doar un placeholder static. Lipsa interactivității reale face aplicația să pară un simplu site de prezentare, nu un tool de networking activ.\n\nIMBUNATATIRE: Implementează un \"Contextual Chat Overlay\" cu motor de căutare semantică local (Vectores prin `Xenova/transformers.js` in-browser) pentru interogări complexe pe profiluri.\n\nTIP: Funcțional.",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 4,
+    "text": "NEMULTUMIRE: Secretara AI este doar un switch-case static, ineficient și previzibil. Lipsa persistenței locale în afara memoriei RAM blochează utilitatea reală a aplicației între sesiuni.\n\nIMBUNATATIRE: Implementare IndexedDB pentru persistență și un motor de vectori minimalist (in-memory) pentru matching semantic.\n\nTIP: functional.",
+    "ok": true
+  },
+  {
+    "cod": "5.3",
+    "rol": "Data Scientist",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Matching-ul euristic e opac și imprecis, iar \"Secretara AI\" e doar un filtru rudimentar. Datele stau static, fără să extragem valoare predictivă din conexiuni.\n\nIMBUNATATIRE: Implementarea unui \"Vector Similarity Score\" (JS simplificat) și vizualizarea \"Predictive Match Probability\" pe cardurile de profil.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Onboarding-ul static și lipsa contextului în \"Secretara AI\" fac ca utilizatorii să abandoneze aplicația după prima utilizare. Nu există o buclă de retenție activă.\n\nIMBUNATATIRE: Integrarea unui \"AI Interactive Tour\" (ghid pas-cu-pas tip spotlight) și istoric local de conversații persistant via localStorage.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "2.6",
+    "rol": "Network Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Reteaua vizuală actuală este statică și vulnerabilă la scalare; lipsa unei reprezentări a fluxului de date criptate între noduri.\n\nIMBUNATATIRE: Implementare Canvas-based \"Data Flow Animation\" (particule pe linii) și \"Network Stress-Test Mode\" pentru simularea latenței.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "10.3",
+    "rol": "Project Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Secretara AI este rudimentară și statică, iar lipsa filtrării pe Potriviri face lista inutilizabilă la scară.\n\nIMBUNATATIRE: Implementează un motor de filtrare multi-criterial (UI tip sidebar) și un chatbot cu `localStorage` pentru \"Context Memory\", simulând persistența conversației.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "15.2",
+    "rol": "Accountant / Contabil",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Lipsa trasabilității tranzacțiilor financiare în \"Secretara AI\" și absența unui jurnal de audit pentru acțiunile utilizatorului. Datele par volatile, riscând integritatea raportărilor.\n\nIMBUNATATIRE: Implementarea unui \"Registru de Audit\" (Audit Log) exportabil JSON, cu timestamp-uri și hash-uri pentru fiecare interacțiune, plus vizualizarea grafică a fluxului de date.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "7.4",
+    "rol": "Product Owner",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Secretara AI este decorativă; nu oferă valoare reală în matching-ul de rețea. Lipsa unei ierarhii vizuale în cardurile de profil face ca experiența de selecție să pară haotică.\n\nIMBUNATATIRE: Implementează \"Semantic Query\" local (vectori simpli) și un layout \"CardStack\" stil Tinder cu swipe-uri.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 5,
+    "text": "NEMULTUMIRE: Matching-ul euristic este static și opac; lipsa persistentei face datele volatile.\n\nIMBUNATATIRE: Implementez un \"Vector Similarity Engine\" în JS folosind *Mini-Embeddings* pre-calculate pentru matching semantic și stocare `IndexedDB` cu sincronizare `Blob` criptat pentru persistența datelor.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "5.3",
+    "rol": "Data Scientist",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Matching-ul euristic e opac și imprecis, iar \"Secretara AI\" e doar un filtru rudimentar. Utilizatorul nu înțelege *de ce* o conexiune e valoroasă.\n\nIMBUNATATIRE: Implementează un motor de \"Scoring Vectorial\" via JS (TF-IDF pe vectori rari) cu vizualizare \"Radar Chart\" (SVG) pentru compatibilitate.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Onboarding-ul este \"ghost town\" după prima rulare; utilizatorii uită valoarea aplicației. Lipsa unui context de \"Secretară AI\" proactivă face ca datele să rămână statice.\n\nIMBUNATATIRE: Dashboard \"Smart Prompt\" cu acțiuni contextuale bazate pe Trust Score și integrarea unui Ghid Onboarding \"Coach\" interactiv.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "10.4",
+    "rol": "Scrum Master",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Secretara AI este rigidă și „moartă”, iar lipsa unui sistem de filtrare face ca lista de potriviri să fie o masă amorfă, greu de navigat pentru un utilizator care caută eficiență.\n\n**IMBUNATATIRE:** Adăugare „Smart Filter Bar” (multi-select tag-based) și un „AI Chat-Bubble” persistent care preia contextul din profilul activ pentru simulări de conversație.\n\n**TIP:** Funcțional și Vizual.",
+    "ok": true
+  },
+  {
+    "cod": "15.3",
+    "rol": "FP&A Analyst",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Deciziile strategice sunt subiective deoarece „Secretara AI” și „Potrivirile” sunt bazate pe cuvinte-cheie rigide, nu pe valoarea economică a rețelei. Lipsesc indicatorii de rentabilitate a conexiunilor.\n\nIMBUNATATIRE: Implementare \"Value-Matrix\" (Bubble Chart SVG) pentru a vizualiza ROI-ul relațional bazat pe greutatea temelor comune.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "2.7",
+    "rol": "Database Administrator (DBA)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Structura JSON \"flat\" devine ineficientă; căutările fuzzy și corelarea grafurilor consumă RAM inutil, cauzând micro-saccadări. Integritatea e blocată de un singur flux secvențial, fără posibilitatea de a consulta istoric granular.\n\nIMBUNATATIRE: Implementarea unui \"IndexedDB Proxy\" pentru persistenta locală și indexare inversă (inverted index) pentru matching instantaneu.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "7.5",
+    "rol": "Business Analyst",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Lipsa profunzimii în \"Secretara AI\" și \"Potriviri\" face experiența să pară un simplu catalog static, nu un instrument de networking inteligent.\n\n**IMBUNATATIRE:** Implementare *Semantic Vector-Lite* (stocare embedding-uri simple în JSON) și un sidebar *Chat-Context* care filtrează rețeaua bazat pe istoricul conversației.\n\n**TIP:** Funcțional.",
+    "ok": true
+  },
+  {
+    "cod": "5.4",
+    "rol": "Machine Learning Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Matching-ul euristic (TF-IDF) este limitat și static, oferind recomandări superficiale care nu învață din comportamentul utilizatorului.\n\nIMBUNATATIRE: Implementarea unui vector embedding simplu (Tiny-Transformers JS) pentru relevanță semantică și un mecanism de \"re-ranking\" bazat pe interacțiunile salvate local (click-uri/vizualizări).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.6",
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este doar un script static de matching, inutil în practică. Lipsa persistenței și a unui mecanism de feedback face ca aplicația să pară un demo mort, nu un instrument de networking.\n\nIMBUNATATIRE: Implementez un motor \"Smart-Filter\" (localStorage) cu ponderi ajustabile și export JSON al întregului istoric de interacțiuni.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "10.4",
+    "rol": "Scrum Master",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Secretara AI este rudimentară și statică, rupând imersiunea „premium”. Experiența pare o listă de date, nu un asistent inteligent.\n\nIMBUNATATIRE: Implementarea unui „Chat Bubble” cu auto-completare pentru prompturi și simularea unui „typing effect” (streaming-like) pentru răspunsuri, folosind un motor local de vectori simplificat pentru context.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 4,
+    "text": "NEMULTUMIRE: Onboarding-ul static și lipsa profilului bogat fac ca utilizatorii să abandoneze rapid aplicația, neînțelegând valoarea rețelei.\n\nIMBUNATATIRE: Implementarea unui \"Profile Wizard\" interactiv cu carduri stilizate și un sistem de \"Trust Badges\" (SVG) pentru activitate, stocate local. \n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "15.3",
+    "rol": "FP&A Analyst",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Lipsa unui motor de \"Scenario Planning\" face deciziile de rețea doar intuitive, nu fundamentate. Nu pot simula impactul adăugării unui membru asupra densității rețelei sau a \"Trust Score\"-ului.\n\nIMBUNATATIRE: Dashboard \"What-If\" cu slider pentru simulări și proiecții vizuale (graf transformat dinamic).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "3.1",
+    "rol": "QA Lead",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Trust Ledger-ul este un simplu jurnal static. Lipsa validării în timp real a integrității datelor la orice modificare face ca securitatea să pară decorativă.\n\nIMBUNATATIRE: Implementează \"Self-Healing Integrity Check\": la fiecare acțiune, aplicația re-validează hash-chain-ul și afișează un badge de \"Verified/Tampered\" în header.\n\nTIP: functional.",
+    "ok": true
+  },
+  {
+    "cod": "1.6",
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este doar un script static de cuvinte-cheie, inutil pentru decizii reale.\n\nIMBUNATATIRE: Implementez un motor de \"Vector Similarity\" in-browser (TinyTensor/JS) pentru matching semantic si un sistem de \"Chat-History\" persistent in localStorage criptat.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "7.5",
+    "rol": "Business Analyst",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: \"Secretara AI\" bazată pe cuvinte-cheie este rudimentară și neutilizabilă, iar lipsa filtrelor avansate face \"Potrivirile\" zgomotoase.\n\nIMBUNATATIRE: Implementează \"Semantic Vector Search\" (JS-native, tf-idf ponderat) pentru potriviri și un \"Chat Context Manager\" local, care stochează istoric criptat în localStorage.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "5.4",
+    "rol": "Machine Learning Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Matching-ul euristic (TF-IDF) este static și superficial; nu înțelege contextul sau intenția utilizatorului.\n\nIMBUNATATIRE: Implementarea unui vector space local (Tiny-Transformers) via ONNX Runtime Web pentru embeddings semantice, cu vizualizare 2D (PCA) a proximității membrilor în ecranul \"Potriviri\".\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "10.4",
+    "rol": "Scrum Master",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Secretara AI este rudimentară și statică, oferind experiență de utilizare \"moartă\" în absența unui backend.\n\nIMBUNATATIRE: Implementarea unui \"Contextual Prompt Builder\" care generează drafturi de mesaje pe baza datelor din profil, folosind un motor de template-uri local și UI de tip chat-bubble.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 5,
+    "text": "NEMULTUMIRE: Onboarding-ul \"o singură dată\" e un risc major de retenție; utilizatorii uită valoarea rețelei după prima sesiune. Lipsa unui \"Tutorial Interactiv\" face ca funcțiile avansate (graf/matching) să fie subutilizate.\n\nIMBUNATATIRE: Implementare \"Guided Tour\" (driver.js light) declanșabil din meniu și \"Progressive Onboarding\" (tooltips contextuale).\n\nTIP: ambele.",
+    "ok": true
+  },
+  {
+    "cod": "15.4",
+    "rol": "Payroll Specialist",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Lipsa trasabilității și a istoricului validat pentru schimbările de status. O eroare de calcul sau o modificare de membru nu poate fi auditată ulterior, subminând încrederea în integritatea datelor.\n\nIMBUNATATIRE: Implementarea unui \"Audit Log\" vizual, tip ledger, cu timestamp și hash-chain per acțiune.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "3.2",
+    "rol": "Senior QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Stabilitatea aplicației este o iluzie. Lipsa testelor automate face ca orice modificare UI să riște coruperea criptării sau a Trust Ledger-ului fără avertisment.\n\nIMBUNATATIRE: Implementarea unui \"Test Harness\" inline (tab invizibil) cu teste unitare pentru logica AES și integritatea hashing-ului.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "7.6",
+    "rol": "Product Operations Specialist",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Lipsa persistenței datelor și a feedback-ului de progres fac aplicația să pară un demo static, nu un instrument de networking. Utilizatorul nu știe \"ce urmează\" după onboarding.\n\nIMBUNATATIRE: Implementare `localStorage` cu compresie LZ-string și modul de \"Tutorial Interactiv\" (overlay-uri ghidate pas cu pas).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "5.5",
+    "rol": "MLOps Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Matching-ul euristic e static și opac; lipsa validării datelor face ca \"Trust Score\" să fie arbitrar.\n\nIMBUNATATIRE: Implementarea unui \"Mini-Engine de Scorare\" determinist în JS care ponderează vectori de trăsături; adăugarea unui vizualizator de \"Explainability\" (tooltip pe scor) care detaliază ponderea fiecărei teme.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "1.6",
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Matching-ul euristic e rudimentar și static, iar \"Secretara AI\" este doar un motor de căutare banal, lipsit de context.\n\nIMBUNATATIRE: Implementarea unui sistem de \"Vectori de Interes\" (Web Storage) și a unui motor de ranking bazat pe scoruri ponderate, plus UI îmbunătățit cu carduri expandabile.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "10.5",
+    "rol": "Delivery Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este doar un motor rudimentar de căutare, frustrant prin lipsa de context și interactivitate, iar profilurile par statice, neimplicate în ecosistem.\n\nIMBUNATATIRE: Implementarea unui \"Contextual Prompt Runner\" (stări predefinite) și mini-profiluri cu \"Trust Badges\" dinamice (scor derivat din rețea).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Utilizatorii se pierd în „Secretara AI” statică; lipsa feedback-ului vizual la interogări creează frustrare și senzația de „black box”.\n\nIMBUNATATIRE: Implementare *Chat Bubble stream-like* cu *typing indicator* CSS și evidențiere sintactică a cuvintelor-cheie găsite în JSON-ul local.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "3.2",
+    "rol": "Senior QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Zero validare automată a integrității criptografice și a fluxului de onboarding. Orice modificare UI riscă să corupă starea locală, făcând aplicația instabilă la actualizări viitoare.\n\nIMBUNATATIRE: Implementarea unui \"Test-Runner\" integrat (mini-suite de unit tests in-memory) care validează la fiecare refresh integritatea AES-GCM și fluxul onboarding.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "15.5",
+    "rol": "Procurement / Achizitii",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Raportarea costurilor și a performanței furnizorilor este statică și greu de urmărit în timp real. Lipsesc dashboard-urile de \"Spend Analysis\" care să justifice deciziile de achiziție.\n\nIMBUNATATIRE: Dashboard interactiv cu grafice dinamice (Chart.js) pentru evoluția cheltuielilor și \"Vendor Risk Score\" vizualizat prin coduri de culoare.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.6",
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 4,
+    "text": "NEMULTUMIRE: Matching-ul euristic e rudimentar și static, iar \"Secretara AI\" este doar un bot de cuvinte-cheie inutil.\n\nIMBUNATATIRE: Implementez `Mini-Vector-Embeddings` (JS) pentru matching semantic real și un `Intent-Parser` bazat pe reguli regex avansate pentru Secretară.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "8.1",
+    "rol": "Design Lead",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Lipsa de context vizual în \"Secretara AI\" și Potriviri; interacțiunea este plată, bazată pe text static, ceea ce erodează încrederea în calitatea algoritmului.\n\nIMBUNATATIRE: Implementare \"Decision Cards\" cu feedback vizual (swipe/taps) și vizualizarea \"Why matched\" printr-un graf radar animat.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "5.6",
+    "rol": "Mobile Product Analyst",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Onboardingul este un „dead-end” izolat; utilizatorul intră în aplicație fără o misiune clară, ducând la churn rapid după explorarea inițială.\n\nIMBUNATATIRE: Implementează un \"Progress Tracker\" (task-list) în dashboard: \"Completează profilul\" și \"Fă prima conexiune\" cu recompense vizuale (Trust Score bonus).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Onboarding-ul static lasă utilizatorii blocați după primii 20 membri seed; lipsa unui \"Tutorial Contextual\" (coach marks) face interfața complexă greu de navigat.\n\nIMBUNATATIRE: Implementare *Onboarding Layer* (z-index top) cu tooltips interactive \"pas-cu-pas\" care ghidează utilizatorul prin rețea și matching.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "11.1",
+    "rol": "Marketing Lead",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Onboardingul este un \"blocaj\" static; utilizatorul nu vede valoarea rețelei imediat, ducând la churn ridicat. Lipsa unei \"ancore\" vizuale pentru Trust Score descurajează engagement-ul.\n\nIMBUNATATIRE: Implementează \"Interactive Guided Tour\" cu tooltips contextuale și un dashboard \"Executive Pulse\" care simulează vizual potențialul rețelei.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "15.6",
+    "rol": "Billing / Revenue Operations",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Lipsa unui istoric financiar transparent pentru utilizator. Nu pot valida integritatea abonamentelor sau a statusului de \"Premium\" în aplicație.\n\nIMBUNATATIRE: Dashboard \"Revenue & Subscription\" cu tabel istoric tranzacții, status (Active/Expired) și export PDF local al facturilor.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.7",
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Reteaua este un haos static vizual; lipsa filtrarii avansate face \"Potrivirile\" irelevante, transformand UX-ul intr-o lista inutila.\n\nIMBUNATATIRE: Implementez *Canvas-based Force-Directed Graph* cu clustering dinamic si *Sidebar de filtrare multi-parametru* (scor, teme, proximity) cu randare instantanee a subseturilor in lista.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "8.2",
+    "rol": "Senior UX Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este statică și inutilă; pare un simplu chatbot rudimentar. Lipsa contextului din rețea o face să piardă valoarea \"Executive\" a aplicației.\n\nIMBUNATATIRE: Implementează un \"Contextual Agent\" ce accesează array-ul de date criptate pentru a genera sumarizări proactive și sugestii de networking bazate pe proximitatea în graful de rețea.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "3.2",
+    "rol": "Senior QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Zero validare automată a integrității datelor la încărcarea fișierului local; risc de corupere a Trust Ledger-ului. Lipsa unei suite de teste de regresie UI face ca orice modificare a logicii de criptare/stocare să fie un salt în necunoscut.\n\nIMBUNATATIRE: Implementarea unui \"Integrity Guard\" (test unitar automatizat la boot) care validează SHA-256 chain și structura JSON a vault-ului, plus un dashboard QA ascuns (Debug Mode) pentru rularea automată a scenariilor critice de criptare/decriptare.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "5.7",
+    "rol": "Data Analyst",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Sistemul de matching este o \"cutie neagră\" statică. Lipsa filtrării avansate și a analizei contextuale face ca datele să pară inutile pentru decizii reale de business.\n\nIMBUNATATIRE: Implementează un \"Interactive Filter Matrix\" (slicer-uri SQL-like) și o matrice de corelație vizuală pentru relevanța potrivirilor.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Utilizatorii se pierd în rețeaua interactivă; nu pot filtra vizual conexiunile relevante, făcând explorarea haotică.\n\nIMBUNATATIRE: Implementare \"Focus-Lens\": slider interactiv de proximitate (radius) care ascunde nodurile irelevante în timp real, păstrând doar conexiunile cu scor de potrivire peste pragul setat.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "15.6",
+    "rol": "Billing / Revenue Operations",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Lipsa unui sistem de \"Billing & Subscription Status\" în profil face ca valoarea utilizatorului să fie abstractă, fără monitorizarea directă a statusului de plată sau a accesului premium.\n\nIMBUNATATIRE: Dashboard financiar în Profil: Card \"Status Abonament\" cu grafic de retenție și buton \"Gestionare Plăți\" (modal mock-up Stripe).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "11.2",
+    "rol": "Digital Marketing Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Onboarding-ul static nu convinge userul de valoarea rețelei; lipsa \"social proof\" face ca achiziția să fie ineficientă.\n\nIMBUNATATIRE: Integrare \"Live Trust Feed\" pe ecranul de start: un slider cu ultimele 3 potriviri verificate (hash-chain valid).\n\nTIP: ambele.",
+    "ok": true
+  },
+  {
+    "cod": "3.3",
+    "rol": "QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE:Lipsa testelor automate face ca orice modificare UI/UX să riște regresii. Totul e fragil la iterația 3.\n\nIMBUNATATIRE:Integrare Vitest/Playwright cu un mini-suita de teste \"smoke\" în-browser care validează hash-chain-ul și fluxul de criptare la fiecare load.\n\nTIP:functional",
+    "ok": true
+  },
+  {
+    "cod": "5.8",
+    "rol": "BI Developer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Trust Ledger-ul este o simplă listă statică, greu de auditat vizual; lipsesc metrici de evoluție a integrității.\n\nIMBUNATATIRE: Implementez \"Integrity Heatmap\" (calendar/timeline vizual) cu status-uri codate cromatic și un mini-dashboard de \"Anomaly Detection\" pentru hash-uri, integrat direct în meniul de securitate.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "8.2",
+    "rol": "Senior UX Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Rețeaua interactivă devine haotică la peste 20 noduri, iar \"Secretara AI\" este doar un motor de căutare static, lipsit de contextul conversațional necesar unui asistent premium.\n\nIMBUNATATIRE: Implementează un \"Canvas Contextual\" (view de noduri clusterizat fizic) și un prompt-system bazat pe *Local Storage* pentru a simula \"memoria\" discuțiilor.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "11.2",
+    "rol": "Digital Marketing Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Onboarding-ul actual este static; nu pot targeta audiențe specifice fără un \"Growth Loop\" integrat. Utilizatorii nu au un stimul vizual de valoare pentru a partaja aplicația.\n\nIMBUNATATIRE: Implementare \"Invite-to-Unlock\" cu link-uri generate dinamic și un sistem de referral vizual (badge-uri).\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 4,
+    "text": "NEMULTUMIRE: Onboarding-ul static lasă utilizatorii blocați după primii pași; lipsa feedback-ului la căutarea fuzzy în rețea creează confuzie.\n\nIMBUNATATIRE: Implementează un \"Guided Tour\" interactiv (overlay cu highlight-uri) și highlight vizual (text-match) în timp real în lista de rețea.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.7",
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Gestionarea stării în `eie.html` a devenit un haos procedural; update-ul UI-ului la schimbări de date e ineficient, cauzând flicker-uri vizuale pe rețeaua interactivă.\n\nIMBUNATATIRE: Implementarea unui sistem `Reactive State` (Proxy-based) pentru randare declarativă. Când datele se schimbă, doar componentele afectate se re-randează.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "3.3",
+    "rol": "QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Lipsa testelor automate face ca orice modificare UI să riște regresii în Trust Ledger și criptare. \n\nIMBUNATATIRE: Implementarea unui \"Test Runner\" minimalist în JS care simulează scenarii critice (criptare/decriptare/hash-chain) direct în consolă, cu vizualizare \"Status Test\" în UI.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "16.1",
+    "rol": "Head of Legal",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Lipsa trasabilității și a validității juridice pentru \"Secretara AI\" și matching-ul euristic. Riscul de interpretare eronată a datelor (hallucination/bias) fără un audit trail imuabil este inacceptabil pentru conformitate.\n\n**IMBUNATATIRE:** Implementarea unui \"Jurnal de Audit Cryptographic\" (Log imuabil) stocat local, care semnează digital fiecare sugestie/match cu un timestamp și hash SHA-256, exportabil ca PDF semnat.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "8.3",
+    "rol": "UI Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Vizualizarea rețelei este haotică pe ecrane mici, iar \"Secretara AI\" pare un simplu chat-box static, lipsit de contextul dinamicii utilizatorului.\n\nIMBUNATATIRE: Implementează un layout \"Node-Canvas\" cu zoom/pan tactil și adaugă carduri \"Smart Context\" în chat, injectând dinamic date din profilul vizat.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.7",
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Interacțiunea cu \"Secretara AI\" este plată, bazată pe regex rudimentar, iar lipsa stării persistente face ca sesiunile să fie efemere și inutile pentru utilizator.\n\nIMBUNATATIRE: Implementarea unui `Memory Buffer` indexat prin `n-grams` pentru context local și stocare `localStorage` criptată.\n\nTIP: Funcțional.",
+    "ok": true
+  },
+  {
+    "cod": "6.1",
+    "rol": "Head of AI",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este doar un script static de cuvinte-cheie, inutil pentru decizii reale. Lipsa contextului dinamic face ca aplicația să pară o simplă bază de date, nu un partener inteligent.\n\nIMBUNATATIRE: Implementare vector-search local (Transformers.js) pentru matching semantic.\n\nTIP: Funcțional și vizual.",
+    "ok": true
+  },
+  {
+    "cod": "16.2",
+    "rol": "Corporate Lawyer",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Lipsa trasabilității juridice în \"Secretara AI\". Euristicile actuale sunt riscante pentru due-diligence; nu pot evalua riguros riscul sau compatibilitatea contractuală în M&A.\n\nIMBUNATATIRE: Implementarea unui \"Audit Log\" criptat și filtru avansat de compatibilitate bazat pe ponderi de risc (Weighted Scoring).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "3.3",
+    "rol": "QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Lipsa testelor automate face ca orice modificare UI/UX să riște regresii critice, iar matching-ul euristic este nevalidat, generând rezultate imprevizibile.\n\nIMBUNATATIRE: Implementarea unui \"Test-Runner\" integrat (mini-framework JS) care rulează scenarii critice de criptare/decriptare și validare logică matching la fiecare salvare.\n\nTIP: functional.",
+    "ok": true
+  },
+  {
+    "cod": "11.3",
+    "rol": "Content Marketer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rece; lipsește un \"hook\" emoțional pentru utilizator. Secretara AI e doar un formular rudimentar, fără personalitate.\n\nIMBUNATATIRE: Implementează un \"Chat-Bubbles UI\" animat pentru Secretară și un \"Trust Pulse\" (puls vizual pe Trust Score) care reacționează la interacțiuni.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "8.3",
+    "rol": "UI Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Vizualizarea \"Retea\" este haotică pe mobil, iar \"Secretara AI\" pare un simplu chat-box static, lipsit de context vizual.\n\nIMBUNATATIRE: Implementează un \"Canvas Contextual\" (fereastră glisantă/drawer) pentru detalii profil și un sistem de \"Pulse\" vizual pe nodurile rețelei pentru activitate recentă.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.7",
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 4,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa unei ierarhii vizuale în \"Secretara AI\" face ca fluxul de conversație să pară un simplu jurnal, nu un asistent proactiv.\n\nIMBUNATATIRE: Implementarea unui \"Chat Bubble System\" cu mesaje auto-expandabile și un sistem de \"Quick-Actions\" contextuale bazat pe NLP minimal.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "6.2",
+    "rol": "AI Research Scientist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Matching-ul euristic e static și \"Secretara AI\" e doar un filtru rudimentar de text, oferind o experiență de utilizator superficială, lipsită de inteligență contextuală.\n\nIMBUNATATIRE: Implementare *Vector Embeddings* prin TinyTensor (JS) pentru matching semantic și un *LLM-in-Browser* (Transformers.js) pentru raționament local.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 5,
+    "text": "NEMULTUMIRE: Gestionarea stării în RAM este volatilă; un refresh accidental șterge tot, frustrând utilizatorii. Lipsa feedback-ului de salvare creează anxietate privind integritatea datelor.\n\nIMBUNATATIRE: Implementare \"Auto-Save Persistence\" în IndexedDB cu criptare transparentă și un indicator vizual de tip \"Sync-Status\" (puls/check) lângă Trust Score.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "11.3",
+    "rol": "Content Marketer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este un placeholder inert; lipsa contextului dinamic face experiența să pară un simplu tabel static, nu o unealtă inteligentă.\n\nIMBUNATATIRE: Implementează un \"Contextual Sidebar\" retractabil ce analizează activ nodul selectat în rețea, generând sumarizări live (keyword matching) și sugestii de acțiune.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 6,
+    "text": "NEMULTUMIRE: Utilizatorii se pierd în „Retea” și nu înțeleg valoarea match-urilor din cauza lipsei de context; interfața e statică în ciuda animațiilor.\n\nIMBUNATATIRE: Implementare \"Contextual Tooltip\" pe graf și \"Smart Filtering\" cu slider range pentru Trust Score.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "16.3",
+    "rol": "Contracts Manager",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Gestionarea manuală a clauzelor și lipsa istoricului de negociere fac procesul lent și predispus la erori în rețeaua de 20 membri.\n\nIMBUNATATIRE: Integrarea unui \"Clause Library\" (template-uri JSON) cu versionare locală și sistem de \"Redlining\" vizual în profilul membrilor.\n\nTIP: Ambele.",
+    "ok": true
+  }
+]
