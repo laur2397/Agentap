@@ -13,6 +13,7 @@
 - 2026-05-31 · Item 9 (Mini-calendar saptamanal) · banda 7 zile cu azi evidentiat + bulina/numar pe zilele cu intalniri; tap -> toast cu intalnirile zilei; validat, 0 erori.
 - 2026-05-31 · AUDIT item 9 (secloop9): APROBAT 6/6 + CAE.
 - 2026-05-31 · Item 10 (Rezultat intalnire) · notita 'cum a mers' atasata intalnirilor confirmate (adauga/editeaza/afiseaza); validat, 0 erori.
+- 2026-05-31 · Item 17 (Filtrare jurnal pe interval) · chips Azi/Saptamana/Tot in jurnal (NOTERANGE): Azi = de la inceputul zilei, Saptamana = ultimele 7 zile, combinabil cu filtrul de #tag si cautarea; validat Playwright (Tot=3, Saptamana=2, Azi=1), 0 erori.
 - 2026-05-31 · Item 16 (Notificari browser) · comutator opt-in in Preferinte care cere permisiunea (Notification.requestPermission, gestioneaza granted/denied/unsupported); notifica task-urile scadente azi/intarziate, deduplicat per sesiune (NOTIFIED Set), declansat din updateBadges; copy onest "doar cat aplicatia e deschisa — fara server/push"; persistat doar daca permisiunea ramane granted; validat Playwright (toggle on/off, permisiune granted, 1 notificare deduplicata), 0 erori.
 - 2026-05-31 · AUDIT item 15 (secloop15): APROBAT 6/6 + CAE (recomandari neblocante: wipe() in finally, user-select:none pe elemente sensibile, validare Blob la export .ics).
 - 2026-05-31 · Item 15 (Remindere <24h) · intalnirile confirmate din urmatoarele 24h capata chenar accent + pastila "⏰ in ~Nh / in curand" (hoursUntil/soonLabel); validat Playwright (1 din 2 evidentiata, badge "in ~2h"), 0 erori.
