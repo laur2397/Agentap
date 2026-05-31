@@ -1,0 +1,110 @@
+[
+  {
+    "rol": "Marketing Lead",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "input": "Iată prioritățile din perspectiva Marketingului pentru evoluția „Secretarei AI”, respectând constrângerile tehnice:\n\n1. **Agenda de Pregătire Contextuală:** Generează un „Brief de Networking” bazat pe istoricul local al notițelor. *Contează pentru autoritatea brandului: utilizatorii par profesioniști și pregătiți, crescând valoarea percepută a aplicației.*\n2. **Sistem de Follow-up Structurat:** Trimite template-uri text personalizate cu „ce ofer/caut” după întâlnire. *Contează pentru retenție: închide bucla de valoare a networking-ului prin acțiune imediată.*\n3. **Smart Scheduling cu Dublu Consimțământ:** Propune intervale libere din calendarul local și gestionează cererile de întâlnire între membri. *Contează pentru creștere (viralitate): facilitează tranzacțiile de business direct în aplicație.*",
+    "ok": true
+  },
+  {
+    "rol": "Customer Success Lead",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "input": "Iată prioritățile strategice pentru Secretara AI, axate pe retenție prin utilitate imediată (Local-Only):\n\n1. **Agenda de Pregătire (Smart Briefing):** Generează un rezumat \"Cine, Ce, De ce\" înainte de întâlnire, bazat pe istoricul conversațiilor locale. *Crește valoarea percepută a fiecărei interacțiuni și reduce anxietatea utilizatorului.*\n2. **Ciclu de Follow-up Structurat:** Draft-uri editabile post-întâlnire cu \"Acțiuni stabilite\". *Asigură continuitatea relațiilor și transformă simple discuții în proiecte concrete.*\n3. **Calendarul de Oportunități (Matching Scheduler):** Vizualizează ferestrele libere și propune întâlniri cu membri compatibili pe baza intereselor comune. *Reduce efortul de organizare și stimulează activitatea în rețea.*",
+    "ok": true
+  },
+  {
+    "rol": "QA Lead",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "input": "Iată prioritizarea strategică din perspectiva QA pentru a asigura stabilitatea funcțională fără a crea așteptări false:\n\n1. **Agenda Contextuală Locală:** Generează un rezumat \"snapshot\" înainte de întâlnire, bazat strict pe istoricul notițelor stocate local. **De ce:** Elimină riscul erorilor de sincronizare și oferă utilizatorului valoare imediată, controlată, fără a promite integrări externe imposibile.\n\n2. **Manager de Task-uri \"Prompt-Driven\":** Transformă input-ul utilizatorului în remindere cu deadline (ex: \"Follow-up cu X\"). **De ce:** Structurarea datelor în format JSON local permite testarea riguroasă a stărilor (task activ/completat) fără a necesita un calendar extern real.\n\n3. **Log de Interacțiuni \"Strict-Manual\":** Interfață pentru notarea manuală a detaliilor post-întâlnire, cu validare de câmpuri pentru 'ce ofer/caut'. **De ce:** Minimizează bug-urile de procesare naturală; calitatea datelor depinde de input-ul validat, garantând consistența algoritmului de matching local.",
+    "ok": true
+  },
+  {
+    "rol": "Behavioral Science Lead",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "input": "Iată viziunea mea din perspectiva Behavioral Science Lead, concentrată pe utilitate autentică și autonomie, fără a simula inteligență care nu există:\n\n1. **Agenda de Pregătire Contextuală**: Înainte de meeting, secretara afișează un sumar local al istoricului (schimburi anterioare, nevoi/oferte). *De ce:* Reduce sarcina cognitivă și anxietatea socială, transformând networking-ul reactiv într-unul fundamentat pe date reale.\n2. **Sistem de „Double-Opt-In” pentru Calendar**: Interfață pentru propuneri de întâlnire care necesită acceptul explicit al ambilor utilizatori în app. *De ce:* Respectă autonomia utilizatorului și previne intruziunea, eliminând iluzia unui asistent care „rezolvă totul” în fundal.\n3. **Draft de Follow-Up Structurat**: Generează automat un draft bazat pe cuvintele-cheie extrase din notițe, care trebuie editat/aprobat de utilizator. *De ce:* Încurajează responsabilitatea și autenticitatea, evitând spam-ul generat de mașinărie care devalorizează conexiunile umane.",
+    "ok": true
+  },
+  {
+    "rol": "Data / AI Lead",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "input": "Iată strategia departamentului de date pentru „Secretara AI”, axată pe arhitectura *local-first* și algoritmi deterministici:\n\n1. **Motor de Potrivire Bidirecțională:** Corelează „Ofer/Caut” cu istoricul tranzacțional al membrilor. Contează pentru a genera recomandări relevante prin vectori simpli de similaritate, fără LLM.\n2. **Jurnal de Intenție & Context:** Stochează structurat „Agenda pre-meet” și „Note post-meet”. Contează pentru a menține *lineage*-ul relațiilor de business și a oferi context analitic la următoarea interacțiune.\n3. **Scheduler cu Consimțământ:** Algoritm de intersecție a ferestrelor de disponibilitate locală. Contează pentru a automatiza logistica întâlnirilor, eliminând necesitatea integrării cu calendare externe.",
+    "ok": true
+  },
+  {
+    "rol": "Head of Product / CPO Deputy",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "input": "Iată strategia de produs pentru evoluția „Secretarei AI” în ecosistemul Cercul EIE:\n\n1. **Agenda Contextuală Dinamică**: Generează un fișier „Brief de Întâlnire” local, combinând istoricul interacțiunilor și nevoile reciproce extrase din profil. *Contează pentru eficiența discuției și creșterea valorii networking-ului.*\n\n2. **Manager de Intenții (Sistem de Matching)**: Gestionează cereri de întâlnire cu dublu consimțământ, blocând sloturi în calendarul local. *Contează pentru organizarea autonomă, respectând strict limitările client-side.*\n\n3. **Flux de Follow-up Structurat**: Propune șabloane de mesaje bazate pe notițele post-întâlnire și statusul proiectelor active. *Contează pentru menținerea relațiilor fără a depinde de servicii cloud.*",
+    "ok": true
+  },
+  {
+    "rol": "Finance Director / CFO Deputy",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "input": "Iată prioritățile din perspectiva eficienței financiare și a controlului resurselor:\n\n1. **Jurnal de Timp și Eficiență:** Monitorizează durata întâlnirilor vs. obiective atinse. Ajută la evaluarea ROI-ului fiecărei interacțiuni, eliminând „timpul mort” care costă firma.\n2. **Algoritm de Prioritizare „Smart-Match”:** Filtrează cererile de întâlnire pe baza relevanței „caut/ofer”. Reduce costul de oportunitate prin maximizarea calității networking-ului.\n3. **Generator de Agendă și Follow-up:** Automatizează structurarea discuțiilor. Standardizează procesul pentru a crește rata de conversie a parteneriatelor, optimizând astfel efortul administrativ manual.",
+    "ok": true
+  },
+  {
+    "rol": "CISO Deputy / Security Lead",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "input": "Iată strategia de securitate pentru funcționalitățile „Secretarei AI”, focalizată pe minimizarea suprafeței de atac prin procesare locală:\n\n1. **Local-Vault Encrypted Schedule:** Gestionează calendarul doar în `localStorage` criptat AES-GCM. Previne exfiltrarea datelor de contact, deoarece niciun server nu vede orarul utilizatorului.\n2. **Contextual Sandbox Agendas:** Generează agende bazate strict pe cuvinte-cheie locale. Elimină riscul de injectare prompt/date externe; utilizatorul validează manual orice „idee” înainte de salvare.\n3. **Consent-Based Peer Exchange:** Intermediază întâlniri doar prin semnături criptografice locale (Public Key). Previne spam-ul și impersonarea, garantând că nicio cerere nu pleacă fără consimțământul explicit al ambelor părți.",
+    "ok": true
+  },
+  {
+    "rol": "Internal IT Manager",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "input": "Iată strategia IT pentru transformarea „Secretarei AI”, optimizată pentru mediul local, single-file, fără dependențe externe:\n\n1. **Manager de Context Local (Agenda & Notite):** Gestionează un index JSON stocat în `localStorage`. Permite definirea agendei pre-întâlnire și stocarea notițelor. *Contează pentru că oferă structură logică fără a necesita backend, păstrând datele utilizatorului 100% private.*\n\n2. **Motor de Potrivire Euristic (Calendar & Meet-uri):** Compară string-uri de disponibilitate (ex: „Luni 10-12”) introduse local prin reguli de tip „if-then”. *Contează pentru că facilitează programarea între membri prin compatibilitate directă, eliminând nevoia de sincronizare cu calendare externe (Google/Outlook).*\n\n3. **Generator de Follow-up (Task-uri & Remindere):** Extrage automat acțiuni (to-do) din notițe pe baza unor cuvinte-cheie predefinite și le listează într-un dashboard de task-uri. *Contează pentru că asigură productivitatea angajatului prin remintare persistentă, fără a depăși limitele tehnice ale fișierului single-file.*",
+    "ok": true
+  },
+  {
+    "rol": "DevOps Lead",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "input": "Iată viziunea mea pentru a transforma „Secretara AI” într-un motor de productivitate robust, respectând constrângerile tehnice:\n\n1. **Motor local de „Conflict-Free Scheduling”:** Gestionează disponibilitatea pe baza unor ferestre orare definite local în JSON. Asigură sincronizarea între membri prin export/import manual de fișiere `.ics` (fără server). Esențial pentru fiabilitatea procesului de programare fără dependențe externe.\n2. **Sistem de „Context-Aware Agenda Generator”:** Generează agende bazate pe istoricul de note și „Ce caut/ofer”. Prioritizează subiectele critice înainte de întâlnire. Reduce timpul de pregătire și garantează eficiența livrabilelor la nivel de utilizator.\n3. **Pipeline de „State-Recovery & Logs”:** Salvează starea curentă a interacțiunilor în `localStorage` și permite exportul de backup. Oferă trasabilitate completă a deciziilor luate. Asigură continuitatea datelor și reziliența informației în lipsa unui backend centralizat.",
+    "ok": true
+  },
+  {
+    "rol": "Head of Engineering / VP Engineering",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "input": "Iată strategia tehnică pentru evoluția „Secretarei AI”, optimizată pentru constrângerile de arhitectură locală:\n\n1. **Manager de Context (Agenda & Follow-up):** Generează template-uri text bazate pe istoricul local al membrului (ce ofer/caut). Permite utilizatorului să editeze manual „fișa de pregătire” înainte de întâlnire și „rezumatul” după, salvând totul în JSON local. Esențial pentru continuitatea relațiilor fără a depinde de cloud.\n\n2. **Broker de Disponibilitate (Matchmaking):** Utilizează un algoritm de intersecție a intervalelor orare (input manual de la utilizatori: „sunt liber Luni 10-12”). Verifică compatibilitatea locală și trimite o notificare (trigger JS) către celălalt membru pentru accept. Rezolvă problema coordonării fără integrare cu Google Calendar.\n\n3. **Vault de Memorie (Idei & Remindere):** Un sistem de indexare bazat pe *LocalStorage* pentru notițe și „todo-uri” atașate profilurilor de membri. Declanșează alerte vizuale în UI la deschiderea aplicației dacă un task este activ. Asigură execuția promptă a promisiunilor făcute în rețea, păstrând datele 100% private.",
+    "ok": true
+  },
+  {
+    "rol": "Head of AI",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "input": "Iată propunerea strategică pentru evoluția funcției de AI în 'Cercul EIE', respectând constrângerile tehnice:\n\n1. **Agenda Inteligenta (Contextual Pre-Meeting):** Generează automat o listă de 3 puncte de discuție bazate pe istoricul de \"Căutări/Oferte\" al ambilor membri. Reduce timpul de pregătire și crește valoarea networking-ului.\n2. **Calendar Local (Scheduler Bidirecțional):** Gestionează ferestre de disponibilitate setate manual, permițând propuneri de întâlnire între membri via cod QR/link local. Elimină haosul coordonării.\n3. **Smart Follow-up Generator:** Compune un draft de mesaj post-întâlnire, precompletat cu notițele extrase din aplicație. Asigură continuitatea relațiilor de business fără efort.",
+    "ok": true
+  },
+  {
+    "rol": "Head of PMO",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "input": "Iată strategia pentru \"Secretara AI\", optimizată pentru eficiență operațională fără dependențe externe:\n\n1. **Agenda Contextuală (Pre-Meeting):** Generează un rezumat al istoricului interacțiunilor cu membrul respectiv. *De ce:* Elimină haosul, asigură continuitatea discuțiilor și oferă vizibilitate asupra obiectivelor comune, eliminând \"proiectele ascunse\".\n2. **Planner de Acțiune (Post-Meeting):** Transformă notițele brute în \"Task-uri de tip Follow-up\" cu termene limită locale. *De ce:* Disciplina execuției transformă simpla socializare în business concret.\n3. **Brokeraj de Rețea (Double-Opt-In):** Gestionează un registru de disponibilități (slots) creat manual de utilizator, propunând potriviri doar când ambele părți au bifat \"disponibil\". *De ce:* Oferă structură și control, fără a simula integrări Google Calendar inexistente.",
+    "ok": true
+  },
+  {
+    "rol": "Sales Director",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "input": "Iată prioritățile pentru „Secretara AI” din perspectiva obiectivelor comerciale:\n\n1. **Smart Pipeline Tracker:** Gestionează stadiul fiecărui prospect (Cold/Negotiation/Closed) local. Esențial pentru a vizualiza rata de conversie și prioritizarea efortului de vânzare.\n2. **Dynamic Meeting Briefs:** Generează agende bazate pe istoricul „ce caut/ofer”. Crește rata de succes a întâlnirilor prin pregătire tactică și focus pe valoarea adăugată.\n3. **Follow-up Automation:** Drafturi de mesaje personalizate post-întâlnire. Reduce ciclul de vânzare prin promptitudine și menținerea continuității în relația cu partenerii B2B.",
+    "ok": true
+  },
+  {
+    "rol": "Design Lead",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "input": "Iată propunerile pentru transformarea Secretarei AI, axate pe design vizual și UX intuitiv, păstrând onestitatea tehnică (local, euristic):\n\n1. **Agenda Contextuală Dinamică:** Generează o listă de verificare vizuală pre-întâlnire, bazată pe potrivirile de cuvinte-cheie din profilul partenerului. Ajută utilizatorul să prioritizeze discuția, eliminând \"timpii morți\" și fragmentarea, oferind un workflow structurat fără a simula o inteligență externă.\n\n2. **Cronologia „Micro-Follow-up”:** Un sistem de notițe structurate (de tip \"de făcut\", \"de oferit\") care se populează automat din input-ul manual post-întâlnire. Oferă continuitate vizuală între întâlniri, asigurând că fiecare interacțiune este documentată local, fără a necesita sincronizare cloud complexă.\n\n3. **Planner Vizual de Disponibilitate:** O grilă vizuală \"local-only\" unde utilizatorul își bifează manual ferestrele de disponibilitate; secretara doar evidențiază \"overlap-ul\" cu alt membru (stocat local). Permite programarea cu dublu consimțământ printr-un flux de acceptare transparent, fără a simula integrări cu calendare externe.",
+    "ok": true
+  },
+  {
+    "rol": "HR Director / Head of People",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "input": "Iată prioritățile HR pentru „Secretara AI” din perspectiva dezvoltării relaționale și a eficienței membrilor:\n\n1. **Manager de „Smart-Agenda”**: Generează agende structurate înainte de întâlniri bazate pe „ofer/caut”. *Contează pentru că transformă networking-ul haotic în schimburi de valoare punctuale, crescând rata de succes a interacțiunilor.*\n2. **Sistem de „Follow-up Prompt”**: Drafturi de mesaje personalizate post-întâlnire, stocate local. *Contează pentru că menține disciplina relațională și asigură continuitatea colaborării între membri.*\n3. **Broker de Disponibilitate**: Interfață de propunere sloturi între membri, bazată pe disponibilitate marcată manual. *Contează pentru că elimină fricțiunea logistică fără a simula integrări externe false.*",
+    "ok": true
+  },
+  {
+    "rol": "Head of Legal",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "input": "Iată strategia mea, axată pe minimizarea răspunderii legale prin transparență și consimțământ:\n\n1. **Jurnal de Consimțământ (Audit Trail):** Înregistrează local fiecare acord de interconectare între membri. *De ce:* Protejează firma în caz de dispute privind utilizarea datelor, demonstrând respectarea GDPR și a consimțământului explicit (opt-in), stocat local fără a expune datele utilizatorilor pe servere externe.\n\n2. **Template-uri de \"Notă de Intenție\" (Non-Binding):** Generare locală de agende pre-întâlnire cu clauze de confidențialitate standardizate. *De ce:* Previne scurgerile de informații comerciale și protejează IP-ul utilizatorilor prin setarea unor așteptări clare și legale înainte de schimbul de date, totul fără a implica asistență juridică reală.\n\n3. **Rezumat cu \"Disclaimer de Responsabilitate\":** Fiecare follow-up generat include un text predefinit care clarifică natura non-obligatorie a interacțiunii. *De ce:* Limitează răspunderea companiei în cazul în care un utilizator interpretează greșit recomandările AI-ului ca fiind consultanță juridică sau comercială validă, prevenind litigii inutile.",
+    "ok": true
+  },
+  {
+    "rol": "Head of Operations / COO Deputy",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "input": "Iată viziunea mea pentru eficientizarea operațională a „Cercului EIE”, respectând constrângerile tehnice:\n\n1. **Manager de Context (Agenda & Notite):** Gestionează fișe locale per contact cu istoric de întâlniri și „teme de urmărit”. Oferă continuitate în discuții și elimină pierderea informațiilor.\n2. **Sincronizator de Disponibilitate (Calendar local):** Vizualizează ferestrele libere ale utilizatorului și generează invitații text („copiază-lipește”) cu propuneri de sloturi. Reduce fricțiunea planificării manuale.\n3. **Motor de Follow-up (Task-uri contextuale):** Generează mesaje pre-formatate bazate pe „ce cauți/oferi” după întâlnire. Automatizează menținerea relației fără a crea spam, păstrând networking-ul relevant și activ.",
+    "ok": true
+  }
+]
