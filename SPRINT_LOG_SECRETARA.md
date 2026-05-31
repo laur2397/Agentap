@@ -13,3 +13,4 @@
 - 2026-05-31 · Item 9 (Mini-calendar saptamanal) · banda 7 zile cu azi evidentiat + bulina/numar pe zilele cu intalniri; tap -> toast cu intalnirile zilei; validat, 0 erori.
 - 2026-05-31 · AUDIT item 9 (secloop9): APROBAT 6/6 + CAE.
 - 2026-05-31 · Item 10 (Rezultat intalnire) · notita 'cum a mers' atasata intalnirilor confirmate (adauga/editeaza/afiseaza); validat, 0 erori.
+- 2026-05-31 · Item 11 (Mod Focus) · buton 🎯 Focus ascunde tot pe Secretara (CSS .focusing), lasa captura rapida (#focusQuick, Enter/+) + task-urile scadente azi + ultimele 3 notite; toggle iesire; validat Playwright (FOCUS_BTN/FOCUSING_CLASS/QUICK_VISIBLE/NOTE_IN_PANEL/WEEKCAL_HIDDEN/WEEKCAL_BACK toate OK), 0 erori JS (doar fontul offline ERR_CERT, de mediu).

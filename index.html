@@ -316,6 +316,11 @@ details.why2>summary::-webkit-details-marker{display:none}
 .connrow .cr{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .connrow .cmeta{font-size:12px;color:var(--primary-dim);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .connrow .cdate{font-size:11px;color:var(--muted);flex:none}
+.connrow .crt{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none}
+.relpill{border:0;border-radius:30px;padding:4px 10px;font-size:11px;font-weight:600;cursor:pointer}
+.relpill.relrece{background:var(--card2);color:var(--muted)}
+.relpill.relactiv{background:var(--success-soft);color:var(--success)}
+.relpill.relprio{background:var(--warn-soft);color:var(--warn-ink)}
 .mapwrap{margin-top:18px;border-top:1px solid var(--line);padding-top:6px}
 .mapwrap>summary{font-size:13px;font-weight:600;color:var(--primary);cursor:pointer;list-style:none;padding:10px 0}
 .mapwrap>summary::-webkit-details-marker{display:none}
@@ -342,8 +347,35 @@ details.why2>summary::-webkit-details-marker{display:none}
 .meetcard .mwho{font-size:12px;color:var(--muted);white-space:nowrap}
 .meetcard .mplace{font-size:12.5px;color:var(--ink2);margin-top:5px}
 .meetcard .adock,.meetcard .waiting,.meetcard .shield{margin-top:11px}
+.meetcard .moview{margin-top:10px;font-size:13px;color:var(--ink2);background:var(--card2);border-radius:10px;padding:10px 12px;display:flex;align-items:flex-start;gap:6px}
+.meetcard .moview b{color:var(--ink)}.meetcard .moview .x{margin-left:auto;background:none;border:0;color:var(--muted);cursor:pointer;font-size:15px}
+.meetcard .moedit{margin-top:10px}
 .calrow{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
 .calrow .btn{flex:1;min-width:118px;font-size:12px}
+/* loop2 #1: ecran Azi */
+.todayrow{display:flex;align-items:flex-start;gap:11px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 14px;margin-bottom:9px;box-shadow:var(--shadow)}
+.todayrow .tdi{font-size:17px;flex:none;line-height:1.4}
+.todayrow .tdc{flex:1;min-width:0}
+.todayrow .tdt{font-size:14px;font-weight:600;color:var(--ink)}
+.todayrow .tds{font-size:12px;color:var(--muted);margin-top:2px}
+/* loop2 #11: mod focus */
+.focusbar{display:flex;justify-content:flex-end;margin:2px 0 6px}
+#focusPanel{display:none}
+#secretara.focusing>:not(.focusbar):not(#focusPanel){display:none}
+#secretara.focusing #focusPanel{display:block}
+#secretara.focusing{min-height:60vh}
+.focuswrap{max-width:560px;margin:6px auto 0}
+.focuswrap .fhint{font-size:12px;color:var(--muted);margin:4px 2px 14px;text-align:center}
+.focuslist{margin-top:16px}
+.focuslist .fl-h{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:14px 2px 7px}
+/* loop2 #9: mini-calendar saptamanal */
+.weekcal{display:flex;gap:6px;margin:12px 0 4px}
+.wcell{flex:1;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:8px 2px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;position:relative;min-height:44px}
+.wcell .wd{font-size:10px;color:var(--muted);text-transform:uppercase}
+.wcell .wn{font-size:15px;font-weight:700;color:var(--ink)}
+.wcell.today{border-color:var(--primary);background:var(--primary-soft)}
+.wcell.has .wn{color:var(--primary-dim)}
+.wcell .wdot{position:absolute;top:3px;right:4px;min-width:13px;height:13px;border-radius:8px;background:var(--primary);color:#fff;font-size:8.5px;font-weight:700;display:grid;place-items:center;line-height:1}
 /* iteratia 3 Secretara: task-uri + badge */
 .taskcard{display:flex;align-items:flex-start;gap:11px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:9px;box-shadow:var(--shadow)}
 .taskcard.done{opacity:.6}
@@ -355,6 +387,7 @@ details.why2>summary::-webkit-details-marker{display:none}
 .taskcard .tdue{font-size:11.5px;color:var(--muted);margin-top:3px}
 .taskcard .tdue.over{color:var(--warn);font-weight:600}
 .taskcard .x{background:none;border:0;color:var(--muted);font-size:18px;cursor:pointer;min-height:44px;min-width:28px}
+.taskcard .x.prio{color:var(--warn)}
 .navbadge{position:absolute;top:7px;left:calc(50% + 7px);min-width:16px;height:16px;padding:0 4px;border-radius:9px;background:var(--warn);color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center;line-height:1}
 /* backlog #2: urmatoarea intalnire pe Acasa */
 .nextmeet{background:linear-gradient(135deg,var(--primary-soft),transparent);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-top:14px;box-shadow:var(--shadow)}
@@ -428,6 +461,7 @@ details.why2>summary::-webkit-details-marker{display:none}
     <div class="eyebrow">Reteaua ta</div><h2 class="title">Conexiunile tale</h2>
     <p class="sub">Oamenii cu care te-ai conectat. O conexiune apare doar dupa ce ambele parti accepta o introducere.</p>
     <div class="searchbar"><span class="ic">⌕</span><input id="netSearch" placeholder="Cauta o persoana…" aria-label="Cauta in retea"></div>
+    <div class="filters" id="connFilters"></div>
     <div id="connList"></div>
     <details class="mapwrap" id="mapDet"><summary>Vezi harta retelei ⌄</summary>
       <p class="sub" style="margin-top:8px">Fiecare bulina e un membru; tu esti evidentiat in centru. O <b>linie</b> intre doua buline inseamna o <b>conexiune confirmata</b> (ambele parti au acceptat). Trage nodurile ca sa explorezi.</p>
@@ -438,8 +472,13 @@ details.why2>summary::-webkit-details-marker{display:none}
   <section id="secretara" class="view">
     <div class="eyebrow">Asistent</div><h2 class="title">Secretara ta</h2>
     <p class="sub">Intalniri, notite si pregatire — intr-un singur loc.</p>
-    <div class="sec">Intalniri</div>
+    <div class="focusbar"><button class="btn ghost sm" data-act="focus" aria-label="Comuta modul Focus">🎯 Focus</button></div>
+    <div id="focusPanel"></div>
+    <div class="sec">Azi</div>
+    <div id="todayBox"></div>
+    <div class="sec" style="margin-top:24px">Intalniri</div>
     <p class="sub">Programezi din conversatia cu o conexiune; se confirma doar cand ambele parti accepta. La cele confirmate poti adauga in Google Calendar / descarca .ics / trimite email — <b>tu</b> alegi sa predai datele, aplicatia nu trimite nimic singura.</p>
+    <div id="weekcal"></div>
     <div id="meetList"></div>
     <div class="sec" style="margin-top:26px">Noteaza dupa o intalnire</div>
     <p class="sub">Scrie cu cuvintele tale ce ai discutat. Iti notez singur ce cauti si ce oferi, si caut potriviri.</p>
@@ -552,7 +591,7 @@ const SEEK={0:[["Investitor pentru proiect imobiliar","dictare"],["Furnizor de c
 const COLORS=["#6366F1","#10B981","#F59E0B","#8B5CF6","#EC4899","#0EA5E9","#14B8A6","#F97316","#EF4444","#22C55E"];
 const STOP=new Set("si sau de la in un o cu pe pentru din ca care este are am ai vreau caut ofer cineva zona bun buna nou noua a al ale lui langa".split(" "));
 const KEY="cercul_eie_v5",TKEY="cercul_theme",SKEY="cercul_salt";
-let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false,MATCHFILTER="all",NOTEFILTER="all";
+let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false,MATCHFILTER="all",NOTEFILTER="all",EDITTASK=null,EDITNOTE=null,CONNFILTER="all",EDITMEET=null,FOCUS=false;
 // suprascrie cu zerouri bufferele pe care le controlam (audit s5r #1). CryptoKey-urile sunt
 // non-extractabile/opace (WebCrypto nu expune heap-ul lor) -> le eliberam pt. GC; parolele sunt
 // string-uri imutabile in JS si nu pot fi zeroizate — limitare documentata, nu ascunsa.
@@ -637,16 +676,16 @@ function validDB(d){if(!d||typeof d!=="object")return false;
   d.messages=d.messages.filter(x=>x&&typeof x==="object");
   if(!Array.isArray(d.notes))d.notes=[];
   d.notes=d.notes.filter(n=>n&&typeof n==="object"&&n.id!=null);
-  d.notes.forEach(n=>{n.text=clean(n.text);n.member_id=+n.member_id;n.t=+n.t||Date.now();});
+  d.notes.forEach(n=>{n.text=clean(n.text);n.member_id=+n.member_id;n.t=+n.t||Date.now();n.pin=n.pin?1:0;});
   if(!Array.isArray(d.meetings))d.meetings=[];
   d.meetings=d.meetings.filter(x=>x&&typeof x==="object"&&x.id!=null);
   d.meetings.forEach(x=>{x.a=+x.a;x.b=+x.b;x.place=clean(x.place||"");x.when=clean(x.when||"").slice(0,16);
-    if(["propus","confirmat","refuzat"].indexOf(x.status)<0)x.status="propus";});
+    if(["propus","confirmat","refuzat"].indexOf(x.status)<0)x.status="propus";x.outcome=clean(x.outcome||"");});
   if(!Array.isArray(d.tasks))d.tasks=[];
   d.tasks=d.tasks.filter(t=>t&&typeof t==="object"&&t.id!=null);
-  d.tasks.forEach(t=>{t.text=clean(t.text);t.member_id=+t.member_id;t.done=t.done?1:0;t.due=clean(t.due||"").slice(0,10);t.t=+t.t||Date.now();});
+  d.tasks.forEach(t=>{t.text=clean(t.text);t.member_id=+t.member_id;t.done=t.done?1:0;t.due=clean(t.due||"").slice(0,10);t.t=+t.t||Date.now();t.prio=t.prio?1:0;});
   if(!d.members.length)return false;
-  d.members.forEach(m=>{m.trust=Math.max(0,Math.min(100,+m.trust||0));m.name=clean(m.name).slice(0,80)||"?";m.id=+m.id;m.industry=clean(m.industry||"");m.role=clean(m.role||"Membru");});
+  d.members.forEach(m=>{m.trust=Math.max(0,Math.min(100,+m.trust||0));m.name=clean(m.name).slice(0,80)||"?";m.id=+m.id;m.industry=clean(m.industry||"");m.role=clean(m.role||"Membru");if(m.rel&&["rece","activ","prioritar"].indexOf(m.rel)<0)m.rel="activ";});
   d.items.forEach(i=>{i.text=clean(i.text);i.visible=i.visible?1:0;i.member_id=+i.member_id;});
   if(typeof d.seq!=="number"||d.seq<1)d.seq=Math.max(d.members.length,...d.members.map(m=>m.id))+1;
   if(!Array.isArray(d.audit))d.audit=[];return true;}
@@ -731,7 +770,7 @@ function setView(v){if(PROC){toast("Asteapta — Secretara AI proceseaza…");re
 function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("div",{class:"sk l w80"}),h("div",{class:"sk l w40"}));}
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
 function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
-  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();setKids($("#matchList"),pipeline(myMatches().filter(matchIndOk)));}else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){renderMeetings();renderTasks();renderNotes();}else if(VIEW==="profil")prof();
+  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();setKids($("#matchList"),pipeline(myMatches().filter(matchIndOk)));}else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();}}else if(VIEW==="profil")prof();
   updateBadges();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 // backlog #7: empty-state ilustrat, consistent
 function estateBox(title,sub){return h("div",{class:"estate",style:{padding:"26px 20px"}},
@@ -778,18 +817,27 @@ function home(){const me=mem(ME),mm=myMatches();
   const top=mm.filter(m=>m.status!=="conectat").slice(0,2),list=top.length?top:mm.slice(0,2);
   setKids($("#topMatches"),list.length?matches(list):emp());
 }
+const relOf=cel=>cel.rel||"activ";
+const REL={rece:["Rece","relrece"],activ:["Activ","relactiv"],prioritar:["Prioritar","relprio"]};
 function renderConn(){const host=$("#connList");if(!host)return;
   const q=(($("#netSearch")||{}).value||"").trim();
   const conn=DB.matches.filter(m=>m.status==="conectat"&&(m.offer_member===ME||m.seek_member===ME)).sort((a,b)=>(b.at||0)-(a.at||0));
+  // chips de filtrare pe status relatie
+  const fh=$("#connFilters");
+  if(fh){const chip=(f,l)=>h("button",{class:"chip"+(CONNFILTER===f?" on":""),"data-act":"connfilter","data-f":f,text:l});
+    setKids(fh, conn.length?[chip("all","Toate"),chip("prioritar","Prioritar"),chip("activ","Activ"),chip("rece","Rece")]:[]);}
   const rows=conn.map(m=>{const cel=mem(m.offer_member===ME?m.seek_member:m.offer_member);if(!cel)return null;
     if(q&&!fuzzy(q,cel.name+" "+(cel.industry||"")))return null;
-    const common=(m.common||[]).join(", ");
+    if(CONNFILTER!=="all"&&relOf(cel)!==CONNFILTER)return null;
+    const common=(m.common||[]).join(", "),rel=relOf(cel),rl=REL[rel];
     const ts=DB.messages.filter(x=>x.match_id===m.id&&x.t).map(x=>x.t),lastA=ts.length?Math.max(...ts):(m.at||0);
     const av=h("div",{class:"av sq",style:{width:"44px",height:"44px",fontSize:"15px"}},ini(cel.name));av.style.background=cel.color||"#6366F1";
     return h("div",{class:"connrow","data-act":"msg","data-id":m.id,tabindex:"0",role:"button","aria-label":"Deschide conversatia cu "+cel.name},av,
       h("div",{class:"ci"},h("div",{class:"cn",text:cel.name}),h("div",{class:"cr",text:cel.role}),
         h("div",{class:"cmeta",text:common?"prin interes comun: "+common:"conexiune confirmata"})),
-      h("div",{class:"cdate",text:lastA?"activ "+relTime(lastA):""}));}).filter(Boolean);
+      h("div",{class:"crt"},
+        h("button",{class:"relpill "+rl[1],"data-act":"relcycle","data-id":cel.id,"aria-label":"Status relatie: "+rl[0],title:"Schimba statusul relatiei",text:rl[0]}),
+        h("div",{class:"cdate",text:lastA?"activ "+relTime(lastA):""})));}).filter(Boolean);
   setKids(host, rows.length?rows:estateBox(q?"Niciun rezultat":"Inca nicio conexiune", q?"Incearca alt nume.":"Conexiunile apar aici dupa ce accepti o introducere in „Cine merita contactat”."));
 }
 /* Trust Ledger cu hash-chain REAL, verificabil + exportabil (audit: nu "security theater") */
@@ -976,6 +1024,41 @@ function dicteaza(){if(PROC)return;const text=$("#dictText").value.trim();if(!te
     if(pendingLock){pendingLock=false;lockNow();}
   },950);}
 
+/* ---- Secretara loop2 #1: ecran Azi (task-uri scadente azi + intalniri azi) ---- */
+function renderToday(){const host=$("#todayBox");if(!host)return;const td=today();
+  const meets=(DB.meetings||[]).filter(m=>m.status==="confirmat"&&(m.a===ME||m.b===ME)&&(m.when||"").slice(0,10)===td);
+  const tasks=(DB.tasks||[]).filter(t=>t.member_id===ME&&!t.done&&t.due===td);
+  const out=[];
+  meets.forEach(m=>{const cel=mem(m.a===ME?m.b:m.a)||{name:"?"};out.push(h("div",{class:"todayrow"},h("span",{class:"tdi"},"📅"),
+    h("div",{class:"tdc"},h("div",{class:"tdt",text:fmtWhen(m.when)+" · "+cel.name}),m.place?h("div",{class:"tds",text:m.place}):null)));});
+  tasks.forEach(t=>out.push(h("div",{class:"todayrow"},h("span",{class:"tdi"},"✅"),
+    h("div",{class:"tdc"},h("div",{class:"tdt",text:t.text}),h("div",{class:"tds",text:"task scadent azi"})))));
+  setKids(host, out.length?out:estateBox("Nimic urgent azi","Nicio intalnire sau task scadent astazi."));}
+/* loop2 #11: mod Focus — ascunde tot, lasa input rapid + notitele active */
+function toggleFocus(){FOCUS=!FOCUS;logA(FOCUS?"Mod Focus pornit":"Mod Focus oprit");render();
+  if(FOCUS)setTimeout(()=>{const i=$("#focusQuick");if(i)i.focus();},60);}
+function focusAdd(){if(!DB)return;const i=$("#focusQuick"),t=clean((i&&i.value||"").trim());if(!t)return;
+  DB.notes.push({id:DB.seq++,member_id:ME,text:t,t:Date.now()});if(i)i.value="";
+  logA("Notita adaugata (Focus)");save();renderFocus();toast("Notita salvata");}
+function renderFocus(){const host=$("#focusPanel");if(!host)return;const td=today();
+  const input=h("div",{class:"addrow"},
+    h("input",{id:"focusQuick",placeholder:"Scrie o idee rapida…","aria-label":"Captura rapida"}),
+    h("button",{class:"btn gold sm","data-act":"focusadd","aria-label":"Adauga nota",text:"+"}));
+  input.querySelector("input").addEventListener("keydown",e=>{if(e.key==="Enter")focusAdd();});
+  const tasks=(DB.tasks||[]).filter(t=>t.member_id===ME&&!t.done&&t.due&&t.due<=td)
+    .sort((a,b)=>(b.prio||0)-(a.prio||0)||(a.due||"9999").localeCompare(b.due||"9999"));
+  const notes=(DB.notes||[]).filter(n=>n.member_id===ME).sort((a,b)=>(b.pin||0)-(a.pin||0)||b.t-a.t).slice(0,3);
+  const list=[];
+  if(tasks.length){list.push(h("div",{class:"fl-h",text:"De facut azi"}));
+    tasks.forEach(t=>list.push(h("div",{class:"todayrow"},h("span",{class:"tdi"},"✅"),
+      h("div",{class:"tdc"},h("div",{class:"tdt",text:t.text}),t.due?h("div",{class:"tds",text:(t.due<td?"intarziat: ":"termen: ")+fmtWhen(t.due)}):null))));}
+  if(notes.length){list.push(h("div",{class:"fl-h",text:"Ultimele notite"}));
+    notes.forEach(n=>list.push(h("div",{class:"todayrow"},h("span",{class:"tdi"},n.pin?"📌":"📝"),
+      h("div",{class:"tdc"},h("div",{class:"tdt",text:n.text}),h("div",{class:"tds",text:relTime(n.t)})))));}
+  if(!list.length)list.push(estateBox("Minte limpede","Nimic in coada. Scrie ce ai de tinut minte mai sus."));
+  setKids(host, h("div",{class:"focuswrap"},input,
+    h("div",{class:"fhint",text:"Doar captura si esentialul. Apasa 🎯 Focus din nou ca sa iesi."}),
+    h("div",{class:"focuslist"},...list)));}
 /* ---- Secretara iteratia 1: jurnal de notite ---- */
 const noteTags=t=>(String(t).match(/#[\p{L}\p{N}_]+/gu)||[]).map(x=>x.toLowerCase());
 function setNoteFilter(f){NOTEFILTER=f;renderNotes();}
@@ -989,15 +1072,30 @@ function renderNotes(){const host=$("#notesList");if(!host)return;
     setKids(fhost, allTags.length?[chip("all","Toate"),...allTags.map(t=>chip(t,t))]:[]);}
   let list=mine;
   if(NOTEFILTER!=="all")list=list.filter(n=>noteTags(n.text).includes(NOTEFILTER));
-  list=list.filter(n=>!q||n.text.toLowerCase().includes(q)).sort((a,b)=>b.t-a.t);
-  setKids(host, list.length?list.map(n=>h("div",{class:"notecard"},
-      h("div",{class:"nt"},h("div",{class:"ntx",text:n.text}),h("div",{class:"ndate",text:relTime(n.t)})),
-      h("button",{class:"x","data-act":"delnote","data-id":n.id,"aria-label":"Sterge notita",text:"×"}))):
+  list=list.filter(n=>!q||n.text.toLowerCase().includes(q)).sort((a,b)=>(b.pin||0)-(a.pin||0)||b.t-a.t);
+  const row=n=>{if(EDITNOTE===n.id)return h("div",{class:"notecard"},
+      h("div",{class:"nt"},h("input",{id:"enText",value:n.text,"aria-label":"Text notita",style:{width:"100%"}}),
+        h("div",{style:{display:"flex",gap:"7px",marginTop:"8px"}},
+          h("button",{class:"btn gold sm","data-act":"notesave","data-id":n.id,text:"Salveaza"}),
+          h("button",{class:"btn ghost sm","data-act":"notecancel",text:"Renunta"}))));
+    return h("div",{class:"notecard"+(n.pin?" pinned":"")},
+      h("div",{class:"nt"},h("div",{class:"ntx",text:(n.pin?"📌 ":"")+n.text}),h("div",{class:"ndate",text:relTime(n.t)})),
+      h("button",{class:"x"+(n.pin?" prio":""),"data-act":"notepin","data-id":n.id,"aria-label":n.pin?"Anuleaza fixarea":"Fixeaza sus",title:"Fixeaza",text:"📌"}),
+      h("button",{class:"x","data-act":"noteedit","data-id":n.id,"aria-label":"Editeaza notita",text:"✎"}),
+      h("button",{class:"x","data-act":"delnote","data-id":n.id,"aria-label":"Sterge notita",text:"×"}));};
+  setKids(host, list.length?list.map(row):
     estateBox(q||NOTEFILTER!=="all"?"Nicio notita gasita":"Inca nicio notita", q||NOTEFILTER!=="all"?"Incearca alt filtru.":"Scrie prima ta idee — poti folosi #tag-uri."));}
 function addNote(){if(!DB)return;const inp=$("#noteText"),t=clean((inp&&inp.value||"").trim());if(!t)return;
   DB.notes.push({id:DB.seq++,member_id:ME,text:t,t:Date.now()});if(inp)inp.value="";
   logA("Notita adaugata in jurnal");save();renderNotes();toast("Notita salvata");}
 function delNote(id){if(!confirm("Stergi aceasta notita?"))return;const n=(DB.notes||[]).find(x=>x.id===id);DB.notes=(DB.notes||[]).filter(x=>x.id!==id);if(n)logA("Notita stearsa din jurnal");save();renderNotes();}
+function togglePin(id){const n=(DB.notes||[]).find(x=>x.id===id);if(!n)return;n.pin=n.pin?0:1;logA(n.pin?"Notita fixata":"Notita defixata");save();renderNotes();}
+function relCycle(id){const c=mem(id);if(!c)return;const order=["rece","activ","prioritar"];c.rel=order[(order.indexOf(relOf(c))+1)%3];logA("Status relatie "+REL[c.rel][0]+" pentru "+c.name);save();renderConn();}
+function setConnFilter(f){CONNFILTER=f;renderConn();}
+function editNote(id){EDITNOTE=id;renderNotes();}
+function cancelNoteEdit(){EDITNOTE=null;renderNotes();}
+function saveNote(id){const n=(DB.notes||[]).find(x=>x.id===id);if(!n){EDITNOTE=null;renderNotes();return;}
+  const nt=clean((($("#enText")||{}).value||"").trim());if(nt)n.text=nt;EDITNOTE=null;logA("Notita editata");save();renderNotes();toast("Notita actualizata");}
 /* ---- Secretara iteratia 1: brief de 1 minut (doar din datele tale) ---- */
 function buildBrief(m){const cel=mem(ME===m.offer_member?m.seek_member:m.offer_member);if(!cel)return null;
   const common=new Set();
@@ -1037,6 +1135,21 @@ async function meetRespond(id,ok){const mt=(DB.meetings||[]).find(x=>x.id===id);
   mt.status="confirmat";mt.cat=Date.now();
   try{mt.hash=await hmacHex("MEET|"+mt.a+"|"+mt.b+"|"+mt.when+"|"+mt.place);}catch(_){mt.hash="";}
   logA("Intalnire confirmata (dublu consimtamant)");save();render();toast("✓ Intalnire confirmata");}
+/* backlog secretara #9: mini-calendar pe 7 zile */
+function renderWeekCal(){const host=$("#weekcal");if(!host)return;const td=today(),wd=["Du","Lu","Ma","Mi","Jo","Vi","Sa"];
+  const cells=[];
+  for(let i=0;i<7;i++){const iso=addDays(td,i),dt=new Date(iso+"T00:00");
+    const cnt=(DB.meetings||[]).filter(m=>m.status==="confirmat"&&(m.a===ME||m.b===ME)&&(m.when||"").slice(0,10)===iso).length;
+    cells.push(h("button",{class:"wcell"+(i===0?" today":"")+(cnt?" has":""),"data-act":"weekday","data-d":iso,"aria-label":wd[dt.getDay()]+" "+dt.getDate()+(cnt?(", "+cnt+" intalniri"):", liber")},
+      h("div",{class:"wd",text:wd[dt.getDay()]}),h("div",{class:"wn",text:String(dt.getDate())}),cnt?h("div",{class:"wdot",text:cnt>1?String(cnt):""}):null));}
+  setKids(host,h("div",{class:"weekcal"},...cells));}
+function weekDay(iso){const ms=(DB.meetings||[]).filter(m=>m.status==="confirmat"&&(m.a===ME||m.b===ME)&&(m.when||"").slice(0,10)===iso);
+  if(!ms.length){toast("Liber pe "+fmtWhen(iso));return;}
+  toast(ms.map(m=>{const cel=mem(m.a===ME?m.b:m.a)||{name:"?"};return ((m.when.split("T")[1])||"")+" "+cel.name.split(" ")[0];}).join(" · "));}
+function editMeetOutcome(id){EDITMEET=id;renderMeetings();}
+function cancelMeetOutcome(){EDITMEET=null;renderMeetings();}
+function saveMeetOutcome(id){const m=(DB.meetings||[]).find(x=>x.id===id);if(!m){EDITMEET=null;renderMeetings();return;}
+  m.outcome=clean((($("#moText")||{}).value||"").trim());EDITMEET=null;logA("Rezultat intalnire notat");save();renderMeetings();toast("Rezultat salvat");}
 function renderMeetings(){const host=$("#meetList");if(!host)return;
   const mine=(DB.meetings||[]).filter(x=>x.a===ME||x.b===ME);
   const toAccept=mine.filter(x=>x.status==="propus"&&x.b===ME);
@@ -1055,9 +1168,18 @@ function renderMeetings(){const host=$("#meetList");if(!host)return;
              h("button",{class:"btn ghost sm","data-act":"fu","data-id":x.id,"data-fk":"thanks",text:"Multumire"}),
              h("button",{class:"btn ghost sm","data-act":"fu","data-id":x.id,"data-fk":"next",text:"Pas urmator"}),
              h("button",{class:"btn ghost sm","data-act":"fu","data-id":x.id,"data-fk":"resched",text:"Reprogramare"}))));
+    let oc=null;
+    if(x.status==="confirmat"){
+      oc = EDITMEET===x.id
+        ? h("div",{class:"moedit"},h("input",{id:"moText",value:x.outcome||"",placeholder:"Cum a mers intalnirea?","aria-label":"Rezultat intalnire",style:{width:"100%"}}),
+            h("div",{style:{display:"flex",gap:"7px",marginTop:"7px"}},h("button",{class:"btn gold sm","data-act":"mosave","data-id":x.id,text:"Salveaza"}),h("button",{class:"btn ghost sm","data-act":"mocancel",text:"Renunta"})))
+        : x.outcome
+          ? h("div",{class:"moview"},h("b",{text:"Rezultat: "}),x.outcome,h("button",{class:"x","data-act":"moedit","data-id":x.id,"aria-label":"Editeaza rezultat",text:"✎"}))
+          : h("button",{class:"btn ghost sm","data-act":"moedit","data-id":x.id,style:{marginTop:"9px"},text:"✎ Noteaza rezultatul"});
+    }
     return h("div",{class:"meetcard"},
       h("div",{class:"mtop2"},h("div",{class:"mw",text:fmtWhen(x.when)}),h("div",{class:"mwho",text:"cu "+cel.name})),
-      x.place?h("div",{class:"mplace",text:"📍 "+x.place}):null,acts);};
+      x.place?h("div",{class:"mplace",text:"📍 "+x.place}):null,acts,oc);};
   const out=[];
   if(toAccept.length){out.push(h("div",{class:"pipe-h a"},h("span",{class:"pd"}),"De confirmat",h("span",{class:"pn",text:String(toAccept.length)})));toAccept.forEach(x=>out.push(card(x,"accept")));}
   if(confirmed.length){out.push(h("div",{class:"pipe-h c"},h("span",{class:"pd"}),"Confirmate",h("span",{class:"pn",text:String(confirmed.length)})));confirmed.forEach(x=>out.push(card(x,"done")));}
@@ -1089,23 +1211,52 @@ function downloadICS(m){try{const blob=new Blob([icsFor(m)],{type:"text/calendar
   setTimeout(()=>URL.revokeObjectURL(a.href),2000);logA("Export intalnire (.ics)");toast(".ics descarcat — importa-l in calendar");}catch(e){toast("Export esuat");}}
 
 /* ---- Secretara iteratia 3: task-uri cu termen + reminder ---- */
-function addTask(){if(!DB)return;const t=clean((($("#taskText")||{}).value||"").trim()),due=clean((($("#taskDue")||{}).value||"")).slice(0,10);if(!t)return;
-  DB.tasks.push({id:DB.seq++,member_id:ME,text:t,due,done:0,t:Date.now()});
+// detectie de data in limbaj natural (RO) — backlog secretara #6
+function parseDue(text){const low=String(text).toLowerCase().replace(/[âă]/g,"a").replace(/î/g,"i").replace(/[șş]/g,"s").replace(/[țţ]/g,"t");
+  let m;
+  if(/\bpoimaine\b/.test(low))return addDays(today(),2);
+  if(/\bmaine\b/.test(low))return addDays(today(),1);
+  if(/\bazi\b/.test(low))return today();
+  if((m=low.match(/\b(?:in|peste)\s+(\d+)\s+zile\b/)))return addDays(today(),+m[1]);
+  const days=["duminica","luni","marti","miercuri","joi","vineri","sambata"];
+  for(let i=0;i<7;i++)if(new RegExp("\\b"+days[i]+"\\b").test(low)){const diff=((i-new Date().getDay()+7)%7)||7;return addDays(today(),diff);}
+  return "";}
+function addTask(){if(!DB)return;const t=clean((($("#taskText")||{}).value||"").trim());if(!t)return;
+  let due=clean((($("#taskDue")||{}).value||"")).slice(0,10);
+  let auto=false;if(!due){const p=parseDue(t);if(p){due=p;auto=true;}}
+  DB.tasks.push({id:DB.seq++,member_id:ME,text:t,due,done:0,prio:0,t:Date.now()});
   if($("#taskText"))$("#taskText").value="";if($("#taskDue"))$("#taskDue").value="";
-  logA("Task adaugat: "+t);save();renderTasks();updateBadges();toast("Task adaugat");}
+  logA("Task adaugat: "+t);save();renderTasks();updateBadges();toast(auto?"Task adaugat · termen detectat: "+fmtWhen(due):"Task adaugat");}
 function toggleTask(id){const x=(DB.tasks||[]).find(t=>t.id===id);if(!x)return;x.done=x.done?0:1;
   logA(x.done?"Task finalizat":"Task redeschis");save();renderTasks();updateBadges();}
 function delTask(id){if(!confirm("Stergi acest task?"))return;DB.tasks=(DB.tasks||[]).filter(t=>t.id!==id);logA("Task sters");save();renderTasks();updateBadges();}
+function toggleTaskPrio(id){const t=(DB.tasks||[]).find(x=>x.id===id);if(!t)return;t.prio=t.prio?0:1;logA(t.prio?"Task marcat important":"Task: prioritate scoasa");save();renderTasks();}
+function addDays(d,n){const x=(d?new Date(d+"T00:00"):new Date());if(isNaN(x))return today();x.setDate(x.getDate()+n);return x.toISOString().slice(0,10);}
+function snoozeTask(id){const t=(DB.tasks||[]).find(x=>x.id===id);if(!t)return;const base=(t.due&&t.due>today())?t.due:today();t.due=addDays(base,1);logA("Task amanat cu o zi");save();renderTasks();updateBadges();toast("Amanat pana "+fmtWhen(t.due));}
+function editTask(id){EDITTASK=id;renderTasks();}
+function cancelTaskEdit(){EDITTASK=null;renderTasks();}
+function saveTask(id){const t=(DB.tasks||[]).find(x=>x.id===id);if(!t){EDITTASK=null;renderTasks();return;}
+  const nt=clean((($("#etText")||{}).value||"").trim()),nd=clean((($("#etDue")||{}).value||"")).slice(0,10);
+  if(nt)t.text=nt;t.due=nd;EDITTASK=null;logA("Task editat");save();renderTasks();updateBadges();toast("Task actualizat");}
 function setTaskFilter(f){TASKFILTER=f;$$("#taskFilters .chip").forEach(c=>c.classList.toggle("on",c.dataset.f===f));renderTasks();}
 function renderTasks(){const host=$("#taskList");if(!host)return;
   const td=today();let list=(DB.tasks||[]).filter(t=>t.member_id===ME);
   if(TASKFILTER==="active")list=list.filter(t=>!t.done);
   else if(TASKFILTER==="due")list=list.filter(t=>!t.done&&t.due&&t.due<=td);
-  const open=list.filter(t=>!t.done).sort((a,b)=>(a.due||"9999").localeCompare(b.due||"9999")),done=list.filter(t=>t.done);
+  const open=list.filter(t=>!t.done).sort((a,b)=>(b.prio||0)-(a.prio||0)||(a.due||"9999").localeCompare(b.due||"9999")),done=list.filter(t=>t.done);
   const row=t=>{const overdue=!t.done&&t.due&&t.due<td;
+    if(EDITTASK===t.id)return h("div",{class:"taskcard"},
+      h("div",{class:"ti"},h("input",{id:"etText",value:t.text,"aria-label":"Text task",style:{width:"100%",marginBottom:"6px"}}),
+        h("input",{id:"etDue",type:"date",value:t.due||"","aria-label":"Termen",style:{width:"100%"}}),
+        h("div",{style:{display:"flex",gap:"7px",marginTop:"8px"}},
+          h("button",{class:"btn gold sm","data-act":"tasksave","data-id":t.id,text:"Salveaza"}),
+          h("button",{class:"btn ghost sm","data-act":"taskcancel",text:"Renunta"}))));
     return h("div",{class:"taskcard"+(t.done?" done":"")},
       h("button",{class:"tcheck"+(t.done?" on":""),"data-act":"tasktoggle","data-id":t.id,role:"checkbox","aria-checked":t.done?"true":"false","aria-label":"Marcheaza finalizat"},t.done?"✓":""),
       h("div",{class:"ti"},h("div",{class:"ttx",text:t.text}),t.due?h("div",{class:"tdue"+(overdue?" over":""),text:(overdue?"scadent: ":"termen: ")+fmtWhen(t.due)}):null),
+      h("button",{class:"x","data-act":"tasksnooze","data-id":t.id,"aria-label":"Amana o zi",title:"Amana +1 zi",text:"⏰"}),
+      h("button",{class:"x"+(t.prio?" prio":""),"data-act":"taskprio","data-id":t.id,"aria-label":t.prio?"Scoate prioritatea":"Marcheaza important",title:"Prioritate",text:t.prio?"★":"☆"}),
+      h("button",{class:"x","data-act":"taskedit","data-id":t.id,"aria-label":"Editeaza task",text:"✎"}),
       h("button",{class:"x","data-act":"deltask","data-id":t.id,"aria-label":"Sterge task",text:"×"}));};
   const out=[...open.map(row),...done.map(row)];
   const empty=estateBox("Niciun task","Adauga o sarcina cu termen in campul de mai sus.");
@@ -1219,6 +1370,23 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="tasktoggle")toggleTask(id);
   else if(a==="deltask")delTask(id);
   else if(a==="tfilter")setTaskFilter(el.dataset.f);
+  else if(a==="tasksnooze")snoozeTask(id);
+  else if(a==="taskprio")toggleTaskPrio(id);
+  else if(a==="taskedit")editTask(id);
+  else if(a==="tasksave")saveTask(id);
+  else if(a==="taskcancel")cancelTaskEdit();
+  else if(a==="notepin")togglePin(id);
+  else if(a==="relcycle")relCycle(id);
+  else if(a==="connfilter")setConnFilter(el.dataset.f);
+  else if(a==="weekday")weekDay(el.dataset.d);
+  else if(a==="focus")toggleFocus();
+  else if(a==="focusadd")focusAdd();
+  else if(a==="moedit")editMeetOutcome(id);
+  else if(a==="mosave")saveMeetOutcome(id);
+  else if(a==="mocancel")cancelMeetOutcome();
+  else if(a==="noteedit")editNote(id);
+  else if(a==="notesave")saveNote(id);
+  else if(a==="notecancel")cancelNoteEdit();
   else if(a==="srperson"){closeSearch();openMemberMatch(id);}
   else if(a==="srgo"){closeSearch();setView(el.dataset.v);}
   else if(a==="importbtn")importData();

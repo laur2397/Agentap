@@ -358,6 +358,16 @@ details.why2>summary::-webkit-details-marker{display:none}
 .todayrow .tdc{flex:1;min-width:0}
 .todayrow .tdt{font-size:14px;font-weight:600;color:var(--ink)}
 .todayrow .tds{font-size:12px;color:var(--muted);margin-top:2px}
+/* loop2 #11: mod focus */
+.focusbar{display:flex;justify-content:flex-end;margin:2px 0 6px}
+#focusPanel{display:none}
+#secretara.focusing>:not(.focusbar):not(#focusPanel){display:none}
+#secretara.focusing #focusPanel{display:block}
+#secretara.focusing{min-height:60vh}
+.focuswrap{max-width:560px;margin:6px auto 0}
+.focuswrap .fhint{font-size:12px;color:var(--muted);margin:4px 2px 14px;text-align:center}
+.focuslist{margin-top:16px}
+.focuslist .fl-h{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:14px 2px 7px}
 /* loop2 #9: mini-calendar saptamanal */
 .weekcal{display:flex;gap:6px;margin:12px 0 4px}
 .wcell{flex:1;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:8px 2px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;position:relative;min-height:44px}
@@ -462,6 +472,8 @@ details.why2>summary::-webkit-details-marker{display:none}
   <section id="secretara" class="view">
     <div class="eyebrow">Asistent</div><h2 class="title">Secretara ta</h2>
     <p class="sub">Intalniri, notite si pregatire — intr-un singur loc.</p>
+    <div class="focusbar"><button class="btn ghost sm" data-act="focus" aria-label="Comuta modul Focus">🎯 Focus</button></div>
+    <div id="focusPanel"></div>
     <div class="sec">Azi</div>
     <div id="todayBox"></div>
     <div class="sec" style="margin-top:24px">Intalniri</div>
@@ -579,7 +591,7 @@ const SEEK={0:[["Investitor pentru proiect imobiliar","dictare"],["Furnizor de c
 const COLORS=["#6366F1","#10B981","#F59E0B","#8B5CF6","#EC4899","#0EA5E9","#14B8A6","#F97316","#EF4444","#22C55E"];
 const STOP=new Set("si sau de la in un o cu pe pentru din ca care este are am ai vreau caut ofer cineva zona bun buna nou noua a al ale lui langa".split(" "));
 const KEY="cercul_eie_v5",TKEY="cercul_theme",SKEY="cercul_salt";
-let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false,MATCHFILTER="all",NOTEFILTER="all",EDITTASK=null,EDITNOTE=null,CONNFILTER="all",EDITMEET=null;
+let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false,MATCHFILTER="all",NOTEFILTER="all",EDITTASK=null,EDITNOTE=null,CONNFILTER="all",EDITMEET=null,FOCUS=false;
 // suprascrie cu zerouri bufferele pe care le controlam (audit s5r #1). CryptoKey-urile sunt
 // non-extractabile/opace (WebCrypto nu expune heap-ul lor) -> le eliberam pt. GC; parolele sunt
 // string-uri imutabile in JS si nu pot fi zeroizate — limitare documentata, nu ascunsa.
@@ -758,7 +770,7 @@ function setView(v){if(PROC){toast("Asteapta — Secretara AI proceseaza…");re
 function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("div",{class:"sk l w80"}),h("div",{class:"sk l w40"}));}
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
 function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
-  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();setKids($("#matchList"),pipeline(myMatches().filter(matchIndOk)));}else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();}else if(VIEW==="profil")prof();
+  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();setKids($("#matchList"),pipeline(myMatches().filter(matchIndOk)));}else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();}}else if(VIEW==="profil")prof();
   updateBadges();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 // backlog #7: empty-state ilustrat, consistent
 function estateBox(title,sub){return h("div",{class:"estate",style:{padding:"26px 20px"}},
@@ -1022,6 +1034,31 @@ function renderToday(){const host=$("#todayBox");if(!host)return;const td=today(
   tasks.forEach(t=>out.push(h("div",{class:"todayrow"},h("span",{class:"tdi"},"✅"),
     h("div",{class:"tdc"},h("div",{class:"tdt",text:t.text}),h("div",{class:"tds",text:"task scadent azi"})))));
   setKids(host, out.length?out:estateBox("Nimic urgent azi","Nicio intalnire sau task scadent astazi."));}
+/* loop2 #11: mod Focus — ascunde tot, lasa input rapid + notitele active */
+function toggleFocus(){FOCUS=!FOCUS;logA(FOCUS?"Mod Focus pornit":"Mod Focus oprit");render();
+  if(FOCUS)setTimeout(()=>{const i=$("#focusQuick");if(i)i.focus();},60);}
+function focusAdd(){if(!DB)return;const i=$("#focusQuick"),t=clean((i&&i.value||"").trim());if(!t)return;
+  DB.notes.push({id:DB.seq++,member_id:ME,text:t,t:Date.now()});if(i)i.value="";
+  logA("Notita adaugata (Focus)");save();renderFocus();toast("Notita salvata");}
+function renderFocus(){const host=$("#focusPanel");if(!host)return;const td=today();
+  const input=h("div",{class:"addrow"},
+    h("input",{id:"focusQuick",placeholder:"Scrie o idee rapida…","aria-label":"Captura rapida"}),
+    h("button",{class:"btn gold sm","data-act":"focusadd","aria-label":"Adauga nota",text:"+"}));
+  input.querySelector("input").addEventListener("keydown",e=>{if(e.key==="Enter")focusAdd();});
+  const tasks=(DB.tasks||[]).filter(t=>t.member_id===ME&&!t.done&&t.due&&t.due<=td)
+    .sort((a,b)=>(b.prio||0)-(a.prio||0)||(a.due||"9999").localeCompare(b.due||"9999"));
+  const notes=(DB.notes||[]).filter(n=>n.member_id===ME).sort((a,b)=>(b.pin||0)-(a.pin||0)||b.t-a.t).slice(0,3);
+  const list=[];
+  if(tasks.length){list.push(h("div",{class:"fl-h",text:"De facut azi"}));
+    tasks.forEach(t=>list.push(h("div",{class:"todayrow"},h("span",{class:"tdi"},"✅"),
+      h("div",{class:"tdc"},h("div",{class:"tdt",text:t.text}),t.due?h("div",{class:"tds",text:(t.due<td?"intarziat: ":"termen: ")+fmtWhen(t.due)}):null))));}
+  if(notes.length){list.push(h("div",{class:"fl-h",text:"Ultimele notite"}));
+    notes.forEach(n=>list.push(h("div",{class:"todayrow"},h("span",{class:"tdi"},n.pin?"📌":"📝"),
+      h("div",{class:"tdc"},h("div",{class:"tdt",text:n.text}),h("div",{class:"tds",text:relTime(n.t)})))));}
+  if(!list.length)list.push(estateBox("Minte limpede","Nimic in coada. Scrie ce ai de tinut minte mai sus."));
+  setKids(host, h("div",{class:"focuswrap"},input,
+    h("div",{class:"fhint",text:"Doar captura si esentialul. Apasa 🎯 Focus din nou ca sa iesi."}),
+    h("div",{class:"focuslist"},...list)));}
 /* ---- Secretara iteratia 1: jurnal de notite ---- */
 const noteTags=t=>(String(t).match(/#[\p{L}\p{N}_]+/gu)||[]).map(x=>x.toLowerCase());
 function setNoteFilter(f){NOTEFILTER=f;renderNotes();}
@@ -1342,6 +1379,8 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="relcycle")relCycle(id);
   else if(a==="connfilter")setConnFilter(el.dataset.f);
   else if(a==="weekday")weekDay(el.dataset.d);
+  else if(a==="focus")toggleFocus();
+  else if(a==="focusadd")focusAdd();
   else if(a==="moedit")editMeetOutcome(id);
   else if(a==="mosave")saveMeetOutcome(id);
   else if(a==="mocancel")cancelMeetOutcome();
