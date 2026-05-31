@@ -315,8 +315,8 @@ nav{position:sticky;bottom:0;z-index:9;background:color-mix(in srgb,var(--bg) 88
       <p style="font-size:11px;color:var(--muted);margin:-6px 0 8px">Read-only · fiecare actiune e inregistrata cu marca de timp (conformitate).</p>
       <div class="audit" id="auditList"></div></div>
     <div class="panel"><h3>Confidentialitate <span class="badge vis">Local-Only</span></h3>
-      <p style="font-size:12px;color:var(--ink2);line-height:1.55">Datele tale traiesc <b>doar in acest browser</b>, criptate la repaus cu <b>AES-GCM</b> si o cheie derivata din parola ta (<b>PBKDF2</b>) care <b>nu se salveaza pe disc</b> — traieste doar in memorie cat tine sesiunea. Integritatea e verificata cu checksum <b>SHA-256</b>. „Ce caut” ramane privat: identitatea si cererea se dezvaluie celeilalte parti <b>doar dupa dublu consimtamant</b>.</p>
-      <p style="font-size:11px;color:var(--warn);line-height:1.5;margin-top:8px">⚠ Prototip de cercetare: rulează client-side, deci un script malițios injectat (XSS) sau o extensie de browser pot accesa datele cât sesiunea e deblocată. <b>Nu introduce date cu adevarat sensibile.</b> Tu esti responsabil de backup — datele dispar la stergerea cache-ului.</p>
+      <p style="font-size:12px;color:var(--ink2);line-height:1.55">Datele tale traiesc <b>doar in acest browser</b>, criptate la repaus cu <b>AES-GCM</b> si o cheie derivata din parola ta (<b>PBKDF2</b>) care <b>nu se salveaza pe disc</b> — traieste doar in memorie. Integritatea continutului: checksum <b>SHA-256</b>. Trust Ledger: lant <b>HMAC-SHA256</b> cheiat de o cheie derivata din parola (secreta, nestocata) — nu poate fi rescris fara parola. La inactivitate (3 min) sau manual, <b>cheile se sterg din memorie</b> (auto-lock). „Ce caut” ramane privat: se dezvaluie <b>doar dupa dublu consimtamant</b>.</p>
+      <p style="font-size:11px;color:var(--warn);line-height:1.5;margin-top:8px">⚠ Prototip de cercetare, client-side: un script malitios pe aceeasi origine (XSS/extensie) are oricum acces direct la memorie cat sesiunea e deblocata — de aceea apararea reala e auto-lock-ul si parola, nu obscuritatea. Declansatoarele de matching sunt mascate de o durata fixa de procesare (anti timing). <b>Nu introduce date cu adevarat sensibile</b>; tu esti responsabil de backup.</p>
       <div style="margin-top:12px"><button class="btn ghost sm" onclick="exportData()">⤓ Exporta datele (JSON) pentru backup</button></div></div>
     <div class="panel"><h3>Preferinte <span class="badge vis">acces</span></h3>
       <div class="toggle"><span>Reduce animatiile <span style="color:var(--muted);font-size:11px">(accesibilitate)</span></span>
@@ -377,7 +377,7 @@ const SEEK={0:[["Investitor pentru proiect imobiliar","dictare"],["Furnizor de c
 const COLORS=["#B88E56","#2E7D32","#1A2B3C","#8a6fa8","#cf7a6e","#3d7ea6","#b08a5a","#4f9d77"];
 const STOP=new Set("si sau de la in un o cu pe pentru din ca care este are am ai vreau caut ofer cineva zona bun buna nou noua a al ale lui langa".split(" "));
 const KEY="cercul_eie_v4",TKEY="cercul_theme",SKEY="cercul_salt";
-let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[];
+let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false;
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
 const esc=s=>(s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
 const svgSafe=s=>String(s||"").replace(/[^\p{L}\p{N}\s.\-]/gu,"").slice(0,40); // whitelist pt. SVG (audit R3 #3)
@@ -409,6 +409,13 @@ async function deriveKey(pass,salt){
   const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(pass),"PBKDF2",false,["deriveKey"]);
   return crypto.subtle.deriveKey({name:"PBKDF2",salt,iterations:150000,hash:"SHA-256"},base,
     {name:"AES-GCM",length:256},false,["encrypt","decrypt"]); } // extractable:false -> cheia nu poate fi exportata
+// cheie HMAC separata, tot derivata din parola (PBKDF2, info distinct) — chei NU se stocheaza (audit s4 #3)
+async function deriveHMAC(pass,salt){
+  const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(pass+"|ledger-hmac-v1"),"PBKDF2",false,["deriveKey"]);
+  return crypto.subtle.deriveKey({name:"PBKDF2",salt,iterations:150000,hash:"SHA-256"},base,
+    {name:"HMAC",hash:"SHA-256"},false,["sign"]); }
+async function hmacHex(msg){if(!HK)return"";const sig=await crypto.subtle.sign("HMAC",HK,new TextEncoder().encode(msg));
+  return [...new Uint8Array(sig)].map(b=>b.toString(16).padStart(2,"0")).join("");}
 async function sha(str){return b64(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(str)));}
 async function encJSON(o){const iv=crypto.getRandomValues(new Uint8Array(12)),js=JSON.stringify(o),sum=await sha(js);
   const ct=await crypto.subtle.encrypt({name:"AES-GCM",iv},CK,new TextEncoder().encode(JSON.stringify({d:o,s:sum})));
@@ -421,12 +428,16 @@ async function decJSON(blob){const o=JSON.parse(blob);if(!o||!o.ct||!o.iv)throw 
 /* ---- validare schema + sanitizare la incarcare (audit R1 #4 / R3) ---- */
 function validDB(d){if(!d||typeof d!=="object")return false;
   for(const f of ["members","items","matches","messages"])if(!Array.isArray(d[f]))return false;
+  // filtram intrarile null/alterate inainte de procesare (audit s4 #4)
+  d.members=d.members.filter(m=>m&&typeof m==="object"&&m.id!=null);
+  d.items=d.items.filter(i=>i&&typeof i==="object"&&i.id!=null);
+  d.matches=d.matches.filter(m=>m&&typeof m==="object"&&m.id!=null);
+  d.messages=d.messages.filter(x=>x&&typeof x==="object");
   if(!d.members.length)return false;
-  d.members.forEach(m=>{m.trust=Math.max(0,Math.min(100,+m.trust||0));m.name=clean(m.name).slice(0,80)||"?";m.id=+m.id;});
-  d.items.forEach(i=>{i.text=clean(i.text);i.visible=i.visible?1:0;});
+  d.members.forEach(m=>{m.trust=Math.max(0,Math.min(100,+m.trust||0));m.name=clean(m.name).slice(0,80)||"?";m.id=+m.id;m.industry=clean(m.industry||"");m.role=clean(m.role||"Membru");});
+  d.items.forEach(i=>{i.text=clean(i.text);i.visible=i.visible?1:0;i.member_id=+i.member_id;});
   if(typeof d.seq!=="number"||d.seq<1)d.seq=Math.max(d.members.length,...d.members.map(m=>m.id))+1;
-  if(!Array.isArray(d.audit))d.audit=[];
-  if(!d.ledgerSalt)d.ledgerSalt=b64(crypto.getRandomValues(new Uint8Array(8)));return true;}
+  if(!Array.isArray(d.audit))d.audit=[];return true;}
 let saveTimer=null;
 function save(){if(!CK)return;clearTimeout(saveTimer);saveTimer=setTimeout(async()=>{try{localStorage.setItem(KEY,await encJSON(DB));}catch(e){console.warn("save esuat",e);}},120);}
 async function flush(){if(!CK)return;try{localStorage.setItem(KEY,await encJSON(DB));}catch(e){console.warn(e);}}
@@ -442,7 +453,7 @@ function seed(){
   d.seq=d.members.length+1;
   const ai=(m,k,arr)=>(arr||[]).forEach(([t,s])=>d.items.push({id:d.seq++,member_id:m,kind:k,text:t,visible:k==="ofer"?1:0,source:s}));
   SEED.forEach((_,i)=>{ai(i+1,"ofer",OFF[i]);ai(i+1,"caut",SEEK[i]);});
-  DB=d;d.ledgerSalt=b64(crypto.getRandomValues(new Uint8Array(8)));buildIDF();runMatching();[[1,2],[3,1],[5,4],[2,3],[7,3],[3,5]].forEach(([a,b])=>preConnect(a,b));save();return d;
+  DB=d;buildIDF();runMatching();[[1,2],[3,1],[5,4],[2,3],[7,3],[3,5]].forEach(([a,b])=>preConnect(a,b));save();return d;
 }
 function preConnect(a,b){const m=DB.matches.find(x=>(x.offer_member===a&&x.seek_member===b)||(x.offer_member===b&&x.seek_member===a));if(m){m.offer_consent=1;m.seek_consent=1;m.status="conectat";if(!m.at)m.at=Date.now()-Math.floor(Math.random()*9+1)*864e5;if(!DB.messages.some(x=>x.match_id===m.id))ctx(m);}}
 function tok(t){return new Set((t.toLowerCase().match(/[a-z0-9]+/g)||[]).filter(w=>w.length>=3&&!STOP.has(w)));}
@@ -485,7 +496,8 @@ function setView(v){if(PROC){toast("Asteapta — Secretara AI proceseaza…");re
 function skeleton(v){const sk='<div class="skel"><div class="sk box"></div><div class="sk l w80"></div><div class="sk l w40"></div></div>';
   if(v==="potriviri")$("#matchList").innerHTML=sk+sk;
   else if(v==="acasa")$("#topMatches").innerHTML=sk;}
-function render(){try{if(VIEW==="acasa")home();else if(VIEW==="potriviri")$("#matchList").innerHTML=pipeline(myMatches());else if(VIEW==="retea")net();else if(VIEW==="profil")prof();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
+function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
+  if(VIEW==="acasa")home();else if(VIEW==="potriviri")$("#matchList").innerHTML=pipeline(myMatches());else if(VIEW==="retea")net();else if(VIEW==="profil")prof();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 function emp(){return'<div class="estate"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2"><circle cx="27" cy="27" r="15"/><path d="M38 38 L53 53" stroke-linecap="round"/><path d="M21 27 h12 M27 21 v12" stroke-linecap="round" opacity=".5"/></svg><div class="t">Nicio potrivire inca</div><div style="font-size:12px;margin-top:4px">Adauga in profil sau dicteaza dupa un apel — recalculez afinitatile pe loc.</div></div>';}
 
 function home(){const me=mem(ME),mm=myMatches();
@@ -511,16 +523,16 @@ function home(){const me=mem(ME),mm=myMatches();
 async function renderLedger(conx){
   if(!conx.length){$("#ledger").innerHTML='<div class="estate" style="padding:18px"><div class="t">Nicio conexiune confirmata inca.</div></div>';LEDGER_CHAIN=[];return;}
   const chrono=conx.slice().sort((a,b)=>(a.at||0)-(b.at||0));let prev="GENESIS";const hsh={};
-  const SALT=DB.ledgerSalt||"";
-  for(const m of chrono){const h=await shaHex(SALT+"|"+prev+"|"+m.offer_member+"|"+m.seek_member+"|"+(m.at||0));hsh[m.id]=h;prev=h;}
+  // hash-chain cu HMAC-SHA256 cheiat de cheia derivata din parola (secreta, nestocata)
+  for(const m of chrono){if(!DB||!HK)return;const h=await hmacHex(prev+"|"+m.offer_member+"|"+m.seek_member+"|"+(m.at||0));hsh[m.id]=h;prev=h;}
   LEDGER_CHAIN=chrono.map(m=>({id:m.id,a:m.offer_member,b:m.seek_member,at:m.at||0,hash:hsh[m.id]}));
   const rows=conx.slice(0,4).map(m=>{const cel=mem(m.offer_member===ME?m.seek_member:m.offer_member);
     return`<div class="lrow"><span class="dot"></span><div><div class="lr-name">${esc(cel.name)}</div><div class="lr-hash">⛓ ${(hsh[m.id]||"").slice(0,12)}…</div></div><span class="lr-date">${m.at?new Date(m.at).toLocaleDateString("ro-RO",{day:"numeric",month:"short"}):""}</span></div>`;}).join("");
   $("#ledger").innerHTML=rows+`<div class="lgverify"><span id="lgState">⛓ lant de ${chrono.length} verigi (SHA-256)</span>
     <button class="btn ghost sm" style="margin-left:auto;padding:5px 11px;font-size:11px" onclick="verifyLedger()">Verifica</button>
     <button class="btn ghost sm" style="padding:5px 11px;font-size:11px" onclick="exportLedger()">Export</button></div>`;}
-async function verifyLedger(){let prev="GENESIS",ok=true;const SALT=DB.ledgerSalt||"";
-  for(const e of LEDGER_CHAIN){if(await shaHex(SALT+"|"+prev+"|"+e.a+"|"+e.b+"|"+e.at)!==e.hash){ok=false;break;}prev=e.hash;}
+async function verifyLedger(){let prev="GENESIS",ok=true;
+  for(const e of LEDGER_CHAIN){if(!DB||!HK)return;if(await hmacHex(prev+"|"+e.a+"|"+e.b+"|"+e.at)!==e.hash){ok=false;break;}prev=e.hash;}
   const el=$("#lgState");if(el)el.innerHTML=ok?`<span class="ok">✓ lant integru (${LEDGER_CHAIN.length} verigi)</span>`:'<span class="bad">✗ lant alterat — integritate compromisa</span>';
   toast(ok?"Trust Ledger: lant integru ✓":"Trust Ledger: alterare detectata ✗");}
 function exportLedger(){try{const blob=new Blob([JSON.stringify(LEDGER_CHAIN,null,2)],{type:"application/json"});
@@ -528,8 +540,8 @@ function exportLedger(){try{const blob=new Blob([JSON.stringify(LEDGER_CHAIN,nul
 function pl(l,v){return`<div><div class="row"><span>${l}</span><span style="color:var(--primary-dim)">${v}%</span></div><div class="bar"><i style="width:${v}%"></i></div></div>`;}
 
 function matches(list){if(!list.length)return'';
-  return list.map(m=>{const o=DB.items.find(i=>i.id===m.offer_item),s=DB.items.find(i=>i.id===m.seek_item);
-    const off=m.offer_member===ME,cel=mem(off?m.seek_member:m.offer_member),euc=off?m.offer_consent:m.seek_consent;
+  return list.map(m=>{const o=DB.items.find(i=>i.id===m.offer_item)||{text:"",source:""},s=DB.items.find(i=>i.id===m.seek_item)||{text:"",source:""};
+    const off=m.offer_member===ME,cel=mem(off?m.seek_member:m.offer_member)||{name:"?",industry:"",role:"",trust:0},euc=off?m.offer_consent:m.seek_consent;
     // privacy-by-design: pana la DUBLU consimtamant, identitatea si cererea privata raman ascunse
     const rev=m.status==="conectat";
     const nm=rev?esc(cel.name):"Membru din Cerc",ro=rev?esc(cel.role):esc(cel.industry)+" · identitate ascunsa",av=rev?ini(cel.name):"✦";
@@ -629,7 +641,12 @@ function prof(){const me=mem(ME),con=DB.matches.filter(x=>x.status==="conectat"&
   r("ofer","#oferList");r("caut","#cautList");
   const au=(DB.audit||[]).filter(a=>a.me===ME).slice(0,12);
   $("#auditList").innerHTML=au.length?au.map(a=>`<div class="arow"><span class="at">${relTime(a.t)}</span><span>${esc(a.a)}</span></div>`).join(""):'<div class="empty" style="padding:10px;font-size:14px">Nicio actiune inregistrata.</div>';}
-function addItem(k){const t=clean($("#"+k+"Text").value.trim());if(!t)return;DB.items.push({id:DB.seq++,member_id:ME,kind:k,text:t,visible:k==="ofer"?1:0,source:"profil"});$("#"+k+"Text").value="";logA("Adaugat in „"+(k==="ofer"?"ce ofer":"ce caut")+"”: "+t);runMatching();save();render();toast("Adaugat — am recalculat afinitatile");}
+function addItem(k){if(PROC)return;const t=clean($("#"+k+"Text").value.trim());if(!t)return;
+  DB.items.push({id:DB.seq++,member_id:ME,kind:k,text:t,visible:k==="ofer"?1:0,source:"profil"});$("#"+k+"Text").value="";
+  logA("Adaugat in „"+(k==="ofer"?"ce ofer":"ce caut")+"”: "+t);
+  PROC=true;const t0=performance.now();runMatching();save();
+  const wait=Math.max(0,360-(performance.now()-t0)); // durata constanta -> maschează timing-ul matching-ului (audit s4 #2)
+  setTimeout(()=>{PROC=false;render();toast("Adaugat — am recalculat afinitatile");if(pendingLock){pendingLock=false;lockNow();}},wait);}
 function delItem(id){const it=DB.items.find(i=>i.id===id);DB.items=DB.items.filter(i=>i.id!==id);if(it)logA("Sters: "+it.text);save();render();}
 
 /* Secretara AI — cu indicator de procesare */
@@ -646,6 +663,7 @@ function dicteaza(){if(PROC)return;const text=$("#dictText").value.trim();if(!te
     save();runMatching();
     $("#dictRes").innerHTML='<div class="sec" style="margin-top:4px">Intentii extrase</div>'+(out.length?out.map(([k,t])=>`<div class="linei"><div>${esc(t)}</div><span class="badge ${k==="ofer"?"vis":"priv"}">${k}</span></div>`).join(""):'<div class="empty">Nu am gasit intentii clare.</div>')+(out.length?'<div style="margin-top:10px"><button class="btn ghost sm" onclick="setView(\'potriviri\')">Vezi potrivirile noi →</button></div>':'');
     $("#dictText").value="";btn.disabled=false;$("#dictText").disabled=false;PROC=false;
+    if(pendingLock){pendingLock=false;lockNow();}
   },950);}
 
 function openMemberMatch(mid){if(mid===ME){setView("profil");return;}
@@ -706,10 +724,10 @@ async function lockSubmit(){const pass=$("#lockPass").value,err=$("#lockErr");er
   $("#lockBtn").disabled=true;
   try{
     if(LOCKMODE==="setup"){const salt=crypto.getRandomValues(new Uint8Array(16));
-      CK=await deriveKey(pass,salt);localStorage.setItem(SKEY,b64(salt));
+      CK=await deriveKey(pass,salt);HK=await deriveHMAC(pass,salt);localStorage.setItem(SKEY,b64(salt));
       DB=seed();await flush();$("#lockPass").value="";$("#lock").classList.remove("on");
       loadMembers();render();obGo(0);obShow();resetIdle();}
-    else{const salt=unb64(localStorage.getItem(SKEY));CK=await deriveKey(pass,salt);
+    else{const salt=unb64(localStorage.getItem(SKEY));CK=await deriveKey(pass,salt);HK=await deriveHMAC(pass,salt);
       const d=await decJSON(localStorage.getItem(KEY));if(!validDB(d))throw new Error("schema");DB=d;
       $("#lockPass").value="";$("#lock").classList.remove("on");loadMembers();render();resetIdle();}
   }catch(e){console.warn("lock",e);CK=null;err.style.display="block";
@@ -720,8 +738,14 @@ function lockReset(){if(!confirm("Reseteaza? Datele criptate actuale raman ca ba
   $("#lockPass").value="";$("#lockErr").style.display="none";showLock("setup");}
 /* ---- auto-lock: cryptographic shredding — sterge cheia din RAM la inactivitate (audit s5 #3) ---- */
 let idleT=null;const IDLE_MS=180000;
-function lockNow(){if(!CK)return;stopNet();clearTimeout(idleT);CK=null;DB=null;LEDGER_CHAIN=[];
-  $("#lockPass").value="";showLock("unlock");toast("Blocat — cheia stearsa din memorie");}
+function lockNow(){if(!CK||LOCKING)return;
+  if(PROC){pendingLock=true;toast("Se blocheaza dupa finalizarea procesarii…");return;} // atomic: nu intrerupe operatiuni (audit s4 #1)
+  LOCKING=true;stopNet();clearTimeout(idleT);
+  CK=null;HK=null;DB=null;ME=null;LEDGER_CHAIN=[];CHAT=null;FSIM=null; // cryptographic shredding al cheilor din RAM
+  ["#matchList","#netHost","#ledger","#kpis","#topMatches","#phead","#mMsgs","#dictRes","#oferList","#cautList","#auditList"]
+    .forEach(s=>{const el=$(s);if(el)el.innerHTML="";}); // sanitizare DOM (audit s4 #5)
+  $("#overlay").classList.remove("on");$("#lockPass").value="";showLock("unlock");LOCKING=false;
+  toast("Blocat — cheile sterse din memorie");}
 function resetIdle(){if(!CK)return;clearTimeout(idleT);idleT=setTimeout(lockNow,IDLE_MS);}
 ["pointerdown","keydown","touchstart"].forEach(ev=>window.addEventListener(ev,resetIdle,{passive:true}));
 

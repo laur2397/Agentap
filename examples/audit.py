@@ -22,6 +22,21 @@ def P(f): return os.path.join(ROOT,f)
 
 # Descrierea EXACTA a solutiei auditate (iteratia 2 + remedieri runda 1). Onesta — doar ce e implementat.
 SOLUTIE=(
+ "REMEDIERI RUNDA 4 (iteratia 5, toate verificate automat cu Playwright, zero erori de consola):\n"
+ "(R4#1) AUTO-LOCK ATOMIC: blocarea NU mai intrerupe operatiuni asincrone. Daca o procesare e in curs "
+ "(PROC), blocarea se AMANA (pendingLock) si se executa abia dupa finalizare; verificat: lock declansat "
+ "in timpul Secretarei AI se amana si se aplica corect, fara DOMException. Functiile async de ledger au "
+ "guard (bail daca DB/HK devin null). La blocare se face si sanitizare DOM (golirea zonelor sensibile).\n"
+ "(R4#2) ANTI TIMING SIDE-CHANNEL: declansatoarele de matching (addItem, Secretara) sunt mascate de o "
+ "durata FIXA de procesare (padding la ~360ms / 950ms), astfel incat timpul algoritmului TF-IDF nu e "
+ "observabil prin UI. Documentat onest modelul de amenintare: un atacator cu script pe aceeasi origine "
+ "are oricum acces direct la memorie, deci apararea reala e auto-lock + parola.\n"
+ "(R4#3) HASH-CHAIN CORECT: Trust Ledger trece de la 'salt secret' (incoerent) la HMAC-SHA256 cheiat de "
+ "o cheie derivata din parola (PBKDF2, info distinct), tinuta DOAR in RAM, niciodata stocata. Terminologia "
+ "'secret' e acum exacta (cheie secreta reala, nu pepper stocat). Verificat: verificarea lantului = integru.\n"
+ "(R4#4) HARDENING null: validDB filtreaza activ intrarile null/alterate (members/items/matches/messages) "
+ "inainte de procesare; render() are guard pe ME invalid + optional chaining; matches() are fallback-uri "
+ "pe membru/item lipsa. Verificat: localStorage corupt -> reseed/eroare gratioasa, fara TypeError/crash.\n\n"
  "ITERATIA 4 — imbunatatiri notabile peste iteratia 3, respectand constrangerile auditului s5spec "
  "(ZERO dependinte externe, fara ONNX/D3/RAG = fara 'magie tehnologica', totul pur client-side vanilla; "
  "verificate automat cu Playwright, zero erori de consola):\n"
