@@ -560,7 +560,7 @@ const SEEK={0:[["Investitor pentru proiect imobiliar","dictare"],["Furnizor de c
 const COLORS=["#6366F1","#10B981","#F59E0B","#8B5CF6","#EC4899","#0EA5E9","#14B8A6","#F97316","#EF4444","#22C55E"];
 const STOP=new Set("si sau de la in un o cu pe pentru din ca care este are am ai vreau caut ofer cineva zona bun buna nou noua a al ale lui langa".split(" "));
 const KEY="cercul_eie_v5",TKEY="cercul_theme",SKEY="cercul_salt";
-let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false,MATCHFILTER="all",NOTEFILTER="all";
+let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false,MATCHFILTER="all",NOTEFILTER="all",EDITTASK=null;
 // suprascrie cu zerouri bufferele pe care le controlam (audit s5r #1). CryptoKey-urile sunt
 // non-extractabile/opace (WebCrypto nu expune heap-ul lor) -> le eliberam pt. GC; parolele sunt
 // string-uri imutabile in JS si nu pot fi zeroizate — limitare documentata, nu ascunsa.
@@ -1114,6 +1114,11 @@ function addTask(){if(!DB)return;const t=clean((($("#taskText")||{}).value||"").
 function toggleTask(id){const x=(DB.tasks||[]).find(t=>t.id===id);if(!x)return;x.done=x.done?0:1;
   logA(x.done?"Task finalizat":"Task redeschis");save();renderTasks();updateBadges();}
 function delTask(id){if(!confirm("Stergi acest task?"))return;DB.tasks=(DB.tasks||[]).filter(t=>t.id!==id);logA("Task sters");save();renderTasks();updateBadges();}
+function editTask(id){EDITTASK=id;renderTasks();}
+function cancelTaskEdit(){EDITTASK=null;renderTasks();}
+function saveTask(id){const t=(DB.tasks||[]).find(x=>x.id===id);if(!t){EDITTASK=null;renderTasks();return;}
+  const nt=clean((($("#etText")||{}).value||"").trim()),nd=clean((($("#etDue")||{}).value||"")).slice(0,10);
+  if(nt)t.text=nt;t.due=nd;EDITTASK=null;logA("Task editat");save();renderTasks();updateBadges();toast("Task actualizat");}
 function setTaskFilter(f){TASKFILTER=f;$$("#taskFilters .chip").forEach(c=>c.classList.toggle("on",c.dataset.f===f));renderTasks();}
 function renderTasks(){const host=$("#taskList");if(!host)return;
   const td=today();let list=(DB.tasks||[]).filter(t=>t.member_id===ME);
@@ -1121,9 +1126,16 @@ function renderTasks(){const host=$("#taskList");if(!host)return;
   else if(TASKFILTER==="due")list=list.filter(t=>!t.done&&t.due&&t.due<=td);
   const open=list.filter(t=>!t.done).sort((a,b)=>(a.due||"9999").localeCompare(b.due||"9999")),done=list.filter(t=>t.done);
   const row=t=>{const overdue=!t.done&&t.due&&t.due<td;
+    if(EDITTASK===t.id)return h("div",{class:"taskcard"},
+      h("div",{class:"ti"},h("input",{id:"etText",value:t.text,"aria-label":"Text task",style:{width:"100%",marginBottom:"6px"}}),
+        h("input",{id:"etDue",type:"date",value:t.due||"","aria-label":"Termen",style:{width:"100%"}}),
+        h("div",{style:{display:"flex",gap:"7px",marginTop:"8px"}},
+          h("button",{class:"btn gold sm","data-act":"tasksave","data-id":t.id,text:"Salveaza"}),
+          h("button",{class:"btn ghost sm","data-act":"taskcancel",text:"Renunta"}))));
     return h("div",{class:"taskcard"+(t.done?" done":"")},
       h("button",{class:"tcheck"+(t.done?" on":""),"data-act":"tasktoggle","data-id":t.id,role:"checkbox","aria-checked":t.done?"true":"false","aria-label":"Marcheaza finalizat"},t.done?"✓":""),
       h("div",{class:"ti"},h("div",{class:"ttx",text:t.text}),t.due?h("div",{class:"tdue"+(overdue?" over":""),text:(overdue?"scadent: ":"termen: ")+fmtWhen(t.due)}):null),
+      h("button",{class:"x","data-act":"taskedit","data-id":t.id,"aria-label":"Editeaza task",text:"✎"}),
       h("button",{class:"x","data-act":"deltask","data-id":t.id,"aria-label":"Sterge task",text:"×"}));};
   const out=[...open.map(row),...done.map(row)];
   const empty=estateBox("Niciun task","Adauga o sarcina cu termen in campul de mai sus.");
@@ -1237,6 +1249,9 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="tasktoggle")toggleTask(id);
   else if(a==="deltask")delTask(id);
   else if(a==="tfilter")setTaskFilter(el.dataset.f);
+  else if(a==="taskedit")editTask(id);
+  else if(a==="tasksave")saveTask(id);
+  else if(a==="taskcancel")cancelTaskEdit();
   else if(a==="srperson"){closeSearch();openMemberMatch(id);}
   else if(a==="srgo"){closeSearch();setView(el.dataset.v);}
   else if(a==="importbtn")importData();
