@@ -1279,7 +1279,8 @@ function renderMeetings(){const host=$("#meetList");if(!host)return;
       x.place?h("div",{class:"mplace",text:"📍 "+x.place}):null,acts,oc);};
   const out=[];
   if(toAccept.length){out.push(h("div",{class:"pipe-h a"},h("span",{class:"pd"}),"De confirmat",h("span",{class:"pn",text:String(toAccept.length)})));toAccept.forEach(x=>out.push(card(x,"accept")));}
-  if(confirmed.length){out.push(h("div",{class:"pipe-h c"},h("span",{class:"pd"}),"Confirmate",h("span",{class:"pn",text:String(confirmed.length)})));confirmed.forEach(x=>out.push(card(x,"done")));}
+  if(confirmed.length){out.push(h("div",{class:"pipe-h c"},h("span",{class:"pd"}),"Confirmate",h("span",{class:"pn",text:String(confirmed.length)})));confirmed.forEach(x=>out.push(card(x,"done")));
+    out.push(h("button",{class:"btn ghost sm","data-act":"exportAgenda",style:{marginTop:"4px"},"aria-label":"Exporta toate intalnirile confirmate ca .ics",text:"⬇ Exporta agenda completa (.ics)"}));}
   if(waiting.length){out.push(h("div",{class:"pipe-h p"},h("span",{class:"pd"}),"In asteptare",h("span",{class:"pn",text:String(waiting.length)})));waiting.forEach(x=>out.push(card(x,"wait")));}
   setKids(host, out.length?out:estateBox("Nicio intalnire","Deschide o conexiune (Reteaua) si apasa „Propune o intalnire”."));}
 
@@ -1292,10 +1293,20 @@ function meetDates(w){const[d,t]=String(w).split("T");const tm=t||"09:00";
   return[f(s),f(e)];}
 const icsEsc=s=>String(s).replace(/([\\;,])/g,"\\$1").replace(/\n/g,"\\n");
 function meetTitle(m){const cel=mem(ME===m.a?m.b:m.a)||{name:"?"};return "Intalnire cu "+cel.name;}
-function icsFor(m){const[s,e]=meetDates(m.when);
-  return["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Cercul EIE//RO//","BEGIN:VEVENT","UID:meet-"+m.id+"@cercul",
-    "DTSTART:"+s,"DTEND:"+e,"SUMMARY:"+icsEsc(meetTitle(m)),m.place?"LOCATION:"+icsEsc(m.place):"",
-    "DESCRIPTION:"+icsEsc("Programata prin Cercul EIE"),"END:VEVENT","END:VCALENDAR"].filter(Boolean).join("\r\n");}
+function veventFor(m){const[s,e]=meetDates(m.when);
+  return["BEGIN:VEVENT","UID:meet-"+m.id+"@cercul","DTSTART:"+s,"DTEND:"+e,"SUMMARY:"+icsEsc(meetTitle(m)),
+    m.place?"LOCATION:"+icsEsc(m.place):"","DESCRIPTION:"+icsEsc("Programata prin Cercul EIE"),"END:VEVENT"].filter(Boolean);}
+function icsFor(m){return["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Cercul EIE//RO//",...veventFor(m),"END:VCALENDAR"].join("\r\n");}
+// loop2 #20: export agenda completa — toate intalnirile confirmate intr-un singur .ics
+function exportAllICS(){const conf=(DB.meetings||[]).filter(m=>m.status==="confirmat"&&(m.a===ME||m.b===ME))
+    .sort((a,b)=>String(a.when).localeCompare(String(b.when)));
+  if(!conf.length){toast("Nicio intalnire confirmata de exportat");return;}
+  const lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Cercul EIE//RO//"];
+  conf.forEach(m=>lines.push(...veventFor(m)));lines.push("END:VCALENDAR");
+  try{const blob=new Blob([lines.join("\r\n")],{type:"text/calendar"});const a=document.createElement("a");
+    a.href=URL.createObjectURL(blob);a.download="agenda-cercul.ics";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+    logA("Export agenda completa (.ics): "+conf.length+" intalniri");toast("Agenda (.ics) descarcata · "+conf.length+" intalniri");
+  }catch(e){toast("Export esuat");}}
 function gcalUrl(m){const[s,e]=meetDates(m.when);
   const p=new URLSearchParams({action:"TEMPLATE",text:meetTitle(m),dates:s+"/"+e,details:"Programata prin Cercul EIE",location:m.place||""});
   return "https://calendar.google.com/calendar/render?"+p.toString();}
@@ -1490,6 +1501,7 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="meetno")meetRespond(id,false);
   else if(a==="gcal"){const mt=(DB.meetings||[]).find(x=>x.id===id);if(mt){openExt(gcalUrl(mt));logA("Deschis Google Calendar pt. o intalnire");}}
   else if(a==="ics"){const mt=(DB.meetings||[]).find(x=>x.id===id);if(mt)downloadICS(mt);}
+  else if(a==="exportAgenda")exportAllICS();
   else if(a==="email"){const mt=(DB.meetings||[]).find(x=>x.id===id);if(mt){openExt(mailtoUrl(mt));logA("Deschis email pt. o intalnire");}}
   else if(a==="fu")followUp(id,el.dataset.fk);
   else if(a==="addtask")addTask();

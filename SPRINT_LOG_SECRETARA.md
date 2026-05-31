@@ -13,6 +13,7 @@
 - 2026-05-31 · Item 9 (Mini-calendar saptamanal) · banda 7 zile cu azi evidentiat + bulina/numar pe zilele cu intalniri; tap -> toast cu intalnirile zilei; validat, 0 erori.
 - 2026-05-31 · AUDIT item 9 (secloop9): APROBAT 6/6 + CAE.
 - 2026-05-31 · Item 10 (Rezultat intalnire) · notita 'cum a mers' atasata intalnirilor confirmate (adauga/editeaza/afiseaza); validat, 0 erori.
+- 2026-05-31 · Item 20 (Export agenda .ics) · buton "⬇ Exporta agenda completa (.ics)" sub intalnirile confirmate; un singur VCALENDAR cu cate un VEVENT per intalnire confirmata (sortate cronologic); refactor veventFor() reutilizat de icsFor(); validat Playwright (2 VEVENT intr-un singur VCALENDAR, locatii pastrate), 0 erori. — LOOP 2 SECRETARA COMPLET (20/20).
 - 2026-05-31 · Item 19 (Bulk done) · buton "✓ Finalizeaza vizibile" marcheaza toate task-urile deschise care trec filtrul curent (Active/Scadente/Toate), cu confirmare (count) anti-accident; validat Playwright (3 active -> 0 active, 3 done), 0 erori.
 - 2026-05-31 · AUDIT item 18 (secloop18): APROBAT 6/6 + CAE.
 - 2026-05-31 · Item 18 (Duplicare task) · buton ⧉ pe task creeaza o copie noua (acelasi text+prioritate, nefinalizata, fara termen) ca sablon pentru sarcini recurente; validat Playwright (1->2 carduri, 2 aparitii ale textului), 0 erori.

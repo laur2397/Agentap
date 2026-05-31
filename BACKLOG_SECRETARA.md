@@ -27,4 +27,4 @@ Validare: node --check + smoke Playwright zero erori. Audit (examples/audit.py) 
 17. [x] Filtrare jurnal pe interval de timp (azi / saptamana / tot).
 18. [x] Duplicare task (sablon rapid pentru sarcini recurente).
 19. [x] Marcaj „toate task-urile vizibile ca finalizate” (bulk done) cu confirmare.
-20. [ ] Export doar al intalnirilor confirmate ca un singur fisier .ics (agenda completa).
+20. [x] Export doar al intalnirilor confirmate ca un singur fisier .ics (agenda completa).
