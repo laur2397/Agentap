@@ -642,6 +642,13 @@ details.why2>summary::-webkit-details-marker{display:none}
         <button class="btn ghost sm" data-act="importbtn">⤒ Importa (JSON)</button>
         <input type="file" id="importFile" accept="application/json,.json" style="display:none" onchange="handleImport(event)" aria-label="Fisier de import">
       </div></div>
+    <div class="panel"><h3>Backup criptat &amp; transfer <span class="badge priv">.eie</span></h3>
+      <p style="font-size:12px;color:var(--ink2);line-height:1.55">Un fișier <b>.eie</b> criptat cu o parolă aleasă de tine. Folosește-l ca să nu pierzi datele dacă schimbi telefonul sau ștergi browserul — îl restaurezi pe orice dispozitiv cu aceeași parolă. Nimic nu pleacă spre vreun server.</p>
+      <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn gold sm" data-act="backupEnc">🔒 Backup criptat (.eie)</button>
+        <button class="btn ghost sm" data-act="restoreEnc">↺ Restaurează din .eie</button>
+        <input type="file" id="restoreFile" accept=".eie,application/octet-stream" style="display:none" onchange="handleRestore(event)" aria-label="Fisier backup criptat">
+      </div></div>
     <div class="panel"><h3>Preferinte <span class="badge vis">acces</span></h3>
       <div class="toggle"><span>Reduce animatiile <span style="color:var(--muted);font-size:11px">(accesibilitate)</span></span>
         <div class="sw" id="rmSw" role="switch" tabindex="0" aria-label="Reduce animatiile" onclick="toggleRM()"><i></i></div></div>
@@ -882,6 +889,34 @@ function exportData(){try{const blob=new Blob([JSON.stringify(DB,null,2)],{type:
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="cercul-export-"+today()+".json";a.click();
   setTimeout(()=>URL.revokeObjectURL(a.href),2000);logA("Export date (JSON) pentru backup");toast("Date exportate (JSON)");}catch(e){toast("Export esuat");}}
 function logA(action){if(!DB.audit)DB.audit=[];DB.audit.unshift({t:Date.now(),me:ME,a:clean(action).slice(0,160)});if(DB.audit.length>60)DB.audit.pop();}
+/* loop4 #1: backup criptat dedicat (.eie) — parola de backup separata, PBKDF2+AES-GCM, fara server */
+async function exportEncrypted(){if(!DB)return;
+  const pw=prompt("Alege o parola pentru acest backup (min. 6 caractere). O vei folosi la restaurare:");
+  if(pw===null)return; if(!pw||pw.length<6){toast("Parola backup prea scurta (min. 6)");return;}
+  try{showProc();
+    const salt=crypto.getRandomValues(new Uint8Array(16)),key=await deriveKey(pw,salt),iv=crypto.getRandomValues(new Uint8Array(12));
+    const ct=await crypto.subtle.encrypt({name:"AES-GCM",iv},key,new TextEncoder().encode(JSON.stringify(DB)));
+    const pkg=JSON.stringify({app:"cercul-eie",v:1,kdf:"PBKDF2-150k-SHA256",salt:b64(salt),iv:b64(iv),ct:b64(ct)});
+    const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([pkg],{type:"application/octet-stream"}));
+    a.download="cercul-backup-"+today()+".eie";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+    localStorage.setItem("cercul_lastbackup",String(Date.now()));logA("Backup criptat exportat (.eie)");hideProc();toast("Backup criptat salvat (.eie)");
+  }catch(e){hideProc();toast("Backup esuat");}}
+/* loop4 #2: restaurare din backup criptat (+ transfer pe alt dispozitiv) */
+function restoreEncrypted(){const inp=$("#restoreFile");if(inp)inp.click();}
+function handleRestore(ev){const f=ev.target.files&&ev.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=async()=>{ev.target.value="";let o;try{o=JSON.parse(String(r.result));}catch(_){toast("Fisier .eie invalid");return;}
+    if(!o||o.app!=="cercul-eie"||!o.ct||!o.iv||!o.salt){toast("Nu pare un backup Cercul EIE");return;}
+    const pw=prompt("Parola backup-ului (cea aleasa la export):");if(pw===null)return;if(!pw){toast("Parola necesara");return;}
+    try{showProc();const key=await deriveKey(pw,unb64(o.salt));
+      const pt=await crypto.subtle.decrypt({name:"AES-GCM",iv:unb64(o.iv)},key,unb64(o.ct));
+      const d=JSON.parse(new TextDecoder().decode(pt));
+      if(!validDB(d)){hideProc();toast("Backup valid, dar datele par corupte");return;}
+      if(!confirm("Restaurarea inlocuieste datele curente cu cele din backup. Continui?")){hideProc();return;}
+      backupRaw();DB=d;ME=null;loadMembers();save();logA("Restaurat din backup criptat (.eie)");
+      setView("acasa");hideProc();toast("Date restaurate din backup");
+    }catch(e){hideProc();toast("Parola gresita sau fisier deteriorat");}};
+  r.readAsText(f);}
 // backlog #8: import cu validare de schema + confirmare (anti-corupere, cu backup)
 function importData(){const inp=$("#importFile");if(inp)inp.click();}
 function handleImport(ev){const f=ev.target.files&&ev.target.files[0];if(!f){return;}
@@ -1761,6 +1796,8 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="srperson"){closeSearch();openMemberMatch(id);}
   else if(a==="srgo"){closeSearch();setView(el.dataset.v);}
   else if(a==="importbtn")importData();
+  else if(a==="backupEnc")exportEncrypted();
+  else if(a==="restoreEnc")restoreEncrypted();
   else if(a==="profedit")editProfile();
   else if(a==="profsave")saveProfile();
   else if(a==="profcancel")cancelProfile();
