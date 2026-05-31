@@ -76,6 +76,11 @@ h2.title{font-family:var(--serif);font-size:27px;font-weight:600;margin:2px 0 14
 /* loop3 #10: progres intrinsec onest */
 .intrinsic{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink2);background:var(--card2);border-radius:11px;padding:10px 12px;margin-top:12px}
 .intrinsic .inti{font-size:15px;flex:none}
+/* loop3 #12: control de ordonare relevanta<->diversitate */
+.ctrlrow{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin:2px 0 14px}
+.ctrllab{font-size:12.5px;color:var(--ink2);display:block;margin-bottom:7px}
+.ctrlrow input[type=range]{width:100%;accent-color:var(--primary)}
+.ctrlhint{font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.45}
 /* loop3 #2: card "aha" first-step */
 .ahacard{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--primary);border-radius:14px;padding:14px 15px;margin-top:12px;box-shadow:var(--shadow)}
 .ahacard .ahai{font-size:22px;flex:none;line-height:1.2}
@@ -526,6 +531,11 @@ details.why2>summary::-webkit-details-marker{display:none}
     <div class="eyebrow">Pentru tine</div><h2 class="title">Cine merita contactat</h2>
     <p class="sub">Oameni din cerc cu care ai legaturi relevante. Identitatea se dezvaluie cu acordul ambelor parti.</p>
     <div class="filters" id="matchFilters"></div>
+    <div class="ctrlrow">
+      <label for="divSlider" class="ctrllab">Ordonare: <b>Relevanță</b> ↔ <b>Diversitate</b></label>
+      <input type="range" id="divSlider" min="0" max="100" step="25" value="0" aria-label="Echilibru relevanta - diversitate" oninput="setMatchDiv(this.value)">
+      <div class="ctrlhint" id="divHint"></div>
+    </div>
     <div id="matchList"></div>
   </section>
 
@@ -889,7 +899,7 @@ function setView(v){if(PROC){toast("Asteapta — Secretara AI proceseaza…");re
 function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("div",{class:"sk l w80"}),h("div",{class:"sk l w40"}));}
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
 function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
-  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();setKids($("#matchList"),pipeline(myMatches().filter(matchIndOk)));}else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();}}else if(VIEW==="profil")prof();
+  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();applyMatchDiv();setKids($("#matchList"),pipeline(orderMatches(myMatches().filter(matchIndOk))));}else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();}}else if(VIEW==="profil")prof();
   updateBadges();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 // backlog #7: empty-state ilustrat, consistent
 function estateBox(title,sub){return h("div",{class:"estate",style:{padding:"26px 20px"}},
@@ -1068,6 +1078,19 @@ function matches(list){return list.map(m=>{
       h("div",{class:"ghead"},av,h("div",{class:"gi"},h("div",{class:"gn",text:nm}),h("div",{class:"gt",text:ro})),pill),
       gline,bridge,badges,whychips,dock,details,h("div",{class:"shield",text:"🛡 Conexiune protejata"+(rev?" · sursa: "+o.source:"")}));});}
 
+/* loop3 #12: audit de control — slider explicabil relevanta <-> diversitate (ajustabil, transparent) */
+let MATCHDIV=0;
+function divHintText(){const w=MATCHDIV;return w<=0?"După potrivire (scor), de la cea mai relevantă.":
+  w>=100?"Variație maximă de domenii — îți arăt oameni din cât mai multe industrii.":
+  "Echilibru: relevanță, dar evit să-ți arăt prea mulți din același domeniu la rând.";}
+function applyMatchDiv(){const s=$("#divSlider");if(s)s.value=String(MATCHDIV);const hd=$("#divHint");if(hd)hd.textContent=divHintText();}
+function setMatchDiv(v){MATCHDIV=Math.max(0,Math.min(100,+v||0));localStorage.setItem("cercul_matchdiv",String(MATCHDIV));applyMatchDiv();if(VIEW==="potriviri")render();}
+function orderMatches(list){const w=MATCHDIV/100;const pool=list.slice().sort((a,b)=>b.score-a.score);
+  if(w<=0)return pool; const out=[],seen={};
+  while(pool.length){let bi=0,bv=-1e9;
+    for(let i=0;i<pool.length;i++){const ind=matchInd(pool[i])||"_",pen=seen[ind]||0,v=pool[i].score-w*pen*45-i*0.01;if(v>bv){bv=v;bi=i;}}
+    const ch=pool.splice(bi,1)[0],ind=matchInd(ch)||"_";seen[ind]=(seen[ind]||0)+1;out.push(ch);}
+  return out;}
 /* backlog #10: filtru pe industrie la Potriviri */
 function matchInd(m){const c=mem(m.offer_member===ME?m.seek_member:m.offer_member);return c&&c.industry||"";}
 function matchIndOk(m){return MATCHFILTER==="all"||matchInd(m)===MATCHFILTER;}
@@ -1742,6 +1765,7 @@ applyTheme(localStorage.getItem(TKEY)||"light");
 RM=localStorage.getItem("cercul_rm")==="1";applyRM();
 DATEABS=localStorage.getItem("cercul_dateabs")==="1";applyDateAbs();
 NOTIFY=localStorage.getItem("cercul_notify")==="1"&&notifSupported()&&Notification.permission==="granted";applyNotify();
+MATCHDIV=Math.max(0,Math.min(100,+(localStorage.getItem("cercul_matchdiv")||0)));applyMatchDiv();
 showLock(localStorage.getItem(SKEY)&&localStorage.getItem(KEY)?"unlock":"setup");
 </script>
 </body>
