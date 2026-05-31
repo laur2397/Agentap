@@ -60,6 +60,13 @@ Secretara AI a Cercului EIE devine **Chief-of-Staff-ul tău personal**, un siste
 *   **Integritate cronologica la sincronizare (limitare ONESTA):** Trust Ledger-ul actual e **single-writer** (un singur dispozitiv scrie) -> nu exista fork/race in stadiul curent. Sincronizarea multi-dispozitiv reala (care ar introduce evenimente concurente offline) e AMANATA si are ca **prerechizita** un mecanism de ordonare cauzala (Lamport timestamp / vector clock) + reconciliere de lant — fara el nu activam sync P2P automat, ca sa nu bifurcam/corupem lantul de hash.
 *   **Jurnal de audit local:** Fiecare actiune a Secretarei (creare task, propunere intalnire, follow-up, revocare) se scrie in jurnalul read-only existent, cu marca de timp.
 
+## 6ter. CONSTRANGERI DE IMPLEMENTARE (rafinari cerute de CAE, de respectat la build)
+*   **PBKDF2 unificat:** acelasi standard de iteratii pentru toate derivarile de chei (nu amesteca 150k/600k); derivarea grea ruleaza intr-un Web Worker ca sa nu blocheze UI-ul.
+*   **Revocare = blacklisting:** un peer marcat „revocat” in Trust Ledger e respins automat la urmatoarea sincronizare (orice date primite de la el sunt ignorate), nu doar „cerere de stergere”.
+*   **Ledger Append-Only la import:** importul poate DOAR adauga verigi noi care continua lantul local (hard-lock pe hash + validare semnatura); nu poate sterge/modifica verigi anterioare (anti „sync poisoning”).
+*   **Accesibilitate (preluat din app):** contrast >=4.5:1 (WCAG AA), tinte de atingere >=44x44px, focus-visible — deja respectate in iteratia 5.
+*   **Empty states cu CTA:** fiecare ecran gol al Secretarei are un indemn clar (ex. „Adauga prima notita”, „Propune o intalnire”).
+
 ## 6. ROADMAP
 1. **Iterația 1: „Sistemul de Indexare”** — Implementarea sistemului de notițe structurate și extragere de cuvinte-cheie (keywords) pentru crearea brief-ului de întâlnire.
 2. **Iterația 2: „Brokerul de Conexiuni”** — Implementarea fluxului de double-opt-in (schimbul de disponibilitate între membri prin QR/Link local).
