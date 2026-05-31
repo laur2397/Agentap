@@ -704,6 +704,15 @@ function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBloc
 function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
   if(VIEW==="acasa")home();else if(VIEW==="potriviri")setKids($("#matchList"),pipeline(myMatches()));else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){renderMeetings();renderTasks();renderNotes();}else if(VIEW==="profil")prof();
   updateBadges();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
+// backlog #7: empty-state ilustrat, consistent
+function estateBox(title,sub){return h("div",{class:"estate",style:{padding:"26px 20px"}},
+  svgEl("svg",{viewBox:"0 0 64 64",fill:"none",stroke:"currentColor","stroke-width":"2","aria-hidden":"true"},
+    svgEl("rect",{x:"13",y:"15",width:"38",height:"30",rx:"5"}),
+    svgEl("path",{d:"M13 25 H51","stroke-linecap":"round",opacity:".55"}),
+    svgEl("circle",{cx:"20",cy:"20",r:"1.6",fill:"currentColor"}),
+    svgEl("path",{d:"M20 53 H44","stroke-linecap":"round",opacity:".4"})),
+  h("div",{class:"t",text:title}),
+  sub?h("div",{style:{fontSize:"12px",marginTop:"4px"},text:sub}):null);}
 function emp(){return h("div",{class:"estate"},
   svgEl("svg",{viewBox:"0 0 64 64",fill:"none",stroke:"currentColor","stroke-width":"2"},
     svgEl("circle",{cx:27,cy:27,r:15}),svgEl("path",{d:"M38 38 L53 53","stroke-linecap":"round"}),
@@ -746,9 +755,7 @@ function renderConn(){const host=$("#connList");if(!host)return;
       h("div",{class:"ci"},h("div",{class:"cn",text:cel.name}),h("div",{class:"cr",text:cel.role}),
         h("div",{class:"cmeta",text:common?"prin interes comun: "+common:"conexiune confirmata"})),
       h("div",{class:"cdate",text:m.at?new Date(m.at).toLocaleDateString("ro-RO",{day:"numeric",month:"short"}):""}));}).filter(Boolean);
-  setKids(host, rows.length?rows:h("div",{class:"estate",style:{padding:"30px"}},
-    h("div",{class:"t",text:q?"Niciun rezultat":"Inca nicio conexiune"}),
-    h("div",{style:{fontSize:"12px",marginTop:"4px"},text:q?"Incearca alt nume.":"Conexiunile apar aici dupa ce accepti o introducere in „Cine merita contactat”."})));
+  setKids(host, rows.length?rows:estateBox(q?"Niciun rezultat":"Inca nicio conexiune", q?"Incearca alt nume.":"Conexiunile apar aici dupa ce accepti o introducere in „Cine merita contactat”."));
 }
 /* Trust Ledger cu hash-chain REAL, verificabil + exportabil (audit: nu "security theater") */
 async function renderLedger(conx){const host=$("#ledger");if(!host)return;
@@ -916,8 +923,7 @@ function renderNotes(){const host=$("#notesList");if(!host)return;
   setKids(host, list.length?list.map(n=>h("div",{class:"notecard"},
       h("div",{class:"nt"},h("div",{class:"ntx",text:n.text}),h("div",{class:"ndate",text:relTime(n.t)})),
       h("button",{class:"x","data-act":"delnote","data-id":n.id,"aria-label":"Sterge notita",text:"×"}))):
-    h("div",{class:"estate",style:{padding:"24px"}},h("div",{class:"t",text:q?"Nicio notita gasita":"Inca nicio notita"}),
-      h("div",{style:{fontSize:"12px",marginTop:"4px"},text:q?"Incearca alt cuvant.":"Scrie prima ta idee in campul de mai sus — o gasesti oricand."})));}
+    estateBox(q?"Nicio notita gasita":"Inca nicio notita", q?"Incearca alt cuvant.":"Scrie prima ta idee in campul de mai sus — o gasesti oricand."));}
 function addNote(){if(!DB)return;const inp=$("#noteText"),t=clean((inp&&inp.value||"").trim());if(!t)return;
   DB.notes.push({id:DB.seq++,member_id:ME,text:t,t:Date.now()});if(inp)inp.value="";
   logA("Notita adaugata in jurnal");save();renderNotes();toast("Notita salvata");}
@@ -986,7 +992,7 @@ function renderMeetings(){const host=$("#meetList");if(!host)return;
   if(toAccept.length){out.push(h("div",{class:"pipe-h a"},h("span",{class:"pd"}),"De confirmat",h("span",{class:"pn",text:String(toAccept.length)})));toAccept.forEach(x=>out.push(card(x,"accept")));}
   if(confirmed.length){out.push(h("div",{class:"pipe-h c"},h("span",{class:"pd"}),"Confirmate",h("span",{class:"pn",text:String(confirmed.length)})));confirmed.forEach(x=>out.push(card(x,"done")));}
   if(waiting.length){out.push(h("div",{class:"pipe-h p"},h("span",{class:"pd"}),"In asteptare",h("span",{class:"pn",text:String(waiting.length)})));waiting.forEach(x=>out.push(card(x,"wait")));}
-  setKids(host, out.length?out:h("div",{class:"estate",style:{padding:"22px"}},h("div",{class:"t",text:"Nicio intalnire"}),h("div",{style:{fontSize:"12px",marginTop:"4px"},text:"Deschide o conexiune (Reteaua) si apasa „Propune o intalnire”."})));}
+  setKids(host, out.length?out:estateBox("Nicio intalnire","Deschide o conexiune (Reteaua) si apasa „Propune o intalnire”."));}
 
 /* ---- export catre Google Calendar / .ics / email (user-initiated, app nu trimite nimic) ---- */
 const pad2=n=>String(n).padStart(2,"0");
@@ -1032,7 +1038,7 @@ function renderTasks(){const host=$("#taskList");if(!host)return;
       h("div",{class:"ti"},h("div",{class:"ttx",text:t.text}),t.due?h("div",{class:"tdue"+(overdue?" over":""),text:(overdue?"scadent: ":"termen: ")+fmtWhen(t.due)}):null),
       h("button",{class:"x","data-act":"deltask","data-id":t.id,"aria-label":"Sterge task",text:"×"}));};
   const out=[...open.map(row),...done.map(row)];
-  const empty=h("div",{class:"estate",style:{padding:"22px"}},h("div",{class:"t",text:"Niciun task"}),h("div",{style:{fontSize:"12px",marginTop:"4px"},text:"Adauga o sarcina cu termen in campul de mai sus."}));
+  const empty=estateBox("Niciun task","Adauga o sarcina cu termen in campul de mai sus.");
   setKids(host, out.length?out:empty);}
 function updateBadges(){if(!DB)return;const td=today();
   const tdue=(DB.tasks||[]).filter(t=>t.member_id===ME&&!t.done&&t.due&&t.due<=td).length;
@@ -1059,7 +1065,7 @@ function openSearch(){if(!DB)return;$("#searchOv").classList.add("on");const i=$
 function closeSearch(){$("#searchOv").classList.remove("on");}
 function runSearch(){const host=$("#searchRes");if(!host||!DB)return;
   const q=(($("#globalSearch")||{}).value||"").toLowerCase().trim();
-  if(!q){const hint=h("div",{class:"estate",style:{padding:"30px"}},h("div",{class:"t",text:"Cauta in cercul tau"}),h("div",{style:{fontSize:"12px",marginTop:"4px"},text:"Scrie un nume, o notita sau un task."}));setKids(host,hint);return;}
+  if(!q){setKids(host,estateBox("Cauta in cercul tau","Scrie un nume, o notita sau un task."));return;}
   const out=[],sec=t=>h("div",{class:"srhead",text:t});
   const people=DB.members.filter(m=>m.id!==ME&&(m.name+" "+(m.industry||"")).toLowerCase().includes(q)).slice(0,6);
   const notes=(DB.notes||[]).filter(n=>n.member_id===ME&&n.text.toLowerCase().includes(q)).slice(0,6);
@@ -1068,7 +1074,7 @@ function runSearch(){const host=$("#searchRes");if(!host||!DB)return;
     out.push(h("div",{class:"srrow","data-act":"srperson","data-id":m.id},av,h("div",{class:"sri"},h("div",{class:"srn",text:m.name}),h("div",{class:"srm",text:m.industry||""}))));});}
   if(notes.length){out.push(sec("Notite"));notes.forEach(n=>out.push(h("div",{class:"srrow","data-act":"srgo","data-v":"secretara"},h("div",{class:"sric"},"📝"),h("div",{class:"sri"},h("div",{class:"srn",text:n.text})))));}
   if(tasks.length){out.push(sec("Task-uri"));tasks.forEach(t=>out.push(h("div",{class:"srrow","data-act":"srgo","data-v":"secretara"},h("div",{class:"sric"},t.done?"✅":"⬜"),h("div",{class:"sri"},h("div",{class:"srn",text:t.text})))));}
-  const empty=h("div",{class:"estate",style:{padding:"30px"}},h("div",{class:"t",text:"Niciun rezultat"}));
+  const empty=estateBox("Niciun rezultat");
   setKids(host, out.length?out:empty);}
 
 function openMemberMatch(mid){if(mid===ME){setView("profil");return;}

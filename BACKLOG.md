@@ -14,7 +14,7 @@ Reguli pentru fiecare item:
 4. [x] Follow-up: 3 sabloane (multumire / propunere pas urmator / reprogramare).
 5. [x] Brief de intalnire: include si task-urile deschise legate de persoana.
 6. [x] Cautare globala (header): peste persoane, notite, task-uri.
-7. [ ] Empty-states ilustrate consistente (SVG) pe toate ecranele goale.
+7. [x] Empty-states ilustrate consistente (SVG) pe toate ecranele goale.
 8. [ ] Export complet (toate datele) + Import cu validare de schema + confirmare.
 9. [ ] Profil: editare nume/domeniu (nu doar onboarding).
 10. [ ] Potriviri: filtru pe industrie (chips).
