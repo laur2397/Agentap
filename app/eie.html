@@ -149,6 +149,58 @@ input,textarea,select{background:var(--card2);border:1px solid var(--line2);bord
 .spin{display:inline-block;width:15px;height:15px;border:2px solid var(--primary-soft);border-top-color:var(--primary);border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px}
 @keyframes sp{to{transform:rotate(360deg)}}
 .proc{display:flex;align-items:center;gap:9px;color:var(--ink2);font-size:13px;padding:10px 0}
+.dots{display:inline-flex;gap:4px}.dots i{width:6px;height:6px;border-radius:50%;background:var(--primary);animation:bl 1s var(--ease) infinite}
+.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes bl{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+
+/* skeleton shimmer (iteratia 3 — perceptie de viteza) */
+.skel{padding:2px}
+.sk{position:relative;overflow:hidden;background:var(--card2);border-radius:12px}
+.sk::after{content:"";position:absolute;inset:0;transform:translateX(-100%);
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--ink) 8%,transparent),transparent);animation:sh 1.2s infinite}
+@keyframes sh{100%{transform:translateX(100%)}}
+.sk.l{height:13px;margin:8px 0}.sk.l.w60{width:60%}.sk.l.w40{width:40%}.sk.l.w80{width:80%}
+.sk.box{height:78px;margin-bottom:11px}
+
+/* count-up KPI */
+.kpi .v{font-variant-numeric:tabular-nums}
+
+/* trust donut */
+.donut{--p:0;width:46px;height:46px;border-radius:50%;flex:none;display:grid;place-items:center;
+  background:conic-gradient(var(--primary) calc(var(--p)*1%),var(--line) 0);transition:background .9s var(--ease)}
+.donut span{width:36px;height:36px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:14px;color:var(--primary-dim)}
+
+/* sparkline */
+.spark{display:block;width:100%;height:34px;margin-top:8px}
+.spark path.area{fill:var(--primary-soft)}.spark path.line{fill:none;stroke:var(--primary);stroke-width:2}
+
+/* search */
+.searchbar{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line2);border-radius:30px;padding:9px 14px;margin-bottom:13px}
+.searchbar input{flex:1;background:none;border:0;padding:0;font-size:14px;color:var(--ink)}
+.searchbar .ic{color:var(--muted);font-size:14px}
+
+/* empty state svg */
+.estate{text-align:center;padding:30px 20px;color:var(--muted)}
+.estate svg{width:84px;height:84px;opacity:.6;margin-bottom:10px}
+.estate .t{font-family:var(--serif);font-size:17px;color:var(--ink2)}
+
+/* graf interactiv */
+svg .node{cursor:pointer;transition:opacity .3s var(--ease)}
+svg .node.dim{opacity:.22}svg .edge{transition:opacity .3s var(--ease)}svg .edge.dim{opacity:.06}
+svg .node.sdim{opacity:.14}svg .edge.sdim{opacity:.05}
+
+/* ledger hash */
+.ledger .lr-hash{font-family:ui-monospace,monospace;font-size:9px;color:var(--muted);letter-spacing:.3px}
+.lgverify{display:flex;gap:8px;align-items:center;padding:10px 15px;border-top:1px solid var(--line);font-size:11px;color:var(--ink2)}
+.lgverify .ok{color:var(--success)}.lgverify .bad{color:var(--warn)}
+
+/* reduce motion */
+@media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+body.reduce-motion *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+.toggle{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;color:var(--ink);padding:6px 0}
+.sw{width:42px;height:24px;border-radius:30px;background:var(--line2);position:relative;cursor:pointer;transition:.3s var(--ease);flex:none}
+.sw i{position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:var(--card);transition:.3s var(--ease);box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.sw.on{background:var(--primary)}.sw.on i{left:21px}
 
 /* nav */
 nav{position:sticky;bottom:0;z-index:9;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(18px);border-top:1px solid var(--line)}
@@ -205,7 +257,7 @@ nav{position:sticky;bottom:0;z-index:9;background:color-mix(in srgb,var(--bg) 88
 <main>
   <!-- ACASA -->
   <section id="acasa" class="view on">
-    <div class="digest"><div class="e">Focus Digest · azi</div><div class="g" id="digG"></div><p id="digP"></p></div>
+    <div class="digest"><div class="e">Focus Digest · azi</div><div class="g" id="digG"></div><p id="digP"></p><div id="trend"></div></div>
     <div class="sec">Exec-Concierge</div>
     <p class="sub" style="margin:-6px 0 10px">Estimari euristice — indicatori de colaborare, nu valori financiare garantate.</p>
     <div class="kpis" id="kpis"></div>
@@ -228,6 +280,7 @@ nav{position:sticky;bottom:0;z-index:9;background:color-mix(in srgb,var(--bg) 88
   <section id="retea" class="view">
     <div class="eyebrow">Network Capital</div><h2 class="title">Reteaua</h2>
     <p class="sub">Conexiunile confirmate. Nodul tau in centru; firele = legaturi deschise prin Cercul.</p>
+    <div class="searchbar"><span class="ic">⌕</span><input id="netSearch" placeholder="Cauta membru sau domeniu…" aria-label="Cauta in retea" oninput="net()"></div>
     <div class="netwrap"><div id="netHost"></div></div>
     <div class="netlegend"><span><i style="background:var(--primary)"></i>Conexiune</span><span><i style="background:var(--line2)"></i>Membru</span></div>
   </section>
@@ -255,6 +308,9 @@ nav{position:sticky;bottom:0;z-index:9;background:color-mix(in srgb,var(--bg) 88
       <p style="font-size:12px;color:var(--ink2);line-height:1.55">Datele tale traiesc <b>doar in acest browser</b>, criptate la repaus cu <b>AES-GCM</b> si o cheie derivata din parola ta (<b>PBKDF2</b>) care <b>nu se salveaza pe disc</b> — traieste doar in memorie cat tine sesiunea. Integritatea e verificata cu checksum <b>SHA-256</b>. „Ce caut” ramane privat: identitatea si cererea se dezvaluie celeilalte parti <b>doar dupa dublu consimtamant</b>.</p>
       <p style="font-size:11px;color:var(--warn);line-height:1.5;margin-top:8px">⚠ Prototip de cercetare: rulează client-side, deci un script malițios injectat (XSS) sau o extensie de browser pot accesa datele cât sesiunea e deblocată. <b>Nu introduce date cu adevarat sensibile.</b> Tu esti responsabil de backup — datele dispar la stergerea cache-ului.</p>
       <div style="margin-top:12px"><button class="btn ghost sm" onclick="exportData()">⤓ Exporta datele (JSON) pentru backup</button></div></div>
+    <div class="panel"><h3>Preferinte <span class="badge vis">acces</span></h3>
+      <div class="toggle"><span>Reduce animatiile <span style="color:var(--muted);font-size:11px">(accesibilitate)</span></span>
+        <div class="sw" id="rmSw" role="switch" tabindex="0" aria-label="Reduce animatiile" onclick="toggleRM()"><i></i></div></div></div>
   </section>
 </main>
 
@@ -311,7 +367,7 @@ const SEEK={0:[["Investitor pentru proiect imobiliar","dictare"],["Furnizor de c
 const COLORS=["#B88E56","#2E7D32","#1A2B3C","#8a6fa8","#cf7a6e","#3d7ea6","#b08a5a","#4f9d77"];
 const STOP=new Set("si sau de la in un o cu pe pentru din ca care este are am ai vreau caut ofer cineva zona bun buna nou noua a al ale lui langa".split(" "));
 const KEY="cercul_eie_v4",TKEY="cercul_theme",SKEY="cercul_salt";
-let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,PROC=false,LOCKMODE="unlock";
+let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[];
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
 const esc=s=>(s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
 const svgSafe=s=>String(s||"").replace(/[^\p{L}\p{N}\s.\-]/gu,"").slice(0,40); // whitelist pt. SVG (audit R3 #3)
@@ -319,6 +375,23 @@ const ini=n=>{const p=n.trim().split(/\s+/);return((p[0][0]||"?")+(p[1]?p[1][0]:
 const today=()=>new Date().toISOString().slice(0,10);
 const cssv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 function relTime(t){const s=(Date.now()-t)/1000;if(s<60)return"acum";if(s<3600)return Math.floor(s/60)+"m";if(s<86400)return Math.floor(s/3600)+"h";return Math.floor(s/86400)+"z";}
+/* ---- iteratia 3: motion, count-up, hash, tranzitii ---- */
+let RM=false;
+const anim=()=>!RM&&!matchMedia("(prefers-reduced-motion: reduce)").matches;
+function applyRM(){document.body.classList.toggle("reduce-motion",RM);const sw=$("#rmSw");if(sw){sw.classList.toggle("on",RM);sw.setAttribute("aria-checked",RM);}}
+function toggleRM(){RM=!RM;localStorage.setItem("cercul_rm",RM?"1":"0");applyRM();if(VIEW)render();}
+function countUp(el,target,suffix){if(!el)return;target=+target||0;suffix=suffix||"";
+  if(!anim()){el.textContent=target+suffix;return;}
+  const t0=performance.now(),dur=750;
+  (function step(t){const k=Math.min(1,(t-t0)/dur);el.textContent=Math.round(target*(1-Math.pow(1-k,3)))+suffix;if(k<1)requestAnimationFrame(step);})(t0);}
+async function shaHex(s){const h=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return [...new Uint8Array(h)].map(b=>b.toString(16).padStart(2,"0")).join("");}
+function transition(fn){if(anim()&&document.startViewTransition){try{document.startViewTransition(fn);}catch(e){fn();}}else fn();}
+function donut(score){return`<div class="donut" style="--p:${Math.max(0,Math.min(100,score))}"><span>${score}</span></div>`;}
+function sparkline(vals){const w=300,h=34,mx=Math.max(...vals,1),mn=Math.min(...vals,0),rg=(mx-mn)||1;
+  const pts=vals.map((v,i)=>[i/(vals.length-1)*w,h-4-((v-mn)/rg)*(h-8)]);
+  const line=pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" ");
+  const area=line+` L ${w} ${h} L 0 ${h} Z`;
+  return`<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><path class="area" d="${area}"/><path class="line" d="${line}"/></svg>`;}
 /* ==== criptare la repaus: AES-GCM cu cheie derivata PBKDF2 din parola, DOAR in RAM (audit R3 #1) ==== */
 const b64=b=>btoa(String.fromCharCode(...new Uint8Array(b))),unb64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 const clean=s=>String(s==null?"":s).replace(/[\x00-\x1f\x7f]/g,"").replace(/[<>]/g,"").slice(0,400); // sanitizare input
@@ -393,26 +466,52 @@ function fin(m){if(m.status==="conectat")return;m.status="conectat";m.at=Date.no
   toast("✦ Conexiune deschisa cu "+cel.name.split(" ")[0]);}
 function myMatches(){return DB.matches.filter(m=>(m.offer_member===ME||m.seek_member===ME)&&m.status!=="respins").sort((a,b)=>b.score-a.score);}
 
-function setView(v){if(PROC){toast("Asteapta — Secretara AI proceseaza…");return;}VIEW=v;$$(".tab").forEach(t=>t.classList.toggle("on",t.dataset.v===v));$$(".view").forEach(s=>s.classList.toggle("on",s.id===v));window.scrollTo(0,0);render();}
+function setView(v){if(PROC){toast("Asteapta — Secretara AI proceseaza…");return;}
+  VIEW=v;$$(".tab").forEach(t=>t.classList.toggle("on",t.dataset.v===v));
+  transition(()=>{$$(".view").forEach(s=>s.classList.toggle("on",s.id===v));window.scrollTo(0,0);});
+  skeleton(v);setTimeout(render,anim()?170:0);}
+function skeleton(v){const sk='<div class="skel"><div class="sk box"></div><div class="sk l w80"></div><div class="sk l w40"></div></div>';
+  if(v==="potriviri")$("#matchList").innerHTML=sk+sk;
+  else if(v==="acasa")$("#topMatches").innerHTML=sk;}
 function render(){try{if(VIEW==="acasa")home();else if(VIEW==="potriviri")$("#matchList").innerHTML=matches(myMatches())||emp();else if(VIEW==="retea")net();else if(VIEW==="profil")prof();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
-function emp(){return'<div class="empty">Nicio potrivire. Adauga in profil sau dicteaza.</div>';}
+function emp(){return'<div class="estate"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2"><circle cx="27" cy="27" r="15"/><path d="M38 38 L53 53" stroke-linecap="round"/><path d="M21 27 h12 M27 21 v12" stroke-linecap="round" opacity=".5"/></svg><div class="t">Nicio potrivire inca</div><div style="font-size:12px;margin-top:4px">Adauga in profil sau dicteaza dupa un apel — recalculez afinitatile pe loc.</div></div>';}
 
 function home(){const me=mem(ME),mm=myMatches();
   const prop=mm.filter(m=>m.status==="propus").length,con=mm.filter(m=>m.status==="conectat").length;
   $("#digG").textContent="Buna ziua, "+me.name.split(" ")[0]+".";
   $("#digP").textContent=`Ai ${prop} oportunitati noi de mare afinitate si ${con} conexiuni active. Ti-am grupat tot intr-un singur rezumat — fara intreruperi pe parcursul zilei.`;
-  const dealflow=con*42+prop*12,roi=(con*3.4).toFixed(1);
+  const dealflow=con*42+prop*12,roi=(con*3.4).toFixed(1),avg=mm.length?Math.round(mm.reduce((s,m)=>s+m.score,0)/mm.length):0;
+  // mini-trend (est.) — vizualizare, nu cifre garantate
+  const trend=[dealflow*.4,dealflow*.55,dealflow*.5,dealflow*.7,dealflow*.85,dealflow||4].map(Math.round);
+  $("#trend").innerHTML='<div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary-dim);margin-top:8px">Tendinta deal flow (est.)</div>'+sparkline(trend);
   const k=(l,v,d)=>`<div class="kpi"><div class="l">${l}</div><div class="v">${v}</div><div class="d">${d}</div></div>`;
+  const kc=(l,id,d)=>`<div class="kpi"><div class="l">${l}</div><div class="v" id="${id}">0</div><div class="d">${d}</div></div>`;
   $("#kpis").innerHTML=k("Network Capital","€"+dealflow+"k (est.)","deal flow ipotetic")+k("ROI conexiuni",roi+"x (est.)","ipotetic, nu garantat")
-    +k("Trust Score",me.trust,"verificat")+k("Afinitate medie",(mm.length?Math.round(mm.reduce((s,m)=>s+m.score,0)/mm.length):0),"din 99");
+    +kc("Trust Score","kpiTrust","verificat")+kc("Afinitate medie","kpiAff","din 99");
+  countUp($("#kpiTrust"),me.trust,"");countUp($("#kpiAff"),avg,"");
   const reach=Math.min(100,40+con*9),depth=Math.min(100,30+con*12),fresh=Math.min(100,55+prop*5);
   $("#pulse").innerHTML=pl("Acoperire retea",reach)+pl("Adancime relatii",depth)+pl("Prospetime oportunitati",fresh);
   const conx=mm.filter(m=>m.status==="conectat").sort((a,b)=>(b.at||0)-(a.at||0));
-  $("#ledger").innerHTML=conx.length?conx.slice(0,4).map(m=>{const cel=mem(m.offer_member===ME?m.seek_member:m.offer_member);
-    return`<div class="lrow"><span class="dot"></span><div><div class="lr-name">${esc(cel.name)}</div><div class="lr-meta">${esc(cel.role)}</div></div><span class="lr-date">${m.at?new Date(m.at).toLocaleDateString("ro-RO",{day:"numeric",month:"short"}):""}</span></div>`;}).join("")
-    :'<div class="empty" style="padding:18px">Nicio conexiune confirmata inca.</div>';
+  renderLedger(conx);
   $("#topMatches").innerHTML=matches(mm.filter(m=>m.status!=="conectat").slice(0,2))||matches(mm.slice(0,2))||emp();
 }
+/* Trust Ledger cu hash-chain REAL, verificabil + exportabil (audit: nu "security theater") */
+async function renderLedger(conx){
+  if(!conx.length){$("#ledger").innerHTML='<div class="estate" style="padding:18px"><div class="t">Nicio conexiune confirmata inca.</div></div>';LEDGER_CHAIN=[];return;}
+  const chrono=conx.slice().sort((a,b)=>(a.at||0)-(b.at||0));let prev="GENESIS";const hsh={};
+  for(const m of chrono){const h=await shaHex(prev+"|"+m.offer_member+"|"+m.seek_member+"|"+(m.at||0));hsh[m.id]=h;prev=h;}
+  LEDGER_CHAIN=chrono.map(m=>({id:m.id,a:m.offer_member,b:m.seek_member,at:m.at||0,hash:hsh[m.id]}));
+  const rows=conx.slice(0,4).map(m=>{const cel=mem(m.offer_member===ME?m.seek_member:m.offer_member);
+    return`<div class="lrow"><span class="dot"></span><div><div class="lr-name">${esc(cel.name)}</div><div class="lr-hash">⛓ ${(hsh[m.id]||"").slice(0,12)}…</div></div><span class="lr-date">${m.at?new Date(m.at).toLocaleDateString("ro-RO",{day:"numeric",month:"short"}):""}</span></div>`;}).join("");
+  $("#ledger").innerHTML=rows+`<div class="lgverify"><span id="lgState">⛓ lant de ${chrono.length} verigi (SHA-256)</span>
+    <button class="btn ghost sm" style="margin-left:auto;padding:5px 11px;font-size:11px" onclick="verifyLedger()">Verifica</button>
+    <button class="btn ghost sm" style="padding:5px 11px;font-size:11px" onclick="exportLedger()">Export</button></div>`;}
+async function verifyLedger(){let prev="GENESIS",ok=true;
+  for(const e of LEDGER_CHAIN){if(await shaHex(prev+"|"+e.a+"|"+e.b+"|"+e.at)!==e.hash){ok=false;break;}prev=e.hash;}
+  const el=$("#lgState");if(el)el.innerHTML=ok?`<span class="ok">✓ lant integru (${LEDGER_CHAIN.length} verigi)</span>`:'<span class="bad">✗ lant alterat — integritate compromisa</span>';
+  toast(ok?"Trust Ledger: lant integru ✓":"Trust Ledger: alterare detectata ✗");}
+function exportLedger(){try{const blob=new Blob([JSON.stringify(LEDGER_CHAIN,null,2)],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="trust-ledger-"+today()+".json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);toast("Trust Ledger exportat (JSON)");}catch(e){toast("Export esuat");}}
 function pl(l,v){return`<div><div class="row"><span>${l}</span><span style="color:var(--primary-dim)">${v}%</span></div><div class="bar"><i style="width:${v}%"></i></div></div>`;}
 
 function matches(list){if(!list.length)return'';
@@ -437,22 +536,32 @@ function matches(list){if(!list.length)return'';
       <div class="pair"><div class="r"><span class="tag">${off?"tu oferi":"tu cauti"}</span><b>${mineTxt}</b></div>
         <div class="r"><span class="tag">${rev?esc(cel.name.split(" ")[0]):"membrul"} ${off?"cauta":"ofera"}</span><b>${celTxt}</b></div></div>
       <details class="why"><summary>De ce v-am potrivit</summary><div class="b">${why}</div></details>
+      <div style="font-size:10.5px;color:var(--muted);margin-top:8px">⚙ metoda: TF-IDF + cosine · ${(m.common||[]).length} ${rev?"teme comune":"semnale (detalii dupa consimtamant)"}</div>
       <div class="src"><span class="seal">❧</span> ${src}</div>
       <div class="acts">${acts}</div></div>`;}).join("");}
 
 function net(){const W=400,H=400,cx=W/2,cy=H/2,R=150,others=DB.members.filter(m=>m.id!==ME),pos={};pos[ME]=[cx,cy];
   others.forEach((m,i)=>{const a=(i/others.length)*Math.PI*2-Math.PI/2;pos[m.id]=[cx+R*Math.cos(a),cy+R*Math.sin(a)];});
   const conn=DB.matches.filter(m=>m.status==="conectat");let e="",n="";
+  const q=(($("#netSearch")||{}).value||"").trim();const match=id=>{const m=mem(id);return fuzzy(q,m.name+" "+(m.industry||""));};
   const cPri=cssv("--primary"),cCard=cssv("--card2"),cLine=cssv("--line2"),cInk=cssv("--ink2"),cBg=cssv("--bg2");
-  conn.forEach(m=>{const a=pos[m.offer_member],b=pos[m.seek_member];if(a&&b)e+=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="${cPri}" stroke-width="1.5" opacity=".7"/>`;});
-  DB.members.forEach(m=>{const p=pos[m.id];if(!p)return;const me=m.id===ME,deg=conn.filter(c=>c.offer_member===m.id||c.seek_member===m.id).length,r=me?22:11+Math.min(7,deg*2);
-    n+=`<g onclick="openMemberMatch(${m.id})" style="cursor:pointer"><circle cx="${p[0]}" cy="${p[1]}" r="${r}" fill="${me?cPri:cCard}" stroke="${me?cPri:cLine}" stroke-width="${me?2.5:1.5}"/>
-      <text x="${p[0]}" y="${p[1]+4}" text-anchor="middle" fill="${me?cBg:cInk}" font-weight="600">${svgSafe(ini(m.name))}</text>
+  conn.forEach(m=>{const a=pos[m.offer_member],b=pos[m.seek_member];if(a&&b){const sd=q&&!(match(m.offer_member)||match(m.seek_member));
+    e+=`<line class="edge${sd?' sdim':''}" data-a="${m.offer_member}" data-b="${m.seek_member}" x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="${cPri}" stroke-width="1.5" opacity=".7"/>`;}});
+  DB.members.forEach(m=>{const p=pos[m.id];if(!p)return;const meN=m.id===ME,deg=conn.filter(c=>c.offer_member===m.id||c.seek_member===m.id).length,r=meN?22:11+Math.min(7,deg*2),sd=q&&!meN&&!match(m.id);
+    n+=`<g class="node${sd?' sdim':''}" data-id="${m.id}" onclick="openMemberMatch(${m.id})" onmouseover="netFocus(${m.id})" onmouseout="netFocus(0)">
+      <circle cx="${p[0]}" cy="${p[1]}" r="${r}" fill="${meN?cPri:cCard}" stroke="${meN?cPri:cLine}" stroke-width="${meN?2.5:1.5}"/>
+      <text x="${p[0]}" y="${p[1]+4}" text-anchor="middle" fill="${meN?cBg:cInk}" font-weight="600">${svgSafe(ini(m.name))}</text>
       <text x="${p[0]}" y="${p[1]+r+12}" text-anchor="middle">${svgSafe(m.name.split(" ")[0])}</text></g>`;});
   $("#netHost").innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block" role="img" aria-label="Graful retelei tale: ${conn.length} conexiuni confirmate intre membrii Cercului">${e}${n}</svg>`;}
+function netFocus(id){const host=$("#netHost");if(!host)return;
+  if(!id){host.querySelectorAll(".node,.edge").forEach(el=>el.classList.remove("dim"));return;}
+  const nb=new Set([id]);DB.matches.filter(m=>m.status==="conectat"&&(m.offer_member===id||m.seek_member===id)).forEach(m=>{nb.add(m.offer_member);nb.add(m.seek_member);});
+  host.querySelectorAll(".node").forEach(el=>el.classList.toggle("dim",!nb.has(+el.dataset.id)));
+  host.querySelectorAll(".edge").forEach(el=>el.classList.toggle("dim",!(nb.has(+el.dataset.a)&&nb.has(+el.dataset.b))));}
+function fuzzy(q,s){q=(q||"").toLowerCase().trim();if(!q)return true;s=(s||"").toLowerCase();if(s.includes(q))return true;let i=0;for(const c of s){if(c===q[i])i++;if(i>=q.length)return true;}return false;}
 
 function prof(){const me=mem(ME),con=DB.matches.filter(x=>x.status==="conectat"&&(x.offer_member===ME||x.seek_member===ME)).length;
-  $("#phead").innerHTML=`<div style="display:flex;gap:14px;align-items:center"><div class="av" style="width:60px;height:60px;font-size:22px">${ini(me.name)}</div>
+  $("#phead").innerHTML=`<div style="display:flex;gap:14px;align-items:center">${donut(me.trust)}
     <div><div style="font-family:var(--serif);font-size:23px;font-weight:600;color:var(--ink)">${esc(me.name)}</div><div style="color:var(--ink2);font-size:13px">${esc(me.role)}</div>
     <div style="margin-top:7px"><span class="trust">✦ Trust Score ${me.trust}/100</span> <span style="color:var(--muted);font-size:12px;margin-left:6px">${con} conexiuni</span></div></div></div>`;
   const r=(k,el)=>{const l=DB.items.filter(i=>i.member_id===ME&&i.kind===k);
@@ -466,7 +575,7 @@ function delItem(id){const it=DB.items.find(i=>i.id===id);DB.items=DB.items.filt
 /* Secretara AI — cu indicator de procesare */
 function dicteaza(){if(PROC)return;const text=$("#dictText").value.trim();if(!text)return;
   const btn=$("#dictBtn");PROC=true;btn.disabled=true;$("#dictText").disabled=true;
-  $("#dictRes").innerHTML='<div class="proc" role="status" aria-live="polite"><span class="spin"></span> Secretara AI proceseaza apelul si extrage intentiile…</div>';
+  $("#dictRes").innerHTML='<div class="proc" role="status" aria-live="polite"><span class="dots"><i></i><i></i><i></i></span> Secretara AI asculta si extrage intentiile…</div>';
   setTimeout(()=>{
     const out=[];
     for(const part of text.split(/[.\n;,]+/)){const p=part.trim();if(p.length<5)continue;const low=p.toLowerCase();
@@ -551,6 +660,7 @@ function lockReset(){if(!confirm("Reseteaza? Datele criptate actuale raman ca ba
   $("#lockPass").value="";$("#lockErr").style.display="none";showLock("setup");}
 
 applyTheme(localStorage.getItem(TKEY)||"light");
+RM=localStorage.getItem("cercul_rm")==="1";applyRM();
 showLock(localStorage.getItem(SKEY)&&localStorage.getItem(KEY)?"unlock":"setup");
 </script>
 </body>
