@@ -951,7 +951,7 @@ function addItem(k){if(PROC)return;const t=clean($("#"+k+"Text").value.trim());i
   showProc();const t0=performance.now();runMatching();save();
   const wait=Math.max(0,360-(performance.now()-t0)); // durata constanta -> maschează timing-ul matching-ului (audit s4 #2)
   setTimeout(()=>{hideProc();render();toast("Adaugat — am recalculat afinitatile");if(pendingLock){pendingLock=false;lockNow();}},wait);}
-function delItem(id){const it=DB.items.find(i=>i.id===id);DB.items=DB.items.filter(i=>i.id!==id);if(it)logA("Sters: "+it.text);save();render();}
+function delItem(id){if(!confirm("Stergi acest element din profil?"))return;const it=DB.items.find(i=>i.id===id);DB.items=DB.items.filter(i=>i.id!==id);if(it)logA("Sters: "+it.text);save();render();}
 
 /* Secretara AI — cu indicator de procesare */
 function dicteaza(){if(PROC)return;const text=$("#dictText").value.trim();if(!text)return;
@@ -995,7 +995,7 @@ function renderNotes(){const host=$("#notesList");if(!host)return;
 function addNote(){if(!DB)return;const inp=$("#noteText"),t=clean((inp&&inp.value||"").trim());if(!t)return;
   DB.notes.push({id:DB.seq++,member_id:ME,text:t,t:Date.now()});if(inp)inp.value="";
   logA("Notita adaugata in jurnal");save();renderNotes();toast("Notita salvata");}
-function delNote(id){const n=(DB.notes||[]).find(x=>x.id===id);DB.notes=(DB.notes||[]).filter(x=>x.id!==id);if(n)logA("Notita stearsa din jurnal");save();renderNotes();}
+function delNote(id){if(!confirm("Stergi aceasta notita?"))return;const n=(DB.notes||[]).find(x=>x.id===id);DB.notes=(DB.notes||[]).filter(x=>x.id!==id);if(n)logA("Notita stearsa din jurnal");save();renderNotes();}
 /* ---- Secretara iteratia 1: brief de 1 minut (doar din datele tale) ---- */
 function buildBrief(m){const cel=mem(ME===m.offer_member?m.seek_member:m.offer_member);if(!cel)return null;
   const common=new Set();
@@ -1093,7 +1093,7 @@ function addTask(){if(!DB)return;const t=clean((($("#taskText")||{}).value||"").
   logA("Task adaugat: "+t);save();renderTasks();updateBadges();toast("Task adaugat");}
 function toggleTask(id){const x=(DB.tasks||[]).find(t=>t.id===id);if(!x)return;x.done=x.done?0:1;
   logA(x.done?"Task finalizat":"Task redeschis");save();renderTasks();updateBadges();}
-function delTask(id){DB.tasks=(DB.tasks||[]).filter(t=>t.id!==id);save();renderTasks();updateBadges();}
+function delTask(id){if(!confirm("Stergi acest task?"))return;DB.tasks=(DB.tasks||[]).filter(t=>t.id!==id);logA("Task sters");save();renderTasks();updateBadges();}
 function setTaskFilter(f){TASKFILTER=f;$$("#taskFilters .chip").forEach(c=>c.classList.toggle("on",c.dataset.f===f));renderTasks();}
 function renderTasks(){const host=$("#taskList");if(!host)return;
   const td=today();let list=(DB.tasks||[]).filter(t=>t.member_id===ME);

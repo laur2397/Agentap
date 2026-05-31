@@ -22,7 +22,7 @@ Reguli pentru fiecare item:
 12. [x] Setari: format data (reinterpretat — vezi log) de inceput (luni/duminica) pt. afisarea datelor.
 13. [x] Accesibilitate: trecere completa cu tastatura pe carduri (Enter/Space).
 14. [x] Pulse de retea reintrodus, dar compact si onest (1 rand).
-15. [ ] Confirmare la stergere (task/nota/conexiune) — anti-accident.
+15. [x] Confirmare la stergere (task/nota/conexiune) — anti-accident.
 16. [ ] „Ultima activitate” per conexiune in lista din Reteaua.
 17. [ ] Dark mode: rafinare contraste pe carduri noi (task/meet).
 18. [ ] Performanta: debounce la cautari.

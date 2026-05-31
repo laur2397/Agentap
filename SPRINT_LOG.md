@@ -18,3 +18,4 @@
 - 2026-05-31 · AUDIT item 12 (loop12): APROBAT 6/6 + CAE.
 - 2026-05-31 · Item 13 (Navigare cu tastatura) · listener global Enter/Space pe randuri [data-act]/.sw + tabindex/role pe connrow/srrow; validat, 0 erori.
 - 2026-05-31 · Item 14 (Pulse retea compact) · 1 rand 'Acoperire retea: X din Y membri' + bara, raport REAL (nu scor fabricat); validat, 0 erori.
+- 2026-05-31 · Item 15 (Confirmare la stergere) · confirm() pe delTask/delNote/delItem (anti-accident); validat, 0 erori.
