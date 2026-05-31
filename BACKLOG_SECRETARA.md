@@ -8,7 +8,7 @@ Reguli: schimbare mica, izolata; zero innerHTML (DOM API); criptare/CSP/TrustedT
 Validare: node --check + smoke Playwright zero erori. Audit (examples/audit.py) la fiecare al 3-lea item.
 
 ## Prioritizat
-1. [ ] Ecran „Azi”: task-urile scadente azi + intalnirile de azi, intr-un singur loc pe Secretara.
+1. [x] Ecran „Azi”: task-urile scadente azi + intalnirile de azi, intr-un singur loc pe Secretara.
 2. [ ] Editare task (text + termen), nu doar adaugare/stergere.
 3. [ ] Editare notita existenta (inline), nu doar adaugare/stergere.
 4. [ ] Prioritate task (normal/important) + sortare cu importantele sus.

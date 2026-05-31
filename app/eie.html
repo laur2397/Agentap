@@ -344,6 +344,12 @@ details.why2>summary::-webkit-details-marker{display:none}
 .meetcard .adock,.meetcard .waiting,.meetcard .shield{margin-top:11px}
 .calrow{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
 .calrow .btn{flex:1;min-width:118px;font-size:12px}
+/* loop2 #1: ecran Azi */
+.todayrow{display:flex;align-items:flex-start;gap:11px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 14px;margin-bottom:9px;box-shadow:var(--shadow)}
+.todayrow .tdi{font-size:17px;flex:none;line-height:1.4}
+.todayrow .tdc{flex:1;min-width:0}
+.todayrow .tdt{font-size:14px;font-weight:600;color:var(--ink)}
+.todayrow .tds{font-size:12px;color:var(--muted);margin-top:2px}
 /* iteratia 3 Secretara: task-uri + badge */
 .taskcard{display:flex;align-items:flex-start;gap:11px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:9px;box-shadow:var(--shadow)}
 .taskcard.done{opacity:.6}
@@ -438,7 +444,9 @@ details.why2>summary::-webkit-details-marker{display:none}
   <section id="secretara" class="view">
     <div class="eyebrow">Asistent</div><h2 class="title">Secretara ta</h2>
     <p class="sub">Intalniri, notite si pregatire — intr-un singur loc.</p>
-    <div class="sec">Intalniri</div>
+    <div class="sec">Azi</div>
+    <div id="todayBox"></div>
+    <div class="sec" style="margin-top:24px">Intalniri</div>
     <p class="sub">Programezi din conversatia cu o conexiune; se confirma doar cand ambele parti accepta. La cele confirmate poti adauga in Google Calendar / descarca .ics / trimite email — <b>tu</b> alegi sa predai datele, aplicatia nu trimite nimic singura.</p>
     <div id="meetList"></div>
     <div class="sec" style="margin-top:26px">Noteaza dupa o intalnire</div>
@@ -731,7 +739,7 @@ function setView(v){if(PROC){toast("Asteapta — Secretara AI proceseaza…");re
 function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("div",{class:"sk l w80"}),h("div",{class:"sk l w40"}));}
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
 function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
-  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();setKids($("#matchList"),pipeline(myMatches().filter(matchIndOk)));}else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){renderMeetings();renderTasks();renderNotes();}else if(VIEW==="profil")prof();
+  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();setKids($("#matchList"),pipeline(myMatches().filter(matchIndOk)));}else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){renderToday();renderMeetings();renderTasks();renderNotes();}else if(VIEW==="profil")prof();
   updateBadges();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 // backlog #7: empty-state ilustrat, consistent
 function estateBox(title,sub){return h("div",{class:"estate",style:{padding:"26px 20px"}},
@@ -976,6 +984,16 @@ function dicteaza(){if(PROC)return;const text=$("#dictText").value.trim();if(!te
     if(pendingLock){pendingLock=false;lockNow();}
   },950);}
 
+/* ---- Secretara loop2 #1: ecran Azi (task-uri scadente azi + intalniri azi) ---- */
+function renderToday(){const host=$("#todayBox");if(!host)return;const td=today();
+  const meets=(DB.meetings||[]).filter(m=>m.status==="confirmat"&&(m.a===ME||m.b===ME)&&(m.when||"").slice(0,10)===td);
+  const tasks=(DB.tasks||[]).filter(t=>t.member_id===ME&&!t.done&&t.due===td);
+  const out=[];
+  meets.forEach(m=>{const cel=mem(m.a===ME?m.b:m.a)||{name:"?"};out.push(h("div",{class:"todayrow"},h("span",{class:"tdi"},"📅"),
+    h("div",{class:"tdc"},h("div",{class:"tdt",text:fmtWhen(m.when)+" · "+cel.name}),m.place?h("div",{class:"tds",text:m.place}):null)));});
+  tasks.forEach(t=>out.push(h("div",{class:"todayrow"},h("span",{class:"tdi"},"✅"),
+    h("div",{class:"tdc"},h("div",{class:"tdt",text:t.text}),h("div",{class:"tds",text:"task scadent azi"})))));
+  setKids(host, out.length?out:estateBox("Nimic urgent azi","Nicio intalnire sau task scadent astazi."));}
 /* ---- Secretara iteratia 1: jurnal de notite ---- */
 const noteTags=t=>(String(t).match(/#[\p{L}\p{N}_]+/gu)||[]).map(x=>x.toLowerCase());
 function setNoteFilter(f){NOTEFILTER=f;renderNotes();}
