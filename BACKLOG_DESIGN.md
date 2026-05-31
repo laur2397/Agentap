@@ -30,7 +30,7 @@ Validare: node --check + smoke Playwright zero erori. Audit (examples/audit.py) 
 14. [x] Reducere efort cognitiv pe Acasa: gruparea clara a sectiunilor + un singur accent primar.
 15. [x] Micro-feedback placut, neintruziv, la actiuni cheie (respecta reduce-motion; fara dopamina fortata).
 16. [x] „Privacy health" in Profil: indicator criptare activa + spatiu ocupat estimativ (transparenta).
-17. [ ] Skip-to-content + landmark-uri ARIA (acces rapid la continut, accesibilitate reala).
+17. [x] Skip-to-content + landmark-uri ARIA (acces rapid la continut, accesibilitate reala).
 18. [ ] Next-step ghidat contextual: cand o sectiune e goala, un singur buton catre actiunea utila.
 19. [ ] Confirmare calda dupa o intalnire confirmata: rezumat „ce urmeaza" (follow-up sugerat, optional).
 20. [ ] Pagina „Despre / Valoarea ta": ce face app-ul si ce NU face (anti dark-pattern, transparent).
