@@ -646,7 +646,7 @@ function validDB(d){if(!d||typeof d!=="object")return false;
   d.messages=d.messages.filter(x=>x&&typeof x==="object");
   if(!Array.isArray(d.notes))d.notes=[];
   d.notes=d.notes.filter(n=>n&&typeof n==="object"&&n.id!=null);
-  d.notes.forEach(n=>{n.text=clean(n.text);n.member_id=+n.member_id;n.t=+n.t||Date.now();});
+  d.notes.forEach(n=>{n.text=clean(n.text);n.member_id=+n.member_id;n.t=+n.t||Date.now();n.pin=n.pin?1:0;});
   if(!Array.isArray(d.meetings))d.meetings=[];
   d.meetings=d.meetings.filter(x=>x&&typeof x==="object"&&x.id!=null);
   d.meetings.forEach(x=>{x.a=+x.a;x.b=+x.b;x.place=clean(x.place||"");x.when=clean(x.when||"").slice(0,16);
@@ -1008,14 +1008,15 @@ function renderNotes(){const host=$("#notesList");if(!host)return;
     setKids(fhost, allTags.length?[chip("all","Toate"),...allTags.map(t=>chip(t,t))]:[]);}
   let list=mine;
   if(NOTEFILTER!=="all")list=list.filter(n=>noteTags(n.text).includes(NOTEFILTER));
-  list=list.filter(n=>!q||n.text.toLowerCase().includes(q)).sort((a,b)=>b.t-a.t);
+  list=list.filter(n=>!q||n.text.toLowerCase().includes(q)).sort((a,b)=>(b.pin||0)-(a.pin||0)||b.t-a.t);
   const row=n=>{if(EDITNOTE===n.id)return h("div",{class:"notecard"},
       h("div",{class:"nt"},h("input",{id:"enText",value:n.text,"aria-label":"Text notita",style:{width:"100%"}}),
         h("div",{style:{display:"flex",gap:"7px",marginTop:"8px"}},
           h("button",{class:"btn gold sm","data-act":"notesave","data-id":n.id,text:"Salveaza"}),
           h("button",{class:"btn ghost sm","data-act":"notecancel",text:"Renunta"}))));
-    return h("div",{class:"notecard"},
-      h("div",{class:"nt"},h("div",{class:"ntx",text:n.text}),h("div",{class:"ndate",text:relTime(n.t)})),
+    return h("div",{class:"notecard"+(n.pin?" pinned":"")},
+      h("div",{class:"nt"},h("div",{class:"ntx",text:(n.pin?"📌 ":"")+n.text}),h("div",{class:"ndate",text:relTime(n.t)})),
+      h("button",{class:"x"+(n.pin?" prio":""),"data-act":"notepin","data-id":n.id,"aria-label":n.pin?"Anuleaza fixarea":"Fixeaza sus",title:"Fixeaza",text:"📌"}),
       h("button",{class:"x","data-act":"noteedit","data-id":n.id,"aria-label":"Editeaza notita",text:"✎"}),
       h("button",{class:"x","data-act":"delnote","data-id":n.id,"aria-label":"Sterge notita",text:"×"}));};
   setKids(host, list.length?list.map(row):
@@ -1024,6 +1025,7 @@ function addNote(){if(!DB)return;const inp=$("#noteText"),t=clean((inp&&inp.valu
   DB.notes.push({id:DB.seq++,member_id:ME,text:t,t:Date.now()});if(inp)inp.value="";
   logA("Notita adaugata in jurnal");save();renderNotes();toast("Notita salvata");}
 function delNote(id){if(!confirm("Stergi aceasta notita?"))return;const n=(DB.notes||[]).find(x=>x.id===id);DB.notes=(DB.notes||[]).filter(x=>x.id!==id);if(n)logA("Notita stearsa din jurnal");save();renderNotes();}
+function togglePin(id){const n=(DB.notes||[]).find(x=>x.id===id);if(!n)return;n.pin=n.pin?0:1;logA(n.pin?"Notita fixata":"Notita defixata");save();renderNotes();}
 function editNote(id){EDITNOTE=id;renderNotes();}
 function cancelNoteEdit(){EDITNOTE=null;renderNotes();}
 function saveNote(id){const n=(DB.notes||[]).find(x=>x.id===id);if(!n){EDITNOTE=null;renderNotes();return;}
@@ -1283,6 +1285,7 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="taskedit")editTask(id);
   else if(a==="tasksave")saveTask(id);
   else if(a==="taskcancel")cancelTaskEdit();
+  else if(a==="notepin")togglePin(id);
   else if(a==="noteedit")editNote(id);
   else if(a==="notesave")saveNote(id);
   else if(a==="notecancel")cancelNoteEdit();
