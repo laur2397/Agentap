@@ -261,7 +261,7 @@ async def audit_gate(sem, solutie=SOLUTIE, runda=1):
 
 async def main():
     if not KEYS: print("no GEMINI_KEYS"); sys.exit(1)
-    runda=int(re.sub(r"\D","",sys.argv[1])) if len(sys.argv)>1 else 1
+    runda=sys.argv[1] if len(sys.argv)>1 else "1"  # eticheta (poate fi text) pt. nume fisier + prompt
     sem=asyncio.Semaphore(LOT)
     r=await audit_gate(sem,runda=runda)
     print("="*60);print(r["verdict"][:1400]);print("="*60)
