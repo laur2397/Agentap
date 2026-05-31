@@ -22,6 +22,15 @@ def P(f): return os.path.join(ROOT,f)
 
 # Descrierea EXACTA a solutiei auditate (iteratia 2 + remedieri runda 1). Onesta — doar ce e implementat.
 SOLUTIE=(
+ "EXPORT CALENDAR/EMAIL (peste iteratia 2, verificat cu Playwright, zero erori, TrustedTypes activ):\n"
+ "Pe intalnirile CONFIRMATE apar 3 actiuni: (1) 'Google Calendar' -> deschide calendar.google.com/render "
+ "precompletat (titlu/data/loc) intr-un tab nou; (2) '.ics' -> descarca un fisier iCalendar standard "
+ "(import in Google/Apple/Outlook); (3) 'Email' -> deschide clientul de email cu un draft mailto: precompletat.\n"
+ "ONESTITATE CRITICA: NU e sincronizare OAuth/API si NU e 'magie'. Aplicatia ramane Local-Only cu "
+ "connect-src 'none' — NU face NICIUN apel de retea si NU trimite nimic singura. Sunt handoff-uri "
+ "USER-INITIATED catre propriul Google/email al utilizatorului; UI-ul declara explicit: 'tu alegi sa "
+ "predai datele, aplicatia nu trimite nimic singura'. Sync-ul real OAuth dus-intors ar cere backend + "
+ "ar rupe modelul Local-Only — declarat ca proiect separat, nu implementat fals.\n\n"
  "REMEDIERI QA (peste iteratia 2 Secretara, verificate cu Playwright, zero erori):\n"
  "(qa-tt) TRUSTED TYPES ACTIVAT: CSP include acum 'require-trusted-types-for script'. Pentru ca aplicatia "
  "NU foloseste niciun sink DOM-XSS (zero innerHTML/outerHTML/document.write; totul prin createElement/"

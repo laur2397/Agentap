@@ -342,6 +342,8 @@ details.why2>summary::-webkit-details-marker{display:none}
 .meetcard .mwho{font-size:12px;color:var(--muted);white-space:nowrap}
 .meetcard .mplace{font-size:12.5px;color:var(--ink2);margin-top:5px}
 .meetcard .adock,.meetcard .waiting,.meetcard .shield{margin-top:11px}
+.calrow{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+.calrow .btn{flex:1;min-width:118px;font-size:12px}
 </style>
 </head>
 <body>
@@ -391,7 +393,7 @@ details.why2>summary::-webkit-details-marker{display:none}
     <div class="eyebrow">Asistent</div><h2 class="title">Secretara ta</h2>
     <p class="sub">Intalniri, notite si pregatire — intr-un singur loc.</p>
     <div class="sec">Intalniri</div>
-    <p class="sub">Programezi din conversatia cu o conexiune. Se confirma doar cand ambele parti accepta.</p>
+    <p class="sub">Programezi din conversatia cu o conexiune; se confirma doar cand ambele parti accepta. La cele confirmate poti adauga in Google Calendar / descarca .ics / trimite email — <b>tu</b> alegi sa predai datele, aplicatia nu trimite nimic singura.</p>
     <div id="meetList"></div>
     <div class="sec" style="margin-top:26px">Noteaza dupa o intalnire</div>
     <p class="sub">Scrie cu cuvintele tale ce ai discutat. Iti notez singur ce cauti si ce oferi, si caut potriviri.</p>
@@ -894,7 +896,11 @@ function renderMeetings(){const host=$("#meetList");if(!host)return;
   const card=(x,kind)=>{const otherId=x.a===ME?x.b:x.a,cel=mem(otherId)||{name:"?"};
     const acts=kind==="accept"?h("div",{class:"adock"},h("button",{class:"btn gold","data-act":"meetyes","data-id":x.id,text:"Accept"}),h("button",{class:"btn ghost","data-act":"meetno","data-id":x.id,text:"Refuz"}))
       :kind==="wait"?h("div",{class:"waiting",text:"⏳ Asteapta confirmarea lui "+cel.name.split(" ")[0]})
-      :h("div",{class:"shield",text:"🛡 Confirmata · semnatura "+(x.hash||"").slice(0,10)+"…"});
+      :h("div",{},h("div",{class:"shield",text:"🛡 Confirmata · semnatura "+(x.hash||"").slice(0,10)+"…"}),
+         h("div",{class:"calrow"},
+           h("button",{class:"btn ghost sm","data-act":"gcal","data-id":x.id,text:"📅 Google Calendar"}),
+           h("button",{class:"btn ghost sm","data-act":"ics","data-id":x.id,text:"⬇ .ics"}),
+           h("button",{class:"btn ghost sm","data-act":"email","data-id":x.id,text:"✉ Email"})));
     return h("div",{class:"meetcard"},
       h("div",{class:"mtop2"},h("div",{class:"mw",text:fmtWhen(x.when)}),h("div",{class:"mwho",text:"cu "+cel.name})),
       x.place?h("div",{class:"mplace",text:"📍 "+x.place}):null,acts);};
@@ -903,6 +909,30 @@ function renderMeetings(){const host=$("#meetList");if(!host)return;
   if(confirmed.length){out.push(h("div",{class:"pipe-h c"},h("span",{class:"pd"}),"Confirmate",h("span",{class:"pn",text:String(confirmed.length)})));confirmed.forEach(x=>out.push(card(x,"done")));}
   if(waiting.length){out.push(h("div",{class:"pipe-h p"},h("span",{class:"pd"}),"In asteptare",h("span",{class:"pn",text:String(waiting.length)})));waiting.forEach(x=>out.push(card(x,"wait")));}
   setKids(host, out.length?out:h("div",{class:"estate",style:{padding:"22px"}},h("div",{class:"t",text:"Nicio intalnire"}),h("div",{style:{fontSize:"12px",marginTop:"4px"},text:"Deschide o conexiune (Reteaua) si apasa „Propune o intalnire”."})));}
+
+/* ---- export catre Google Calendar / .ics / email (user-initiated, app nu trimite nimic) ---- */
+const pad2=n=>String(n).padStart(2,"0");
+function meetDates(w){const[d,t]=String(w).split("T");const tm=t||"09:00";
+  const[Y,M,D]=d.split("-").map(Number),[hh,mm]=tm.split(":").map(Number);
+  const s=new Date(Y,(M||1)-1,D||1,hh||9,mm||0,0),e=new Date(s.getTime()+36e5);
+  const f=x=>x.getFullYear()+pad2(x.getMonth()+1)+pad2(x.getDate())+"T"+pad2(x.getHours())+pad2(x.getMinutes())+"00";
+  return[f(s),f(e)];}
+const icsEsc=s=>String(s).replace(/([\\;,])/g,"\\$1").replace(/\n/g,"\\n");
+function meetTitle(m){const cel=mem(ME===m.a?m.b:m.a)||{name:"?"};return "Intalnire cu "+cel.name;}
+function icsFor(m){const[s,e]=meetDates(m.when);
+  return["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Cercul EIE//RO//","BEGIN:VEVENT","UID:meet-"+m.id+"@cercul",
+    "DTSTART:"+s,"DTEND:"+e,"SUMMARY:"+icsEsc(meetTitle(m)),m.place?"LOCATION:"+icsEsc(m.place):"",
+    "DESCRIPTION:"+icsEsc("Programata prin Cercul EIE"),"END:VEVENT","END:VCALENDAR"].filter(Boolean).join("\r\n");}
+function gcalUrl(m){const[s,e]=meetDates(m.when);
+  const p=new URLSearchParams({action:"TEMPLATE",text:meetTitle(m),dates:s+"/"+e,details:"Programata prin Cercul EIE",location:m.place||""});
+  return "https://calendar.google.com/calendar/render?"+p.toString();}
+function mailtoUrl(m){const subj="Confirmare intalnire — "+meetTitle(m);
+  const body="Buna,\n\nConfirm intalnirea noastra: "+fmtWhen(m.when)+(m.place?(", "+m.place):"")+".\n\nCu stima,";
+  return "mailto:?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(body);}
+function openExt(url){const a=document.createElement("a");a.href=url;a.target="_blank";a.rel="noopener";a.click();}
+function downloadICS(m){try{const blob=new Blob([icsFor(m)],{type:"text/calendar"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="intalnire-"+m.id+".ics";a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),2000);logA("Export intalnire (.ics)");toast(".ics descarcat — importa-l in calendar");}catch(e){toast("Export esuat");}}
 
 function openMemberMatch(mid){if(mid===ME){setView("profil");return;}
   let m=DB.matches.find(x=>x.status!=="respins"&&((x.offer_member===ME&&x.seek_member===mid)||(x.offer_member===mid&&x.seek_member===ME)));
@@ -962,6 +992,9 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="propmeet")proposeMeeting(id);
   else if(a==="meetyes")meetRespond(id,true);
   else if(a==="meetno")meetRespond(id,false);
+  else if(a==="gcal"){const mt=(DB.meetings||[]).find(x=>x.id===id);if(mt){openExt(gcalUrl(mt));logA("Deschis Google Calendar pt. o intalnire");}}
+  else if(a==="ics"){const mt=(DB.meetings||[]).find(x=>x.id===id);if(mt)downloadICS(mt);}
+  else if(a==="email"){const mt=(DB.meetings||[]).find(x=>x.id===id);if(mt){openExt(mailtoUrl(mt));logA("Deschis email pt. o intalnire");}}
   else if(a==="go")setView(el.dataset.v);});
 
 // error boundary global (remediaza constatarea de audit #4)
