@@ -1,5 +1,6 @@
 # SPRINT_LOG_DESIGN — loop 3 (Design + Psihologie & Cognitiv, engagement etic)
 
+- 2026-05-31 · Item 4 (Explicabilitate potriviri) · pe cardurile conectate apar chips vizibile cu interesele comune ("De ce o vezi — aveti in comun: …", doar post-consimtamant ca sa nu dezvaluim pre-consimtamant); inlocuit jargonul "TF-IDF + cosine" cu limbaj uman ("N semnale comune dintre ce ati declarat amandoi"); validat Playwright (zero "TF-IDF", chips prezente), 0 erori.
 - 2026-05-31 · AUDIT item 3 (designloop3): APROBAT 6/6 + CAE.
 - 2026-05-31 · Item 3 (Badge Local-Only) · pastila permanenta discreta in antet (punct verde + "Local"); click -> explicatie scurta despre confidentialitate; persista pe toate ecranele; validat Playwright (vizibil, toast, persista), 0 erori.
 - 2026-05-31 · Item 2 (Moment „aha") · card de bun-venit pe Acasa cand nu ai inca ofer/caut: valoare imediata + un singur next-step ("Completeaza profilul"); dispare cand adaugi primul item; validat Playwright (apare gol / dispare dupa add), 0 erori.

@@ -17,7 +17,7 @@ Validare: node --check + smoke Playwright zero erori. Audit (examples/audit.py) 
 1. [x] „De ce esti aici": un rand de pozitionare cald pe Acasa (valoarea aplicatiei, fara jargon).
 2. [x] Momentul „aha" la prima deschidere: empty-state Acasa cu valoare imediata + 1 next-step clar.
 3. [x] Badge permanent discret „Local-Only · 0 date trimise" (incredere, click -> explicatie scurta).
-4. [ ] Explicabilitate potriviri: pe card, „De ce o vezi" — interesele comune listate clar (algoritm transparent).
+4. [x] Explicabilitate potriviri: pe card, „De ce o vezi" — interesele comune listate clar (algoritm transparent).
 5. [ ] Indicator de suprapunere pe card: ce ofera ea ↔ ce cauti tu (potrivirea, vizual, onest).
 6. [ ] Radar de valoare (SVG) in Profil: ce ofer vs ce caut, vizual, calm (fara scoruri-trofeu).
 7. [ ] „Ultimul contact" per conexiune + sectiune „De reconectat" (sanatatea relatiei = frecventa, nu volum).
