@@ -580,6 +580,8 @@ details.why2>summary::-webkit-details-marker{display:none}
   <!-- PROFIL -->
   <section id="profil" class="view">
     <div id="phead" class="panel" style="margin-top:0"></div>
+    <div class="panel"><div class="toggle"><span>Deschis spre conexiuni <span style="color:var(--muted);font-size:11px">(marcaj personal, asincron — fără tracking)</span></span>
+      <div class="sw" id="ocSw" role="switch" tabindex="0" aria-label="Deschis spre conexiuni" onclick="toggleOpenConnect()"><i></i></div></div></div>
     <div class="panel"><h3>Echilibrul tău</h3><div id="valueRadar"></div>
       <p style="font-size:11.5px;color:var(--muted);line-height:1.5;margin:8px 2px 0">O imagine calmă a ce dai și ce ceri în cerc — nu un scor, ci un reper pentru tine.</p></div>
     <div class="panel"><h3>Ce ofer <span class="badge vis">vizibil</span></h3><div id="oferList"></div>
@@ -1135,8 +1137,10 @@ function prof(){const me=mem(ME),con=DB.matches.filter(x=>x.status==="conectat"&
         h("div",{style:{color:"var(--ink2)",fontSize:"13px"},text:me.role}),
         h("div",{style:{marginTop:"8px",display:"flex",alignItems:"center",gap:"8px",flexWrap:"wrap"}},
           h("span",{class:"hbadge v",text:"✓ Profil verificat"}),
+          me.open?h("span",{class:"hbadge v",text:"🟢 Deschis spre conexiuni"}):null,
           h("span",{style:{color:"var(--muted)",fontSize:"12px"},text:con+" conexiuni"}))),
       h("button",{class:"btn ghost sm","data-act":"profedit",text:"✎ Editeaza"})));}
+  applyOC();
   const r=(k,elid)=>{const l=DB.items.filter(i=>i.member_id===ME&&i.kind===k);
     setKids($(elid), l.length?l.map(i=>h("div",{class:"linei"},
         h("div",{},h("div",{text:i.text}),h("div",{class:"meta",text:"sursa: "+i.source})),
@@ -1145,6 +1149,9 @@ function prof(){const me=mem(ME),con=DB.matches.filter(x=>x.status==="conectat"&
   renderValueRadar();
   const au=(DB.audit||[]).filter(a=>a.me===ME).slice(0,12);
   setKids($("#auditList"), au.length?au.map(a=>h("div",{class:"arow"},h("span",{class:"at",text:relTime(a.t)}),h("span",{text:a.a}))):h("div",{class:"empty",style:{padding:"10px",fontSize:"14px"},text:"Nicio actiune inregistrata."}));}
+/* loop3 #9: status manual "Deschis spre conexiuni" (asincron, fara tracking) */
+function applyOC(){const me=mem(ME);const sw=$("#ocSw");if(sw){const on=!!(me&&me.open);sw.classList.toggle("on",on);sw.setAttribute("aria-checked",on?"true":"false");}}
+function toggleOpenConnect(){const me=mem(ME);if(!me)return;me.open=me.open?0:1;logA(me.open?"Marcat: deschis spre conexiuni":"Marcaj deschis spre conexiuni scos");save();applyOC();prof();toast(me.open?"Marcat ca deschis spre conexiuni":"Marcaj scos");}
 /* loop3 #6: radar de valoare (SVG) — echilibru calm ofer vs caut, fara scor-trofeu */
 function renderValueRadar(){const host=$("#valueRadar");if(!host)return;
   const off=(DB.items||[]).filter(i=>i.member_id===ME&&i.kind==="ofer").length;
