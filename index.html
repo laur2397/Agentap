@@ -76,6 +76,12 @@ h2.title{font-family:var(--serif);font-size:27px;font-weight:600;margin:2px 0 14
 /* loop3 #10: progres intrinsec onest */
 .intrinsic{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink2);background:var(--card2);border-radius:11px;padding:10px 12px;margin-top:12px}
 .intrinsic .inti{font-size:15px;flex:none}
+/* loop3 #16: privacy health */
+.phealth{display:flex;flex-direction:column;gap:8px}
+.phrow{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink2)}
+.phrow b{color:var(--ink)}
+.phdot{width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}
+.phdot.ok{background:var(--success)}
 /* loop3 #12: control de ordonare relevanta<->diversitate */
 .ctrlrow{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin:2px 0 14px}
 .ctrllab{font-size:12.5px;color:var(--ink2);display:block;margin-bottom:7px}
@@ -601,6 +607,7 @@ details.why2>summary::-webkit-details-marker{display:none}
     <div id="phead" class="panel" style="margin-top:0"></div>
     <div class="panel"><div class="toggle"><span>Deschis spre conexiuni <span style="color:var(--muted);font-size:11px">(marcaj personal, asincron — fără tracking)</span></span>
       <div class="sw" id="ocSw" role="switch" tabindex="0" aria-label="Deschis spre conexiuni" onclick="toggleOpenConnect()"><i></i></div></div></div>
+    <div id="privacyHealth"></div>
     <div class="panel"><h3>Echilibrul tău</h3><div id="valueRadar"></div>
       <p style="font-size:11.5px;color:var(--muted);line-height:1.5;margin:8px 2px 0">O imagine calmă a ce dai și ce ceri în cerc — nu un scor, ci un reper pentru tine.</p></div>
     <div class="panel"><h3>Ce ofer <span class="badge vis">vizibil</span></h3><div id="oferList"></div>
@@ -1188,9 +1195,19 @@ function prof(){const me=mem(ME),con=DB.matches.filter(x=>x.status==="conectat"&
         h("div",{},h("div",{text:i.text}),h("div",{class:"meta",text:"sursa: "+i.source})),
         h("button",{class:"x","data-act":"del","data-id":i.id,"aria-label":"Sterge",text:"×"}))):h("div",{class:"empty",style:{padding:"12px",fontSize:"14px"},text:"Încă nimic aici — adaugă primul lucru mai jos."}));};
   r("ofer","#oferList");r("caut","#cautList");
-  renderValueRadar();
+  renderValueRadar();renderPrivacyHealth();
   const au=(DB.audit||[]).filter(a=>a.me===ME).slice(0,12);
   setKids($("#auditList"), au.length?au.map(a=>h("div",{class:"arow"},h("span",{class:"at",text:relTime(a.t)}),h("span",{text:a.a}))):h("div",{class:"empty",style:{padding:"10px",fontSize:"14px"},text:"Nicio actiune inregistrata."}));}
+/* loop3 #16: "Privacy health" — criptare activa + spatiu ocupat estimativ (transparenta) */
+function renderPrivacyHealth(){const host=$("#privacyHealth");if(!host)return;
+  let bytes=0;try{const raw=localStorage.getItem(KEY)||"";bytes=raw.length;}catch(_){}
+  const kb=bytes>0?(bytes/1024):0,size=kb>=1024?(kb/1024).toFixed(1)+" MB":Math.max(1,Math.round(kb))+" KB";
+  const enc=!!(CK&&HK); // chei active in RAM
+  setKids(host,h("div",{class:"panel"},h("h3",{},"Confidențialitate — pe scurt"),
+    h("div",{class:"phealth"},
+      h("div",{class:"phrow"},h("span",{class:"phdot ok"}),h("span",{},"Criptare la repaus: "),h("b",{text:enc?"activă (AES-GCM, cheie în RAM)":"date criptate pe disc"})),
+      h("div",{class:"phrow"},h("span",{class:"phdot ok"}),h("span",{},"Trimiteri în rețea: "),h("b",{text:"zero (Local-Only)"})),
+      h("div",{class:"phrow"},h("span",{class:"phdot"}),h("span",{},"Spațiu ocupat (estimativ): "),h("b",{text:bytes>0?("~"+size):"—"})))));}
 /* loop3 #9: status manual "Deschis spre conexiuni" (asincron, fara tracking) */
 function applyOC(){const me=mem(ME);const sw=$("#ocSw");if(sw){const on=!!(me&&me.open);sw.classList.toggle("on",on);sw.setAttribute("aria-checked",on?"true":"false");}}
 function toggleOpenConnect(){const me=mem(ME);if(!me)return;me.open=me.open?0:1;logA(me.open?"Marcat: deschis spre conexiuni":"Marcaj deschis spre conexiuni scos");save();applyOC();prof();toast(me.open?"Marcat ca deschis spre conexiuni":"Marcaj scos");}
@@ -1759,7 +1776,7 @@ function lockNow(){if(!CK||LOCKING)return;
   if(PROC){pendingLock=true;toast("Se blocheaza dupa finalizarea procesarii…");return;} // atomic: nu intrerupe operatiuni (audit s4 #1)
   LOCKING=true;stopNet();clearTimeout(idleT);wipe();
   CK=null;HK=null;DB=null;ME=null;LEDGER_CHAIN=[];CHAT=null;FSIM=null; // elibereaza cheile din RAM (best-effort; datele pe disc raman criptate, recuperabile doar cu parola)
-  ["#matchList","#netHost","#ledger","#kpis","#topMatches","#phead","#mMsgs","#dictRes","#oferList","#cautList","#auditList","#valueRadar","#ahaCard","#intrinsic","#activeNet","#reconnect"]
+  ["#matchList","#netHost","#ledger","#kpis","#topMatches","#phead","#mMsgs","#dictRes","#oferList","#cautList","#auditList","#valueRadar","#ahaCard","#intrinsic","#activeNet","#reconnect","#privacyHealth"]
     .forEach(s=>{const el=$(s);if(el)el.replaceChildren();}); // sanitizare DOM, fara innerHTML (audit s4 #5 / s5r2)
   $("#overlay").classList.remove("on");$("#lockPass").value="";showLock("unlock");LOCKING=false;
   toast("Blocat — cheile eliberate din memorie (best-effort)");}
