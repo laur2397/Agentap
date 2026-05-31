@@ -8,7 +8,7 @@ Reguli pentru fiecare item:
 - La fiecare 3 itemi, ruleaza board-ul de audit (examples/audit.py) si remediaza daca RESPINS.
 
 ## Prioritizat
-1. [ ] Sortare/filtrare task-uri: comutator „Toate / Active / Scadente”.
+1. [x] Sortare/filtrare task-uri: comutator „Toate / Active / Scadente”.
 2. [ ] Intalniri viitoare evidentiate pe Acasa (urmatoarea intalnire confirmata, sus).
 3. [ ] Reminder badge si pentru intalniri „De confirmat” (nu doar task-uri).
 4. [ ] Follow-up: 3 sabloane (multumire / propunere pas urmator / reprogramare).
