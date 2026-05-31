@@ -358,6 +358,10 @@ details.why2>summary::-webkit-details-marker{display:none}
 .todayrow .tdc{flex:1;min-width:0}
 .todayrow .tdt{font-size:14px;font-weight:600;color:var(--ink)}
 .todayrow .tds{font-size:12px;color:var(--muted);margin-top:2px}
+/* loop2 #13: rezumat antet secretara */
+.secsum{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 2px}
+.secsum .ss{display:inline-flex;align-items:center;gap:6px;background:var(--primary-soft);color:var(--primary-dim);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:600}
+.secsum .ss b{font-weight:800}
 /* loop2 #11: mod focus */
 .focusbar{display:flex;justify-content:flex-end;margin:2px 0 6px}
 #focusPanel{display:none}
@@ -486,6 +490,7 @@ details.why2>summary::-webkit-details-marker{display:none}
   <section id="secretara" class="view">
     <div class="eyebrow">Asistent</div><h2 class="title">Secretara ta</h2>
     <p class="sub">Intalniri, notite si pregatire — intr-un singur loc.</p>
+    <div id="secSummary" class="secsum"></div>
     <div class="focusbar"><button class="btn ghost sm" data-act="focus" aria-label="Comuta modul Focus">🎯 Focus</button></div>
     <div id="focusPanel"></div>
     <div class="sec">Azi</div>
@@ -799,7 +804,7 @@ function setView(v){if(PROC){toast("Asteapta — Secretara AI proceseaza…");re
 function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("div",{class:"sk l w80"}),h("div",{class:"sk l w40"}));}
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
 function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
-  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();setKids($("#matchList"),pipeline(myMatches().filter(matchIndOk)));}else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();}}else if(VIEW==="profil")prof();
+  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();setKids($("#matchList"),pipeline(myMatches().filter(matchIndOk)));}else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();}}else if(VIEW==="profil")prof();
   updateBadges();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 // backlog #7: empty-state ilustrat, consistent
 function estateBox(title,sub){return h("div",{class:"estate",style:{padding:"26px 20px"}},
@@ -1063,6 +1068,15 @@ function renderToday(){const host=$("#todayBox");if(!host)return;const td=today(
   tasks.forEach(t=>out.push(h("div",{class:"todayrow"},h("span",{class:"tdi"},"✅"),
     h("div",{class:"tdc"},h("div",{class:"tdt",text:t.text}),h("div",{class:"tds",text:"task scadent azi"})))));
   setKids(host, out.length?out:estateBox("Nimic urgent azi","Nicio intalnire sau task scadent astazi."));}
+/* loop2 #13: rezumat in antet — N task-uri active · M intalniri viitoare */
+function renderSecSummary(){const host=$("#secSummary");if(!host)return;const td=today();
+  const tActive=(DB.tasks||[]).filter(t=>t.member_id===ME&&!t.done).length;
+  const mFuture=(DB.meetings||[]).filter(m=>m.status==="confirmat"&&(m.a===ME||m.b===ME)&&(m.when||"").slice(0,10)>=td).length;
+  const tlabel=tActive===1?"task activ":"task-uri active";
+  const mlabel=mFuture===1?"intalnire viitoare":"intalniri viitoare";
+  setKids(host,[
+    h("span",{class:"ss"},"✅ ",h("b",{text:String(tActive)})," "+tlabel),
+    h("span",{class:"ss"},"📅 ",h("b",{text:String(mFuture)})," "+mlabel)]);}
 /* loop2 #11: mod Focus — ascunde tot, lasa input rapid + notitele active */
 function toggleFocus(){FOCUS=!FOCUS;logA(FOCUS?"Mod Focus pornit":"Mod Focus oprit");render();
   if(FOCUS)setTimeout(()=>{const i=$("#focusQuick");if(i)i.focus();},60);}
