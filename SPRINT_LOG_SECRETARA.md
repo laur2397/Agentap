@@ -13,6 +13,7 @@
 - 2026-05-31 · Item 9 (Mini-calendar saptamanal) · banda 7 zile cu azi evidentiat + bulina/numar pe zilele cu intalniri; tap -> toast cu intalnirile zilei; validat, 0 erori.
 - 2026-05-31 · AUDIT item 9 (secloop9): APROBAT 6/6 + CAE.
 - 2026-05-31 · Item 10 (Rezultat intalnire) · notita 'cum a mers' atasata intalnirilor confirmate (adauga/editeaza/afiseaza); validat, 0 erori.
+- 2026-05-31 · AUDIT item 18 (secloop18): APROBAT 6/6 + CAE.
 - 2026-05-31 · Item 18 (Duplicare task) · buton ⧉ pe task creeaza o copie noua (acelasi text+prioritate, nefinalizata, fara termen) ca sablon pentru sarcini recurente; validat Playwright (1->2 carduri, 2 aparitii ale textului), 0 erori.
 - 2026-05-31 · Item 17 (Filtrare jurnal pe interval) · chips Azi/Saptamana/Tot in jurnal (NOTERANGE): Azi = de la inceputul zilei, Saptamana = ultimele 7 zile, combinabil cu filtrul de #tag si cautarea; validat Playwright (Tot=3, Saptamana=2, Azi=1), 0 erori.
 - 2026-05-31 · Item 16 (Notificari browser) · comutator opt-in in Preferinte care cere permisiunea (Notification.requestPermission, gestioneaza granted/denied/unsupported); notifica task-urile scadente azi/intarziate, deduplicat per sesiune (NOTIFIED Set), declansat din updateBadges; copy onest "doar cat aplicatia e deschisa — fara server/push"; persistat doar daca permisiunea ramane granted; validat Playwright (toggle on/off, permisiune granted, 1 notificare deduplicata), 0 erori.
