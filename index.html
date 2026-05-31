@@ -918,14 +918,16 @@ function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[
   if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();applyMatchDiv();setKids($("#matchList"),pipeline(orderMatches(myMatches().filter(matchIndOk))));}else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();}}else if(VIEW==="profil")prof();
   updateBadges();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 // backlog #7: empty-state ilustrat, consistent
-function estateBox(title,sub){return h("div",{class:"estate",style:{padding:"26px 20px"}},
+function estateBox(title,sub,action){return h("div",{class:"estate",style:{padding:"26px 20px"}},
   svgEl("svg",{viewBox:"0 0 64 64",fill:"none",stroke:"currentColor","stroke-width":"2","aria-hidden":"true"},
     svgEl("rect",{x:"13",y:"15",width:"38",height:"30",rx:"5"}),
     svgEl("path",{d:"M13 25 H51","stroke-linecap":"round",opacity:".55"}),
     svgEl("circle",{cx:"20",cy:"20",r:"1.6",fill:"currentColor"}),
     svgEl("path",{d:"M20 53 H44","stroke-linecap":"round",opacity:".4"})),
   h("div",{class:"t",text:title}),
-  sub?h("div",{style:{fontSize:"12px",marginTop:"4px"},text:sub}):null);}
+  sub?h("div",{style:{fontSize:"12px",marginTop:"4px"},text:sub}):null,
+  // loop3 #18: un singur next-step ghidat, contextual
+  action?h("button",{class:"btn gold sm",style:{marginTop:"14px"},"data-act":"go","data-v":action.v,text:action.label}):null);}
 function emp(){return h("div",{class:"estate"},
   svgEl("svg",{viewBox:"0 0 64 64",fill:"none",stroke:"currentColor","stroke-width":"2"},
     svgEl("circle",{cx:27,cy:27,r:15}),svgEl("path",{d:"M38 38 L53 53","stroke-linecap":"round"}),
@@ -1001,7 +1003,7 @@ function renderConn(){const host=$("#connList");if(!host)return;
       h("div",{class:"crt"},
         h("button",{class:"relpill "+rl[1],"data-act":"relcycle","data-id":cel.id,"aria-label":"Status relatie: "+rl[0],title:"Schimba statusul relatiei",text:rl[0]}),
         h("div",{class:"cdate",text:lastA?"activ "+relTime(lastA):""})));}).filter(Boolean);
-  setKids(host, rows.length?rows:estateBox(q?"Niciun rezultat":"Inca nicio conexiune", q?"Incearca alt nume.":"Conexiunile apar aici dupa ce accepti o introducere in „Cine merita contactat”."));
+  setKids(host, rows.length?rows:estateBox(q?"Niciun rezultat":"Inca nicio conexiune", q?"Incearca alt nume.":"Conexiunile apar aici dupa ce accepti o introducere.",q?null:{label:"Vezi cine merita contactat →",v:"potriviri"}));
   renderActiveNet(conn);
   renderReconnect(conn);
 }
@@ -1471,7 +1473,7 @@ function renderMeetings(){const host=$("#meetList");if(!host)return;
   if(confirmed.length){out.push(h("div",{class:"pipe-h c"},h("span",{class:"pd"}),"Confirmate",h("span",{class:"pn",text:String(confirmed.length)})));confirmed.forEach(x=>out.push(card(x,"done")));
     out.push(h("button",{class:"btn ghost sm","data-act":"exportAgenda",style:{marginTop:"4px"},"aria-label":"Exporta toate intalnirile confirmate ca .ics",text:"⬇ Exporta agenda completa (.ics)"}));}
   if(waiting.length){out.push(h("div",{class:"pipe-h p"},h("span",{class:"pd"}),"In asteptare",h("span",{class:"pn",text:String(waiting.length)})));waiting.forEach(x=>out.push(card(x,"wait")));}
-  setKids(host, out.length?out:estateBox("Nicio intalnire","Deschide o conexiune (Reteaua) si apasa „Propune o intalnire”."));}
+  setKids(host, out.length?out:estateBox("Nicio intalnire","Deschide o conexiune din Reteaua si propune o intalnire.",{label:"Vezi reteaua →",v:"retea"}));}
 
 /* ---- export catre Google Calendar / .ics / email (user-initiated, app nu trimite nimic) ---- */
 const pad2=n=>String(n).padStart(2,"0");
