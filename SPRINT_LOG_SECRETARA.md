@@ -11,3 +11,5 @@
 - 2026-05-31 · Item 7 (Pin notite) · buton 📌 fixeaza notita sus (sort pin desc), marcaj vizual; validat, 0 erori.
 - 2026-05-31 · Item 8 (Status relatie) · pastila Rece/Activ/Prioritar pe conexiune (tap cicleaza, nu deschide conversatia) + chips de filtrare in Reteaua; validat, 0 erori.
 - 2026-05-31 · Item 9 (Mini-calendar saptamanal) · banda 7 zile cu azi evidentiat + bulina/numar pe zilele cu intalniri; tap -> toast cu intalnirile zilei; validat, 0 erori.
+- 2026-05-31 · AUDIT item 9 (secloop9): APROBAT 6/6 + CAE.
+- 2026-05-31 · Item 10 (Rezultat intalnire) · notita 'cum a mers' atasata intalnirilor confirmate (adauga/editeaza/afiseaza); validat, 0 erori.
