@@ -11,7 +11,7 @@ Reguli pentru fiecare item:
 1. [x] Sortare/filtrare task-uri: comutator „Toate / Active / Scadente”.
 2. [x] Intalniri viitoare evidentiate pe Acasa (urmatoarea intalnire confirmata, sus).
 3. [x] Reminder badge si pentru intalniri „De confirmat” (nu doar task-uri).
-4. [ ] Follow-up: 3 sabloane (multumire / propunere pas urmator / reprogramare).
+4. [x] Follow-up: 3 sabloane (multumire / propunere pas urmator / reprogramare).
 5. [ ] Brief de intalnire: include si task-urile deschise legate de persoana.
 6. [ ] Cautare globala (header): peste persoane, notite, task-uri.
 7. [ ] Empty-states ilustrate consistente (SVG) pe toate ecranele goale.

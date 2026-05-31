@@ -361,6 +361,12 @@ details.why2>summary::-webkit-details-marker{display:none}
 .nextmeet .nmlabel{font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--primary-dim);font-weight:700}
 .nextmeet .nmwhen{font-family:var(--sans);font-size:19px;font-weight:800;color:var(--ink);letter-spacing:-.3px;margin-top:4px}
 .nextmeet .nmwho{font-size:13px;color:var(--ink2);margin-top:2px}
+/* backlog #4: follow-up cu 3 sabloane */
+.fudet{margin-top:9px}
+.fudet>summary{list-style:none;cursor:pointer;font-size:12.5px;font-weight:600;color:var(--primary);padding:4px 0}
+.fudet>summary::-webkit-details-marker{display:none}
+.furow{display:flex;flex-wrap:wrap;gap:7px;margin-top:7px}
+.furow .btn{flex:1;min-width:104px;font-size:12px}
 </style>
 </head>
 <body>
@@ -941,8 +947,12 @@ function renderMeetings(){const host=$("#meetList");if(!host)return;
          h("div",{class:"calrow"},
            h("button",{class:"btn ghost sm","data-act":"gcal","data-id":x.id,text:"📅 Google Calendar"}),
            h("button",{class:"btn ghost sm","data-act":"ics","data-id":x.id,text:"⬇ .ics"}),
-           h("button",{class:"btn ghost sm","data-act":"email","data-id":x.id,text:"✉ Email"}),
-           h("button",{class:"btn ghost sm","data-act":"followup","data-id":x.id,text:"✍ Follow-up"})));
+           h("button",{class:"btn ghost sm","data-act":"email","data-id":x.id,text:"✉ Email"})),
+         h("details",{class:"fudet"},h("summary",{text:"✍ Follow-up ⌄"}),
+           h("div",{class:"furow"},
+             h("button",{class:"btn ghost sm","data-act":"fu","data-id":x.id,"data-fk":"thanks",text:"Multumire"}),
+             h("button",{class:"btn ghost sm","data-act":"fu","data-id":x.id,"data-fk":"next",text:"Pas urmator"}),
+             h("button",{class:"btn ghost sm","data-act":"fu","data-id":x.id,"data-fk":"resched",text:"Reprogramare"}))));
     return h("div",{class:"meetcard"},
       h("div",{class:"mtop2"},h("div",{class:"mw",text:fmtWhen(x.when)}),h("div",{class:"mwho",text:"cu "+cel.name})),
       x.place?h("div",{class:"mplace",text:"📍 "+x.place}):null,acts);};
@@ -1007,11 +1017,13 @@ function updateBadges(){if(!DB)return;const td=today();
   if(n>0){if(!b){b=h("span",{class:"navbadge"});tab.appendChild(b);}b.textContent=String(n);}
   else if(b)b.remove();}
 /* follow-up post-intalnire: sablon gata de copiat */
-function followUp(id){const m=(DB.meetings||[]).find(x=>x.id===id);if(!m)return;
-  const cel=mem(ME===m.a?m.b:m.a)||{name:""},me=mem(ME)||{name:""};
-  const txt="Buna "+cel.name.split(" ")[0]+",\n\nMi-a facut placere sa ne vedem ("+fmtWhen(m.when)+"). "+
-    "Asa cum am discutat, [completeaza pasul urmator].\n\nRamanem in legatura,\n"+me.name+".";
-  logA("Follow-up generat pentru o intalnire");
+function followUp(id,kind){const m=(DB.meetings||[]).find(x=>x.id===id);if(!m)return;
+  const cel=mem(ME===m.a?m.b:m.a)||{name:""},me=mem(ME)||{name:""},fn=cel.name.split(" ")[0],w=fmtWhen(m.when);
+  let txt;
+  if(kind==="thanks")txt="Buna "+fn+",\n\nMultumesc pentru intalnire ("+w+"). Mi-a facut placere sa discutam si astept cu interes pasii urmatori.\n\nCu stima,\n"+me.name+".";
+  else if(kind==="resched")txt="Buna "+fn+",\n\nLegat de intalnirea noastra ("+w+"), as vrea sa o reprogramam. Ce zi ti-ar conveni saptamana viitoare?\n\nCu stima,\n"+me.name+".";
+  else txt="Buna "+fn+",\n\nMi-a facut placere sa ne vedem ("+w+"). Asa cum am discutat, [completeaza pasul urmator].\n\nRamanem in legatura,\n"+me.name+".";
+  logA("Follow-up ("+(kind||"next")+") generat");
   try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(()=>toast("Follow-up copiat — lipeste-l unde vrei")).catch(()=>openExt(mailtoBody("Follow-up",txt)));return;}}catch(_){}
   openExt(mailtoBody("Follow-up",txt));}
 function mailtoBody(subj,body){return "mailto:?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(body);}
@@ -1077,7 +1089,7 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="gcal"){const mt=(DB.meetings||[]).find(x=>x.id===id);if(mt){openExt(gcalUrl(mt));logA("Deschis Google Calendar pt. o intalnire");}}
   else if(a==="ics"){const mt=(DB.meetings||[]).find(x=>x.id===id);if(mt)downloadICS(mt);}
   else if(a==="email"){const mt=(DB.meetings||[]).find(x=>x.id===id);if(mt){openExt(mailtoUrl(mt));logA("Deschis email pt. o intalnire");}}
-  else if(a==="followup")followUp(id);
+  else if(a==="fu")followUp(id,el.dataset.fk);
   else if(a==="addtask")addTask();
   else if(a==="tasktoggle")toggleTask(id);
   else if(a==="deltask")delTask(id);
