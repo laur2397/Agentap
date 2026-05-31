@@ -319,6 +319,17 @@ details.why2>summary::-webkit-details-marker{display:none}
 .mapwrap{margin-top:18px;border-top:1px solid var(--line);padding-top:6px}
 .mapwrap>summary{font-size:13px;font-weight:600;color:var(--primary);cursor:pointer;list-style:none;padding:10px 0}
 .mapwrap>summary::-webkit-details-marker{display:none}
+/* iteratia 1 Secretara: notite + brief */
+.notecard{display:flex;align-items:flex-start;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:9px;box-shadow:var(--shadow)}
+.notecard .nt{flex:1;min-width:0}
+.notecard .ntx{font-size:14px;color:var(--ink);line-height:1.5;white-space:pre-wrap;word-break:break-word}
+.notecard .ndate{font-size:11px;color:var(--muted);margin-top:4px}
+.notecard .x{background:none;border:0;color:var(--muted);font-size:18px;cursor:pointer;line-height:1;min-height:44px;min-width:30px}
+.brief{background:var(--primary-soft);border:1px solid var(--line);border-radius:14px;margin-bottom:12px}
+.brief>summary{list-style:none;cursor:pointer;font-weight:700;font-size:13px;color:var(--primary-dim);padding:11px 14px}
+.brief>summary::-webkit-details-marker{display:none}
+.brief .bbody{padding:0 14px 13px;font-size:13px;color:var(--ink2);line-height:1.6}
+.brief .bl{margin:3px 0}.brief .bl b{color:var(--ink);font-weight:600}
 </style>
 </head>
 <body>
@@ -370,6 +381,11 @@ details.why2>summary::-webkit-details-marker{display:none}
     <textarea id="dictText" rows="5" placeholder="ex: Am vorbit cu un investitor interesat de energie. Eu caut un contabil bun si ofer spatii comerciale."></textarea>
     <div style="margin-top:10px"><button class="btn gold" id="dictBtn" onclick="dicteaza()">Noteaza si cauta potriviri</button></div>
     <div id="dictRes" style="margin-top:14px"></div>
+    <div class="sec" style="margin-top:26px">Jurnalul tau</div>
+    <p class="sub">Idei, notite si lucruri de tinut minte. Cauta-le oricand; brief-ul de intalnire le foloseste.</p>
+    <div class="searchbar"><span class="ic">⌕</span><input id="noteSearch" placeholder="Cauta in notite…" aria-label="Cauta in notite" oninput="renderNotes()"></div>
+    <div class="addrow"><input id="noteText" placeholder="Scrie o idee sau o notita…" aria-label="Notita noua" onkeydown="if(event.key==='Enter')addNote()"><button class="btn gold sm" data-act="addnote" aria-label="Adauga notita">+</button></div>
+    <div id="notesList" style="margin-top:12px"></div>
   </section>
 
   <!-- PROFIL -->
@@ -525,6 +541,9 @@ function validDB(d){if(!d||typeof d!=="object")return false;
   d.items=d.items.filter(i=>i&&typeof i==="object"&&i.id!=null);
   d.matches=d.matches.filter(m=>m&&typeof m==="object"&&m.id!=null);
   d.messages=d.messages.filter(x=>x&&typeof x==="object");
+  if(!Array.isArray(d.notes))d.notes=[];
+  d.notes=d.notes.filter(n=>n&&typeof n==="object"&&n.id!=null);
+  d.notes.forEach(n=>{n.text=clean(n.text);n.member_id=+n.member_id;n.t=+n.t||Date.now();});
   if(!d.members.length)return false;
   d.members.forEach(m=>{m.trust=Math.max(0,Math.min(100,+m.trust||0));m.name=clean(m.name).slice(0,80)||"?";m.id=+m.id;m.industry=clean(m.industry||"");m.role=clean(m.role||"Membru");});
   d.items.forEach(i=>{i.text=clean(i.text);i.visible=i.visible?1:0;i.member_id=+i.member_id;});
@@ -552,7 +571,7 @@ function exportData(){try{const blob=new Blob([JSON.stringify(DB,null,2)],{type:
 function logA(action){if(!DB.audit)DB.audit=[];DB.audit.unshift({t:Date.now(),me:ME,a:clean(action).slice(0,160)});if(DB.audit.length>60)DB.audit.pop();}
 
 function seed(){
-  const d={members:[],items:[],matches:[],messages:[],audit:[],seq:1};
+  const d={members:[],items:[],matches:[],messages:[],audit:[],notes:[],seq:1};
   SEED.forEach((m,i)=>d.members.push({id:i+1,name:m[0],role:m[1],industry:m[2],trust:m[3],color:COLORS[i%COLORS.length]}));
   d.seq=d.members.length+1;
   const ai=(m,k,arr)=>(arr||[]).forEach(([t,s])=>d.items.push({id:d.seq++,member_id:m,kind:k,text:t,visible:k==="ofer"?1:0,source:s}));
@@ -600,7 +619,7 @@ function setView(v){if(PROC){toast("Asteapta — Secretara AI proceseaza…");re
 function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("div",{class:"sk l w80"}),h("div",{class:"sk l w40"}));}
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
 function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
-  if(VIEW==="acasa")home();else if(VIEW==="potriviri")setKids($("#matchList"),pipeline(myMatches()));else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="profil")prof();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
+  if(VIEW==="acasa")home();else if(VIEW==="potriviri")setKids($("#matchList"),pipeline(myMatches()));else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara")renderNotes();else if(VIEW==="profil")prof();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 function emp(){return h("div",{class:"estate"},
   svgEl("svg",{viewBox:"0 0 64 64",fill:"none",stroke:"currentColor","stroke-width":"2"},
     svgEl("circle",{cx:27,cy:27,r:15}),svgEl("path",{d:"M38 38 L53 53","stroke-linecap":"round"}),
@@ -795,6 +814,33 @@ function dicteaza(){if(PROC)return;const text=$("#dictText").value.trim();if(!te
     if(pendingLock){pendingLock=false;lockNow();}
   },950);}
 
+/* ---- Secretara iteratia 1: jurnal de notite ---- */
+function renderNotes(){const host=$("#notesList");if(!host)return;
+  const q=(($("#noteSearch")||{}).value||"").toLowerCase().trim();
+  const list=(DB.notes||[]).filter(n=>n.member_id===ME).filter(n=>!q||n.text.toLowerCase().includes(q)).sort((a,b)=>b.t-a.t);
+  setKids(host, list.length?list.map(n=>h("div",{class:"notecard"},
+      h("div",{class:"nt"},h("div",{class:"ntx",text:n.text}),h("div",{class:"ndate",text:relTime(n.t)})),
+      h("button",{class:"x","data-act":"delnote","data-id":n.id,"aria-label":"Sterge notita",text:"×"}))):
+    h("div",{class:"estate",style:{padding:"24px"}},h("div",{class:"t",text:q?"Nicio notita gasita":"Inca nicio notita"}),
+      h("div",{style:{fontSize:"12px",marginTop:"4px"},text:q?"Incearca alt cuvant.":"Scrie prima ta idee in campul de mai sus — o gasesti oricand."})));}
+function addNote(){if(!DB)return;const inp=$("#noteText"),t=clean((inp&&inp.value||"").trim());if(!t)return;
+  DB.notes.push({id:DB.seq++,member_id:ME,text:t,t:Date.now()});if(inp)inp.value="";
+  logA("Notita adaugata in jurnal");save();renderNotes();toast("Notita salvata");}
+function delNote(id){const n=(DB.notes||[]).find(x=>x.id===id);DB.notes=(DB.notes||[]).filter(x=>x.id!==id);if(n)logA("Notita stearsa din jurnal");save();renderNotes();}
+/* ---- Secretara iteratia 1: brief de 1 minut (doar din datele tale) ---- */
+function buildBrief(m){const cel=mem(ME===m.offer_member?m.seek_member:m.offer_member);if(!cel)return null;
+  const common=new Set();
+  DB.matches.filter(x=>(x.offer_member===ME&&x.seek_member===cel.id)||(x.offer_member===cel.id&&x.seek_member===ME)).forEach(x=>(x.common||[]).forEach(w=>common.add(w)));
+  const theirOffers=DB.items.filter(i=>i.member_id===cel.id&&i.kind==="ofer"&&i.visible).map(i=>i.text);
+  const fn=cel.name.split(" ")[0].toLowerCase();
+  const myNotes=(DB.notes||[]).filter(n=>n.member_id===ME&&n.text.toLowerCase().includes(fn)).map(n=>n.text);
+  const rows=[h("div",{class:"bl"},h("b",{},"Conexiune din: "),(m.at?new Date(m.at).toLocaleDateString("ro-RO",{day:"numeric",month:"long"}):"recent"))];
+  if(common.size)rows.push(h("div",{class:"bl"},h("b",{},"Interese comune: "),[...common].join(", ")));
+  if(theirOffers.length)rows.push(h("div",{class:"bl"},h("b",{},cel.name.split(" ")[0]+" ofera: "),theirOffers.join("; ")));
+  rows.push(myNotes.length?h("div",{class:"bl"},h("b",{},"Notitele tale: "),myNotes.join(" · "))
+    :h("div",{class:"bl",style:{color:"var(--muted)"}},"Nu ai notite legate de aceasta persoana. Adauga in Jurnal."));
+  const d=h("details",{class:"brief"},h("summary",{text:"📋 Brief de 1 minut ⌄"}),h("div",{class:"bbody"},...rows));d.open=true;return d;}
+
 function openMemberMatch(mid){if(mid===ME){setView("profil");return;}
   let m=DB.matches.find(x=>x.status!=="respins"&&((x.offer_member===ME&&x.seek_member===mid)||(x.offer_member===mid&&x.seek_member===ME)));
   if(m&&m.status==="conectat"){openMatch(m.id);return;}
@@ -802,8 +848,9 @@ function openMemberMatch(mid){if(mid===ME){setView("profil");return;}
   else toast("Nicio potrivire directa cu "+name(mid));}
 function openMatch(id){CHAT=id;const m=DB.matches.find(x=>x.id===id),cel=mem(ME===m.offer_member?m.seek_member:m.offer_member);
   $("#mTitle").textContent=cel.name;$("#mSub").textContent=cel.role+" · Trust "+cel.trust+"/100";$("#overlay").classList.add("on");loadChat();}
-function loadChat(){const msgs=DB.messages.filter(m=>m.match_id===CHAT);
-  setKids($("#mMsgs"),...msgs.map(m=>{if(m.sender===null)return h("div",{class:"msg app",text:"❧ "+m.text});
+function loadChat(){const mt=DB.matches.find(x=>x.id===CHAT),msgs=DB.messages.filter(m=>m.match_id===CHAT);
+  const br=mt?buildBrief(mt):null;
+  setKids($("#mMsgs"),br,...msgs.map(m=>{if(m.sender===null)return h("div",{class:"msg app",text:"❧ "+m.text});
     return m.sender===ME?h("div",{class:"msg me",text:m.text}):h("div",{class:"msg them"},h("span",{class:"nm2",text:name(m.sender)}),m.text);}));
   const b=$("#mMsgs");b.scrollTop=b.scrollHeight;}
 function sendMsg(){const t=$("#mInput").value.trim();if(!t)return;DB.messages.push({id:DB.seq++,match_id:CHAT,sender:ME,text:t});$("#mInput").value="";save();loadChat();}
@@ -847,6 +894,8 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="del")delItem(id);
   else if(a==="verify")verifyLedger();
   else if(a==="exportL")exportLedger();
+  else if(a==="addnote")addNote();
+  else if(a==="delnote")delNote(id);
   else if(a==="go")setView(el.dataset.v);});
 
 // error boundary global (remediaza constatarea de audit #4)

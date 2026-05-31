@@ -22,6 +22,17 @@ def P(f): return os.path.join(ROOT,f)
 
 # Descrierea EXACTA a solutiei auditate (iteratia 2 + remedieri runda 1). Onesta — doar ce e implementat.
 SOLUTIE=(
+ "SECRETARA — ITERATIA 1 din roadmap-ul aprobat (Notite + Brief de intalnire). Verificat cu Playwright, "
+ "zero erori de consola, tot pe DOM API (zero innerHTML).\n"
+ "(s1-notite) JURNAL DE NOTITE in ecranul Secretara: adaugi idei/notite (sanitizate cu clean(), randate "
+ "prin textContent), cu cautare locala, stergere, marca de timp; empty-state cu CTA clar ('Scrie prima "
+ "ta idee'). Notitele intra in baza criptata existenta (AES-GCM) si in jurnalul de audit.\n"
+ "(s1-brief) BRIEF DE 1 MINUT: la deschiderea unei conversatii cu o conexiune, sus apare un brief generat "
+ "DOAR din datele tale locale: cand v-ati conectat, interese comune, ce ofera persoana (date vizibile "
+ "asumate), si NOTITELE TALE care mentioneaza persoana. NU agrega profilul privat al celuilalt fara "
+ "consimtamant. Onest, fara LLM/integrari false.\n"
+ "(s1-acces) Tinte de atingere >=44px pe butoane, focus-visible, empty-state cu indemn — conform "
+ "constrangerilor de accesibilitate.\n\n"
  "AJUSTARI UX (feedback client: 'pagina prea aglomerata' + 'reteaua primitiva, ce sunt liniile?'):\n"
  "(ux#1) DECLUTTER ACASA: eliminat sectiunea abstracta 'Sanatatea retelei' (bare) si sparkline-ul; "
  "KPI-urile mari inlocuite cu o banda compacta de 3 statistici (Conexiuni / Sugestii noi / Potrivire "
