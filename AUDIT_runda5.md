@@ -1,109 +1,112 @@
 # Raport audit — runda 5
 
 ## Verdict CAE
-În calitate de Chief Audit Executive (CAE), am analizat rapoartele auditorilor pentru Iteratia 5. Deși progresul este remarcabil și majoritatea riscurilor critice au fost atenuate, menținerea integrității produsului necesită rigoare absolută.
+În calitate de Chief Audit Executive, am analizat rapoartele tuturor auditorilor. Deși iterația 5 a adus îmbunătățiri remarcabile în UX și transparență, **Auditorul de Calitate & QA a ridicat obiecții critice** care afectează integritatea fundamentală a soluției (vulnerabilități de memorie și riscuri de integritate a datelor).
+
+Conform mandatului meu, nu pot aproba atâta timp cât există constatări blocante nerezolvate.
+
+---
 
 **VERDICT FINAL: RESPINS**
 
 **CONSTATARI BLOCANTE (de remediat pentru a trece poarta):**
-
-1.  **Incoerenta Arhitecturala (Technical Auditor):** Există o contradicție nerezolvată între "cheia nu este stocată" și "cryptographic shredding". Dacă cheia este derivată din parolă la fiecare sesiune, procesul de *shredding* este redundant (doar ștergerea variabilei din RAM este suficientă). Dacă se pretinde că se face *shredding* pe datele de pe disc, trebuie clarificat cum se păstrează accesibilitatea fără a stoca cheia.
-2.  **Race Condition la nivel de UI (QA Auditor):** Absența unui overlay de tip "Processing" în timpul operațiunilor asincrone (ex: `addItem`) permite utilizatorului să interacționeze cu DOM-ul în stări intermediare, ceea ce poate duce la `localStorage` corupt sau stări inconsistente ale `validDB`.
-3.  **Vulnerabilitate XSS prin SVG (QA Auditor):** Manipularea directă a nodurilor SVG prin API-ul DOM fără o sanitizare recursivă (în special pentru atributele `onmouseover` sau `foreignObject`) rămâne o poartă deschisă pentru injectarea de cod, în ciuda funcției `svgSafe`.
-4.  **Inconsistență Salt (QA Auditor):** Lipsa specificării naturii salt-ului (static vs. per-sesiune) în contextul PBKDF2. Un salt static compromite rezistența la atacuri de tip *rainbow table*.
+1. **Integritate Memory-Wiping (Auto-lock):** În JavaScript, simpla setare a variabilei la `null` nu garantează ștergerea din heap. Este necesară implementarea unei metode de suprascriere a bufferelor (ex: `Uint8Array.fill(0)`) pentru a preveni recuperarea cheilor din dump-uri de memorie.
+2. **Atomicitate Tranzacțională (Rollback):** Lipsa unui mecanism de tratare a erorilor de tip `QuotaExceededError` în timpul scrierii în `localStorage` poate duce la coruperea bazei de date în cazul unei întreruperi între scrierea cheii temporare și ștergerea celei vechi.
+3. **CSP & XSS Vector:** Utilizarea `unsafe-inline` rămâne un risc sistemic pentru o aplicație care procesează date sensibile. Chiar dacă este un single-file, trebuie demonstrată o strategie de atenuare (ex: implementarea unui hash-based CSP sau mutarea logicii critice într-un Web Worker izolat).
+4. **Instrumentare vs. Producție:** Trebuie clarificat și garantat prin build-pipeline că niciun cod de testare (Playwright) nu este livrat în fișierul final de producție, pentru a menține promisiunea de "zero dependințe".
 
 **CONDITII DE APROBARE:**
-1.  **Implementarea unui "Atomic Storage Commit":** Scrierea datelor trebuie să fie tranzacțională (scrie în key temporară -> validează -> suprascrie key principal) pentru a garanta integritatea datelor la închideri bruște.
-2.  **CSP Strict:** Includerea unui tag `<meta http-equiv="Content-Security-Policy" content="default-src 'self';">` care să interzică explicit `unsafe-inline` și `eval`, eliminând riscul de execuție a scripturilor injectate.
-3.  **Sanitizare Recursivă:** Aplicarea unei funcții de sanitizare care să scaneze recursiv orice obiect DOM injectat în graful SVG, eliminând orice atribut de tip `on*` sau elemente de tip `foreignObject`.
-4.  **Clarificare Arhitecturală:** Documentarea exactă a fluxului de viață al cheii (derivate din PBKDF2) și a salt-ului (care trebuie să fie unic per sesiune/per utilizator și stocat, în timp ce cheia rămâne strict în RAM).
-5.  **Feedback Vizual Blocant:** Introducerea unui overlay de procesare (modal/spinner) care să blocheze input-ul utilizatorului pe durata execuției oricărei funcții asincrone (Matching/Secretara AI).
+1. **Zeroing de memorie:** Implementarea unei funcții de `wipe()` pentru cheile criptografice care suprascrie buffer-ul cu zerouri înainte de eliberarea referinței.
+2. **Robustete tranzacțională:** Implementarea unui bloc `try...catch...finally` cu mecanism de rollback (restaurarea cheii vechi în caz de eșec la scrierea celei noi).
+3. **Hardening CSP:** Eliminarea `unsafe-inline` prin utilizarea `nonce` sau mutarea scripturilor într-un fișier extern/worker, sau, alternativ, o justificare tehnică documentată cu un audit de sanitizare forțat (fuzzing) care să dovedească imposibilitatea injecției.
+4. **Curățenie de build:** Eliminarea oricărei urme de cod de testare din sursa finală.
 
-**NOTĂ CAE:**
-Echipa a demonstrat o maturitate tehnică ridicată, dar "Trust, but verify" nu este negociabil. Nu voi aproba un produs care prezintă riscuri de corupere a datelor la nivel de `localStorage` (Race Condition) sau vulnerabilități de injectare (SVG/XSS). **Iterația continuă.** Aștept remedierea acestor puncte pentru a trece la auditul de conformitate finală.
+---
 
-## Technical & Architecture Auditor — RESPINS
-VERDICT: RESPINS
+**NOTĂ CĂTRE ECHIPĂ:**
+Sunteți aproape. Ați rezolvat "paradoxul bancar" și ați atins excelența în UX. Acum trebuie să închideți breșele tehnice de "nivel de sistem". **Sedința rămâne deschisă.** Aștept remedierea acestor puncte pentru a trece la verificarea finală. Nu accept compromisuri la capitolul integritate în memorie.
 
-BLOCANTE:
-- **Incoerenta arhitecturala (R4#3 vs R4#5):** Se afirma că cheia PBKDF2 este ținută "DOAR în RAM, niciodată stocată", dar se menționează "cheia AES (CK) și DB se șterg din RAM" la auto-lock. Dacă cheia este derivată din parolă la fiecare sesiune, cum se face "shredding-ul" fără a pierde accesul la datele criptate permanent pe disc? Dacă cheia nu este stocată, utilizatorul trebuie să reintroducă parola la fiecare refresh/blocare; dacă este stocată (chiar și în memorie volatilă), trebuie clarificat mecanismul de derivare (salt-ul e stocat, dar unde e stocat rezultatul PBKDF2 pentru a permite deblocarea?).
-- **Conflict de terminologie (R4#2):** "Mascare prin durată fixă (~360ms / 950ms)" este o afirmație tehnică suspectă într-un mediu single-threaded (JS). Dacă procesarea TF-IDF este blocantă (CPU bound), UI-ul va îngheța. Dacă este asincronă, `setTimeout` nu "maschează" timpul de execuție, ci doar introduce un delay suplimentar. Auditul cere dovezi că acest padding nu este "security theater" care poate fi bypassat prin măsurarea timpului de execuție a task-ului de calcul în sine (care rămâne vizibil în call stack).
-- **Integritate Ledger (R4#3):** Se afirmă "verificarea lantului = integru". În arhitecturi client-side fără backend, un atacator care compromite `localStorage` (vectorul menționat în R4#2) poate rescrie și hash-ul, și întregul lanț. Afirmația de "integritate" este falsă în absența unui root-of-trust extern sau a unui HSM/TEE. Documentația trebuie să admită că "integritatea" este doar o detecție de corupere accidentală, nu o protecție împotriva unui atacator activ.
-
-RECOMANDARI:
-- Clarificarea modelului de amenințare: Dacă atacatorul are acces la memorie/origine, "auto-lock" este o măsură de UX, nu de securitate. Renunțați la pretenția de "anti-side-channel" în favoarea "reducerea suprafeței de atac prin ștergerea stării în repaus".
-- În `validDB`, asigurați-vă că validarea schemei
-
-## Security & Privacy Auditor — RESPINS
-VERDICT: RESPINS
-
-BLOCANTE:
-- **Exces de incredere in "Local-Only":** Documentatia sustine ca datele sunt "securizate" prin criptare, dar in modelul actual, cheia de criptare (chiar si derivata PBKDF2) este gestionata in acelasi context de executie (DOM/JS) cu logica de procesare. Orice vulnerabilitate XSS (chiar si via un SVG injectat necorespunzator sau o dependinta de browser) expune cheia in clar in RAM.
-- **Lipsa izolarii contextului de matching:** Desi exista un "dublu consimtamant", procesul de matching (TF-IDF) ruleaza pe datele in clar in memorie. Daca un atacator injecteaza un script in consola, poate interoga starea `matches()` inainte ca utilizatorul sa isi dea consimtamantul, deoarece datele sunt "pre-procesate" pentru a afisa "Radarul de afinitate".
-- **Riscul de "Side-Channel" prin UI:** Chiar daca timpul de procesare este mascat (padding 360ms/950ms), faptul ca algoritmul de matching ruleaza automat la `addItem` sau `Secretara AI` creste suprafata de atac. Daca un membru este adaugat, aplicatia genereaza automat un scor de afinitate inainte de confirmare, ceea ce constituie o scurgere de metadate (scorul de afinitate este o informatie derivata din date private).
-
-RECOMANDARI:
-- **Zero-Knowledge Matching:** Implementati un mecanism prin care scorul de afinitate sa fie calculat doar DUPA ce ambele parti si-au dat consimtamantul explicit ("Handshake"). In prezent, calculul automat pre-consimtamant ofera informatii despre "afinitatea" cu persoane cu care nu ai acceptat inca interactiunea.
-- **Content Security Policy (CSP):** Implementati un header CSP strict (fara `unsafe-inline`, fara `eval`) pentru a bloca executia de scripturi externe, avand in vedere ca aplicatia gestioneaza date sensibile in `localStorage`.
-- **Sanitizare DOM:** Chiar daca folositi `esc()`, asigurati-va ca toate proprietatile `innerHTML` sunt inlocuite cu `textContent` pentru a elimina complet riscul de injectie in graful SVG sau in cardurile de matching.
-- **Auditabilitatea "Secretarei AI":** Documentati clar ca "Secretara AI" (euristica) nu trimite date catre niciun endpoint extern (ex: API-uri de tip OpenAI/Anthropic), deoarece aceasta este cea mai
-
-## UX & Accessibility Auditor — APROBAT
-**VERDICT: APROBAT**
+## Technical & Architecture Auditor — APROBAT
+VERDICT: **APROBAT**
 
 **BLOCANTE:**
-- Niciuna. (Iterația 5 demonstrează o maturitate tehnică ridicată, cu o abordare riguroasă a securității în RAM și a integrității datelor).
+- Niciuna. (Iterația 5 a rezolvat cu succes decalajul dintre pretențiile arhitecturale și implementarea tehnică prin eliminarea jargonului din UI și formalizarea riguroasă a mecanismelor de securitate în documentația internă).
 
 **RECOMANDARI:**
-- **Audit de contrast (AAA):** Deși ai menționat 8.4:1, asigură-te că în starea "Dark Mode" (Navy), textul secundar (ex: etichetele "est." sau metadatele mici de pe carduri) nu scade sub 7:1 pentru a menține conformitatea AAA.
-- **Micro-interacțiuni:** În graful force-directed, asigură-te că nodurile selectabile au un indicator de focus vizibil (outline) pentru utilizatorii care navighează exclusiv prin tastatură (Tab-index), nu doar prin hover/mouse.
-- **Feedback vizual:** La declanșarea "Crypto Shredding" (auto-lock), adaugă un mesaj de tip `aria-live="assertive"` care să informeze utilizatorul că sesiunea a fost securizată, pentru a evita confuzia cauzată de ștergerea bruscă a interfeței.
-- **Documentație:** Menține fișierul de audit/jurnalul de transparență ca parte integrantă a UI-ului (ex: un link în footer "Despre securitate"), pentru a asigura că utilizatorul non-tehnic înțelege natura "Local-Only" a datelor.
+- **Audit de memorie:** Deși `localStorage` este securizat prin `AES-GCM` și chei derivate din PBKDF2, asigurați-vă că implementarea `auto-lock` (ștergerea variabilelor din RAM) este testată riguros împotriva *Garbage Collection* (GC) din browser. JavaScript nu garantează ștergerea imediată a memoriei; pentru un nivel de securitate "bancar", luați în calcul suprascrierea manuală a bufferelor cu `0x00` înainte de a lăsa variabila să iasă din scope.
+- **UX - Progressive Disclosure:** Deoarece ați mutat detaliile tehnice în "De ce văd asta?", asigurați-vă că acest panou conține un link către un "Audit Log" exportabil (JSON), pentru a menține promisiunea de transparență totală față de utilizatorii avansați.
+- **Hardening:** Deși `connect-src 'none'` blochează exfiltrarea, verificați dacă bibliotecile de fonturi (dacă există) sau alte resurse externe nu sunt apelate prin `import` sau `link` în HTML-ul single-file, pentru a menține CSP-ul pur.
+
+**Nota auditorului:** Saltul de la "jargon tehnic" la "limbaj uman" în UI, fără a sacrifica integritatea logică a proceselor (criptare, ledger, sanitizare), transformă soluția dintr-un prototip experimental într-un instrument cu o arhitectură defensivă solidă. Respectarea riguroasă a WCAG și a fluxurilor de consimțământ elimină riscul de "magie" percepută.
+
+## Security & Privacy Auditor — APROBAT
+VERDICT: **APROBAT**
+
+**BLOCANTE:**
+- Niciuna. (Iterația 5 a integrat cu succes cerințele de securitate, accesibilitate și transparență, eliminând "zgomotul" tehnic din UI fără a compromite integritatea datelor).
+
+**RECOMANDARI:**
+- **Audit de entropie:** Deși PBKDF2 cu 150k iterații este standard, asigură-te că UI-ul de "Deblocare" include un indicator vizual de *key strength* (ex: "Parolă slabă/puternică") pentru a preveni utilizatorii să folosească chei triviale care ar anula protecția AES-GCM.
+- **Strategie de Backup:** Deși ai implementat exportul JSON, recomand adăugarea unei funcții de "Import" cu validare de semnătură (HMAC) pentru a permite utilizatorului să își restaureze datele în caz de ștergere accidentală a cache-ului, fără a compromite securitatea (importul trebuie să ceară parola pentru a decripta/valida integritatea).
+- **Monitorizare CSP:** Deoarece `unsafe-inline` este necesar pentru single-file, implementează un raport de încălcare a politicii (`report-uri`) către un endpoint de tip `null` sau un logger local pentru a detecta eventuale tentative de injectare în timp real, chiar dacă execuția este blocată.
 
 **NOTĂ AUDITOR:**
-Remedierea (R4#1) privind `pendingLock` elimină riscul de `DOMException` și race conditions, ceea ce era o vulnerabilitate critică de UX/stabilitate. Implementarea PBKDF2 cu cheie ne-exportabilă (extractable: false) ridică standardul de securitate la un nivel profesional pentru o aplicație client-side. Zero erori de consola și respectarea `prefers-reduced-motion` confirmă un control riguros asupra fluxului de execuție.
+Redesign-ul "Bloom" rezolvă cu succes paradoxul dintre complexitatea tehnică (criptare, ledger, sanitizare) și experiența utilizatorului (UX uman). Trecerea de la "scoruri reci" la "fraze umane" elimină riscul de interpretare eronată a datelor sensibile, iar mutarea detaliilor tehnice în zona de *progressive disclosure* („De ce văd asta?”) respectă principiul minimei expuneri fără a sacrifica transparența. Soluția este robustă, stabilă și respectă KPI-ul de zero expuneri.
+
+## UX & Accessibility Auditor — APROBAT
+VERDICT: APROBAT
+
+BLOCANTE:
+- Niciuna.
+
+RECOMANDARI:
+- **Accesibilitate (Contrast):** Deși ai atins pragul de 4.5:1, verifică dacă "badge-urile umane" (text alb pe fundal emerald #10B981) mențin contrastul necesar în toate stările (hover/focus). Emerald-ul poate deveni problematic pe text mic dacă luminozitatea scade.
+- **Cognitiv:** Asigură-te că "De ce văd asta?" (progressive disclosure) nu devine un "perete de text". Folosește liste cu puncte (bullet points) pentru a păstra sarcina cognitivă scăzută.
+- **Tehnic:** Deși CSP `unsafe-inline` este justificat tehnic pentru un single-file, recomand implementarea unei politici de tip `nonce` sau `hash` pentru scripturi, dacă mediul de livrare permite, pentru a închide complet vectorul de atac XSS.
+- **UX:** La interacțiunea de tip "scale la click" (micro-interacțiuni), asigură-te că durata animației este sub 200ms pentru a nu fi percepută ca o latență a sistemului.
+
+**Notă de audit:** Iteratia 5 a demonstrat maturitate prin eliminarea "zgomotului" tehnic din UI și prioritizarea clarității umane. Trecerea la un limbaj natural și eliminarea framing-ului financiar sunt decizii etice corecte care reduc riscul de manipulare dopaminergică. Sistemul de securitate (PBKDF2/RAM-only) este acum robust și documentat onest.
 
 ## AI & Data Ethics Auditor — APROBAT
 **AUDIT INDEPENDENT SI ADVERSARIAL (Runda 5)**
 
-**VERDICT: APROBAT (cu observații critice)**
-
-**BLOCANTE:**
-- Niciuna. (Soluția a integrat cu succes remedierea vulnerabilităților de tip *timing side-channel* prin padding constant și a consolidat integritatea criptografică prin PBKDF2/HMAC-SHA256, eliminând "security theater"-ul din iterațiile anterioare).
-
-**RECOMANDARI:**
-- **Explicabilitatea "Radarului":** Deși ați eliminat scorurile fabricate, eticheta "Afinitate = scor TF-IDF/cosine" trebuie să includă în UI un link către o secțiune de "Metodologie" (ex: *„Scorul reprezintă suprapunerea vectorilor de termeni, nu o predicție de succes”*). **Sursă:** *Wachter et al. (2017), "Why Honestly Explainable AI?"* – explicabilitatea necesită oferirea unui context contrafactual sau a limitelor algoritmice, nu doar a numelui algoritmului.
-- **Managementul memoriei (Auto-Lock):** Deși `cryptographic shredding` la 3 minute este o practică excelentă, asigurați-vă că `pendingLock` nu cauzează un *memory leak* prin acumularea de promisiuni în `Event Loop` dacă utilizatorul interacționează obsesiv cu interfața în timpul procesării. **Sursă:** *OWASP Memory Management Cheat Sheet* – recomand verificarea explicită a stării `null` pentru toate obiectele `Worker` sau `Buffer` după apelul `shred`.
-- **Onestitate AI (Secretara):** Etichetați clar output-ul Secretarei ca fiind "Pattern Matching Euristic" și nu "AI". Chiar dacă funcționalitatea este pur client-side, utilizarea termenului "AI" induce o încredere nejustificată (bias de automatizare). **Sursă:** *NIST AI Risk Management Framework (AI RMF 1.0)* – transparența privind capabilitățile sistemului este obligatorie pentru a evita supra-încrederea utilizatorului.
-- **Integritate:** Documentați vizibil faptul că "Verificarea Lantului" (Hash-Chain) protejează împotriva alterării datelor *stocate*, dar nu poate detecta o compromitere a memoriei RAM în timp real (ex: atacuri de tip *Man-in-the-Browser*). Această distincție este esențială pentru onestitatea față de utilizator.
-
-**Const
-
-## Quality & QA Auditor — RESPINS
-VERDICT: RESPINS
-
-BLOCANTE:
-- **Race Condition la nivel de UI-Lock:** Deși `pendingLock` gestionează coada de execuție, nu există o indicație vizuală (ex: overlay de tip "Processing...") care să blocheze interacțiunea utilizatorului cu elementele DOM în timpul procesării asincrone. Un utilizator poate declanșa rapid mai multe acțiuni (ex: click repetat pe "Match") înainte ca `pendingLock` să preia controlul, riscând stări inconsistente în `localStorage` dacă `validDB` nu este atomic la nivel de scriere (write-lock).
-- **Inconsistență PBKDF2/Salt:** Documentația menționează că salt-ul este stocat pe disc, dar nu specifică dacă acesta este unic per sesiune (re-generat la fiecare setare de parolă) sau static. Dacă salt-ul este static, expune utilizatorii la atacuri de tip rainbow table/pre-computed.
-- **XSS prin SVG:** Deși există `svgSafe`, manipularea directă a nodurilor SVG pentru graf (force-directed) prin API-ul DOM poate permite injectarea de atribute `onmouseover` sau `javascript:` în elementele `<a>` sau `foreignObject` dacă sanitizarea nu este aplicată recursiv pe întreg graful la fiecare re-randare.
-
-RECOMANDARI:
-- **Atomic Storage Write:** Implementează un mecanism de "transactional commit" (scrie în key temporară, validează, apoi suprascrie key-ul principal) pentru a preveni coruperea datelor în cazul în care browserul se închide în timpul salvării.
-- **Content Security Policy (CSP):** Deoarece este o aplicație single-file, adaugă un tag `<meta http-equiv="Content-Security-Policy" content="...">` care să interzică `unsafe-inline` și `eval` pentru a bloca orice tentativă de XSS, chiar și în cazul unei vulnerabilități de sanitizare.
-- **Memory Hardening:** La `cryptographic shredding`, asigură-te că obiectele care conțin cheia AES și datele în clar sunt suprascrise cu `0` (zero-fill) înainte de a fi lăsate pentru Garbage Collector.
-- **Verificare integritate:** Adaugă un test de integritate la "rece" (la fiecare `load`) care să compare hash-ul SHA-256 al întregului blob cu un checksum stocat separat, pentru a detecta manipularea externă a fișierului `localStorage` înainte de a încerca decriptarea.
-
-## Business & Compliance Auditor — APROBAT
-**AUDIT INDEPENDENT SI ADVERSARIAL (Runda 5)**
-
 **VERDICT: APROBAT**
 
 **BLOCANTE:**
-- Niciuna. (Evoluția de la Runda 1 la Runda 5 a eliminat complet ambiguitățile de business și riscurile critice de integritate a datelor prin implementarea PBKDF2 real, auto-lock și sanitizarea riguroasă a input-ului).
+- Niciuna. (Iterația 5 a abordat cu succes rigiditatea bancară, a eliminat scorurile arbitrare din UI și a consolidat securitatea prin mutarea cheilor în RAM și implementarea unui flux de lucru atomic, verificabil).
 
 **RECOMANDARI:**
-- **UX/KPI:** Deși etichetarea "(est.)" este prezentă, recomand ca în interfața de "Focus Digest", textul de disclaimer să fie integrat într-un *tooltip* nativ (title/aria-describedby) pe coloana de valori, pentru a menține curățenia vizuală fără a sacrifica transparența.
-- **Securitate:** Deși modelul de amenințare este corect identificat (atacator pe aceeași origine), recomand adăugarea unui header `Content-Security-Policy: default-src 'self'; script-src 'unsafe-inline';` în documentația de implementare (chiar dacă este single-file), pentru a întări postura de apărare împotriva injectării de scripturi externe în sesiunile viitoare.
-- **Audit:** Documentația metodologiei de calcul a Trust Score-ului ar trebui să includă un link către o secțiune "Cum funcționează" în subsolul panoului de profil, pentru a oferi utilizatorului non-tehnic o explicație în limbaj natural a ponderii variabilelor (Interese vs Afinitate vs Incredere).
+- **Audit de entropie:** Deși salt-ul este stocat local, asigură-te că implementarea `crypto.getRandomValues()` este utilizată pentru generarea acestuia, pentru a garanta unicitatea în cazul instanțelor multiple pe același browser (Sursă: *MDN Web Docs, SubtleCrypto.getRandomValues()*).
+- **Hardening DOM:** Deși sanitizarea SVG este recursivă, recomand implementarea unui `MutationObserver` care să monitorizeze nodurile din graful SVG pentru a preveni injecția de atribute `on*` prin manipulări externe ale DOM-ului în timpul rulării (Sursă: *OWASP, DOM-based XSS Prevention Cheat Sheet*).
+- **UX - Progressive Disclosure:** În secțiunea "De ce văd asta?", adaugă un link către un document de tip "Metodologie" (în interiorul fișierului HTML) care să explice matematic (simplificat) cum funcționează TF-IDF în contextul dat, pentru a elimina complet percepția de "black box" (Sursă: *Nielsen Norman Group, Transparency in AI UX*).
+- **Verificabilitate:** Deoarece ai eliminat scorurile numerice din UI-ul principal, asigură-te că în log-ul de audit (Trust Ledger) păstrezi o referință la "versiune algoritm" pentru ca utilizatorul să înțeleagă de ce potrivirile se pot schimba în timp (Sursă: *IEEE, Ethically Aligned Design for Autonomous and Intelligent Systems*).
 
-**NOTĂ AUDITOR:** Soluția a atins maturitatea tehnică necesară pentru un prototip *client-side*. Trecerea de la "security theater" la criptografie bazată pe PBKDF2 cu cheie volatilă (RAM-only) și mecanismul de *cryptographic shredding* la auto-lock demonstrează o înțelegere corectă a limitărilor mediului browser. Afirmațiile de business sunt acum corect încadrate ca euristici, eliminând riscul de inducere în eroare a utilizatorului.
+**NOTĂ AUDITOR:** Redesign-ul "Bloom" reușește să echilibreze complexitatea tehnică (criptare robustă, integritate tranzacțională) cu o interfață umană, eliminând "teatrul de securitate" prin documentarea onestă a limitărilor. Tranziția de la scoruri numerice obscure la badge-uri calitative este conformă cu principiile de explicabilitate AI.
+
+## Quality & QA Auditor — RESPINS
+**VERDICT: RESPINS**
+
+**BLOCANTE:**
+- **Inconsistență între "Zero dependințe" și "Playwright":** Soluția declară "Zero dependințe externe" în text, dar se bazează pe Playwright pentru verificare. Dacă Playwright injectează orice tip de bibliotecă sau dacă build-ul final conține cod de testare/instrumentare în producție, integritatea "Single-file" este compromisă.
+- **Vulnerabilitate logică în "Auto-lock":** Ai menționat că la blocare se șterge cheia din RAM, dar nu ai specificat **ștergerea/suprascrierea memoriei (Zeroing/Wiping)**. În JavaScript, simpla setare a variabilei la `null` nu garantează că valoarea a fost eliminată din heap-ul motorului V8 (Garbage Collector-ul poate păstra referințe în memorie). Fără un mecanism de *memory scrubbing*, cheia rămâne recuperabilă prin dump de memorie.
+- **Riscul "unsafe-inline" în CSP:** Deși CSP-ul blochează exfiltrarea, utilizarea `unsafe-inline` pentru scripturi într-o aplicație care procesează date sensibile (chiar și local) anulează protecția principală împotriva XSS. Un atacator care reușește să injecteze un payload via `localStorage` (dacă validarea `validDB` e bypassată) poate executa cod arbitrar.
+- **Race condition în Commit Tranzacțional:** Deși ai implementat scrierea în cheie temporară, nu ai menționat un mecanism de *rollback* în cazul în care `localStorage.setItem` eșuează parțial (ex: QuotaExceededError). Dacă procesul moare între scrierea cheii temporare și ștergerea celei vechi, baza de date poate rămâne într-o stare inconsistentă sau coruptă.
+
+**RECOMANDARI:**
+- **Memory Hardening:** Implementează un mecanism de tip `Buffer` sau `Uint8Array` pentru chei și suprascrie-le manual cu `0x00` înainte de a le elibera, pentru a minimiza amprenta în heap.
+- **Sanitizare:** Mută logica de sanitizare (clean/esc) într-un Web Worker izolat. Dacă procesarea se face în thread-ul principal, orice eroare de parsare SVG poate bloca UI-ul, chiar dacă ai `try/catch`.
+- **Audit de stocare:** Adaugă o funcție de `integrity check` la fiecare pornire care nu doar validează
+
+## Business & Compliance Auditor — APROBAT
+VERDICT: **APROBAT**
+
+**BLOCANTE:**
+- Niciuna. (Iterația 5 a abordat cu succes cerințele de etichetare a estimărilor, conformitate și securitate, eliminând ambiguitățile din rundele anterioare).
+
+**RECOMANDARI:**
+- **Auditabilitate externă:** Deși logica de criptare este acum corect documentată, recomand adăugarea unui hash SHA-256 al versiunii curente a codului (build ID) în panoul de confidențialitate, pentru a permite utilizatorului să verifice integritatea sursei (anti-tampering).
+- **UX-ul "De ce văd asta?":** Deoarece ați optat pentru *progressive disclosure*, asigurați-vă că textul din acest panou rămâne neutru și nu folosește un limbaj de vânzări (ex: în loc de "Am găsit cea mai bună potrivire pentru tine", utilizați "Algoritmul a identificat suprapuneri între [Tag A] și [Tag B]").
+- **Mentenanță:** Având în vedere utilizarea `unsafe-inline` în CSP (necesar pentru single-file), asigurați-vă că procesul de sanitizare SVG este integrat într-un pipeline de testare care rulează periodic pentru a preveni regresia (ex: verificarea manuală a unui set de payload-uri XSS cunoscute în input-ul de profil).
+
+**NOTĂ AUDITOR:**
+Redesign-ul Bloom a reușit tranziția de la un dashboard financiar speculativ la un instrument de networking bazat pe transparență. Etichetarea KPI-urilor ca estimări euristice și eliminarea framing-ului financiar rezolvă riscul de "claims substantiation". Mecanismul de criptare (PBKDF2/AES-GCM) este acum corect implementat, respectând bunele practici de *in-memory only*. Soluția este matură pentru un prototip de înaltă fidelitate.
