@@ -390,6 +390,7 @@ details.why2>summary::-webkit-details-marker{display:none}
 .meetcard .moview{margin-top:10px;font-size:13px;color:var(--ink2);background:var(--card2);border-radius:10px;padding:10px 12px;display:flex;align-items:flex-start;gap:6px}
 .meetcard .moview b{color:var(--ink)}.meetcard .moview .x{margin-left:auto;background:none;border:0;color:var(--muted);cursor:pointer;font-size:15px}
 .meetcard .moedit{margin-top:10px}
+.meetcard .moview.goal{border-left:2px solid var(--primary)}
 /* loop2 #15: remindere intalniri <24h */
 .meetcard.soon{border-color:var(--primary);box-shadow:0 0 0 1px var(--primary),var(--shadow)}
 .soonbadge{display:inline-flex;align-items:center;gap:4px;background:var(--primary);color:#fff;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:700;margin-top:7px}
@@ -692,7 +693,7 @@ const SEEK={0:[["Investitor pentru proiect imobiliar","dictare"],["Furnizor de c
 const COLORS=["#6366F1","#10B981","#F59E0B","#8B5CF6","#EC4899","#0EA5E9","#14B8A6","#F97316","#EF4444","#22C55E"];
 const STOP=new Set("si sau de la in un o cu pe pentru din ca care este are am ai vreau caut ofer cineva zona bun buna nou noua a al ale lui langa".split(" "));
 const KEY="cercul_eie_v5",TKEY="cercul_theme",SKEY="cercul_salt";
-let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false,MATCHFILTER="all",NOTEFILTER="all",EDITTASK=null,EDITNOTE=null,CONNFILTER="all",EDITMEET=null,FOCUS=false,NOTERANGE="all";
+let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false,MATCHFILTER="all",NOTEFILTER="all",EDITTASK=null,EDITNOTE=null,CONNFILTER="all",EDITMEET=null,FOCUS=false,NOTERANGE="all",EDITGOAL=null;
 // suprascrie cu zerouri bufferele pe care le controlam (audit s5r #1). CryptoKey-urile sunt
 // non-extractabile/opace (WebCrypto nu expune heap-ul lor) -> le eliberam pt. GC; parolele sunt
 // string-uri imutabile in JS si nu pot fi zeroizate — limitare documentata, nu ascunsa.
@@ -1361,6 +1362,11 @@ function renderWeekCal(){const host=$("#weekcal");if(!host)return;const td=today
 function weekDay(iso){const ms=(DB.meetings||[]).filter(m=>m.status==="confirmat"&&(m.a===ME||m.b===ME)&&(m.when||"").slice(0,10)===iso);
   if(!ms.length){toast("Liber pe "+fmtWhen(iso));return;}
   toast(ms.map(m=>{const cel=mem(m.a===ME?m.b:m.a)||{name:"?"};return ((m.when.split("T")[1])||"")+" "+cel.name.split(" ")[0];}).join(" · "));}
+// loop3 #11: scopul intalnirii (pre-meeting) — camp optional "ce vrei sa obtii"
+function editMeetGoal(id){EDITGOAL=id;renderMeetings();}
+function cancelMeetGoal(){EDITGOAL=null;renderMeetings();}
+function saveMeetGoal(id){const m=(DB.meetings||[]).find(x=>x.id===id);if(!m){EDITGOAL=null;renderMeetings();return;}
+  m.goal=clean((($("#mgText")||{}).value||"").trim());EDITGOAL=null;logA("Scop intalnire notat");save();renderMeetings();toast("Scop salvat");}
 function editMeetOutcome(id){EDITMEET=id;renderMeetings();}
 function cancelMeetOutcome(){EDITMEET=null;renderMeetings();}
 function saveMeetOutcome(id){const m=(DB.meetings||[]).find(x=>x.id===id);if(!m){EDITMEET=null;renderMeetings();return;}
@@ -1388,6 +1394,15 @@ function renderMeetings(){const host=$("#meetList");if(!host)return;
              h("button",{class:"btn ghost sm","data-act":"fu","data-id":x.id,"data-fk":"thanks",text:"Multumire"}),
              h("button",{class:"btn ghost sm","data-act":"fu","data-id":x.id,"data-fk":"next",text:"Pas urmator"}),
              h("button",{class:"btn ghost sm","data-act":"fu","data-id":x.id,"data-fk":"resched",text:"Reprogramare"}))));
+    let gl=null;
+    if(x.status==="confirmat"){
+      gl = EDITGOAL===x.id
+        ? h("div",{class:"moedit"},h("input",{id:"mgText",value:x.goal||"",placeholder:"Ce vrei sa obtii din aceasta intalnire?","aria-label":"Scopul intalnirii",style:{width:"100%"}}),
+            h("div",{style:{display:"flex",gap:"7px",marginTop:"7px"}},h("button",{class:"btn gold sm","data-act":"mgsave","data-id":x.id,text:"Salveaza"}),h("button",{class:"btn ghost sm","data-act":"mgcancel",text:"Renunta"})))
+        : x.goal
+          ? h("div",{class:"moview goal"},h("b",{text:"Scop: "}),x.goal,h("button",{class:"x","data-act":"mgedit","data-id":x.id,"aria-label":"Editeaza scopul",text:"✎"}))
+          : h("button",{class:"btn ghost sm","data-act":"mgedit","data-id":x.id,style:{marginTop:"9px"},text:"🎯 Adauga scopul intalnirii"});
+    }
     let oc=null;
     if(x.status==="confirmat"){
       oc = EDITMEET===x.id
@@ -1401,7 +1416,7 @@ function renderMeetings(){const host=$("#meetList");if(!host)return;
     return h("div",{class:"meetcard"+(sl?" soon":"")},
       h("div",{class:"mtop2"},h("div",{class:"mw",text:fmtWhen(x.when)}),h("div",{class:"mwho",text:"cu "+cel.name})),
       sl?h("div",{class:"soonbadge",text:"⏰ "+sl}):null,
-      x.place?h("div",{class:"mplace",text:"📍 "+x.place}):null,acts,oc);};
+      x.place?h("div",{class:"mplace",text:"📍 "+x.place}):null,acts,gl,oc);};
   const out=[];
   if(toAccept.length){out.push(h("div",{class:"pipe-h a"},h("span",{class:"pd"}),"De confirmat",h("span",{class:"pn",text:String(toAccept.length)})));toAccept.forEach(x=>out.push(card(x,"accept")));}
   if(confirmed.length){out.push(h("div",{class:"pipe-h c"},h("span",{class:"pd"}),"Confirmate",h("span",{class:"pn",text:String(confirmed.length)})));confirmed.forEach(x=>out.push(card(x,"done")));
@@ -1647,6 +1662,9 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="weekday")weekDay(el.dataset.d);
   else if(a==="focus")toggleFocus();
   else if(a==="focusadd")focusAdd();
+  else if(a==="mgedit")editMeetGoal(id);
+  else if(a==="mgsave")saveMeetGoal(id);
+  else if(a==="mgcancel")cancelMeetGoal();
   else if(a==="moedit")editMeetOutcome(id);
   else if(a==="mosave")saveMeetOutcome(id);
   else if(a==="mocancel")cancelMeetOutcome();

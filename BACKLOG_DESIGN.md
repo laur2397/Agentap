@@ -24,7 +24,7 @@ Validare: node --check + smoke Playwright zero erori. Audit (examples/audit.py) 
 8. [x] Widget „Reteaua activa": persoanele cu interactiune in ultimele 30 de zile (lista curata).
 9. [x] Status manual „Deschis spre conexiuni" (asincron, fara tracking) — comutator in Profil.
 10. [x] Progres intrinsec onest pe Acasa: „ai notat N idei · M task-uri facute" (real, nu streak).
-11. [ ] Scopul intalnirii (pre-meeting): camp optional „ce vrei sa obtii" la intalnirile viitoare.
+11. [x] Scopul intalnirii (pre-meeting): camp optional „ce vrei sa obtii" la intalnirile viitoare.
 12. [ ] Audit de control: slider explicabil relevanta↔diversitate in ordinea potrivirilor (ajustabil manual).
 13. [ ] Microcopy cald & uman: revizuire texte cheie (fara jargon tehnic, ton prietenos).
 14. [ ] Reducere efort cognitiv pe Acasa: gruparea clara a sectiunilor + un singur accent primar.
