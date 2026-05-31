@@ -520,7 +520,8 @@ details.why2>summary::-webkit-details-marker{display:none}
     <div class="filters" id="taskFilters" style="margin-top:12px">
       <button class="chip" data-act="tfilter" data-f="all">Toate</button>
       <button class="chip on" data-act="tfilter" data-f="active">Active</button>
-      <button class="chip" data-act="tfilter" data-f="due">Scadente</button></div>
+      <button class="chip" data-act="tfilter" data-f="due">Scadente</button>
+      <button class="btn ghost sm" data-act="bulkdone" style="margin-left:auto" aria-label="Marcheaza toate task-urile vizibile ca finalizate">✓ Finalizeaza vizibile</button></div>
     <div id="taskList" style="margin-top:6px"></div>
     <div class="sec" style="margin-top:26px">Jurnalul tau</div>
     <p class="sub">Idei, notite si lucruri de tinut minte. Cauta-le oricand; brief-ul de intalnire le foloseste.</p>
@@ -1339,6 +1340,14 @@ function saveTask(id){const t=(DB.tasks||[]).find(x=>x.id===id);if(!t){EDITTASK=
   const nt=clean((($("#etText")||{}).value||"").trim()),nd=clean((($("#etDue")||{}).value||"")).slice(0,10);
   if(nt)t.text=nt;t.due=nd;EDITTASK=null;logA("Task editat");save();renderTasks();updateBadges();toast("Task actualizat");}
 function setTaskFilter(f){TASKFILTER=f;$$("#taskFilters .chip").forEach(c=>c.classList.toggle("on",c.dataset.f===f));renderTasks();}
+// loop2 #19: bulk done — toate task-urile vizibile (dupa filtrul curent), cu confirmare
+function visibleOpenTasks(){const td=today();let list=(DB.tasks||[]).filter(t=>t.member_id===ME&&!t.done);
+  if(TASKFILTER==="due")list=list.filter(t=>t.due&&t.due<=td);
+  return list;}
+function bulkDone(){const open=visibleOpenTasks();if(!open.length){toast("Niciun task de finalizat");return;}
+  if(!confirm("Marchezi "+open.length+" task"+(open.length===1?"":"-uri")+" ca finalizate?"))return;
+  const ids=new Set(open.map(t=>t.id));(DB.tasks||[]).forEach(t=>{if(ids.has(t.id))t.done=1;});
+  logA("Bulk done: "+open.length+" task-uri finalizate");save();renderTasks();updateBadges();toast(open.length+" task-uri finalizate");}
 function renderTasks(){const host=$("#taskList");if(!host)return;
   const td=today();let list=(DB.tasks||[]).filter(t=>t.member_id===ME);
   if(TASKFILTER==="active")list=list.filter(t=>!t.done);
@@ -1487,6 +1496,7 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="tasktoggle")toggleTask(id);
   else if(a==="deltask")delTask(id);
   else if(a==="tfilter")setTaskFilter(el.dataset.f);
+  else if(a==="bulkdone")bulkDone();
   else if(a==="tasksnooze")snoozeTask(id);
   else if(a==="taskprio")toggleTaskPrio(id);
   else if(a==="taskedit")editTask(id);
