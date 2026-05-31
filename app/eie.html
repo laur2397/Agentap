@@ -355,6 +355,14 @@ details.why2>summary::-webkit-details-marker{display:none}
 .todayrow .tdc{flex:1;min-width:0}
 .todayrow .tdt{font-size:14px;font-weight:600;color:var(--ink)}
 .todayrow .tds{font-size:12px;color:var(--muted);margin-top:2px}
+/* loop2 #9: mini-calendar saptamanal */
+.weekcal{display:flex;gap:6px;margin:12px 0 4px}
+.wcell{flex:1;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:8px 2px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;position:relative;min-height:44px}
+.wcell .wd{font-size:10px;color:var(--muted);text-transform:uppercase}
+.wcell .wn{font-size:15px;font-weight:700;color:var(--ink)}
+.wcell.today{border-color:var(--primary);background:var(--primary-soft)}
+.wcell.has .wn{color:var(--primary-dim)}
+.wcell .wdot{position:absolute;top:3px;right:4px;min-width:13px;height:13px;border-radius:8px;background:var(--primary);color:#fff;font-size:8.5px;font-weight:700;display:grid;place-items:center;line-height:1}
 /* iteratia 3 Secretara: task-uri + badge */
 .taskcard{display:flex;align-items:flex-start;gap:11px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:9px;box-shadow:var(--shadow)}
 .taskcard.done{opacity:.6}
@@ -455,6 +463,7 @@ details.why2>summary::-webkit-details-marker{display:none}
     <div id="todayBox"></div>
     <div class="sec" style="margin-top:24px">Intalniri</div>
     <p class="sub">Programezi din conversatia cu o conexiune; se confirma doar cand ambele parti accepta. La cele confirmate poti adauga in Google Calendar / descarca .ics / trimite email — <b>tu</b> alegi sa predai datele, aplicatia nu trimite nimic singura.</p>
+    <div id="weekcal"></div>
     <div id="meetList"></div>
     <div class="sec" style="margin-top:26px">Noteaza dupa o intalnire</div>
     <p class="sub">Scrie cu cuvintele tale ce ai discutat. Iti notez singur ce cauti si ce oferi, si caut potriviri.</p>
@@ -746,7 +755,7 @@ function setView(v){if(PROC){toast("Asteapta — Secretara AI proceseaza…");re
 function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("div",{class:"sk l w80"}),h("div",{class:"sk l w40"}));}
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
 function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
-  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();setKids($("#matchList"),pipeline(myMatches().filter(matchIndOk)));}else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){renderToday();renderMeetings();renderTasks();renderNotes();}else if(VIEW==="profil")prof();
+  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();setKids($("#matchList"),pipeline(myMatches().filter(matchIndOk)));}else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();}else if(VIEW==="profil")prof();
   updateBadges();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 // backlog #7: empty-state ilustrat, consistent
 function estateBox(title,sub){return h("div",{class:"estate",style:{padding:"26px 20px"}},
@@ -1086,6 +1095,17 @@ async function meetRespond(id,ok){const mt=(DB.meetings||[]).find(x=>x.id===id);
   mt.status="confirmat";mt.cat=Date.now();
   try{mt.hash=await hmacHex("MEET|"+mt.a+"|"+mt.b+"|"+mt.when+"|"+mt.place);}catch(_){mt.hash="";}
   logA("Intalnire confirmata (dublu consimtamant)");save();render();toast("✓ Intalnire confirmata");}
+/* backlog secretara #9: mini-calendar pe 7 zile */
+function renderWeekCal(){const host=$("#weekcal");if(!host)return;const td=today(),wd=["Du","Lu","Ma","Mi","Jo","Vi","Sa"];
+  const cells=[];
+  for(let i=0;i<7;i++){const iso=addDays(td,i),dt=new Date(iso+"T00:00");
+    const cnt=(DB.meetings||[]).filter(m=>m.status==="confirmat"&&(m.a===ME||m.b===ME)&&(m.when||"").slice(0,10)===iso).length;
+    cells.push(h("button",{class:"wcell"+(i===0?" today":"")+(cnt?" has":""),"data-act":"weekday","data-d":iso,"aria-label":wd[dt.getDay()]+" "+dt.getDate()+(cnt?(", "+cnt+" intalniri"):", liber")},
+      h("div",{class:"wd",text:wd[dt.getDay()]}),h("div",{class:"wn",text:String(dt.getDate())}),cnt?h("div",{class:"wdot",text:cnt>1?String(cnt):""}):null));}
+  setKids(host,h("div",{class:"weekcal"},...cells));}
+function weekDay(iso){const ms=(DB.meetings||[]).filter(m=>m.status==="confirmat"&&(m.a===ME||m.b===ME)&&(m.when||"").slice(0,10)===iso);
+  if(!ms.length){toast("Liber pe "+fmtWhen(iso));return;}
+  toast(ms.map(m=>{const cel=mem(m.a===ME?m.b:m.a)||{name:"?"};return ((m.when.split("T")[1])||"")+" "+cel.name.split(" ")[0];}).join(" · "));}
 function renderMeetings(){const host=$("#meetList");if(!host)return;
   const mine=(DB.meetings||[]).filter(x=>x.a===ME||x.b===ME);
   const toAccept=mine.filter(x=>x.status==="propus"&&x.b===ME);
@@ -1305,6 +1325,7 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="notepin")togglePin(id);
   else if(a==="relcycle")relCycle(id);
   else if(a==="connfilter")setConnFilter(el.dataset.f);
+  else if(a==="weekday")weekDay(el.dataset.d);
   else if(a==="noteedit")editNote(id);
   else if(a==="notesave")saveNote(id);
   else if(a==="notecancel")cancelNoteEdit();

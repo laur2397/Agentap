@@ -16,7 +16,7 @@ Validare: node --check + smoke Playwright zero erori. Audit (examples/audit.py) 
 6. [x] Quick-add task cu detectie de data in text („maine”, „luni”, „in 3 zile”).
 7. [x] Pin la notite: notitele fixate apar sus in jurnal.
 8. [x] Status relatie per conexiune (Rece / Activ / Prioritar) + filtrare in Reteaua.
-9. [ ] Vizualizare saptamanala a intalnirilor (mini-calendar pe 7 zile).
+9. [x] Vizualizare saptamanala a intalnirilor (mini-calendar pe 7 zile).
 10. [ ] Notita de rezultat atasata unei intalniri confirmate („cum a mers”).
 11. [ ] Mod Focus: ascunde tot, lasa doar notita activa + input rapid.
 12. [ ] Quick-add global (buton + / tasta) pentru notita sau task de oriunde.
