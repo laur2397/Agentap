@@ -1,0 +1,1762 @@
+[
+  {
+    "cod": "6.4",
+    "rol": "ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Matching-ul pe keyword-uri statice nu scalează și ignoră contextul semantic al profilului.\n\nFIX: Implementează un model de embedding (Sentence-Transformers) în browser (TensorFlow.js) pentru calcularea similarității cosinus în timp real, eliminând dependența de keyword-uri.",
+    "ok": true
+  },
+  {
+    "cod": "8.7",
+    "rol": "Graphic / Brand Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Contrastul auriu pe fundal dark este ilizibil la dimensiuni mici, iar ierarhia vizuală a KPI-urilor este haotică, diluând percepția de \"premium\".\n\nFIX: Implementează paleta de culori cu raport de contrast WCAG și un sistem de tipografie tip \"Gold-on-Black\" scalabil.",
+    "ok": true
+  },
+  {
+    "cod": "1.9",
+    "rol": "Senior Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Arhitectura monolit (single-file HTML) blochează scalabilitatea, testarea unitară și performanța UI nativ. Stocarea locală limitează sincronizarea cross-device.\n\nFIX: Migrarea către un framework hibrid (React Native/Expo) cu structură modulară și integrarea unei baze de date cloud (Firebase).",
+    "ok": true
+  },
+  {
+    "cod": "3.5",
+    "rol": "Performance Test Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: `localStorage` limitează stocarea la 5MB și blochează UI-ul pe main thread în timpul operațiilor de matching pentru seturi mari de date.\n\nFIX: Implementează IndexedDB pentru stocare asincronă și Web Workers pentru a deloga procesarea algoritmului de matching.",
+    "ok": true
+  },
+  {
+    "cod": "11.8",
+    "rol": "Growth Marketer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa mecanismului de captare a datelor (tracking) face imposibilă validarea ipotezelor de retenție și activare.\n\nFIX: Injectează un script simplu de logare în localStorage care să trimită event-uri de tip 'click' pe matching și 'add' în profil.",
+    "ok": true
+  },
+  {
+    "cod": "13.5",
+    "rol": "Customer Experience Analyst",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa feedback-ului direct. Utilizatorul nu poate evalua calitatea potrivirilor, blocând calculul CSAT și validarea algoritmului.\n\nFIX: Adaugă un buton de rating (1-5 stele) pe cardul de potrivire după acțiunea „Accept”. Stochează scorul în localStorage pentru analiză.",
+    "ok": true
+  },
+  {
+    "cod": "6.5",
+    "rol": "Generative AI Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Matching-ul pe keyword overlap e ineficient și superficial; generează zgomot, nu valoare.\n\nFIX: Implementează un prompt system-level pentru a grupa \"Intentii de business\" prin vectori semantici, filtrând potrivirile după scorul de relevanță generat de model.",
+    "ok": true
+  },
+  {
+    "cod": "17.2",
+    "rol": "Internal Help Desk",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa persistenței datelor și a autentificării (SSO) blochează accesul securizat și sincronizarea între dispozitivele angajaților.\n\nFIX: Implementează Firebase Auth pentru identitate unică și Firestore pentru stocarea securizată a profilurilor, eliminând dependența de localStorage-ul local.",
+    "ok": true
+  },
+  {
+    "cod": "1.9",
+    "rol": "Senior Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: Stocarea locală (localStorage) nu permite sincronizarea datelor între dispozitive, compromițând retenția utilizatorilor și integritatea rețelei.\n\nFIX: Implementează un API REST minimal (Firebase sau Supabase) pentru persistență, permițând migrarea datelor către un backend scalabil în iterația viitoare.",
+    "ok": true
+  },
+  {
+    "cod": "3.5",
+    "rol": "Performance Test Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Stocarea în `localStorage` și matching-ul client-side vor bloca UI-ul (main thread) la creșterea numărului de membri, cauzând latență critică în UX.\n\nFIX: Implementează Web Workers pentru procesarea algoritmului de matching și paginare (lazy loading) a listei de membri.",
+    "ok": true
+  },
+  {
+    "cod": "9.1",
+    "rol": "Behavioral Science Lead",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: \"Secretara AI\" colectează date sensibile fără consimțământ explicit sau transparență asupra stocării. Riscul de manipulare prin \"Trust Score\" opac.\n\nFIX: Implementează un ecran de consimțământ granular și un jurnal de transparență pentru scorul de încredere (cum este calculat).",
+    "ok": true
+  },
+  {
+    "cod": "11.9",
+    "rol": "Brand / PR Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa unui sistem de verificare a identității (KYC) subminează \"Trust Score\"-ul; reputația platformei riscă să fie asociată cu conturi false/spam.\n\nFIX: Implementează un ecran de \"Verificare Digitală\" (LinkedIn/Email) obligatoriu pentru accesul la funcția de potrivire.",
+    "ok": true
+  },
+  {
+    "cod": "17.3",
+    "rol": "Endpoint Management Specialist",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Datele sensibile (Trust Score, rețea) sunt stocate în `localStorage` în clar, accesibile oricărui script/utilizator de pe dispozitiv.\n\nFIX: Implementează criptarea datelor în browser folosind Web Crypto API și adaugă un timeout de sesiune pentru ștergerea automată.",
+    "ok": true
+  },
+  {
+    "cod": "1.10",
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: `localStorage` limitează scalabilitatea și nu permite sincronizarea între dispozitive, blocând adopția reală.\n\nFIX: Implementează un mock de autentificare (JWT) și un strat de servicii pentru a pregăti integrarea cu un backend Firebase/Supabase în iterația următoare.",
+    "ok": true
+  },
+  {
+    "cod": "13.6",
+    "rol": "Support Team Lead",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa unui sistem de ticketing/escaladare în prototip va bloca suportul când utilizatorii raportează erori în Matching.\n\nFIX: Adaugă un modul \"Support/Feedback\" în meniu care generează un JSON cu starea localStorage, facilitând diagnosticarea rapidă a incidentelor fără backend.",
+    "ok": true
+  },
+  {
+    "cod": "6.5",
+    "rol": "Generative AI Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Matching-ul pe keyword-uri este imprecis și produce zgomot. Secretara AI este doar un placeholder, fără procesare semantică.\n\nFIX: Implementează un embedding local (Transformers.js) pentru matching semantic și sumarizare \"intentii\" în browser, eliminând dependența de keyword-uri statice.",
+    "ok": true
+  },
+  {
+    "cod": "3.6",
+    "rol": "Quality Engineer Process",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa persistenței datelor și a procesului de validare (input-uri necontrolate). \n\nFIX: Implementează un schema-validator pentru `localStorage` și un flux \"Definition of Done\" (checklist) obligatoriu înainte de orice modificare a codului pentru a preveni regresia.",
+    "ok": true
+  },
+  {
+    "cod": "9.2",
+    "rol": "Behavioral Scientist / Psiholog cognitiv",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: \"Secretara AI\" creează dependență prin validare externă constantă, riscând să devină un \"slot machine\" psihologic.\n\nFIX: Înlocuiește notificările de tip \"push\" cu un interval de \"batching\" zilnic (digest), încurajând reflecția deliberată în detrimentul gratificării instantanee.",
+    "ok": true
+  },
+  {
+    "cod": "11.10",
+    "rol": "Technical Writer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa ghidului de utilizare pentru „Secretara AI” generează confuzie privind inputul vocal.\nFIX: Adăugarea unui buton „?” în ecranul AI care deschide un modal cu exemple de comenzi vocale și structura corectă a intențiilor de business.",
+    "ok": true
+  },
+  {
+    "cod": "14.1",
+    "rol": "HR Director / Head of People",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa unui sistem de verificare a credibilității (Trust Score) și a siguranței psihologice în interacțiuni. Matching-ul bazat doar pe keyword-uri riscă să creeze conexiuni superficiale, subminând cultura de \"High-Trust\" a rețelei.\n\nFIX: Introducerea unui algoritm de \"Endorsement\" (validare încrucișată între membri) în fluxul de matching.",
+    "ok": true
+  },
+  {
+    "cod": "17.4",
+    "rol": "Internal Tools / Systems Admin",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa integrării API blochează scalarea datelor din Notion/CRM. Prototipul e izolat, imposibil de sincronizat cu restul ecosistemului.\n\nFIX: Implementează un Webhook mock pentru a simula trimiterea \"intențiilor\" către un endpoint extern (ex: Make.com/Zapier) pentru procesare.",
+    "ok": true
+  },
+  {
+    "cod": "1.10",
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: `localStorage` șterge datele la cache clear și nu permite sincronizarea între dispozitive; UX-ul pe mobil e blocat de designul single-file.\n\nFIX: Migrare date către Firebase Realtime DB și refactorizare în componente modulare pentru scalabilitate.",
+    "ok": true
+  },
+  {
+    "cod": "6.6",
+    "rol": "LLM / Integration Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Matching-ul pe keyword-uri este rudimentar și ineficient. Lipsa unui layer de orchestrare face imposibilă scalarea către inteligență semantică.\n\nFIX: Implementează un proxy API (ex: LangChain) pentru a trimite intentiile către un model LLM (OpenAI/Anthropic) pentru embedding-uri și matching semantic.",
+    "ok": true
+  },
+  {
+    "cod": "4.1",
+    "rol": "CISO Deputy / Security Lead",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Stocarea datelor sensibile (Trust Score, profil) în localStorage este necriptată, expunând utilizatorii la furt de identitate prin atacuri XSS.\n\nFIX: Implementează criptarea AES (Web Crypto API) pentru datele din localStorage și validează riguros input-ul utilizatorului.",
+    "ok": true
+  },
+  {
+    "cod": "14.2",
+    "rol": "Technical Recruiter / Sourcer",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa unui sistem de filtrare a competențelor tehnice (stack/senioritate) în `POTRIVIRI` duce la matching irelevant.\n\nFIX: Adaugă tag-uri de competențe (ex: React, Go, AWS) în `PROFIL` și filtrează `POTRIVIRI` prin intersecția acestor seturi de date.",
+    "ok": true
+  },
+  {
+    "cod": "17.4",
+    "rol": "Internal Tools / Systems Admin",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa integrării API blochează scalarea datelor din tool-uri externe (Notion/CRM) în localStorage.\n\nFIX: Implementează un webhook handler generic (ex: prin Make.com) care să injecteze JSON-ul de matching direct în `localStorage` pentru a simula un flux de date real.",
+    "ok": true
+  },
+  {
+    "cod": "1.10",
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: State management-ul prin localStorage este volatil și ineficient pentru grafuri complexe; lipsa unei structuri de date normalizate blochează scalarea matching-ului.\n\nFIX: Implementează un store centralizat (State Manager) și persistă datele într-un IndexedDB pentru a simula un cache local robust.",
+    "ok": true
+  },
+  {
+    "cod": "11.11",
+    "rol": "Marketing Operations",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa trasabilității datelor între \"Secretara AI\" și CRM; datele rămân izolate în localStorage, imposibil de analizat în BI.\n\nFIX: Implementează un export JSON/CSV în profil și un webhook mock pentru a simula trimiterea intențiilor către un CRM.",
+    "ok": true
+  },
+  {
+    "cod": "9.2",
+    "rol": "Behavioral Scientist / Psiholog cognitiv",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: \"Secretara AI\" induce dependență prin feedback imediat și validare socială, riscând un comportament compulsiv de verificare.\n\nFIX: Introdu \"Batch Processing\" pentru recomandări (afișare doar la ore fixe), reducând anxietatea de tip FOMO și stimulând utilizarea intenționată.",
+    "ok": true
+  },
+  {
+    "cod": "1.1",
+    "rol": "Head of Engineering / VP Engineering",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa persistenței și securității datelor (localStorage expus) blochează scalarea și încrederea utilizatorilor premium.\n\nFIX: Migrare către Firebase pentru autentificare și stocare (Firestore), implementare reguli de acces (Security Rules) și integrare API OpenAI pentru matching semantic.",
+    "ok": true
+  },
+  {
+    "cod": "6.7",
+    "rol": "Conversational AI Designer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Secretara AI este un \"black box\" pasiv; utilizatorul nu știe ce a înțeles AI-ul din dictare, generând incertitudine.\n\nFIX: Adaugă un ecran de confirmare \"Intentii extrase\" înainte de match, permițând editarea textului și validarea contextului.",
+    "ok": true
+  },
+  {
+    "cod": "12.1",
+    "rol": "Sales Director",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa unui sistem de \"Sales Pipeline\" și \"Lead Scoring\" pentru a monetiza rețeaua. Nu vedem cum validăm ROI-ul pentru parteneri.\n\nFIX: Adaugă un modul \"CRM\" în ecranul 4 pentru a monitoriza statusul tranzacțiilor generate de AI.",
+    "ok": true
+  },
+  {
+    "cod": "9.3",
+    "rol": "Cercetator neurostiinte / stiinte cognitive",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: \"Trust Score\" și \"ROI\" vizibile constant induc anxietate și „scrolling de validare” prin supra-activarea sistemului de recompensă dopaminergică.\n\nFIX: Înlocuiește KPI-urile numerice cu un dashboard de \"Stare de Rețea\" calitativ, afișat doar la cerere (on-demand), pentru a reduce stresul de performanță.",
+    "ok": true
+  },
+  {
+    "cod": "14.2",
+    "rol": "Technical Recruiter / Sourcer",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa unui sistem de tag-uri tehnice/stack-uri (ex: Python, AWS) în profil. Matching-ul actual pe keyword-uri generice este irelevant pentru recrutarea tech.\n\nFIX: Adăugarea unui set de \"Tech Skills Tags\" în profil și filtrarea match-urilor pe stack-ul tehnologic.",
+    "ok": true
+  },
+  {
+    "cod": "18.1",
+    "rol": "Head of Operations / COO Deputy",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa persistenței datelor și a securității (localStorage) blochează scalabilitatea și încrederea utilizatorului pentru date de rețea.\n\nFIX: Migrarea către un backend serverless (Firebase) pentru sincronizare multi-device și stocare securizată, esențială pentru integritatea Trust Score-ului.",
+    "ok": true
+  },
+  {
+    "cod": "1.10",
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 4,
+    "review": "PROBLEMA: Lipsa persistenței cross-device și securității datelor (stocare în localStorage/plain text).\n\nFIX: Implementare Firebase Auth și Firestore pentru sincronizare în timp real și securizarea accesului la profiluri; tranziție de la stocare locală la cloud-based.",
+    "ok": true
+  },
+  {
+    "cod": "6.8",
+    "rol": "AI Data Specialist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Datele de test (20 membri) sunt statice, neanonimizate și lipsite de metadate structurate pentru matching semantic.\n\nFIX: Implementează un script de generare sintetică a setului de date (JSON), incluzând etichete de context și vectori de trăsături pentru antrenament.",
+    "ok": true
+  },
+  {
+    "cod": "4.2",
+    "rol": "Information Security Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Stocarea datelor sensibile (Trust Scores, intentii business) în localStorage permite accesul oricui accesează dispozitivul fără autentificare.\n\nFIX: Implementează un ecran de login cu stocare criptată (AES-256) a datelor locale și timeout automat pentru sesiune.",
+    "ok": true
+  },
+  {
+    "cod": "1.2",
+    "rol": "Engineering Manager",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa persistenței datelor și a securității face prototipul inutilizabil pentru feedback real.\n\nFIX: Implementează `IndexedDB` pentru stocare locală robustă și criptează datele din `localStorage` pentru a simula un mediu securizat necesar pentru încrederea utilizatorilor.",
+    "ok": true
+  },
+  {
+    "cod": "4.2",
+    "rol": "Information Security Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Stocarea datelor sensibile (Trust Score, profiluri) în `localStorage` (plain text) permite accesul neautorizat prin XSS sau acces fizic la dispozitiv.\n\nFIX: Implementează criptarea datelor în browser folosind Web Crypto API cu cheie derivată din parolă/PIN.",
+    "ok": true
+  },
+  {
+    "cod": "12.2",
+    "rol": "Account Executive",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa unui dashboard de \"Pipeline Value\" și a unei funcții de export/CRM. Nu pot închide clienți mari dacă nu văd impactul financiar direct al rețelei în platformă.\n\nFIX: Adaugă un modul \"Deal Tracker\" pentru a vizualiza valoarea oportunităților generate.",
+    "ok": true
+  },
+  {
+    "cod": "14.3",
+    "rol": "Recruiter / Talent Acquisition",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa unui profil de \"Hiring Manager\" care să valideze calitatea candidaților (Trust Score), ducând la recrutări subiective.\n\nFIX: Adaugă în `eie.html` un modul de \"Vetting Score\" unde Hiring Managerii pot confirma calitatea potrivirilor și a interacțiunilor.",
+    "ok": true
+  },
+  {
+    "cod": "9.4",
+    "rol": "Ethical / Responsible Design Lead",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: \"Secretara AI\" colectează date vocale fără consimțământ explicit sau control asupra stocării (privacy-by-default absent).\n\nFIX: Introdu un ecran de \"Privacy & Data Consent\" înainte de activarea microfonului, explicând clar stocarea locală a intentiilor și dreptul de ștergere.",
+    "ok": true
+  },
+  {
+    "cod": "18.2",
+    "rol": "Business Operations Analyst",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa persistenței datelor și a securității face imposibilă scalarea sau auditul interacțiunilor.\n\nFIX: Implementează IndexedDB pentru stocare locală structurată și un sistem de logare a acțiunilor (audit trail) în interfață pentru trasabilitatea deciziilor de match.",
+    "ok": true
+  },
+  {
+    "cod": "2.1",
+    "rol": "DevOps Lead",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Stocarea locală (localStorage) blochează scalabilitatea și nu oferă integritatea datelor necesară pentru un sistem de \"Trust Score\".\n\nFIX: Implementează Firebase/Supabase pentru sincronizare cloud și autentificare. Migrează logica de matching către un Edge Function pentru securitate și consistență.",
+    "ok": true
+  },
+  {
+    "cod": "6.9",
+    "rol": "Responsible AI / AI Ethics Specialist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Algoritmul de matching bazat pe keyword-uri favorizează \"bula\" (homofilie), amplificând biasul de selecție și excluzând diversitatea rețelei.\n\nFIX: Implementează un \"diversity nudge\" în algoritm: afișează 20% recomandări care extind aria semantică a utilizatorului, evitând doar overlap-ul strict.",
+    "ok": true
+  },
+  {
+    "cod": "1.2",
+    "rol": "Engineering Manager",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Datele în localStorage sunt volatile și izolate, blocând scalarea și colaborarea reală.\n\nFIX: Implementează un mock-API (JSON server) pentru a simula fluxul de date asincron și a pregăti arhitectura pentru un backend real în iterația următoare.",
+    "ok": true
+  },
+  {
+    "cod": "4.3",
+    "rol": "Application Security Engineer",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Stocarea datelor sensibile (Trust Scores, intentii) în localStorage expune datele la XSS și acces neautorizat local.\n\nFIX: Implementează criptarea datelor stocate local folosind Web Crypto API și sanitizează input-urile utilizatorilor pentru a preveni injecția de scripturi.",
+    "ok": true
+  },
+  {
+    "cod": "9.5",
+    "rol": "UX Researcher (well-being focus)",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Afișarea \"Trust Score\" și a indicatorilor de ROI creează anxietate de performanță și presiunea comparației sociale constante.\n\nFIX: Înlocuiește valorile numerice cu feedback calitativ, sub formă de progres incremental, eliminând clasamentele publice între utilizatori.",
+    "ok": true
+  },
+  {
+    "cod": "12.2",
+    "rol": "Account Executive",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa unui \"Executive Dashboard\" pentru raportarea ROI-ului către stakeholderii B2B.\n\nFIX: Adaugă un modul de export PDF/CSV pentru KPI-uri (Network Capital/ROI), esențial pentru validarea valorii în fața decidenților și închiderea contractelor pe termen lung.",
+    "ok": true
+  },
+  {
+    "cod": "14.3",
+    "rol": "Recruiter / Talent Acquisition",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa contextului calitativ în profiluri; \"Trust Score\" e prea abstract pentru a evalua soft skills sau experiența reală.\n\nFIX: Adaugă un câmp \"Verificat de\" (link către recomandări/proiecte) și un tag de \"Industrie/Funcție\" pentru filtrare precisă.",
+    "ok": true
+  },
+  {
+    "cod": "18.2",
+    "rol": "Business Operations Analyst",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa persistenței datelor și a securității face procesul de \"Network Capital\" inauditabil și nescalabil.\n\nFIX: Implementează stocare în IndexedDB cu criptare locală (AES-GCM) și un log de tranzacții pentru trasabilitatea deciziilor de matching între utilizatori.",
+    "ok": true
+  },
+  {
+    "cod": "2.2",
+    "rol": "DevOps Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa unui sistem de versionare și deployment automatizat face prototipul imposibil de testat/distribuit.\n\nFIX: Implementează un pipeline GitHub Actions pentru deploy automat pe GitHub Pages la fiecare push, incluzând validare sintactică (linting) și minificare automată.",
+    "ok": true
+  },
+  {
+    "cod": "6.10",
+    "rol": "MLOps Engineer (AI)",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa unui pipeline de evaluare pentru matching-ul semantic; algoritmul actual (keyword overlap) nu permite scalarea sau măsurarea calității predicțiilor.\n\nFIX: Implementează un script de evaluare locală (Python) pentru a testa calitatea potrivirilor pe seturi de date sintetice.",
+    "ok": true
+  },
+  {
+    "cod": "4.3",
+    "rol": "Application Security Engineer",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Stocarea datelor sensibile (Trust Score, rețea) în localStorage este vulnerabilă la atacuri XSS și acces neautorizat local.\n\nFIX: Implementează criptarea datelor în localStorage folosind Web Crypto API și sanitizează input-urile din funcția 'Secretara AI' pentru a preveni injecțiile.",
+    "ok": true
+  },
+  {
+    "cod": "1.2",
+    "rol": "Engineering Manager",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: Lipsa persistenței datelor și a unui flux de autentificare blochează testarea reală a experienței utilizatorului și a Trust Score-ului.\n\nFIX: Implementează Firebase Auth și Firestore pentru sincronizarea profilului și a match-urilor între dispozitive în acest sprint.",
+    "ok": true
+  },
+  {
+    "cod": "9.6",
+    "rol": "Digital Wellbeing Specialist",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: \"Focus Digest\" și \"Secretara AI\" pot induce anxietate prin suprasolicitare informațională.\nFIX: Introdu un \"Deep Work Mode\" care blochează notificările și rezumatele timp de 4 ore, activabil din ecranul Acasă.",
+    "ok": true
+  },
+  {
+    "cod": "12.2",
+    "rol": "Account Executive",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: Interfața nu arată valoarea monetară imediată a rețelei pentru un client Enterprise, lipsind argumentele pentru ROI în demo.\n\nFIX: Adaugă un modul \"Value Realized\" care simulează economiile/veniturile generate prin potrivirile EIE, esențial pentru închiderea vânzării.",
+    "ok": true
+  },
+  {
+    "cod": "14.4",
+    "rol": "People Operations Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa procesului de onboarding pentru noii membri în aplicație creează riscuri de date eronate și neconformitate.\n\nFIX: Adaugă un flux de \"Înregistrare administrativă\" în ecranul Profil pentru colectarea documentelor și validarea datelor necesare HRIS-ului intern.",
+    "ok": true
+  },
+  {
+    "cod": "18.3",
+    "rol": "Strategy & Planning Specialist",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa unui mecanism de validare a valorii (ROI) face imposibilă scalarea. Prototipul e o jucărie, nu un instrument de business.\n\nFIX: Adaugă un modul de tracking \"Deal-Flow\" în localStorage pentru a măsura rata de conversie a potrivirilor.",
+    "ok": true
+  },
+  {
+    "cod": "2.2",
+    "rol": "DevOps Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa unui proces de deploy și a versionării codului (single-file HTML) blochează scalabilitatea și trasabilitatea schimbărilor.\n\nFIX: Migrează codul într-un repo Git, configurează GitHub Actions pentru validare statică (linting) și găzduire automată pe GitHub Pages.",
+    "ok": true
+  },
+  {
+    "cod": "7.1",
+    "rol": "Head of Product / CPO Deputy",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa feedback-ului de retenție în „Secretara AI” și a validării valorii pentru utilizator (nu doar matching).\n\nFIX: Introducerea unui flux de „Feedback Loop” post-potrivire pentru calibrarea algoritmului de recomandare și creșterea scorului de Trust pe baza ratei de acceptare.",
+    "ok": true
+  },
+  {
+    "cod": "1.3",
+    "rol": "Software Architect",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa persistenței și a unui contract de date structurat (JSON schema) blochează scalarea logică a grafurilor.\n\nFIX: Implementează un store modular cu `IndexedDB` pentru persistenta locală și definește un `Schema Manager` pentru standardizarea entităților (User/Match) în iteratia 2.",
+    "ok": true
+  },
+  {
+    "cod": "4.4",
+    "rol": "Penetration Tester",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Stocarea datelor sensibile (Trust Score, network) în `localStorage` este vulnerabilă la XSS și acces neautorizat local.\nFIX: Implementează criptare AES client-side pentru datele din `localStorage` și o politică riguroasă de Content Security Policy (CSP).",
+    "ok": true
+  },
+  {
+    "cod": "9.7",
+    "rol": "Behavioral / Marketing Psychologist",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: \"Trust Score\" și \"Network Health\" pot crea anxietate socială și FOMO manipulativ, forțând utilizatorii să \"performeze\" pentru validare.\n\nFIX: Înlocuiește scorurile numerice cu feedback calitativ, bazat pe contribuții, eliminând ierarhizarea competitivă între membri.",
+    "ok": true
+  },
+  {
+    "cod": "12.3",
+    "rol": "Inside Sales Representative",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa unui flux de „Call to Action” (CTA) imediat după vizualizarea potrivirilor; utilizatorul vede match-ul, dar nu poate seta direct o întâlnire.\n\nFIX: Adaugă butonul „Book Meeting” în ecranul POTRIVIRI, care generează automat un link de tip calendar.",
+    "ok": true
+  },
+  {
+    "cod": "14.4",
+    "rol": "People Operations Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa unui flux de onboarding și a gestionării documentelor contractuale în aplicație. Membrii apar \"în rețea\" fără a fi validați legal.\n\nFIX: Adaugă în ecranul PROFIL un modul de status: \"Documente Semnate/Validare HR\" pentru a asigura trasabilitatea conformității.",
+    "ok": true
+  },
+  {
+    "cod": "18.3",
+    "rol": "Strategy & Planning Specialist",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa unui mecanism de validare a valorii economice (ROI) face imposibilă scalarea sau atragerea de capital; matching-ul bazat pe keyword-uri este superficial și nu generează tranzacții reale.\n\nFIX: Implementează un \"Deal Flow Tracker\" pentru a măsura conversia oportunităților în tranzacții închise.",
+    "ok": true
+  },
+  {
+    "cod": "2.2",
+    "rol": "DevOps Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: Stocarea `localStorage` blochează scalabilitatea și integritatea datelor; lipsa pipeline-ului CI/CD împiedică livrarea iterativă sigură.\n\nFIX: Migrează datele într-un JSON mock externalizat și configurează un pipeline GitHub Actions pentru validarea sintaxei și deploy automat pe GitHub Pages.",
+    "ok": true
+  },
+  {
+    "cod": "7.2",
+    "rol": "Senior Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa unui mecanism de retenție (onboarding/feedback loop) face ca datele să fie statice și inutile pentru \"Network Health\". \n\nFIX: Implementează un workflow de \"Quick Pulse\" (3 întrebări) la login pentru a actualiza dinamic scorul de afinitate.",
+    "ok": true
+  },
+  {
+    "cod": "1.3",
+    "rol": "Software Architect",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Logica de business (matching) in browser expune datele și fragilizează scalarea. State-ul local (localStorage) e volatil și nesecurizat.\n\nFIX: Migrează logica de matching într-un API (Node.js/Supabase) și stochează datele în PostgreSQL cu row-level security.",
+    "ok": true
+  },
+  {
+    "cod": "4.4",
+    "rol": "Penetration Tester",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Stocarea datelor sensibile (Trust Score, rețea) în `localStorage` este vulnerabilă la atacuri XSS; orice script malițios poate exfiltra întreg profilul utilizatorului.\n\nFIX: Implementează criptarea datelor în `localStorage` folosind `Web Crypto API` cu o cheie derivată din sesiune.",
+    "ok": true
+  },
+  {
+    "cod": "9.8",
+    "rol": "Data Scientist (engagement quality)",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Metricile \"Network Capital\" și \"Trust Score\" gamifică excesiv tranzacțiile, riscând să creeze dependență și comportament compulsiv de networking.\n\nFIX: Adaugă un dashboard \"Wellbeing Pulse\" care măsoară calitatea conexiunilor (ex: rata de răspuns vs. volum) și limitează notificările zilnice.",
+    "ok": true
+  },
+  {
+    "cod": "12.3",
+    "rol": "Inside Sales Representative",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa unui flux de „Call-to-Action” rapid (ex: buton „Book Meeting”) blochează conversia lead-urilor în demo-uri.\nFIX: Adaugă un buton de „Programare Instantă” în ecranul Potriviri care integrează direct un link de calendar (Calendly) pentru setarea întâlnirilor.",
+    "ok": true
+  },
+  {
+    "cod": "14.5",
+    "rol": "Learning & Development Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa contextului de învățare. \"Secretara AI\" colectează intenții, dar nu oferă feedback de dezvoltare sau gap-uri de competențe pentru utilizator.\n\nFIX: Adaugă în ecranul \"Profil\" un modul de \"Skill Gap Analysis\" bazat pe potrivirile ratate.",
+    "ok": true
+  },
+  {
+    "cod": "18.4",
+    "rol": "Revenue Operations (RevOps)",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa trasabilității procesului lead-to-cash; KPI-urile (ROI/Trust Score) sunt izolate, fără legătură cu pâlnia de conversie.\n\nFIX: Implementează un dashboard care mapează statusul potrivirilor pe etapele de vânzare (Lead -> Intro -> Contract) pentru calculul CAC/LTV.",
+    "ok": true
+  },
+  {
+    "cod": "2.3",
+    "rol": "Site Reliability Engineer (SRE)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Datele în `localStorage` sunt volatile și vulnerabile la ștergeri accidentale, fără mecanism de backup/recovery, punând în pericol continuitatea experienței utilizatorului.\n\nFIX: Implementează un buton de export/import JSON pentru starea aplicației, permițând salvarea locală a datelor.",
+    "ok": true
+  },
+  {
+    "cod": "7.2",
+    "rol": "Senior Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa retenției și a valorii concrete. Utilizatorii nu revin fără un mecanism de \"feedback loop\" post-matching.\n\nFIX: Implementează un sistem de notificare \"Status Update\" în Secretara AI: utilizatorul confirmă dacă întâlnirea a avut loc, actualizând automat Trust Score-ul.",
+    "ok": true
+  },
+  {
+    "cod": "1.4",
+    "rol": "Tech Lead",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Stocarea datelor în localStorage este volatilă și nesecurizată, blocând scalarea și integritatea profilului.\n\nFIX: Implementează un serviciu de persistenta bazat pe IndexedDB cu o interfață tip repository, permițând migrarea ulterioară către un backend real fără refactorizarea UI.",
+    "ok": true
+  },
+  {
+    "cod": "4.5",
+    "rol": "Compliance & Audit Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Datele sunt stocate în `localStorage` necriptat, încălcând principiile GDPR privind confidențialitatea și securitatea datelor cu caracter personal.\n\nFIX: Implementează criptarea datelor în browser (Web Crypto API) și adaugă un mecanism de consimțământ explicit pentru procesarea datelor.",
+    "ok": true
+  },
+  {
+    "cod": "9.9",
+    "rol": "Ethics & Policy Advisor",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Gamificarea \"Trust Score\" și \"Network Capital\" poate crea dependență sau discriminare algoritmică, încălcând principiile AI Act privind transparența.\n\nFIX: Adăugarea unui modul de explicabilitate (Why) lângă fiecare scor și un buton de \"opt-out\" pentru evaluarea automată.",
+    "ok": true
+  },
+  {
+    "cod": "12.4",
+    "rol": "Sales Engineer / Pre-sales",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa persistenței datelor și a securității (localStorage expus) invalidează credibilitatea pentru clienții B2B.\n\nFIX: Implementează Firebase Auth pentru autentificare și stocare securizată în cloud, asigurând un flow de onboarding real și persistență cross-device.",
+    "ok": true
+  },
+  {
+    "cod": "14.6",
+    "rol": "Compensation & Benefits Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa unui sistem de cuantificare a valorii contributiei in \"Trust Score\" face imposibila echilibrarea grilei de salarizare/beneficii.\n\nFIX: Introdu in `localStorage` un modul de raportare a ROI-ului per membru pentru a valida benchmarking-ul si echitatea.",
+    "ok": true
+  },
+  {
+    "cod": "18.4",
+    "rol": "Revenue Operations (RevOps)",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: KPI-urile (ROI, Trust Score) sunt izolate, fără logică de conversie din \"Lead\" în \"Revenue\". Lipsesc datele pentru calculul CAC/LTV.\n\nFIX: Adaugă în `localStorage` un istoric al tranzacțiilor (Lead-to-Cash) pentru a genera rapoarte unificate de performanță.",
+    "ok": true
+  },
+  {
+    "cod": "2.3",
+    "rol": "Site Reliability Engineer (SRE)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: `localStorage` riscă pierderea datelor la cache clearing; lipsa validării integrității stării cauzează crash-uri la parsarea JSON-ului.\n\nFIX: Implementează un mecanism de `try-catch` pentru citirea `localStorage` și un strat de validare a schemei datelor (schema validation) înainte de randare.",
+    "ok": true
+  },
+  {
+    "cod": "7.2",
+    "rol": "Senior Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: Lipsa retenției pe termen lung; utilizatorii nu revin fără un mecanism de notificare sau feedback de valoare.\n\nFIX: Implementează \"Trust Ledger\" în ecranul Acasă: un istoric vizual al tranzacțiilor/potrivirilor finalizate pentru a demonstra ROI imediat.",
+    "ok": true
+  },
+  {
+    "cod": "4.5",
+    "rol": "Compliance & Audit Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Stocarea datelor sensibile (Trust Score, intentii business) în `localStorage` în clar, fără criptare și mecanisme de control acces.\n\nFIX: Implementează Web Crypto API pentru criptarea datelor locale și adaugă un jurnal (audit log) al accesărilor.",
+    "ok": true
+  },
+  {
+    "cod": "10.1",
+    "rol": "Head of PMO",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Absența mecanismului de scalabilitate și trasabilitate a datelor (localStorage izolat blochează evoluția către un produs multi-user).\n\nFIX: Implementarea unui mock-API (JSON Server) pentru a simula integrarea backend și a permite testarea fluxului de date între utilizatori.",
+    "ok": true
+  },
+  {
+    "cod": "12.4",
+    "rol": "Sales Engineer / Pre-sales",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa persistenței datelor și a securității face imposibilă testarea \"Trust Score\" în demo-uri reale.\n\nFIX: Implementează IndexedDB pentru stocare locală robustă și simulează un flux de autentificare prin token JWT hardcodat pentru a demonstra securitatea datelor.",
+    "ok": true
+  },
+  {
+    "cod": "14.7",
+    "rol": "Employer Branding / Internal Comms",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa contextului de \"cultură și valori\" în profil și matching; pare o simplă platformă de tranzacționare, nu un ecosistem de networking premium.\n\nFIX: Adaugă în Profil secțiunea „Values & Culture Fit” și un badge de „Culture Ambassador” în graph.",
+    "ok": true
+  },
+  {
+    "cod": "18.5",
+    "rol": "Vendor Management",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa trasabilității și a standardelor de securitate în procesarea datelor membrilor prin AI. Riscuri legale majore privind confidențialitatea.\n\nFIX: Implementarea unui modul de „Data Privacy & Compliance” cu log-uri de acces și consimțământ stocate local pentru audit.",
+    "ok": true
+  },
+  {
+    "cod": "1.4",
+    "rol": "Tech Lead",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Stocarea locală în localStorage expune date sensibile (Trust Score, rețea) în browser, fără criptare sau trasabilitate.\n\nFIX: Implementează un strat de criptare AES-GCM pentru datele stocate și un mecanism de \"Session Clear\" automat pentru a preveni exfiltrarea informațiilor.",
+    "ok": true
+  },
+  {
+    "cod": "2.3",
+    "rol": "Site Reliability Engineer (SRE)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: Lipsa persistenței cross-device și integritatea datelor în localStorage. Un refresh șterge starea, compromițând continuitatea serviciului (SLO de disponibilitate a datelor).\n\nFIX: Implementează sincronizarea stării via IndexedDB și un mecanism de export/import JSON pentru backup manual de urgență.",
+    "ok": true
+  },
+  {
+    "cod": "7.3",
+    "rol": "Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa persistenței datelor și a unui mecanism de autentificare (chiar și mock) blochează validarea fluxului de „Trust Score”.\n\nFIX: Implementează un `Auth` simulat în localStorage și stocarea stării sesiunii pentru a permite testarea continuității profilului între pagini.",
+    "ok": true
+  },
+  {
+    "cod": "1.4",
+    "rol": "Tech Lead",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: Stocarea datelor în localStorage este volatilă și nesecurizată, blocând scalabilitatea. \n\nFIX: Implementează un mock-backend (MirageJS) și o structură de date normalizată pentru a simula un API REST, pregătind tranziția către o bază de date reală.",
+    "ok": true
+  },
+  {
+    "cod": "4.6",
+    "rol": "Security Analyst (SOC)",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Stocarea datelor sensibile (Trust Score, rețea) în localStorage este necriptată și expusă atacurilor XSS, permițând exfiltrarea facilă a informațiilor de business.\n\nFIX: Implementează `Web Crypto API` pentru criptarea datelor stocate local și sanitizează input-urile din \"Secretara AI\".",
+    "ok": true
+  },
+  {
+    "cod": "10.2",
+    "rol": "Program Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa persistenței datelor și a autentificării blochează validarea valorii în rândul stakeholderilor (imposibil de testat scenarii cross-device).\n\nFIX: Implementează Firebase Auth și Firestore (free tier) pentru sincronizarea profilului și a rețelei între utilizatori în această iterație.",
+    "ok": true
+  },
+  {
+    "cod": "12.5",
+    "rol": "Business Development Manager",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa integrării CRM și a istoricului de negociere blochează scalarea parteneriatelor; datele locale izolate fac imposibilă raportarea strategică.\n\nFIX: Adaugă export CSV/JSON pentru pipeline și un câmp de notițe \"Stadiu Negociere\" în profilul fiecărui contact.",
+    "ok": true
+  },
+  {
+    "cod": "14.8",
+    "rol": "HR Business Partner",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa unui mecanism de feedback pentru calitatea \"potrivirilor\" generează frustrare și conflicte de interese.\n\nFIX: Adaugă un buton de \"Feedback Calitate\" (1-5 stele) la fiecare match, stocat în localStorage, pentru a ajusta algoritmic scorul de încredere (Trust Score).",
+    "ok": true
+  },
+  {
+    "cod": "18.6",
+    "rol": "Facilities / Office Manager",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa integrării logisticii fizice: ecranul de \"Potriviri\" nu indică disponibilitatea în spațiul de coworking sau proximitatea geografică a membrilor.\n\nFIX: Adăugarea unui tag \"Locație/Birou\" în profil și filtrarea potrivirilor bazată pe prezența fizică sincronizată.",
+    "ok": true
+  },
+  {
+    "cod": "2.4",
+    "rol": "Cloud Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Datele în `localStorage` sunt stocate local, fără persistență securizată sau scalabilitate pentru utilizatori multipli.\n\nFIX: Implementează un backend serverless (AWS Lambda + DynamoDB) cu autentificare Cognito pentru a migra stocarea datelor și a asigura securitatea identității.",
+    "ok": true
+  },
+  {
+    "cod": "7.3",
+    "rol": "Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: \"Secretara AI\" e o cutie neagră; lipsa feedback-ului la procesare frustrează utilizatorul.\n\nFIX: Adaugă un status de \"Procesare în curs\" și un istoric al intențiilor extrase pentru a valida acuratețea AI-ului înainte de generarea potrivirilor.",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa persistenței și a securității (localStorage este vulnerabil, datele dispar la refresh).\n\nFIX: Implementarea unui API REST (Node.js/PostgreSQL) cu autentificare JWT și endpoint-uri securizate pentru sincronizarea datelor între clienți și gestionarea identității utilizatorilor.",
+    "ok": true
+  },
+  {
+    "cod": "5.1",
+    "rol": "Data / AI Lead",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: LocalStorage este volatil și imposibil de auditat/guvernat pentru un ecosistem de date scalabil. Riscuri majore de GDPR și zero trasabilitate pentru modelul de matching.\n\nFIX: Implementează un schema-registry minim și un layer de persistenta bazat pe IndexedDB cu structuri JSON normalizate.",
+    "ok": true
+  },
+  {
+    "cod": "10.2",
+    "rol": "Program Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa unui mecanism de persistență și sync (fără backend) blochează scalabilitatea și validarea cu stakeholderii.\n\nFIX: Implementează Firebase/Supabase pentru auth și stocare date; permite validarea fluxului de „Secretara AI” printr-un API mock (OpenAI) pentru demo-ul de fidelitate.",
+    "ok": true
+  },
+  {
+    "cod": "12.6",
+    "rol": "Sales Operations Specialist",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Datele din `localStorage` sunt izolate și imposibil de auditat/raportat pentru forecast sau pipeline.\n\nFIX: Implementează un buton de export CSV/JSON pentru datele din rețea, permițând importul în CRM-ul centralizat pentru analiză și acuratețe.",
+    "ok": true
+  },
+  {
+    "cod": "15.1",
+    "rol": "Finance Director / CFO Deputy",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa trasabilității financiare a \"Network Capital\" și a ROI-ului; indicatorii sunt arbitrar definiți, fără validare contabilă.\n\nFIX: Integrarea unui modul de tracking pentru tranzacții și costuri per interacțiune, validând indicatorii de performanță (ROI) prin date reale de bilanț.",
+    "ok": true
+  },
+  {
+    "cod": "18.6",
+    "rol": "Facilities / Office Manager",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa fluxului de onboarding fizic/hibrid pentru utilizatori noi.\nFIX: Adaugarea unei secțiuni \"Office Access\" în ecranul Profil, cu integrare QR pentru check-in și rezervare spații de lucru pentru întâlniri fizice Network Capital.",
+    "ok": true
+  },
+  {
+    "cod": "2.4",
+    "rol": "Cloud Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Stocarea datelor în localStorage este volatilă și nesecurizată, imposibil de scalat sau auditat pentru conformitate GDPR.\n\nFIX: Migrarea stocării către un serviciu serverless (ex: AWS DynamoDB) cu IAM roles pentru autentificare și criptare at-rest.",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: LocalStorage este volatil și nesigur; logica de matching client-side va degrada performanța și securitatea pe măsură ce rețeaua crește.\n\nFIX: Implementează un API Gateway (Node.js/Fastify) cu baza de date PostgreSQL pentru persistenta datelor și calculul server-side al grafurilor.",
+    "ok": true
+  },
+  {
+    "cod": "5.2",
+    "rol": "Data Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa structurii de date (schema) împiedică scalarea matching-ului; localStorage este volatil și nevalidabil. \n\nFIX: Definește o schemă JSON strictă pentru entități (User, Intent, Match) și implementează o funcție de validare a integrității datelor la fiecare salvare.",
+    "ok": true
+  },
+  {
+    "cod": "7.3",
+    "rol": "Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: Lipsa persistenței datelor și a fluxului de onboarding blochează validarea valorii (Trust Score) pentru utilizatori noi.\n\nFIX: Implementează un mock-onboarding cu 3 întrebări de profil și salvează starea în localStorage pentru a simula continuitatea experienței între sesiuni.",
+    "ok": true
+  },
+  {
+    "cod": "10.3",
+    "rol": "Project Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa persistenței datelor și a securității (localStorage expus) blochează scalarea și validarea cu utilizatori reali.\n\nFIX: Implementează Firebase (Auth + Firestore) pentru persistență cross-device și securitate; înlocuiește matching-ul pe keyword-uri cu un API LLM (OpenAI) pentru relevanță semantică.",
+    "ok": true
+  },
+  {
+    "cod": "13.1",
+    "rol": "Customer Success Lead",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa feedback-ului valoric; utilizatorul nu vede cum \"Network Capital\" se traduce în rezultate tangibile, riscând churn rapid.\n\nFIX: Adaugă un widget \"Value Realized\" în Acasă, care cuantifică istoric conexiunile convertite în oportunități sau colaborări confirmate.",
+    "ok": true
+  },
+  {
+    "cod": "15.2",
+    "rol": "Accountant / Contabil",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa trasabilității tranzacțiilor în \"Network Capital\" (KPI-ul financiar nu are istoric sau jurnal de audit pentru validarea ROI-ului).\n\nFIX: Implementează un \"Ledger\" simplu în localStorage care înregistrează fiecare schimb de valoare cu timestamp, sursă și ID tranzacție.",
+    "ok": true
+  },
+  {
+    "cod": "7.4",
+    "rol": "Product Owner",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Matching-ul pe keyword-uri este imprecis și nu generează valoare reală pentru utilizator.\nFIX: Introdu un sistem de \"Interese Prioritare\" (weighting) în profil și un algoritm de ranking simplificat care sortează potrivirile în funcție de scorul de afinitate.",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: Lipsa persistenței și a unui API centralizat blochează scalarea și sincronizarea datelor între utilizatori (singura sursă de adevăr este localStorage).\n\nFIX: Implementează un backend Node.js cu PostgreSQL pentru stocarea membrilor și a graficului de relații, expunând un API REST securizat (JWT).",
+    "ok": true
+  },
+  {
+    "cod": "10.3",
+    "rol": "Project Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa persistenței datelor și a securității face prototipul inutilizabil pentru testare reală.\n\nFIX: Implementează IndexedDB pentru stocare locală robustă și un workflow de onboarding simplificat cu simulare de autentificare pentru a valida fluxul de utilizator.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa unui sistem de feedback direct pentru \"Secretara AI\" și potriviri, ceea ce blochează colectarea datelor de antrenament și ne împiedică să măsurăm valoarea percepută (CSAT) de client.\n\nFIX: Adaugă butoane de feedback (like/dislike) în fluxul de potriviri.",
+    "ok": true
+  },
+  {
+    "cod": "15.2",
+    "rol": "Accountant / Contabil",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa trasabilității tranzacțiilor în KPI-ul \"Network Capital\" și absența log-ului de audit pentru matching-uri, riscând integritatea datelor financiare.\n\nFIX: Implementează un jurnal de tranzacții (ledger) exportabil în CSV în localStorage pentru fiecare mișcare de capital/match.",
+    "ok": true
+  },
+  {
+    "cod": "5.2",
+    "rol": "Data Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Datele din `localStorage` sunt izolate, inconsistente și lipsite de o schemă definită, blocând orice analiză a rețelei sau scalare pentru ML.\n\nFIX: Implementează o structură JSON-schema strictă pentru entități și un script de validare la scriere/citire.",
+    "ok": true
+  },
+  {
+    "cod": "2.4",
+    "rol": "Cloud Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: `localStorage` stochează datele local, riscând pierderea informațiilor și imposibilitatea sincronizării între dispozitive, nefiind scalabil.\n\nFIX: Implementarea unui backend minimal (Firebase/Supabase) pentru persistența datelor, autentificare și gestionarea securizată a profilurilor în cloud.",
+    "ok": true
+  },
+  {
+    "cod": "7.4",
+    "rol": "Product Owner",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa persistenței datelor între utilizatori blochează testarea fluxului real de \"dublu consimțământ\".\n\nFIX: Implementează un \"Mock Backend\" în localStorage care să simuleze stări de \"Pending/Accepted\" între ID-uri fictive diferite pentru a valida logica de match.",
+    "ok": true
+  },
+  {
+    "cod": "2.5",
+    "rol": "System Administrator",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: LocalStorage este volatil; riscul de pierdere a datelor utilizatorilor în caz de curățare browser sau crash este critic.\n\nFIX: Implementează un script de export/import JSON pentru backup manual și o procedură de validare a integrității datelor stocate.",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 4,
+    "review": "PROBLEMA: `localStorage` stochează datele local, imposibil de sincronizat pentru matching între utilizatori.\n\nFIX: Implementează un API REST (Node.js/PostgreSQL) pentru stocarea centralizată a profilurilor și a grafului de conexiuni, permițând matching-ul server-side și persistența datelor.",
+    "ok": true
+  },
+  {
+    "cod": "10.3",
+    "rol": "Project Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: Lipsa persistenței datelor și a unui flux de onboarding blochează validarea utilității reale. Utilizatorii pierd setările la refresh, iar valoarea \"Network Capital\" rămâne abstractă.\n\nFIX: Implementare `localStorage` pentru persistență și un onboarding simplificat prin input de interese.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa contextului istoric în profilul clientului împiedică monitorizarea succesului (QBR) și identificarea oportunităților de expansiune.\n\nFIX: Adaugă un modul \"Jurnal Interacțiuni\" în Profil (stocare locală) pentru a loga manual istoricul discuțiilor și obiectivele setate.",
+    "ok": true
+  },
+  {
+    "cod": "2.6",
+    "rol": "Network Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Datele sunt stocate în `localStorage` fără criptare sau control al accesului, expunând informațiile membrilor în cazul unui atac XSS.\n\nFIX: Implementează un VPN obligatoriu pentru accesul la aplicație și criptează payload-ul stocat local folosind Web Crypto API.",
+    "ok": true
+  },
+  {
+    "cod": "7.4",
+    "rol": "Product Owner",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: Lipsa persistenței datelor între sesiuni/dispozitive blochează validarea user flow-ului.\n\nFIX: Implementează sincronizarea minimală prin export/import JSON în localStorage și adaugă un \"Mock Auth\" simplu pentru a simula stocarea profilului utilizatorului în timpul testelor.",
+    "ok": true
+  },
+  {
+    "cod": "5.3",
+    "rol": "Data Scientist",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Matching-ul pe keyword-uri simple produce zgomot și fals-pozitive, ignorând contextul de business. Nu există metrici de validare a calității conexiunilor.\n\nFIX: Implementează un algoritm de calcul Jaccard Similarity ponderat și un sistem de feedback post-match pentru ajustarea scorului de afinitate.",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 5,
+    "review": "PROBLEMA: `localStorage` stochează datele local, imposibil de sincronizat între dispozitive sau între utilizatori. Lipsa unui backend face imposibilă validarea securizată a trust score-ului.\n\nFIX: Implementează un API REST (Node.js/PostgreSQL) pentru persistența datelor și autentificare JWT obligatorie.",
+    "ok": true
+  },
+  {
+    "cod": "15.2",
+    "rol": "Accountant / Contabil",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: Lipsa auditabilității tranzacțiilor în \"Network Capital\". Fără un registru de jurnal imuabil, KPI-urile financiare sunt neconfirmabile și expuse erorilor.\n\nFIX: Adaugă un log \"Istoric Tranzacții\" (timestamp, sumă, contrapărți) pentru reconcilierea automată a valorii Network Capital.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: Lipsa unui workflow de \"Onboarding/Setare Obiective\" face ca scorul de afinitate să fie irelevant fără contextul nevoilor clientului.\n\nFIX: Adăugarea unui formular \"Setup\" obligatoriu la prima rulare pentru a defini \"Obiective Trimestriale\" (ce caut/ofer).",
+    "ok": true
+  },
+  {
+    "cod": "10.4",
+    "rol": "Scrum Master",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa persistenței datelor și a feedback-ului real blochează validarea valorii.\n\nFIX: Implementăm o bază de date simbolică prin `localStorage` persistent și adăugăm un formular de \"Feedback Rapid\" pentru fiecare potrivire, colectând metrici de succes ale utilizatorilor.",
+    "ok": true
+  },
+  {
+    "cod": "5.3",
+    "rol": "Data Scientist",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Matching-ul pe keyword-uri simple e statistic irelevant; generează zgomot, nu valoare. Lipsesc datele de interacțiune pentru a calcula un scor de încredere (Trust Score) valid.\n\nFIX: Implementează un algoritm de similaritate cosinus pentru vectori și log-ul acțiunilor (accept/refuz) pentru a rafina Trust Score-ul.",
+    "ok": true
+  },
+  {
+    "cod": "15.3",
+    "rol": "FP&A Analyst",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: KPI-urile (ROI, Trust Score) sunt cifre statice, lipsite de fundament matematic sau metodologie de calcul ce ar permite scalarea sau validarea valorii reale a rețelei.\n\nFIX: Implementează un motor de calcul în JS care generează dinamic indicatorii pe baza tranzacțiilor simulate.",
+    "ok": true
+  },
+  {
+    "cod": "2.7",
+    "rol": "Database Administrator (DBA)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: `localStorage` este volatil, nesecurizat și limitează scalarea la datele locale, blocând replicarea și integritatea datelor.\n\nFIX: Implementează un strat de abstractizare `Repository` pentru a migra rapid către IndexedDB și pregăti integrarea unui backend SQL/NoSQL.",
+    "ok": true
+  },
+  {
+    "cod": "7.5",
+    "rol": "Business Analyst",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa persistenței datelor și a feedback-ului de sistem (stări tranzitorii) în fluxul de matching.\n\nFIX: Implementare `localStorage` cu structură JSON pentru memorarea match-urilor și adăugarea de stări \"Pending\" / \"Accepted\" în UI pentru a valida succesul interacțiunii.",
+    "ok": true
+  },
+  {
+    "cod": "1.6",
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Datele sunt stocate în `localStorage`, deci dispar la ștergerea cache-ului și sunt vulnerabile; lipsa unui backend blochează scalabilitatea și autentificarea.\n\nFIX: Migrarea stării către Firebase (Auth + Firestore) pentru persistență, securitate și sincronizare multi-device.",
+    "ok": true
+  },
+  {
+    "cod": "5.4",
+    "rol": "Machine Learning Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Matching-ul pe keyword-uri statice ignoră contextul și nu scalează; lipsa unui feature store face imposibilă personalizarea în timp real.\n\nFIX: Implementează un vector embedding local (via TensorFlow.js) pentru matching semantic și stochează profilurile în vectori indexați local.",
+    "ok": true
+  },
+  {
+    "cod": "15.3",
+    "rol": "FP&A Analyst",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: \"Network Capital\" în EUR este o cifră fără fundament, fiind un KPI de tip vanity metric, irelevant financiar fără un model de atribuire a valorii per conexiune.\n\nFIX: Implementează un \"Value Attribution Model\" în JS care calculează ROI estimat pe baza conversiei intentiilor de business.",
+    "ok": true
+  },
+  {
+    "cod": "3.1",
+    "rol": "QA Lead",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Persistența locală (localStorage) riscă coruperea datelor la actualizări și lipsește mecanismul de rollback.\n\nFIX: Implementează un strat de validare a schemei JSON la încărcare și funcție de export/import manual pentru backup-ul stării utilizatorului.",
+    "ok": true
+  },
+  {
+    "cod": "7.5",
+    "rol": "Business Analyst",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa persistenței datelor și a unui mecanism de autentificare invalidează testarea fluxului de \"dublu consimțământ\".\n\nFIX: Implementează `localStorage` cu ID-uri unice pentru utilizatori și mock-uri pentru stări de accept/refuz, permițând simularea corectă a matching-ului între sesiuni.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 4,
+    "review": "PROBLEMA: Lipsa unui sistem de feedback calitativ (CSAT/NPS) în fluxul de matching blochează validarea valorii pentru clienți.\n\nFIX: Adăugarea unui buton \"Feedback Match\" (Like/Dislike) în ecranul Potriviri pentru a colecta date necesare optimizării algoritmului în iteratia 3.",
+    "ok": true
+  },
+  {
+    "cod": "1.6",
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Stocarea locală (localStorage) blochează scalabilitatea și consistența datelor între dispozitive.\nFIX: Introducerea unei baze de date Firebase/Supabase pentru sincronizare real-time și autentificare securizată, înlocuind stocarea locală statică.",
+    "ok": true
+  },
+  {
+    "cod": "10.4",
+    "rol": "Scrum Master",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa persistenței datelor și a feedback-ului real blochează validarea valorii (MVP inutilizabil).\n\nFIX: Implementează `localStorage` pentru starea profilului și introdu un formular de \"Feedback Săptămânal\" în dashboard pentru a colecta date calitative despre potriviri.",
+    "ok": true
+  },
+  {
+    "cod": "5.4",
+    "rol": "Machine Learning Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Matching-ul pe keyword overlap (hardcoded) nu scalează și nu oferă relevanță semantică pentru \"Trust Score\".\nFIX: Implementează un vector embedding local (via TensorFlow.js) pentru a calcula similaritatea cosinus între profiluri, stocând vectorii în localStorage.",
+    "ok": true
+  },
+  {
+    "cod": "10.4",
+    "rol": "Scrum Master",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: Lipsa persistenței datelor și a feedback-ului real blochează validarea valorii.\n\nFIX: Implementăm `localStorage` pentru starea utilizatorului și introducem un buton „Feedback” pentru a colecta date calitative direct de la cei 20 membri seed.",
+    "ok": true
+  },
+  {
+    "cod": "15.4",
+    "rol": "Payroll Specialist",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa trasabilității financiare și a unui audit trail pentru \"Network Capital\". Fără dovezi de plată sau istoric fiscal, riscăm erori de conformitate și neîncredere în calculul ROI-ului afișat.\n\nFIX: Adăugarea unui modul \"Istoric Tranzacții\" cu export CSV pentru audit.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 5,
+    "review": "PROBLEMA: Lipsa unui sistem de feedback calitativ (CSAT/NPS) în fluxul de matching blochează validarea valorii pentru clienți.\n\nFIX: Adaugă un buton \"Raportează relevanță\" la fiecare potrivire pentru a colecta date necesare optimizării algoritmului de matching.",
+    "ok": true
+  },
+  {
+    "cod": "3.2",
+    "rol": "Senior QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa persistenței reale și a stării de testare blochează validarea fluxului de matching. Testele end-to-end sunt imposibile fără o arhitectură care să decupleze datele de UI.\n\nFIX: Implementează o suită Playwright care simulează localStorage și mock-uri pentru starea nodurilor.",
+    "ok": true
+  },
+  {
+    "cod": "7.6",
+    "rol": "Product Operations Specialist",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa structurii de date (taxonomie) pentru \"intentii\" blochează scalabilitatea și analiza AI ulterior.\n\nFIX: Implementează un JSON schema standardizat pentru profiluri și intentii în localStorage. Permite validarea automată a input-ului pentru a asigura calitatea datelor.",
+    "ok": true
+  },
+  {
+    "cod": "1.6",
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: Datele sunt stocate doar în localStorage, pierzându-se la schimbarea dispozitivului și fără integritate.\n\nFIX: Implementează un backend minimalist cu Node.js/Express și o bază de date PostgreSQL pentru persistență, auth și gestionarea reală a grafurilor de conexiuni.",
+    "ok": true
+  },
+  {
+    "cod": "10.5",
+    "rol": "Delivery Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa persistenței datelor și a securității blochează testarea reală a fluxului de \"Trust Score\". Clienții nu pot vedea valoarea fără date persistente.\n\nFIX: Implementează criptare locală (AES) pentru localStorage și un import/export JSON pentru simularea persistenței.",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa persistenței datelor la refresh cauzează pierderea stării/match-urilor, generând tichete de tip „mi-au dispărut conexiunile”.\n\nFIX: Implementează `localStorage` pentru salvarea stării nodurilor și a match-urilor, cu un buton de „Export/Import JSON” pentru backup manual până la backend.",
+    "ok": true
+  },
+  {
+    "cod": "15.5",
+    "rol": "Procurement / Achizitii",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa trasabilității financiare și a conformității în fluxul de \"Network Capital\". Fără integrare cu un sistem de gestiune a cheltuielilor, nu putem valida ROI-ul sau conformitatea achizițiilor între membri.\n\nFIX: Adăugarea unui modul \"Audit Trail\" pentru fiecare tranzacție.",
+    "ok": true
+  },
+  {
+    "cod": "5.5",
+    "rol": "MLOps Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa unui sistem de versionare a datelor (DVC) și a feedback-ului pentru matching face imposibilă optimizarea scorului de afinitate.\n\nFIX: Implementează logarea locală a interacțiunilor utilizatorului într-un JSON, permițând antrenarea offline a unui model de ranking simplificat.",
+    "ok": true
+  },
+  {
+    "cod": "8.1",
+    "rol": "Design Lead",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Vizualul \"dark+gold\" este prea dens, compromițând lizibilitatea datelor critice (KPIs). Ierarhia informațională este plată, obosește utilizatorul premium.\n\nFIX: Implementează un sistem de tipografie scalabilă și spațiu negativ extins. Introdu ierarhia \"Progressive Disclosure\" pentru a prioritiza doar KPI-urile vitale.",
+    "ok": true
+  },
+  {
+    "cod": "5.6",
+    "rol": "Mobile Product Analyst",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Absența fluxului de onboarding duce la \"Cold Start Problem\"; utilizatorii nu înțeleg valoarea rețelei fără date inițiale.\n\nFIX: Introdu un ecran de setup (interese/oferte) la prima lansare pentru a popula imediat algoritmul de matching și a personaliza feed-ul.",
+    "ok": true
+  },
+  {
+    "cod": "1.6",
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 4,
+    "review": "PROBLEMA: Datele în `localStorage` sunt volatile și imposibil de sincronizat/securizat între utilizatori.\n\nFIX: Implementează un backend Node.js/Express cu bază de date PostgreSQL și autentificare JWT pentru a gestiona persistenta, integritatea datelor și logica de matching securizată.",
+    "ok": true
+  },
+  {
+    "cod": "11.1",
+    "rol": "Marketing Lead",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa unui mecanism de referință (virality loop) în profil. Fără un sistem de invitații/recomandări, costul de achiziție (CAC) va exploda.\n\nFIX: Adaugă buton \"Invite to Network\" în Profil pentru a genera un referral link unic (localStorage).",
+    "ok": true
+  },
+  {
+    "cod": "3.2",
+    "rol": "Senior QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa persistenței backend și a ID-urilor unice face testarea regresiei imposibilă; starea `localStorage` se pierde la fiecare reload, blocând validarea fluxului de matching.\n\nFIX: Implementează un mock API stratificat pentru stocarea datelor și sesiunilor (JSON-server).",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa persistenței datelor la refresh/închidere browser (doar localStorage local) creează frustrări la utilizatorii care pierd progresul sesiunii.\n\nFIX: Implementare persistență state-management cu auto-save în localStorage pentru fiecare acțiune și un buton \"Export/Import Backup\" pentru a simula portabilitatea datelor.",
+    "ok": true
+  },
+  {
+    "cod": "15.6",
+    "rol": "Billing / Revenue Operations",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa integrării cu gateway-uri de plată și logică de abonament în prototip blochează validarea fluxului de revenue recurent.\n\nFIX: Adaugă în ecranul \"Profil\" un modul \"Subscription Status\" cu status de plată și buton de integrare Stripe.",
+    "ok": true
+  },
+  {
+    "cod": "3.2",
+    "rol": "Senior QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: Lipsa persistenței server-side blochează testarea fluxurilor end-to-end (matching, auth).\nFIX: Implementează o interfață `StorageProvider` (Mock/API) și adaugă Cypress cu fixture-uri pentru a simula starea rețelei și valida logică de matching în CI/CD.",
+    "ok": true
+  },
+  {
+    "cod": "8.2",
+    "rol": "Senior UX Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa feedback-ului vizual la interacțiunea cu graficul și la \"Secretara AI\" creează incertitudine asupra statusului procesării.\n\nFIX: Implementează stări de încărcare (skeleton screens) și micro-interacțiuni haptice pentru confirmarea acțiunilor, asigurând continuitatea fluxului cognitiv.",
+    "ok": true
+  },
+  {
+    "cod": "1.7",
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Starea globală gestionată prin `localStorage` este volatilă și greu de testat, riscând inconsistențe între ecrane.\n\nFIX: Implementează un store simplu bazat pe `Proxy` pentru reactivitate și centralizarea datelor, eliminând dependența directă de `localStorage` în logica de business.",
+    "ok": true
+  },
+  {
+    "cod": "11.2",
+    "rol": "Digital Marketing Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa unui sistem de tracking (AppsFlyer/Adjust) în prototip face imposibilă măsurarea conversiilor și optimizarea CAC/ROAS.\n\nFIX: Integrarea unui SDK de tracking și a unui flow de onboarding personalizat pentru a colecta date de atribuire încă de la instalare.",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: `localStorage` șterge datele la curățarea browserului, generând tichete de pierdere a progresului/profilului.\n\nFIX: Implementează `IndexedDB` pentru persistență robustă și un buton de export/import JSON pentru back-up manual în lipsa unui backend.",
+    "ok": true
+  },
+  {
+    "cod": "15.6",
+    "rol": "Billing / Revenue Operations",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa integrării cu gateway-uri de plată și a logicii de \"Trust Score\" monetizabil blochează veniturile recurente.\n\nFIX: Adaugă în `localStorage` un modul de \"Subscription Status\" și un buton de \"Upgrade/Renew\" care să simuleze integrarea cu Stripe.",
+    "ok": true
+  },
+  {
+    "cod": "3.3",
+    "rol": "QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa ID-urilor și a atributelor de testare (data-testid) în HTML face imposibilă automatizarea UI stabilă.\n\nFIX: Adăugarea atributelor `data-testid` pe elementele critice (carduri, butoane, input-uri) pentru a permite selecția robustă în scripturile de testare Playwright/Cypress.",
+    "ok": true
+  },
+  {
+    "cod": "8.2",
+    "rol": "Senior UX Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa contextului în „Secretara AI” duce la matching irelevant; lipsa onboarding-ului blochează colectarea datelor pentru Trust Score.\n\nFIX: Adaugă un formular scurt de onboarding (interese/oferte) și stochează-le în localStorage pentru a rafina algoritmul de matching prin keyword-uri prioritizate.",
+    "ok": true
+  },
+  {
+    "cod": "5.7",
+    "rol": "Data Analyst",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Absența logicii de calcul pentru \"Trust Score\" și \"ROI\" în prototip face imposibilă validarea metricilor de business.\n\nFIX: Implementează în `localStorage` o structură de date JSON cu formule explicite pentru calculul scorurilor din metadatele utilizatorilor.",
+    "ok": true
+  },
+  {
+    "cod": "1.7",
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Stocarea locală (`localStorage`) este volatilă, iar randarea SVG-ului static blochează scalabilitatea vizuală a rețelei pe mobil.\n\nFIX: Implementează `IndexedDB` pentru persistență robustă și utilizează `D3.js` cu `Canvas` pentru a anima dinamic nodurile rețelei conform `Trust Score`.",
+    "ok": true
+  },
+  {
+    "cod": "5.8",
+    "rol": "BI Developer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Metrici (ROI, Trust Score) fără fundament semantic sau surse de date verificabile; riscul de a prezenta cifre inconsistente în dashboard.\n\nFIX: Implementarea unui strat logic (\"metric layer\") centralizat care să calculeze unitar KPI-urile din obiectele JSON existente.",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 4,
+    "review": "PROBLEMA: `localStorage` șterge datele la curățarea cache-ului, cauzând pierderea profilului și a match-urilor.\n\nFIX: Implementează export/import JSON pentru setările utilizatorului și adaugă o alertă \"Data Persistence Warning\" în setări pentru a preveni pierderea accidentală a datelor.",
+    "ok": true
+  },
+  {
+    "cod": "11.2",
+    "rol": "Digital Marketing Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa unui sistem de tracking (AppsFlyer/Adjust) în prototip blochează măsurarea calității utilizatorilor și a ROAS-ului pe campanii.\n\nFIX: Integrarea unui SDK de atribuire și a unui parametru `utm_source` în URL pentru a urmări sursa instalării în `localStorage`.",
+    "ok": true
+  },
+  {
+    "cod": "3.3",
+    "rol": "QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa ID-urilor și a atributelor de testare (data-testid) în elementele HTML blochează automatizarea UI.\n\nFIX: Adăugarea atributelor `data-testid` pe butoane și carduri pentru a permite selecția robustă a elementelor în suita de teste Playwright/Cypress.",
+    "ok": true
+  },
+  {
+    "cod": "16.1",
+    "rol": "Head of Legal",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Stocarea datelor sensibile (profil/rețea) în localStorage este necriptată, încălcând GDPR. Lipsa mecanismului de consimțământ (Terms/Privacy) expune compania la sancțiuni.\n\nFIX: Implementați un layer de criptare locală și adăugați un modal obligatoriu de acceptare a Termenilor și Politicii de Confidențialitate.",
+    "ok": true
+  },
+  {
+    "cod": "8.3",
+    "rol": "UI Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Contrastul auriu pe fundal dark este ilizibil la fonturi mici, iar ierarhia vizuală a cardurilor KPI este haotică.\n\nFIX: Implementează paleta de culori cu raport de contrast 4.5:1 și standardizează spațierea (paddings) folosind un sistem de grid 8pt.",
+    "ok": true
+  },
+  {
+    "cod": "6.1",
+    "rol": "Head of AI",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Algoritmul bazat pe keyword overlap generează \"zgomot\" și false corelații, subminând Trust Score-ul.\n\nFIX: Implementează un motor de matching bazat pe embedding-uri vectoriale locale (ex: Transformers.js) pentru relevanță semantică reală, nu doar potriviri de cuvinte.",
+    "ok": true
+  },
+  {
+    "cod": "1.7",
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: Starea globală (localStorage) este volatilă și greu de scalat pentru nodurile rețelei.\nFIX: Implementează un store simplu cu `Proxy` pentru reactivitate și un serviciu de serializare JSON pentru a pregăti trecerea la un backend real.",
+    "ok": true
+  },
+  {
+    "cod": "11.3",
+    "rol": "Content Marketer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa contextului narativ (storytelling) în interfață; utilizatorul nu înțelege valoarea „Trust Score” fără conținut educativ integrat.\n\nFIX: Adaugă secțiunea „Trust Insights” în ecranul ACASĂ: scurte articole tip „micro-learning” despre cum să crești scorul pentru a debloca oportunități.",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 5,
+    "review": "PROBLEMA: Lipsa persistenței datelor la refresh/închidere browser frustrează utilizatorii; pierderea stării `localStorage` duce la tichete de tip \"date dispărute\".\n\nFIX: Implementare `localStorage` pentru starea aplicației și un buton \"Export/Import Backup\" în setări pentru a simula persistența cross-device.",
+    "ok": true
+  },
+  {
+    "cod": "16.2",
+    "rol": "Corporate Lawyer",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa unui modul de \"Legal/Compliance Validation\" în fluxul de matching; riscuri majore de conflict de interese sau clauze de neconcurență ignorate în potriviri.\n\nFIX: Adăugarea unui filtru \"Conflict Check\" bazat pe metadata juridică în algoritmul de matching.",
+    "ok": true
+  },
+  {
+    "cod": "3.3",
+    "rol": "QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: Lipsa ID-urilor și a atributelor de testare (data-testid) în HTML blochează automatizarea UI.\nFIX: Adăugarea atributelor `data-testid` pe elementele critice (carduri, butoane, input-uri) pentru a permite selecția robustă prin Playwright/Cypress în iterația următoare.",
+    "ok": true
+  },
+  {
+    "cod": "8.3",
+    "rol": "UI Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Contrastul auriu pe fundal dark este ilizibil pentru accesibilitate, iar ierarhia vizuală a cardurilor KPI este saturată.\n\nFIX: Implementează paleta de culori cu raport de contrast 4.5:1 și standardizează spațierea (spacing tokens) pentru a aerisi interfața.",
+    "ok": true
+  },
+  {
+    "cod": "1.7",
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 4,
+    "review": "PROBLEMA: Single-file HTML/JS creează datorie tehnică și riscuri de scalabilitate. Performanța SVG-ului static va degrada UX-ul odată cu creșterea numărului de noduri.\n\nFIX: Migrare către o arhitectură modulară (Vite/React) și implementarea D3.js pentru vizualizarea dinamică a grafului.",
+    "ok": true
+  },
+  {
+    "cod": "6.2",
+    "rol": "AI Research Scientist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Algoritmul de matching bazat pe keyword overlap este ineficient si genereaza zgomot, ignorand contextul semantic al retelei.\n\nFIX: Implementeaza in JS un model *Sentence-BERT* usor (ONNX) pentru vectorizarea profilurilor si calculul similaritatii cosinus in localStorage.",
+    "ok": true
+  },
+  {
+    "cod": "11.3",
+    "rol": "Content Marketer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa contextului narativ în prototip; utilizatorul nu înțelege valoarea „Trust Score” fără un mecanism de storytelling educațional integrat.\n\nFIX: Adăugarea unui modul „Content Feed” în ecranul ACASĂ, cu micro-articole despre cum se construiește Trust Score-ul în rețea.",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 6,
+    "review": "PROBLEMA: Lipsa persistenței datelor la refresh/închidere browser (doar localStorage local) cauzează pierderea stării și frustrarea utilizatorilor.\n\nFIX: Implementarea unui mecanism de export/import JSON al stării și integrarea Firebase Realtime Database pentru sincronizare cross-device și persistență.",
+    "ok": true
+  },
+  {
+    "cod": "16.3",
+    "rol": "Contracts Manager",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa clauzelor de confidențialitate (NDA) și a fluxului legal în \"Potriviri\" expune riscuri juridice majore la schimbul de date.\n\nFIX: Adaugă un checkbox obligatoriu de \"Acceptare Termeni/NDA\" înainte de vizualizarea datelor de contact în fluxul de matching.",
+    "ok": true
+  },
+  {
+    "cod": "3.4",
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa persistenței datelor la refresh/închidere browser face testarea imposibilă.\nFIX: Implementează `localStorage` pentru starea match-urilor și profilului.\n\nPROBLEMA: Lipsa feedback-ului vizual la acțiuni (accept/refuz) induce utilizatorul în eroare.\nFIX: Adaugă stări `loading` și animații CSS la click.",
+    "ok": true
+  },
+  {
+    "cod": "8.4",
+    "rol": "Interaction Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa feedback-ului tactil și vizual la acțiunea de \"match\" (swipe/click), cauzând nesiguranță utilizatorului.\n\nFIX: Adaugă o animație de \"spring\" (easing: cubic-bezier) la carduri și un state vizual (glow auriu) la acceptare pentru confirmare imediată.",
+    "ok": true
+  },
+  {
+    "cod": "1.8",
+    "rol": "Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa persistenței reale și a unui state management scalabil (localStorage e limitat).\nFIX: Implementarea Redux Toolkit sau React Query pentru gestionarea stării și simularea unui API fetch, pregătind integrarea cu un backend real în iterația următoare.",
+    "ok": true
+  },
+  {
+    "cod": "6.2",
+    "rol": "AI Research Scientist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Matching-ul pe keyword overlap este ineficient și superficial, ignorând contextul semantic al rețelei.\n\nFIX: Implementează un model de tip \"Lightweight Embedding\" (ex. DistilBERT) în browser (ONNX) pentru a calcula similaritatea cosinus a vectorilor de profil.",
+    "ok": true
+  },
+  {
+    "cod": "13.4",
+    "rol": "Onboarding / Implementation Specialist",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa unui flux de onboarding (first-run) face utilizatorul să intre într-o aplicație goală, fără context, crescând riscul de abandon imediat (Time to Value mare).\n\nFIX: Introdu un ecran de \"Setup Profil\" obligatoriu la prima lansare pentru a popula localStorage.",
+    "ok": true
+  },
+  {
+    "cod": "11.4",
+    "rol": "SEO / SEM Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Single-file HTML fără rutare (slugs) blochează indexarea paginilor (Acasa, Profil, etc.), făcând imposibil SEO-ul on-page.\n\nFIX: Implementează un router client-side (ex: `history.pushState`) și generează meta-taguri dinamice per secțiune pentru a permite crawlere-lor să indexeze conținutul.",
+    "ok": true
+  },
+  {
+    "cod": "16.4",
+    "rol": "Privacy / GDPR Officer (DPO)",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Stocarea datelor sensibile (rețea, intenții business) în `localStorage` este necriptată și accesibilă oricărui script/utilizator local.\n\nFIX: Implementează cifrarea datelor (AES-GCM) înainte de stocare și adaugă un banner de consimțământ pentru colectarea datelor cu caracter personal.",
+    "ok": true
+  },
+  {
+    "cod": "3.4",
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Starea rețelei (SVG) și datele din localStorage se pierd la refresh accidental pe mobil. Lipsa feedback-ului vizual la \"Accept/Refuz\" face fluxul confuz.\n\nFIX: Implementează `window.onbeforeunload` pentru salvare automată și adaugă animații CSS de confirmare la matching.",
+    "ok": true
+  },
+  {
+    "cod": "8.5",
+    "rol": "UX Researcher",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa contextului pentru \"Trust Score\" creează scepticism; utilizatorii nu înțeleg cum se calculează, scăzând adopția.\n\nFIX: Adaugă un tooltip sau modal \"Cum calculăm încrederea\" cu 3 factori vizibili (vechime, recomandări, tranzacții finalizate) în pagina de profil.",
+    "ok": true
+  },
+  {
+    "cod": "1.8",
+    "rol": "Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: `localStorage` nu permite sincronizarea datelor între utilizatori, blocând funcționalitatea de rețea.\nFIX: Implementez un mock API (JSON Server) pentru a simula fetch-ul de date și starea globală (Context API/Zustand), pregătind terenul pentru integrarea cu backend-ul real.",
+    "ok": true
+  },
+  {
+    "cod": "6.3",
+    "rol": "Senior ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Matching-ul bazat pe keyword overlap este ineficient (zgomot mare, zero context semantic).\n\nFIX: Implementează un model de embeddings (ex: TensorFlow.js cu pre-trained model) pentru a calcula similaritatea cosinus între vectorii de profil, îmbunătățind precizia recomandărilor.",
+    "ok": true
+  },
+  {
+    "cod": "13.4",
+    "rol": "Onboarding / Implementation Specialist",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa unui flux de onboarding blochează înțelegerea valorii (Time to First Value). Utilizatorii noi nu știu ce să completeze în Profil pentru a activa algoritmul.\n\nFIX: Adaugă un wizard de 3 pași la prima logare pentru setarea intereselor/ofertelor.",
+    "ok": true
+  },
+  {
+    "cod": "3.4",
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: Lipsa persistenței datelor la refresh/închidere browser (localStorage gol la sesiune nouă) și starea stării (graph/match) neresetabilă.\n\nFIX: Implementare `localStorage.setItem` pentru starea match-urilor și adăugarea unui buton \"Reset Data\" în Profil pentru sesiuni noi.",
+    "ok": true
+  },
+  {
+    "cod": "16.5",
+    "rol": "Regulatory Compliance Specialist",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa consimțământului explicit pentru procesarea datelor (GDPR) și absența mecanismului de ștergere a datelor (Right to be Forgotten) în localStorage.\n\nFIX: Adaugă un banner de \"Termeni și Confidențialitate\" la prima deschidere și un buton de \"Reset/Ștergere date\" în Profil.",
+    "ok": true
+  },
+  {
+    "cod": "11.5",
+    "rol": "ASO Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Screenshots curente lipsesc; utilizatorii nu înțeleg valoarea \"Network Capital\" fără vizualizarea interfeței premium.\n\nFIX: Adaugă în `eie.html` un modul de \"App Preview\" cu 3 ecrane cheie (Dashboard, Matching, AI Secretary) optimizate pentru layout-ul App Store.",
+    "ok": true
+  },
+  {
+    "cod": "8.5",
+    "rol": "UX Researcher",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Lipsa contextului calitativ. Utilizatorii nu înțeleg valoarea \"Trust Score\" fără explicații vizuale, riscând abandonul.\n\nFIX: Adaugă tooltips (modaluri info) pe scorurile KPI pentru a justifica vizibil sursa datelor și metodologia de calcul.",
+    "ok": true
+  },
+  {
+    "cod": "1.8",
+    "rol": "Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: Stocarea locală (localStorage) nu permite sincronizarea și persistenta datelor între sesiuni/dispozitive, blocând testarea flow-ului de rețea.\n\nFIX: Implementează un mock API service (JSON Server sau MSW) pentru a simula fetch-ul de date și starea globală (Context/Zustand).",
+    "ok": true
+  },
+  {
+    "cod": "6.3",
+    "rol": "Senior ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 2,
+    "review": "PROBLEMA: Matching-ul bazat pe keyword overlap generează zgomot și \"cold start\" sever pentru utilizatorii noi.\n\nFIX: Implementează un vector embedding local (via TensorFlow.js) pentru matching semantic și un scor de încredere ponderat (Trust Score × Cosine Similarity).",
+    "ok": true
+  },
+  {
+    "cod": "11.6",
+    "rol": "Social Media Manager",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Prototipul este un \"black box\" izolat, imposibil de distribuit sau de integrat în social media pentru creșterea comunității.\n\nFIX: Adaugă butoane de \"Share\" pe cardurile de potrivire și KPI, cu generare de imagini (og:image) pentru vizibilitate socială.",
+    "ok": true
+  },
+  {
+    "cod": "17.1",
+    "rol": "Internal IT Manager",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Stocarea datelor în localStorage este nesecurizată și volatilă, riscând scurgeri de informații sensibile în cazul pierderii dispozitivului.\n\nFIX: Implementați autentificare prin SSO (Azure AD/Okta) și stocare criptată pe dispozitiv (Secure Enclave/KeyStore) pentru a asigura trasabilitatea accesului.",
+    "ok": true
+  },
+  {
+    "cod": "3.4",
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 4,
+    "review": "PROBLEMA: Lipsa persistenței datelor la refresh browser șterge statusul \"Accept/Refuz\" în Matchmaker, blocând fluxul de testare.\n\nFIX: Implementează `localStorage.setItem` la fiecare schimbare de stare a match-ului pentru a păstra deciziile utilizatorului între sesiuni.",
+    "ok": true
+  },
+  {
+    "cod": "8.6",
+    "rol": "Design System Specialist",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Incoerență vizuală și lipsa unui sistem de design (tokens) în `eie.html`, ducând la UI fragmentat.\n\nFIX: Definirea unui set minim de CSS variables (color/spacing) și un set de componente atomice (butoane/carduri) pentru consistență imediată.",
+    "ok": true
+  },
+  {
+    "cod": "1.9",
+    "rol": "Senior Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: LocalStorage este volatil și riscant pentru datele utilizatorilor. Arhitectura tip single-file este imposibil de scalat sau monitorizat (crash reporting).\n\nFIX: Migrare către React Native cu SQLite pentru persistență locală și integrarea Sentry pentru monitorizarea erorilor în timp real.",
+    "ok": true
+  },
+  {
+    "cod": "13.4",
+    "rol": "Onboarding / Implementation Specialist",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 3,
+    "review": "PROBLEMA: Lipsa unui flux de onboarding blochează înțelegerea valorii \"Network Capital\". Utilizatorii intră într-o aplicație goală, fără context.\n\nFIX: Adaugă un ecran \"Setup Profil\" obligatoriu la prima rulare, care populează localStorage pentru a genera imediat recomandări personalizate.",
+    "ok": true
+  },
+  {
+    "cod": "6.4",
+    "rol": "ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Matching-ul pe keyword overlap este ineficient și superficial, ignorând contextul semantic al profilurilor.\n\nFIX: Implementează un model de embedding (Sentence-BERT) pentru calculul similarității cosinus între vectorii profilurilor, stocându-i în localStorage pentru matching semantic rapid.",
+    "ok": true
+  },
+  {
+    "cod": "11.7",
+    "rol": "Community Manager",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa unui sistem de feedback in-app descurajează utilizatorii, făcând imposibilă colectarea datelor pentru rapoartele mele.\n\nFIX: Adăugarea unui buton \"Feedback\" pe ecranul ACASĂ care deschide un formular simplu salvat în localStorage pentru a simula colectarea opiniilor.",
+    "ok": true
+  },
+  {
+    "cod": "13.5",
+    "rol": "Customer Experience Analyst",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa feedback-ului direct. Utilizatorii testează funcționalități fără a putea evalua efortul sau satisfacția (CES/CSAT).\n\nFIX: Introdu un buton de \"Feedback\" după acțiunea de potrivire și un micro-sondaj NPS post-interacțiune, stocate local pentru analiză ulterioară.",
+    "ok": true
+  },
+  {
+    "cod": "17.2",
+    "rol": "Internal Help Desk",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 1,
+    "review": "PROBLEMA: Lipsa persistenței datelor și securității (localStorage expus) blochează scalabilitatea și conformitatea pentru utilizatori.\n\nFIX: Implementează un sistem de autentificare bazat pe token-uri JWT și o bază de date Firebase pentru sincronizarea securizată a profilurilor între dispozitive.",
+    "ok": true
+  }
+]
