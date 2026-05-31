@@ -303,6 +303,12 @@ h2.title{font-weight:800;font-size:24px;letter-spacing:-.5px;margin:2px 0 4px}
 .whychips{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
 .whychip{font-size:11.5px;color:var(--primary-dim);background:var(--primary-soft);border:1px solid var(--line);border-radius:30px;padding:4px 10px}
 .whylead{font-size:11px;color:var(--muted);width:100%;margin-bottom:1px}
+/* loop3 #5: indicator de suprapunere (bridge) ce ofera ↔ ce cauta */
+.bridge{display:flex;align-items:stretch;gap:8px;margin-top:11px;background:var(--card2);border-radius:12px;padding:10px 11px}
+.bridge .bside{flex:1;min-width:0}
+.bridge .blab{font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:700}
+.bridge .btxt{font-size:12.5px;color:var(--ink);margin-top:3px;line-height:1.35}
+.bridge .barrow{align-self:center;color:var(--primary);font-size:16px;flex:none}
 .adock{display:flex;gap:8px;margin-top:14px;align-items:center}
 .adock .btn{flex:1}
 .menu-dots{flex:none;width:44px;height:44px;border-radius:11px;border:1px solid var(--line2);background:var(--card);color:var(--muted);font-size:18px;cursor:pointer;display:grid;place-items:center}
@@ -983,6 +989,11 @@ function matches(list){return list.map(m=>{
     else dock=h("div",{class:"adock"},h("button",{class:"btn gold","data-act":"introduce","data-id":m.id,text:"Cere introducere"}),h("button",{class:"btn ghost","data-act":"decline","data-id":m.id,text:"Nu acum"}));
     const why=rev?`Aveti ${interese}${nC?" ("+(m.common||[]).join(", ")+")":""}. Conexiune confirmata de ambele parti.`
                  :"Potrivire pe teme de business comune. Identitatea si detaliile se dezvaluie doar dupa ce ambele parti accepta (dublu consimtamant).";
+    // loop3 #5: indicator de suprapunere vizibil (doar dupa consimtamant, cand textele sunt vizibile)
+    const bridge=(rev&&(o.text||s.text))?h("div",{class:"bridge"},
+      h("div",{class:"bside"},h("div",{class:"blab",text:off?"Tu oferi":(fn+" ofera")}),h("div",{class:"btxt",text:o.text||"—"})),
+      h("div",{class:"barrow",text:"⇄"}),
+      h("div",{class:"bside"},h("div",{class:"blab",text:off?(fn+" cauta"):"Tu cauti"}),h("div",{class:"btxt",text:s.text||"—"}))):null;
     // loop3 #4: explicabilitate vizibila — interesele comune ca chips (doar dupa consimtamant, ca sa nu dezvaluim pre-consimtamant)
     const whychips=(rev&&nC>0)?h("div",{class:"whychips"},h("span",{class:"whylead",text:"De ce o vezi — aveti in comun:"}),
       ...(m.common||[]).slice(0,6).map(w=>h("span",{class:"whychip",text:w}))):null;
@@ -990,7 +1001,7 @@ function matches(list){return list.map(m=>{
       h("div",{class:"whybody"},why,h("div",{class:"mono",style:{marginTop:"8px"},text:`Potrivire pe ${nC} ${nC===1?"semnal comun":"semnale comune"} dintre ce ati declarat amandoi · scor ${m.score}/99 · Trust ${cel.trust}/100. Estimari, nu garantii.`})));
     return h("div",{class:"card match"+(rev?" conectat":"")},
       h("div",{class:"ghead"},av,h("div",{class:"gi"},h("div",{class:"gn",text:nm}),h("div",{class:"gt",text:ro})),pill),
-      gline,badges,whychips,dock,details,h("div",{class:"shield",text:"🛡 Conexiune protejata"+(rev?" · sursa: "+o.source:"")}));});}
+      gline,bridge,badges,whychips,dock,details,h("div",{class:"shield",text:"🛡 Conexiune protejata"+(rev?" · sursa: "+o.source:"")}));});}
 
 /* backlog #10: filtru pe industrie la Potriviri */
 function matchInd(m){const c=mem(m.offer_member===ME?m.seek_member:m.offer_member);return c&&c.industry||"";}
