@@ -6,3 +6,4 @@
 - 2026-05-31 · AUDIT item 3 (secloop3): APROBAT 6/6 + CAE.
 - 2026-05-31 · Item 4 (Prioritate task) · stea ☆/★ pe task; importantele sus la sortare; validat, 0 erori.
 - 2026-05-31 · Item 5 (Snooze task) · buton ⏰ -> termen +1 zi (min. maine); validat, 0 erori.
+- 2026-05-31 · Item 6 (Quick-add cu data) · parseDue() detecteaza azi/maine/poimaine/zi-saptamana/'in N zile' din text si seteaza termenul; validat, 0 erori.

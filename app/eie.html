@@ -1119,10 +1119,22 @@ function downloadICS(m){try{const blob=new Blob([icsFor(m)],{type:"text/calendar
   setTimeout(()=>URL.revokeObjectURL(a.href),2000);logA("Export intalnire (.ics)");toast(".ics descarcat — importa-l in calendar");}catch(e){toast("Export esuat");}}
 
 /* ---- Secretara iteratia 3: task-uri cu termen + reminder ---- */
-function addTask(){if(!DB)return;const t=clean((($("#taskText")||{}).value||"").trim()),due=clean((($("#taskDue")||{}).value||"")).slice(0,10);if(!t)return;
-  DB.tasks.push({id:DB.seq++,member_id:ME,text:t,due,done:0,t:Date.now()});
+// detectie de data in limbaj natural (RO) — backlog secretara #6
+function parseDue(text){const low=String(text).toLowerCase().replace(/[âă]/g,"a").replace(/î/g,"i").replace(/[șş]/g,"s").replace(/[țţ]/g,"t");
+  let m;
+  if(/\bpoimaine\b/.test(low))return addDays(today(),2);
+  if(/\bmaine\b/.test(low))return addDays(today(),1);
+  if(/\bazi\b/.test(low))return today();
+  if((m=low.match(/\b(?:in|peste)\s+(\d+)\s+zile\b/)))return addDays(today(),+m[1]);
+  const days=["duminica","luni","marti","miercuri","joi","vineri","sambata"];
+  for(let i=0;i<7;i++)if(new RegExp("\\b"+days[i]+"\\b").test(low)){const diff=((i-new Date().getDay()+7)%7)||7;return addDays(today(),diff);}
+  return "";}
+function addTask(){if(!DB)return;const t=clean((($("#taskText")||{}).value||"").trim());if(!t)return;
+  let due=clean((($("#taskDue")||{}).value||"")).slice(0,10);
+  let auto=false;if(!due){const p=parseDue(t);if(p){due=p;auto=true;}}
+  DB.tasks.push({id:DB.seq++,member_id:ME,text:t,due,done:0,prio:0,t:Date.now()});
   if($("#taskText"))$("#taskText").value="";if($("#taskDue"))$("#taskDue").value="";
-  logA("Task adaugat: "+t);save();renderTasks();updateBadges();toast("Task adaugat");}
+  logA("Task adaugat: "+t);save();renderTasks();updateBadges();toast(auto?"Task adaugat · termen detectat: "+fmtWhen(due):"Task adaugat");}
 function toggleTask(id){const x=(DB.tasks||[]).find(t=>t.id===id);if(!x)return;x.done=x.done?0:1;
   logA(x.done?"Task finalizat":"Task redeschis");save();renderTasks();updateBadges();}
 function delTask(id){if(!confirm("Stergi acest task?"))return;DB.tasks=(DB.tasks||[]).filter(t=>t.id!==id);logA("Task sters");save();renderTasks();updateBadges();}
