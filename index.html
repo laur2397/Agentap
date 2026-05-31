@@ -406,6 +406,9 @@ details.why2>summary::-webkit-details-marker{display:none}
 .meetcard .moview b{color:var(--ink)}.meetcard .moview .x{margin-left:auto;background:none;border:0;color:var(--muted);cursor:pointer;font-size:15px}
 .meetcard .moedit{margin-top:10px}
 .meetcard .moview.goal{border-left:2px solid var(--primary)}
+/* loop3 #19: confirmare calda "ce urmeaza" */
+.meetnext{display:flex;align-items:flex-start;gap:7px;font-size:12px;color:var(--ink2);background:var(--primary-soft);border-radius:10px;padding:9px 11px;margin-top:10px;line-height:1.45}
+.meetnext .mni{flex:none}
 /* loop2 #15: remindere intalniri <24h */
 .meetcard.soon{border-color:var(--primary);box-shadow:0 0 0 1px var(--primary),var(--shadow)}
 .soonbadge{display:inline-flex;align-items:center;gap:4px;background:var(--primary);color:#fff;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:700;margin-top:7px}
@@ -1464,10 +1467,17 @@ function renderMeetings(){const host=$("#meetList");if(!host)return;
           : h("button",{class:"btn ghost sm","data-act":"moedit","data-id":x.id,style:{marginTop:"9px"},text:"✎ Noteaza rezultatul"});
     }
     const sl=x.status==="confirmat"?soonLabel(hoursUntil(x.when)):null;
+    // loop3 #19: confirmare calda — "ce urmeaza", contextual (viitor vs trecut)
+    let nx=null;
+    if(x.status==="confirmat"){const hu=hoursUntil(x.when);
+      const txt=(hu!=null&&hu>=0)
+        ? (x.goal?"Ești pregătit — ți-ai notat scopul. Succes la întâlnire!":"Ce urmează: notează-ți scopul ca să mergi pregătit.")
+        : (x.outcome?"Frumos — ai notat cum a mers. Un follow-up scurt menține legătura.":"Ce urmează: notează cum a mers și trimite un follow-up scurt.");
+      nx=h("div",{class:"meetnext"},h("span",{class:"mni",text:"💡"}),h("span",{text:txt}));}
     return h("div",{class:"meetcard"+(sl?" soon":"")},
       h("div",{class:"mtop2"},h("div",{class:"mw",text:fmtWhen(x.when)}),h("div",{class:"mwho",text:"cu "+cel.name})),
       sl?h("div",{class:"soonbadge",text:"⏰ "+sl}):null,
-      x.place?h("div",{class:"mplace",text:"📍 "+x.place}):null,acts,gl,oc);};
+      x.place?h("div",{class:"mplace",text:"📍 "+x.place}):null,acts,nx,gl,oc);};
   const out=[];
   if(toAccept.length){out.push(h("div",{class:"pipe-h a"},h("span",{class:"pd"}),"De confirmat",h("span",{class:"pn",text:String(toAccept.length)})));toAccept.forEach(x=>out.push(card(x,"accept")));}
   if(confirmed.length){out.push(h("div",{class:"pipe-h c"},h("span",{class:"pd"}),"Confirmate",h("span",{class:"pn",text:String(confirmed.length)})));confirmed.forEach(x=>out.push(card(x,"done")));
