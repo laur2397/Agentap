@@ -915,7 +915,7 @@ function emp(){return h("div",{class:"estate"},
     svgEl("circle",{cx:27,cy:27,r:15}),svgEl("path",{d:"M38 38 L53 53","stroke-linecap":"round"}),
     svgEl("path",{d:"M21 27 h12 M27 21 v12","stroke-linecap":"round",opacity:".5"})),
   h("div",{class:"t",text:"Nicio potrivire inca"}),
-  h("div",{style:{fontSize:"12px",marginTop:"4px"},text:"Adauga in profil sau dicteaza dupa un apel — recalculez afinitatile pe loc."}));}
+  h("div",{style:{fontSize:"12px",marginTop:"4px"},text:"Adauga in profil sau noteaza dupa un apel — iti gasesc pe loc oameni potriviti."}));}
 
 function home(){const me=mem(ME),mm=myMatches();
   const prop=mm.filter(m=>m.status==="propus").length,con=mm.filter(m=>m.status==="conectat").length;
@@ -1182,7 +1182,7 @@ function prof(){const me=mem(ME),con=DB.matches.filter(x=>x.status==="conectat"&
   const r=(k,elid)=>{const l=DB.items.filter(i=>i.member_id===ME&&i.kind===k);
     setKids($(elid), l.length?l.map(i=>h("div",{class:"linei"},
         h("div",{},h("div",{text:i.text}),h("div",{class:"meta",text:"sursa: "+i.source})),
-        h("button",{class:"x","data-act":"del","data-id":i.id,"aria-label":"Sterge",text:"×"}))):h("div",{class:"empty",style:{padding:"12px",fontSize:"14px"},text:"Nimic inca."}));};
+        h("button",{class:"x","data-act":"del","data-id":i.id,"aria-label":"Sterge",text:"×"}))):h("div",{class:"empty",style:{padding:"12px",fontSize:"14px"},text:"Încă nimic aici — adaugă primul lucru mai jos."}));};
   r("ofer","#oferList");r("caut","#cautList");
   renderValueRadar();
   const au=(DB.audit||[]).filter(a=>a.me===ME).slice(0,12);
@@ -1217,7 +1217,7 @@ function addItem(k){if(PROC)return;const t=clean($("#"+k+"Text").value.trim());i
   logA("Adaugat in „"+(k==="ofer"?"ce ofer":"ce caut")+"”: "+t);
   showProc();const t0=performance.now();runMatching();save();
   const wait=Math.max(0,360-(performance.now()-t0)); // durata constanta -> maschează timing-ul matching-ului (audit s4 #2)
-  setTimeout(()=>{hideProc();render();toast("Adaugat — am recalculat afinitatile");if(pendingLock){pendingLock=false;lockNow();}},wait);}
+  setTimeout(()=>{hideProc();render();toast("Gata — am cautat oameni potriviti pentru tine");if(pendingLock){pendingLock=false;lockNow();}},wait);}
 function delItem(id){if(!confirm("Stergi acest element din profil?"))return;const it=DB.items.find(i=>i.id===id);DB.items=DB.items.filter(i=>i.id!==id);if(it)logA("Sters: "+it.text);save();render();}
 
 /* Secretara AI — cu indicator de procesare */

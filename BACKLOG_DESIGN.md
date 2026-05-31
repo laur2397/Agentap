@@ -26,7 +26,7 @@ Validare: node --check + smoke Playwright zero erori. Audit (examples/audit.py) 
 10. [x] Progres intrinsec onest pe Acasa: „ai notat N idei · M task-uri facute" (real, nu streak).
 11. [x] Scopul intalnirii (pre-meeting): camp optional „ce vrei sa obtii" la intalnirile viitoare.
 12. [x] Audit de control: slider explicabil relevanta↔diversitate in ordinea potrivirilor (ajustabil manual).
-13. [ ] Microcopy cald & uman: revizuire texte cheie (fara jargon tehnic, ton prietenos).
+13. [x] Microcopy cald & uman: revizuire texte cheie (fara jargon tehnic, ton prietenos).
 14. [ ] Reducere efort cognitiv pe Acasa: gruparea clara a sectiunilor + un singur accent primar.
 15. [ ] Micro-feedback placut, neintruziv, la actiuni cheie (respecta reduce-motion; fara dopamina fortata).
 16. [ ] „Privacy health" in Profil: indicator criptare activa + spatiu ocupat estimativ (transparenta).
