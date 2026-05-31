@@ -999,7 +999,9 @@ function renderTasks(){const host=$("#taskList");if(!host)return;
   const empty=h("div",{class:"estate",style:{padding:"22px"}},h("div",{class:"t",text:"Niciun task"}),h("div",{style:{fontSize:"12px",marginTop:"4px"},text:"Adauga o sarcina cu termen in campul de mai sus."}));
   setKids(host, out.length?out:empty);}
 function updateBadges(){if(!DB)return;const td=today();
-  const n=(DB.tasks||[]).filter(t=>t.member_id===ME&&!t.done&&t.due&&t.due<=td).length;
+  const tdue=(DB.tasks||[]).filter(t=>t.member_id===ME&&!t.done&&t.due&&t.due<=td).length;
+  const mconf=(DB.meetings||[]).filter(x=>x.status==="propus"&&x.b===ME).length; // intalniri de confirmat
+  const n=tdue+mconf;
   const tab=document.querySelector('.tab[data-v="secretara"]');if(!tab)return;
   let b=tab.querySelector(".navbadge");
   if(n>0){if(!b){b=h("span",{class:"navbadge"});tab.appendChild(b);}b.textContent=String(n);}
