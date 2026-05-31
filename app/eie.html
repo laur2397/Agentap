@@ -469,7 +469,11 @@ details.why2>summary::-webkit-details-marker{display:none}
       <p style="font-size:12px;color:var(--ink2);line-height:1.55">Datele tale traiesc <b>doar in acest browser</b>, criptate la repaus cu <b>AES-GCM</b>. Cheia se deriveaza din parola ta (<b>PBKDF2</b>, 150k iteratii) cu un <b>salt unic per utilizator</b>, generat la prima rulare si stocat local (salt-ul nu e secret — previne rainbow tables); <b>cheia ramane strict in RAM</b> si nu se scrie niciodata pe disc. La blocare cheia e <b>eliberata din memorie (best-effort)</b> — JS nu garanteaza zeroing imediat al heap-ului; datele pe disc raman criptate si se redeschid doar cu parola. Scrierea e tranzactionala (temp→validare→commit). Integritate: checksum <b>SHA-256</b>; Trust Ledger pe lant <b>HMAC-SHA256</b> cheiat de parola. „Ce caut” se dezvaluie <b>doar dupa dublu consimtamant</b>.</p>
       <p style="font-size:11px;color:var(--muted);line-height:1.5;margin-top:8px">Securitatea finala depinde de <b>taria parolei tale</b>: la un dump complet al stocarii, un atacator are doar salt+ciphertext (nu si parola) si trebuie sa o sparga prin brute-force incetinit de PBKDF2. Foloseste o parola lunga (ideal dintr-un manager de parole). Acest prototip nu adauga un „pepper” extern (n-ar avea unde, fiind Local-Only fara server).</p>
       <p style="font-size:11px;color:var(--warn);line-height:1.5;margin-top:8px">⚠ Prototip de cercetare, client-side: un script malitios pe aceeasi origine (XSS/extensie) are oricum acces direct la memorie cat sesiunea e deblocata — de aceea apararea reala e auto-lock-ul si parola, nu obscuritatea. Declansatoarele de matching sunt mascate de o durata fixa de procesare (anti timing). <b>Nu introduce date cu adevarat sensibile</b>; tu esti responsabil de backup.</p>
-      <div style="margin-top:12px"><button class="btn ghost sm" onclick="exportData()">⤓ Exporta datele (JSON) pentru backup</button></div></div>
+      <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn ghost sm" onclick="exportData()">⤓ Exporta (JSON)</button>
+        <button class="btn ghost sm" data-act="importbtn">⤒ Importa (JSON)</button>
+        <input type="file" id="importFile" accept="application/json,.json" style="display:none" onchange="handleImport(event)" aria-label="Fisier de import">
+      </div></div>
     <div class="panel"><h3>Preferinte <span class="badge vis">acces</span></h3>
       <div class="toggle"><span>Reduce animatiile <span style="color:var(--muted);font-size:11px">(accesibilitate)</span></span>
         <div class="sw" id="rmSw" role="switch" tabindex="0" aria-label="Reduce animatiile" onclick="toggleRM()"><i></i></div></div></div>
@@ -652,6 +656,17 @@ function exportData(){try{const blob=new Blob([JSON.stringify(DB,null,2)],{type:
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="cercul-export-"+today()+".json";a.click();
   setTimeout(()=>URL.revokeObjectURL(a.href),2000);logA("Export date (JSON) pentru backup");toast("Date exportate (JSON)");}catch(e){toast("Export esuat");}}
 function logA(action){if(!DB.audit)DB.audit=[];DB.audit.unshift({t:Date.now(),me:ME,a:clean(action).slice(0,160)});if(DB.audit.length>60)DB.audit.pop();}
+// backlog #8: import cu validare de schema + confirmare (anti-corupere, cu backup)
+function importData(){const inp=$("#importFile");if(inp)inp.click();}
+function handleImport(ev){const f=ev.target.files&&ev.target.files[0];if(!f){return;}
+  const r=new FileReader();
+  r.onload=()=>{try{const d=JSON.parse(String(r.result));
+    if(!validDB(d)){toast("Fisier invalid sau schema gresita");return;}
+    if(!confirm("Inlocuiesti TOATE datele actuale cu cele din fisier? Datele curente se pierd (se pastreaza un backup criptat).")){return;}
+    backupRaw();DB=d;ME=null;loadMembers();save();logA("Import date din fisier JSON");setView("acasa");toast("Date importate cu succes");
+  }catch(e){console.warn("import",e);toast("Import esuat — fisier invalid");}finally{try{ev.target.value="";}catch(_){}}};
+  r.onerror=()=>toast("Nu am putut citi fisierul");
+  r.readAsText(f);}
 
 function seed(){
   const d={members:[],items:[],matches:[],messages:[],audit:[],notes:[],meetings:[],tasks:[],seq:1};
@@ -1145,6 +1160,7 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="tfilter")setTaskFilter(el.dataset.f);
   else if(a==="srperson"){closeSearch();openMemberMatch(id);}
   else if(a==="srgo"){closeSearch();setView(el.dataset.v);}
+  else if(a==="importbtn")importData();
   else if(a==="go")setView(el.dataset.v);});
 
 // error boundary global (remediaza constatarea de audit #4)

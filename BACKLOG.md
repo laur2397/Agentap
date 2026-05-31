@@ -15,7 +15,7 @@ Reguli pentru fiecare item:
 5. [x] Brief de intalnire: include si task-urile deschise legate de persoana.
 6. [x] Cautare globala (header): peste persoane, notite, task-uri.
 7. [x] Empty-states ilustrate consistente (SVG) pe toate ecranele goale.
-8. [ ] Export complet (toate datele) + Import cu validare de schema + confirmare.
+8. [x] Export complet (toate datele) + Import cu validare de schema + confirmare.
 9. [ ] Profil: editare nume/domeniu (nu doar onboarding).
 10. [ ] Potriviri: filtru pe industrie (chips).
 11. [ ] Notite: tag-uri simple (#client, #idee) + filtrare pe tag.
