@@ -1327,6 +1327,10 @@ function toggleTask(id){const x=(DB.tasks||[]).find(t=>t.id===id);if(!x)return;x
   logA(x.done?"Task finalizat":"Task redeschis");save();renderTasks();updateBadges();}
 function delTask(id){if(!confirm("Stergi acest task?"))return;DB.tasks=(DB.tasks||[]).filter(t=>t.id!==id);logA("Task sters");save();renderTasks();updateBadges();}
 function toggleTaskPrio(id){const t=(DB.tasks||[]).find(x=>x.id===id);if(!t)return;t.prio=t.prio?0:1;logA(t.prio?"Task marcat important":"Task: prioritate scoasa");save();renderTasks();}
+// loop2 #18: duplicare task (sablon rapid pt. sarcini recurente) — copie noua, nefinalizata, fara termen
+function dupTask(id){const t=(DB.tasks||[]).find(x=>x.id===id);if(!t)return;
+  DB.tasks.push({id:DB.seq++,member_id:ME,text:t.text,due:"",done:0,prio:t.prio||0,t:Date.now()});
+  logA("Task duplicat: "+t.text);save();renderTasks();updateBadges();toast("Task duplicat — seteaza un termen nou");}
 function addDays(d,n){const x=(d?new Date(d+"T00:00"):new Date());if(isNaN(x))return today();x.setDate(x.getDate()+n);return x.toISOString().slice(0,10);}
 function snoozeTask(id){const t=(DB.tasks||[]).find(x=>x.id===id);if(!t)return;const base=(t.due&&t.due>today())?t.due:today();t.due=addDays(base,1);logA("Task amanat cu o zi");save();renderTasks();updateBadges();toast("Amanat pana "+fmtWhen(t.due));}
 function editTask(id){EDITTASK=id;renderTasks();}
@@ -1353,6 +1357,7 @@ function renderTasks(){const host=$("#taskList");if(!host)return;
       h("button",{class:"x","data-act":"tasksnooze","data-id":t.id,"aria-label":"Amana o zi",title:"Amana +1 zi",text:"⏰"}),
       h("button",{class:"x"+(t.prio?" prio":""),"data-act":"taskprio","data-id":t.id,"aria-label":t.prio?"Scoate prioritatea":"Marcheaza important",title:"Prioritate",text:t.prio?"★":"☆"}),
       h("button",{class:"x","data-act":"taskedit","data-id":t.id,"aria-label":"Editeaza task",text:"✎"}),
+      h("button",{class:"x","data-act":"taskdup","data-id":t.id,"aria-label":"Duplica task",title:"Duplica",text:"⧉"}),
       h("button",{class:"x","data-act":"deltask","data-id":t.id,"aria-label":"Sterge task",text:"×"}));};
   const out=[...open.map(row),...done.map(row)];
   const empty=estateBox("Niciun task","Adauga o sarcina cu termen in campul de mai sus.");
@@ -1485,6 +1490,7 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="tasksnooze")snoozeTask(id);
   else if(a==="taskprio")toggleTaskPrio(id);
   else if(a==="taskedit")editTask(id);
+  else if(a==="taskdup")dupTask(id);
   else if(a==="tasksave")saveTask(id);
   else if(a==="taskcancel")cancelTaskEdit();
   else if(a==="notepin")togglePin(id);
