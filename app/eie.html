@@ -523,7 +523,8 @@ details.why2>summary::-webkit-details-marker{display:none}
     <label>Domeniul tau</label><input id="obInd" placeholder="ex: Imobiliare, IT, Energie…" autocomplete="off"></div>
   <div class="step" data-s="1"><label>Ce oferi cercului?</label><input id="obOff" placeholder="ex: spatii comerciale in centru" autocomplete="off"></div>
   <div class="step" data-s="2"><label>Ce cauti?</label><input id="obSeek" placeholder="ex: un investitor pentru un proiect" autocomplete="off"></div>
-  <div class="nav2"><div class="dots" id="obDots"><i class="on"></i><i></i><i></i></div>
+  <div class="step" data-s="3"><label>O prima notita sau idee (optional)</label><input id="obNote" placeholder="ex: De sunat partenerul saptamana viitoare" autocomplete="off"></div>
+  <div class="nav2"><div class="dots" id="obDots"><i class="on"></i><i></i><i></i><i></i></div>
     <button class="btn gold" id="obNext" onclick="obNext()">Continua →</button></div>
   <button class="skip" onclick="obSkip()">Doar explorez deocamdata</button>
 </div>
@@ -1173,14 +1174,15 @@ function toggleTheme(){applyTheme(document.documentElement.getAttribute("data-th
 /* onboarding */
 function obShow(){$("#ob").classList.add("on");}
 function obDots(){$$("#obDots i").forEach((d,i)=>d.classList.toggle("on",i<=obStep));}
-function obGo(s){obStep=s;$$(".ob .step").forEach(e=>e.classList.toggle("on",+e.dataset.s===s));obDots();$("#obNext").textContent=s===2?"Intra in Cerc ✦":"Continua →";}
+function obGo(s){obStep=s;$$(".ob .step").forEach(e=>e.classList.toggle("on",+e.dataset.s===s));obDots();$("#obNext").textContent=s===3?"Intra in Cerc ✦":"Continua →";}
 function obNext(){
   if(obStep===0){if(!$("#obName").value.trim()){$("#obName").focus();return;}}
-  if(obStep<2){obGo(obStep+1);return;}
-  const nm=clean($("#obName").value.trim())||"Tu",ind=clean($("#obInd").value.trim())||"Business",off=clean($("#obOff").value.trim()),seek=clean($("#obSeek").value.trim());
+  if(obStep<3){obGo(obStep+1);return;}
+  const nm=clean($("#obName").value.trim())||"Tu",ind=clean($("#obInd").value.trim())||"Business",off=clean($("#obOff").value.trim()),seek=clean($("#obSeek").value.trim()),note=clean(($("#obNote")||{}).value||"").trim();
   const id=DB.seq++;DB.members.push({id,name:nm,role:"Membru, "+ind,industry:ind,trust:75,color:COLORS[id%COLORS.length]});
   if(off)DB.items.push({id:DB.seq++,member_id:id,kind:"ofer",text:off,visible:1,source:"onboarding"});
   if(seek)DB.items.push({id:DB.seq++,member_id:id,kind:"caut",text:seek,visible:0,source:"onboarding"});
+  if(note)DB.notes.push({id:DB.seq++,member_id:id,text:note,t:Date.now()});
   ME=id;logA("Profil creat prin onboarding");runMatching();save();loadMembers();$("#member").value=ME;
   $("#ob").classList.remove("on");setView("acasa");toast("Bun venit, "+nm.split(" ")[0]+"!");}
 function obSkip(){$("#ob").classList.remove("on");localStorage.setItem(KEY+"_seen","1");}

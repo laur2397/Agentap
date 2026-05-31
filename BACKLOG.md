@@ -26,5 +26,5 @@ Reguli pentru fiecare item:
 16. [x] „Ultima activitate” per conexiune in lista din Reteaua.
 17. [x] Dark mode: rafinare contraste pe carduri noi (task/meet).
 18. [x] Performanta: debounce la cautari.
-19. [ ] Onboarding: pas optional „adauga prima notita/task”.
+19. [x] Onboarding: pas optional „adauga prima notita/task”.
 20. [ ] Documentatie: README scurt pt. app (cum se ruleaza, ce face, limitari).
