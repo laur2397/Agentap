@@ -356,6 +356,11 @@ details.why2>summary::-webkit-details-marker{display:none}
 .taskcard .tdue.over{color:var(--warn);font-weight:600}
 .taskcard .x{background:none;border:0;color:var(--muted);font-size:18px;cursor:pointer;min-height:44px;min-width:28px}
 .navbadge{position:absolute;top:7px;left:calc(50% + 7px);min-width:16px;height:16px;padding:0 4px;border-radius:9px;background:var(--warn);color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center;line-height:1}
+/* backlog #2: urmatoarea intalnire pe Acasa */
+.nextmeet{background:linear-gradient(135deg,var(--primary-soft),transparent);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-top:14px;box-shadow:var(--shadow)}
+.nextmeet .nmlabel{font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--primary-dim);font-weight:700}
+.nextmeet .nmwhen{font-family:var(--sans);font-size:19px;font-weight:800;color:var(--ink);letter-spacing:-.3px;margin-top:4px}
+.nextmeet .nmwho{font-size:13px;color:var(--ink2);margin-top:2px}
 </style>
 </head>
 <body>
@@ -375,6 +380,7 @@ details.why2>summary::-webkit-details-marker{display:none}
   <!-- ACASA -->
   <section id="acasa" class="view on">
     <div class="digest"><div class="e">Azi</div><div class="g" id="digG"></div><p id="digP"></p></div>
+    <div id="nextMeet"></div>
     <div class="statstrip" id="kpis"></div>
     <div class="sec">Persoane de contactat<a data-go="potriviri">toate →</a></div>
     <div id="topMatches"></div>
@@ -681,6 +687,17 @@ function home(){const me=mem(ME),mm=myMatches();
   $("#digG").textContent="Buna ziua, "+me.name.split(" ")[0]+".";
   $("#digP").textContent=prop?`Ai ${prop} ${prop===1?"sugestie noua":"sugestii noi"} de verificat si ${con} ${con===1?"conexiune":"conexiuni"}.`
     :`Ai ${con} ${con===1?"conexiune activa":"conexiuni active"}. Adauga ce cauti sau ce oferi ca sa primesti sugestii.`;
+  // urmatoarea intalnire confirmata (backlog #2)
+  const td=today(),up=(DB.meetings||[]).filter(x=>x.status==="confirmat"&&(x.a===ME||x.b===ME)&&(x.when||"").slice(0,10)>=td).sort((a,b)=>String(a.when).localeCompare(String(b.when)));
+  if(up[0]){const x=up[0],cel=mem(x.a===ME?x.b:x.a)||{name:"?"};
+    setKids($("#nextMeet"),h("div",{class:"nextmeet"},
+      h("div",{class:"nmlabel",text:"📅 Urmatoarea intalnire"}),
+      h("div",{class:"nmwhen",text:fmtWhen(x.when)}),
+      h("div",{class:"nmwho",text:"cu "+cel.name+(x.place?" · "+x.place:"")}),
+      h("div",{class:"calrow"},
+        h("button",{class:"btn ghost sm","data-act":"gcal","data-id":x.id,text:"📅 Calendar"}),
+        h("button",{class:"btn ghost sm","data-act":"msg","data-id":x.match_id,text:"Conversatie"}))));
+  }else setKids($("#nextMeet"));
   const stat=(v,l)=>h("div",{class:"st"},h("div",{class:"sv",text:String(v)}),h("div",{class:"sl",text:l}));
   setKids($("#kpis"),stat(con,"Conexiuni"),stat(prop,"Sugestii noi"),stat(avg||"—","Potrivire medie"));
   const conx=mm.filter(m=>m.status==="conectat").sort((a,b)=>(b.at||0)-(a.at||0));
