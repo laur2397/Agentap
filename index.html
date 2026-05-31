@@ -318,6 +318,13 @@ h2.title{font-weight:800;font-size:24px;letter-spacing:-.5px;margin:2px 0 4px}
 .reconn-row .rcn{font-size:13.5px;font-weight:600;color:var(--ink)}
 .reconn-row .rcd{font-size:11.5px;color:var(--muted);margin-top:1px}
 .reconn-row .rcgo{font-size:12px;color:var(--primary);font-weight:600;flex:none}
+/* loop3 #8: widget reteaua activa */
+.activenet{margin-bottom:14px}
+.an-h{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:2px 2px 9px}
+.an-h .an-n{background:var(--success);color:#fff;border-radius:999px;min-width:17px;height:17px;display:grid;place-items:center;font-size:10px;padding:0 5px}
+.an-strip{display:flex;gap:12px;overflow-x:auto;padding:2px 2px 6px;-webkit-overflow-scrolling:touch}
+.an-item{background:none;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;flex:none;width:54px}
+.an-item .an-name{font-size:11px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:54px}
 .adock{display:flex;gap:8px;margin-top:14px;align-items:center}
 .adock .btn{flex:1}
 .menu-dots{flex:none;width:44px;height:44px;border-radius:11px;border:1px solid var(--line2);background:var(--card);color:var(--muted);font-size:18px;cursor:pointer;display:grid;place-items:center}
@@ -522,6 +529,7 @@ details.why2>summary::-webkit-details-marker{display:none}
     <div class="eyebrow">Reteaua ta</div><h2 class="title">Conexiunile tale</h2>
     <p class="sub">Oamenii cu care te-ai conectat. O conexiune apare doar dupa ce ambele parti accepta o introducere.</p>
     <div class="searchbar"><span class="ic">⌕</span><input id="netSearch" placeholder="Cauta o persoana…" aria-label="Cauta in retea"></div>
+    <div id="activeNet"></div>
     <div id="reconnect"></div>
     <div class="filters" id="connFilters"></div>
     <div id="connList"></div>
@@ -951,8 +959,22 @@ function renderConn(){const host=$("#connList");if(!host)return;
         h("button",{class:"relpill "+rl[1],"data-act":"relcycle","data-id":cel.id,"aria-label":"Status relatie: "+rl[0],title:"Schimba statusul relatiei",text:rl[0]}),
         h("div",{class:"cdate",text:lastA?"activ "+relTime(lastA):""})));}).filter(Boolean);
   setKids(host, rows.length?rows:estateBox(q?"Niciun rezultat":"Inca nicio conexiune", q?"Incearca alt nume.":"Conexiunile apar aici dupa ce accepti o introducere in „Cine merita contactat”."));
+  renderActiveNet(conn);
   renderReconnect(conn);
 }
+// loop3 #8: widget "Reteaua activa" — persoane cu interactiune in ultimele 30 zile (lista curata)
+function renderActiveNet(conn){const host=$("#activeNet");if(!host)return;const now=Date.now(),win=30*864e5;
+  const active=conn.map(m=>{const cel=mem(m.offer_member===ME?m.seek_member:m.offer_member);if(!cel)return null;
+      const ts=DB.messages.filter(x=>x.match_id===m.id&&x.t).map(x=>x.t),lastA=ts.length?Math.max(...ts):(m.at||0);
+      return lastA&&(now-lastA)<=win?{m,cel,lastA}:null;}).filter(Boolean)
+    .sort((a,b)=>b.lastA-a.lastA);
+  if(!active.length){setKids(host);return;}
+  setKids(host,h("div",{class:"activenet"},
+    h("div",{class:"an-h"},"Activi în ultimele 30 de zile",h("span",{class:"an-n",text:String(active.length)})),
+    h("div",{class:"an-strip"},...active.slice(0,8).map(a=>{
+      const av=h("div",{class:"av sq an-av",style:{width:"40px",height:"40px",fontSize:"14px"}},ini(a.cel.name));av.style.background=a.cel.color||"#6366F1";
+      return h("button",{class:"an-item","data-act":"msg","data-id":a.m.id,"aria-label":"Deschide conversatia cu "+a.cel.name},av,
+        h("div",{class:"an-name",text:a.cel.name.split(" ")[0]}));}))));}
 // loop3 #7: sectiune "De reconectat" — relatii fara contact de mult (sanatate = frecventa, nu volum)
 function renderReconnect(conn){const host=$("#reconnect");if(!host)return;const now=Date.now(),cut=30*864e5;
   const stale=conn.map(m=>{const cel=mem(m.offer_member===ME?m.seek_member:m.offer_member);if(!cel)return null;
