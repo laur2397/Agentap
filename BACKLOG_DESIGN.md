@@ -28,7 +28,7 @@ Validare: node --check + smoke Playwright zero erori. Audit (examples/audit.py) 
 12. [x] Audit de control: slider explicabil relevanta↔diversitate in ordinea potrivirilor (ajustabil manual).
 13. [x] Microcopy cald & uman: revizuire texte cheie (fara jargon tehnic, ton prietenos).
 14. [x] Reducere efort cognitiv pe Acasa: gruparea clara a sectiunilor + un singur accent primar.
-15. [ ] Micro-feedback placut, neintruziv, la actiuni cheie (respecta reduce-motion; fara dopamina fortata).
+15. [x] Micro-feedback placut, neintruziv, la actiuni cheie (respecta reduce-motion; fara dopamina fortata).
 16. [ ] „Privacy health" in Profil: indicator criptare activa + spatiu ocupat estimativ (transparenta).
 17. [ ] Skip-to-content + landmark-uri ARIA (acces rapid la continut, accesibilitate reala).
 18. [ ] Next-step ghidat contextual: cand o sectiune e goala, un singur buton catre actiunea utila.
