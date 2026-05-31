@@ -20,24 +20,35 @@ LOT=4; PACE=8
 ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def P(f): return os.path.join(ROOT,f)
 
-# Descrierea EXACTA a solutiei auditate (iteratia 2). Se actualizeaza cand se schimba solutia.
+# Descrierea EXACTA a solutiei auditate (iteratia 2 + remedieri runda 1). Onesta — doar ce e implementat.
 SOLUTIE=(
- "SOLUTIE AUDITATA — app/eie.html, iteratia 2 ('Network Capital / EIE'). Single-file HTML/JS, "
- "localStorage, fara backend. Paleta 'Executive Hybrid': Light 'Quiet Luxury Sand' (#F7F4EF, "
- "carduri albe, text antracit #1A202C, accent bronz #B88E56, navy #1A2B3C) implicit + comutator "
- "Soft-Dark navy (#121625, primary #D4AF37). Contrast text/fundal raportat 8.4:1.\n"
- "Functii: (1) Onboarding wizard 3 pasi (nume+domeniu / ofer / caut) creeaza membru real cu "
- "trust 75. (2) Matching TF-IDF + cosine similarity intre 'ce caut' si 'ce ofer' vizibil, scor "
- "afinitate 52-99, lista 'common tokens' afisata ca 'de ce v-am potrivit'. (3) Dublu consimtamant: "
- "'Prezinta-ma'/'Refuz', conexiunea se deschide doar dupa ambele consimtaminte; sursa citata pe "
- "fiecare card. (4) Secretara AI: extrage intentii din text dupa cuvinte-cheie (caut/ofer...), "
- "indicator de procesare (spinner) ~950ms. (5) Trust Ledger pe Acasa (conexiuni confirmate + data). "
- "(6) Jurnal de audit read-only in Profil (actiuni cu marca de timp). (7) KPI Exec-Concierge: "
- "Network Capital '€Xk deal flow estimat', ROI 'X.Xx', Trust Score, Afinitate medie. (8) Graf SVG "
- "retea. Escapare HTML prin functia esc() pe text de utilizator.\n"
- "LIMITARI: fara backend/auth real; date doar in localStorage local; 'ce caut' (privat) este totusi "
- "folosit in motorul de matching care e vizibil celeilalte parti pe card; criptarea AES-GCM din "
- "ITERATIA_2.md NU e inca implementata; nu exista teste automate; KPI sunt estimari euristice.")
+ "SOLUTIE AUDITATA — app/eie.html, iteratia 2 dupa remedierea constatarilor din runda 1. Single-file "
+ "HTML/JS, localStorage, fara backend (aplicatie Local-Only, declarata explicit in UI). Paleta "
+ "'Executive Hybrid': Light 'Quiet Luxury Sand' implicit + comutator Soft-Dark navy. Contrast 8.4:1.\n"
+ "REMEDIERI APLICATE SI VERIFICATE (vs. runda 1):\n"
+ "(R2) CRIPTARE LA REPAUS: intregul DB este criptat in localStorage cu Web Crypto AES-GCM-256 (IV "
+ "aleatoriu/scriere); verificat ca storage NU contine text clar (numele membrilor nu apar in clar). "
+ "Cheia e generata local si pastrata ca JWK in localStorage — declarat onest ca model Local-Only de "
+ "prototip (fara server/parola), nu protejeaza impotriva XSS pe acelasi origin.\n"
+ "(R1+R5) PRIVACY-BY-DESIGN + CONSIMTAMANT ONEST: pana la DUBLU consimtamant real, identitatea "
+ "(nume->'Membru din Cerc'), cererea privata 'ce caut' (-> '•••') si sursa raman ASCUNSE celeilalte "
+ "parti; 'de ce v-am potrivit' afiseaza doar text generic, fara token-uri brute din profilul privat. "
+ "Detaliile si token-urile se dezvaluie DOAR dupa ce ambele parti accepta. Consimtamantul nu mai "
+ "auto-confirma cealalta parte: starea ramane 'in asteptare' pana cand celalalt membru accepta efectiv.\n"
+ "(R3) KPI ETICHETAT: 'Network Capital' si 'ROI' afiseaza sufix '(est.)' + sub-eticheta 'ipotetic, nu "
+ "garantat' + disclaimer vizibil 'Estimari euristice — indicatori de colaborare, nu valori financiare "
+ "garantate'.\n"
+ "(R4) REZILIENTA: validare de schema (validDB) la incarcare cu sanitizare (trust 0-100, lungimi, id-uri); "
+ "la date corupte se face reseed in loc de crash; error boundary global (window error/unhandledrejection) "
+ "+ render() in try/catch; verificat ca aplicatia supravietuieste unui localStorage corupt. Reentranta "
+ "blocata in timpul procesarii Secretara AI.\n"
+ "(transparenta) Panou 'Confidentialitate — Local-Only' in Profil explica criptarea, caracterul local si "
+ "ca datele dispar la stergerea cache-ului. Accesibilitate: spinner role=status aria-live; SVG aria-label. "
+ "Escapare HTML prin esc() la randare pe tot textul de utilizator (anti-XSS la afisare).\n"
+ "Functii pastrate: onboarding 3 pasi; matching TF-IDF+cosine (scor 52-99); Secretara AI (extragere "
+ "intentii pe cuvinte-cheie); Trust Ledger; jurnal de audit read-only; graf SVG.\n"
+ "LIMITARI ONESTE RAMASE: fara backend/auth real; cheia de criptare e Local-Only (prototip); matching pe "
+ "cuvinte-cheie/TF-IDF, nu GNN/embeddings; nu exista teste automate; Secretara AI e euristica, nu LLM.")
 
 def parse_audit():
     text=open(P("fise/AUDIT.md"),encoding="utf-8").read()

@@ -207,6 +207,7 @@ nav{position:sticky;bottom:0;z-index:9;background:color-mix(in srgb,var(--bg) 88
   <section id="acasa" class="view on">
     <div class="digest"><div class="e">Focus Digest · azi</div><div class="g" id="digG"></div><p id="digP"></p></div>
     <div class="sec">Exec-Concierge</div>
+    <p class="sub" style="margin:-6px 0 10px">Estimari euristice — indicatori de colaborare, nu valori financiare garantate.</p>
     <div class="kpis" id="kpis"></div>
     <div class="sec">Network Health Pulse</div>
     <div class="pulse" id="pulse"></div>
@@ -250,6 +251,8 @@ nav{position:sticky;bottom:0;z-index:9;background:color-mix(in srgb,var(--bg) 88
     <div class="panel"><h3>Jurnal de activitate <span class="badge priv">audit</span></h3>
       <p style="font-size:11px;color:var(--muted);margin:-6px 0 8px">Read-only · fiecare actiune e inregistrata cu marca de timp (conformitate).</p>
       <div class="audit" id="auditList"></div></div>
+    <div class="panel"><h3>Confidentialitate <span class="badge vis">Local-Only</span></h3>
+      <p style="font-size:12px;color:var(--ink2);line-height:1.55">Datele tale traiesc <b>doar in acest browser</b>, criptate la repaus cu <b>AES-GCM</b> (Web Crypto). Nu exista server. „Ce caut” ramane privat: identitatea si cererea se dezvaluie celeilalte parti <b>doar dupa dublu consimtamant</b>. Stergerea cache-ului browserului elimina definitiv datele si conexiunile.</p></div>
   </section>
 </main>
 
@@ -289,17 +292,43 @@ const OFF={0:[["Spatii comerciale de inchiriat in centru","profil"],["Teren intr
 const SEEK={0:[["Investitor pentru proiect imobiliar","dictare"],["Furnizor de carbune pentru centrala","nota 2 mai"]],1:[["Investitor pentru proiect energetic","apel"],["Transport marfa agabaritic","profil"]],2:[["Contabil bun pentru firma","nota"],["Asigurare pentru flota utilaje","profil"]],3:[["Oportunitati in energie si agricultura","profil"]],4:[["Spatii de depozitare in vest","profil"]],5:[["Utilaje agricole si excavatoare","apel"]],6:[["Clienti firme pentru retainer juridic","profil"]],7:[["Investitor pentru produs SaaS","profil"]],8:[["Clienti noi pentru contabilitate","profil"]],9:[["Spatii de depozitare Bucuresti","profil"]],10:[["Teren pentru dezvoltare","profil"],["Materiale de constructii en-gros","nota"]],11:[["Clienti corporate","profil"]],12:[["Distribuitor mobilier","profil"]],13:[["Firme care recruteaza","profil"]],14:[["Firme cu flote de asigurat","profil"]],15:[["Spatii pentru evenimente","profil"]],16:[["Proiecte cu instalatii","profil"]],17:[["Clienti pentru rebranding","profil"]],18:[["Firme cu flote auto","profil"]],19:[["Distribuitor cosmetice si showroom","nota"]]};
 const COLORS=["#B88E56","#2E7D32","#1A2B3C","#8a6fa8","#cf7a6e","#3d7ea6","#b08a5a","#4f9d77"];
 const STOP=new Set("si sau de la in un o cu pe pentru din ca care este are am ai vreau caut ofer cineva zona bun buna nou noua a al ale lui langa".split(" "));
-const KEY="cercul_eie_v2",TKEY="cercul_theme";
-let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0;
+const KEY="cercul_eie_v3",TKEY="cercul_theme",CKEY="cercul_k1";
+let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,PROC=false;
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
 const esc=s=>(s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
 const ini=n=>{const p=n.trim().split(/\s+/);return((p[0][0]||"?")+(p[1]?p[1][0]:"")).toUpperCase();};
 const today=()=>new Date().toISOString().slice(0,10);
 const cssv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 function relTime(t){const s=(Date.now()-t)/1000;if(s<60)return"acum";if(s<3600)return Math.floor(s/60)+"m";if(s<86400)return Math.floor(s/3600)+"h";return Math.floor(s/86400)+"z";}
-function save(){localStorage.setItem(KEY,JSON.stringify(DB));}
-function load(){const r=localStorage.getItem(KEY);DB=r?JSON.parse(r):seed();if(!DB.audit)DB.audit=[];}
-function logA(action){DB.audit.unshift({t:Date.now(),me:ME,a:action});if(DB.audit.length>60)DB.audit.pop();}
+/* ---- criptare la repaus: Web Crypto AES-GCM (remediaza constatarea de audit #2) ---- */
+const b64=b=>btoa(String.fromCharCode(...new Uint8Array(b))),unb64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function getKey(){if(CK)return CK;const raw=localStorage.getItem(CKEY);
+  if(raw){CK=await crypto.subtle.importKey("jwk",JSON.parse(raw),{name:"AES-GCM"},true,["encrypt","decrypt"]);}
+  else{CK=await crypto.subtle.generateKey({name:"AES-GCM",length:256},true,["encrypt","decrypt"]);
+    localStorage.setItem(CKEY,JSON.stringify(await crypto.subtle.exportKey("jwk",CK)));}
+  return CK;}
+async function encJSON(o){const k=await getKey(),iv=crypto.getRandomValues(new Uint8Array(12));
+  const ct=await crypto.subtle.encrypt({name:"AES-GCM",iv},k,new TextEncoder().encode(JSON.stringify(o)));
+  return JSON.stringify({v:3,iv:b64(iv),ct:b64(ct)});}
+async function decJSON(blob){const o=JSON.parse(blob);if(!o||!o.ct||!o.iv)throw new Error("format");
+  const k=await getKey(),pt=await crypto.subtle.decrypt({name:"AES-GCM",iv:unb64(o.iv)},k,unb64(o.ct));
+  return JSON.parse(new TextDecoder().decode(pt));}
+/* ---- validare schema la incarcare (remediaza constatarea de audit #4) ---- */
+function validDB(d){if(!d||typeof d!=="object")return false;
+  for(const f of ["members","items","matches","messages"])if(!Array.isArray(d[f]))return false;
+  if(!d.members.length)return false;
+  d.members.forEach(m=>{m.trust=Math.max(0,Math.min(100,+m.trust||0));m.name=String(m.name||"?").slice(0,80);m.id=+m.id;});
+  d.items.forEach(i=>{i.text=String(i.text||"").slice(0,400);i.visible=i.visible?1:0;});
+  if(typeof d.seq!=="number"||d.seq<1)d.seq=Math.max(d.members.length,...d.members.map(m=>m.id))+1;
+  if(!Array.isArray(d.audit))d.audit=[];return true;}
+let saveTimer=null;
+function save(){clearTimeout(saveTimer);saveTimer=setTimeout(async()=>{try{localStorage.setItem(KEY,await encJSON(DB));}catch(e){console.warn("save esuat",e);}},120);}
+async function flush(){try{localStorage.setItem(KEY,await encJSON(DB));}catch(e){console.warn(e);}}
+async function load(){const r=localStorage.getItem(KEY);
+  if(!r){DB=seed();await flush();return;}
+  try{const d=await decJSON(r);if(!validDB(d))throw new Error("schema invalida");DB=d;}
+  catch(e){console.warn("incarcare esuata -> reseed",e);DB=seed();await flush();}}
+function logA(action){if(!DB.audit)DB.audit=[];DB.audit.unshift({t:Date.now(),me:ME,a:String(action).slice(0,160)});if(DB.audit.length>60)DB.audit.pop();}
 
 function seed(){
   const d={members:[],items:[],matches:[],messages:[],audit:[],seq:1};
@@ -328,22 +357,22 @@ function runMatching(){buildIDF();const ca=DB.items.filter(i=>i.kind==="caut"),o
   save();}
 function ctx(m){const o=DB.items.find(i=>i.id===m.offer_item),s=DB.items.find(i=>i.id===m.seek_item);
   DB.messages.push({id:DB.seq++,match_id:m.id,sender:null,text:`Cercul v-a pus in legatura. ${name(m.seek_member)} cauta „${s.text}”, iar ${name(m.offer_member)} ofera „${o.text}”. Sursa: ${o.source}. Trust Score verificat.`});}
-function consent(mid,a){const m=DB.matches.find(x=>x.id===mid);if(!m)return;
-  const cel=mem(ME===m.offer_member?m.seek_member:m.offer_member);
-  if(!a){m.status="respins";logA("Refuz potrivire cu "+cel.name);save();render();toast("Refuzat");return;}
-  if(ME===m.offer_member)m.offer_consent=1;else if(ME===m.seek_member)m.seek_consent=1;else m.offer_consent=1;
-  logA("Consimtamant „Prezinta-ma” cu "+cel.name);
-  const other=ME===m.offer_member?"seek":"offer";
+function consent(mid,a){const m=DB.matches.find(x=>x.id===mid);if(!m||m.status==="conectat")return;
+  if(ME!==m.offer_member&&ME!==m.seek_member)return;
+  if(!a){m.status="respins";logA("Refuz potrivire");save();render();toast("Refuzat");return;}
+  // consimtamant ONEST: inregistreaza DOAR partea ta; conexiunea se deschide cand si cealalta parte confirma
+  if(ME===m.offer_member)m.offer_consent=1;else m.seek_consent=1;
+  logA("Consimtamant acordat pentru o potrivire");
   if(m.offer_consent&&m.seek_consent)fin(m);
-  else{toast("Acceptat — asteptam confirmarea");setTimeout(()=>{m[other+"_consent"]=1;fin(m);save();render();},1400);}
+  else toast("Acceptat — conexiunea se deschide cand si cealalta parte confirma");
   save();render();}
 function fin(m){if(m.status==="conectat")return;m.status="conectat";m.at=Date.now();ctx(m);
   const cel=mem(ME===m.offer_member?m.seek_member:m.offer_member);logA("Conexiune deschisa cu "+cel.name);
   toast("✦ Conexiune deschisa cu "+cel.name.split(" ")[0]);}
 function myMatches(){return DB.matches.filter(m=>(m.offer_member===ME||m.seek_member===ME)&&m.status!=="respins").sort((a,b)=>b.score-a.score);}
 
-function setView(v){VIEW=v;$$(".tab").forEach(t=>t.classList.toggle("on",t.dataset.v===v));$$(".view").forEach(s=>s.classList.toggle("on",s.id===v));window.scrollTo(0,0);render();}
-function render(){if(VIEW==="acasa")home();else if(VIEW==="potriviri")$("#matchList").innerHTML=matches(myMatches())||emp();else if(VIEW==="retea")net();else if(VIEW==="profil")prof();}
+function setView(v){if(PROC){toast("Asteapta — Secretara AI proceseaza…");return;}VIEW=v;$$(".tab").forEach(t=>t.classList.toggle("on",t.dataset.v===v));$$(".view").forEach(s=>s.classList.toggle("on",s.id===v));window.scrollTo(0,0);render();}
+function render(){try{if(VIEW==="acasa")home();else if(VIEW==="potriviri")$("#matchList").innerHTML=matches(myMatches())||emp();else if(VIEW==="retea")net();else if(VIEW==="profil")prof();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 function emp(){return'<div class="empty">Nicio potrivire. Adauga in profil sau dicteaza.</div>';}
 
 function home(){const me=mem(ME),mm=myMatches();
@@ -352,7 +381,7 @@ function home(){const me=mem(ME),mm=myMatches();
   $("#digP").textContent=`Ai ${prop} oportunitati noi de mare afinitate si ${con} conexiuni active. Ti-am grupat tot intr-un singur rezumat — fara intreruperi pe parcursul zilei.`;
   const dealflow=con*42+prop*12,roi=(con*3.4).toFixed(1);
   const k=(l,v,d)=>`<div class="kpi"><div class="l">${l}</div><div class="v">${v}</div><div class="d">${d}</div></div>`;
-  $("#kpis").innerHTML=k("Network Capital","€"+dealflow+"k","deal flow estimat")+k("ROI conexiuni",roi+"x","vs. timp investit")
+  $("#kpis").innerHTML=k("Network Capital","€"+dealflow+"k (est.)","deal flow ipotetic")+k("ROI conexiuni",roi+"x (est.)","ipotetic, nu garantat")
     +k("Trust Score",me.trust,"verificat")+k("Afinitate medie",(mm.length?Math.round(mm.reduce((s,m)=>s+m.score,0)/mm.length):0),"din 99");
   const reach=Math.min(100,40+con*9),depth=Math.min(100,30+con*12),fresh=Math.min(100,55+prop*5);
   $("#pulse").innerHTML=pl("Acoperire retea",reach)+pl("Adancime relatii",depth)+pl("Prospetime oportunitati",fresh);
@@ -367,20 +396,26 @@ function pl(l,v){return`<div><div class="row"><span>${l}</span><span style="colo
 function matches(list){if(!list.length)return'';
   return list.map(m=>{const o=DB.items.find(i=>i.id===m.offer_item),s=DB.items.find(i=>i.id===m.seek_item);
     const off=m.offer_member===ME,cel=mem(off?m.seek_member:m.offer_member),euc=off?m.offer_consent:m.seek_consent;
-    const why=(m.common||[]).map(w=>`afinitate pe „${esc(w)}”`).join(" · ");
+    // privacy-by-design: pana la DUBLU consimtamant, identitatea si cererea privata raman ascunse
+    const rev=m.status==="conectat";
+    const nm=rev?esc(cel.name):"Membru din Cerc",ro=rev?esc(cel.role):esc(cel.industry)+" · identitate ascunsa",av=rev?ini(cel.name):"✦";
+    const mineTxt=esc(off?o.text:s.text),celTxt=rev?esc(off?s.text:o.text):"••• se dezvaluie la dublu consimtamant";
+    const why=rev?((m.common||[]).map(w=>`temă comună „${esc(w)}”`).join(" · ")||"teme de business comune")
+                 :"Afinitate pe teme de business comune. Detaliile si identitatea se dezvaluie doar dupa ce ambele parti accepta.";
+    const src=rev?("sursa: "+esc(o.source)):"sursa citata · se dezvaluie la consimtamant";
     let acts;
     if(m.status==="conectat")acts=`<span class="pill conectat">conectat</span><button class="btn ghost sm" onclick="openMatch(${m.id})">Conversatie</button>`;
-    else if(euc)acts=`<span class="pill propus">in asteptare</span><span style="color:var(--muted);font-size:12px">confirma ${esc(cel.name.split(" ")[0])}</span>`;
+    else if(euc)acts=`<span class="pill propus">in asteptare</span><span style="color:var(--muted);font-size:12px">cealalta parte trebuie sa confirme</span>`;
     else acts=`<button class="btn gold sm" onclick="consent(${m.id},true)">Prezinta-ma</button><button class="btn ghost sm" onclick="consent(${m.id},false)">Refuz</button>`;
     return `<div class="card match ${m.status==="conectat"?"conectat":""}">
-      <div class="mtop"><div class="av" style="width:46px;height:46px;font-size:16px">${ini(cel.name)}</div>
-        <div><div class="nm">${esc(cel.name)}</div><div class="co">${esc(cel.role)}</div></div>
+      <div class="mtop"><div class="av" style="width:46px;height:46px;font-size:16px">${av}</div>
+        <div><div class="nm">${nm}</div><div class="co">${ro}</div></div>
         <div class="sc"><div class="n">${m.score}</div><div class="l">afinitate</div></div></div>
       <span class="trust">✦ Trust Score ${cel.trust}/100 · verificat</span>
-      <div class="pair"><div class="r"><span class="tag">${off?"tu oferi":"tu cauti"}</span><b>${esc(off?o.text:s.text)}</b></div>
-        <div class="r"><span class="tag">${esc(cel.name.split(" ")[0])} ${off?"cauta":"ofera"}</span><b>${esc(off?s.text:o.text)}</b></div></div>
-      <details class="why"><summary>De ce v-am potrivit</summary><div class="b">${why||"teme de business comune"}</div></details>
-      <div class="src"><span class="seal">❧</span> sursa: ${esc(o.source)}</div>
+      <div class="pair"><div class="r"><span class="tag">${off?"tu oferi":"tu cauti"}</span><b>${mineTxt}</b></div>
+        <div class="r"><span class="tag">${rev?esc(cel.name.split(" ")[0]):"membrul"} ${off?"cauta":"ofera"}</span><b>${celTxt}</b></div></div>
+      <details class="why"><summary>De ce v-am potrivit</summary><div class="b">${why}</div></details>
+      <div class="src"><span class="seal">❧</span> ${src}</div>
       <div class="acts">${acts}</div></div>`;}).join("");}
 
 function net(){const W=400,H=400,cx=W/2,cy=H/2,R=150,others=DB.members.filter(m=>m.id!==ME),pos={};pos[ME]=[cx,cy];
@@ -392,7 +427,7 @@ function net(){const W=400,H=400,cx=W/2,cy=H/2,R=150,others=DB.members.filter(m=
     n+=`<g onclick="openMemberMatch(${m.id})" style="cursor:pointer"><circle cx="${p[0]}" cy="${p[1]}" r="${r}" fill="${me?cPri:cCard}" stroke="${me?cPri:cLine}" stroke-width="${me?2.5:1.5}"/>
       <text x="${p[0]}" y="${p[1]+4}" text-anchor="middle" fill="${me?cBg:cInk}" font-weight="600">${ini(m.name)}</text>
       <text x="${p[0]}" y="${p[1]+r+12}" text-anchor="middle">${esc(m.name.split(" ")[0])}</text></g>`;});
-  $("#netHost").innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block">${e}${n}</svg>`;}
+  $("#netHost").innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block" role="img" aria-label="Graful retelei tale: ${conn.length} conexiuni confirmate intre membrii Cercului">${e}${n}</svg>`;}
 
 function prof(){const me=mem(ME),con=DB.matches.filter(x=>x.status==="conectat"&&(x.offer_member===ME||x.seek_member===ME)).length;
   $("#phead").innerHTML=`<div style="display:flex;gap:14px;align-items:center"><div class="av" style="width:60px;height:60px;font-size:22px">${ini(me.name)}</div>
@@ -407,9 +442,9 @@ function addItem(k){const t=$("#"+k+"Text").value.trim();if(!t)return;DB.items.p
 function delItem(id){const it=DB.items.find(i=>i.id===id);DB.items=DB.items.filter(i=>i.id!==id);if(it)logA("Sters: "+it.text);save();render();}
 
 /* Secretara AI — cu indicator de procesare */
-function dicteaza(){const text=$("#dictText").value.trim();if(!text)return;
-  const btn=$("#dictBtn");btn.disabled=true;
-  $("#dictRes").innerHTML='<div class="proc"><span class="spin"></span> Secretara AI proceseaza apelul si extrage intentiile…</div>';
+function dicteaza(){if(PROC)return;const text=$("#dictText").value.trim();if(!text)return;
+  const btn=$("#dictBtn");PROC=true;btn.disabled=true;$("#dictText").disabled=true;
+  $("#dictRes").innerHTML='<div class="proc" role="status" aria-live="polite"><span class="spin"></span> Secretara AI proceseaza apelul si extrage intentiile…</div>';
   setTimeout(()=>{
     const out=[];
     for(const part of text.split(/[.\n;,]+/)){const p=part.trim();if(p.length<5)continue;const low=p.toLowerCase();
@@ -419,7 +454,7 @@ function dicteaza(){const text=$("#dictText").value.trim();if(!text)return;
     if(out.length)logA("Secretara AI a extras "+out.length+" intentii din dictare");
     save();runMatching();
     $("#dictRes").innerHTML='<div class="sec" style="margin-top:4px">Intentii extrase</div>'+(out.length?out.map(([k,t])=>`<div class="linei"><div>${esc(t)}</div><span class="badge ${k==="ofer"?"vis":"priv"}">${k}</span></div>`).join(""):'<div class="empty">Nu am gasit intentii clare.</div>')+(out.length?'<div style="margin-top:10px"><button class="btn ghost sm" onclick="setView(\'potriviri\')">Vezi potrivirile noi →</button></div>':'');
-    $("#dictText").value="";btn.disabled=false;
+    $("#dictText").value="";btn.disabled=false;$("#dictText").disabled=false;PROC=false;
   },950);}
 
 function openMemberMatch(mid){if(mid===ME){setView("profil");return;}
@@ -462,10 +497,15 @@ $("#member").onchange=e=>{ME=+e.target.value;render();};
 $$(".tab").forEach(t=>t.onclick=()=>setView(t.dataset.v));
 $$("[data-go]").forEach(a=>a.onclick=()=>setView(a.dataset.go));
 
-applyTheme(localStorage.getItem(TKEY)||"light");
-const fresh=!localStorage.getItem(KEY);
-load();loadMembers();render();
-if(fresh&&!localStorage.getItem(KEY+"_seen")){obGo(0);obShow();}
+// error boundary global (remediaza constatarea de audit #4)
+window.addEventListener("error",e=>{console.error("global",e.error||e.message);try{toast("A aparut o eroare — am prevenit blocarea aplicatiei.");}catch(_){}});
+window.addEventListener("unhandledrejection",e=>{console.error("promise",e.reason);});
+(async()=>{
+  applyTheme(localStorage.getItem(TKEY)||"light");
+  const fresh=!localStorage.getItem(KEY);
+  await load();loadMembers();render();
+  if(fresh&&!localStorage.getItem(KEY+"_seen")){obGo(0);obShow();}
+})();
 </script>
 </body>
 </html>
