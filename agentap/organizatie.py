@@ -228,6 +228,18 @@ ORGANIZATIE = {
             ("Facilities / Office Manager", 2, "Administreaza spatiile si logistica de birou."),
         ],
     },
+    "17. Audit & Assurance": {
+        "intro": "Corp de audit independent si adversarial. Poarta obligatorie: nicio sedinta, decizie sau iteratie nu se incheie pana cand Chief Audit Executive nu emite verdict APROBAT. Zero-tolerance la afirmatii nesustinute, dark patterns, scurtaturi de securitate sau regresii.",
+        "roluri": [
+            ("Chief Audit Executive (CAE)", 1, "Detine verdictul final al portii de audit; aproba doar cu 0 constatari blocante."),
+            ("Technical & Architecture Auditor", 1, "Verifica daca afirmatiile tehnice corespund realitatii din cod."),
+            ("Security & Privacy Auditor", 1, "Audit advers pe securitate, scurgeri de date si consimtamant real."),
+            ("UX & Accessibility Auditor", 1, "Audit pe WCAG, sarcina cognitiva si etica design-ului (anti dark-pattern)."),
+            ("AI & Data Ethics Auditor", 1, "Audit pe explicabilitate, sursa citata si onestitatea scorurilor."),
+            ("Quality & QA Auditor", 1, "Audit pe robustete si cazuri limita; incearca sa sparga solutia."),
+            ("Business & Compliance Auditor", 1, "Audit pe integritatea afirmatiilor de business si conformitate (GDPR, AI Act)."),
+        ],
+    },
 }
 
 
