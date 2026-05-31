@@ -1,6 +1,7 @@
 # SPRINT_LOG_HYBRID — loop 4 (raspuns la investitori, fara server)
 
 - 2026-05-31 · AUDIT item 6 (hybridloop6): APROBAT 6/6 + CAE.
+- 2026-05-31 · AUDIT item 9 (hybridloop9): APROBAT 6/6 + CAE. LOOP HIBRID INCHIS.
 - 2026-05-31 · Item 9 (Pozitionare Local-Only) · leadul de setup comunica acum valoarea-intai („relatiile tale raman pe acest dispozitiv, nu pleaca spre niciun server, nu sunt vandute"); panoul „Despre" are o nota ICP clara („Pentru cine e" + „De ce Local-Only") — raspuns la obiectia #10 (privacy-only); validat Playwright, 0 erori. LOOP HIBRID COMPLET (9/9).
 - 2026-05-31 · Item 8 (Sabloane de notite) · 4 chips (Dupa apel / Follow-up / Idee / Intalnire) in Secretara; un click insereaza un sablon structurat in #noteText si pozitioneaza cursorul dupa primul ':'; reduce frictiunea de intrare a datelor (obiectia #9); validat Playwright (4 chips, insert, salvare), 0 erori.
 - 2026-05-31 · Item 7 (Schimb intr-un singur loc) · panoul „Schimba contacte la o intalnire" combina acum: codul tau (textarea+copiere), QR, si un CAMP de lipit codul celuilalt (textarea #pasteCode) + buton „Adauga in retea" — inlocuieste prompt()-ul cu un field accesibil; se goleste la succes; camp gol -> focus+toast, fara add; validat Playwright, 0 erori.
