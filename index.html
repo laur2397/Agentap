@@ -104,6 +104,12 @@ h2.title{font-family:var(--serif);font-size:27px;font-weight:600;margin:2px 0 14
 .ahacard .ahai{font-size:22px;flex:none;line-height:1.2}
 .ahacard .ahat{font-weight:700;font-size:14.5px;color:var(--ink)}
 .ahacard .ahap{font-size:12.5px;color:var(--ink2);line-height:1.5;margin-top:4px}
+/* loop4 #3: nudge de backup, bland */
+.nudge{display:flex;gap:11px;align-items:flex-start;background:var(--card2);border:1px solid var(--line);border-radius:13px;padding:12px 14px;margin-top:12px}
+.nudge .ndi{font-size:18px;flex:none;line-height:1.3}
+.nudge .ndc{flex:1;min-width:0}
+.nudge .ndt{font-size:12.5px;color:var(--ink2);line-height:1.45}
+.nudge .ndrow{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap}
 
 /* kpi exec-concierge */
 .kpis{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:14px}
@@ -542,6 +548,7 @@ details.why2>summary::-webkit-details-marker{display:none}
     <div class="digest"><div class="e">Azi</div><div class="g" id="digG"></div><p id="digP"></p></div>
     <div class="whyhere" id="whyHere">Un cerc privat unde construiești relații de afaceri care contează — la ritmul tău, cu datele rămase doar la tine.</div>
     <div id="ahaCard"></div>
+    <div id="backupNudge"></div>
     <div id="nextMeet"></div>
     <div class="statstrip" id="kpis"></div>
     <div id="intrinsic"></div>
@@ -889,6 +896,17 @@ function exportData(){try{const blob=new Blob([JSON.stringify(DB,null,2)],{type:
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="cercul-export-"+today()+".json";a.click();
   setTimeout(()=>URL.revokeObjectURL(a.href),2000);logA("Export date (JSON) pentru backup");toast("Date exportate (JSON)");}catch(e){toast("Export esuat");}}
 function logA(action){if(!DB.audit)DB.audit=[];DB.audit.unshift({t:Date.now(),me:ME,a:clean(action).slice(0,160)});if(DB.audit.length>60)DB.audit.pop();}
+/* loop4 #3: reminder bland de backup (>14 zile), neintruziv si dismissable */
+function renderBackupNudge(){const host=$("#backupNudge");if(!host)return;
+  const last=+(localStorage.getItem("cercul_lastbackup")||0),dism=+(localStorage.getItem("cercul_backup_dismiss")||0);
+  const now=Date.now(),DAY=864e5,due=(now-last)>14*DAY,recentlyDismissed=(now-dism)<7*DAY;
+  if(!due||recentlyDismissed){setKids(host);return;}
+  const txt=last?"Au trecut peste 2 săptămâni de la ultimul backup.":"Încă nu ai un backup criptat. Dacă schimbi telefonul sau ștergi browserul, datele se pierd.";
+  setKids(host,h("div",{class:"nudge"},h("span",{class:"ndi",text:"💾"}),
+    h("div",{class:"ndc"},h("div",{class:"ndt",text:txt}),
+      h("div",{class:"ndrow"},h("button",{class:"btn gold sm","data-act":"backupEnc",text:"Fă un backup"}),
+        h("button",{class:"btn ghost sm","data-act":"dismissBackup",text:"Mai târziu"})))));}
+function dismissBackup(){localStorage.setItem("cercul_backup_dismiss",String(Date.now()));renderBackupNudge();}
 /* loop4 #1: backup criptat dedicat (.eie) — parola de backup separata, PBKDF2+AES-GCM, fara server */
 async function exportEncrypted(){if(!DB)return;
   const pw=prompt("Alege o parola pentru acest backup (min. 6 caractere). O vei folosi la restaurare:");
@@ -1012,6 +1030,7 @@ function home(){const me=mem(ME),mm=myMatches();
       h("div",{class:"ahap",text:"Spune in 2 randuri ce oferi si ce cauti — generam sugestii relevante, doar pe dispozitivul tau."}),
       h("button",{class:"btn gold sm","data-act":"go","data-v":"profil",style:{marginTop:"10px"},text:"Completeaza profilul →"}))));}
   else setKids($("#ahaCard"));
+  renderBackupNudge();
   // urmatoarea intalnire confirmata (backlog #2)
   const td=today(),up=(DB.meetings||[]).filter(x=>x.status==="confirmat"&&(x.a===ME||x.b===ME)&&(x.when||"").slice(0,10)>=td).sort((a,b)=>String(a.when).localeCompare(String(b.when)));
   if(up[0]){const x=up[0],cel=mem(x.a===ME?x.b:x.a)||{name:"?"};
@@ -1798,6 +1817,7 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="importbtn")importData();
   else if(a==="backupEnc")exportEncrypted();
   else if(a==="restoreEnc")restoreEncrypted();
+  else if(a==="dismissBackup")dismissBackup();
   else if(a==="profedit")editProfile();
   else if(a==="profsave")saveProfile();
   else if(a==="profcancel")cancelProfile();
@@ -1855,7 +1875,7 @@ function lockNow(){if(!CK||LOCKING)return;
   if(PROC){pendingLock=true;toast("Se blocheaza dupa finalizarea procesarii…");return;} // atomic: nu intrerupe operatiuni (audit s4 #1)
   LOCKING=true;stopNet();clearTimeout(idleT);wipe();
   CK=null;HK=null;DB=null;ME=null;LEDGER_CHAIN=[];CHAT=null;FSIM=null; // elibereaza cheile din RAM (best-effort; datele pe disc raman criptate, recuperabile doar cu parola)
-  ["#matchList","#netHost","#ledger","#kpis","#topMatches","#phead","#mMsgs","#dictRes","#oferList","#cautList","#auditList","#valueRadar","#ahaCard","#intrinsic","#activeNet","#reconnect","#privacyHealth"]
+  ["#matchList","#netHost","#ledger","#kpis","#topMatches","#phead","#mMsgs","#dictRes","#oferList","#cautList","#auditList","#valueRadar","#ahaCard","#intrinsic","#activeNet","#reconnect","#privacyHealth","#backupNudge"]
     .forEach(s=>{const el=$(s);if(el)el.replaceChildren();}); // sanitizare DOM, fara innerHTML (audit s4 #5 / s5r2)
   $("#overlay").classList.remove("on");$("#lockPass").value="";showLock("unlock");LOCKING=false;
   toast("Blocat — cheile eliberate din memorie (best-effort)");}
