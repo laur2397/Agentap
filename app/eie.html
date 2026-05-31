@@ -330,6 +330,18 @@ details.why2>summary::-webkit-details-marker{display:none}
 .brief>summary::-webkit-details-marker{display:none}
 .brief .bbody{padding:0 14px 13px;font-size:13px;color:var(--ink2);line-height:1.6}
 .brief .bl{margin:3px 0}.brief .bl b{color:var(--ink);font-weight:600}
+/* iteratia 2 Secretara: intalniri */
+.mform{background:var(--card2);border:1px solid var(--line);border-radius:14px;margin-bottom:12px}
+.mform>summary{list-style:none;cursor:pointer;font-weight:700;font-size:13px;color:var(--primary-dim);padding:11px 14px}
+.mform>summary::-webkit-details-marker{display:none}
+.mfbody{padding:0 14px 14px;display:flex;flex-direction:column}
+.mfl{font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin:9px 0 4px}
+.meetcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin-bottom:10px;box-shadow:var(--shadow)}
+.meetcard .mtop2{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.meetcard .mw{font-weight:700;font-size:14px;color:var(--ink)}
+.meetcard .mwho{font-size:12px;color:var(--muted);white-space:nowrap}
+.meetcard .mplace{font-size:12.5px;color:var(--ink2);margin-top:5px}
+.meetcard .adock,.meetcard .waiting,.meetcard .shield{margin-top:11px}
 </style>
 </head>
 <body>
@@ -376,7 +388,12 @@ details.why2>summary::-webkit-details-marker{display:none}
 
   <!-- SECRETARA AI -->
   <section id="secretara" class="view">
-    <div class="eyebrow">Asistent</div><h2 class="title">Noteaza dupa o intalnire</h2>
+    <div class="eyebrow">Asistent</div><h2 class="title">Secretara ta</h2>
+    <p class="sub">Intalniri, notite si pregatire — intr-un singur loc.</p>
+    <div class="sec">Intalniri</div>
+    <p class="sub">Programezi din conversatia cu o conexiune. Se confirma doar cand ambele parti accepta.</p>
+    <div id="meetList"></div>
+    <div class="sec" style="margin-top:26px">Noteaza dupa o intalnire</div>
     <p class="sub">Scrie cu cuvintele tale ce ai discutat. Iti notez singur ce cauti si ce oferi, si caut potriviri.</p>
     <textarea id="dictText" rows="5" placeholder="ex: Am vorbit cu un investitor interesat de energie. Eu caut un contabil bun si ofer spatii comerciale."></textarea>
     <div style="margin-top:10px"><button class="btn gold" id="dictBtn" onclick="dicteaza()">Noteaza si cauta potriviri</button></div>
@@ -544,6 +561,10 @@ function validDB(d){if(!d||typeof d!=="object")return false;
   if(!Array.isArray(d.notes))d.notes=[];
   d.notes=d.notes.filter(n=>n&&typeof n==="object"&&n.id!=null);
   d.notes.forEach(n=>{n.text=clean(n.text);n.member_id=+n.member_id;n.t=+n.t||Date.now();});
+  if(!Array.isArray(d.meetings))d.meetings=[];
+  d.meetings=d.meetings.filter(x=>x&&typeof x==="object"&&x.id!=null);
+  d.meetings.forEach(x=>{x.a=+x.a;x.b=+x.b;x.place=clean(x.place||"");x.when=clean(x.when||"").slice(0,16);
+    if(["propus","confirmat","refuzat"].indexOf(x.status)<0)x.status="propus";});
   if(!d.members.length)return false;
   d.members.forEach(m=>{m.trust=Math.max(0,Math.min(100,+m.trust||0));m.name=clean(m.name).slice(0,80)||"?";m.id=+m.id;m.industry=clean(m.industry||"");m.role=clean(m.role||"Membru");});
   d.items.forEach(i=>{i.text=clean(i.text);i.visible=i.visible?1:0;i.member_id=+i.member_id;});
@@ -571,7 +592,7 @@ function exportData(){try{const blob=new Blob([JSON.stringify(DB,null,2)],{type:
 function logA(action){if(!DB.audit)DB.audit=[];DB.audit.unshift({t:Date.now(),me:ME,a:clean(action).slice(0,160)});if(DB.audit.length>60)DB.audit.pop();}
 
 function seed(){
-  const d={members:[],items:[],matches:[],messages:[],audit:[],notes:[],seq:1};
+  const d={members:[],items:[],matches:[],messages:[],audit:[],notes:[],meetings:[],seq:1};
   SEED.forEach((m,i)=>d.members.push({id:i+1,name:m[0],role:m[1],industry:m[2],trust:m[3],color:COLORS[i%COLORS.length]}));
   d.seq=d.members.length+1;
   const ai=(m,k,arr)=>(arr||[]).forEach(([t,s])=>d.items.push({id:d.seq++,member_id:m,kind:k,text:t,visible:k==="ofer"?1:0,source:s}));
@@ -619,7 +640,7 @@ function setView(v){if(PROC){toast("Asteapta — Secretara AI proceseaza…");re
 function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("div",{class:"sk l w80"}),h("div",{class:"sk l w40"}));}
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
 function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
-  if(VIEW==="acasa")home();else if(VIEW==="potriviri")setKids($("#matchList"),pipeline(myMatches()));else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara")renderNotes();else if(VIEW==="profil")prof();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
+  if(VIEW==="acasa")home();else if(VIEW==="potriviri")setKids($("#matchList"),pipeline(myMatches()));else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){renderMeetings();renderNotes();}else if(VIEW==="profil")prof();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 function emp(){return h("div",{class:"estate"},
   svgEl("svg",{viewBox:"0 0 64 64",fill:"none",stroke:"currentColor","stroke-width":"2"},
     svgEl("circle",{cx:27,cy:27,r:15}),svgEl("path",{d:"M38 38 L53 53","stroke-linecap":"round"}),
@@ -841,6 +862,47 @@ function buildBrief(m){const cel=mem(ME===m.offer_member?m.seek_member:m.offer_m
     :h("div",{class:"bl",style:{color:"var(--muted)"}},"Nu ai notite legate de aceasta persoana. Adauga in Jurnal."));
   const d=h("details",{class:"brief"},h("summary",{text:"📋 Brief de 1 minut ⌄"}),h("div",{class:"bbody"},...rows));d.open=true;return d;}
 
+/* ---- Secretara iteratia 2: calendar & programare (double-opt-in) ---- */
+function fmtWhen(w){if(!w)return"";const[d,t]=String(w).split("T");const dd=new Date(d+"T00:00");
+  if(isNaN(dd))return String(w);const s=dd.toLocaleDateString("ro-RO",{weekday:"short",day:"numeric",month:"short"});return s+(t?(" · "+t):"");}
+function meetingForm(m){const f=h("details",{class:"mform"},h("summary",{text:"📅 Propune o intalnire ⌄"}),
+    h("div",{class:"mfbody"},
+      h("label",{class:"mfl",for:"mfDate",text:"Data"}),h("input",{type:"date",id:"mfDate","aria-label":"Data intalnirii"}),
+      h("label",{class:"mfl",for:"mfTime",text:"Ora"}),h("input",{type:"time",id:"mfTime","aria-label":"Ora intalnirii"}),
+      h("label",{class:"mfl",for:"mfPlace",text:"Loc / detalii"}),h("input",{id:"mfPlace","aria-label":"Loc",placeholder:"ex: Cafenea, online…"}),
+      h("button",{class:"btn gold","data-act":"propmeet","data-id":m.id,style:{marginTop:"12px",width:"100%"},text:"Trimite propunerea"})));
+  return f;}
+function proposeMeeting(mid){const m=DB.matches.find(x=>x.id===mid);if(!m)return;
+  const date=($("#mfDate")||{}).value||"",time=($("#mfTime")||{}).value||"",place=clean((($("#mfPlace")||{}).value||"").trim());
+  if(!date){toast("Alege o data pentru intalnire");return;}
+  const other=ME===m.offer_member?m.seek_member:m.offer_member;
+  DB.meetings.push({id:DB.seq++,a:ME,b:other,match_id:mid,when:date+(time?("T"+time):""),place,status:"propus",at:Date.now()});
+  logA("Ai propus o intalnire cu "+(mem(other)||{name:"?"}).name);save();loadChat();
+  toast("Propunere trimisa — se confirma cand cealalta parte accepta");}
+async function meetRespond(id,ok){const mt=(DB.meetings||[]).find(x=>x.id===id);if(!mt||mt.status!=="propus")return;
+  if(mt.b!==ME){toast("Doar persoana invitata poate confirma");return;}
+  if(!ok){mt.status="refuzat";logA("Ai refuzat o intalnire");save();render();toast("Intalnire refuzata");return;}
+  mt.status="confirmat";mt.cat=Date.now();
+  try{mt.hash=await hmacHex("MEET|"+mt.a+"|"+mt.b+"|"+mt.when+"|"+mt.place);}catch(_){mt.hash="";}
+  logA("Intalnire confirmata (dublu consimtamant)");save();render();toast("✓ Intalnire confirmata");}
+function renderMeetings(){const host=$("#meetList");if(!host)return;
+  const mine=(DB.meetings||[]).filter(x=>x.a===ME||x.b===ME);
+  const toAccept=mine.filter(x=>x.status==="propus"&&x.b===ME);
+  const waiting=mine.filter(x=>x.status==="propus"&&x.a===ME);
+  const confirmed=mine.filter(x=>x.status==="confirmat").sort((a,b)=>String(a.when).localeCompare(String(b.when)));
+  const card=(x,kind)=>{const otherId=x.a===ME?x.b:x.a,cel=mem(otherId)||{name:"?"};
+    const acts=kind==="accept"?h("div",{class:"adock"},h("button",{class:"btn gold","data-act":"meetyes","data-id":x.id,text:"Accept"}),h("button",{class:"btn ghost","data-act":"meetno","data-id":x.id,text:"Refuz"}))
+      :kind==="wait"?h("div",{class:"waiting",text:"⏳ Asteapta confirmarea lui "+cel.name.split(" ")[0]})
+      :h("div",{class:"shield",text:"🛡 Confirmata · semnatura "+(x.hash||"").slice(0,10)+"…"});
+    return h("div",{class:"meetcard"},
+      h("div",{class:"mtop2"},h("div",{class:"mw",text:fmtWhen(x.when)}),h("div",{class:"mwho",text:"cu "+cel.name})),
+      x.place?h("div",{class:"mplace",text:"📍 "+x.place}):null,acts);};
+  const out=[];
+  if(toAccept.length){out.push(h("div",{class:"pipe-h a"},h("span",{class:"pd"}),"De confirmat",h("span",{class:"pn",text:String(toAccept.length)})));toAccept.forEach(x=>out.push(card(x,"accept")));}
+  if(confirmed.length){out.push(h("div",{class:"pipe-h c"},h("span",{class:"pd"}),"Confirmate",h("span",{class:"pn",text:String(confirmed.length)})));confirmed.forEach(x=>out.push(card(x,"done")));}
+  if(waiting.length){out.push(h("div",{class:"pipe-h p"},h("span",{class:"pd"}),"In asteptare",h("span",{class:"pn",text:String(waiting.length)})));waiting.forEach(x=>out.push(card(x,"wait")));}
+  setKids(host, out.length?out:h("div",{class:"estate",style:{padding:"22px"}},h("div",{class:"t",text:"Nicio intalnire"}),h("div",{style:{fontSize:"12px",marginTop:"4px"},text:"Deschide o conexiune (Reteaua) si apasa „Propune o intalnire”."})));}
+
 function openMemberMatch(mid){if(mid===ME){setView("profil");return;}
   let m=DB.matches.find(x=>x.status!=="respins"&&((x.offer_member===ME&&x.seek_member===mid)||(x.offer_member===mid&&x.seek_member===ME)));
   if(m&&m.status==="conectat"){openMatch(m.id);return;}
@@ -849,8 +911,8 @@ function openMemberMatch(mid){if(mid===ME){setView("profil");return;}
 function openMatch(id){CHAT=id;const m=DB.matches.find(x=>x.id===id),cel=mem(ME===m.offer_member?m.seek_member:m.offer_member);
   $("#mTitle").textContent=cel.name;$("#mSub").textContent=cel.role+" · Trust "+cel.trust+"/100";$("#overlay").classList.add("on");loadChat();}
 function loadChat(){const mt=DB.matches.find(x=>x.id===CHAT),msgs=DB.messages.filter(m=>m.match_id===CHAT);
-  const br=mt?buildBrief(mt):null;
-  setKids($("#mMsgs"),br,...msgs.map(m=>{if(m.sender===null)return h("div",{class:"msg app",text:"❧ "+m.text});
+  const br=mt?buildBrief(mt):null,mf=mt&&mt.status==="conectat"?meetingForm(mt):null;
+  setKids($("#mMsgs"),br,mf,...msgs.map(m=>{if(m.sender===null)return h("div",{class:"msg app",text:"❧ "+m.text});
     return m.sender===ME?h("div",{class:"msg me",text:m.text}):h("div",{class:"msg them"},h("span",{class:"nm2",text:name(m.sender)}),m.text);}));
   const b=$("#mMsgs");b.scrollTop=b.scrollHeight;}
 function sendMsg(){const t=$("#mInput").value.trim();if(!t)return;DB.messages.push({id:DB.seq++,match_id:CHAT,sender:ME,text:t});$("#mInput").value="";save();loadChat();}
@@ -896,6 +958,9 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="exportL")exportLedger();
   else if(a==="addnote")addNote();
   else if(a==="delnote")delNote(id);
+  else if(a==="propmeet")proposeMeeting(id);
+  else if(a==="meetyes")meetRespond(id,true);
+  else if(a==="meetno")meetRespond(id,false);
   else if(a==="go")setView(el.dataset.v);});
 
 // error boundary global (remediaza constatarea de audit #4)

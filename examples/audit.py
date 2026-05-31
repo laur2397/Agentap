@@ -22,6 +22,18 @@ def P(f): return os.path.join(ROOT,f)
 
 # Descrierea EXACTA a solutiei auditate (iteratia 2 + remedieri runda 1). Onesta — doar ce e implementat.
 SOLUTIE=(
+ "SECRETARA — ITERATIA 2 din roadmap (Calendar & Programare cu DOUBLE-OPT-IN). Verificat cu Playwright, "
+ "zero erori, tot pe DOM API (zero innerHTML).\n"
+ "(s2-propunere) Din conversatia cu o conexiune, formular 'Propune o intalnire' (data/ora/loc, sanitizate). "
+ "Creeaza o intalnire status 'propus' (a=propunator, b=invitat).\n"
+ "(s2-doubleoptin) Invitatul vede propunerea in ecranul Secretara la 'De confirmat' si Accepta/Refuza. "
+ "Intalnirea devine 'confirmat' DOAR dupa acceptul celeilalte parti (propunerea=primul consimtamant, "
+ "acceptul=al doilea). Doar persoana invitata (b===ME) poate confirma.\n"
+ "(s2-imuabil) La confirmare se calculeaza o SEMNATURA HMAC-SHA256 (cheia derivata din parola, din RAM) "
+ "peste detaliile intalnirii (parti+data+loc) -> inregistrare tamper-evident, afisata pe card; "
+ "actiunea intra si in jurnalul de audit. Aliniat cu strategia (intalnire confirmata = inregistrare imuabila).\n"
+ "(s2-calendar) Ecranul Secretara afiseaza intalnirile grupate: De confirmat / Confirmate (sortate dupa "
+ "data) / In asteptare; empty-state cu CTA. Tot criptat, accesibil (44px, focus), persistent.\n\n"
  "SECRETARA — ITERATIA 1 din roadmap-ul aprobat (Notite + Brief de intalnire). Verificat cu Playwright, "
  "zero erori de consola, tot pe DOM API (zero innerHTML).\n"
  "(s1-notite) JURNAL DE NOTITE in ecranul Secretara: adaugi idei/notite (sanitizate cu clean(), randate "
