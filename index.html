@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="ro" data-theme="light">
+<head>
+<meta charset="utf-8">
+<!-- CSP: blocheaza orice retea (connect-src 'none' -> fara exfiltrare), fara obiecte/iframe/eval.
+     'unsafe-inline' la script e necesar pt. arhitectura single-file; exfiltrarea ramane blocata. (audit s5 #2) -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'; object-src 'none'; require-trusted-types-for 'script'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cercul EIE — Network Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ====== PALETA "Bloom" — luminos, social, modern (redesign sedinta 7, 220 agenti) ====== */
+:root{
+  /* LIGHT — bright & airy */
+  --bg:#FAFAFB;--bg2:#F1F2F6;--card:#FFFFFF;--card2:#F5F6FA;--line:#ECEDF2;--line2:#E0E2EC;
+  --ink:#1E293B;--ink2:#475569;--muted:#64748B;
+  --primary:#6366F1;--primary2:#818CF8;--primary-dim:#4F46E5;--primary-soft:rgba(99,102,241,.10);
+  --accent:#4F46E5;--accent-soft:rgba(99,102,241,.08);
+  --success:#10B981;--success-soft:rgba(16,185,129,.12);--warn:#F59E0B;--warn-soft:rgba(245,158,11,.13);--warn-ink:#B45309;
+  --on-primary:#ffffff;
+  --shadow:0 1px 2px rgba(16,24,40,.04),0 6px 16px -6px rgba(16,24,40,.10);
+  --shadow-lg:0 12px 40px -8px rgba(16,24,40,.22);
+  --glow:rgba(99,102,241,.10);
+  --gold:var(--primary);--gold2:var(--primary2);--gold-dim:var(--primary-dim);--gold-soft:var(--primary-soft);
+  --teal:var(--success);--teal-soft:var(--success-soft);
+  --serif:'Inter',system-ui,sans-serif;--sans:'Inter',system-ui,sans-serif;--ease:cubic-bezier(.22,1,.36,1);
+}
+[data-theme="dark"]{
+  /* DARK — slate + indigo */
+  --bg:#0F1117;--bg2:#15171F;--card:#1B1E27;--card2:#222633;--line:#2A2F3C;--line2:#363C4B;
+  --ink:#F1F5F9;--ink2:#CBD5E1;--muted:#94A3B8;
+  --primary:#818CF8;--primary2:#A5B4FC;--primary-dim:#A5B4FC;--primary-soft:rgba(129,140,248,.16);
+  --accent:#A5B4FC;--accent-soft:rgba(129,140,248,.14);
+  --success:#34D399;--success-soft:rgba(52,211,153,.16);--warn:#FBBF24;--warn-soft:rgba(251,191,36,.16);--warn-ink:#FCD34D;
+  --on-primary:#15131f;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 20px -8px rgba(0,0,0,.5);
+  --shadow-lg:0 16px 44px -10px rgba(0,0,0,.6);
+  --glow:rgba(129,140,248,.14);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg2);color:var(--ink);font-family:var(--sans);font-weight:400;-webkit-font-smoothing:antialiased}
+.shell{max-width:440px;margin:0 auto;min-height:100vh;position:relative;overflow:hidden;
+  background:radial-gradient(130% 55% at 50% -8%,var(--glow),transparent 55%),var(--bg);transition:background .5s var(--ease)}
+header{padding:22px 20px 14px;position:sticky;top:0;z-index:9;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.htop{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.brand{display:flex;align-items:center;gap:11px}
+.brand .mk{width:40px;height:40px;border-radius:50%;border:1px solid var(--primary);color:var(--primary);display:grid;place-items:center;font-family:var(--serif);font-size:20px;font-weight:700;background:radial-gradient(circle at 30% 30%,var(--primary-soft),transparent)}
+.brand .t{font-family:var(--serif);font-size:21px;font-weight:700;line-height:1;color:var(--ink)}
+.brand .t small{display:block;font-family:var(--sans);font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--primary-dim);margin-top:2px}
+.hright{display:flex;align-items:center;gap:8px}
+.themebtn{width:34px;height:34px;border-radius:50%;border:1px solid var(--line2);background:var(--card);color:var(--ink2);font-size:15px;cursor:pointer;display:grid;place-items:center;transition:.3s var(--ease)}
+.themebtn:active{transform:scale(.92)}
+.memsel{background:var(--card);border:1px solid var(--line2);border-radius:30px;padding:7px 11px;color:var(--ink);font:inherit;font-size:12px;max-width:112px}
+main{padding:20px 18px 92px;animation:rise .4s var(--ease)}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.view{display:none}.view.on{display:block}
+.eyebrow{font-size:9.5px;letter-spacing:3px;text-transform:uppercase;color:var(--primary-dim)}
+h2.title{font-family:var(--serif);font-size:27px;font-weight:600;margin:2px 0 14px;color:var(--ink)}
+.sub{color:var(--muted);font-size:12px;margin:-10px 0 16px}
+.sec{font-family:var(--serif);font-size:18px;font-weight:600;margin:24px 0 11px;display:flex;justify-content:space-between;align-items:baseline;color:var(--ink)}
+.sec a{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--primary);cursor:pointer}
+
+/* digest */
+.digest{background:linear-gradient(135deg,var(--primary-soft),transparent);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
+.digest .e{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--primary)}
+.digest .g{font-family:var(--serif);font-size:21px;font-weight:600;margin:4px 0 6px;color:var(--ink)}
+.digest p{font-size:13px;color:var(--ink2);line-height:1.55}
+
+/* kpi exec-concierge */
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:14px}
+.kpi{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--card);box-shadow:var(--shadow)}
+.kpi .l{font-size:9.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
+.kpi .v{font-family:var(--serif);font-size:26px;font-weight:700;color:var(--primary-dim);margin-top:4px;line-height:1}
+.kpi .d{font-size:11px;color:var(--success);margin-top:3px}
+
+/* pulse */
+.pulse{border:1px solid var(--line);border-radius:14px;padding:15px 17px;background:var(--card);margin-top:12px;box-shadow:var(--shadow)}
+.pulse .row{display:flex;justify-content:space-between;align-items:center;font-size:13px;margin:7px 0;color:var(--ink2)}
+.bar{height:6px;border-radius:4px;background:var(--line);overflow:hidden;margin-top:4px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--primary-dim),var(--primary));transition:width .8s var(--ease)}
+
+/* ledger */
+.ledger{border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden;box-shadow:var(--shadow)}
+.ledger .lrow{display:flex;align-items:center;gap:11px;padding:12px 15px;border-bottom:1px solid var(--line);font-size:13px}
+.ledger .lrow:last-child{border-bottom:0}
+.ledger .dot{width:7px;height:7px;border-radius:50%;background:var(--success);flex:none}
+.ledger .lr-name{font-weight:500;color:var(--ink)}
+.ledger .lr-meta{font-size:11px;color:var(--muted)}
+.ledger .lr-date{margin-left:auto;font-size:10.5px;color:var(--primary-dim);white-space:nowrap}
+
+/* match cards */
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px;margin-bottom:13px;position:relative;overflow:hidden;transition:.4s var(--ease);box-shadow:var(--shadow)}
+.card.match::before{content:"";position:absolute;inset:0;border-radius:18px;padding:1px;background:linear-gradient(140deg,var(--primary-soft),transparent 42%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.card.conectat::before{background:linear-gradient(140deg,var(--success-soft),transparent 42%)}
+.mtop{display:flex;align-items:center;gap:12px}
+.av{border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-weight:700;flex:none;background:var(--card2);border:1px solid var(--primary-dim);color:var(--primary-dim)}
+.nm{font-family:var(--serif);font-size:18px;font-weight:600;line-height:1.1;color:var(--ink)}
+.co{font-size:11px;color:var(--muted);margin-top:2px}
+.sc{margin-left:auto;text-align:center}
+.sc .n{font-family:var(--serif);font-size:25px;font-weight:700;color:var(--primary-dim);line-height:1}
+.sc .l{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.trust{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;color:var(--success);background:var(--success-soft);border-radius:20px;padding:3px 9px;margin-top:8px}
+.pair{font-size:13px;margin:12px 0 0}
+.pair .r{display:flex;gap:9px;padding:4px 0}
+.pair .tag{min-width:70px;font-size:9px;letter-spacing:.8px;text-transform:uppercase;color:var(--primary-dim);font-weight:600;padding-top:3px}
+.pair b{color:var(--ink);font-weight:500}
+.why{margin-top:11px}
+.why summary{cursor:pointer;color:var(--primary);font-size:10px;letter-spacing:1.4px;text-transform:uppercase;list-style:none}
+.why summary::-webkit-details-marker{display:none}
+.why summary::before{content:"— "}
+.why .b{margin-top:9px;font-size:12.5px;color:var(--ink2);border-left:2px solid var(--primary-dim);padding-left:11px;line-height:1.55}
+.src{margin-top:13px;padding-top:12px;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}
+.src .seal{color:var(--primary)}
+.acts{display:flex;gap:9px;margin-top:14px;align-items:center;flex-wrap:wrap}
+.btn{border:0;border-radius:30px;padding:10px 18px;font:inherit;font-size:13px;font-weight:500;letter-spacing:.4px;cursor:pointer;transition:.35s var(--ease)}
+.btn.gold{background:linear-gradient(135deg,var(--primary),var(--primary-dim));color:var(--on-primary);font-weight:600;box-shadow:0 4px 14px var(--primary-soft)}
+.btn.gold:active{transform:translateY(1px)}
+.btn.ghost{background:transparent;color:var(--ink2);border:1px solid var(--line2)}
+.btn.sm{padding:8px 14px;font-size:12px}
+.pill{font-size:9px;padding:3px 11px;border-radius:30px;font-weight:600;letter-spacing:.8px;text-transform:uppercase}
+.pill.propus{background:var(--primary-soft);color:var(--primary-dim)}.pill.conectat{background:var(--success-soft);color:var(--success)}
+.empty{color:var(--muted);font-style:italic;text-align:center;padding:28px;font-family:var(--serif);font-size:15px}
+
+/* members */
+.filters{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px;margin-bottom:14px;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line2);border-radius:30px;padding:6px 14px;font-size:12px;color:var(--ink2);cursor:pointer;white-space:nowrap;background:var(--card)}
+.chip.on{background:var(--primary);color:var(--on-primary);border-color:var(--primary);font-weight:500}
+
+/* network */
+.netwrap{border:1px solid var(--line);border-radius:18px;background:var(--card);padding:6px;overflow:hidden;box-shadow:var(--shadow)}
+.netlegend{display:flex;gap:15px;flex-wrap:wrap;margin-top:12px;font-size:11px;color:var(--ink2)}
+.netlegend i{display:inline-block;width:12px;height:2px;border-radius:2px;margin-right:5px;vertical-align:middle}
+svg text{font-family:var(--sans);font-size:9px;fill:var(--ink2)}
+
+/* profile / dictare */
+.panel{border:1px solid var(--line);border-radius:16px;background:var(--card);padding:17px;margin-top:13px;box-shadow:var(--shadow)}
+.panel h3{font-family:var(--serif);font-size:17px;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:12px;color:var(--ink)}
+.badge{font-size:8.5px;padding:3px 9px;border-radius:30px;font-weight:600;letter-spacing:.6px;text-transform:uppercase}
+.badge.vis{background:var(--success-soft);color:var(--success)}.badge.priv{background:var(--primary-soft);color:var(--primary-dim)}
+.linei{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink)}
+.linei .meta{font-size:11px;color:var(--muted);margin-top:2px}.linei .x{background:none;border:0;color:var(--muted);font-size:17px;cursor:pointer}
+.addrow{display:flex;gap:7px;margin-top:12px}
+input,textarea,select{background:var(--card2);border:1px solid var(--line2);border-radius:10px;padding:10px 12px;color:var(--ink);font:inherit;font-size:13px}
+.addrow input{flex:1}textarea{width:100%}
+.audit{font-size:12px;color:var(--ink2)}
+.audit .arow{display:flex;gap:8px;padding:7px 0;border-bottom:1px dashed var(--line)}
+.audit .arow:last-child{border-bottom:0}
+.audit .at{color:var(--muted);min-width:54px;font-size:11px}
+
+/* spinner */
+.spin{display:inline-block;width:15px;height:15px;border:2px solid var(--primary-soft);border-top-color:var(--primary);border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.proc{display:flex;align-items:center;gap:9px;color:var(--ink2);font-size:13px;padding:10px 0}
+.procmask{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;gap:10px;background:color-mix(in srgb,var(--bg) 55%,transparent);backdrop-filter:blur(2px);color:var(--ink2);font-size:13px;font-family:var(--serif)}
+.procmask.on{display:flex}
+.procmask .spin{width:18px;height:18px}
+.dots{display:inline-flex;gap:4px}.dots i{width:6px;height:6px;border-radius:50%;background:var(--primary);animation:bl 1s var(--ease) infinite}
+.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes bl{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+
+/* skeleton shimmer (iteratia 3 — perceptie de viteza) */
+.skel{padding:2px}
+.sk{position:relative;overflow:hidden;background:var(--card2);border-radius:12px}
+.sk::after{content:"";position:absolute;inset:0;transform:translateX(-100%);
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--ink) 8%,transparent),transparent);animation:sh 1.2s infinite}
+@keyframes sh{100%{transform:translateX(100%)}}
+.sk.l{height:13px;margin:8px 0}.sk.l.w60{width:60%}.sk.l.w40{width:40%}.sk.l.w80{width:80%}
+.sk.box{height:78px;margin-bottom:11px}
+
+/* count-up KPI */
+.kpi .v{font-variant-numeric:tabular-nums}
+
+/* trust donut */
+.donut{--p:0;width:46px;height:46px;border-radius:50%;flex:none;display:grid;place-items:center;
+  background:conic-gradient(var(--primary) calc(var(--p)*1%),var(--line) 0);transition:background .9s var(--ease)}
+.donut span{width:36px;height:36px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:14px;color:var(--primary-dim)}
+
+/* sparkline */
+.spark{display:block;width:100%;height:34px;margin-top:8px}
+.spark path.area{fill:var(--primary-soft)}.spark path.line{fill:none;stroke:var(--primary);stroke-width:2}
+
+/* search */
+.searchbar{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line2);border-radius:30px;padding:9px 14px;margin-bottom:13px}
+.searchbar input{flex:1;background:none;border:0;padding:0;font-size:14px;color:var(--ink)}
+.searchbar .ic{color:var(--muted);font-size:14px}
+
+/* empty state svg */
+.estate{text-align:center;padding:30px 20px;color:var(--muted)}
+.estate svg{width:84px;height:84px;opacity:.6;margin-bottom:10px}
+.estate .t{font-family:var(--serif);font-size:17px;color:var(--ink2)}
+
+/* graf interactiv */
+svg .node{cursor:pointer;transition:opacity .3s var(--ease)}
+svg .node.dim{opacity:.22}svg .edge{transition:opacity .3s var(--ease)}svg .edge.dim{opacity:.06}
+svg .node.sdim{opacity:.14}svg .edge.sdim{opacity:.05}
+/* iteratia 4: pipeline + radar */
+.pipe-h{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink2);font-weight:600;margin:18px 0 10px}
+.pipe-h:first-child{margin-top:2px}
+.pipe-h .pd{width:8px;height:8px;border-radius:50%;flex:none}
+.pipe-h.p .pd{background:var(--primary)}.pipe-h.a .pd{background:var(--warn)}.pipe-h.c .pd{background:var(--success)}
+.pipe-h .pn{margin-left:auto;background:var(--card2);border:1px solid var(--line);border-radius:20px;padding:1px 9px;font-size:11px;letter-spacing:0;color:var(--ink2)}
+.radarwrap{display:flex;gap:11px;align-items:center;margin-top:11px;padding:11px;background:var(--card2);border:1px solid var(--line);border-radius:12px}
+.radar{flex:none}
+.rk{font-size:10.5px;color:var(--ink2);line-height:1.5}.rk b{color:var(--primary-dim);font-weight:600}
+
+/* ledger hash */
+.ledger .lr-hash{font-family:ui-monospace,monospace;font-size:9px;color:var(--muted);letter-spacing:.3px}
+.lgverify{display:flex;gap:8px;align-items:center;padding:10px 15px;border-top:1px solid var(--line);font-size:11px;color:var(--ink2)}
+.lgverify .ok{color:var(--success)}.lgverify .bad{color:var(--warn)}
+
+/* reduce motion */
+@media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+body.reduce-motion *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+.toggle{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;color:var(--ink);padding:6px 0}
+.sw{width:42px;height:24px;border-radius:30px;background:var(--line2);position:relative;cursor:pointer;transition:.3s var(--ease);flex:none}
+.sw i{position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:var(--card);transition:.3s var(--ease);box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.sw.on{background:var(--primary)}.sw.on i{left:21px}
+
+/* nav */
+nav{position:sticky;bottom:0;z-index:9;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(18px);border-top:1px solid var(--line)}
+.navin{display:flex}
+.tab{flex:1;background:none;border:0;padding:12px 3px 13px;display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--muted);font-size:9.5px;letter-spacing:.3px;cursor:pointer;transition:.3s var(--ease);position:relative}
+.tab .ic{font-size:17px;line-height:1}
+.tab.on{color:var(--primary-dim)}.tab.on::before{content:"";position:absolute;top:0;width:22px;height:2px;background:var(--primary);border-radius:2px}
+
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(15,18,28,.55);backdrop-filter:blur(5px);display:none;align-items:flex-end;justify-content:center;z-index:30}
+.overlay.on{display:flex}
+.modal{background:var(--card);border:1px solid var(--line2);border-radius:24px 24px 0 0;width:100%;max-width:440px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;animation:up .45s var(--ease);box-shadow:var(--shadow-lg)}
+@keyframes up{from{transform:translateY(100%)}to{transform:none}}
+.modal .h{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.modal .h .t{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--ink)}.modal .h .s{font-size:11px;color:var(--muted)}
+.modal .h button{background:none;border:0;color:var(--muted);font-size:24px;cursor:pointer}
+.msgs{flex:1;overflow:auto;padding:16px 18px;display:flex;flex-direction:column;gap:9px}
+.msg{max-width:82%;padding:9px 13px;border-radius:15px;font-size:13px;line-height:1.5}
+.msg.app{align-self:center;max-width:96%;text-align:center;border:1px solid var(--primary-dim);color:var(--ink2);font-family:var(--serif);font-style:italic;background:var(--card2)}
+.msg.me{align-self:flex-end;background:linear-gradient(135deg,var(--primary),var(--primary-dim));color:var(--on-primary)}
+.msg.them{align-self:flex-start;background:var(--card2);border:1px solid var(--line);color:var(--ink)}
+.msg .nm2{font-size:10px;color:var(--primary-dim);font-weight:600;display:block;margin-bottom:2px}
+.cinput{display:flex;gap:8px;padding:13px 16px;border-top:1px solid var(--line)}.cinput input{flex:1}
+.toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--accent);border:1px solid var(--primary-dim);color:#fff;padding:11px 20px;border-radius:30px;font-size:13px;opacity:0;transition:.45s var(--ease);z-index:50;white-space:nowrap;box-shadow:var(--shadow-lg)}
+.toast.on{transform:translateX(-50%) translateY(0);opacity:1}
+
+/* onboarding */
+.ob{position:fixed;inset:0;background:var(--bg);z-index:60;display:none;flex-direction:column;align-items:center;justify-content:center;padding:30px 26px;text-align:center}
+.ob.on{display:flex}
+.ob .mk{width:58px;height:58px;border-radius:50%;border:1px solid var(--primary);color:var(--primary);display:grid;place-items:center;font-family:var(--serif);font-size:28px;font-weight:700;margin-bottom:18px;background:radial-gradient(circle at 30% 30%,var(--primary-soft),transparent)}
+.ob h1{font-family:var(--serif);font-size:30px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.ob .lead{color:var(--ink2);font-size:14px;max-width:300px;line-height:1.55;margin-bottom:22px}
+.ob .step{width:100%;max-width:340px;text-align:left;display:none}
+.ob .step.on{display:block;animation:rise .4s var(--ease)}
+.ob label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary-dim);display:block;margin:0 0 7px}
+.ob input{width:100%;font-size:15px;padding:13px 14px;margin-bottom:18px}
+.ob .nav2{display:flex;gap:10px;justify-content:space-between;align-items:center;max-width:340px;width:100%}
+.ob .dots{display:flex;gap:6px}.ob .dots i{width:7px;height:7px;border-radius:50%;background:var(--line2)}.ob .dots i.on{background:var(--primary)}
+.ob .skip{background:none;border:0;color:var(--muted);font-size:12px;cursor:pointer;margin-top:16px}
+
+/* ============ REDESIGN "Bloom" (iteratia 5) — luminos, social, modern ============ */
+.brand .mk{border-radius:13px;border:0;background:linear-gradient(135deg,var(--primary),var(--primary-dim));color:#fff;font-weight:800;font-size:19px}
+.brand .t{font-weight:800;font-size:19px;letter-spacing:-.3px}
+.brand .t small{color:var(--muted);letter-spacing:2px}
+h2.title{font-weight:800;font-size:24px;letter-spacing:-.5px;margin:2px 0 4px}
+.eyebrow{color:var(--primary);letter-spacing:1.5px;font-weight:600}
+.sec{font-weight:700;font-size:16px;letter-spacing:-.2px}
+.sub{font-size:13px;line-height:1.5}
+.digest .g,.kpi .v,.nm,.modal .h .t,.panel h3,.ob h1,.estate .t,.lr-name{font-family:var(--sans)}
+.kpi .v{font-weight:800;letter-spacing:-.5px}
+.btn{border-radius:11px;min-height:44px;font-weight:600;letter-spacing:0;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.btn.gold{background:linear-gradient(135deg,var(--primary),var(--primary-dim));box-shadow:0 4px 12px rgba(99,102,241,.28)}
+.btn.gold:active{transform:scale(.97)}
+.btn.sm{min-height:38px;border-radius:10px}
+.card{border-radius:18px;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.card.match::before,.card.conectat::before{display:none}
+.card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.av.sq{border-radius:13px;border:0;color:#fff;font-weight:700;font-family:var(--sans)}
+.ghead{display:flex;align-items:flex-start;gap:12px}
+.ghead .gi{flex:1;min-width:0}
+.ghead .gn{font-weight:700;font-size:16px;color:var(--ink);letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ghead .gt{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.statuspill{flex:none;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:5px 10px;border-radius:30px;background:var(--card2);color:var(--ink2)}
+.statuspill .sd{width:6px;height:6px;border-radius:50%;background:var(--muted)}
+.statuspill.ok{background:var(--success-soft);color:var(--success)}.statuspill.ok .sd{background:var(--success)}
+.statuspill.warn{background:var(--warn-soft);color:var(--warn-ink)}.statuspill.warn .sd{background:var(--warn)}
+.gline{font-size:14px;color:var(--ink);line-height:1.5;margin:13px 0 2px}
+.gline b{font-weight:700}
+.hbadges{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.hbadge{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--ink2);background:var(--card2);border-radius:30px;padding:5px 11px}
+.hbadge.v{color:var(--success)}
+.adock{display:flex;gap:8px;margin-top:14px;align-items:center}
+.adock .btn{flex:1}
+.menu-dots{flex:none;width:44px;height:44px;border-radius:11px;border:1px solid var(--line2);background:var(--card);color:var(--muted);font-size:18px;cursor:pointer;display:grid;place-items:center}
+.waiting{font-size:13px;color:var(--ink2);background:var(--warn-soft);border-radius:11px;padding:11px 13px;margin-top:14px;display:flex;align-items:center;gap:8px}
+details.why2{margin-top:11px}
+details.why2>summary{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;color:var(--primary);cursor:pointer;font-weight:500;list-style:none}
+details.why2>summary::-webkit-details-marker{display:none}
+.whybody{margin-top:9px;background:var(--card2);border-radius:12px;padding:13px;font-size:12.5px;color:var(--ink2);line-height:1.6}
+.whybody .mono{font-family:ui-monospace,monospace;font-size:11px;color:var(--muted)}
+.shield{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);margin-top:11px}
+:focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:8px}
+.tab:focus-visible,.themebtn:focus-visible,.menu-dots:focus-visible{outline-offset:-2px}
+.pill{text-transform:none;letter-spacing:0;font-weight:600}
+.tab .ic{font-size:18px}
+/* stats compacte (declutter Acasa) */
+.statstrip{display:flex;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 6px;margin:16px 0 4px;box-shadow:var(--shadow)}
+.statstrip .st{flex:1;text-align:center;border-right:1px solid var(--line)}
+.statstrip .st:last-child{border-right:0}
+.statstrip .sv{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.5px}
+.statstrip .sl{font-size:11px;color:var(--muted);margin-top:3px}
+/* lista de conexiuni (Reteaua) */
+.connrow{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;cursor:pointer;box-shadow:var(--shadow);transition:transform .15s var(--ease)}
+.connrow:hover{transform:translateY(-1px);box-shadow:var(--shadow-lg)}
+.connrow .ci{flex:1;min-width:0}
+.connrow .cn{font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.connrow .cr{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.connrow .cmeta{font-size:12px;color:var(--primary-dim);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.connrow .cdate{font-size:11px;color:var(--muted);flex:none}
+.mapwrap{margin-top:18px;border-top:1px solid var(--line);padding-top:6px}
+.mapwrap>summary{font-size:13px;font-weight:600;color:var(--primary);cursor:pointer;list-style:none;padding:10px 0}
+.mapwrap>summary::-webkit-details-marker{display:none}
+/* iteratia 1 Secretara: notite + brief */
+.notecard{display:flex;align-items:flex-start;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:9px;box-shadow:var(--shadow)}
+.notecard .nt{flex:1;min-width:0}
+.notecard .ntx{font-size:14px;color:var(--ink);line-height:1.5;white-space:pre-wrap;word-break:break-word}
+.notecard .ndate{font-size:11px;color:var(--muted);margin-top:4px}
+.notecard .x{background:none;border:0;color:var(--muted);font-size:18px;cursor:pointer;line-height:1;min-height:44px;min-width:30px}
+.brief{background:var(--primary-soft);border:1px solid var(--line);border-radius:14px;margin-bottom:12px}
+.brief>summary{list-style:none;cursor:pointer;font-weight:700;font-size:13px;color:var(--primary-dim);padding:11px 14px}
+.brief>summary::-webkit-details-marker{display:none}
+.brief .bbody{padding:0 14px 13px;font-size:13px;color:var(--ink2);line-height:1.6}
+.brief .bl{margin:3px 0}.brief .bl b{color:var(--ink);font-weight:600}
+/* iteratia 2 Secretara: intalniri */
+.mform{background:var(--card2);border:1px solid var(--line);border-radius:14px;margin-bottom:12px}
+.mform>summary{list-style:none;cursor:pointer;font-weight:700;font-size:13px;color:var(--primary-dim);padding:11px 14px}
+.mform>summary::-webkit-details-marker{display:none}
+.mfbody{padding:0 14px 14px;display:flex;flex-direction:column}
+.mfl{font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin:9px 0 4px}
+.meetcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin-bottom:10px;box-shadow:var(--shadow)}
+.meetcard .mtop2{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.meetcard .mw{font-weight:700;font-size:14px;color:var(--ink)}
+.meetcard .mwho{font-size:12px;color:var(--muted);white-space:nowrap}
+.meetcard .mplace{font-size:12.5px;color:var(--ink2);margin-top:5px}
+.meetcard .adock,.meetcard .waiting,.meetcard .shield{margin-top:11px}
+.calrow{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+.calrow .btn{flex:1;min-width:118px;font-size:12px}
+/* iteratia 3 Secretara: task-uri + badge */
+.taskcard{display:flex;align-items:flex-start;gap:11px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:9px;box-shadow:var(--shadow)}
+.taskcard.done{opacity:.6}
+.taskcard.done .ttx{text-decoration:line-through;color:var(--muted)}
+.tcheck{flex:none;width:24px;height:24px;margin-top:1px;border-radius:7px;border:2px solid var(--line2);background:var(--card);color:#fff;cursor:pointer;display:grid;place-items:center;font-size:13px;font-weight:700}
+.tcheck.on{background:var(--success);border-color:var(--success)}
+.taskcard .ti{flex:1;min-width:0}
+.taskcard .ttx{font-size:14px;color:var(--ink);line-height:1.45;word-break:break-word}
+.taskcard .tdue{font-size:11.5px;color:var(--muted);margin-top:3px}
+.taskcard .tdue.over{color:var(--warn);font-weight:600}
+.taskcard .x{background:none;border:0;color:var(--muted);font-size:18px;cursor:pointer;min-height:44px;min-width:28px}
+.navbadge{position:absolute;top:7px;left:calc(50% + 7px);min-width:16px;height:16px;padding:0 4px;border-radius:9px;background:var(--warn);color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center;line-height:1}
+/* backlog #2: urmatoarea intalnire pe Acasa */
+.nextmeet{background:linear-gradient(135deg,var(--primary-soft),transparent);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-top:14px;box-shadow:var(--shadow)}
+.nextmeet .nmlabel{font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--primary-dim);font-weight:700}
+.nextmeet .nmwhen{font-family:var(--sans);font-size:19px;font-weight:800;color:var(--ink);letter-spacing:-.3px;margin-top:4px}
+.nextmeet .nmwho{font-size:13px;color:var(--ink2);margin-top:2px}
+/* backlog #14: pulse retea compact */
+.netpulse{margin-top:14px}
+.netpulse .npr{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;color:var(--ink2);margin-bottom:5px}
+.netpulse .npv{color:var(--primary-dim);font-weight:600}
+/* backlog #4: follow-up cu 3 sabloane */
+.fudet{margin-top:9px}
+.fudet>summary{list-style:none;cursor:pointer;font-size:12.5px;font-weight:600;color:var(--primary);padding:4px 0}
+.fudet>summary::-webkit-details-marker{display:none}
+.furow{display:flex;flex-wrap:wrap;gap:7px;margin-top:7px}
+.furow .btn{flex:1;min-width:104px;font-size:12px}
+/* backlog #6: cautare globala */
+.searchov{position:fixed;inset:0;z-index:55;background:var(--bg);display:none;flex-direction:column}
+.searchov.on{display:flex}
+.searchov-h{display:flex;align-items:center;gap:10px;padding:16px 18px;border-bottom:1px solid var(--line);background:var(--card)}
+.searchov-h .ic{color:var(--muted);font-size:17px}
+.searchov-h input{flex:1;background:none;border:0;font-size:16px;color:var(--ink);padding:6px 0}
+.searchov-h .sclose{background:none;border:0;color:var(--muted);font-size:26px;cursor:pointer;min-width:44px;min-height:44px}
+.searchov-res{flex:1;overflow:auto;padding:10px 14px;max-width:440px;width:100%;margin:0 auto}
+.srhead{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);font-weight:700;margin:14px 4px 6px}
+.srrow{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:12px;cursor:pointer}
+.srrow:hover{background:var(--card2)}
+.srrow .sric{width:34px;height:34px;display:grid;place-items:center;font-size:18px;flex:none}
+.srrow .sri{flex:1;min-width:0}
+.srrow .srn{font-size:14px;color:var(--ink);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srrow .srm{font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+  <div class="htop">
+    <div class="brand"><div class="mk">C</div><div class="t">Cercul EIE<small>Network Capital</small></div></div>
+    <div class="hright">
+      <button class="themebtn" id="searchBtn" title="Cauta" aria-label="Cauta global" onclick="openSearch()">⌕</button>
+      <button class="themebtn" id="lockBtnHd" title="Blocheaza acum (sterge cheia din memorie)" onclick="lockNow()">🔒</button>
+      <button class="themebtn" id="themeBtn" title="Comuta tema" onclick="toggleTheme()">☾</button>
+      <select class="memsel" id="member"></select>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ACASA -->
+  <section id="acasa" class="view on">
+    <div class="digest"><div class="e">Azi</div><div class="g" id="digG"></div><p id="digP"></p></div>
+    <div id="nextMeet"></div>
+    <div class="statstrip" id="kpis"></div>
+    <div id="netpulse"></div>
+    <div class="sec">Persoane de contactat<a data-go="potriviri">toate →</a></div>
+    <div id="topMatches"></div>
+    <div class="sec">Conexiuni recente<a data-go="retea">reteaua →</a></div>
+    <div class="ledger" id="ledger"></div>
+  </section>
+
+  <!-- POTRIVIRI -->
+  <section id="potriviri" class="view">
+    <div class="eyebrow">Pentru tine</div><h2 class="title">Cine merita contactat</h2>
+    <p class="sub">Oameni din cerc cu care ai legaturi relevante. Identitatea se dezvaluie cu acordul ambelor parti.</p>
+    <div class="filters" id="matchFilters"></div>
+    <div id="matchList"></div>
+  </section>
+
+  <!-- RETEA -->
+  <section id="retea" class="view">
+    <div class="eyebrow">Reteaua ta</div><h2 class="title">Conexiunile tale</h2>
+    <p class="sub">Oamenii cu care te-ai conectat. O conexiune apare doar dupa ce ambele parti accepta o introducere.</p>
+    <div class="searchbar"><span class="ic">⌕</span><input id="netSearch" placeholder="Cauta o persoana…" aria-label="Cauta in retea"></div>
+    <div id="connList"></div>
+    <details class="mapwrap" id="mapDet"><summary>Vezi harta retelei ⌄</summary>
+      <p class="sub" style="margin-top:8px">Fiecare bulina e un membru; tu esti evidentiat in centru. O <b>linie</b> intre doua buline inseamna o <b>conexiune confirmata</b> (ambele parti au acceptat). Trage nodurile ca sa explorezi.</p>
+      <div class="netwrap"><div id="netHost"></div></div></details>
+  </section>
+
+  <!-- SECRETARA AI -->
+  <section id="secretara" class="view">
+    <div class="eyebrow">Asistent</div><h2 class="title">Secretara ta</h2>
+    <p class="sub">Intalniri, notite si pregatire — intr-un singur loc.</p>
+    <div class="sec">Intalniri</div>
+    <p class="sub">Programezi din conversatia cu o conexiune; se confirma doar cand ambele parti accepta. La cele confirmate poti adauga in Google Calendar / descarca .ics / trimite email — <b>tu</b> alegi sa predai datele, aplicatia nu trimite nimic singura.</p>
+    <div id="meetList"></div>
+    <div class="sec" style="margin-top:26px">Noteaza dupa o intalnire</div>
+    <p class="sub">Scrie cu cuvintele tale ce ai discutat. Iti notez singur ce cauti si ce oferi, si caut potriviri.</p>
+    <textarea id="dictText" rows="5" placeholder="ex: Am vorbit cu un investitor interesat de energie. Eu caut un contabil bun si ofer spatii comerciale."></textarea>
+    <div style="margin-top:10px"><button class="btn gold" id="dictBtn" onclick="dicteaza()">Noteaza si cauta potriviri</button></div>
+    <div id="dictRes" style="margin-top:14px"></div>
+    <div class="sec" style="margin-top:26px">De facut</div>
+    <p class="sub">Sarcini cu termen. Cele scadente apar evidentiate, iar numarul lor apare pe tab-ul Secretara.</p>
+    <div class="addrow"><input id="taskText" placeholder="ex: Trimite oferta lui Bogdan" aria-label="Task nou" onkeydown="if(event.key==='Enter')addTask()"><input id="taskDue" type="date" style="max-width:144px" aria-label="Termen"><button class="btn gold sm" data-act="addtask" aria-label="Adauga task">+</button></div>
+    <div class="filters" id="taskFilters" style="margin-top:12px">
+      <button class="chip" data-act="tfilter" data-f="all">Toate</button>
+      <button class="chip on" data-act="tfilter" data-f="active">Active</button>
+      <button class="chip" data-act="tfilter" data-f="due">Scadente</button></div>
+    <div id="taskList" style="margin-top:6px"></div>
+    <div class="sec" style="margin-top:26px">Jurnalul tau</div>
+    <p class="sub">Idei, notite si lucruri de tinut minte. Cauta-le oricand; brief-ul de intalnire le foloseste.</p>
+    <div class="searchbar"><span class="ic">⌕</span><input id="noteSearch" placeholder="Cauta in notite…" aria-label="Cauta in notite"></div>
+    <div class="addrow"><input id="noteText" placeholder="Scrie o idee… foloseste #tag-uri (ex: #client)" aria-label="Notita noua" onkeydown="if(event.key==='Enter')addNote()"><button class="btn gold sm" data-act="addnote" aria-label="Adauga notita">+</button></div>
+    <div class="filters" id="noteFilters" style="margin-top:10px"></div>
+    <div id="notesList" style="margin-top:8px"></div>
+  </section>
+
+  <!-- PROFIL -->
+  <section id="profil" class="view">
+    <div id="phead" class="panel" style="margin-top:0"></div>
+    <div class="panel"><h3>Ce ofer <span class="badge vis">vizibil</span></h3><div id="oferList"></div>
+      <div class="addrow"><input id="oferText" placeholder="ce oferi…"><button class="btn gold sm" onclick="addItem('ofer')">+</button></div></div>
+    <div class="panel"><h3>Ce caut <span class="badge priv">privat</span></h3><div id="cautList"></div>
+      <div class="addrow"><input id="cautText" placeholder="ce cauti…"><button class="btn gold sm" onclick="addItem('caut')">+</button></div></div>
+    <div class="panel"><h3>Jurnal de activitate <span class="badge priv">audit</span></h3>
+      <p style="font-size:11px;color:var(--muted);margin:-6px 0 8px">Read-only · fiecare actiune e inregistrata cu marca de timp (conformitate).</p>
+      <div class="audit" id="auditList"></div></div>
+    <div class="panel"><h3>Confidentialitate <span class="badge vis">Local-Only</span></h3>
+      <p style="font-size:12px;color:var(--ink2);line-height:1.55">Datele tale traiesc <b>doar in acest browser</b>, criptate la repaus cu <b>AES-GCM</b>. Cheia se deriveaza din parola ta (<b>PBKDF2</b>, 150k iteratii) cu un <b>salt unic per utilizator</b>, generat la prima rulare si stocat local (salt-ul nu e secret — previne rainbow tables); <b>cheia ramane strict in RAM</b> si nu se scrie niciodata pe disc. La blocare cheia e <b>eliberata din memorie (best-effort)</b> — JS nu garanteaza zeroing imediat al heap-ului; datele pe disc raman criptate si se redeschid doar cu parola. Scrierea e tranzactionala (temp→validare→commit). Integritate: checksum <b>SHA-256</b>; Trust Ledger pe lant <b>HMAC-SHA256</b> cheiat de parola. „Ce caut” se dezvaluie <b>doar dupa dublu consimtamant</b>.</p>
+      <p style="font-size:11px;color:var(--muted);line-height:1.5;margin-top:8px">Securitatea finala depinde de <b>taria parolei tale</b>: la un dump complet al stocarii, un atacator are doar salt+ciphertext (nu si parola) si trebuie sa o sparga prin brute-force incetinit de PBKDF2. Foloseste o parola lunga (ideal dintr-un manager de parole). Acest prototip nu adauga un „pepper” extern (n-ar avea unde, fiind Local-Only fara server).</p>
+      <p style="font-size:11px;color:var(--warn);line-height:1.5;margin-top:8px">⚠ Prototip de cercetare, client-side: un script malitios pe aceeasi origine (XSS/extensie) are oricum acces direct la memorie cat sesiunea e deblocata — de aceea apararea reala e auto-lock-ul si parola, nu obscuritatea. Declansatoarele de matching sunt mascate de o durata fixa de procesare (anti timing). <b>Nu introduce date cu adevarat sensibile</b>; tu esti responsabil de backup.</p>
+      <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn ghost sm" onclick="exportData()">⤓ Exporta (JSON)</button>
+        <button class="btn ghost sm" data-act="importbtn">⤒ Importa (JSON)</button>
+        <input type="file" id="importFile" accept="application/json,.json" style="display:none" onchange="handleImport(event)" aria-label="Fisier de import">
+      </div></div>
+    <div class="panel"><h3>Preferinte <span class="badge vis">acces</span></h3>
+      <div class="toggle"><span>Reduce animatiile <span style="color:var(--muted);font-size:11px">(accesibilitate)</span></span>
+        <div class="sw" id="rmSw" role="switch" tabindex="0" aria-label="Reduce animatiile" onclick="toggleRM()"><i></i></div></div>
+      <div class="toggle"><span>Date absolute <span style="color:var(--muted);font-size:11px">(15 iun, nu „acum/2h”)</span></span>
+        <div class="sw" id="daSw" role="switch" tabindex="0" aria-label="Date absolute" onclick="toggleDateAbs()"><i></i></div></div></div>
+  </section>
+</main>
+
+<nav><div class="navin">
+  <button class="tab on" data-v="acasa"><span class="ic">◈</span>Acasa</button>
+  <button class="tab" data-v="potriviri"><span class="ic">✦</span>Potriviri</button>
+  <button class="tab" data-v="retea"><span class="ic">⬡</span>Reteaua</button>
+  <button class="tab" data-v="secretara"><span class="ic">✎</span>Secretara</button>
+  <button class="tab" data-v="profil"><span class="ic">◷</span>Profil</button>
+</div></nav>
+</div>
+
+<!-- LOCK / SETUP (cheie derivata din parola, doar in RAM) -->
+<div class="ob" id="lock">
+  <div class="mk">C</div>
+  <h1 id="lockTitle">Deblocheaza Cercul</h1>
+  <div class="lead" id="lockLead"></div>
+  <div class="step on" style="max-width:340px;width:100%">
+    <label>Parola de sesiune</label>
+    <input id="lockPass" type="password" placeholder="parola ta" autocomplete="off"
+      onkeydown="if(event.key==='Enter')lockSubmit()">
+    <div id="lockErr" style="color:var(--warn);font-size:12px;margin:-8px 0 12px;display:none"></div>
+  </div>
+  <div class="nav2" style="justify-content:flex-end"><button class="btn gold" id="lockBtn" onclick="lockSubmit()">Deblocheaza →</button></div>
+  <button class="skip" id="lockReset" onclick="lockReset()" style="display:none">Am uitat parola — reseteaza (pastreaza backup criptat)</button>
+  <p style="font-size:11px;color:var(--muted);max-width:320px;margin-top:16px">Cheia AES-GCM se deriveaza din parola (PBKDF2, 150k iteratii) si nu se salveaza niciodata pe disc. Prototip Local-Only: nu introduce date critice.</p>
+</div>
+
+<!-- ONBOARDING WIZARD -->
+<div class="ob" id="ob">
+  <div class="mk">C</div>
+  <h1>Bun venit in Cerc</h1>
+  <div class="lead">Trei intrebari scurte si esti inauntru. Iti pregatim profilul si primele potriviri din prima secunda.</div>
+  <div class="step on" data-s="0"><label>Cum te numim?</label><input id="obName" placeholder="Nume si prenume" autocomplete="off">
+    <label>Domeniul tau</label><input id="obInd" placeholder="ex: Imobiliare, IT, Energie…" autocomplete="off"></div>
+  <div class="step" data-s="1"><label>Ce oferi cercului?</label><input id="obOff" placeholder="ex: spatii comerciale in centru" autocomplete="off"></div>
+  <div class="step" data-s="2"><label>Ce cauti?</label><input id="obSeek" placeholder="ex: un investitor pentru un proiect" autocomplete="off"></div>
+  <div class="step" data-s="3"><label>O prima notita sau idee (optional)</label><input id="obNote" placeholder="ex: De sunat partenerul saptamana viitoare" autocomplete="off"></div>
+  <div class="nav2"><div class="dots" id="obDots"><i class="on"></i><i></i><i></i><i></i></div>
+    <button class="btn gold" id="obNext" onclick="obNext()">Continua →</button></div>
+  <button class="skip" onclick="obSkip()">Doar explorez deocamdata</button>
+</div>
+
+<div class="overlay" id="overlay"><div class="modal">
+  <div class="h"><div><div class="t" id="mTitle"></div><div class="s" id="mSub"></div></div><button onclick="closeModal()">×</button></div>
+  <div class="msgs" id="mMsgs"></div>
+  <div class="cinput"><input id="mInput" placeholder="Scrie un mesaj..."><button class="btn gold sm" onclick="sendMsg()">→</button></div>
+</div></div>
+<div class="searchov" id="searchOv">
+  <div class="searchov-h">
+    <span class="ic">⌕</span>
+    <input id="globalSearch" placeholder="Cauta persoane, notite, task-uri…" aria-label="Cautare globala" onkeydown="if(event.key==='Escape')closeSearch()">
+    <button class="sclose" onclick="closeSearch()" aria-label="Inchide">×</button>
+  </div>
+  <div id="searchRes" class="searchov-res"></div>
+</div>
+<div class="procmask" id="procMask" role="status" aria-live="polite"><span class="spin"></span> Procesez…</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const SEED=[["Ana Popescu","Director, Popescu Imobiliare","Imobiliare",92],["Bogdan Marin","Fondator, Marin Energy","Energie",88],["Cristina Ilie","CEO, Excavari Ilie","Constructii",90],["Darius Enache","Investitor privat","Finante",95],["Elena Voicu","Owner, Voicu Logistic","Transport",84],["Florin Dobre","Antreprenor, AgriFarm","Agricultura",80],["Gabriela Stan","Avocat, Stan & Asociatii","Juridic",93],["Horia Lungu","Director, NordSoft","IT",87],["Irina Pavel","Contabil-sef, FinPro","Finante",89],["Janos Kovacs","Importator, Kovacs Trade","Comert",78],["Liviu Toma","Dezvoltator, Toma Construct","Constructii",85],["Maria Radu","Marketing, Radu Media","Marketing",82],["Nicolae Barbu","Producator, Barbu Mobila","Productie",81],["Oana Dinu","HR, TalentHub","HR",86],["Paul Georgescu","Broker, AsigPlus","Asigurari",83],["Raluca Neagu","Owner, Neagu Catering","HoReCa",79],["Sorin Apostol","Inginer, Apostol Instalatii","Constructii",84],["Teodora Mihai","Designer, Mihai Studio","Creative",88],["Victor Stoica","Distribuitor, Stoica Auto","Auto",80],["Bianca Lazar","Fondator, Lazar Cosmetics","Productie",85]];
+const OFF={0:[["Spatii comerciale de inchiriat in centru","profil"],["Teren intravilan langa centura","nota 4 mai"]],1:[["Cariera de carbune in zona Gorj","nota 3 martie"],["Contracte furnizare energie firme","profil"]],2:[["Utilaje de excavat in Brasov","audio 12 ian"]],3:[["Capital pentru investitii energie si imobiliare","profil"]],4:[["Flota transport marfa national si UE","profil"]],5:[["Cereale en-gros la pret de producator","profil"]],6:[["Consultanta juridica M&A si contracte","profil"]],7:[["Dezvoltare software si AI la comanda","profil"]],8:[["Contabilitate si fiscalitate firme","profil"]],9:[["Import produse din Asia, logistica","profil"]],10:[["Antrepriza constructii rezidentiale","profil"]],11:[["Campanii marketing si productie video","profil"]],12:[["Mobilier la comanda HoReCa si birouri","profil"]],13:[["Recrutare IT si management","profil"]],14:[["Asigurari de firma si flote","profil"]],15:[["Catering evenimente corporate","profil"]],16:[["Instalatii electrice industriale","profil"]],17:[["Branding premium si identitate","profil"]],18:[["Distributie piese auto","profil"]],19:[["Productie cosmetice private-label","profil"]]};
+const SEEK={0:[["Investitor pentru proiect imobiliar","dictare"],["Furnizor de carbune pentru centrala","nota 2 mai"]],1:[["Investitor pentru proiect energetic","apel"],["Transport marfa agabaritic","profil"]],2:[["Contabil bun pentru firma","nota"],["Asigurare pentru flota utilaje","profil"]],3:[["Oportunitati in energie si agricultura","profil"]],4:[["Spatii de depozitare in vest","profil"]],5:[["Utilaje agricole si excavatoare","apel"]],6:[["Clienti firme pentru retainer juridic","profil"]],7:[["Investitor pentru produs SaaS","profil"]],8:[["Clienti noi pentru contabilitate","profil"]],9:[["Spatii de depozitare Bucuresti","profil"]],10:[["Teren pentru dezvoltare","profil"],["Materiale de constructii en-gros","nota"]],11:[["Clienti corporate","profil"]],12:[["Distribuitor mobilier","profil"]],13:[["Firme care recruteaza","profil"]],14:[["Firme cu flote de asigurat","profil"]],15:[["Spatii pentru evenimente","profil"]],16:[["Proiecte cu instalatii","profil"]],17:[["Clienti pentru rebranding","profil"]],18:[["Firme cu flote auto","profil"]],19:[["Distribuitor cosmetice si showroom","nota"]]};
+const COLORS=["#6366F1","#10B981","#F59E0B","#8B5CF6","#EC4899","#0EA5E9","#14B8A6","#F97316","#EF4444","#22C55E"];
+const STOP=new Set("si sau de la in un o cu pe pentru din ca care este are am ai vreau caut ofer cineva zona bun buna nou noua a al ale lui langa".split(" "));
+const KEY="cercul_eie_v5",TKEY="cercul_theme",SKEY="cercul_salt";
+let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false,MATCHFILTER="all",NOTEFILTER="all";
+// suprascrie cu zerouri bufferele pe care le controlam (audit s5r #1). CryptoKey-urile sunt
+// non-extractabile/opace (WebCrypto nu expune heap-ul lor) -> le eliberam pt. GC; parolele sunt
+// string-uri imutabile in JS si nu pot fi zeroizate — limitare documentata, nu ascunsa.
+function wipe(){try{if(SALTBUF){SALTBUF.fill(0);SALTBUF=null;}}catch(_){}}
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+/* ===== constructor DOM sigur — ZERO innerHTML, totul prin createElement/textContent (audit s5r2 #1) ===== */
+function h(tag,props,...kids){const e=document.createElement(tag);
+  if(props)for(const k in props){const v=props[k];if(v==null||v===false)continue;
+    if(k==="class")e.className=v;
+    else if(k==="text")e.textContent=v;                       // text de utilizator -> textContent (fara markup)
+    else if(k.slice(0,2)==="on"&&typeof v==="function")e.addEventListener(k.slice(2),v);
+    else if(k==="style"&&typeof v==="object")Object.assign(e.style,v);
+    else e.setAttribute(k,v);}
+  add(e,kids);return e;}
+function svgEl(tag,props,...kids){const e=document.createElementNS("http://www.w3.org/2000/svg",tag);
+  if(props)for(const k in props){if(props[k]!=null)e.setAttribute(k,props[k]);}
+  add(e,kids);return e;}
+function add(e,kids){for(const k of kids.flat(9)){if(k==null||k===false||k==="")continue;
+  e.append(k&&k.nodeType?k:document.createTextNode(String(k)));}}
+function setKids(el,...kids){if(el){el.replaceChildren();add(el,kids);}} // inlocuieste continutul fara innerHTML
+const esc=s=>(s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const svgSafe=s=>String(s||"").replace(/[^\p{L}\p{N}\s.\-]/gu,"").slice(0,40); // whitelist pt. SVG (audit R3 #3)
+// sanitizare RECURSIVA defense-in-depth pe SVG: elimina foreignObject/script + orice atribut on* (audit s5 #3)
+function sanitizeSVG(root){if(!root)return;root.querySelectorAll("foreignObject,script,a").forEach(n=>n.remove());
+  root.querySelectorAll("*").forEach(el=>{for(const a of [...el.attributes])if(/^on/i.test(a.name)||/^(href|xlink:href)$/i.test(a.name))el.removeAttribute(a.name);});}
+const ini=n=>{const p=n.trim().split(/\s+/);return((p[0][0]||"?")+(p[1]?p[1][0]:"")).toUpperCase();};
+const today=()=>new Date().toISOString().slice(0,10);
+const cssv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+let DATEABS=false;
+function relTime(t){if(DATEABS){try{return new Date(t).toLocaleDateString("ro-RO",{day:"numeric",month:"short"})+" "+new Date(t).toLocaleTimeString("ro-RO",{hour:"2-digit",minute:"2-digit"});}catch(_){}}
+  const s=(Date.now()-t)/1000;if(s<60)return"acum";if(s<3600)return Math.floor(s/60)+"m";if(s<86400)return Math.floor(s/3600)+"h";return Math.floor(s/86400)+"z";}
+function applyDateAbs(){const sw=$("#daSw");if(sw){sw.classList.toggle("on",DATEABS);sw.setAttribute("aria-checked",DATEABS);}}
+function toggleDateAbs(){DATEABS=!DATEABS;localStorage.setItem("cercul_dateabs",DATEABS?"1":"0");applyDateAbs();if(VIEW)render();}
+/* ---- iteratia 3: motion, count-up, hash, tranzitii ---- */
+let RM=false;
+const anim=()=>!RM&&!matchMedia("(prefers-reduced-motion: reduce)").matches;
+function applyRM(){document.body.classList.toggle("reduce-motion",RM);const sw=$("#rmSw");if(sw){sw.classList.toggle("on",RM);sw.setAttribute("aria-checked",RM);}}
+function toggleRM(){RM=!RM;localStorage.setItem("cercul_rm",RM?"1":"0");applyRM();if(VIEW)render();}
+function countUp(el,target,suffix){if(!el)return;target=+target||0;suffix=suffix||"";
+  if(!anim()){el.textContent=target+suffix;return;}
+  const t0=performance.now(),dur=750;
+  (function step(t){const k=Math.min(1,(t-t0)/dur);el.textContent=Math.round(target*(1-Math.pow(1-k,3)))+suffix;if(k<1)requestAnimationFrame(step);})(t0);}
+async function shaHex(s){const h=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return [...new Uint8Array(h)].map(b=>b.toString(16).padStart(2,"0")).join("");}
+function transition(fn){if(anim()&&document.startViewTransition){try{document.startViewTransition(fn);}catch(e){fn();}}else fn();}
+function donut(score){score=Math.max(0,Math.min(100,+score||0));const d=h("div",{class:"donut"},h("span",{text:String(score)}));d.style.setProperty("--p",score);return d;}
+function sparkline(vals){const w=300,hh=34,mx=Math.max(...vals,1),mn=Math.min(...vals,0),rg=(mx-mn)||1;
+  const pts=vals.map((v,i)=>[i/(vals.length-1)*w,hh-4-((v-mn)/rg)*(hh-8)]);
+  const line=pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" ");
+  const area=line+` L ${w} ${hh} L 0 ${hh} Z`;
+  return svgEl("svg",{class:"spark",viewBox:`0 0 ${w} ${hh}`,preserveAspectRatio:"none","aria-hidden":"true"},
+    svgEl("path",{class:"area",d:area}),svgEl("path",{class:"line",d:line}));}
+/* ==== criptare la repaus: AES-GCM cu cheie derivata PBKDF2 din parola, DOAR in RAM (audit R3 #1) ==== */
+const b64=b=>btoa(String.fromCharCode(...new Uint8Array(b))),unb64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+const clean=s=>String(s==null?"":s).replace(/[\x00-\x1f\x7f]/g,"").replace(/[<>]/g,"").slice(0,400); // sanitizare input
+async function deriveKey(pass,salt){
+  const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(pass),"PBKDF2",false,["deriveKey"]);
+  return crypto.subtle.deriveKey({name:"PBKDF2",salt,iterations:150000,hash:"SHA-256"},base,
+    {name:"AES-GCM",length:256},false,["encrypt","decrypt"]); } // extractable:false -> cheia nu poate fi exportata
+// cheie HMAC separata, tot derivata din parola (PBKDF2, info distinct) — chei NU se stocheaza (audit s4 #3)
+async function deriveHMAC(pass,salt){
+  const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(pass+"|ledger-hmac-v1"),"PBKDF2",false,["deriveKey"]);
+  return crypto.subtle.deriveKey({name:"PBKDF2",salt,iterations:150000,hash:"SHA-256"},base,
+    {name:"HMAC",hash:"SHA-256"},false,["sign"]); }
+async function hmacHex(msg){if(!HK)return"";const sig=await crypto.subtle.sign("HMAC",HK,new TextEncoder().encode(msg));
+  return [...new Uint8Array(sig)].map(b=>b.toString(16).padStart(2,"0")).join("");}
+async function sha(str){return b64(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(str)));}
+async function encJSON(o){const iv=crypto.getRandomValues(new Uint8Array(12)),js=JSON.stringify(o),sum=await sha(js);
+  const ct=await crypto.subtle.encrypt({name:"AES-GCM",iv},CK,new TextEncoder().encode(JSON.stringify({d:o,s:sum})));
+  return JSON.stringify({v:4,iv:b64(iv),ct:b64(ct)});}
+async function decJSON(blob){const o=JSON.parse(blob);if(!o||!o.ct||!o.iv)throw new Error("format");
+  const pt=await crypto.subtle.decrypt({name:"AES-GCM",iv:unb64(o.iv)},CK,unb64(o.ct));
+  const w=JSON.parse(new TextDecoder().decode(pt));
+  if(await sha(JSON.stringify(w.d))!==w.s)throw new Error("checksum"); // integritate SHA-256 (audit R3 #2)
+  return w.d;}
+/* ---- validare schema + sanitizare la incarcare (audit R1 #4 / R3) ---- */
+function validDB(d){if(!d||typeof d!=="object")return false;
+  for(const f of ["members","items","matches","messages"])if(!Array.isArray(d[f]))return false;
+  // filtram intrarile null/alterate inainte de procesare (audit s4 #4)
+  d.members=d.members.filter(m=>m&&typeof m==="object"&&m.id!=null);
+  d.items=d.items.filter(i=>i&&typeof i==="object"&&i.id!=null);
+  d.matches=d.matches.filter(m=>m&&typeof m==="object"&&m.id!=null);
+  d.messages=d.messages.filter(x=>x&&typeof x==="object");
+  if(!Array.isArray(d.notes))d.notes=[];
+  d.notes=d.notes.filter(n=>n&&typeof n==="object"&&n.id!=null);
+  d.notes.forEach(n=>{n.text=clean(n.text);n.member_id=+n.member_id;n.t=+n.t||Date.now();});
+  if(!Array.isArray(d.meetings))d.meetings=[];
+  d.meetings=d.meetings.filter(x=>x&&typeof x==="object"&&x.id!=null);
+  d.meetings.forEach(x=>{x.a=+x.a;x.b=+x.b;x.place=clean(x.place||"");x.when=clean(x.when||"").slice(0,16);
+    if(["propus","confirmat","refuzat"].indexOf(x.status)<0)x.status="propus";});
+  if(!Array.isArray(d.tasks))d.tasks=[];
+  d.tasks=d.tasks.filter(t=>t&&typeof t==="object"&&t.id!=null);
+  d.tasks.forEach(t=>{t.text=clean(t.text);t.member_id=+t.member_id;t.done=t.done?1:0;t.due=clean(t.due||"").slice(0,10);t.t=+t.t||Date.now();});
+  if(!d.members.length)return false;
+  d.members.forEach(m=>{m.trust=Math.max(0,Math.min(100,+m.trust||0));m.name=clean(m.name).slice(0,80)||"?";m.id=+m.id;m.industry=clean(m.industry||"");m.role=clean(m.role||"Membru");});
+  d.items.forEach(i=>{i.text=clean(i.text);i.visible=i.visible?1:0;i.member_id=+i.member_id;});
+  if(typeof d.seq!=="number"||d.seq<1)d.seq=Math.max(d.members.length,...d.members.map(m=>m.id))+1;
+  if(!Array.isArray(d.audit))d.audit=[];return true;}
+let saveTimer=null;
+// commit tranzactional: scrie in key temporara -> valideaza roundtrip -> suprascrie key principal (audit s5 cond.1)
+async function commit(){if(!CK||!DB)return;let blob;
+  try{blob=await encJSON(DB);}catch(e){console.warn("criptare esuata",e);return;}
+  try{
+    localStorage.setItem(KEY+"_tmp",blob);          // 1. scrie temporar
+    await decJSON(localStorage.getItem(KEY+"_tmp")); // 2. valideaza roundtrip
+    localStorage.setItem(KEY,blob);                  // 3. commit atomic
+  }catch(e){
+    // rollback: NU atingem key principal -> datele vechi (valide) raman intacte (audit s5r #2)
+    if(e&&e.name==="QuotaExceededError")toast("Stocare plina — modificarea nu a fost salvata, datele vechi sunt pastrate.");
+    else console.warn("commit esuat (rollback)",e);
+  }finally{try{localStorage.removeItem(KEY+"_tmp");}catch(_){}}}
+function save(){if(!CK)return;clearTimeout(saveTimer);saveTimer=setTimeout(commit,120);}
+async function flush(){return commit();}
+function backupRaw(){const raw=localStorage.getItem(KEY);if(raw)localStorage.setItem(KEY+"_backup_"+Date.now(),raw);} // anti-pierdere (audit R3 #4)
+function exportData(){try{const blob=new Blob([JSON.stringify(DB,null,2)],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="cercul-export-"+today()+".json";a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),2000);logA("Export date (JSON) pentru backup");toast("Date exportate (JSON)");}catch(e){toast("Export esuat");}}
+function logA(action){if(!DB.audit)DB.audit=[];DB.audit.unshift({t:Date.now(),me:ME,a:clean(action).slice(0,160)});if(DB.audit.length>60)DB.audit.pop();}
+// backlog #8: import cu validare de schema + confirmare (anti-corupere, cu backup)
+function importData(){const inp=$("#importFile");if(inp)inp.click();}
+function handleImport(ev){const f=ev.target.files&&ev.target.files[0];if(!f){return;}
+  const r=new FileReader();
+  r.onload=()=>{try{const d=JSON.parse(String(r.result));
+    if(!validDB(d)){toast("Fisier invalid sau schema gresita");return;}
+    if(!confirm("Inlocuiesti TOATE datele actuale cu cele din fisier? Datele curente se pierd (se pastreaza un backup criptat).")){return;}
+    backupRaw();DB=d;ME=null;loadMembers();save();logA("Import date din fisier JSON");setView("acasa");toast("Date importate cu succes");
+  }catch(e){console.warn("import",e);toast("Import esuat — fisier invalid");}finally{try{ev.target.value="";}catch(_){}}};
+  r.onerror=()=>toast("Nu am putut citi fisierul");
+  r.readAsText(f);}
+
+function seed(){
+  const d={members:[],items:[],matches:[],messages:[],audit:[],notes:[],meetings:[],tasks:[],seq:1};
+  SEED.forEach((m,i)=>d.members.push({id:i+1,name:m[0],role:m[1],industry:m[2],trust:m[3],color:COLORS[i%COLORS.length]}));
+  d.seq=d.members.length+1;
+  const ai=(m,k,arr)=>(arr||[]).forEach(([t,s])=>d.items.push({id:d.seq++,member_id:m,kind:k,text:t,visible:k==="ofer"?1:0,source:s}));
+  SEED.forEach((_,i)=>{ai(i+1,"ofer",OFF[i]);ai(i+1,"caut",SEEK[i]);});
+  DB=d;buildIDF();runMatching();[[1,2],[3,1],[5,4],[2,3],[7,3],[3,5]].forEach(([a,b])=>preConnect(a,b));save();return d;
+}
+function preConnect(a,b){const m=DB.matches.find(x=>(x.offer_member===a&&x.seek_member===b)||(x.offer_member===b&&x.seek_member===a));if(m){m.offer_consent=1;m.seek_consent=1;m.status="conectat";if(!m.at)m.at=Date.now()-Math.floor(Math.random()*9+1)*864e5;if(!DB.messages.some(x=>x.match_id===m.id))ctx(m);}}
+function tok(t){return new Set((t.toLowerCase().match(/[a-z0-9]+/g)||[]).filter(w=>w.length>=3&&!STOP.has(w)));}
+function mem(id){return DB.members.find(m=>m.id===id);}
+function name(id){const m=mem(id);return m?m.name:"?";}
+
+/* ---- matching: TF-IDF + cosine similarity ---- */
+function buildIDF(){const docs=DB.items.map(i=>tok(i.text));const df={};docs.forEach(s=>s.forEach(w=>df[w]=(df[w]||0)+1));const N=docs.length||1;IDF={};for(const w in df)IDF[w]=Math.log(1+N/df[w]);}
+function vnorm(set){let s=0;for(const w of set){const v=IDF[w]||1;s+=v*v;}return Math.sqrt(s)||1;}
+function cosine(a,b){const common=[...a].filter(w=>b.has(w));let dot=0;for(const w of common){const v=IDF[w]||1;dot+=v*v;}return{cos:dot/(vnorm(a)*vnorm(b)),common};}
+function runMatching(){buildIDF();const ca=DB.items.filter(i=>i.kind==="caut"),of=DB.items.filter(i=>i.kind==="ofer"&&i.visible);
+  for(const s of ca)for(const o of of){if(o.member_id===s.member_id)continue;
+    const {cos,common}=cosine(tok(s.text),tok(o.text));if(!common.length)continue;
+    const ex=DB.matches.find(m=>m.offer_item===o.id&&m.seek_item===s.id);
+    const score=Math.max(52,Math.min(99,Math.round(55+cos*42+common.length*2)));
+    if(ex){ex.score=ex.status==="conectat"?ex.score:score;continue;}
+    DB.matches.push({id:DB.seq++,offer_item:o.id,seek_item:s.id,offer_member:o.member_id,seek_member:s.member_id,score,common,status:"propus",offer_consent:0,seek_consent:0});}
+  save();}
+function ctx(m){const o=DB.items.find(i=>i.id===m.offer_item),s=DB.items.find(i=>i.id===m.seek_item);
+  DB.messages.push({id:DB.seq++,match_id:m.id,sender:null,text:`Cercul v-a pus in legatura. ${name(m.seek_member)} cauta „${s.text}”, iar ${name(m.offer_member)} ofera „${o.text}”. Sursa: ${o.source}. Trust Score verificat.`});}
+function consent(mid,a){const m=DB.matches.find(x=>x.id===mid);if(!m||m.status==="conectat")return;
+  if(ME!==m.offer_member&&ME!==m.seek_member)return;
+  if(!a){m.status="respins";logA("Refuz potrivire");save();render();toast("Refuzat");return;}
+  // consimtamant ONEST: inregistreaza DOAR partea ta; conexiunea se deschide cand si cealalta parte confirma
+  if(ME===m.offer_member)m.offer_consent=1;else m.seek_consent=1;
+  logA("Consimtamant acordat pentru o potrivire");
+  if(m.offer_consent&&m.seek_consent)fin(m);
+  else toast("Acceptat — conexiunea se deschide cand si cealalta parte confirma");
+  save();render();}
+function fin(m){if(m.status==="conectat")return;m.status="conectat";m.at=Date.now();ctx(m);
+  const cel=mem(ME===m.offer_member?m.seek_member:m.offer_member);logA("Conexiune deschisa cu "+cel.name);
+  toast("✦ Conexiune deschisa cu "+cel.name.split(" ")[0]);}
+function myMatches(){return DB.matches.filter(m=>(m.offer_member===ME||m.seek_member===ME)&&m.status!=="respins").sort((a,b)=>b.score-a.score);}
+
+function setView(v){if(PROC){toast("Asteapta — Secretara AI proceseaza…");return;}
+  if(VIEW==="retea"&&v!=="retea")stopNet();
+  VIEW=v;$$(".tab").forEach(t=>t.classList.toggle("on",t.dataset.v===v));
+  transition(()=>{$$(".view").forEach(s=>s.classList.toggle("on",s.id===v));window.scrollTo(0,0);});
+  skeleton(v);setTimeout(render,anim()?170:0);}
+function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("div",{class:"sk l w80"}),h("div",{class:"sk l w40"}));}
+function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
+function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
+  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();setKids($("#matchList"),pipeline(myMatches().filter(matchIndOk)));}else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){renderMeetings();renderTasks();renderNotes();}else if(VIEW==="profil")prof();
+  updateBadges();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
+// backlog #7: empty-state ilustrat, consistent
+function estateBox(title,sub){return h("div",{class:"estate",style:{padding:"26px 20px"}},
+  svgEl("svg",{viewBox:"0 0 64 64",fill:"none",stroke:"currentColor","stroke-width":"2","aria-hidden":"true"},
+    svgEl("rect",{x:"13",y:"15",width:"38",height:"30",rx:"5"}),
+    svgEl("path",{d:"M13 25 H51","stroke-linecap":"round",opacity:".55"}),
+    svgEl("circle",{cx:"20",cy:"20",r:"1.6",fill:"currentColor"}),
+    svgEl("path",{d:"M20 53 H44","stroke-linecap":"round",opacity:".4"})),
+  h("div",{class:"t",text:title}),
+  sub?h("div",{style:{fontSize:"12px",marginTop:"4px"},text:sub}):null);}
+function emp(){return h("div",{class:"estate"},
+  svgEl("svg",{viewBox:"0 0 64 64",fill:"none",stroke:"currentColor","stroke-width":"2"},
+    svgEl("circle",{cx:27,cy:27,r:15}),svgEl("path",{d:"M38 38 L53 53","stroke-linecap":"round"}),
+    svgEl("path",{d:"M21 27 h12 M27 21 v12","stroke-linecap":"round",opacity:".5"})),
+  h("div",{class:"t",text:"Nicio potrivire inca"}),
+  h("div",{style:{fontSize:"12px",marginTop:"4px"},text:"Adauga in profil sau dicteaza dupa un apel — recalculez afinitatile pe loc."}));}
+
+function home(){const me=mem(ME),mm=myMatches();
+  const prop=mm.filter(m=>m.status==="propus").length,con=mm.filter(m=>m.status==="conectat").length;
+  const avg=mm.length?Math.round(mm.reduce((s,m)=>s+m.score,0)/mm.length):0;
+  $("#digG").textContent="Buna ziua, "+me.name.split(" ")[0]+".";
+  $("#digP").textContent=prop?`Ai ${prop} ${prop===1?"sugestie noua":"sugestii noi"} de verificat si ${con} ${con===1?"conexiune":"conexiuni"}.`
+    :`Ai ${con} ${con===1?"conexiune activa":"conexiuni active"}. Adauga ce cauti sau ce oferi ca sa primesti sugestii.`;
+  // urmatoarea intalnire confirmata (backlog #2)
+  const td=today(),up=(DB.meetings||[]).filter(x=>x.status==="confirmat"&&(x.a===ME||x.b===ME)&&(x.when||"").slice(0,10)>=td).sort((a,b)=>String(a.when).localeCompare(String(b.when)));
+  if(up[0]){const x=up[0],cel=mem(x.a===ME?x.b:x.a)||{name:"?"};
+    setKids($("#nextMeet"),h("div",{class:"nextmeet"},
+      h("div",{class:"nmlabel",text:"📅 Urmatoarea intalnire"}),
+      h("div",{class:"nmwhen",text:fmtWhen(x.when)}),
+      h("div",{class:"nmwho",text:"cu "+cel.name+(x.place?" · "+x.place:"")}),
+      h("div",{class:"calrow"},
+        h("button",{class:"btn ghost sm","data-act":"gcal","data-id":x.id,text:"📅 Calendar"}),
+        h("button",{class:"btn ghost sm","data-act":"msg","data-id":x.match_id,text:"Conversatie"}))));
+  }else setKids($("#nextMeet"));
+  const stat=(v,l)=>h("div",{class:"st"},h("div",{class:"sv",text:String(v)}),h("div",{class:"sl",text:l}));
+  setKids($("#kpis"),stat(con,"Conexiuni"),stat(prop,"Sugestii noi"),stat(avg||"—","Potrivire medie"));
+  // pulse de retea compact & onest (raport real, backlog #14)
+  const total=Math.max(0,DB.members.length-1),pct=total?Math.round(con/total*100):0;
+  setKids($("#netpulse"),h("div",{class:"netpulse"},
+    h("div",{class:"npr"},h("span",{text:"Acoperire retea"}),h("span",{class:"npv",text:con+" din "+total+" membri"})),
+    h("div",{class:"bar"},h("i",{style:{width:pct+"%"}}))));
+  const conx=mm.filter(m=>m.status==="conectat").sort((a,b)=>(b.at||0)-(a.at||0));
+  renderLedger(conx);
+  const top=mm.filter(m=>m.status!=="conectat").slice(0,2),list=top.length?top:mm.slice(0,2);
+  setKids($("#topMatches"),list.length?matches(list):emp());
+}
+function renderConn(){const host=$("#connList");if(!host)return;
+  const q=(($("#netSearch")||{}).value||"").trim();
+  const conn=DB.matches.filter(m=>m.status==="conectat"&&(m.offer_member===ME||m.seek_member===ME)).sort((a,b)=>(b.at||0)-(a.at||0));
+  const rows=conn.map(m=>{const cel=mem(m.offer_member===ME?m.seek_member:m.offer_member);if(!cel)return null;
+    if(q&&!fuzzy(q,cel.name+" "+(cel.industry||"")))return null;
+    const common=(m.common||[]).join(", ");
+    const ts=DB.messages.filter(x=>x.match_id===m.id&&x.t).map(x=>x.t),lastA=ts.length?Math.max(...ts):(m.at||0);
+    const av=h("div",{class:"av sq",style:{width:"44px",height:"44px",fontSize:"15px"}},ini(cel.name));av.style.background=cel.color||"#6366F1";
+    return h("div",{class:"connrow","data-act":"msg","data-id":m.id,tabindex:"0",role:"button","aria-label":"Deschide conversatia cu "+cel.name},av,
+      h("div",{class:"ci"},h("div",{class:"cn",text:cel.name}),h("div",{class:"cr",text:cel.role}),
+        h("div",{class:"cmeta",text:common?"prin interes comun: "+common:"conexiune confirmata"})),
+      h("div",{class:"cdate",text:lastA?"activ "+relTime(lastA):""}));}).filter(Boolean);
+  setKids(host, rows.length?rows:estateBox(q?"Niciun rezultat":"Inca nicio conexiune", q?"Incearca alt nume.":"Conexiunile apar aici dupa ce accepti o introducere in „Cine merita contactat”."));
+}
+/* Trust Ledger cu hash-chain REAL, verificabil + exportabil (audit: nu "security theater") */
+async function renderLedger(conx){const host=$("#ledger");if(!host)return;
+  if(!conx.length){setKids(host,h("div",{class:"estate",style:{padding:"18px"}},h("div",{class:"t",text:"Nicio conexiune confirmata inca."})));LEDGER_CHAIN=[];return;}
+  const chrono=conx.slice().sort((a,b)=>(a.at||0)-(b.at||0));let prev="GENESIS";const hsh={};
+  for(const m of chrono){if(!DB||!HK)return;const hx=await hmacHex(prev+"|"+m.offer_member+"|"+m.seek_member+"|"+(m.at||0));hsh[m.id]=hx;prev=hx;}
+  LEDGER_CHAIN=chrono.map(m=>({id:m.id,a:m.offer_member,b:m.seek_member,at:m.at||0,hash:hsh[m.id]}));
+  const rows=conx.slice(0,4).map(m=>{const cel=mem(m.offer_member===ME?m.seek_member:m.offer_member)||{name:"?"};
+    return h("div",{class:"lrow"},h("span",{class:"dot"}),
+      h("div",{},h("div",{class:"lr-name",text:cel.name}),h("div",{class:"lr-hash",text:"⛓ "+(hsh[m.id]||"").slice(0,12)+"…"})),
+      h("span",{class:"lr-date",text:m.at?new Date(m.at).toLocaleDateString("ro-RO",{day:"numeric",month:"short"}):""}));});
+  const verify=h("div",{class:"lgverify"},
+    h("span",{id:"lgState",text:"⛓ lant de "+chrono.length+" verigi (SHA-256)"}),
+    h("button",{class:"btn ghost sm",style:{marginLeft:"auto",padding:"5px 11px",fontSize:"11px",minHeight:"0"},"data-act":"verify",text:"Verifica"}),
+    h("button",{class:"btn ghost sm",style:{padding:"5px 11px",fontSize:"11px",minHeight:"0"},"data-act":"exportL",text:"Export"}));
+  setKids(host,...rows,verify);}
+async function verifyLedger(){let prev="GENESIS",ok=true;
+  for(const e of LEDGER_CHAIN){if(!DB||!HK)return;if(await hmacHex(prev+"|"+e.a+"|"+e.b+"|"+e.at)!==e.hash){ok=false;break;}prev=e.hash;}
+  const el=$("#lgState");if(el)setKids(el,h("span",{class:ok?"ok":"bad",text:ok?`✓ lant integru (${LEDGER_CHAIN.length} verigi)`:"✗ lant alterat — integritate compromisa"}));
+  toast(ok?"Trust Ledger: lant integru ✓":"Trust Ledger: alterare detectata ✗");}
+function exportLedger(){try{const blob=new Blob([JSON.stringify(LEDGER_CHAIN,null,2)],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="trust-ledger-"+today()+".json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);toast("Trust Ledger exportat (JSON)");}catch(e){toast("Export esuat");}}
+function pl(l,v){return h("div",{},
+  h("div",{class:"row"},h("span",{text:l}),h("span",{style:{color:"var(--primary-dim)"},text:v+"%"})),
+  h("div",{class:"bar"},h("i",{style:{width:v+"%"}})));}
+
+function scoreLabel(s){return s>=85?"Potrivire excelenta":s>=70?"Potrivire foarte buna":s>=60?"Potrivire buna":"Posibila potrivire";}
+function matches(list){return list.map(m=>{
+    const o=DB.items.find(i=>i.id===m.offer_item)||{text:"",source:""},s=DB.items.find(i=>i.id===m.seek_item)||{text:"",source:""};
+    const off=m.offer_member===ME,cel=mem(off?m.seek_member:m.offer_member)||{name:"?",industry:"",role:"",trust:0,color:"#6366F1"};
+    const euc=off?m.offer_consent:m.seek_consent,rev=m.status==="conectat",nC=(m.common||[]).length;
+    const nm=rev?cel.name:"Membru din Cerc",ro=rev?cel.role:(cel.industry||"Business")+" · identitate ascunsa";
+    const av=h("div",{class:"av sq",style:{width:"46px",height:"46px",fontSize:"16px"}},rev?ini(cel.name):"✦");
+    av.style.background=rev?(cel.color||"#6366F1"):"var(--primary)"; // culoare din paleta controlata, nu input
+    const pill=h("span",{class:rev?"statuspill ok":euc?"statuspill warn":"statuspill"},h("span",{class:"sd"}),rev?"Conectat":euc?"In asteptare":"Sugestie");
+    const fn=rev?cel.name.split(" ")[0]:"Acest membru",ind=cel.industry||"cerc";
+    let gline;
+    if(off) gline=rev?h("div",{class:"gline"},h("b",{text:fn})," cauta „"+s.text+"” — exact ce oferi tu.")
+                     :h("div",{class:"gline"},h("b",{text:"Cineva din "+ind})," cauta ceva ce ",h("b",{text:"tu oferi"}),".");
+    else    gline=rev?h("div",{class:"gline"},h("b",{text:fn})," ofera „"+o.text+"” — fix ce cauti tu.")
+                     :h("div",{class:"gline"},h("b",{text:"Cineva din "+ind})," ofera ceva ce ",h("b",{text:"tu cauti"}),".");
+    const interese=nC>0?`${nC} ${nC===1?"interes comun":"interese comune"}`:"teme de business comune";
+    const badges=h("div",{class:"hbadges"},h("span",{class:"hbadge",text:"★ "+scoreLabel(m.score)}),h("span",{class:"hbadge",text:"🔗 "+interese}),
+      cel.trust>=80?h("span",{class:"hbadge v",text:"✓ Profil verificat"}):h("span",{class:"hbadge",text:"Profil activ"}));
+    let dock;
+    if(rev) dock=h("div",{class:"adock"},h("button",{class:"btn gold","data-act":"msg","data-id":m.id,text:"Trimite mesaj"}),h("button",{class:"btn ghost","data-act":"profil","data-id":m.id,text:"Vezi profil"}));
+    else if(euc) dock=h("div",{class:"waiting",text:"⏳ Asteptam confirmarea celeilalte parti ca sa va punem in legatura."});
+    else dock=h("div",{class:"adock"},h("button",{class:"btn gold","data-act":"introduce","data-id":m.id,text:"Cere introducere"}),h("button",{class:"btn ghost","data-act":"decline","data-id":m.id,text:"Nu acum"}));
+    const why=rev?`Aveti ${interese}${nC?" ("+(m.common||[]).join(", ")+")":""}. Conexiune confirmata de ambele parti.`
+                 :"Potrivire pe teme de business comune. Identitatea si detaliile se dezvaluie doar dupa ce ambele parti accepta (dublu consimtamant).";
+    const details=h("details",{class:"why2"},h("summary",{text:"De ce vad asta? ⌄"}),
+      h("div",{class:"whybody"},why,h("div",{class:"mono",style:{marginTop:"8px"},text:`Metoda: TF-IDF + cosine · ${nC} semnale comune · scor ${m.score}/99 · Trust ${cel.trust}/100. Estimari, nu garantii.`})));
+    return h("div",{class:"card match"+(rev?" conectat":"")},
+      h("div",{class:"ghead"},av,h("div",{class:"gi"},h("div",{class:"gn",text:nm}),h("div",{class:"gt",text:ro})),pill),
+      gline,badges,dock,details,h("div",{class:"shield",text:"🛡 Conexiune protejata"+(rev?" · sursa: "+o.source:"")}));});}
+
+/* backlog #10: filtru pe industrie la Potriviri */
+function matchInd(m){const c=mem(m.offer_member===ME?m.seek_member:m.offer_member);return c&&c.industry||"";}
+function matchIndOk(m){return MATCHFILTER==="all"||matchInd(m)===MATCHFILTER;}
+function setMatchFilter(f){MATCHFILTER=f;render();}
+function renderMatchFilters(){const host=$("#matchFilters");if(!host)return;
+  const inds=[...new Set(myMatches().map(matchInd).filter(Boolean))].sort();
+  const chip=(f,label)=>h("button",{class:"chip"+(MATCHFILTER===f?" on":""),"data-act":"mfilter","data-f":f,text:label});
+  if(!inds.length){setKids(host);return;}
+  setKids(host, chip("all","Toate"), ...inds.map(i=>chip(i,i)));}
+function pipeline(list){if(!list.length)return emp();
+  const g={p:[],a:[],c:[]};
+  list.forEach(m=>{const euc=m.offer_member===ME?m.offer_consent:m.seek_consent;
+    if(m.status==="conectat")g.c.push(m);else if(euc)g.a.push(m);else g.p.push(m);});
+  const out=[];
+  const col=(t,arr,cls)=>{if(!arr.length)return;out.push(h("div",{class:"pipe-h "+cls},h("span",{class:"pd"}),t,h("span",{class:"pn",text:String(arr.length)})));out.push(...matches(arr));};
+  col("Noi — de decis",g.p,"p");col("In asteptare",g.a,"a");col("Conectate",g.c,"c");
+  return out.length?out:emp();}
+
+/* ---- iteratia 4: graf FORCE-DIRECTED (fizica vanilla, fara dependinte) ---- */
+let FSIM=null;
+function stopNet(){if(FSIM&&FSIM.raf){cancelAnimationFrame(FSIM.raf);FSIM.raf=null;}}
+function net(){const host=$("#netHost");if(!host||!DB)return;
+  const W=400,H=400,cx=W/2,cy=H/2;
+  const conn=DB.matches.filter(m=>m.status==="conectat"),members=DB.members;
+  if(!FSIM||FSIM.n!==members.length){const pos={};members.forEach((m,i)=>{const a=(i/members.length)*Math.PI*2;pos[m.id]={x:cx+120*Math.cos(a)+(Math.random()*8-4),y:cy+120*Math.sin(a)+(Math.random()*8-4),vx:0,vy:0};});FSIM={pos,n:members.length,raf:null,drag:0};}
+  const pos=FSIM.pos;members.forEach(m=>{if(!pos[m.id])pos[m.id]={x:cx+(Math.random()*40-20),y:cy+(Math.random()*40-20),vx:0,vy:0};});
+  const q=(($("#netSearch")||{}).value||"").trim(),matchq=id=>{const m=mem(id);return fuzzy(q,m.name+" "+(m.industry||""));};
+  const cPri=cssv("--primary"),cCard=cssv("--card2"),cLine=cssv("--line2"),cInk=cssv("--ink2"),cBg=cssv("--bg2");
+  const deg=id=>conn.filter(c=>c.offer_member===id||c.seek_member===id).length;
+  function step(){const ids=members.map(m=>m.id);
+    for(const id of ids){const p=pos[id];if(id===ME){p.x=cx;p.y=cy;p.vx=p.vy=0;continue;}if(FSIM.drag===id)continue;
+      let fx=(cx-p.x)*0.012,fy=(cy-p.y)*0.012;
+      for(const j of ids){if(j===id)continue;const o=pos[j];let dx=p.x-o.x,dy=p.y-o.y,d2=dx*dx+dy*dy||1,f=950/d2;fx+=dx*f;fy+=dy*f;}
+      p.vx=(p.vx+fx)*0.82;p.vy=(p.vy+fy)*0.82;}
+    for(const c of conn){const a=pos[c.offer_member],b=pos[c.seek_member];if(!a||!b)continue;let dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1,k=(d-80)/d*0.04;
+      if(c.offer_member!==ME&&FSIM.drag!==c.offer_member){a.vx+=dx*k;a.vy+=dy*k;}
+      if(c.seek_member!==ME&&FSIM.drag!==c.seek_member){b.vx-=dx*k;b.vy-=dy*k;}}
+    for(const id of ids){const p=pos[id];if(id===ME||FSIM.drag===id)continue;p.x=Math.max(24,Math.min(W-24,p.x+p.vx));p.y=Math.max(28,Math.min(H-28,p.y+p.vy));}
+    draw();const moving=ids.some(id=>Math.abs(pos[id].vx)+Math.abs(pos[id].vy)>0.06);
+    FSIM.raf=(moving&&!RM&&!FSIM.drag)?requestAnimationFrame(step):null;}
+  function draw(){const kids=[];
+    conn.forEach(m=>{const a=pos[m.offer_member],b=pos[m.seek_member];if(a&&b){const sd=q&&!(matchq(m.offer_member)||matchq(m.seek_member));
+      kids.push(svgEl("line",{class:"edge"+(sd?" sdim":""),"data-a":m.offer_member,"data-b":m.seek_member,x1:a.x.toFixed(1),y1:a.y.toFixed(1),x2:b.x.toFixed(1),y2:b.y.toFixed(1),stroke:cPri,"stroke-width":"1.5",opacity:".55"}));}});
+    members.forEach(m=>{const p=pos[m.id],meN=m.id===ME,r=meN?22:11+Math.min(7,deg(m.id)*2),sd=q&&!meN&&!matchq(m.id);
+      kids.push(svgEl("g",{class:"node"+(sd?" sdim":""),"data-id":m.id,style:"cursor:grab"},
+        svgEl("circle",{cx:p.x.toFixed(1),cy:p.y.toFixed(1),r,fill:meN?cPri:cCard,stroke:meN?cPri:cLine,"stroke-width":meN?2.5:1.5}),
+        svgEl("text",{x:p.x.toFixed(1),y:(p.y+4).toFixed(1),"text-anchor":"middle",fill:meN?cBg:cInk,"font-weight":"600","pointer-events":"none"},svgSafe(ini(m.name))),
+        svgEl("text",{x:p.x.toFixed(1),y:(p.y+r+12).toFixed(1),"text-anchor":"middle","pointer-events":"none"},svgSafe(m.name.split(" ")[0]))));});
+    let svg=host.querySelector("svg");
+    if(!svg){svg=svgEl("svg",{viewBox:`0 0 ${W} ${H}`,width:"100%",style:"display:block;touch-action:none",role:"img","aria-label":`Graful retelei: ${conn.length} conexiuni, ${members.length} membri. Trage nodurile pentru a explora.`});host.replaceChildren(svg);}
+    svg.replaceChildren(...kids);}
+  draw();
+  const svg=host.querySelector("svg");
+  if(svg&&!svg._wired){svg._wired=1;let cur=0;
+    const pt=ev=>{const r=svg.getBoundingClientRect();return{x:(ev.clientX-r.left)/r.width*W,y:(ev.clientY-r.top)/r.height*H};};
+    svg.addEventListener("pointerdown",ev=>{const g=ev.target.closest(".node");if(!g)return;cur=+g.dataset.id;FSIM.drag=cur;try{svg.setPointerCapture(ev.pointerId);}catch(_){}g._moved=false;g._t=Date.now();});
+    svg.addEventListener("pointermove",ev=>{if(!cur)return;const o=pt(ev);pos[cur].x=o.x;pos[cur].y=o.y;pos[cur].vx=pos[cur].vy=0;const g=svg.querySelector(`.node[data-id="${cur}"]`);if(g)g._moved=true;draw();});
+    svg.addEventListener("pointerup",ev=>{const id=cur;cur=0;FSIM.drag=0;const g=svg.querySelector(`.node[data-id="${id}"]`);
+      if(g&&!g._moved&&Date.now()-(g._t||0)<260)openMemberMatch(id);else{stopNet();if(!RM)FSIM.raf=requestAnimationFrame(step);}});
+    svg.addEventListener("mouseover",ev=>{const g=ev.target.closest(".node");if(g)netFocus(+g.dataset.id);});
+    svg.addEventListener("mouseout",ev=>{if(ev.target.closest(".node"))netFocus(0);});}
+  stopNet();if(!RM)FSIM.raf=requestAnimationFrame(step);}
+function netFocus(id){const host=$("#netHost");if(!host)return;
+  if(!id){host.querySelectorAll(".node,.edge").forEach(el=>el.classList.remove("dim"));return;}
+  const nb=new Set([id]);DB.matches.filter(m=>m.status==="conectat"&&(m.offer_member===id||m.seek_member===id)).forEach(m=>{nb.add(m.offer_member);nb.add(m.seek_member);});
+  host.querySelectorAll(".node").forEach(el=>el.classList.toggle("dim",!nb.has(+el.dataset.id)));
+  host.querySelectorAll(".edge").forEach(el=>el.classList.toggle("dim",!(nb.has(+el.dataset.a)&&nb.has(+el.dataset.b))));}
+function fuzzy(q,s){q=(q||"").toLowerCase().trim();if(!q)return true;s=(s||"").toLowerCase();if(s.includes(q))return true;let i=0;for(const c of s){if(c===q[i])i++;if(i>=q.length)return true;}return false;}
+
+function prof(){const me=mem(ME),con=DB.matches.filter(x=>x.status==="conectat"&&(x.offer_member===ME||x.seek_member===ME)).length;
+  if(EDITPROF){setKids($("#phead"),
+    h("div",{style:{display:"flex",gap:"14px",alignItems:"center"}},donut(me.trust),
+      h("div",{style:{flex:"1",minWidth:"0"}},
+        h("input",{id:"epName",value:me.name,"aria-label":"Nume",style:{width:"100%",marginBottom:"8px"}}),
+        h("input",{id:"epInd",value:me.industry||"",placeholder:"Domeniu (ex: Imobiliare)","aria-label":"Domeniu",style:{width:"100%"}}))),
+    h("div",{style:{display:"flex",gap:"8px",marginTop:"12px"}},
+      h("button",{class:"btn gold sm","data-act":"profsave",text:"Salveaza"}),
+      h("button",{class:"btn ghost sm","data-act":"profcancel",text:"Renunta"})));
+  }else{setKids($("#phead"),
+    h("div",{style:{display:"flex",gap:"14px",alignItems:"center"}},donut(me.trust),
+      h("div",{style:{flex:"1",minWidth:"0"}},h("div",{style:{fontSize:"23px",fontWeight:"800",letterSpacing:"-.4px",color:"var(--ink)"},text:me.name}),
+        h("div",{style:{color:"var(--ink2)",fontSize:"13px"},text:me.role}),
+        h("div",{style:{marginTop:"8px",display:"flex",alignItems:"center",gap:"8px",flexWrap:"wrap"}},
+          h("span",{class:"hbadge v",text:"✓ Profil verificat"}),
+          h("span",{style:{color:"var(--muted)",fontSize:"12px"},text:con+" conexiuni"}))),
+      h("button",{class:"btn ghost sm","data-act":"profedit",text:"✎ Editeaza"})));}
+  const r=(k,elid)=>{const l=DB.items.filter(i=>i.member_id===ME&&i.kind===k);
+    setKids($(elid), l.length?l.map(i=>h("div",{class:"linei"},
+        h("div",{},h("div",{text:i.text}),h("div",{class:"meta",text:"sursa: "+i.source})),
+        h("button",{class:"x","data-act":"del","data-id":i.id,"aria-label":"Sterge",text:"×"}))):h("div",{class:"empty",style:{padding:"12px",fontSize:"14px"},text:"Nimic inca."}));};
+  r("ofer","#oferList");r("caut","#cautList");
+  const au=(DB.audit||[]).filter(a=>a.me===ME).slice(0,12);
+  setKids($("#auditList"), au.length?au.map(a=>h("div",{class:"arow"},h("span",{class:"at",text:relTime(a.t)}),h("span",{text:a.a}))):h("div",{class:"empty",style:{padding:"10px",fontSize:"14px"},text:"Nicio actiune inregistrata."}));}
+/* backlog #9: editare profil */
+function editProfile(){EDITPROF=true;prof();}
+function cancelProfile(){EDITPROF=false;prof();}
+function saveProfile(){const me=mem(ME);if(!me)return;
+  const nm=clean((($("#epName")||{}).value||"").trim()).slice(0,80),ind=clean((($("#epInd")||{}).value||"").trim()).slice(0,60);
+  if(nm)me.name=nm; if(ind){me.industry=ind;me.role="Membru, "+ind;}
+  EDITPROF=false;logA("Profil editat");save();loadMembers();$("#member").value=ME;prof();toast("Profil actualizat");}
+function addItem(k){if(PROC)return;const t=clean($("#"+k+"Text").value.trim());if(!t)return;
+  DB.items.push({id:DB.seq++,member_id:ME,kind:k,text:t,visible:k==="ofer"?1:0,source:"profil"});$("#"+k+"Text").value="";
+  logA("Adaugat in „"+(k==="ofer"?"ce ofer":"ce caut")+"”: "+t);
+  showProc();const t0=performance.now();runMatching();save();
+  const wait=Math.max(0,360-(performance.now()-t0)); // durata constanta -> maschează timing-ul matching-ului (audit s4 #2)
+  setTimeout(()=>{hideProc();render();toast("Adaugat — am recalculat afinitatile");if(pendingLock){pendingLock=false;lockNow();}},wait);}
+function delItem(id){if(!confirm("Stergi acest element din profil?"))return;const it=DB.items.find(i=>i.id===id);DB.items=DB.items.filter(i=>i.id!==id);if(it)logA("Sters: "+it.text);save();render();}
+
+/* Secretara AI — cu indicator de procesare */
+function dicteaza(){if(PROC)return;const text=$("#dictText").value.trim();if(!text)return;
+  const btn=$("#dictBtn");showProc();btn.disabled=true;$("#dictText").disabled=true;
+  setKids($("#dictRes"),h("div",{class:"proc",role:"status","aria-live":"polite"},h("span",{class:"dots"},h("i"),h("i"),h("i"))," Secretara AI asculta si extrage intentiile…"));
+  setTimeout(()=>{
+    const out=[];
+    for(const part of text.split(/[.\n;,]+/)){const p=part.trim();if(p.length<5)continue;const low=p.toLowerCase();
+      if(["caut","am nevoie","vreau","imi trebuie","interesat"].some(k=>low.includes(k)))out.push(["caut",p]);
+      else if(["ofer","am un","am o","vand","detin","furnizor","cunosc","dispun"].some(k=>low.includes(k)))out.push(["ofer",p]);}
+    out.forEach(([k,t])=>DB.items.push({id:DB.seq++,member_id:ME,kind:k,text:clean(t),visible:k==="ofer"?1:0,source:"dictare "+today()}));
+    if(out.length)logA("Secretara AI a extras "+out.length+" intentii din dictare");
+    save();runMatching();
+    const res=[h("div",{class:"sec",style:{marginTop:"4px"},text:"Intentii extrase"})];
+    if(out.length){out.forEach(([k,t])=>res.push(h("div",{class:"linei"},h("div",{text:t}),h("span",{class:"badge "+(k==="ofer"?"vis":"priv"),text:k}))));
+      res.push(h("div",{style:{marginTop:"10px"}},h("button",{class:"btn ghost sm","data-act":"go","data-v":"potriviri",text:"Vezi potrivirile noi →"})));}
+    else res.push(h("div",{class:"empty",text:"Nu am gasit intentii clare."}));
+    setKids($("#dictRes"),...res);
+    $("#dictText").value="";btn.disabled=false;$("#dictText").disabled=false;hideProc();
+    if(pendingLock){pendingLock=false;lockNow();}
+  },950);}
+
+/* ---- Secretara iteratia 1: jurnal de notite ---- */
+const noteTags=t=>(String(t).match(/#[\p{L}\p{N}_]+/gu)||[]).map(x=>x.toLowerCase());
+function setNoteFilter(f){NOTEFILTER=f;renderNotes();}
+function renderNotes(){const host=$("#notesList");if(!host)return;
+  const q=(($("#noteSearch")||{}).value||"").toLowerCase().trim();
+  const mine=(DB.notes||[]).filter(n=>n.member_id===ME);
+  // chips de tag-uri
+  const allTags=[...new Set(mine.flatMap(n=>noteTags(n.text)))].sort();
+  const fhost=$("#noteFilters");
+  if(fhost){const chip=(f,l)=>h("button",{class:"chip"+(NOTEFILTER===f?" on":""),"data-act":"nfilter","data-f":f,text:l});
+    setKids(fhost, allTags.length?[chip("all","Toate"),...allTags.map(t=>chip(t,t))]:[]);}
+  let list=mine;
+  if(NOTEFILTER!=="all")list=list.filter(n=>noteTags(n.text).includes(NOTEFILTER));
+  list=list.filter(n=>!q||n.text.toLowerCase().includes(q)).sort((a,b)=>b.t-a.t);
+  setKids(host, list.length?list.map(n=>h("div",{class:"notecard"},
+      h("div",{class:"nt"},h("div",{class:"ntx",text:n.text}),h("div",{class:"ndate",text:relTime(n.t)})),
+      h("button",{class:"x","data-act":"delnote","data-id":n.id,"aria-label":"Sterge notita",text:"×"}))):
+    estateBox(q||NOTEFILTER!=="all"?"Nicio notita gasita":"Inca nicio notita", q||NOTEFILTER!=="all"?"Incearca alt filtru.":"Scrie prima ta idee — poti folosi #tag-uri."));}
+function addNote(){if(!DB)return;const inp=$("#noteText"),t=clean((inp&&inp.value||"").trim());if(!t)return;
+  DB.notes.push({id:DB.seq++,member_id:ME,text:t,t:Date.now()});if(inp)inp.value="";
+  logA("Notita adaugata in jurnal");save();renderNotes();toast("Notita salvata");}
+function delNote(id){if(!confirm("Stergi aceasta notita?"))return;const n=(DB.notes||[]).find(x=>x.id===id);DB.notes=(DB.notes||[]).filter(x=>x.id!==id);if(n)logA("Notita stearsa din jurnal");save();renderNotes();}
+/* ---- Secretara iteratia 1: brief de 1 minut (doar din datele tale) ---- */
+function buildBrief(m){const cel=mem(ME===m.offer_member?m.seek_member:m.offer_member);if(!cel)return null;
+  const common=new Set();
+  DB.matches.filter(x=>(x.offer_member===ME&&x.seek_member===cel.id)||(x.offer_member===cel.id&&x.seek_member===ME)).forEach(x=>(x.common||[]).forEach(w=>common.add(w)));
+  const theirOffers=DB.items.filter(i=>i.member_id===cel.id&&i.kind==="ofer"&&i.visible).map(i=>i.text);
+  const fn=cel.name.split(" ")[0].toLowerCase();
+  const myNotes=(DB.notes||[]).filter(n=>n.member_id===ME&&n.text.toLowerCase().includes(fn)).map(n=>n.text);
+  const rows=[h("div",{class:"bl"},h("b",{},"Conexiune din: "),(m.at?new Date(m.at).toLocaleDateString("ro-RO",{day:"numeric",month:"long"}):"recent"))];
+  if(common.size)rows.push(h("div",{class:"bl"},h("b",{},"Interese comune: "),[...common].join(", ")));
+  if(theirOffers.length)rows.push(h("div",{class:"bl"},h("b",{},cel.name.split(" ")[0]+" ofera: "),theirOffers.join("; ")));
+  rows.push(myNotes.length?h("div",{class:"bl"},h("b",{},"Notitele tale: "),myNotes.join(" · "))
+    :h("div",{class:"bl",style:{color:"var(--muted)"}},"Nu ai notite legate de aceasta persoana. Adauga in Jurnal."));
+  const myTasks=(DB.tasks||[]).filter(t=>t.member_id===ME&&!t.done&&t.text.toLowerCase().includes(fn)).map(t=>t.text);
+  if(myTasks.length)rows.push(h("div",{class:"bl"},h("b",{},"Task-uri deschise: "),myTasks.join(" · ")));
+  const d=h("details",{class:"brief"},h("summary",{text:"📋 Brief de 1 minut ⌄"}),h("div",{class:"bbody"},...rows));d.open=true;return d;}
+
+/* ---- Secretara iteratia 2: calendar & programare (double-opt-in) ---- */
+function fmtWhen(w){if(!w)return"";const[d,t]=String(w).split("T");const dd=new Date(d+"T00:00");
+  if(isNaN(dd))return String(w);const s=dd.toLocaleDateString("ro-RO",{weekday:"short",day:"numeric",month:"short"});return s+(t?(" · "+t):"");}
+function meetingForm(m){const f=h("details",{class:"mform"},h("summary",{text:"📅 Propune o intalnire ⌄"}),
+    h("div",{class:"mfbody"},
+      h("label",{class:"mfl",for:"mfDate",text:"Data"}),h("input",{type:"date",id:"mfDate","aria-label":"Data intalnirii"}),
+      h("label",{class:"mfl",for:"mfTime",text:"Ora"}),h("input",{type:"time",id:"mfTime","aria-label":"Ora intalnirii"}),
+      h("label",{class:"mfl",for:"mfPlace",text:"Loc / detalii"}),h("input",{id:"mfPlace","aria-label":"Loc",placeholder:"ex: Cafenea, online…"}),
+      h("button",{class:"btn gold","data-act":"propmeet","data-id":m.id,style:{marginTop:"12px",width:"100%"},text:"Trimite propunerea"})));
+  return f;}
+function proposeMeeting(mid){const m=DB.matches.find(x=>x.id===mid);if(!m)return;
+  const date=($("#mfDate")||{}).value||"",time=($("#mfTime")||{}).value||"",place=clean((($("#mfPlace")||{}).value||"").trim());
+  if(!date){toast("Alege o data pentru intalnire");return;}
+  const other=ME===m.offer_member?m.seek_member:m.offer_member;
+  DB.meetings.push({id:DB.seq++,a:ME,b:other,match_id:mid,when:date+(time?("T"+time):""),place,status:"propus",at:Date.now()});
+  logA("Ai propus o intalnire cu "+(mem(other)||{name:"?"}).name);save();loadChat();
+  toast("Propunere trimisa — se confirma cand cealalta parte accepta");}
+async function meetRespond(id,ok){const mt=(DB.meetings||[]).find(x=>x.id===id);if(!mt||mt.status!=="propus")return;
+  if(mt.b!==ME){toast("Doar persoana invitata poate confirma");return;}
+  if(!ok){mt.status="refuzat";logA("Ai refuzat o intalnire");save();render();toast("Intalnire refuzata");return;}
+  mt.status="confirmat";mt.cat=Date.now();
+  try{mt.hash=await hmacHex("MEET|"+mt.a+"|"+mt.b+"|"+mt.when+"|"+mt.place);}catch(_){mt.hash="";}
+  logA("Intalnire confirmata (dublu consimtamant)");save();render();toast("✓ Intalnire confirmata");}
+function renderMeetings(){const host=$("#meetList");if(!host)return;
+  const mine=(DB.meetings||[]).filter(x=>x.a===ME||x.b===ME);
+  const toAccept=mine.filter(x=>x.status==="propus"&&x.b===ME);
+  const waiting=mine.filter(x=>x.status==="propus"&&x.a===ME);
+  const confirmed=mine.filter(x=>x.status==="confirmat").sort((a,b)=>String(a.when).localeCompare(String(b.when)));
+  const card=(x,kind)=>{const otherId=x.a===ME?x.b:x.a,cel=mem(otherId)||{name:"?"};
+    const acts=kind==="accept"?h("div",{class:"adock"},h("button",{class:"btn gold","data-act":"meetyes","data-id":x.id,text:"Accept"}),h("button",{class:"btn ghost","data-act":"meetno","data-id":x.id,text:"Refuz"}))
+      :kind==="wait"?h("div",{class:"waiting",text:"⏳ Asteapta confirmarea lui "+cel.name.split(" ")[0]})
+      :h("div",{},h("div",{class:"shield",text:"🛡 Confirmata · semnatura "+(x.hash||"").slice(0,10)+"…"}),
+         h("div",{class:"calrow"},
+           h("button",{class:"btn ghost sm","data-act":"gcal","data-id":x.id,text:"📅 Google Calendar"}),
+           h("button",{class:"btn ghost sm","data-act":"ics","data-id":x.id,text:"⬇ .ics"}),
+           h("button",{class:"btn ghost sm","data-act":"email","data-id":x.id,text:"✉ Email"})),
+         h("details",{class:"fudet"},h("summary",{text:"✍ Follow-up ⌄"}),
+           h("div",{class:"furow"},
+             h("button",{class:"btn ghost sm","data-act":"fu","data-id":x.id,"data-fk":"thanks",text:"Multumire"}),
+             h("button",{class:"btn ghost sm","data-act":"fu","data-id":x.id,"data-fk":"next",text:"Pas urmator"}),
+             h("button",{class:"btn ghost sm","data-act":"fu","data-id":x.id,"data-fk":"resched",text:"Reprogramare"}))));
+    return h("div",{class:"meetcard"},
+      h("div",{class:"mtop2"},h("div",{class:"mw",text:fmtWhen(x.when)}),h("div",{class:"mwho",text:"cu "+cel.name})),
+      x.place?h("div",{class:"mplace",text:"📍 "+x.place}):null,acts);};
+  const out=[];
+  if(toAccept.length){out.push(h("div",{class:"pipe-h a"},h("span",{class:"pd"}),"De confirmat",h("span",{class:"pn",text:String(toAccept.length)})));toAccept.forEach(x=>out.push(card(x,"accept")));}
+  if(confirmed.length){out.push(h("div",{class:"pipe-h c"},h("span",{class:"pd"}),"Confirmate",h("span",{class:"pn",text:String(confirmed.length)})));confirmed.forEach(x=>out.push(card(x,"done")));}
+  if(waiting.length){out.push(h("div",{class:"pipe-h p"},h("span",{class:"pd"}),"In asteptare",h("span",{class:"pn",text:String(waiting.length)})));waiting.forEach(x=>out.push(card(x,"wait")));}
+  setKids(host, out.length?out:estateBox("Nicio intalnire","Deschide o conexiune (Reteaua) si apasa „Propune o intalnire”."));}
+
+/* ---- export catre Google Calendar / .ics / email (user-initiated, app nu trimite nimic) ---- */
+const pad2=n=>String(n).padStart(2,"0");
+function meetDates(w){const[d,t]=String(w).split("T");const tm=t||"09:00";
+  const[Y,M,D]=d.split("-").map(Number),[hh,mm]=tm.split(":").map(Number);
+  const s=new Date(Y,(M||1)-1,D||1,hh||9,mm||0,0),e=new Date(s.getTime()+36e5);
+  const f=x=>x.getFullYear()+pad2(x.getMonth()+1)+pad2(x.getDate())+"T"+pad2(x.getHours())+pad2(x.getMinutes())+"00";
+  return[f(s),f(e)];}
+const icsEsc=s=>String(s).replace(/([\\;,])/g,"\\$1").replace(/\n/g,"\\n");
+function meetTitle(m){const cel=mem(ME===m.a?m.b:m.a)||{name:"?"};return "Intalnire cu "+cel.name;}
+function icsFor(m){const[s,e]=meetDates(m.when);
+  return["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Cercul EIE//RO//","BEGIN:VEVENT","UID:meet-"+m.id+"@cercul",
+    "DTSTART:"+s,"DTEND:"+e,"SUMMARY:"+icsEsc(meetTitle(m)),m.place?"LOCATION:"+icsEsc(m.place):"",
+    "DESCRIPTION:"+icsEsc("Programata prin Cercul EIE"),"END:VEVENT","END:VCALENDAR"].filter(Boolean).join("\r\n");}
+function gcalUrl(m){const[s,e]=meetDates(m.when);
+  const p=new URLSearchParams({action:"TEMPLATE",text:meetTitle(m),dates:s+"/"+e,details:"Programata prin Cercul EIE",location:m.place||""});
+  return "https://calendar.google.com/calendar/render?"+p.toString();}
+function mailtoUrl(m){const subj="Confirmare intalnire — "+meetTitle(m);
+  const body="Buna,\n\nConfirm intalnirea noastra: "+fmtWhen(m.when)+(m.place?(", "+m.place):"")+".\n\nCu stima,";
+  return "mailto:?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(body);}
+function openExt(url){const a=document.createElement("a");a.href=url;a.target="_blank";a.rel="noopener";a.click();}
+function downloadICS(m){try{const blob=new Blob([icsFor(m)],{type:"text/calendar"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="intalnire-"+m.id+".ics";a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),2000);logA("Export intalnire (.ics)");toast(".ics descarcat — importa-l in calendar");}catch(e){toast("Export esuat");}}
+
+/* ---- Secretara iteratia 3: task-uri cu termen + reminder ---- */
+function addTask(){if(!DB)return;const t=clean((($("#taskText")||{}).value||"").trim()),due=clean((($("#taskDue")||{}).value||"")).slice(0,10);if(!t)return;
+  DB.tasks.push({id:DB.seq++,member_id:ME,text:t,due,done:0,t:Date.now()});
+  if($("#taskText"))$("#taskText").value="";if($("#taskDue"))$("#taskDue").value="";
+  logA("Task adaugat: "+t);save();renderTasks();updateBadges();toast("Task adaugat");}
+function toggleTask(id){const x=(DB.tasks||[]).find(t=>t.id===id);if(!x)return;x.done=x.done?0:1;
+  logA(x.done?"Task finalizat":"Task redeschis");save();renderTasks();updateBadges();}
+function delTask(id){if(!confirm("Stergi acest task?"))return;DB.tasks=(DB.tasks||[]).filter(t=>t.id!==id);logA("Task sters");save();renderTasks();updateBadges();}
+function setTaskFilter(f){TASKFILTER=f;$$("#taskFilters .chip").forEach(c=>c.classList.toggle("on",c.dataset.f===f));renderTasks();}
+function renderTasks(){const host=$("#taskList");if(!host)return;
+  const td=today();let list=(DB.tasks||[]).filter(t=>t.member_id===ME);
+  if(TASKFILTER==="active")list=list.filter(t=>!t.done);
+  else if(TASKFILTER==="due")list=list.filter(t=>!t.done&&t.due&&t.due<=td);
+  const open=list.filter(t=>!t.done).sort((a,b)=>(a.due||"9999").localeCompare(b.due||"9999")),done=list.filter(t=>t.done);
+  const row=t=>{const overdue=!t.done&&t.due&&t.due<td;
+    return h("div",{class:"taskcard"+(t.done?" done":"")},
+      h("button",{class:"tcheck"+(t.done?" on":""),"data-act":"tasktoggle","data-id":t.id,role:"checkbox","aria-checked":t.done?"true":"false","aria-label":"Marcheaza finalizat"},t.done?"✓":""),
+      h("div",{class:"ti"},h("div",{class:"ttx",text:t.text}),t.due?h("div",{class:"tdue"+(overdue?" over":""),text:(overdue?"scadent: ":"termen: ")+fmtWhen(t.due)}):null),
+      h("button",{class:"x","data-act":"deltask","data-id":t.id,"aria-label":"Sterge task",text:"×"}));};
+  const out=[...open.map(row),...done.map(row)];
+  const empty=estateBox("Niciun task","Adauga o sarcina cu termen in campul de mai sus.");
+  setKids(host, out.length?out:empty);}
+function updateBadges(){if(!DB)return;const td=today();
+  const tdue=(DB.tasks||[]).filter(t=>t.member_id===ME&&!t.done&&t.due&&t.due<=td).length;
+  const mconf=(DB.meetings||[]).filter(x=>x.status==="propus"&&x.b===ME).length; // intalniri de confirmat
+  const n=tdue+mconf;
+  const tab=document.querySelector('.tab[data-v="secretara"]');if(!tab)return;
+  let b=tab.querySelector(".navbadge");
+  if(n>0){if(!b){b=h("span",{class:"navbadge"});tab.appendChild(b);}b.textContent=String(n);}
+  else if(b)b.remove();}
+/* follow-up post-intalnire: sablon gata de copiat */
+function followUp(id,kind){const m=(DB.meetings||[]).find(x=>x.id===id);if(!m)return;
+  const cel=mem(ME===m.a?m.b:m.a)||{name:""},me=mem(ME)||{name:""},fn=cel.name.split(" ")[0],w=fmtWhen(m.when);
+  let txt;
+  if(kind==="thanks")txt="Buna "+fn+",\n\nMultumesc pentru intalnire ("+w+"). Mi-a facut placere sa discutam si astept cu interes pasii urmatori.\n\nCu stima,\n"+me.name+".";
+  else if(kind==="resched")txt="Buna "+fn+",\n\nLegat de intalnirea noastra ("+w+"), as vrea sa o reprogramam. Ce zi ti-ar conveni saptamana viitoare?\n\nCu stima,\n"+me.name+".";
+  else txt="Buna "+fn+",\n\nMi-a facut placere sa ne vedem ("+w+"). Asa cum am discutat, [completeaza pasul urmator].\n\nRamanem in legatura,\n"+me.name+".";
+  logA("Follow-up ("+(kind||"next")+") generat");
+  try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(()=>toast("Follow-up copiat — lipeste-l unde vrei")).catch(()=>openExt(mailtoBody("Follow-up",txt)));return;}}catch(_){}
+  openExt(mailtoBody("Follow-up",txt));}
+function mailtoBody(subj,body){return "mailto:?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(body);}
+
+/* ---- backlog #6: cautare globala ---- */
+function openSearch(){if(!DB)return;$("#searchOv").classList.add("on");const i=$("#globalSearch");if(i){i.value="";setTimeout(()=>i.focus(),80);}runSearch();}
+function closeSearch(){$("#searchOv").classList.remove("on");}
+function runSearch(){const host=$("#searchRes");if(!host||!DB)return;
+  const q=(($("#globalSearch")||{}).value||"").toLowerCase().trim();
+  if(!q){setKids(host,estateBox("Cauta in cercul tau","Scrie un nume, o notita sau un task."));return;}
+  const out=[],sec=t=>h("div",{class:"srhead",text:t});
+  const people=DB.members.filter(m=>m.id!==ME&&(m.name+" "+(m.industry||"")).toLowerCase().includes(q)).slice(0,6);
+  const notes=(DB.notes||[]).filter(n=>n.member_id===ME&&n.text.toLowerCase().includes(q)).slice(0,6);
+  const tasks=(DB.tasks||[]).filter(t=>t.member_id===ME&&t.text.toLowerCase().includes(q)).slice(0,6);
+  if(people.length){out.push(sec("Persoane"));people.forEach(m=>{const av=h("div",{class:"av sq",style:{width:"34px",height:"34px",fontSize:"13px"}},ini(m.name));av.style.background=m.color||"#6366F1";
+    out.push(h("div",{class:"srrow","data-act":"srperson","data-id":m.id,tabindex:"0",role:"button"},av,h("div",{class:"sri"},h("div",{class:"srn",text:m.name}),h("div",{class:"srm",text:m.industry||""}))));});}
+  if(notes.length){out.push(sec("Notite"));notes.forEach(n=>out.push(h("div",{class:"srrow","data-act":"srgo","data-v":"secretara",tabindex:"0",role:"button"},h("div",{class:"sric"},"📝"),h("div",{class:"sri"},h("div",{class:"srn",text:n.text})))));}
+  if(tasks.length){out.push(sec("Task-uri"));tasks.forEach(t=>out.push(h("div",{class:"srrow","data-act":"srgo","data-v":"secretara",tabindex:"0",role:"button"},h("div",{class:"sric"},t.done?"✅":"⬜"),h("div",{class:"sri"},h("div",{class:"srn",text:t.text})))));}
+  const empty=estateBox("Niciun rezultat");
+  setKids(host, out.length?out:empty);}
+
+function openMemberMatch(mid){if(mid===ME){setView("profil");return;}
+  let m=DB.matches.find(x=>x.status!=="respins"&&((x.offer_member===ME&&x.seek_member===mid)||(x.offer_member===mid&&x.seek_member===ME)));
+  if(m&&m.status==="conectat"){openMatch(m.id);return;}
+  if(m){setView("potriviri");setTimeout(()=>{const el=[...$$(".match")].find(e=>e.textContent.includes(name(mid)));if(el)el.scrollIntoView({behavior:"smooth",block:"center"});},250);}
+  else toast("Nicio potrivire directa cu "+name(mid));}
+function openMatch(id){CHAT=id;const m=DB.matches.find(x=>x.id===id),cel=mem(ME===m.offer_member?m.seek_member:m.offer_member);
+  $("#mTitle").textContent=cel.name;$("#mSub").textContent=cel.role+" · Trust "+cel.trust+"/100";$("#overlay").classList.add("on");loadChat();}
+function loadChat(){const mt=DB.matches.find(x=>x.id===CHAT),msgs=DB.messages.filter(m=>m.match_id===CHAT);
+  const br=mt?buildBrief(mt):null,mf=mt&&mt.status==="conectat"?meetingForm(mt):null;
+  setKids($("#mMsgs"),br,mf,...msgs.map(m=>{if(m.sender===null)return h("div",{class:"msg app",text:"❧ "+m.text});
+    return m.sender===ME?h("div",{class:"msg me",text:m.text}):h("div",{class:"msg them"},h("span",{class:"nm2",text:name(m.sender)}),m.text);}));
+  const b=$("#mMsgs");b.scrollTop=b.scrollHeight;}
+function sendMsg(){const t=$("#mInput").value.trim();if(!t)return;DB.messages.push({id:DB.seq++,match_id:CHAT,sender:ME,text:t,t:Date.now()});$("#mInput").value="";save();loadChat();if(VIEW==="retea")renderConn();}
+function closeModal(){$("#overlay").classList.remove("on");CHAT=null;}
+$("#mInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendMsg();});
+function toast(t){const el=$("#toast");el.textContent=t;el.classList.add("on");clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove("on"),2500);}
+// overlay blocant pe durata operatiunilor async (audit s5 #2/#5)
+function showProc(){PROC=true;const m=$("#procMask");if(m)m.classList.add("on");}
+function hideProc(){PROC=false;const m=$("#procMask");if(m)m.classList.remove("on");}
+
+/* theme */
+function applyTheme(t){document.documentElement.setAttribute("data-theme",t);$("#themeBtn").textContent=t==="dark"?"☀":"☾";localStorage.setItem(TKEY,t);if(VIEW==="retea")net();}
+function toggleTheme(){applyTheme(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark");}
+
+/* onboarding */
+function obShow(){$("#ob").classList.add("on");}
+function obDots(){$$("#obDots i").forEach((d,i)=>d.classList.toggle("on",i<=obStep));}
+function obGo(s){obStep=s;$$(".ob .step").forEach(e=>e.classList.toggle("on",+e.dataset.s===s));obDots();$("#obNext").textContent=s===3?"Intra in Cerc ✦":"Continua →";}
+function obNext(){
+  if(obStep===0){if(!$("#obName").value.trim()){$("#obName").focus();return;}}
+  if(obStep<3){obGo(obStep+1);return;}
+  const nm=clean($("#obName").value.trim())||"Tu",ind=clean($("#obInd").value.trim())||"Business",off=clean($("#obOff").value.trim()),seek=clean($("#obSeek").value.trim()),note=clean(($("#obNote")||{}).value||"").trim();
+  const id=DB.seq++;DB.members.push({id,name:nm,role:"Membru, "+ind,industry:ind,trust:75,color:COLORS[id%COLORS.length]});
+  if(off)DB.items.push({id:DB.seq++,member_id:id,kind:"ofer",text:off,visible:1,source:"onboarding"});
+  if(seek)DB.items.push({id:DB.seq++,member_id:id,kind:"caut",text:seek,visible:0,source:"onboarding"});
+  if(note)DB.notes.push({id:DB.seq++,member_id:id,text:note,t:Date.now()});
+  ME=id;logA("Profil creat prin onboarding");runMatching();save();loadMembers();$("#member").value=ME;
+  $("#ob").classList.remove("on");setView("acasa");toast("Bun venit, "+nm.split(" ")[0]+"!");}
+function obSkip(){$("#ob").classList.remove("on");localStorage.setItem(KEY+"_seen","1");}
+
+function loadMembers(){setKids($("#member"),...DB.members.map(m=>h("option",{value:m.id,text:m.name})));if(!ME)ME=DB.members[0].id;$("#member").value=ME;}
+$("#member").onchange=e=>{ME=+e.target.value;render();};
+$$(".tab").forEach(t=>t.onclick=()=>setView(t.dataset.v));
+$$("[data-go]").forEach(a=>a.onclick=()=>setView(a.dataset.go));
+{const d=$("#mapDet");if(d)d.addEventListener("toggle",()=>{if(d.open)net();else stopNet();});} // harta retelei la cerere
+// backlog #18: debounce la cautari (performanta)
+function debounce(fn,ms){let t;return function(){clearTimeout(t);t=setTimeout(fn,ms);};}
+{const a=$("#netSearch");if(a)a.addEventListener("input",debounce(renderConn,180));
+ const bn=$("#noteSearch");if(bn)bn.addEventListener("input",debounce(renderNotes,180));
+ const c=$("#globalSearch");if(c)c.addEventListener("input",debounce(runSearch,160));}
+// delegare pt. continut generat dinamic -> 0 handler-e JS inline derivate din date (audit s5r #3)
+document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");if(!el)return;
+  const id=+el.dataset.id,a=el.dataset.act;
+  if(a==="introduce")consent(id,true);
+  else if(a==="decline")consent(id,false);
+  else if(a==="msg"||a==="profil")openMatch(id);
+  else if(a==="del")delItem(id);
+  else if(a==="verify")verifyLedger();
+  else if(a==="exportL")exportLedger();
+  else if(a==="addnote")addNote();
+  else if(a==="delnote")delNote(id);
+  else if(a==="propmeet")proposeMeeting(id);
+  else if(a==="meetyes")meetRespond(id,true);
+  else if(a==="meetno")meetRespond(id,false);
+  else if(a==="gcal"){const mt=(DB.meetings||[]).find(x=>x.id===id);if(mt){openExt(gcalUrl(mt));logA("Deschis Google Calendar pt. o intalnire");}}
+  else if(a==="ics"){const mt=(DB.meetings||[]).find(x=>x.id===id);if(mt)downloadICS(mt);}
+  else if(a==="email"){const mt=(DB.meetings||[]).find(x=>x.id===id);if(mt){openExt(mailtoUrl(mt));logA("Deschis email pt. o intalnire");}}
+  else if(a==="fu")followUp(id,el.dataset.fk);
+  else if(a==="addtask")addTask();
+  else if(a==="tasktoggle")toggleTask(id);
+  else if(a==="deltask")delTask(id);
+  else if(a==="tfilter")setTaskFilter(el.dataset.f);
+  else if(a==="srperson"){closeSearch();openMemberMatch(id);}
+  else if(a==="srgo"){closeSearch();setView(el.dataset.v);}
+  else if(a==="importbtn")importData();
+  else if(a==="profedit")editProfile();
+  else if(a==="profsave")saveProfile();
+  else if(a==="profcancel")cancelProfile();
+  else if(a==="mfilter")setMatchFilter(el.dataset.f);
+  else if(a==="nfilter")setNoteFilter(el.dataset.f);
+  else if(a==="go")setView(el.dataset.v);});
+// backlog #13: accesibilitate — Enter/Space activeaza randuri/switch-uri focusate
+document.addEventListener("keydown",e=>{if(e.key!=="Enter"&&e.key!==" ")return;
+  const t=e.target;if(t&&(t.tagName==="INPUT"||t.tagName==="TEXTAREA"||t.tagName==="BUTTON"||t.tagName==="SELECT"||t.isContentEditable))return;
+  const el=t&&t.closest&&t.closest("[data-act],.sw");
+  if(el&&el.tagName!=="BUTTON"){e.preventDefault();el.click();}});
+
+// error boundary global (remediaza constatarea de audit #4)
+function safeReset(){try{if(PROC)hideProc();pendingLock=false;}catch(_){}} // reset determinist al starii async (audit s5r2 #3)
+window.addEventListener("error",e=>{console.error("global",e.error||e.message);safeReset();try{toast("A aparut o eroare — am prevenit blocarea aplicatiei.");}catch(_){}});
+window.addEventListener("unhandledrejection",e=>{console.error("promise",e.reason);safeReset();});
+window.addEventListener("pagehide",()=>{try{wipe();}catch(_){}}); // curatare determinista a bufferelor la inchidere/navigare
+
+/* ---- lock/setup: cheie derivata din parola, doar in RAM (audit R3 #1) ---- */
+function showLock(mode){LOCKMODE=mode;
+  $("#lockTitle").textContent=mode==="setup"?"Bun venit — seteaza o parola":"Deblocheaza Cercul";
+  $("#lockLead").textContent=mode==="setup"
+    ?"Alege o parola de sesiune. Din ea derivam cheia de criptare (PBKDF2) care NU se salveaza pe disc — traieste doar in memorie."
+    :"Introdu parola de sesiune ca sa decriptezi datele. Cheia se deriveaza in memorie; nu e stocata nicaieri.";
+  $("#lockBtn").textContent=mode==="setup"?"Creeaza si intra →":"Deblocheaza →";
+  $("#lockReset").style.display=mode==="setup"?"none":"block";
+  $("#lock").classList.add("on");setTimeout(()=>$("#lockPass").focus(),120);}
+async function lockSubmit(){const pass=$("#lockPass").value,err=$("#lockErr");err.style.display="none";
+  if(pass.length<4){err.style.display="block";err.textContent="Minim 4 caractere.";return;}
+  $("#lockBtn").disabled=true;
+  try{
+    if(LOCKMODE==="setup"){const salt=crypto.getRandomValues(new Uint8Array(16));SALTBUF=salt;
+      CK=await deriveKey(pass,salt);HK=await deriveHMAC(pass,salt);localStorage.setItem(SKEY,b64(salt));
+      DB=seed();await flush();$("#lockPass").value="";$("#lock").classList.remove("on");
+      loadMembers();render();obGo(0);obShow();resetIdle();}
+    else{const salt=unb64(localStorage.getItem(SKEY));SALTBUF=salt;CK=await deriveKey(pass,salt);HK=await deriveHMAC(pass,salt);
+      const d=await decJSON(localStorage.getItem(KEY));if(!validDB(d))throw new Error("schema");DB=d;
+      $("#lockPass").value="";$("#lock").classList.remove("on");loadMembers();render();resetIdle();}
+  }catch(e){console.warn("lock",e);CK=null;err.style.display="block";
+    err.textContent=LOCKMODE==="setup"?"Eroare la initializare. Reincearca.":"Parola gresita sau date alterate/corupte.";}
+  $("#lockBtn").disabled=false;}
+function lockReset(){if(!confirm("Reseteaza? Datele criptate actuale raman ca backup in browser, dar vei porni un cont nou."))return;
+  backupRaw();localStorage.removeItem(KEY);localStorage.removeItem(SKEY);CK=null;
+  $("#lockPass").value="";$("#lockErr").style.display="none";showLock("setup");}
+/* ---- auto-lock: best-effort clearing al cheilor din RAM la inactivitate (nu garanteaza zeroing in JS managed-memory) ---- */
+let idleT=null;const IDLE_MS=180000;
+function lockNow(){if(!CK||LOCKING)return;
+  if(PROC){pendingLock=true;toast("Se blocheaza dupa finalizarea procesarii…");return;} // atomic: nu intrerupe operatiuni (audit s4 #1)
+  LOCKING=true;stopNet();clearTimeout(idleT);wipe();
+  CK=null;HK=null;DB=null;ME=null;LEDGER_CHAIN=[];CHAT=null;FSIM=null; // elibereaza cheile din RAM (best-effort; datele pe disc raman criptate, recuperabile doar cu parola)
+  ["#matchList","#netHost","#ledger","#kpis","#topMatches","#phead","#mMsgs","#dictRes","#oferList","#cautList","#auditList"]
+    .forEach(s=>{const el=$(s);if(el)el.replaceChildren();}); // sanitizare DOM, fara innerHTML (audit s4 #5 / s5r2)
+  $("#overlay").classList.remove("on");$("#lockPass").value="";showLock("unlock");LOCKING=false;
+  toast("Blocat — cheile eliberate din memorie (best-effort)");}
+function resetIdle(){if(!CK)return;clearTimeout(idleT);idleT=setTimeout(lockNow,IDLE_MS);}
+["pointerdown","keydown","touchstart"].forEach(ev=>window.addEventListener(ev,resetIdle,{passive:true}));
+
+applyTheme(localStorage.getItem(TKEY)||"light");
+RM=localStorage.getItem("cercul_rm")==="1";applyRM();
+DATEABS=localStorage.getItem("cercul_dateabs")==="1";applyDateAbs();
+showLock(localStorage.getItem(SKEY)&&localStorage.getItem(KEY)?"unlock":"setup");
+</script>
+</body>
+</html>
