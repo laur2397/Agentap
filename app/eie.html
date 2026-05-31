@@ -910,6 +910,8 @@ function buildBrief(m){const cel=mem(ME===m.offer_member?m.seek_member:m.offer_m
   if(theirOffers.length)rows.push(h("div",{class:"bl"},h("b",{},cel.name.split(" ")[0]+" ofera: "),theirOffers.join("; ")));
   rows.push(myNotes.length?h("div",{class:"bl"},h("b",{},"Notitele tale: "),myNotes.join(" · "))
     :h("div",{class:"bl",style:{color:"var(--muted)"}},"Nu ai notite legate de aceasta persoana. Adauga in Jurnal."));
+  const myTasks=(DB.tasks||[]).filter(t=>t.member_id===ME&&!t.done&&t.text.toLowerCase().includes(fn)).map(t=>t.text);
+  if(myTasks.length)rows.push(h("div",{class:"bl"},h("b",{},"Task-uri deschise: "),myTasks.join(" · ")));
   const d=h("details",{class:"brief"},h("summary",{text:"📋 Brief de 1 minut ⌄"}),h("div",{class:"bbody"},...rows));d.open=true;return d;}
 
 /* ---- Secretara iteratia 2: calendar & programare (double-opt-in) ---- */
