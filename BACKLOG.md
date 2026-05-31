@@ -27,4 +27,4 @@ Reguli pentru fiecare item:
 17. [x] Dark mode: rafinare contraste pe carduri noi (task/meet).
 18. [x] Performanta: debounce la cautari.
 19. [x] Onboarding: pas optional „adauga prima notita/task”.
-20. [ ] Documentatie: README scurt pt. app (cum se ruleaza, ce face, limitari).
+20. [x] Documentatie: README scurt pt. app (cum se ruleaza, ce face, limitari).

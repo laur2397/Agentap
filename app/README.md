@@ -1,51 +1,44 @@
-# 🤝 Memorie colectiva si potriviri — prototip v1
+# Cercul EIE — aplicație de business networking (prototip)
 
-Aplicatie web pentru un cerc privat de business: aduna ce ofera / ce cauta
-fiecare, face potriviri **in stratul ascuns** si propune conexiuni doar cu
-**acordul ambelor parti**, cu **sursa mereu citata**.
+`eie.html` — o aplicație mobilă **într-un singur fișier**, fără backend, care funcționează 100% în browser.
 
-> Prototip educativ. **Zero dependinte** — doar Python standard (3.10+).
+## Ce face
+Un cerc privat de oameni de afaceri în care:
+- declari **ce oferi** și **ce cauți**;
+- primești **sugestii de conexiuni** pe baza intereselor comune (matching local TF-IDF + cosine);
+- te conectezi prin **dublu consimțământ** (ambele părți acceptă);
+- ai o **Secretară AI**: notițe + brief de întâlnire, calendar & programare (cu export Google Calendar / .ics / email), task-uri cu remindere, follow-up.
 
-## Rulare
+### Ecrane
+- **Acasă** — rezumat, statistici, următoarea întâlnire, pulse de rețea, conexiuni recente.
+- **Potriviri** — persoane de contactat (filtru pe industrie), card „gist-first”, acțiuni clare.
+- **Rețeaua** — lista conexiunilor + hartă force-directed opțională.
+- **Secretara** — întâlniri, task-uri, jurnal de notițe (cu #tag-uri), brief de 1 minut.
+- **Profil** — ce ofer / ce caut, editare profil, jurnal de audit, confidențialitate, setări.
 
-```bash
-python app/server.py
-# deschide http://localhost:8000
-```
+## Cum o rulezi
+1. Deschide `eie.html` în orice browser (telefon sau laptop). Nu necesită server, instalare sau internet (fonturile Google sunt opționale).
+2. La prima rulare **alegi o parolă de sesiune** (min. 4 caractere). Din ea se derivează cheia de criptare; nu se salvează pe disc.
+3. Apasă **„Doar explorez”** pentru a intra cu 20 de membri demo, sau treci prin onboarding (creezi un cont real).
+4. La reschideri, introdu aceeași parolă. ⚠️ Dacă o uiți, datele criptate **nu pot fi recuperate** (există „resetează” cu backup).
 
-La prima pornire se creeaza `app/data.db` cu cativa membri demo (Ana, Bogdan,
-Cristina) si o potrivire „wow” (carbune) deja pregatita. Sterge `app/data.db`
-ca sa reincepi de la zero.
+## Securitate & confidențialitate (model „Local-Only”)
+- **Criptare la repaus**: AES-GCM; cheia derivată din parolă cu PBKDF2 (150k), ținută **doar în RAM**.
+- **Integritate**: checksum SHA-256 + Trust Ledger pe lanț HMAC-SHA256 (verificabil).
+- **Auto-lock** la inactivitate (3 min) sau manual — cheile sunt eliberate din memorie (best-effort).
+- **CSP strict** (`connect-src 'none'` → fără exfiltrare) + **Trusted Types** (zero sink-uri DOM-XSS) + sanitizare la intrare.
+- **Privacy-by-design**: „ce caut” și identitatea se dezvăluie celeilalte părți **doar după dublu consimțământ**.
+- Scriere tranzacțională cu rollback; import cu validare de schemă.
 
-## Ce poti incerca
+## Limitări oneste (nu „magie”)
+- Fără backend / fără cont real / fără sincronizare automată cu Google (export-urile sunt **inițiate de tine**; aplicația nu trimite nimic singură).
+- Matching **euristic** (cuvinte-cheie / TF-IDF), nu embeddings sau LLM real.
+- Datele trăiesc doar în browserul tău; ștergerea cache-ului le elimină. Fă-ți **export (JSON)** pentru backup.
+- Securitatea finală depinde de **tăria parolei tale** (folosește un manager de parole).
 
-1. **Potriviri** — alege „Esti: Ana”. Vei vedea o potrivire propusa (Bogdan
-   ofera carbune, tu cauti carbune), cu sursa citata. Apasa **Prezinta-ma**.
-2. Schimba pe **Bogdan** → vede aceeasi potrivire → **Prezinta-ma**. Acum
-   ambii au acceptat → se deschide **conexiunea** cu un mesaj de context.
-3. **Profil** — adauga ce oferi (vizibil) / ce cauti (privat). Potrivirile se
-   recalculeaza automat.
-4. **Dicteaza** — scrie cateva fraze; aplicatia extrage ofer/caut (euristica
-   simpla, ca demonstratie a fluxului).
-5. **Secretara** — briefing, pe cine sa contactezi, sarcini.
+## Testare
+Testele sunt scripturi externe (Playwright, în afara fișierului de producție). `eie.html` nu conține cod de test.
+Validare rapidă: extrage `<script>` și rulează `node --check`; deschide app-ul și verifică zero erori de consolă.
 
-## Cum respecta principiile din specificatie
-
-| Principiu | Unde |
-|---|---|
-| Doua straturi (stie mult / arati cat vrei) | `ce ofer` vizibil vs `ce caut` privat |
-| Potrivire in stratul ascuns | `run_matching()` compara intern |
-| Consimtamant din ambele parti | fluxul `Prezinta-ma` → confirmare → `conectat` |
-| Sursa mereu vizibila | fiecare item are `source`, afisat pe card |
-| Om controleaza, AI completeaza | dictarea extrage „sugestii”, omul le tine in profil |
-
-## Limitari (constient prototip)
-
-- Fara autentificare reala (alegi cine esti dintr-un select) — e un cerc privat.
-- Extragerea din dictare e pe baza de reguli, nu LLM (vezi `_naive_extract`).
-- Potrivirea e pe suprapunere de cuvinte-cheie, nu semantica.
-- Stocare in SQLite local, fara migrari.
-
-Acestea sunt exact zonele unde, in v2, intra echipele de **AI** (extragere si
-potrivire semantica), **Securitate** (auth, criptare) si **Behavioral Science**
-(fluxuri etice de notificare).
+## Proces
+Aplicația a fost dezvoltată printr-un proces auditat: fiecare iterație trece printr-un „board de audit” (vezi `examples/audit.py`, `AUDIT_*.md`) și un jurnal de sprint (`SPRINT_LOG.md`, `BACKLOG.md`).

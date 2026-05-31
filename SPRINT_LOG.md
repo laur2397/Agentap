@@ -25,3 +25,10 @@
 - 2026-05-31 · Item 18 (Debounce la cautari) · listeneri input debounce-uiti (160-180ms) pe netSearch/noteSearch/globalSearch in loc de oninput inline; validat, 0 erori.
 - 2026-05-31 · AUDIT item 18 (loop18): APROBAT 6/6 + CAE.
 - 2026-05-31 · Item 19 (Onboarding pas optional) · al 4-lea pas 'prima notita/idee' (optional) creeaza o nota la finalizare; validat, 0 erori.
+- 2026-05-31 · Item 20 (README app) · app/README.md rescris: ce face, cum se ruleaza, securitate, limitari oneste, proces; app neatins, validat, 0 erori.
+
+## REZUMAT FINAL SPRINT LOOP (2026-05-31)
+- 20/20 itemi din backlog livrati, fiecare validat (node --check + Playwright, zero erori de consola).
+- Board de audit rulat la itemii 3/6/9/12/15/18 — toate APROBAT 6/6 + CAE.
+- Invarianti pastrati pe tot parcursul: zero innerHTML, criptare AES-GCM, dublu consimtamant, CSP+TrustedTypes, accesibilitate WCAG.
+- Itemi nebifati ramasi in backlog: 0. Loop oprit (backlog gol).
