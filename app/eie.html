@@ -2,6 +2,9 @@
 <html lang="ro" data-theme="light">
 <head>
 <meta charset="utf-8">
+<!-- CSP: blocheaza orice retea (connect-src 'none' -> fara exfiltrare), fara obiecte/iframe/eval.
+     'unsafe-inline' la script e necesar pt. arhitectura single-file; exfiltrarea ramane blocata. (audit s5 #2) -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'; object-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cercul EIE — Network Capital</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -149,6 +152,9 @@ input,textarea,select{background:var(--card2);border:1px solid var(--line2);bord
 .spin{display:inline-block;width:15px;height:15px;border:2px solid var(--primary-soft);border-top-color:var(--primary);border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px}
 @keyframes sp{to{transform:rotate(360deg)}}
 .proc{display:flex;align-items:center;gap:9px;color:var(--ink2);font-size:13px;padding:10px 0}
+.procmask{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;gap:10px;background:color-mix(in srgb,var(--bg) 55%,transparent);backdrop-filter:blur(2px);color:var(--ink2);font-size:13px;font-family:var(--serif)}
+.procmask.on{display:flex}
+.procmask .spin{width:18px;height:18px}
 .dots{display:inline-flex;gap:4px}.dots i{width:6px;height:6px;border-radius:50%;background:var(--primary);animation:bl 1s var(--ease) infinite}
 .dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
 @keyframes bl{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
@@ -315,7 +321,7 @@ nav{position:sticky;bottom:0;z-index:9;background:color-mix(in srgb,var(--bg) 88
       <p style="font-size:11px;color:var(--muted);margin:-6px 0 8px">Read-only · fiecare actiune e inregistrata cu marca de timp (conformitate).</p>
       <div class="audit" id="auditList"></div></div>
     <div class="panel"><h3>Confidentialitate <span class="badge vis">Local-Only</span></h3>
-      <p style="font-size:12px;color:var(--ink2);line-height:1.55">Datele tale traiesc <b>doar in acest browser</b>, criptate la repaus cu <b>AES-GCM</b> si o cheie derivata din parola ta (<b>PBKDF2</b>) care <b>nu se salveaza pe disc</b> — traieste doar in memorie. Integritatea continutului: checksum <b>SHA-256</b>. Trust Ledger: lant <b>HMAC-SHA256</b> cheiat de o cheie derivata din parola (secreta, nestocata) — nu poate fi rescris fara parola. La inactivitate (3 min) sau manual, <b>cheile se sterg din memorie</b> (auto-lock). „Ce caut” ramane privat: se dezvaluie <b>doar dupa dublu consimtamant</b>.</p>
+      <p style="font-size:12px;color:var(--ink2);line-height:1.55">Datele tale traiesc <b>doar in acest browser</b>, criptate la repaus cu <b>AES-GCM</b>. Cheia se deriveaza din parola ta (<b>PBKDF2</b>, 150k iteratii) cu un <b>salt unic per utilizator</b>, generat la prima rulare si stocat local (salt-ul nu e secret — previne rainbow tables); <b>cheia ramane strict in RAM</b> si nu se scrie niciodata pe disc. La blocare se sterge doar cheia din memorie — datele pe disc raman criptate si se redeschid doar cu parola. Scrierea e tranzactionala (temp→validare→commit). Integritate: checksum <b>SHA-256</b>; Trust Ledger pe lant <b>HMAC-SHA256</b> cheiat de parola. „Ce caut” se dezvaluie <b>doar dupa dublu consimtamant</b>.</p>
       <p style="font-size:11px;color:var(--warn);line-height:1.5;margin-top:8px">⚠ Prototip de cercetare, client-side: un script malitios pe aceeasi origine (XSS/extensie) are oricum acces direct la memorie cat sesiunea e deblocata — de aceea apararea reala e auto-lock-ul si parola, nu obscuritatea. Declansatoarele de matching sunt mascate de o durata fixa de procesare (anti timing). <b>Nu introduce date cu adevarat sensibile</b>; tu esti responsabil de backup.</p>
       <div style="margin-top:12px"><button class="btn ghost sm" onclick="exportData()">⤓ Exporta datele (JSON) pentru backup</button></div></div>
     <div class="panel"><h3>Preferinte <span class="badge vis">acces</span></h3>
@@ -368,6 +374,7 @@ nav{position:sticky;bottom:0;z-index:9;background:color-mix(in srgb,var(--bg) 88
   <div class="msgs" id="mMsgs"></div>
   <div class="cinput"><input id="mInput" placeholder="Scrie un mesaj..."><button class="btn gold sm" onclick="sendMsg()">→</button></div>
 </div></div>
+<div class="procmask" id="procMask" role="status" aria-live="polite"><span class="spin"></span> Procesez…</div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -381,6 +388,9 @@ let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
 const esc=s=>(s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
 const svgSafe=s=>String(s||"").replace(/[^\p{L}\p{N}\s.\-]/gu,"").slice(0,40); // whitelist pt. SVG (audit R3 #3)
+// sanitizare RECURSIVA defense-in-depth pe SVG: elimina foreignObject/script + orice atribut on* (audit s5 #3)
+function sanitizeSVG(root){if(!root)return;root.querySelectorAll("foreignObject,script,a").forEach(n=>n.remove());
+  root.querySelectorAll("*").forEach(el=>{for(const a of [...el.attributes])if(/^on/i.test(a.name)||/^(href|xlink:href)$/i.test(a.name))el.removeAttribute(a.name);});}
 const ini=n=>{const p=n.trim().split(/\s+/);return((p[0][0]||"?")+(p[1]?p[1][0]:"")).toUpperCase();};
 const today=()=>new Date().toISOString().slice(0,10);
 const cssv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
@@ -439,8 +449,13 @@ function validDB(d){if(!d||typeof d!=="object")return false;
   if(typeof d.seq!=="number"||d.seq<1)d.seq=Math.max(d.members.length,...d.members.map(m=>m.id))+1;
   if(!Array.isArray(d.audit))d.audit=[];return true;}
 let saveTimer=null;
-function save(){if(!CK)return;clearTimeout(saveTimer);saveTimer=setTimeout(async()=>{try{localStorage.setItem(KEY,await encJSON(DB));}catch(e){console.warn("save esuat",e);}},120);}
-async function flush(){if(!CK)return;try{localStorage.setItem(KEY,await encJSON(DB));}catch(e){console.warn(e);}}
+// commit tranzactional: scrie in key temporara -> valideaza roundtrip -> suprascrie key principal (audit s5 cond.1)
+async function commit(){if(!CK||!DB)return;try{const blob=await encJSON(DB);
+  localStorage.setItem(KEY+"_tmp",blob);await decJSON(localStorage.getItem(KEY+"_tmp"));
+  localStorage.setItem(KEY,blob);localStorage.removeItem(KEY+"_tmp");
+}catch(e){console.warn("commit esuat",e);try{localStorage.removeItem(KEY+"_tmp");}catch(_){}}}
+function save(){if(!CK)return;clearTimeout(saveTimer);saveTimer=setTimeout(commit,120);}
+async function flush(){return commit();}
 function backupRaw(){const raw=localStorage.getItem(KEY);if(raw)localStorage.setItem(KEY+"_backup_"+Date.now(),raw);} // anti-pierdere (audit R3 #4)
 function exportData(){try{const blob=new Blob([JSON.stringify(DB,null,2)],{type:"application/json"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="cercul-export-"+today()+".json";a.click();
@@ -613,7 +628,8 @@ function net(){const host=$("#netHost");if(!host||!DB)return;
         <text x="${p.x.toFixed(1)}" y="${(p.y+r+12).toFixed(1)}" text-anchor="middle" pointer-events="none">${svgSafe(m.name.split(" ")[0])}</text></g>`;});
     let svg=host.querySelector("svg");
     if(svg)svg.innerHTML=e+n;
-    else host.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block;touch-action:none" role="img" aria-label="Graful retelei: ${conn.length} conexiuni, ${members.length} membri. Trage nodurile pentru a explora.">${e+n}</svg>`;}
+    else host.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block;touch-action:none" role="img" aria-label="Graful retelei: ${conn.length} conexiuni, ${members.length} membri. Trage nodurile pentru a explora.">${e+n}</svg>`;
+    sanitizeSVG(host.querySelector("svg"));}
   draw();
   const svg=host.querySelector("svg");
   if(svg&&!svg._wired){svg._wired=1;let cur=0;
@@ -644,14 +660,14 @@ function prof(){const me=mem(ME),con=DB.matches.filter(x=>x.status==="conectat"&
 function addItem(k){if(PROC)return;const t=clean($("#"+k+"Text").value.trim());if(!t)return;
   DB.items.push({id:DB.seq++,member_id:ME,kind:k,text:t,visible:k==="ofer"?1:0,source:"profil"});$("#"+k+"Text").value="";
   logA("Adaugat in „"+(k==="ofer"?"ce ofer":"ce caut")+"”: "+t);
-  PROC=true;const t0=performance.now();runMatching();save();
+  showProc();const t0=performance.now();runMatching();save();
   const wait=Math.max(0,360-(performance.now()-t0)); // durata constanta -> maschează timing-ul matching-ului (audit s4 #2)
-  setTimeout(()=>{PROC=false;render();toast("Adaugat — am recalculat afinitatile");if(pendingLock){pendingLock=false;lockNow();}},wait);}
+  setTimeout(()=>{hideProc();render();toast("Adaugat — am recalculat afinitatile");if(pendingLock){pendingLock=false;lockNow();}},wait);}
 function delItem(id){const it=DB.items.find(i=>i.id===id);DB.items=DB.items.filter(i=>i.id!==id);if(it)logA("Sters: "+it.text);save();render();}
 
 /* Secretara AI — cu indicator de procesare */
 function dicteaza(){if(PROC)return;const text=$("#dictText").value.trim();if(!text)return;
-  const btn=$("#dictBtn");PROC=true;btn.disabled=true;$("#dictText").disabled=true;
+  const btn=$("#dictBtn");showProc();btn.disabled=true;$("#dictText").disabled=true;
   $("#dictRes").innerHTML='<div class="proc" role="status" aria-live="polite"><span class="dots"><i></i><i></i><i></i></span> Secretara AI asculta si extrage intentiile…</div>';
   setTimeout(()=>{
     const out=[];
@@ -662,7 +678,7 @@ function dicteaza(){if(PROC)return;const text=$("#dictText").value.trim();if(!te
     if(out.length)logA("Secretara AI a extras "+out.length+" intentii din dictare");
     save();runMatching();
     $("#dictRes").innerHTML='<div class="sec" style="margin-top:4px">Intentii extrase</div>'+(out.length?out.map(([k,t])=>`<div class="linei"><div>${esc(t)}</div><span class="badge ${k==="ofer"?"vis":"priv"}">${k}</span></div>`).join(""):'<div class="empty">Nu am gasit intentii clare.</div>')+(out.length?'<div style="margin-top:10px"><button class="btn ghost sm" onclick="setView(\'potriviri\')">Vezi potrivirile noi →</button></div>':'');
-    $("#dictText").value="";btn.disabled=false;$("#dictText").disabled=false;PROC=false;
+    $("#dictText").value="";btn.disabled=false;$("#dictText").disabled=false;hideProc();
     if(pendingLock){pendingLock=false;lockNow();}
   },950);}
 
@@ -681,6 +697,9 @@ function sendMsg(){const t=$("#mInput").value.trim();if(!t)return;DB.messages.pu
 function closeModal(){$("#overlay").classList.remove("on");CHAT=null;}
 $("#mInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendMsg();});
 function toast(t){const el=$("#toast");el.textContent=t;el.classList.add("on");clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove("on"),2500);}
+// overlay blocant pe durata operatiunilor async (audit s5 #2/#5)
+function showProc(){PROC=true;const m=$("#procMask");if(m)m.classList.add("on");}
+function hideProc(){PROC=false;const m=$("#procMask");if(m)m.classList.remove("on");}
 
 /* theme */
 function applyTheme(t){document.documentElement.setAttribute("data-theme",t);$("#themeBtn").textContent=t==="dark"?"☀":"☾";localStorage.setItem(TKEY,t);if(VIEW==="retea")net();}
@@ -741,7 +760,7 @@ let idleT=null;const IDLE_MS=180000;
 function lockNow(){if(!CK||LOCKING)return;
   if(PROC){pendingLock=true;toast("Se blocheaza dupa finalizarea procesarii…");return;} // atomic: nu intrerupe operatiuni (audit s4 #1)
   LOCKING=true;stopNet();clearTimeout(idleT);
-  CK=null;HK=null;DB=null;ME=null;LEDGER_CHAIN=[];CHAT=null;FSIM=null; // cryptographic shredding al cheilor din RAM
+  CK=null;HK=null;DB=null;ME=null;LEDGER_CHAIN=[];CHAT=null;FSIM=null; // sterge cheile derivate din RAM (datele pe disc raman criptate, recuperabile doar cu parola)
   ["#matchList","#netHost","#ledger","#kpis","#topMatches","#phead","#mMsgs","#dictRes","#oferList","#cautList","#auditList"]
     .forEach(s=>{const el=$(s);if(el)el.innerHTML="";}); // sanitizare DOM (audit s4 #5)
   $("#overlay").classList.remove("on");$("#lockPass").value="";showLock("unlock");LOCKING=false;
