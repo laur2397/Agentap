@@ -783,11 +783,12 @@ function renderConn(){const host=$("#connList");if(!host)return;
   const rows=conn.map(m=>{const cel=mem(m.offer_member===ME?m.seek_member:m.offer_member);if(!cel)return null;
     if(q&&!fuzzy(q,cel.name+" "+(cel.industry||"")))return null;
     const common=(m.common||[]).join(", ");
+    const ts=DB.messages.filter(x=>x.match_id===m.id&&x.t).map(x=>x.t),lastA=ts.length?Math.max(...ts):(m.at||0);
     const av=h("div",{class:"av sq",style:{width:"44px",height:"44px",fontSize:"15px"}},ini(cel.name));av.style.background=cel.color||"#6366F1";
     return h("div",{class:"connrow","data-act":"msg","data-id":m.id,tabindex:"0",role:"button","aria-label":"Deschide conversatia cu "+cel.name},av,
       h("div",{class:"ci"},h("div",{class:"cn",text:cel.name}),h("div",{class:"cr",text:cel.role}),
         h("div",{class:"cmeta",text:common?"prin interes comun: "+common:"conexiune confirmata"})),
-      h("div",{class:"cdate",text:m.at?new Date(m.at).toLocaleDateString("ro-RO",{day:"numeric",month:"short"}):""}));}).filter(Boolean);
+      h("div",{class:"cdate",text:lastA?"activ "+relTime(lastA):""}));}).filter(Boolean);
   setKids(host, rows.length?rows:estateBox(q?"Niciun rezultat":"Inca nicio conexiune", q?"Incearca alt nume.":"Conexiunile apar aici dupa ce accepti o introducere in „Cine merita contactat”."));
 }
 /* Trust Ledger cu hash-chain REAL, verificabil + exportabil (audit: nu "security theater") */
@@ -1157,7 +1158,7 @@ function loadChat(){const mt=DB.matches.find(x=>x.id===CHAT),msgs=DB.messages.fi
   setKids($("#mMsgs"),br,mf,...msgs.map(m=>{if(m.sender===null)return h("div",{class:"msg app",text:"❧ "+m.text});
     return m.sender===ME?h("div",{class:"msg me",text:m.text}):h("div",{class:"msg them"},h("span",{class:"nm2",text:name(m.sender)}),m.text);}));
   const b=$("#mMsgs");b.scrollTop=b.scrollHeight;}
-function sendMsg(){const t=$("#mInput").value.trim();if(!t)return;DB.messages.push({id:DB.seq++,match_id:CHAT,sender:ME,text:t});$("#mInput").value="";save();loadChat();}
+function sendMsg(){const t=$("#mInput").value.trim();if(!t)return;DB.messages.push({id:DB.seq++,match_id:CHAT,sender:ME,text:t,t:Date.now()});$("#mInput").value="";save();loadChat();if(VIEW==="retea")renderConn();}
 function closeModal(){$("#overlay").classList.remove("on");CHAT=null;}
 $("#mInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendMsg();});
 function toast(t){const el=$("#toast");el.textContent=t;el.classList.add("on");clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove("on"),2500);}
