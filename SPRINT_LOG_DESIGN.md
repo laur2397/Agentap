@@ -1,5 +1,6 @@
 # SPRINT_LOG_DESIGN — loop 3 (Design + Psihologie & Cognitiv, engagement etic)
 
+- 2026-05-31 · Item 7 (De reconectat) · sectiune sus in Reteaua cu pana la 3 conexiuni fara contact de peste 30 zile (frecventa, nu volum), prompt cald "Reia →" care deschide conversatia; dispare cand contactul e recent; validat Playwright (apare la 60 zile, dispare la contact recent), 0 erori.
 - 2026-05-31 · AUDIT item 6 (designloop6): APROBAT 6/6 + CAE.
 - 2026-05-31 · Item 6 (Echilibrul tau / radar valoare) · panou nou in Profil cu SVG calm: bara "Ofer" (stanga) vs "Caut" (dreapta), proportional, cu aria-label si caption onest ("nu un scor, un reper"); fara scor-trofeu; adaugat #valueRadar la curatarea la blocare; validat Playwright (SVG + 2 bare + label), 0 erori.
 - 2026-05-31 · Item 5 (Indicator suprapunere/bridge) · pe cardurile conectate, bloc vizual "Tu oferi/Ea ofera ⇄ Ea cauta/Tu cauti" cu textele reale ale potrivirii; afisat DOAR post-consimtamant (0 bridge pe cardurile ne-dezvaluite — privacy pastrat); validat Playwright (1 bridge cu sageata + etichete corecte, 0 in ne-dezvaluite), 0 erori.
