@@ -18,8 +18,8 @@ Audit (examples/audit.py) la fiecare al 3-lea item.
 1. [x] Backup criptat dedicat (.eie): export al datelor criptat cu o parola de backup (PBKDF2+AES-GCM).
 2. [x] Restore din backup criptat: import fisier .eie + parola -> restaureaza (si transfer pe alt dispozitiv).
 3. [x] Reminder bland de backup pe Acasa daca au trecut >14 zile de la ultimul backup (neintruziv, dismissable).
-4. [ ] Cod de conexiune: genereaza un cod partajabil cu cardul tau PUBLIC (nume, domeniu, ce oferi — NU ce cauti).
-5. [ ] Adauga o conexiune prin cod: lipesti codul cuiva -> apare ca persoana cunoscuta in reteaua ta.
+4. [x] Cod de conexiune: genereaza un cod partajabil cu cardul tau PUBLIC (nume, domeniu, ce oferi — NU ce cauti).
+5. [x] Adauga o conexiune prin cod: lipesti codul cuiva -> apare ca persoana cunoscuta in reteaua ta.
 6. [ ] QR pentru codul de conexiune: randare QR (encoder vanilla, fara biblioteci) pentru schimb fata-in-fata.
 7. [ ] Ecran „Schimba contacte la intalnire": genereaza codul/QR-ul tau + camp de lipit codul celuilalt, intr-un loc.
 8. [ ] Template-uri de notite (dupa apel / follow-up / idee) — un click insereaza structura.

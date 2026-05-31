@@ -357,6 +357,12 @@ h2.title{font-weight:800;font-size:24px;letter-spacing:-.5px;margin:2px 0 4px}
 .an-strip{display:flex;gap:12px;overflow-x:auto;padding:2px 2px 6px;-webkit-overflow-scrolling:touch}
 .an-item{background:none;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;flex:none;width:54px}
 .an-item .an-name{font-size:11px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:54px}
+/* loop4 #4-5: schimb de contacte prin cod */
+.exchwrap{background:var(--card);border:1px solid var(--line);border-radius:13px;margin-bottom:12px;box-shadow:var(--shadow)}
+.exchwrap>summary{list-style:none;cursor:pointer;font-weight:700;font-size:13px;color:var(--primary-dim);padding:13px 15px}
+.exchwrap>summary::-webkit-details-marker{display:none}
+.exchwrap .exchbody{padding:0 15px 15px}
+.exchwrap textarea{background:var(--card2);border:1px solid var(--line);border-radius:10px;color:var(--ink2);padding:9px 11px;resize:none}
 .adock{display:flex;gap:8px;margin-top:14px;align-items:center}
 .adock .btn{flex:1}
 .menu-dots{flex:none;width:44px;height:44px;border-radius:11px;border:1px solid var(--line2);background:var(--card);color:var(--muted);font-size:18px;cursor:pointer;display:grid;place-items:center}
@@ -576,6 +582,16 @@ details.why2>summary::-webkit-details-marker{display:none}
   <section id="retea" class="view">
     <div class="eyebrow">Reteaua ta</div><h2 class="title">Conexiunile tale</h2>
     <p class="sub">Oamenii cu care te-ai conectat. O conexiune apare doar dupa ce ambele parti accepta o introducere.</p>
+    <details class="exchwrap" id="exchDet"><summary>🤝 Schimbă contacte la o întâlnire ⌄</summary>
+      <div class="exchbody">
+        <p class="sub" style="margin:8px 0 10px">Codul tău conține doar <b>cardul public</b> (nume, domeniu, ce oferi) — niciodată „ce cauți". Îl dai cuiva pe care îl întâlnești; el îl lipește la el și te adaugă. Totul local, fără server.</p>
+        <label class="mfl" for="myConnCode">Codul tău de conexiune</label>
+        <textarea id="myConnCode" rows="3" readonly aria-label="Codul tau de conexiune" style="width:100%;font-size:11px"></textarea>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+          <button class="btn ghost sm" data-act="copyConnCode">⧉ Copiază codul meu</button>
+          <button class="btn gold sm" data-act="addByCode">＋ Adaugă pe cineva (lipește cod)</button>
+        </div>
+      </div></details>
     <div class="searchbar"><span class="ic">⌕</span><input id="netSearch" placeholder="Cauta o persoana…" aria-label="Cauta in retea"></div>
     <div id="activeNet"></div>
     <div id="reconnect"></div>
@@ -996,7 +1012,7 @@ function setView(v){if(PROC){toast("Asteapta — Secretara AI proceseaza…");re
 function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("div",{class:"sk l w80"}),h("div",{class:"sk l w40"}));}
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
 function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
-  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();applyMatchDiv();setKids($("#matchList"),pipeline(orderMatches(myMatches().filter(matchIndOk))));}else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();}}else if(VIEW==="profil")prof();
+  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();applyMatchDiv();setKids($("#matchList"),pipeline(orderMatches(myMatches().filter(matchIndOk))));}else if(VIEW==="retea"){renderConn();renderExchange();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();}}else if(VIEW==="profil")prof();
   updateBadges();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 // backlog #7: empty-state ilustrat, consistent
 function estateBox(title,sub,action){return h("div",{class:"estate",style:{padding:"26px 20px"}},
@@ -1066,6 +1082,29 @@ function home(){const me=mem(ME),mm=myMatches();
 }
 const relOf=cel=>cel.rel||"activ";
 const REL={rece:["Rece","relrece"],activ:["Activ","relactiv"],prioritar:["Prioritar","relprio"]};
+/* loop4 #4-5: cod de conexiune (card public) + adaugare prin cod — networking fara server */
+const PAL=["#6366F1","#10B981","#F59E0B","#EF4444","#8B5CF6","#06B6D4","#EC4899","#14B8A6"];
+const b64utf8=s=>btoa(String.fromCharCode(...new TextEncoder().encode(s)));
+const unb64utf8=b=>new TextDecoder().decode(Uint8Array.from(atob(b),c=>c.charCodeAt(0)));
+function myPublicCard(){const me=mem(ME)||{name:"?"};
+  const offers=(DB.items||[]).filter(i=>i.member_id===ME&&i.kind==="ofer"&&i.visible).map(i=>i.text).slice(0,5);
+  return {v:1,n:me.name,d:me.industry||"",r:me.role||"",o:offers};}
+function connCode(){try{return "EIE1:"+b64utf8(JSON.stringify(myPublicCard()));}catch(_){return"";}}
+function renderExchange(){const t=$("#myConnCode");if(t)t.value=connCode();}
+function copyConnCode(){const code=connCode();if(!code){toast("Cod indisponibil");return;}
+  try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(code).then(()=>toast("Cod copiat — dă-l persoanei pe care o întâlnești")).catch(()=>{const t=$("#myConnCode");if(t)t.select();});return;}}catch(_){}
+  const t=$("#myConnCode");if(t)t.select();toast("Selectează și copiază codul");}
+function parseConnCode(s){s=String(s||"").trim();if(!s.startsWith("EIE1:"))return null;
+  try{const o=JSON.parse(unb64utf8(s.slice(5)));if(o&&o.n)return o;}catch(_){}return null;}
+function addByCode(){const raw=prompt("Lipește codul de conexiune primit (începe cu EIE1:):");if(raw===null)return;
+  const card=parseConnCode(raw);if(!card){toast("Cod invalid sau deteriorat");return;}
+  const nm=clean(card.n).slice(0,80);if(!nm){toast("Cod fără nume");return;}
+  if((DB.members||[]).some(m=>m.via==="code"&&m.name===nm)){toast(nm+" e deja adăugat prin cod");return;}
+  const id=DB.seq++,color=PAL[id%PAL.length];
+  DB.members.push({id,name:nm,industry:clean(card.d||"").slice(0,60),role:clean(card.r||"").slice(0,80)||"Adăugat prin cod",trust:60,color,via:"code"});
+  (card.o||[]).slice(0,5).forEach(t=>{const tx=clean(String(t)).slice(0,140);if(tx)DB.items.push({id:DB.seq++,member_id:id,kind:"ofer",text:tx,visible:1,source:"cod de conexiune"});});
+  DB.matches.push({id:DB.seq++,offer_member:id,seek_member:ME,status:"conectat",at:Date.now(),common:[],score:70,via:"code"});
+  logA("Conexiune adăugată prin cod: "+nm);save();loadMembers();$("#member").value=ME;render();toast(nm+" a fost adăugat în rețea");}
 function renderConn(){const host=$("#connList");if(!host)return;
   const q=(($("#netSearch")||{}).value||"").trim();
   const conn=DB.matches.filter(m=>m.status==="conectat"&&(m.offer_member===ME||m.seek_member===ME)).sort((a,b)=>(b.at||0)-(a.at||0));
@@ -1818,6 +1857,8 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="backupEnc")exportEncrypted();
   else if(a==="restoreEnc")restoreEncrypted();
   else if(a==="dismissBackup")dismissBackup();
+  else if(a==="copyConnCode")copyConnCode();
+  else if(a==="addByCode")addByCode();
   else if(a==="profedit")editProfile();
   else if(a==="profsave")saveProfile();
   else if(a==="profcancel")cancelProfile();
