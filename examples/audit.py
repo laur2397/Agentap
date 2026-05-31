@@ -22,6 +22,19 @@ def P(f): return os.path.join(ROOT,f)
 
 # Descrierea EXACTA a solutiei auditate (iteratia 2 + remedieri runda 1). Onesta — doar ce e implementat.
 SOLUTIE=(
+ "REMEDIERI QA RUNDA 2 (verificate automat cu Playwright, zero erori de consola):\n"
+ "(r2#1) ZERO innerHTML: TOATA randarea a fost rescrisa pe DOM API printr-un constructor sigur "
+ "h()/svgEl()/setKids() (createElement/createElementNS + textContent + setAttribute). Verificat in cod: "
+ "0 atribuiri .innerHTML si 0 citiri .innerHTML in tot fisierul. Datele de utilizator intra DOAR ca "
+ "textContent -> imposibil sa devina markup. SVG-ul grafului e construit cu createElementNS si "
+ "svg.replaceChildren (fara serializare HTML). Atributele numerice sunt coercionate.\n"
+ "(r2#2) ANTI CSS-EXFILTRATION: vectorul CSS (ex. [value^=...]{background:url(...)}) e blocat de CSP — "
+ "img-src 'data:' (fara url-uri externe) + connect-src 'none' (fara nicio iesire de retea). style-src "
+ "'self' e imposibil pt. single-file (tot CSS-ul e inline), dar exfiltrarea e efectiv blocata; nicio "
+ "clasa/stil nu e construita din input de utilizator (avatarul foloseste o culoare din paleta controlata).\n"
+ "(r2#3) CLEANUP DETERMINIST (anti zombie-state): handler global error/unhandledrejection reseteaza "
+ "starea async (PROC/overlay/pendingLock); 'pagehide' apeleaza wipe() (zeroizarea bufferelor) la "
+ "inchidere/navigare; commit() are try/catch/finally cu rollback. wipe() la auto-lock ramane.\n\n"
  "REMEDIERI QA (peste redesign-ul iteratiei 5, verificate cu Playwright, zero erori):\n"
  "(qa#1) ZEROING MEMORIE: functie wipe() care suprascrie cu zerouri (Uint8Array.fill(0)) salt-ul si "
  "bufferele controlate, apelata la auto-lock inainte de eliberarea referintelor. Limitare documentata "
