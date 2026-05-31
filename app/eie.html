@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <!-- CSP: blocheaza orice retea (connect-src 'none' -> fara exfiltrare), fara obiecte/iframe/eval.
      'unsafe-inline' la script e necesar pt. arhitectura single-file; exfiltrarea ramane blocata. (audit s5 #2) -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'; object-src 'none'; require-trusted-types-for 'script'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cercul EIE — Network Capital</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -416,7 +416,8 @@ details.why2>summary::-webkit-details-marker{display:none}
       <p style="font-size:11px;color:var(--muted);margin:-6px 0 8px">Read-only · fiecare actiune e inregistrata cu marca de timp (conformitate).</p>
       <div class="audit" id="auditList"></div></div>
     <div class="panel"><h3>Confidentialitate <span class="badge vis">Local-Only</span></h3>
-      <p style="font-size:12px;color:var(--ink2);line-height:1.55">Datele tale traiesc <b>doar in acest browser</b>, criptate la repaus cu <b>AES-GCM</b>. Cheia se deriveaza din parola ta (<b>PBKDF2</b>, 150k iteratii) cu un <b>salt unic per utilizator</b>, generat la prima rulare si stocat local (salt-ul nu e secret — previne rainbow tables); <b>cheia ramane strict in RAM</b> si nu se scrie niciodata pe disc. La blocare se sterge doar cheia din memorie — datele pe disc raman criptate si se redeschid doar cu parola. Scrierea e tranzactionala (temp→validare→commit). Integritate: checksum <b>SHA-256</b>; Trust Ledger pe lant <b>HMAC-SHA256</b> cheiat de parola. „Ce caut” se dezvaluie <b>doar dupa dublu consimtamant</b>.</p>
+      <p style="font-size:12px;color:var(--ink2);line-height:1.55">Datele tale traiesc <b>doar in acest browser</b>, criptate la repaus cu <b>AES-GCM</b>. Cheia se deriveaza din parola ta (<b>PBKDF2</b>, 150k iteratii) cu un <b>salt unic per utilizator</b>, generat la prima rulare si stocat local (salt-ul nu e secret — previne rainbow tables); <b>cheia ramane strict in RAM</b> si nu se scrie niciodata pe disc. La blocare cheia e <b>eliberata din memorie (best-effort)</b> — JS nu garanteaza zeroing imediat al heap-ului; datele pe disc raman criptate si se redeschid doar cu parola. Scrierea e tranzactionala (temp→validare→commit). Integritate: checksum <b>SHA-256</b>; Trust Ledger pe lant <b>HMAC-SHA256</b> cheiat de parola. „Ce caut” se dezvaluie <b>doar dupa dublu consimtamant</b>.</p>
+      <p style="font-size:11px;color:var(--muted);line-height:1.5;margin-top:8px">Securitatea finala depinde de <b>taria parolei tale</b>: la un dump complet al stocarii, un atacator are doar salt+ciphertext (nu si parola) si trebuie sa o sparga prin brute-force incetinit de PBKDF2. Foloseste o parola lunga (ideal dintr-un manager de parole). Acest prototip nu adauga un „pepper” extern (n-ar avea unde, fiind Local-Only fara server).</p>
       <p style="font-size:11px;color:var(--warn);line-height:1.5;margin-top:8px">⚠ Prototip de cercetare, client-side: un script malitios pe aceeasi origine (XSS/extensie) are oricum acces direct la memorie cat sesiunea e deblocata — de aceea apararea reala e auto-lock-ul si parola, nu obscuritatea. Declansatoarele de matching sunt mascate de o durata fixa de procesare (anti timing). <b>Nu introduce date cu adevarat sensibile</b>; tu esti responsabil de backup.</p>
       <div style="margin-top:12px"><button class="btn ghost sm" onclick="exportData()">⤓ Exporta datele (JSON) pentru backup</button></div></div>
     <div class="panel"><h3>Preferinte <span class="badge vis">acces</span></h3>
@@ -995,16 +996,16 @@ async function lockSubmit(){const pass=$("#lockPass").value,err=$("#lockErr");er
 function lockReset(){if(!confirm("Reseteaza? Datele criptate actuale raman ca backup in browser, dar vei porni un cont nou."))return;
   backupRaw();localStorage.removeItem(KEY);localStorage.removeItem(SKEY);CK=null;
   $("#lockPass").value="";$("#lockErr").style.display="none";showLock("setup");}
-/* ---- auto-lock: cryptographic shredding — sterge cheia din RAM la inactivitate (audit s5 #3) ---- */
+/* ---- auto-lock: best-effort clearing al cheilor din RAM la inactivitate (nu garanteaza zeroing in JS managed-memory) ---- */
 let idleT=null;const IDLE_MS=180000;
 function lockNow(){if(!CK||LOCKING)return;
   if(PROC){pendingLock=true;toast("Se blocheaza dupa finalizarea procesarii…");return;} // atomic: nu intrerupe operatiuni (audit s4 #1)
   LOCKING=true;stopNet();clearTimeout(idleT);wipe();
-  CK=null;HK=null;DB=null;ME=null;LEDGER_CHAIN=[];CHAT=null;FSIM=null; // sterge cheile derivate din RAM (datele pe disc raman criptate, recuperabile doar cu parola)
+  CK=null;HK=null;DB=null;ME=null;LEDGER_CHAIN=[];CHAT=null;FSIM=null; // elibereaza cheile din RAM (best-effort; datele pe disc raman criptate, recuperabile doar cu parola)
   ["#matchList","#netHost","#ledger","#kpis","#topMatches","#phead","#mMsgs","#dictRes","#oferList","#cautList","#auditList"]
     .forEach(s=>{const el=$(s);if(el)el.replaceChildren();}); // sanitizare DOM, fara innerHTML (audit s4 #5 / s5r2)
   $("#overlay").classList.remove("on");$("#lockPass").value="";showLock("unlock");LOCKING=false;
-  toast("Blocat — cheile sterse din memorie");}
+  toast("Blocat — cheile eliberate din memorie (best-effort)");}
 function resetIdle(){if(!CK)return;clearTimeout(idleT);idleT=setTimeout(lockNow,IDLE_MS);}
 ["pointerdown","keydown","touchstart"].forEach(ev=>window.addEventListener(ev,resetIdle,{passive:true}));
 

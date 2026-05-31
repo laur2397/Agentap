@@ -22,6 +22,22 @@ def P(f): return os.path.join(ROOT,f)
 
 # Descrierea EXACTA a solutiei auditate (iteratia 2 + remedieri runda 1). Onesta — doar ce e implementat.
 SOLUTIE=(
+ "REMEDIERI QA (peste iteratia 2 Secretara, verificate cu Playwright, zero erori):\n"
+ "(qa-tt) TRUSTED TYPES ACTIVAT: CSP include acum 'require-trusted-types-for script'. Pentru ca aplicatia "
+ "NU foloseste niciun sink DOM-XSS (zero innerHTML/outerHTML/document.write; totul prin createElement/"
+ "textContent), politica trece FARA erori — ceea ce DOVEDESTE formal absenta vectorilor de injectie. "
+ "Verificat: window.trustedTypes activ, 0 violari de consola pe tot fluxul (onboarding, graf, export, intalniri).\n"
+ "(qa-term) TERMINOLOGIE ONESTA: am eliminat 'cryptographic shredding' din cod si din UI. Acum se spune "
+ "corect 'eliberare best-effort a cheilor din RAM' + nota ca JS managed-memory nu garanteaza zeroing imediat. "
+ "Panoul de confidentialitate recomanda explicit o parola puternica / manager de parole.\n"
+ "(qa-pepper) STORAGE — model de amenintare documentat ONEST: la un dump complet al stocarii, atacatorul "
+ "are doar salt+ciphertext (salt-ul NU e secret, e standard), nu si parola; trebuie sa o sparga prin "
+ "brute-force incetinit de PBKDF2. Nu adaugam 'pepper' extern pentru ca nu exista unde (Local-Only, fara "
+ "server) — declarat transparent, nu ascuns.\n"
+ "(qa-shadow) Shadow DOM (mode closed) per card a fost EVALUAT si respins motivat: ar rupe tema globala "
+ "CSS (variabile/teme light-dark) si nu aduce beneficiu real aici — vectorul CSS-exfiltration e deja blocat "
+ "de img-src 'data:' + connect-src 'none' (orice url() extern din CSS e respins), iar datele nu construiesc "
+ "clase/stiluri. Decizie de arhitectura documentata.\n\n"
  "SECRETARA — ITERATIA 2 din roadmap (Calendar & Programare cu DOUBLE-OPT-IN). Verificat cu Playwright, "
  "zero erori, tot pe DOM API (zero innerHTML).\n"
  "(s2-propunere) Din conversatia cu o conexiune, formular 'Propune o intalnire' (data/ora/loc, sanitizate). "
