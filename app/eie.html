@@ -452,8 +452,9 @@ details.why2>summary::-webkit-details-marker{display:none}
     <div class="sec" style="margin-top:26px">Jurnalul tau</div>
     <p class="sub">Idei, notite si lucruri de tinut minte. Cauta-le oricand; brief-ul de intalnire le foloseste.</p>
     <div class="searchbar"><span class="ic">⌕</span><input id="noteSearch" placeholder="Cauta in notite…" aria-label="Cauta in notite" oninput="renderNotes()"></div>
-    <div class="addrow"><input id="noteText" placeholder="Scrie o idee sau o notita…" aria-label="Notita noua" onkeydown="if(event.key==='Enter')addNote()"><button class="btn gold sm" data-act="addnote" aria-label="Adauga notita">+</button></div>
-    <div id="notesList" style="margin-top:12px"></div>
+    <div class="addrow"><input id="noteText" placeholder="Scrie o idee… foloseste #tag-uri (ex: #client)" aria-label="Notita noua" onkeydown="if(event.key==='Enter')addNote()"><button class="btn gold sm" data-act="addnote" aria-label="Adauga notita">+</button></div>
+    <div class="filters" id="noteFilters" style="margin-top:10px"></div>
+    <div id="notesList" style="margin-top:8px"></div>
   </section>
 
   <!-- PROFIL -->
@@ -543,7 +544,7 @@ const SEEK={0:[["Investitor pentru proiect imobiliar","dictare"],["Furnizor de c
 const COLORS=["#6366F1","#10B981","#F59E0B","#8B5CF6","#EC4899","#0EA5E9","#14B8A6","#F97316","#EF4444","#22C55E"];
 const STOP=new Set("si sau de la in un o cu pe pentru din ca care este are am ai vreau caut ofer cineva zona bun buna nou noua a al ale lui langa".split(" "));
 const KEY="cercul_eie_v5",TKEY="cercul_theme",SKEY="cercul_salt";
-let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false,MATCHFILTER="all";
+let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false,MATCHFILTER="all",NOTEFILTER="all";
 // suprascrie cu zerouri bufferele pe care le controlam (audit s5r #1). CryptoKey-urile sunt
 // non-extractabile/opace (WebCrypto nu expune heap-ul lor) -> le eliberam pt. GC; parolele sunt
 // string-uri imutabile in JS si nu pot fi zeroizate — limitare documentata, nu ascunsa.
@@ -958,13 +959,23 @@ function dicteaza(){if(PROC)return;const text=$("#dictText").value.trim();if(!te
   },950);}
 
 /* ---- Secretara iteratia 1: jurnal de notite ---- */
+const noteTags=t=>(String(t).match(/#[\p{L}\p{N}_]+/gu)||[]).map(x=>x.toLowerCase());
+function setNoteFilter(f){NOTEFILTER=f;renderNotes();}
 function renderNotes(){const host=$("#notesList");if(!host)return;
   const q=(($("#noteSearch")||{}).value||"").toLowerCase().trim();
-  const list=(DB.notes||[]).filter(n=>n.member_id===ME).filter(n=>!q||n.text.toLowerCase().includes(q)).sort((a,b)=>b.t-a.t);
+  const mine=(DB.notes||[]).filter(n=>n.member_id===ME);
+  // chips de tag-uri
+  const allTags=[...new Set(mine.flatMap(n=>noteTags(n.text)))].sort();
+  const fhost=$("#noteFilters");
+  if(fhost){const chip=(f,l)=>h("button",{class:"chip"+(NOTEFILTER===f?" on":""),"data-act":"nfilter","data-f":f,text:l});
+    setKids(fhost, allTags.length?[chip("all","Toate"),...allTags.map(t=>chip(t,t))]:[]);}
+  let list=mine;
+  if(NOTEFILTER!=="all")list=list.filter(n=>noteTags(n.text).includes(NOTEFILTER));
+  list=list.filter(n=>!q||n.text.toLowerCase().includes(q)).sort((a,b)=>b.t-a.t);
   setKids(host, list.length?list.map(n=>h("div",{class:"notecard"},
       h("div",{class:"nt"},h("div",{class:"ntx",text:n.text}),h("div",{class:"ndate",text:relTime(n.t)})),
       h("button",{class:"x","data-act":"delnote","data-id":n.id,"aria-label":"Sterge notita",text:"×"}))):
-    estateBox(q?"Nicio notita gasita":"Inca nicio notita", q?"Incearca alt cuvant.":"Scrie prima ta idee in campul de mai sus — o gasesti oricand."));}
+    estateBox(q||NOTEFILTER!=="all"?"Nicio notita gasita":"Inca nicio notita", q||NOTEFILTER!=="all"?"Incearca alt filtru.":"Scrie prima ta idee — poti folosi #tag-uri."));}
 function addNote(){if(!DB)return;const inp=$("#noteText"),t=clean((inp&&inp.value||"").trim());if(!t)return;
   DB.notes.push({id:DB.seq++,member_id:ME,text:t,t:Date.now()});if(inp)inp.value="";
   logA("Notita adaugata in jurnal");save();renderNotes();toast("Notita salvata");}
@@ -1191,6 +1202,7 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="profsave")saveProfile();
   else if(a==="profcancel")cancelProfile();
   else if(a==="mfilter")setMatchFilter(el.dataset.f);
+  else if(a==="nfilter")setNoteFilter(el.dataset.f);
   else if(a==="go")setView(el.dataset.v);});
 
 // error boundary global (remediaza constatarea de audit #4)

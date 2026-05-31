@@ -18,7 +18,7 @@ Reguli pentru fiecare item:
 8. [x] Export complet (toate datele) + Import cu validare de schema + confirmare.
 9. [x] Profil: editare nume/domeniu (nu doar onboarding).
 10. [x] Potriviri: filtru pe industrie (chips).
-11. [ ] Notite: tag-uri simple (#client, #idee) + filtrare pe tag.
+11. [x] Notite: tag-uri simple (#client, #idee) + filtrare pe tag.
 12. [ ] Setari: alegerea zilei de inceput (luni/duminica) pt. afisarea datelor.
 13. [ ] Accesibilitate: trecere completa cu tastatura pe carduri (Enter/Space).
 14. [ ] Pulse de retea reintrodus, dar compact si onest (1 rand).

@@ -13,3 +13,4 @@
 - 2026-05-31 · Item 9 (Editare profil) · buton ✎ Editeaza in Profil -> inputuri nume/domeniu -> Salveaza/Renunta, actualizeaza si dropdown-ul; persista; validat, 0 erori.
 - 2026-05-31 · AUDIT item 9 (loop9): APROBAT 6/6 + CAE.
 - 2026-05-31 · Item 10 (Filtru industrie la Potriviri) · chips Toate + industrii distincte, filtreaza pipeline-ul; validat, 0 erori.
+- 2026-05-31 · Item 11 (Tag-uri la notite) · #tag extras din text, chips de filtrare (Toate + tag-uri distincte) deasupra jurnalului; validat, 0 erori.
