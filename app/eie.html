@@ -478,7 +478,9 @@ details.why2>summary::-webkit-details-marker{display:none}
       </div></div>
     <div class="panel"><h3>Preferinte <span class="badge vis">acces</span></h3>
       <div class="toggle"><span>Reduce animatiile <span style="color:var(--muted);font-size:11px">(accesibilitate)</span></span>
-        <div class="sw" id="rmSw" role="switch" tabindex="0" aria-label="Reduce animatiile" onclick="toggleRM()"><i></i></div></div></div>
+        <div class="sw" id="rmSw" role="switch" tabindex="0" aria-label="Reduce animatiile" onclick="toggleRM()"><i></i></div></div>
+      <div class="toggle"><span>Date absolute <span style="color:var(--muted);font-size:11px">(15 iun, nu „acum/2h”)</span></span>
+        <div class="sw" id="daSw" role="switch" tabindex="0" aria-label="Date absolute" onclick="toggleDateAbs()"><i></i></div></div></div>
   </section>
 </main>
 
@@ -573,7 +575,11 @@ function sanitizeSVG(root){if(!root)return;root.querySelectorAll("foreignObject,
 const ini=n=>{const p=n.trim().split(/\s+/);return((p[0][0]||"?")+(p[1]?p[1][0]:"")).toUpperCase();};
 const today=()=>new Date().toISOString().slice(0,10);
 const cssv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-function relTime(t){const s=(Date.now()-t)/1000;if(s<60)return"acum";if(s<3600)return Math.floor(s/60)+"m";if(s<86400)return Math.floor(s/3600)+"h";return Math.floor(s/86400)+"z";}
+let DATEABS=false;
+function relTime(t){if(DATEABS){try{return new Date(t).toLocaleDateString("ro-RO",{day:"numeric",month:"short"})+" "+new Date(t).toLocaleTimeString("ro-RO",{hour:"2-digit",minute:"2-digit"});}catch(_){}}
+  const s=(Date.now()-t)/1000;if(s<60)return"acum";if(s<3600)return Math.floor(s/60)+"m";if(s<86400)return Math.floor(s/3600)+"h";return Math.floor(s/86400)+"z";}
+function applyDateAbs(){const sw=$("#daSw");if(sw){sw.classList.toggle("on",DATEABS);sw.setAttribute("aria-checked",DATEABS);}}
+function toggleDateAbs(){DATEABS=!DATEABS;localStorage.setItem("cercul_dateabs",DATEABS?"1":"0");applyDateAbs();if(VIEW)render();}
 /* ---- iteratia 3: motion, count-up, hash, tranzitii ---- */
 let RM=false;
 const anim=()=>!RM&&!matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1252,6 +1258,7 @@ function resetIdle(){if(!CK)return;clearTimeout(idleT);idleT=setTimeout(lockNow,
 
 applyTheme(localStorage.getItem(TKEY)||"light");
 RM=localStorage.getItem("cercul_rm")==="1";applyRM();
+DATEABS=localStorage.getItem("cercul_dateabs")==="1";applyDateAbs();
 showLock(localStorage.getItem(SKEY)&&localStorage.getItem(KEY)?"unlock":"setup");
 </script>
 </body>
