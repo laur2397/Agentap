@@ -1,0 +1,74 @@
+[
+  {
+    "rol": "Head of Product / CPO Deputy",
+    "text": "**MERGE:** Estetica 'Bloom' și arhitectura client-side; oferă control și încredere totală.\n**NU MERGE / LIPSESTE:** Lipsa unui \"moment Aha!\" imediat; rețeaua pare statică, nu un instrument de acțiune.\n**IMBUNATATIRE ETICA:** Implementează \"Intentia de Networking\": utilizatorul alege 3 obiective zilnice. Recompensa este vizualizarea progresului real (task-uri finalizate), nu notificări. Claritate prin utilitate, nu prin retenție forțată."
+  },
+  {
+    "rol": "QA Lead",
+    "text": "**MERGE:** Arhitectura *client-side* oferă control total și încredere. Estetica \"Bloom\" este curată și profesionistă.\n\n**NU MERGE / LIPSESTE:** Lipsa persistenței datelor în *single-file* (fără backend) blochează utilitatea reală. \"Brief-ul de 1 minut\" e vag fără context.\n\n**IMBUNATATIRE ETICA:** Implementează export local criptat (JSON/CSV) pentru autonomie. Adaugă un *Dashboard de Focus* care afișează timpul de utilizare vs. rezultate bifate."
+  },
+  {
+    "rol": "Behavioral Science Lead",
+    "text": "**MERGE:** Sistemul \"Bloom\" (claritate vizuală) și focalizarea pe valoare (\"gist-first\").\n\n**NU MERGE / LIPSESTE:** Lipsa unei \"ancore de progres\": utilizatorul nu vede imediat beneficiul investiției de timp în networking.\n\n**IMBUNATATIRE ETICA:** Introdu \"Jurnalul de Intenție\": înainte de eveniment, utilizatorul scrie un obiectiv scurt. După, bifează progresul. Recompensa este vizualizarea creșterii calitative, nu cantitative (fără vanity-metrics)."
+  },
+  {
+    "rol": "Finance Director / CFO Deputy",
+    "text": "**MERGE:** Arhitectura *local-only* oferă o propunere de valoare unică (securitate/intimitate), eliminând costurile de server.\n\n**NU MERGE / LIPSESTE:** Lipsa unui mecanism clar de „închidere a cercului” (feedback loop de valoare). Fără backend, utilizatorul percepe aplicația ca pe o agendă statică, nu ca pe o rețea activă.\n\n**IMBUNATATIRE ETICA:** Implementați „Impact Audit” vizual: un dashboard care afișează valoarea schimbată, nu doar numărul de conexiuni."
+  },
+  {
+    "rol": "Customer Success Lead",
+    "text": "**MERGE:** Conceptul „Secretara” și modularitatea offline-first asigură autonomie și intimitate, elemente de încredere rară.\n\n**NU MERGE:** Riscul de „oboseală cognitivă” la setup; utilizatorul nu vede imediat valoarea rețelei fără date.\n\n**ÎMBUNĂTĂȚIRE ETICĂ:** Introduce un „Audit de Intentivitate” (ce ofer/caut) la onboarding, vizualizat ca *Radar de Valoare* (grafic SVG simplu), oferind feedback vizual despre progresul calitativ, nu cantitativ."
+  },
+  {
+    "rol": "Internal IT Manager",
+    "text": "**MERGE:** Arhitectura single-file (performanță/securitate) și designul \"Bloom\" (claritate).\n**NU MERGE:** Lipsa unei punți între \"Secretară\" și \"Potriviri\" creează un siloz informațional; valoarea nu e evidentă din prima secundă.\n**IMBUNATATIRE ETICA:** Introduceți un \"Indicator de Intentie\" (caut/ofer) pe carduri: vizualizați potrivirea prin suprapunere logică, nu prin swiping, pentru a încuraja alegerea deliberată, nu impulsivă."
+  },
+  {
+    "rol": "CISO Deputy / Security Lead",
+    "text": "**MERGE:** Arhitectura client-side/criptată; Designul \"Bloom\" oferă claritate vizuală necesară încrederii.\n\n**NU MERGE:** Riscul de \"data bloat\" în single-file și lipsa unui mecanism de feedback pentru utilizator privind starea criptării.\n\n**ÎMBUNĂTĂȚIRE ETICĂ:** Adăugarea unui \"Privacy Health Dashboard\" care afișează vizual starea criptării și spațiul local utilizat, validând controlul suveran al utilizatorului fără tracking."
+  },
+  {
+    "rol": "DevOps Lead",
+    "text": "**MERGE:** Arhitectura single-file garantează suveranitatea datelor, un USP puternic.\n**NU MERGE:** Lipsa sincronizării multi-device (fără backend) blochează utilitatea „Network”.\n**ÎMBUNĂTĂȚIRE ETICĂ:** Implementează export local criptat (JSON/CSV) pentru backup și import manual între dispozitive. Oferă utilizatorului control total asupra datelor, transformând „lipsa backend-ului” din limitare tehnică în beneficiu de securitate, consolidând încrederea și retenția prin transparență radicală."
+  },
+  {
+    "rol": "Head of PMO",
+    "text": "**MERGE:** Arhitectura *client-side* (privacy-first) și estetica *Bloom* (claritate).\n**NU MERGE:** Lipsa unei „ancore” de utilitate imediată; riscă să devină un simplu director static.\n**IMBUNATATIRE ETICĂ:** Adaugă „Insight-ul de Rețea” (analiză locală de compatibilitate fără cloud). În loc de notificări, folosește un *indicator de disponibilitate* vizibil doar când ești activ, încurajând interacțiuni asincrone, conștiente."
+  },
+  {
+    "rol": "Head of Operations / COO Deputy",
+    "text": "**MERGE:** Arhitectura *client-side* (securitate/intimitate ca USP) și estetica *Bloom* (claritate cognitivă).\n\n**NU MERGE:** Riscul de „friction-heavy onboarding” și lipsa unui sistem de feedback imediat pentru progres.\n\n**ÎMBUNĂTĂȚIRE ETICĂ:** Implementează un „Dashboard de Intenție” (nu de consum). Afișează vizual starea rețelei („Sănătate conexiuni”) bazată pe acțiuni reale (întâlniri onorate), nu pe metrici de vanitate."
+  },
+  {
+    "rol": "Head of Legal",
+    "text": "**MERGE:** Arhitectura client-side (Zero-Server) garantează confidențialitatea, cel mai mare activ juridic.  \n**NU MERGE:** Riscul \"secretarei\" automate; utilizatorul poate percepe sugestiile ca fiind subiective sau manipulate.  \n**ÎMBUNĂTĂȚIRE ETICĂ:** Introduceți „Audit de Control”: o secțiune vizibilă cu algoritmi locali de sortare. Permiteți utilizatorului să ajusteze manual ponderile (ex: relevanță vs. proximitate). Transparența totală transformă utilitatea în încredere."
+  },
+  {
+    "rol": "Marketing Lead",
+    "text": "**MERGE:** Sistemul 'Bloom' (curat/profesional) și focusul pe \"Secretară\" (utilitate reală).\n\n**NU MERGE:** Lipsa unui \"Moment Aha\" imediat la prima deschidere (valoarea rețelei e abstractă).\n\n**ÎMBUNĂTĂȚIRE ETICĂ:** Adaugă un widget \"Audit de Timp\" (secțiunea Profil) care arată echilibrul între \"Oferit\" vs \"Primit\" (ROI calitativ), oferind satisfacție intrinsecă prin claritate, nu prin validare socială."
+  },
+  {
+    "rol": "Head of AI",
+    "text": "**MERGE:** Estetica *Bloom* (claritate, calm) și accentul pe *Utility-First*. \n\n**NU MERGE / LIPSESTE:** Lipsa feedback-ului de progres real; utilizatorul riscă să perceapă app-ul ca pe un simplu utilitar static, nu ca pe un motor de creștere. \n\n**IMBUNATATIRE ETICA:** Implementează „Jurnalul de Impact”: un grafic simplu, local, care vizualizează doar conexiunile active, nu numere. Succesul este definit prin calitatea relațiilor, nu prin volum."
+  },
+  {
+    "rol": "Design Lead",
+    "text": "**MERGE:** Estetica 'Bloom' și focusul pe utilitate.\n**NU MERGE:** \"Gist-first\" riscă să devină swipe-deck (pattern toxic). Lipsa unui scop clar în \"Reteaua\" poate copleși.\n**IMBUNATATIRE ETICA:** Introdu \"Momentum Feedback\": un indicator vizual de progres al relațiilor (nu vanity), bazat pe acțiuni proprii (ex: \"3 întâlniri productive săptămâna asta\"). Simplifică onboarding-ul printr-un \"Audit de Valoare\" în profil pentru claritate."
+  },
+  {
+    "rol": "Sales Director",
+    "text": "**MERGE:** Estetica \"Bloom\" și simplitatea „single-file” oferă o exclusivitate curată, premium, care atrage targetul B2B.\n\n**NU MERGE:** Lipsa unui \"Value Hook\" imediat la instalare; utilizatorul nu vede utilitatea până nu populează datele.\n\n**IMBUNATATIRE ETICA:** Introdu un „Audit de Rețea” (ghidat, voluntar) care vizualizează lacunele în networking-ul actual, oferind valoare imediată prin insight-uri, nu prin notificări."
+  },
+  {
+    "rol": "Head of Engineering / VP Engineering",
+    "text": "**MERGE:** Arhitectura *client-side* (securitate/GDPR) și designul *Bloom* (claritate cognitivă).  \n**NU MERGE:** Lipsa feedback-ului de valoare imediată; *single-file* poate deveni lent fără indexare.  \n**IMBUNATATIRE ETICA:** Implementează „Jurnalul de Intenție” post-întâlnire: utilizatorul notează o singură valoare oferită. Stimulează recunoștința (intrinsec) și memoria, eliminând nevoia de notificări externe. Progresul real devine vizibil prin calitatea conexiunilor, nu prin numere."
+  },
+  {
+    "rol": "HR Director / Head of People",
+    "text": "**MERGE:** „Gist-first” și designul curat reduc oboseala cognitivă, esențiale pentru profesioniști.\n**NU MERGE:** Lipsa feedback-ului de progres real; utilizatorul nu simte „rostul” rețelei pe termen lung.\n**ÎMBUNĂTĂȚIRE ETICĂ:** Adaugă un „Jurnal de Valoare” (note despre întâlniri cu tag-uri de tip „ajutat/primit ajutor”). Vizualizează calitatea conexiunilor, nu cantitatea. Încurajează introspecția, nu „scrolling-ul”."
+  },
+  {
+    "rol": "Data / AI Lead",
+    "text": "**MERGE:** Arhitectura client-side garantează confidențialitatea, un USP major pentru networking premium.\n\n**NU MERGE:** Lipsa feedback-ului de progres real creează \"golul de utilitate\". Utilizatorul nu vede clar valoarea rețelei.\n\n**ÎMBUNĂTĂȚIRE ETICĂ:** Implementează un \"Radar de Sănătate a Relațiilor\" (vizualizare date locale: frecvență interacțiuni, nu volum). Afișează *progresul* calitativ al conexiunilor, nu *cantitatea*. Retenție prin utilitate, nu dopamină."
+  }
+]
