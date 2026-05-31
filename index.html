@@ -69,6 +69,11 @@ h2.title{font-family:var(--serif);font-size:27px;font-weight:600;margin:2px 0 14
 .digest p{font-size:13px;color:var(--ink2);line-height:1.55}
 /* loop3 #1: rand de pozitionare cald */
 .whyhere{font-size:12.5px;color:var(--muted);line-height:1.5;margin:10px 2px 2px;padding-left:11px;border-left:2px solid var(--primary)}
+/* loop3 #2: card "aha" first-step */
+.ahacard{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--primary);border-radius:14px;padding:14px 15px;margin-top:12px;box-shadow:var(--shadow)}
+.ahacard .ahai{font-size:22px;flex:none;line-height:1.2}
+.ahacard .ahat{font-weight:700;font-size:14.5px;color:var(--ink)}
+.ahacard .ahap{font-size:12.5px;color:var(--ink2);line-height:1.5;margin-top:4px}
 
 /* kpi exec-concierge */
 .kpis{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:14px}
@@ -470,6 +475,7 @@ details.why2>summary::-webkit-details-marker{display:none}
   <section id="acasa" class="view on">
     <div class="digest"><div class="e">Azi</div><div class="g" id="digG"></div><p id="digP"></p></div>
     <div class="whyhere" id="whyHere">Un cerc privat unde construiești relații de afaceri care contează — la ritmul tău, cu datele rămase doar la tine.</div>
+    <div id="ahaCard"></div>
     <div id="nextMeet"></div>
     <div class="statstrip" id="kpis"></div>
     <div id="netpulse"></div>
@@ -865,6 +871,14 @@ function home(){const me=mem(ME),mm=myMatches();
   $("#digG").textContent="Buna ziua, "+me.name.split(" ")[0]+".";
   $("#digP").textContent=prop?`Ai ${prop} ${prop===1?"sugestie noua":"sugestii noi"} de verificat si ${con} ${con===1?"conexiune":"conexiuni"}.`
     :`Ai ${con} ${con===1?"conexiune activa":"conexiuni active"}. Adauga ce cauti sau ce oferi ca sa primesti sugestii.`;
+  // loop3 #2: momentul "aha" — daca n-ai spus inca ce oferi/cauti, un singur next-step clar
+  const myItems=(DB.items||[]).filter(i=>i.member_id===ME);
+  if(!myItems.length){setKids($("#ahaCard"),h("div",{class:"ahacard"},
+    h("div",{class:"ahai",text:"✨"}),
+    h("div",{class:"ahab"},h("div",{class:"ahat",text:"Hai sa-ti gasim primii oameni potriviti"}),
+      h("div",{class:"ahap",text:"Spune in 2 randuri ce oferi si ce cauti — generam sugestii relevante, doar pe dispozitivul tau."}),
+      h("button",{class:"btn gold sm","data-act":"go","data-v":"profil",style:{marginTop:"10px"},text:"Completeaza profilul →"}))));}
+  else setKids($("#ahaCard"));
   // urmatoarea intalnire confirmata (backlog #2)
   const td=today(),up=(DB.meetings||[]).filter(x=>x.status==="confirmat"&&(x.a===ME||x.b===ME)&&(x.when||"").slice(0,10)>=td).sort((a,b)=>String(a.when).localeCompare(String(b.when)));
   if(up[0]){const x=up[0],cel=mem(x.a===ME?x.b:x.a)||{name:"?"};
