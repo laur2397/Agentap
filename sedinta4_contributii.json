@@ -1,0 +1,1762 @@
+[
+  {
+    "cod": "6.2",
+    "rol": "AI Research Scientist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "**NEMULTUMIRE:** Matching-ul TF-IDF este rudimentar, iar „Secretara AI” este doar un placeholder static. Lipsa feedback-ului vizual face experiența rigidă.\n\n**IMBUNATATIRE:** Implementează un motor de *Semantic Similarity* în JS folosind *Transformers.js* (ONNX) pentru matching local și *Framer Motion* pentru micro-interacțiuni.\n\n**TIP:** ambele",
+    "ok": true
+  },
+  {
+    "cod": "1.8",
+    "rol": "Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Lipsa feedback-ului vizual la încărcare creează o senzație de \"îngheț\" a interfeței, iar matching-ul euristic este prea rigid, lipsit de context.\n\n**IMBUNATATIRE:** Implementez *Skeleton Loading* animat (CSS keyframes) și un algoritm de *Fuzzy Matching* îmbunătățit cu ponderi de proximitate în JS.\n\n**TIP:** ambele",
+    "ok": true
+  },
+  {
+    "cod": "3.4",
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă. Lipsa skeleton-loading-ului și a feedback-ului tactil transformă așteptarea în \"îngheț\" vizual, iar graficul SVG este ilizibil pe mobil.\n\nIMBUNATATIRE: Introdu framer-motion light (CSS transitions) pentru stări, skeleton screens la inițializare și un graf interactiv tip Force-Directed (D3.js).\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "11.4",
+    "rol": "SEO / SEM Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Aplicația este un „black box” invizibil pentru motoarele de căutare; fără conținut indexabil și interacțiuni fluide, rata de retenție și achiziția organică sunt nule.\n\nIMBUNATATIRE: Implementare SSR-like (meta-tags dinamice/JSON-LD) și Skeleton Loaders animate. Introducerea unei pagini de \"Preview Public\" indexabilă (SEO-friendly) cu preview-uri criptate.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "8.4",
+    "rol": "Interaction Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Lipsa stărilor de tranziție face ca app-ul să pară o pagină web statică, nu o experiență premium. Întârzierile la încărcarea datelor (Trust Ledger/Matching) sunt brutale, fără feedback vizual (skeleton loading).\n\n**IMBUNATATIRE:** Implementare *View Transitions API* pentru navigare fluidă și *skeleton screens* CSS cu animație tip „shimmer” (gradient wave) pentru toate ecranele.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "6.3",
+    "rol": "Senior ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Matching-ul TF-IDF este rudimentar, iar experiența e statică, lipsită de fluiditate \"premium\". Senzația de \"inteligență\" lipsește complet fără feedback-ul utilizatorului.\n\n**IMBUNATATIRE:** Implementează \"Weighted Scoring\" dinamic (re-ranking la scroll) și tranziții CSS/Framer-lite. Adaugă Skeleton Loaders și interacțiuni haptice.\n\n**TIP:** ambele",
+    "ok": true
+  },
+  {
+    "cod": "1.8",
+    "rol": "Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de feedback vizual, iar UX-ul suferă din cauza lipsei stărilor de încărcare, făcând aplicația să pară „înghețată” în timpul procesării datelor.\n\nIMBUNATATIRE: Implementez `Skeleton Screens` animate (CSS keyframes) și tranziții `View Transitions API` între ecrane.\n\nTIP: Ambele",
+    "ok": true
+  },
+  {
+    "cod": "13.4",
+    "rol": "Onboarding / Implementation Specialist",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Onboarding-ul e steril; utilizatorii abandonează din lipsa feedback-ului vizual imediat (skeleton screens) și a unei ghidări proactive (in-app walkthrough).\n\nIMBUNATATIRE: Implementează skeleton loaders pentru \"Network Health\" și un tur ghidat pas-cu-pas tip \"Intro.js\" (CSS/JS minim) pentru a accelera \"Time-to-Value\".\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "16.4",
+    "rol": "Privacy / GDPR Officer (DPO)",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Gestionarea consimțământului în \"Trust Ledger\" este opacă și riscă non-conformitatea GDPR. Lipsa stărilor goale (empty states) și a feedback-ului vizual în matching scade încrederea utilizatorului în anonimizare.\n\nIMBUNATATIRE: Implementează \"Privacy Dashboard\" interactiv cu log-uri criptate și skeleton loaders animate. Vizualizează matching-ul prin grafuri D3.js explicabile.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "3.4",
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "**NEMULTUMIRE:** Lipsa feedback-ului vizual la acțiuni (spinner/skeleton) și a stărilor goale face interfața să pară \"înghețată\" și brută. Matching-ul euristic e opac; utilizatorul nu înțelege *de ce* a primit o sugestie, generând neîncredere în algoritmul local.\n\n**IMBUNATATIRE:** Implementează skeleton loading animat și \"Explainability Tooltips\" pe scorurile de matching. Adaugă pagini \"Empty State\" ilustrate (SVG) pentru rețea goală.\n\n**TIP:** ambele",
+    "ok": true
+  },
+  {
+    "cod": "8.5",
+    "rol": "UX Researcher",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este un placeholder frustrant care rupe imersiunea; lipsa feedback-ului vizual la procesare (skeleton loading) face aplicația să pară blocată, nu \"premium\".\n\nIMBUNATATIRE: Implementează un motor de procesare text local (Regex + Sentiment) și Skeleton Screens animate (CSS pulse) pentru toate încărcările.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "16.5",
+    "rol": "Regulatory Compliance Specialist",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Lipsa dovezii de consimțământ granular și a trasabilității datelor în \"Trust Ledger\" riscă neconformitatea GDPR/AI Act. Interfața e statică, oferind zero feedback la procesarea datelor sensibile.\n\nIMBUNATATIRE: Implementare \"Privacy Dashboard\" cu log-uri imutabile (SHA-256) și skeleton loading animat pentru interacțiuni.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.4",
+    "rol": "Onboarding / Implementation Specialist",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "**NEMULTUMIRE:** Onboarding-ul e steril, iar \"Secretara AI\" pare un placeholder inert. Lipsa skeleton loading-ului face ca app-ul să pară \"înghețat\" în timpul procesării datelor, distrugând iluzia de premium.\n\n**IMBUNATATIRE:** Implementează skeleton screens (CSS animations) și un AI-Chat cu streaming-effect simulat. Adaugă un progres \"Time-to-Value\" vizual în Onboarding.\n\n**TIP:** ambele",
+    "ok": true
+  },
+  {
+    "cod": "11.5",
+    "rol": "ASO Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Lipsa \"wow factor\" în screenshot-uri și onboarding; rata de conversie va fi catastrofală fără un vizual care să comunice valoarea \"Executive Hybrid\" imediat. Utilizatorul nu înțelege beneficiul \"Trust Ledger\" din descrierea aridă.\n\n**IMBUNATATIRE:** Implementează un \"Hero Section\" cu skeleton loading și micro-interacțiuni GSAP. Adaugă un slider cu capturi de ecran stilizate (mockup-uri premium) direct în UI.\n\n**TIP:** ambele",
+    "ok": true
+  },
+  {
+    "cod": "1.8",
+    "rol": "Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de feedback vizual, iar experiența \"Secretarei AI\" este plată. Utilizatorul nu simte \"premium\" fără animații și stări de loading.\n\nIMBUNATATIRE: Implementez Skeleton Loaders (CSS pulse), tranziții de pagină (View Transitions API) și un stream de tip \"typing effect\" pentru Secretară.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "3.4",
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "**NEMULTUMIRE:** Lipsa feedback-ului vizual la acțiuni (spinner/skeleton) face app-ul să pară „înghețat” în timpul procesării criptografice și a matching-ului. Lipsa stărilor goale (empty states) în Retea/Potriviri creează confuzie.\n\n**IMBUNATATIRE:** Implementează CSS-skeletons și un sistem de `micro-interactions` (framer-motion lite) pentru tranziții.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "8.5",
+    "rol": "UX Researcher",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și rece; utilizatorii nu simt \"Premium\" fără feedback tactil, iar lipsa stărilor de încărcare/goale creează anxietate vizuală. Matching-ul euristic pare un simplu tabel, nu un mecanism de încredere.\n\nIMBUNATATIRE: Implementează skeleton loading, micro-interacțiuni GSAP și un vizualizator de potriviri de tip \"Radar Chart\" interactiv.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "11.6",
+    "rol": "Social Media Manager",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața e statică, lipsită de \"viață\". Utilizatorul nu simte valoarea rețelei; ecranele par tabele reci, nu o experiență premium.\n\nIMBUNATATIRE: Implementează un sistem de *Skeleton Loading* animat (CSS pulse) și micro-interacțiuni (framer-motion light) la tranziția ecranelor. Adaugă un *Trust Score* vizual (gauge circular).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "6.3",
+    "rol": "Senior ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Matching-ul euristic e static, rigid și plictisitor; lipsesc micro-interacțiunile care să creeze senzația de \"inteligență\" premium.\n\nIMBUNATATIRE: Introduc un algoritm de \"weighted scoring\" dinamic (dinamic weights) și animații GSAP pentru skeleton loading și tranzitii fine între stările de matching.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.4",
+    "rol": "Onboarding / Implementation Specialist",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "**NEMULTUMIRE:** Onboarding-ul static și lipsa feedback-ului vizual creează un sentiment de \"aplicație moartă\". Utilizatorul nu simte valoarea imediată (\"Time to Value\" ridicat).\n\n**IMBUNATATIRE:** Implementează un \"Progress Tracker\" animat și skeleton screens pentru încărcarea datelor. Adaugă micro-interacțiuni (framer-like) la validarea cheii și un \"Empty State\" ilustrat pentru rețeaua goală.\n\n**TIP:** ambele",
+    "ok": true
+  },
+  {
+    "cod": "17.1",
+    "rol": "Internal IT Manager",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual la procesarea datelor (Secretară/Matching) creează nesiguranță.\n\nIMBUNATATIRE: Implementez *Skeleton Loading* animat pentru încărcare și tranziții *CSS View Transitions API* pentru ecrane. Adaug micro-interacțiuni pe butoane (stări hover/active).\n\nTIP: ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.9",
+    "rol": "Senior Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Lipsa feedback-ului vizual la acțiuni (stări goale, skeleton loading, tranziții abrupte) face experiența să pară \"low-end\". Lipsa persistenței locale (IndexedDB) forțează reîncărcarea datelor la fiecare refresh.\n\n**IMBUNATATIRE:** Implementare IndexedDB pentru stocare locală, Skeleton Screens CSS pentru încărcare și GSAP pentru micro-interacțiuni fluide.\n\n**TIP:** ambele",
+    "ok": true
+  },
+  {
+    "cod": "3.4",
+    "rol": "Manual QA Tester",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 4,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual la interacțiuni (loading, stări goale) creează o experiență \"dead-end\". Matching-ul euristic e opac, utilizatorul nu înțelege de ce apar acele rezultate.\n\nIMBUNATATIRE: Implementează skeleton-loading, tranziții CSS fluide și \"Explainability Tooltips\" pentru matching (scor + factori).\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "6.4",
+    "rol": "ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Matchingul euristic static e rigid, iar interfața pare un tabel Excel învechit, fără feedback vizual în timp real.\n\nIMBUNATATIRE: Implementez `Brain.js` pentru matching bazat pe ponderi dinamice (ML light) și adaug skeleton loaders cu tranziții CSS `ease-in-out` pentru UX premium.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "8.6",
+    "rol": "Design System Specialist",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual la acțiuni (stări de încărcare, tranziții) creează o experiență \"ieftină\" și neprofesionistă, nealiniată cu estetica 'Executive Hybrid'.\n\nIMBUNATATIRE: Implementarea unui sistem de Design Tokens (CSS Variables) și Skeleton Loading pentru stările de așteptare. Adăugarea tranzițiilor `view-transition-api` între ecrane.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.5",
+    "rol": "Customer Experience Analyst",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual la acțiuni (încărcare, erori) creează o senzație de „aplicație moartă”.\n\nIMBUNATATIRE: Implementarea unui sistem de micro-interacțiuni CSS (transition/keyframes) și Skeleton Loading pentru datele asincrone.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "11.7",
+    "rol": "Community Manager",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rece; utilizatorii abandonează aplicația din lipsa feedback-ului vizual la acțiuni (spinnerul e generic, stările goale sunt doar text). Nu există sentimentul de \"Executive Concierge\" premium.\n\nIMBUNATATIRE: Implementează skeleton loading pentru date, micro-interacțiuni CSS (framer-like) și stări goale ilustrate minimal.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "17.2",
+    "rol": "Internal Help Desk",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual la acțiuni creează o experiență de utilizator \"ieftină\", care subminează prestigiul aplicației executive.\n\nIMBUNATATIRE: Implementează skeleton loading, tranziții CSS `fade-in` și micro-interacțiuni pe butoane. Adaugă stări goale (empty states) ilustrate cu iconițe SVG minimaliste.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "6.4",
+    "rol": "ML Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Matching-ul euristic e rudimentar, iar interfața pare o pagină web statică, lipsită de fluiditate și feedback vizual.\n\nIMBUNATATIRE: Implementez vectorizarea TF-IDF cu stocare în localStorage și adaug animații GSAP (stări goale/skeleton loading).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.9",
+    "rol": "Senior Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "**NEMULTUMIRE:** Lipsa stărilor de încărcare (skeleton screens) și feedback-ul vizual static fac ca aplicația să pară \"înghețată\" în timpul procesării euristice/criptografice, afectând percepția de performanță premium.\n\n**IMBUNATATIRE:** Implementare CSS skeleton loading animat și tranziții de pagină tip \"slide-fade\" cu `view-transition-api`.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "3.5",
+    "rol": "Performance Test Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Calculul TF-IDF și procesarea criptografică pe thread-ul principal blochează UI-ul la volume mari, cauzând \"jank\" vizual și latență inacceptabilă la interacțiune. Fără skeleton loading, experiența pare \"ieftină\" și blocată în timpul procesării.\n\n**IMBUNATATIRE:** Implementează Web Workers pentru matching și criptare; adaugă Skeleton Screens CSS (shimmer effect) pe ecranele ACASA și POTRIVIRI pentru a masca latența asincronă.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "11.8",
+    "rol": "Growth Marketer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Onboarding-ul static și lipsa feedback-ului vizual la matching descurajează activarea; utilizatorul nu simte \"magia\" algoritmului, ceea ce scade retenția.\n\nIMBUNATATIRE: Implementează un \"Progress Skeleton\" și o animație de tip \"Card-Reveal\" la matching pentru a simula procesarea, plus un sistem de notificare \"Toast\" pentru acțiuni reușite.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "8.7",
+    "rol": "Graphic / Brand Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rece; lipsește un limbaj de design \"premium\" (micro-interacțiuni, tranziții fluide, feedback vizual). Utilizatorul nu simte \"greutatea\" și siguranța produsului.\n\nIMBUNATATIRE: Implementez *Skeleton Loading* animat pentru KPI-uri, tranziții `fade-in` pentru ecrane și un sistem de *Micro-interacțiuni* (framer-motion style) la hover/tap.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.5",
+    "rol": "Customer Experience Analyst",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "**NEMULTUMIRE:** Lipsa feedback-ului activ (NPS/CES) și stările goale (empty states) fac aplicația să pară „moartă” și lipsită de direcție, scăzând engagement-ul utilizatorilor seed.\n\n**IMBUNATATIRE:** Implementare modul „Pulse Check” (NPS la 30s) și skeleton loading animat cu CSS.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "17.2",
+    "rol": "Internal Help Desk",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual la acțiuni creează o experiență de utilizare incertă (\"îngheață\" la procesare).\n\nIMBUNATATIRE: Implementare Skeleton Loading pentru datele asincrone și tranziții CSS (fade/slide) între ecrane. Adăugare micro-interacțiuni (hover states, ripple effect).\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "6.5",
+    "rol": "Generative AI Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este un placeholder inert, iar interfața pare un tabel static, lipsit de viață și inteligență contextuală.\n\nIMBUNATATIRE: Implementez un agent de sumarizare local (Transformers.js) pentru *Focus Digest* și animații de tip *Skeleton Loading* fluide, activând micro-interacțiuni CSS pentru feedback haptic.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "9.1",
+    "rol": "Behavioral Science Lead",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rece; lipsește un feedback empatic care să justifice \"Executive Hybrid\". Utilizatorul nu simte valoarea \"Trust Ledger\" în absența unor micro-interacțiuni care să valideze vizual integritatea datelor criptate.\n\nIMBUNATATIRE: Implementare skeleton-loading animat, tranziții fluide între ecrane și vizualizare \"Pulse\" (SVG) dinamică, reactivă la input.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "11.9",
+    "rol": "Brand / PR Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de viață, iar „Secretara AI” pare un simplu formular. Nu inspiră prestigiu; utilizatorul nu simte că interacționează cu un produs „Premium”.\n\nIMBUNATATIRE: Implementează skeleton loading, tranziții tip *page-slide* și un feedback vizual de tip *typing-effect* pentru Secretară.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.9",
+    "rol": "Senior Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "text": "**NEMULTUMIRE:** Lipsa feedback-ului vizual la acțiuni (stări goale, skeleton-uri, animații) face app-ul să pară \"înghețat\". Lipsa persistenței locale (IndexedDB) forțează re-criptarea la fiecare refresh, distrugând UX-ul premium.\n\n**IMBUNATATIRE:** Implementare IndexedDB cu Web Crypto API pentru persistență securizată. Adăugare skeleton-loaders CSS și tranziții de pagină `fade-in` pentru fluiditate.\n\n**TIP:** ambele",
+    "ok": true
+  },
+  {
+    "cod": "3.5",
+    "rol": "Performance Test Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "**NEMULTUMIRE:** Blocarea UI-ului în timpul operațiunilor de criptare și matching euristic. Lipsa feedback-ului vizual creează o experiență \"înghețată\" neprofesionistă în timpul procesării datelor.\n\n**IMBUNATATIRE:** Implementarea `Web Workers` pentru procesare în background și `Skeleton Loading` animat.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.6",
+    "rol": "Support Team Lead",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual la încărcare (skeleton screens) și a micro-interacțiunilor face aplicația să pară un document, nu un instrument \"Executive\".\n\nIMBUNATATIRE: Implementează skeleton loaders CSS și tranziții `view-transition-api`. Adaugă un \"Pulse\" animat pe KPI-uri și hover-states cu umbre subtile.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "17.3",
+    "rol": "Endpoint Management Specialist",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Gestionarea cheii de criptare în RAM este volatilă; lipsa stării \"empty\" face UX-ul rigid și predispune la erori de integritate la închidere.\n\nIMBUNATATIRE: Implementează IndexedDB cu auto-lock la inactivitate și Skeleton Loaders animate pentru ecranele de date.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.10",
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual la interacțiuni (loading/stări goale) și graficul SVG rudimentar oferă o experiență \"ieftină\".\n\nIMBUNATATIRE: Implementez Framer Motion-lite (CSS keyframes) pentru tranziții între ecrane și Skeleton Loading pentru date. Transform graful în D3.js interactiv (zoom/pan).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "6.5",
+    "rol": "Generative AI Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este un placeholder inert, iar interfața e statică, oferind o experiență de utilizator arhaică și lipsită de valoare predictivă.\n\nIMBUNATATIRE: Integrare `WebLLM` (Llama-3-8B local) pentru procesare on-device și skeleton loading cu animații CSS `shimmer`.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "3.6",
+    "rol": "Quality Engineer Process",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Experiența e statică, lipsită de feedback senzorial (loading-uri brute, lipsa stărilor goale). Testarea manuală e ineficientă; riscul de regresii la crypto este inacceptabil.\n\nIMBUNATATIRE: Implementez `Skeleton Loaders` și tranziții CSS (`view-transitions-api`). Adaug o suită de teste unitare `Jest` în consolă pentru logica AES/PBKDF2.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "14.1",
+    "rol": "HR Director / Head of People",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rece; lipsește un sentiment de „premium concierge”. Lipsa feedback-ului vizual (skeleton loading, micro-interacțiuni) face ca procesele euristice să pară lente și rudimentare, subminând încrederea utilizatorului în siguranța datelor.\n\nIMBUNATATIRE: Implementare Skeleton Loaders CSS, animații GSAP pentru tranziții între ecrane și carduri interactive cu efect \"glassmorphism\".\n\nTIP: Ambele",
+    "ok": true
+  },
+  {
+    "cod": "9.2",
+    "rol": "Behavioral Scientist / Psiholog cognitiv",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rece; lipsa feedback-ului vizual la interacțiuni (loading, tranziții) creează fricțiune și nesiguranță, nefiind aliniată cu un produs „Premium”.\n\nIMBUNATATIRE: Implementează skeleton loading pentru date și micro-interacțiuni (CSS transitions) pentru stări. Adaugă ilustrații vectoriale minimaliste pentru stări goale.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "11.10",
+    "rol": "Technical Writer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Utilizatorii sunt confuzi de procesul de criptare locală și matching-ul euristic, generând fricțiune și neîncredere. Documentația e absentă, iar interfața statică nu oferă feedback vizual despre succesul acțiunilor critice.\n\n**IMBUNATATIRE:** Integrare \"In-App Help Overlay\" cu tooltips contextuale și un FAQ interactiv (modala). Adăugare skeleton loading și animații CSS pentru stări goale.\n\n**TIP:** ambele",
+    "ok": true
+  },
+  {
+    "cod": "17.4",
+    "rol": "Internal Tools / Systems Admin",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual la încărcarea datelor (cripare/matching) creează anxietate utilizatorului „Executive”.\n\nIMBUNATATIRE: Implementare skeleton loaders, animații GSAP pentru tranziții între ecrane și un sistem de notificări tip „toast” pentru confirmarea acțiunilor criptografice.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.10",
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual în așteptare și a tranzițiilor face aplicația să pară un document, nu un tool premium.\n\nIMBUNATATIRE: Implementez Skeleton Loaders animate pe bază de CSS și tranziții `view-transition-api` între ecrane.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "4.1",
+    "rol": "CISO Deputy / Security Lead",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Absența mecanismelor de „Secure Session Termination” și „Auto-Lock” expune datele în sesiuni inactive. Lipsa feedback-ului vizual la procesarea criptografică creează incertitudine asupra integrității.\n\nIMBUNATATIRE: Implementează auto-logout după 3 minute de inactivitate și un overlay cu spinner elegant/skeleton-loading animat în timpul operațiunilor AES.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "6.6",
+    "rol": "LLM / Integration Engineer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este un placeholder inert, iar matching-ul euristic e primitiv, lipsit de context semantic real. \n\nIMBUNATATIRE: Integrez un client `fetch` pentru Groq API (Llama-3-8B) cu sistem de caching (LocalStorage) și skeleton loaders. Adaug un sistem de \"Semantic Scoring\" local pentru prioritizarea potrivirilor.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "9.2",
+    "rol": "Behavioral Scientist / Psiholog cognitiv",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și rece; lipsește feedback-ul vizual care să construiască încredere în procesul de criptare și matching, generând anxietate în loc de calm.\n\nIMBUNATATIRE: Implementează \"Skeleton Loaders\" și tranziții de stare fluide (CSS transitions). Adaugă un \"Trust Ledger Visualizer\" animat care confirmă vizual integritatea datelor post-criptare.\n\nTIP: Ambele",
+    "ok": true
+  },
+  {
+    "cod": "11.11",
+    "rol": "Marketing Operations",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Fluxul de date este static și opac; utilizatorul nu vede \"valoarea\" în timp real, iar interfața pare un tabel glorificat, lipsit de feedback-ul dinamic necesar unui tool de Marketing Ops.\n\nIMBUNATATIRE: Implementarea unui \"Executive Dashboard\" cu Skeleton Loading și micro-interacțiuni (GSAP/Anime.js) pentru tranziții fine.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "14.2",
+    "rol": "Technical Recruiter / Sourcer",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Matching-ul euristic e opac; candidatii par statistici reci, nu oameni. Lipsa feedback-ului vizual la \"Secretara AI\" creează frustrare și incertitudine în calificare.\n\nIMBUNATATIRE: Implementează \"Match-Score\" vizual cu bare de progres animate și carduri de profil cu \"Micro-interacțiuni de intentie\".\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "17.4",
+    "rol": "Internal Tools / Systems Admin",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "idx": 2,
+    "text": "**NEMULTUMIRE:** Experiența de utilizator este rigidă: lipsa feedback-ului vizual la încărcare (skeleton screens) și procesarea locală blocantă fac aplicația să pară nefinisată, neprofesionistă pentru un produs \"Premium\".\n\n**IMBUNATATIRE:** Implementează skeleton loading CSS-only și tranziții de stare `view-transition` fluide.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.10",
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual la interacțiuni (loading, stări goale) creează o senzație de \"aplicație ieftină\".\n\nIMBUNATATIRE: Implementez Skeleton Loaders cu animație CSS `shimmer`, tranziții de pagină `View Transition API` și micro-interacțiuni pe butoane (scale-on-click).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.1",
+    "rol": "Head of Engineering / VP Engineering",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual (skeleton loading, micro-interacțiuni) trădează amatorismul, iar matching-ul euristic este prea rudimentar pentru a livra valoare reală \"Executive\".\n\nIMBUNATATIRE: Implementăm GSAP pentru tranziții fluide, skeleton screens și un motor de ponderare bazat pe scoruri de relevanță multi-criteriu.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "6.7",
+    "rol": "Conversational AI Designer",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este un spinner static inutil. Utilizatorii percep lipsa de feedback ca pe o eroare, scăzând încrederea în sistemul local. Interacțiunea este rigidă, fără personalitate sau context.\n\nIMBUNATATIRE: Implementează un \"Typing Indicator\" animat (bule pulsatile) și un mecanism de stocare locală a istoricului (sessionStorage) pentru a simula o conversație fluidă, folosind un prompt sistem \"Executive Concierge\" care oferă răspunsuri structurate, nu doar cuvinte-cheie.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "4.2",
+    "rol": "Information Security Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Riscul de exfiltrare date prin \"Export JSON\" necriptat și lipsa unui \"kill-switch\" pentru sesiuni inactive.\n\nIMBUNATATIRE: Implementare *Encrypted-Blob Export* (AES-GCM) și *Auto-Lock* (timer 3min inactivitate cu blur ecran). Vizual: adăugare *Skeleton Loading* animat pentru Trust Ledger și graf.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "12.1",
+    "rol": "Sales Director",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Lipsa unui \"Pipeline Vizual\" în ecranul Rețea; datele sunt statice, imposibil de urmărit valoarea parteneriatelor sau stadiul negocierilor. \n\n**IMBUNATATIRE:** Integrare Kanban interactiv cu drag-and-drop și skeleton loading pentru stări goale; graf SVG animat cu noduri scalabile bazat pe volumul tranzacțiilor.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "9.3",
+    "rol": "Cercetator neurostiinte / stiinte cognitive",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Lipsa skeleton loading-ului și a feedback-ului vizual creează \"anxietate de latență\" (incertitudine cognitivă), iar interfața statică nu oferă recompense dopaminergice necesare retenției.\n\n**IMBUNATATIRE:** Implementare *shimmer skeleton* CSS pentru încărcări și micro-interacțiuni *haptic-feedback* (vibratie/tranzitie) la matching, pentru a reduce încărcarea cognitivă.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "14.2",
+    "rol": "Technical Recruiter / Sourcer",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: \"Secretara AI\" e doar un placeholder static inutil. Recrutorul are nevoie de eficiență, nu de decor.\n\nIMBUNATATIRE: Implementează un motor local de filtrare fuzzy (Fuse.js) care să rankeze candidații în timp real și adaugă *Skeleton Loading* animat pe ecrane pentru UX premium.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "18.1",
+    "rol": "Head of Operations / COO Deputy",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual (stări goale, skeleton loading) induce o senzație de \"aplicație nefinisată\", scăzând încrederea utilizatorului premium.\n\nIMBUNATATIRE: Implementarea unui sistem de skeleton-loading cu tranziții CSS fluide și micro-animații (Framer Motion-like) pe butoane.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "6.8",
+    "rol": "AI Data Specialist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Matching-ul euristic e opac și rigid; stările de \"loading\" sunt primitive, stricând percepția de premium.\n\nIMBUNATATIRE: Implementează un \"Scoring Visualizer\" (radar chart SVG) pentru matching și skeleton screens animate (shimmer effect) pe tot UI-ul.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.10",
+    "rol": "Mobile Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 4,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de feedback, generând o senzație de „aplicație moartă” în timpul procesării datelor. Lipsa stărilor de așteptare și a tranzițiilor face experiența rigidă.\n\nIMBUNATATIRE: Implementez Skeleton Loaders (CSS pulse) pentru fiecare secțiune și micro-interacțiuni (Framer-like CSS transitions) la schimbarea ecranelor.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "1.2",
+    "rol": "Engineering Manager",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual (skeleton loading, stări goale) creează o experiență de utilizare \"moartă\". Matching-ul euristic e opac, scăzând încrederea utilizatorului în calitatea rezultatelor.\n\nIMBUNATATIRE: Implementează skeleton loading pentru stări goale și tranziții CSS (fade/slide). Adaugă \"Explainability Score\" la matching (ex: \"Potrivire 85% bazată pe skill-ul X\").\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "4.2",
+    "rol": "Information Security Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Riscul de exfiltrare prin export JSON necriptat și lipsa unui audit de integritate în timp real. Stările goale și loading-ul static induc incertitudine asupra securității datelor.\n\nIMBUNATATIRE: Export securizat cu AES-GCM în browser; Skeleton loaders animate; Jurnal de audit vizual cu timestamp-uri imutabile.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "9.4",
+    "rol": "Ethical / Responsible Design Lead",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Lipsa stărilor de încărcare (skeleton) și a feedback-ului tactil creează o experiență fragmentată (\"app-ul înghețat\"). Riscul de dark pattern: lipsa de transparență asupra procesării locale, lăsând utilizatorul nesigur dacă aplicația lucrează sau a cedat.\n\n**IMBUNATATIRE:** Introdu skeleton screens CSS și micro-interacțiuni (framer-motion lite/GSAP) la fiecare acțiune. Adaugă un \"Status Monitor\" minimal care explică procesarea locală (ex: \"Criptare în curs...\"), eliminând anxietatea utilizatorului prin radicală transparență.\n\n**TIP:** ambele",
+    "ok": true
+  },
+  {
+    "cod": "12.2",
+    "rol": "Account Executive",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rece; nu transmite autoritate B2B, iar lipsa feedback-ului vizual la matching/acțiuni scade încrederea clienților mari în procesul de \"trust ledger\".\n\nIMBUNATATIRE: Implementează *skeleton loading* animat, micro-interacțiuni pe cardurile de matching și *state-empty* ilustrate minimalist.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "14.3",
+    "rol": "Recruiter / Talent Acquisition",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este un tabel static, arid, care nu reflectă calitatea premium a candidaților; „Secretara AI” e doar un text-box inert, lipsit de feedback vizual.\n\nIMBUNATATIRE: Implementează carduri de profil „tinder-style” cu animații GSAP și Skeleton Loading. Adaugă un chat bubble animat pentru AI.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "18.2",
+    "rol": "Business Operations Analyst",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual (stări goale, skeleton-uri) creează o experiență de utilizare \"moartă\". Matching-ul euristic e opac, fără o logică de progres interactivă.\n\nIMBUNATATIRE: Implementează CSS Keyframes pentru tranziții fluide, skeleton screens pentru încărcarea datelor și un motor de matching vizual animat (stadii progresive).\n\nTIP: ambele.",
+    "ok": true
+  },
+  {
+    "cod": "2.1",
+    "rol": "DevOps Lead",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Lipsa stărilor de încărcare (skeleton screens) și feedback vizual la matching fac experiența să pară inertă, nu \"premium\". Fără teste, orice modificare riscă coruperea datelor criptate.\n\n**IMBUNATATIRE:** Implementează skeleton loaders CSS și un utilitar de auto-testare (Jest-like) în consolă pentru integritatea criptării.\n\n**TIP:** Ambele",
+    "ok": true
+  },
+  {
+    "cod": "6.9",
+    "rol": "Responsible AI / AI Ethics Specialist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Algoritmul TF-IDF este opac și poate perpetua bias-uri de selecție, iar lipsa feedback-ului vizual asupra „încrederii” decizionale induce o falsă certitudine.\n\nIMBUNATATIRE: Implementează un „Explicability Badge” în Potriviri (ex: „Bazat pe 3 interese comune”) și un Skeleton Loading animat pentru a gestiona percepția latenței.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "4.3",
+    "rol": "Application Security Engineer",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Gestionarea cheii în RAM este volatilă; lipsa feedback-ului vizual la procesare (spinner static) și stările goale inerte scad încrederea utilizatorului.\n\nIMBUNATATIRE: Implementează Web Workers pentru criptare non-blocking, adaugă skeleton screens animate și o bară de progres cu gradient pentru \"Trust Ledger\".\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "9.5",
+    "rol": "UX Researcher (well-being focus)",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Focus Digest\" și \"KPI\" induc anxietate de performanță prin cuantificarea relațiilor umane. Lipsa stărilor goale transformă ecranele goale în eșec personal, nu în oportunitate.\n\nIMBUNATATIRE: Înlocuiesc KPI cu „Momentum” (focalizat pe calitate, nu cantitate) și adaug skeleton loading animat.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "12.2",
+    "rol": "Account Executive",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de autoritate; clienții mari percep lipsa de feedback vizual (loading/stări) ca pe un produs \"de garaj\", nu ca pe o platformă enterprise securizată.\n\nIMBUNATATIRE: Implementează skeleton-screens, tranziții fluide de pagini și micro-interacțiuni pe \"Trust Ledger\".\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.2",
+    "rol": "Engineering Manager",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Experiența utilizatorului este statică, rigidă și lipsită de feedback senzorial; lipsa stărilor de încărcare face ca aplicația să pară nefuncțională în timpul procesării grele.\n\nIMBUNATATIRE: Implementează skeleton loading, tranziții CSS (opacity/slide) și micro-interacțiuni (framer-like) pentru acțiunile critice.\n\nTIP: Vizual.",
+    "ok": true
+  },
+  {
+    "cod": "14.3",
+    "rol": "Recruiter / Talent Acquisition",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este un tabel static, lipsit de context. Candidatii sunt doar linii, nu oameni; lipseste vizualizarea \"pipeline-ului\" pentru a urmari progresul calitativ.\n\nIMBUNATATIRE: Kanban board interactiv cu drag-and-drop, carduri cu skeleton loading și micro-interacțiuni de status (bula de avansare).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "18.2",
+    "rol": "Business Operations Analyst",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa stărilor de încărcare (skeleton screens) și a feedback-ului tactil creează o experiență \"ieftină\", neprofesionistă, care rupe iluzia de \"Executive Hybrid\".\n\nIMBUNATATIRE: Implementează CSS Keyframes pentru Skeleton Loading, micro-interacțiuni \"framer-motion style\" la tranziții și grafice SVG animate dinamic.\n\nTIP: Vizual.",
+    "ok": true
+  },
+  {
+    "cod": "6.10",
+    "rol": "MLOps Engineer (AI)",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Matching-ul euristic e static, ineficient si lipsit de \"inteligenta\" vizuala. Lipsesc feedback-ul de sistem si stările de loading, oferind o experiență fragmentată.\n\nIMBUNATATIRE: Implementează Web Workers pentru procesare asincronă, Skeleton Loaders CSS pentru ecrane și un motor de vectorizare (TinyML) pentru matching dinamic.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.2",
+    "rol": "Engineering Manager",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de feedback senzorial, iar matching-ul euristic oferă rezultate rigide, neproductive pentru utilizator.\n\nIMBUNATATIRE: Implementează framer-motion (JS ușor) pentru tranziții fluide și skeleton loading. Înlocuiește matching-ul TF-IDF cu un sistem de \"Similarity Scoring\" bazat pe ponderea atributelor (Weights) configurabile de utilizator.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "2.2",
+    "rol": "DevOps Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Aplicația este un monolit static, lipsit de feedback vizual (\"dead-UI\") și fără mecanisme de integritate la build. Utilizatorul nu știe dacă procesarea e activă sau dacă starea datelor este validă.\n\nIMBUNATATIRE: Implementez un \"Build-Time Pipeline\" (script local) pentru minificare/obfuscare, Skeleton Loaders (CSS transitions) și un Web Worker pentru procesarea datelor off-main-thread.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "4.3",
+    "rol": "Application Security Engineer",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Gestionarea cheii în RAM este volatilă; lipsa feedback-ului vizual la procesare (spinner static) și a stărilor goale (empty states) scade încrederea utilizatorului.\n\nIMBUNATATIRE: Implementează Web Crypto API cu `subtle.deriveKey` și adaugă skeleton loading animat cu `CSS transitions`.\n\nTIP: ambele.",
+    "ok": true
+  },
+  {
+    "cod": "9.6",
+    "rol": "Digital Wellbeing Specialist",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Lipsa feedback-ului vizual la procesare și stările goale (\"zero state\") inerte creează o experiență de \"aplicație înghețată\", ducând la anxietate și utilizare compulsivă.\n\n**IMBUNATATIRE:** Implementare skeleton loading (shimmer) pe ecrane și micro-animatii de stare pentru interacțiuni. Introducerea unui \"Focus Timer\" vizual (non-intruziv) în KPI Exec-Concierge.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "12.2",
+    "rol": "Account Executive",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Interfața este statică și rece; nu inspiră încredere pentru clienți mari. Lipsește vizualizarea valorii în timp real în timpul negocierii (ROI calculator).\n\nIMBUNATATIRE: Adaugă un \"Executive Dashboard\" cu grafice animate (Chart.js) și micro-interacțiuni (Framer Motion lite) pentru a vizualiza \"Network Health\".\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "14.4",
+    "rol": "People Operations Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Onboardingul este un proces static, administrativ greoi, care blochează utilizatorul. Lipsa indicatorilor de progres și a stărilor de așteptare (skeleton screens) creează o experiență fragmentată, neprofesionistă, ce subminează încrederea în securitatea datelor.\n\nIMBUNATATIRE: Implementează skeleton loading animat pentru KPI-uri și un wizard cu progress bar fluid. \n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "18.3",
+    "rol": "Strategy & Planning Specialist",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Lipsa interactivității și a feedback-ului vizual face ca app-ul să pară o pagină web statică, nu o experiență \"Premium\". Lipsa stărilor de încărcare/goale scade încrederea utilizatorului în robustețea procesării criptografice și a matching-ului.\n\n**IMBUNATATIRE:** Implementare skeleton loading, micro-animații GSAP (fade-in) și stări \"empty\" ilustrate pentru graf/rețea.\n\n**TIP:** Ambele",
+    "ok": true
+  },
+  {
+    "cod": "2.2",
+    "rol": "DevOps Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Aplicația este \"moartă\" vizual și lipsită de testare. Lipsa skeleton-loading-ului și a feedback-ului de UI creează o experiență amatoare, iar absența testelor unitare face orice modificare riscantă.\n\nIMBUNATATIRE: Integrez `Jest` pentru teste logică/criptare și adaug skeleton-uri CSS animate + `Framer Motion` (light) pentru micro-interacțiuni.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "7.1",
+    "rol": "Head of Product / CPO Deputy",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual în procesele asincrone (matching/AI) scade încrederea utilizatorului în \"premium\".\n\nIMBUNATATIRE: Implementare skeleton loaders și micro-tranziții CSS (GSAP Lite). Adăugare \"State Goale\" ilustrate pentru ecrane fără date.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "4.4",
+    "rol": "Penetration Tester",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Stocarea cheii în RAM este vulnerabilă la atacuri de tip „memory scraping” și exfiltrare prin scripturi injectate (XSS). Interfața statică nu semnalizează vizual starea sesiunii, facilitând „shoulder surfing”.\n\nIMBUNATATIRE: Implementează Web Crypto API cu `subtle.deriveKey` și „Auto-Lock” pe inactivitate cu ștergerea pointerului din memorie; adaugă Skeleton Loading și blur tranzitoriu pentru protecția confidențialității.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "9.7",
+    "rol": "Behavioral / Marketing Psychologist",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Onboardingul e tranzacțional, nu relațional. Lipsa feedback-ului vizual la matching creează anxietate, iar interfața pare un tabel static, nu un ecosistem de încredere.\n\nIMBUNATATIRE: Implementează \"Skeleton Loading\" pentru matching și tranziții \"Fade-in\" între ecrane. Adaugă un \"Trust Meter\" animat în profil care validează etic onestitatea datelor.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "12.3",
+    "rol": "Inside Sales Representative",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rece; nu oferă \"dopamina\" necesară pentru a închide lead-uri. Lipsa stărilor de loading și a micro-interacțiunilor face ca experiența să pară un formular demodat, nu o aplicație premium de networking.\n\nIMBUNATATIRE: Implementează skeleton loading animat și tranziții CSS \"slide-in\" între ecrane.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.3",
+    "rol": "Software Architect",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Arhitectura e rigidă, lipsită de stări intermediare (UX „înghețat” în load) și matching-ul euristic e opac. Lipsa unui sistem de evenimente face interfața reactivă greu de întreținut.\n\nIMBUNATATIRE: Implementează un „Event Bus” minimalist și `Skeleton Loading` animat. Adaugă un `scoring` explicabil (tooltip) pentru matching.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "18.3",
+    "rol": "Strategy & Planning Specialist",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de feedback tactil; utilizatorul nu simte \"premium\". Matching-ul euristic e opac, scăzând încrederea în calitatea recomandărilor.\n\nIMBUNATATIRE: Implementează skeleton loading pentru date și tranzitii CSS fluide. Adaugă un \"Confidence Score\" vizual (procentual) pentru fiecare potrivire, explicând factorii determinanți.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "2.2",
+    "rol": "DevOps Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Aplicația este un bloc static, lipsit de feedback vizual la procesare, cu un pipeline de build inexistent care blochează evoluția sigură.\n\nIMBUNATATIRE: Implementez un sistem de \"Skeleton Loading\" animat și un script de CI (GitHub Actions) pentru validare/minificare automată.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "7.2",
+    "rol": "Senior Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Experiența e statică, lipsită de \"premium feel\". Lipsa skeleton loading-ului și a feedback-ului vizual la interacțiuni creează o percepție de latență (chiar și locală) și amatorism.\n\nIMBUNATATIRE: Implementare CSS-only skeleton screens și micro-interacțiuni (Framer-like transitions) pentru schimbarea ecranelor.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.3",
+    "rol": "Software Architect",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Arhitectura actuală este un monolit static, rigid, cu experiență de utilizare lipsită de viață și feedback vizual (skeleton loading absent).\n\nIMBUNATATIRE: Implementează un State Machine centralizat pentru UI și un „Virtual DOM” minimalist pentru re-randări eficiente, adăugând skeleton-uri CSS și tranziții de stare fluide.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "14.4",
+    "rol": "People Operations Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 2,
+    "text": "**NEMULTUMIRE:** Procesul de onboarding este un blocaj static, iar datele din HRIS sunt vizual \"moarte\". Lipsa feedback-ului vizual la acțiuni face ca experiența să pară un tabel Excel glorificat, nu o platformă premium.\n\n**IMBUNATATIRE:** Implementează *Skeleton Loading* animat pentru încărcarea datelor și *Progress Stepper* interactiv în onboarding.\n\n**TIP:** ambele",
+    "ok": true
+  },
+  {
+    "cod": "4.4",
+    "rol": "Penetration Tester",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Stocarea cheii în RAM este expusă prin XSS/Memory Dumping; lipsa feedback-ului vizual la stări goale și skeleton loading face UX-ul să pară \"înghețat\" și nesigur.\n\nIMBUNATATIRE: Implementează `Web Crypto API` cu `SubtleCrypto` pentru chei non-exportabile și adaugă skeleton-uri CSS animate pe ecrane.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "9.8",
+    "rol": "Data Scientist (engagement quality)",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Lipsa feedback-ului despre \"Starea de bine\". Metricile actuale sunt statice, ignorând riscul de utilizare compulsivă. Interfața este un tablou de bord pasiv, nu un asistent care descurajează timpul excesiv prin micro-interacțiuni conștiente.\n\n**IMBUNATATIRE:** Implementarea unui \"Wellbeing Pulse\" (grafic de intensitate/timp) și \"Deep-Work Mode\" (timer de focus). Skeleton loading pentru a reduce anxietatea vizuală și animații CSS subtile de tranziție.\n\n**TIP:** ambele",
+    "ok": true
+  },
+  {
+    "cod": "12.3",
+    "rol": "Inside Sales Representative",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și rece; nu oferă feedback imediat la acțiuni, pierzând încrederea lead-urilor. Lipsa \"stărilor goale\" face aplicația să pară nefinalizată.\n\nIMBUNATATIRE: Implementează tranziții `view-transition-api` și skeleton loaders CSS. Adaugă stări \"Empty State\" ilustrate cu iconițe liniare pentru rețea/potriviri.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "18.4",
+    "rol": "Revenue Operations (RevOps)",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Dashboard-ul e static, lipsit de context decizional. Lipsesc indicatorii de viteză (velocity) și stările goale, făcând aplicația să pară \"moartă\" în absența datelor.\n\nIMBUNATATIRE: Implementează skeleton loading pentru KPI-uri și grafice interactive (Chart.js minimizat). Adaugă \"Revenue Pulse\": mini-sparklines pentru evoluția rețelei.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "14.5",
+    "rol": "Learning & Development Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rece, iar modul de învățare/potrivire lipsește de feedback pedagogic; utilizatorul se simte abandonat într-un tabel de date.\n\nIMBUNATATIRE: Implementează skeleton screens pentru loading, micro-animatii CSS la tranziții și un sistem de \"Progress Badge\" vizual pentru creșterea competențelor.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "2.3",
+    "rol": "Site Reliability Engineer (SRE)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Starea \"Ghost\": erorile de decriptare/date corupte blochează UX-ul fără feedback, iar lipsa skeleton-loading creează percepția de \"app înghețată\".\n\nIMBUNATATIRE: Implementez Error Boundary global cu recuperare din backup local și skeleton screens CSS pentru stările de \"loading\".\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "7.2",
+    "rol": "Senior Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual (loading/stări goale) creează o experiență \"offline\" prăfuită, iar matching-ul euristic e prea opac pentru utilizator.\n\nIMBUNATATIRE: Implementăm Skeleton Loaders cu CSS-animations și un \"Match Insight\" explicativ (de ce s-a făcut potrivirea).\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "1.4",
+    "rol": "Tech Lead",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de feedback tactil; lipsa skeleton loading-ului creează o percepție de latență, iar matching-ul euristic este prea rigid pentru o experiență „premium”.\n\nIMBUNATATIRE: Implementez Framer Motion-like transitions, skeleton loaders CSS și un motor de matching ponderat (fuzzy-search) pentru rezultate relevante.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "4.5",
+    "rol": "Compliance & Audit Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Lipsa trasabilității și a integrității datelor; jurnalul de audit este static și vulnerabil. Utilizatorul nu are dovezi vizuale ale criptării/integrității.\n\nIMBUNATATIRE: Implementarea unui \"Audit Trail\" imuabil (Hash-chaining JSON în LocalStorage) cu vizualizare grafică a integrității (status badge verde/roșu).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "12.4",
+    "rol": "Sales Engineer / Pre-sales",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; utilizatorul simte lipsa de feedback vizual în procesele de calcul (matching/decodare), ceea ce scade încrederea în securitatea AES.\n\nIMBUNATATIRE: Introdu skeleton loading cu CSS-pulsing, animații GSAP/Framer pentru tranziții de ecrane și un \"Decryption-Progress\" vizual.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "14.6",
+    "rol": "Compensation & Benefits Specialist",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Trust Ledger\"-ul e static și lipsit de transparență, iar KPI-urile nu oferă predictibilitate. Lipsa feedback-ului vizual la matching scade încrederea utilizatorului.\n\nIMBUNATATIRE: Implementează skeleton loading animat și un \"Equity Visualizer\" (grafic interactiv) pentru KPI. Adaugă micro-interacțiuni CSS pentru stări goale (empty states) ilustrate.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "18.4",
+    "rol": "Revenue Operations (RevOps)",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "**NEMULTUMIRE:** Lipsa unui funnel vizual integrat (lead-to-cash) și a feedback-ului de stare (skeleton loaders). Datele sunt statice, oferind zero insight despre \"starea sănătății\" pipeline-ului, esențial pentru RevOps.\n\n**IMBUNATATIRE:** Implementare `Revenue Pulse` (grafic tip funnel interactiv) și skeleton screens pentru încărcare.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "9.9",
+    "rol": "Ethics & Policy Advisor",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Lipsa transparenței și a controlului utilizatorului asupra algoritmului de matching, riscând opacitate etică. Interfața e statică, lipsită de feedback senzorial, necomunicând încrederea promisă.\n\nIMBUNATATIRE: Implementarea \"Explainable Matching\" (afișarea scorului de relevanță cu tooltips etice) și Skeleton Loading animat.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "2.3",
+    "rol": "Site Reliability Engineer (SRE)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Aplicația este fragilă; o eroare JS blochează tot, iar starea curentă este volatilă la refresh. Lipsa feedback-ului în timpul procesărilor lungi creează frustrare și incertitudine asupra integrității datelor.\n\nIMBUNATATIRE: Implementez `Error Boundary` global și `Persistence Layer` (IndexedDB) cu auto-save. Adaug Skeleton Loaders și animații CSS `fade-in` pentru tranziții fluide.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "7.2",
+    "rol": "Senior Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual (loading/stări goale) creează o experiență de „aplicație ruptă”, iar matching-ul euristic pare un tabel Excel, nu o experiență de produs premium.\n\nIMBUNATATIRE: Implementează CSS Skeleton Loaders, micro-interacțiuni GSAP la navigare și un sistem de carduri „swipe” cu animație pentru matching.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "1.4",
+    "rol": "Tech Lead",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "**NEMULTUMIRE:** Lipsa feedback-ului vizual la procesare (Secretara/Matching) creează impresia unei aplicații \"înghețate\". Interacțiunile sunt rigide, lipsite de rafinamentul \"premium\" promis.\n\n**IMBUNATATIRE:** Implementare *Skeleton Loading* (CSS-only) și micro-tranziții *Framer-Motion-like* cu CSS `transition` pentru ecrane. Adăugare status-bar dinamic pentru procesări asincrone.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "10.1",
+    "rol": "Head of PMO",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Lipsa stărilor de \"Zero-Data\" și feedback-ul vizual static fac aplicația să pară o foaie de calcul, nu un produs premium. Interacțiunea cu Secretara AI e rigidă, fără *flow* de conversație.\n\n**IMBUNATATIRE:** Implementare *Skeleton Loading* CSS, stări goale ilustrate cu SVG-uri minimaliste și un sistem de mesagerie tip *bubble* animat pentru Secretara AI.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "4.5",
+    "rol": "Compliance & Audit Specialist",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Lipsa trasabilității și a integrității datelor. Jurnalul de audit este rudimentar, neputând demonstra imuabilitatea acțiunilor pentru un audit SOC 2.\n\nIMBUNATATIRE: Implementarea unui \"Audit Trail\" criptografic cu hashing în lanț (SHA-256) per intrare, exportabil ca raport semnat digital.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "12.4",
+    "rol": "Sales Engineer / Pre-sales",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual (loading/stări goale) creează o experiență \"ieftină\", neprofesională pentru un demo executiv. Algoritmul de matching euristic e opac, neconvingător în prezentări.\n\nIMBUNATATIRE: Implementează skeleton-loaders CSS, micro-interacțiuni (Framer Motion-like) și o vizualizare \"Match Score\" detaliată, animată.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "14.7",
+    "rol": "Employer Branding / Internal Comms",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este „rece”, lipsită de viață; utilizatorul se simte izolat în acest seif digital, iar lipsa micro-interacțiunilor face experiența să pară un formular birocratic, nu o platformă premium de networking.\n\nIMBUNATATIRE: Implementează tranziții de pagină tip „page-curl” și skeleton loading animat. Adaugă un sistem de notificări „toast” elegante și stări goale ilustrate cu SVG-uri minimaliste.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "18.5",
+    "rol": "Vendor Management",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Risc ridicat de \"vendor lock-in\" și lipsa transparenței în execuția contractelor. Auditul manual e ineficient, iar dashboard-ul actual nu oferă vizibilitate pe KPI-uri critice de performanță (SLA/risc) pentru parteneri.\n\nIMBUNATATIRE: Implementare \"Vendor Health Card\" cu bară de progres auto-calculată și micro-interacțiuni pentru SLA-uri.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "2.3",
+    "rol": "Site Reliability Engineer (SRE)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE:Lipsa persistenței datelor și a feedback-ului de stare. Utilizatorul riscă pierderea datelor la refresh, iar interfața statică oferă zero indicii despre procesarea criptării sau succesul acțiunilor.\n\nIMBUNATATIRE:Implementare `IndexedDB` pentru stocare locală, Skeleton Loading pentru ecrane și `Framer Motion` (minificat) pentru tranziții fluide.\n\nTIP:Ambele",
+    "ok": true
+  },
+  {
+    "cod": "1.4",
+    "rol": "Tech Lead",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de feedback tactil; matching-ul euristic e opac, iar stările \"goale\" (empty states) distrug percepția de premium.\n\nIMBUNATATIRE: Implementez Framer Motion-lite pentru micro-interacțiuni, skeleton loaders și ilustrații SVG CSS-only. Adaug un \"Explainability Dashboard\" pentru matching: scoruri vizuale detaliate per criteriu.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "7.3",
+    "rol": "Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de feedback tactil; \"Secretara AI\" pare un script rudimentar, nu un asistent, iar lipsa skeleton loading-ului creează o senzație de latență (jank) la procesarea datelor.\n\nIMBUNATATIRE: Implementează CSS Skeleton Loaders și micro-interacțiuni (Framer Motion-like) pe butoane. Adaugă un \"intent-parsing\" vizual cu animații de tip typing pentru Secretară.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "4.6",
+    "rol": "Security Analyst (SOC)",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Logurile sunt statice; lipsa unui dashboard de \"Security Pulse\" face imposibilă detectarea anomaliilor în timp real.\n\nIMBUNATATIRE: Implementez un \"Audit Log Analyzer\" cu vizualizare tip *heatmap* și *skeleton loading* pentru alerte. Adaug animații CSS de tip *pulse* pentru incidentele critice.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "10.2",
+    "rol": "Program Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de feedback, iar matching-ul euristic e rudimentar. Utilizatorul nu simte valoarea \"Premium\" din cauza lipsei de dinamism și a acurateței scăzute în recomandări.\n\nIMBUNATATIRE: Implementează *Skeleton Loading* (CSS-only) și tranzitii *View Transitions API*. Adaugă ponderi pe categorii în TF-IDF pentru matching.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "12.5",
+    "rol": "Business Development Manager",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rece; nu transmite valoarea \"Premium\". Lipsa feedback-ului vizual la matching îngreunează \"vânzarea\" oportunităților către parteneri.\n\nIMBUNATATIRE: Implementare *Framer Motion-like* (CSS transitions/keyframe-uri) pentru micro-interacțiuni, Skeleton Loading premium și carduri interactive cu efect \"Glassmorphism\" la matching.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "18.6",
+    "rol": "Facilities / Office Manager",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rece; lipsa feedback-ului vizual la acțiuni (spinner/skeleton) creează o experiență de „aplicație abandonată” care scade încrederea în securitatea datelor.\n\nIMBUNATATIRE: Implementare *Glassmorphism* discret, skeleton-loading CSS pentru ecranele de date și animații *Framer-lite* (tranziții fluide `opacity/transform`) la schimbarea tab-urilor.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "14.8",
+    "rol": "HR Business Partner",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rece, iar lipsa feedback-ului vizual la acțiuni creează o experiență de utilizare nesigură, inadecvată pentru un instrument de tip \"Executive\". Lipsesc stările de încărcare și tranzițiile care ar trebui să confere autoritate și fluiditate.\n\nIMBUNATATIRE: Implementează skeleton loading pentru date, tranzitii CSS fine (fade/slide) și stări \"Empty State\" ilustrate minimalist. Adaugă micro-interacțiuni (haptic-feedback via JS) și un sistem de notificări tip 'Toast' pentru succesul acțiunilor critice.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "2.4",
+    "rol": "Cloud Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Aplicația e statică, riscă latență la volume mari de date locale și nu are un mecanism de backup/sincronizare cross-device securizat.\n\nIMBUNATATIRE: Implementare IndexedDB pentru stocare persistentă, skeleton loaders pentru ecrane și un modul de export/import criptat via WebCrypto pentru transfer/backup rapid.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "7.3",
+    "rol": "Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "**NEMULTUMIRE:** Lipsa feedback-ului vizual la acțiuni (spinner/skeleton) și a stărilor goale („Empty States”) face aplicația să pară „defectă” sau statică, erodând încrederea utilizatorului în promisiunea de „premium executive”.\n\n**IMBUNATATIRE:** Implementare CSS `skeleton-loading` pentru date și `empty-state` ilustrate minimalist; adăugare animații `GSAP` (micro-interacțiuni) la tranziții.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Matching-ul euristic e primitiv, iar UI-ul e static, lipsit de feedback tactil. Lipsa stărilor de încărcare (skeleton) face experiența să pară \"înghețată\" în timpul procesării datelor.\n\nIMBUNATATIRE: Implementez algoritm Jaccard Index ponderat pentru matching și adaug CSS skeleton-loaders cu animații 'shimmer'.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "5.1",
+    "rol": "Data / AI Lead",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Matching-ul euristic e opac, iar interfața e statică, lipsită de \"flow\" decizional. Utilizatorul nu înțelege *de ce* vede acele recomandări.\n\nIMBUNATATIRE: Implementează \"Weight-Slider\" interactiv (ajustare dinamică a scorului TF-IDF) și Skeleton Loading cu animații CSS pe ecranele de date.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "10.2",
+    "rol": "Program Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de feedback, iar matching-ul euristic este rudimentar. Utilizatorul nu simte valoarea \"premium\" în interacțiune.\n\nIMBUNATATIRE: Implementează *skeleton screens* pentru date, tranziții CSS de tip *view-transition* și un algoritm de ranking hibrid (TF-IDF + pondere proximitate).\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "12.6",
+    "rol": "Sales Operations Specialist",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Datele sunt statice, lipsite de insight-uri acționabile. Interfața e rigidă, fără feedback vizual în timp real, ceea ce scade încrederea utilizatorului în \"Trust Ledger\".\n\nIMBUNATATIRE: Implementează *Skeleton Loading* animat și un *Dashboard Canvas* cu grafice SVG reactive (recalculare automată la update).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "15.1",
+    "rol": "Finance Director / CFO Deputy",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: KPI-urile sunt statice și lipsite de context decizional, iar interfața pare un tabel Excel glorificat, ineficient pentru o analiză de tip \"Executive\".\n\nIMBUNATATIRE: Implementează grafice SVG interactive tip \"sparkline\" și un sistem de \"Conditional Formatting\" pentru indicatori. Adaugă stări de tip \"Skeleton Loading\" pentru o experiență premium.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "18.6",
+    "rol": "Facilities / Office Manager",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; utilizatorii se simt \"pierduți\" în ecrane fără feedback vizual în timp ce datele se procesează, pierzând aura de aplicație premium.\n\nIMBUNATATIRE: Implementare *skeleton loading* cu animație *pulse* și tranziții *fade-in* între ecrane.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "2.4",
+    "rol": "Cloud Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Aplicația e un \"monolit mut\". Lipsa persistenței cloud și a feedback-ului vizual (stări goale, loading) o fac să pară un prototip fragil, nu un instrument executiv premium.\n\nIMBUNATATIRE: Implementează IndexedDB pentru stocare locală, Skeleton Screens CSS pentru ecrane și un export/import criptat tip \"Cloud-Sync\" (s3-ready).\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "7.3",
+    "rol": "Product Manager",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "**NEMULTUMIRE:** Experiența de utilizare este rigidă; lipsa feedback-ului vizual (skeleton loading, micro-interacțiuni) și a stărilor goale face aplicația să pară un prototip nefinisat, nu un produs premium.\n\n**IMBUNATATIRE:** Implementează stări de încărcare (skeletons) cu tranziții CSS fluide și animații de tip \"staggered fade-in\" pentru ecrane.\n\n**TIP:** ambele",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Matching-ul euristic static e rigid, iar lipsa stărilor de loading/gol face experiența \"moartă\". Lipsa unui sistem de persistență locală robustă (IndexedDB) forțează re-procesarea datelor la fiecare refresh.\n\nIMBUNATATIRE: Implementare IndexedDB pentru stocare, skeleton screens animate și un algoritm de matching asincron (Web Worker) pentru fluiditate.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "5.2",
+    "rol": "Data Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Structura datelor e un haos nestructurat în `localStorage`, vulnerabil la corupere și ineficient la query-uri pe măsură ce rețeaua crește.\n\nIMBUNATATIRE: Implementez un strat de *Data Normalization* (schema OBT) cu indexare în memorie (Map-uri) și un sistem de *Validation Schemas* tip Zod-lite pentru integritate.\n\nTIP: functional",
+    "ok": true
+  },
+  {
+    "cod": "10.3",
+    "rol": "Project Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual la acțiuni creează o experiență rudimentară, iar matching-ul euristic este imprecis, oferind rezultate irelevante.\n\nIMBUNATATIRE: Implementez Framer Motion (lightweight) pentru micro-interacțiuni și Skeleton Loaders. Upgrade la matching: ponderare TF-IDF cu vectori de proximitate locali pentru relevanță.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.1",
+    "rol": "Customer Success Lead",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rece; lipsește un sentiment de progres, ceea ce cauzează churn rapid. Utilizatorul nu simte \"pulsul\" rețelei, iar experiența pare un formular Excel glorificat, nu un instrument executiv premium.\n\nIMBUNATATIRE: Implementează skeleton loading, tranziții fluide de tip \"page-slide\" și un dashboard cu animații CSS (fading/scaling) pentru KPI.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "15.2",
+    "rol": "Accountant / Contabil",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Trust Ledger-ul este un tabel static, lipsit de trasabilitate și rigoare auditabilă. Datele sunt opace, îngreunând reconcilierea.\n\nIMBUNATATIRE: Implementarea unui \"Audit Trail\" cu hashing înlănțuit per tranzacție și export CSV/PDF cu semnătură digitală (SHA-256). Adăugarea unui dashboard vizual cu \"Sănătate Financiară\" (sparklines).\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "2.4",
+    "rol": "Cloud Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Aplicația e statică, riscantă în offline-first fără sincronizare, iar \"matching-ul\" euristic e ineficient. Lipsa persistentei distribuite îngreunează scalarea.\n\nIMBUNATATIRE: Implementează Web Workers pentru procesare asincronă și un sistem de stocare IndexedDB criptată. Adaugă animații GSAP (micro-interacțiuni) și Skeleton Loading pentru stările goale.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "7.4",
+    "rol": "Product Owner",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Experiența utilizatorului este statică: lipsa feedback-ului vizual la acțiuni și stările goale (\"empty states\") dau impresia unei aplicații \"moarte\".\n\n**IMBUNATATIRE:** Implementare skeleton loading (CSS-only), tranziții `view-transition-api` între ecrane și micro-interacțiuni (framer-like) pentru acțiunile de match.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Matching-ul euristic static și lipsa feedback-ului vizual fac experiența rigidă. Utilizatorul nu simte \"inteligența\" platformei, iar lipsa stărilor intermediare (loading/empty) creează o senzație de aplicație nefinisată.\n\nIMBUNATATIRE: Implementare Web Workers pentru matching asincron + Skeleton Loaders cu animații CSS.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "5.2",
+    "rol": "Data Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Structura datelor e un haos nestructurat în `localStorage`, vulnerabil la corupere și ineficient la căutare. Lipsesc stările de încărcare (skeleton) și validarea calității datelor.\n\nIMBUNATATIRE: Implementez un `DataSchema` (schema-validator) și `Skeleton Loading` pe ecranele principale.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: \"Secretara AI\" este un placeholder frustrant, iar lipsa stărilor goale (empty states) face aplicația să pară „moartă” pentru utilizatorii noi.\n\nIMBUNATATIRE: Implementează `Skeleton Loading` pentru KPI-uri și un sistem de `Intent Parsing` prin regex avansat pentru Secretară. Adaugă ilustrații CSS minimaliste pentru ecrane goale.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "10.3",
+    "rol": "Project Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de feedback tactil, iar matching-ul euristic este prea rigid, oferind o experiență \"moartă\" pentru utilizator.\n\nIMBUNATATIRE: Implementare Skeleton Loading pentru datele criptate, tranziții GSAP pentru ecrane și motor de matching bazat pe ponderi dinamice (Weighting).\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "2.5",
+    "rol": "System Administrator",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Aplicația e statică, riscantă fără mecanisme de integritate locală și lipsită de feedback vizual la procesare.\n\nIMBUNATATIRE: Introduc `IndexedDB` cu criptare AES-GCM pentru persistenta securizata, `Skeleton Loading` pentru stări goale și `Service Worker` pentru offline-first. Adaug animații CSS `Framer-like` pentru micro-interacțiuni fluide.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "7.4",
+    "rol": "Product Owner",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de feedback, iar matching-ul euristic este rudimentar. Senzația de \"premium\" dispare la încărcarea datelor (flash-uri albe).\n\nIMBUNATATIRE: Implementează *skeleton screens*, tranziții CSS (fade/slide) și un algoritm de ranking ponderat.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "15.2",
+    "rol": "Accountant / Contabil",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "**NEMULTUMIRE:** Lipsa trasabilității și a stărilor intermediare în „Trust Ledger” face imposibilă reconcilierea auditabilă a „potrivirilor”. Datele par statice, fără dovezi de integritate în timp real.\n\n**IMBUNATATIRE:** Implementare *Audit-Log* cu hash-uri înlănțuite (blockchain-lite) și *Skeleton Loading* animat pentru stările de calcul.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 4,
+    "text": "NEMULTUMIRE: Matching-ul euristic e static, ineficient si blocheaza UI-ul. Lipsa feedback-ului vizual la procesare creeaza o experienta \"moarta\".\n\nIMBUNATATIRE: Implementare Web Workers pentru matching asincron + Skeleton Loaders animate. Vectorizarea TF-IDF optimizata cu `TypedArrays` pentru viteza.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "10.3",
+    "rol": "Project Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 3,
+    "text": "**NEMULTUMIRE:** Lipsa feedback-ului vizual la încărcare (skeleton screens) și interacțiunile rigide fac aplicația să pară un document static, nu un instrument premium.\n\n**IMBUNATATIRE:** Implementare *Skeleton Loading* (CSS-only) pe ecranele de date și *Framer-Motion-like transitions* (via Web Animations API) pentru navigarea între ecrane.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "15.2",
+    "rol": "Accountant / Contabil",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: \"Trust Ledger\" este doar un tabel static, lipsit de trasabilitate și consistență contabilă. Riscuri majore de erori neidentificate.\n\nIMBUNATATIRE: Implementare \"Audit Log\" cu validare prin hash înlănțuit (SHA-256) pentru fiecare tranzacție și skeleton loading pentru feedback vizual instantaneu.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de feedback, riscând abandonul utilizatorilor. Lipsa \"skeleton loading\" și a micro-interacțiunilor face ca experiența să pară un formular arhaic, nu o aplicație premium de networking.\n\nIMBUNATATIRE: Implementăm Skeleton Screens CSS și tranziții fluide de stare (GSAP/CSS). \n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "2.6",
+    "rol": "Network Engineer",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Rețeaua statică e inutilă la scalare; lipsa feedback-ului vizual la procesarea \"Secretarei\" creează incertitudine.\n\nIMBUNATATIRE: Implementează vizualizare graf dinamică (D3.js) cu noduri interactive și skeleton loading pentru stări goale. Adaugă un \"Network Health Pulse\" animat care simulează latența.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "7.4",
+    "rol": "Product Owner",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual în stări goale (empty states) și loading creează o experiență amatoare, iar matching-ul euristic e prea opac pentru utilizator.\n\nIMBUNATATIRE: Implementare skeleton loaders, animații GSAP pentru tranziții fine și explicații \"Why match\" (badge-uri de scor) în UI.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "5.3",
+    "rol": "Data Scientist",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Matching-ul euristic TF-IDF este rudimentar și opac; lipsa skeleton loading-ului și a stărilor goale oferă o experiență de utilizare „moartă” și neprofesionistă, nefiind demnă de un produs „premium”.\n\nIMBUNATATIRE: Implementează scoruri de relevanță (probabilități) și skeleton loaders CSS.\n\nTIP: ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.5",
+    "rol": "Senior Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 5,
+    "text": "NEMULTUMIRE: Matching-ul euristic static și lipsa feedback-ului vizual fac experiența rigidă, ca un tabel Excel.\n\nIMBUNATATIRE: Implementez un algoritm de ranking dinamic (weighted scoring) cu animații GSAP pentru \"staggered list\" și Skeleton Loading. Adaug stări goale (empty states) ilustrate cu iconițe SVG minimaliste.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "5.3",
+    "rol": "Data Scientist",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Matching-ul euristic e static, ineficient pentru scalare, iar lipsa feedback-ului vizual (skeleton/stări goale) creează o experiență \"moartă\" și nesigură.\n\nIMBUNATATIRE: Implementează un algoritm de scoring dinamic (Weighted Jaccard) și skeleton screens CSS pentru încărcare. Adaugă animații GSAP pentru tranziții între ecrane.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "10.4",
+    "rol": "Scrum Master",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de feedback senzorial; lipsa skeleton loading-ului creează senzația de \"app blocată\" la procesarea criptării.\n\nIMBUNATATIRE: Implementează CSS Keyframes pentru skeleton loading și tranzitii `fade-in` la schimbarea ecranelor. Adaugă un `requestAnimationFrame` pentru animații fluide în graficul SVG.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "15.3",
+    "rol": "FP&A Analyst",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Lipsa datelor dinamice și a feedback-ului vizual fac KPI-urile să pară statice, nu un \"instrument de decizie\". Fără skeleton loading și stări goale, UX-ul pare \"înghețat\" și neprofesionist.\n\nIMBUNATATIRE: Implementează un \"Scenario Engine\" (slider-e varianță) și skeleton-uri CSS animate.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "2.7",
+    "rol": "Database Administrator (DBA)",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Gestionarea datelor în memorie este volatilă; fără un sistem de versionare (Snapshots) și indexare eficientă, căutările devin lente și riscante la volume mari.\n\nIMBUNATATIRE: Implementez IndexedDB cu Web Worker pentru asincronism și un sistem de \"Snapshot Versioning\" pentru backup-uri atomice, oferind skeleton loading nativ.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Interfața este \"moartă\" și lipsită de feedback imediat. Utilizatorul nu simte valoarea rețelei, iar ecranele statice creează o experiență de utilizare frustrantă și neprofesionistă pentru un produs \"Premium\".\n\nIMBUNATATIRE: Implementează skeleton loading pentru date, micro-animații GSAP la tranziții și graf interactiv D3.js.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "7.5",
+    "rol": "Business Analyst",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de feedback tactil, iar matching-ul euristic este imprecis, generând frustrare prin lipsa de relevanță a rezultatelor.\n\nIMBUNATATIRE: Implementează \"Skeleton Loading\" animat și micro-interacțiuni GSAP. Adaugă un algoritm de weighting pentru matching (criterii obligatorii vs. opționale) pentru rezultate calitative.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "5.4",
+    "rol": "Machine Learning Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Matching-ul euristic e primitiv, iar lipsa feedback-ului vizual (stări goale, skeleton) face experiența rigidă, \"moartă\".\n\nIMBUNATATIRE: Implementez `TF-IDF` vectorial cu `Web Workers` pentru latență zero și adaug `Skeleton Screen` animat cu `CSS Keyframes` pentru tranziții premium.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.6",
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa stărilor \"loading\" și a feedback-ului vizual la procesarea euristică face aplicația să pară nefuncțională.\n\nIMBUNATATIRE: Implementez skeleton-loaders CSS/JS și tranziții de stare (State Machine) pentru Secretara AI și Matching, cu animații GSAP/CSS pentru micro-interacțiuni fluide.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "10.4",
+    "rol": "Scrum Master",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de feedback, generând o senzație de „aplicație moartă”. Lipsa stărilor de încărcare (skeleton) și a tranzițiilor face ca experiența de utilizare să pară ieftină, nealiniată cu estetica \"Premium\".\n\nIMBUNATATIRE: Implementează skeleton screens (CSS-only) și tranziții `view-transition-api` pentru navigație.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "15.3",
+    "rol": "FP&A Analyst",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: KPI-urile sunt statice, lipsite de context decizional. \"Trust Ledger\" este doar un tabel brut, fără proiecții de performanță (forecast) sau analiză de varianță (actual vs. estimat).\n\nIMBUNATATIRE: Implementare \"Executive Dashboard\" cu mini-grafice trend (SVG) și indicatori de varianță (color-coded) pentru fiecare KPI.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 4,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de feedback, generând anxietate privind securitatea datelor criptate. Lipsesc skeleton-urile, deci utilizatorul percepe aplicația ca fiind \"blocată\" în timpul procesării locale.\n\nIMBUNATATIRE: Implementare *Skeleton Loading* pentru ecrane și tranziții *Framer-Motion* CSS. Adăugare status vizual \"Criptare Activă\" în timp real.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "3.1",
+    "rol": "QA Lead",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Experiența utilizatorului e statică și lipsită de feedback imediat. Lipsa stărilor de loading (skeleton) și a tranzițiilor fluide face aplicația să pară „înghețată” în timpul procesării criptografice sau a matching-ului, afectând percepția de performanță premium.\n\nIMBUNATATIRE: Implementează CSS Skeleton Screens și tranziții `view-transition-api` pentru schimbarea ecranelor.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "7.5",
+    "rol": "Business Analyst",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de feedback, iar matching-ul euristic este rudimentar, generând rezultate irelevante.\n\nIMBUNATATIRE: Implementează *Skeleton Screens* pentru încărcare și *Framer Motion* (light) pentru tranziții. Adaugă o funcție de \"Weighting\" (scoruri ponderate) în algoritmul TF-IDF pentru matching personalizat.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.6",
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Matching-ul euristic e rudimentar, iar experiența utilizatorului e statică, lipsită de feedback vizual în sarcini asincrone.\n\nIMBUNATATIRE: Implementez algoritm de ranking Jaccard (scoruri ponderate) și adaug skeleton loaders CSS/Framer Motion light pentru stări goale.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "5.4",
+    "rol": "Machine Learning Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Matching-ul euristic e primitiv, iar lipsa feedback-ului vizual în stări goale creează o experiență \"moartă\". Lipsa unui flux asincron face ca \"Secretara AI\" să pară o simplă animație CSS fără valoare reală.\n\nIMBUNATATIRE: Implementează un motor Vector-Search in-browser (JS) cu *skeleton screens* și *Framer-Motion-like transitions*.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "10.4",
+    "rol": "Scrum Master",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de feedback, iar matching-ul euristic este prea rigid/opac pentru utilizator.\n\nIMBUNATATIRE: Implementează framer-motion (JS ușor) pentru tranziții fluide și skeleton loading. Adaugă un slider de \"Scor de Încredere\" interactiv în matching care vizualizează ponderea criteriilor.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.2",
+    "rol": "Customer Success Manager",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 5,
+    "text": "NEMULTUMIRE: Interfața este statică și rece; lipsa feedback-ului vizual la încărcare (skeleton screens) și a micro-interacțiunilor face ca aplicația să pară un simplu tabel, nu un tool premium.\n\nIMBUNATATIRE: Implementează skeleton loaders CSS și tranziții `fade-in` între ecrane. Adaugă un \"Pulse Indicator\" animat în `Trust Ledger`.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "15.4",
+    "rol": "Payroll Specialist",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este rigidă; lipsa feedback-ului vizual la procesarea datelor (Secretara/Matching) creează incertitudine, iar vizualizarea \"Trust Ledger\" e prea densă, riscând erori de interpretare.\n\nIMBUNATATIRE: Implementare skeleton loaders și micro-interacțiuni (framer-motion-like CSS) pentru stări de așteptare; Dashboard simplificat cu carduri \"Data-Health\" (validare vizuală).\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "3.2",
+    "rol": "Senior QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Aplicația este un bloc static, \"dead-on-arrival\" fără feedback vizual (fără skeleton screens/stări goale) și suferă de lipsa integrității datelor la actualizări, neavând un set de teste de regresie pentru integritatea criptării AES.\n\nIMBUNATATIRE: Implementez *Skeleton Loading* CSS nativ și o suită de *Unit Tests* (TinyTest) integrate în `window.onload` pentru a valida ciclul complet Criptare-Decriptare/Data-Integrity înainte de randare.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "10.5",
+    "rol": "Delivery Manager",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de feedback, generând o experiență de utilizare \"moartă\" care trădează lipsa de profesionalism a unui produs premium.\n\nIMBUNATATIRE: Implementarea skeleton loading-ului pentru KPI-uri și tranziții CSS (fade/slide) între ecrane. Adăugarea unei biblioteci de micro-interacțiuni (ex. animații GSAP/Lottie-lite).\n\nTIP: Vizual.",
+    "ok": true
+  },
+  {
+    "cod": "7.6",
+    "rol": "Product Operations Specialist",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual în procesele asincrone (matching/AI) scade încrederea utilizatorului și \"premiumness-ul\" experienței.\n\nIMBUNATATIRE: Implementează skeleton screens pentru încărcare și micro-interacțiuni GSAP (fading/scaling) la tranziția între ecrane. Adaugă un \"Status Pulse\" animat pentru AI.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.6",
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Matching-ul euristic e rudimentar, iar experiența UI e statică, lipsită de feedback vizual la încărcare.\n\nIMBUNATATIRE: Implementez algoritmul \"Jaccard Similarity\" pentru matching precis și adaug \"Skeleton Loaders\" animate (CSS keyframes) peste stările goale.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Lipsa feedback-ului vizual la acțiuni (spinner/skeleton) și a stărilor de eroare face experiența rigidă și nesigură (utilizatorul crede că app-ul a înghețat).\n\n**IMBUNATATIRE:** Implementare *Glassmorphism* pentru modale, *skeleton loaders* CSS și tranziții *View Transition API*.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "15.5",
+    "rol": "Procurement / Achizitii",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Lipsa predictibilității costurilor și vizualizarea statică. \"KPI Exec-Concierge\" e doar un placeholder; nu am control asupra \"spend-ului\" sau eficienței rețelei, iar interfața pare un tabel Excel glorificat, lipsit de stări de încărcare și feedback vizual tactil.\n\n**IMBUNATATIRE:** Implementare *Skeleton Loading* pentru ecrane și *Sparkline Charts* (SVG) în KPI-uri pentru trenduri vizuale. Adăugare modul \"Smart Spend\" care calculează economiile prin matching-ul ofertelor, cu animații de tranziție (GSAP Lite) între ecrane.\n\n**TIP:** ambele",
+    "ok": true
+  },
+  {
+    "cod": "5.5",
+    "rol": "MLOps Engineer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Matching-ul euristic e static, ineficient si lipsit de feedback vizual; aplicatia pare \"moarta\" in timpul procesarii. Lipsa skeleton-urilor face tranzitiile intre ecrane sa para rudimentare si neprofesioniste.\n\nIMBUNATATIRE: Implementeaza un algoritm de ranking ponderat (Vector-like) si skeleton loading animat.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "3.2",
+    "rol": "Senior QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Aplicația este un \"monolit mut\" fără feedback; lipsa stărilor de încărcare (skeleton) și a validărilor automate face experiența fragilă și neprofesionistă.\n\nIMBUNATATIRE: Implementează un motor de \"Skeleton Loading\" CSS și o suită de teste unitare (Jest/Playwright local) pentru logica criptografică.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "8.1",
+    "rol": "Design Lead",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de viață; lipsa feedback-ului vizual (skeleton loading, tranzitii) creează o senzație de \"mockup\" nefinisat, subminând percepția de \"premium\" și încrederea utilizatorului în timpul procesării datelor.\n\nIMBUNATATIRE: Implementează CSS `skeleton-loaders` pentru ecrane și GSAP/View Transitions API pentru micro-interacțiuni fluide.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.6",
+    "rol": "Backend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 4,
+    "text": "NEMULTUMIRE: Matching-ul euristic e rudimentar, iar lipsa skeleton-loading-ului și a feedback-ului tactil fac app-ul să pară \"înghețat\" și neprofesionist.\n\nIMBUNATATIRE: Implementez algoritm de ranking ponderat (weighted-score) și adaug CSS skeleton-loading cu tranziții fluide (Framer-like).\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "5.6",
+    "rol": "Mobile Product Analyst",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Onboardingul este un \"cold start\" frustrant; lipsa feedback-ului vizual la matching și a skeleton loading-ului creează percepția unei aplicații lente/moarte.\n\n**IMBUNATATIRE:** Implementează un \"Progressive Skeleton Loader\" și animații GSAP (staggered fade) la tranzacții. Adaugă un \"Onboarding Goal-Setter\" interactiv pentru a reduce rata de abandon.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "11.1",
+    "rol": "Marketing Lead",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de \"premium feel\". Lipsa skeleton loading-ului și a feedback-ului vizual în stările goale (zero potriviri) trădează amatorismul tehnic, subminând promisiunea de aplicație \"Executive\".\n\nIMBUNATATIRE: Implementează CSS Keyframes pentru skeleton loading și tranzitează ecranele cu fade-in. Adaugă stări goale ilustrate (SVG minimalist) și micro-interacțiuni pe butoane.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; utilizatorii raportează confuzie la procesarea \"Secretarei AI\" din cauza lipsei feedback-ului vizual în timp real, iar ecranele goale par \"stricate\".\n\nIMBUNATATIRE: Implementez skeleton loading (CSS-only), tranziții `view-transition-api` și o animație de tip \"Typing Indicator\" pentru AI.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "15.6",
+    "rol": "Billing / Revenue Operations",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Lipsa unui modul de \"Subscription & Billing\" în Profil. Utilizatorii nu văd stadiul plății sau facturile, crescând riscul de churn și erori de reconciliere.\n\nIMBUNATATIRE: Implementarea unui \"Billing Dashboard\" cu status abonament, istoric facturi (format JSON/PDF) și notificare vizuală pentru plăți eșuate.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "3.2",
+    "rol": "Senior QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Aplicația este un \"monolit mut\". Lipsa stărilor de încărcare (skeleton screens) și a feedback-ului tactil face experiența să pară blocată. Lipsa testelor unitare/E2E pentru motorul de criptare/matching riscă integritatea datelor la orice modificare.\n\nIMBUNATATIRE: Integrare **Jest** pentru logica de criptare și **Skeleton UI** animat.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "8.2",
+    "rol": "Senior UX Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual la acțiuni face experiența să pară un formular web anost, nu o aplicație premium.\n\nIMBUNATATIRE: Implementează \"Framer Motion\" (CSS transitions/keyframe-uri) pentru micro-interacțiuni, Skeleton Loading pentru date și un layout grid dinamic.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.7",
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și \"moartă\", lipsită de feedback senzorial. Tranzițiile între ecrane sunt brutale, iar stările de încărcare lipsesc, trădând natura locală a aplicației.\n\nIMBUNATATIRE: Implementez un sistem de *View Transitions API* și skeleton loaders CSS animați pentru stările de așteptare.\n\nTIP: Ambele",
+    "ok": true
+  },
+  {
+    "cod": "11.2",
+    "rol": "Digital Marketing Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Rata de conversie e blocată de un onboarding sec și lipsa feedback-ului vizual la acțiuni; utilizatorii nu \"simt\" valoarea imediat, crescând bounce-ul.\n\nIMBUNATATIRE: Implementare Skeleton Loading pentru date, animații CSS (GSAP lite) la tranziții și un progress bar interactiv în onboarding pentru retenție vizuală.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual la acțiuni (încărcare, erori) frustrează utilizatorii, generând tichete pentru \"aplicație blocată\" când procesele rulează în background.\n\nIMBUNATATIRE: Implementează CSS Skeleton Loaders și animații `transition` pentru stări. Adaugă un sistem Toast pentru confirmări tranzacționale.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "5.7",
+    "rol": "Data Analyst",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: KPI-urile sunt statice/estimări oarbe, lipsite de context analitic, iar interfața e inertă, fără feedback vizual la interacțiuni.\n\nIMBUNATATIRE: Implementează un motor de calcul \"Trend-Velocity\" (delta vs. istoric local) și micro-animații GSAP pentru tranziții. Înlocuiește stările goale cu grafice CSS \"Skeleton Loading\".\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "15.6",
+    "rol": "Billing / Revenue Operations",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Lipsa unui modul de \"Subscription & Billing\" în profil face imposibilă monitorizarea veniturilor recurente; utilizatorii nu pot vedea statusul plății, generând incertitudine.\n\nIMBUNATATIRE: Adăugarea unui tab \"Billing & Plan\" cu un dashboard de status abonament, istoric facturi (PDF mock) și integrare Stripe Checkout simulată.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "3.3",
+    "rol": "QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Testarea manuală e ineficientă; lipsa stărilor de \"loading\" și \"empty\" face UX-ul să pară \"înghețat\".\n\nIMBUNATATIRE: Implementez Playwright pentru testare E2E și introduc skeleton screens CSS animate cu `shimmer` + state machine pentru UI reactiv.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "8.2",
+    "rol": "Senior UX Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de viață; lipsa feedback-ului vizual la acțiuni (încărcare, succes) induce nesiguranță, iar ierarhia vizuală a dashboard-ului este plată.\n\nIMBUNATATIRE: Implementează skeleton loading cu animație CSS 'shimmer', micro-interacțiuni (framer-motion-like) la butoane și tranziții fluide între ecrane.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.7",
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa stărilor de încărcare (skeleton screens) și a tranzițiilor fluide între ecrane creează o experiență fragmentată, neprofesionistă (\"cheap\").\n\nIMBUNATATIRE: Implementare *View-Transition API* pentru navigare fluidă și *CSS Skeleton Loaders* pe baza datelor asincrone.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "5.8",
+    "rol": "BI Developer",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: KPI-urile din dashboard sunt statice, lipsite de context analitic. Lipsesc vizualizările de tip „trend” și stările de „skeleton loading”, făcând interfața să pară inertă și neprofesionistă în timpul procesării datelor.\n\nIMBUNATATIRE: Implementez Sparklines pentru KPI-uri, Skeleton UI pentru stările de așteptare și un strat semantic simplificat (caching local) pentru a simula performanța BI.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "11.2",
+    "rol": "Digital Marketing Specialist",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Lipsa datelor de conversie din landing-page îngreunează optimizarea CAC/ROAS. Utilizatorii \"se pierd\" după onboarding, fără feedback vizual de progres.\n\nIMBUNATATIRE: Implementare \"Performance Dashboard\" (local) cu tracking funnel (view -> click -> match) și Skeleton Loading pentru stările goale.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 4,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa feedback-ului vizual la acțiuni (încărcare, erori) frustrează utilizatorii, generând tichete pentru \"aplicație blocată\" când procesele rulează în background.\n\nIMBUNATATIRE: Implementare *Skeleton Loading* CSS și tranziții *Fade-in* pentru ecrane. Adăugare *Toast Notifications* pentru succes/eroare criptare.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "3.3",
+    "rol": "QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Aplicația este inertă; lipsa feedback-ului la încărcarea datelor și fragilitatea fluxului de criptare cauzează erori imposibil de debugat. Nu avem certitudinea că starea persistă corect între sesiuni.\n\nIMBUNATATIRE: Introducere Jest/Playwright pentru unit testing pe logica criptografică și Skeleton Loaders animate pentru ecrane.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "8.3",
+    "rol": "UI Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de viață; lipsa feedback-ului vizual (skeleton loading, micro-interacțiuni) face ca aplicația să pară lentă și nefinisată, subminând aura \"premium\".\n\nIMBUNATATIRE: Implementare *CSS transition-group* pentru animații fluide, *Skeleton Loaders* bazate pe CSS-pulse și tranziții *fade-in* între ecrane.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "16.1",
+    "rol": "Head of Legal",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Jurnalul de audit și consimțământul actual sunt rudimentare, expunând compania la riscuri GDPR și litigii privind trasabilitatea. Lipsa dovezilor imuabile de consimțământ mă îngrijorează.\n\nIMBUNATATIRE: Implementează \"Trust-Audit Ledger\" cu semnătură digitală (SHA-256) pe fiecare acțiune, exportabilă ca PDF/JSON semnat. Adaugă skeleton loading și tranziții fluide.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "1.7",
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 3,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa stărilor de încărcare (skeleton screens) și a feedback-ului tactil creează o senzație de \"aplicație web veche\", compromițând percepția de produs premium.\n\nIMBUNATATIRE: Implementez skeleton loading bazat pe CSS-grid și micro-interacțiuni (Framer-like transitions) pentru navigare.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "6.1",
+    "rol": "Head of AI",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "**NEMULTUMIRE:** Matching-ul TF-IDF este rudimentar și static; \"Secretara AI\" este doar un placeholder inert care nu oferă valoare predictivă, iar interfața suferă de o rigiditate vizuală care trădează lipsa de inteligență a sistemului.\n\n**IMBUNATATIRE:** Implementăm *Vector-Matching* client-side (via Transformers.js) pentru relevanță semantică și *Micro-stări* animate (Lottie-like CSS) pentru Secretara AI, oferind feedback vizual în timp real la input.\n\n**TIP:** ambele",
+    "ok": true
+  },
+  {
+    "cod": "11.3",
+    "rol": "Content Marketer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este statică și rece; lipsește \"senzația de premium\" (micro-interacțiuni) și stările goale par erori tehnice, nu design intenționat.\n\nIMBUNATATIRE: Implementează skeleton loading cu CSS-keyframe, tranziții de pagină tip \"slide-fade\" și stări goale ilustrate (placeholder minimalist) folosind font-icons.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 5,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de feedback, generând anxietate la procesarea datelor (Secretară AI, matching). Lipsa stărilor de încărcare face aplicația să pară „înghețată”.\n\nIMBUNATATIRE: Implementează *Skeleton Screens* animate și micro-interacțiuni CSS (tranziții fluide). Adaugă un sistem de loguri client-side (in-memory) pentru diagnosticare rapidă a erorilor.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "16.2",
+    "rol": "Corporate Lawyer",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Interfața este \"moartă\". Lipsa feedback-ului vizual la acțiuni (spinner/skeleton) și a stărilor de eroare/goale transformă aplicația într-un tabel static, nu într-un tool executiv premium.\n\nIMBUNATATIRE: Implementez Framer Motion-like micro-interacțiuni (CSS transitions) și Skeleton Screens pentru datele criptate.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "3.3",
+    "rol": "QA Automation Engineer",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "idx": 3,
+    "text": "**NEMULTUMIRE:** Lipsa feedback-ului vizual la operațiuni (loading/stări goale) face aplicația să pară „înghețată”. Lipsa testelor unitare/E2E pentru motorul de matching creează riscuri majore de regresie la fiecare iterație.\n\n**IMBUNATATIRE:** Adaug skeleton-loading (CSS) și o suită de teste (Jest/Playwright local) pentru logica de matching.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "8.3",
+    "rol": "UI Designer",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de viață; lipsa feedback-ului vizual (skeleton loading, stări goale) creează percepția unei aplicații lente și nefinisate.\n\nIMBUNATATIRE: Introduc animații CSS ușoare (fade-in), skeleton screens pentru încărcarea datelor și ilustrații minimalist-vectoriale pentru stările goale (empty states).\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "1.7",
+    "rol": "Senior Frontend Developer",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "idx": 4,
+    "text": "NEMULTUMIRE: Interfața este statică și rigidă; lipsa stărilor de încărcare (skeleton screens) și a tranzițiilor fluide între ecrane creează o experiență de tip \"browser vechi\", subminând percepția de produs premium.\n\nIMBUNATATIRE: Implementarea unui CSS View Transitions API și a skeleton-urilor SVG animate pentru KPI-uri.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "6.2",
+    "rol": "AI Research Scientist",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Matching-ul euristic este rigid și rudimentar; interfața e statică, lipsită de feedback senzorial, generând o experiență de utilizare \"moartă\" și nesigură.\n\nIMBUNATATIRE: Implementare *Vector-Lite* (Tiny-Embeddings JS) pentru matching semantic local și tranziții *Framer-Motion* (CSS-driven) cu Skeleton Loaders.\n\nTIP: ambele",
+    "ok": true
+  },
+  {
+    "cod": "11.3",
+    "rol": "Content Marketer",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "idx": 2,
+    "text": "NEMULTUMIRE: Interfața este statică și lipsită de viață; utilizatorul nu simte \"premium\" fără feedback vizual (skeleton loading, animații de tranziție) și \"Secretara AI\" pare doar un formular rudimentar.\n\nIMBUNATATIRE: Introduc animații CSS ușoare (stări: loading/success) și skeleton screens pentru KPI. Transform \"Secretara\" într-un UI tip chat minimalist.\n\nTIP: Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "13.3",
+    "rol": "Technical Support Engineer",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "idx": 6,
+    "text": "**NEMULTUMIRE:** Lipsa feedback-ului vizual la acțiuni (stări goale, blocaje în timpul procesării) creează impresia unei aplicații \"înghețate\", generând tichete false de eroare.\n\n**IMBUNATATIRE:** Implementare *Skeleton Loading* (CSS-only) și *State Manager* pentru feedback vizual (toast-uri discrete) la interacțiuni.\n\n**TIP:** Ambele.",
+    "ok": true
+  },
+  {
+    "cod": "16.3",
+    "rol": "Contracts Manager",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "idx": 1,
+    "text": "NEMULTUMIRE: Dashboard-ul e static, lipsit de contextul riscurilor contractuale. Nu văd \"clauze critice\" sau termene limită, ceea ce mă forțează să caut manual în fiecare fișier.\n\nIMBUNATATIRE: Implementare \"Contract Health Sidebar\" cu skeleton loading și mini-grafice (Canvas) pentru termene de expirare și status semnare.\n\nTIP: Ambele.",
+    "ok": true
+  }
+]
