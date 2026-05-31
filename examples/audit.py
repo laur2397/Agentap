@@ -22,6 +22,14 @@ def P(f): return os.path.join(ROOT,f)
 
 # Descrierea EXACTA a solutiei auditate (iteratia 2 + remedieri runda 1). Onesta — doar ce e implementat.
 SOLUTIE=(
+ "AJUSTARI UX (feedback client: 'pagina prea aglomerata' + 'reteaua primitiva, ce sunt liniile?'):\n"
+ "(ux#1) DECLUTTER ACASA: eliminat sectiunea abstracta 'Sanatatea retelei' (bare) si sparkline-ul; "
+ "KPI-urile mari inlocuite cu o banda compacta de 3 statistici (Conexiuni / Sugestii noi / Potrivire "
+ "medie). Continutul actionabil (Persoane de contactat) urcat sus. Mult mai mult aer.\n"
+ "(ux#2) RETEAUA = LISTA CLARA: graful abstract (perceput ca primitiv) nu mai e implicit. Ecranul arata "
+ "o lista de conexiuni — avatar colorat, nume, rol, 'prin interes comun: X', data; click -> mesaj. "
+ "Graful ramane optional sub 'Vezi harta retelei', cu explicatie clara: o LINIE = o conexiune confirmata "
+ "de ambele parti, tu esti in centru. Cautare pe lista. Tot pe DOM API (zero innerHTML).\n\n"
  "REMEDIERI QA RUNDA 2 (verificate automat cu Playwright, zero erori de consola):\n"
  "(r2#1) ZERO innerHTML: TOATA randarea a fost rescrisa pe DOM API printr-un constructor sigur "
  "h()/svgEl()/setKids() (createElement/createElementNS + textContent + setAttribute). Verificat in cod: "

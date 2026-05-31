@@ -302,6 +302,23 @@ details.why2>summary::-webkit-details-marker{display:none}
 .tab:focus-visible,.themebtn:focus-visible,.menu-dots:focus-visible{outline-offset:-2px}
 .pill{text-transform:none;letter-spacing:0;font-weight:600}
 .tab .ic{font-size:18px}
+/* stats compacte (declutter Acasa) */
+.statstrip{display:flex;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 6px;margin:16px 0 4px;box-shadow:var(--shadow)}
+.statstrip .st{flex:1;text-align:center;border-right:1px solid var(--line)}
+.statstrip .st:last-child{border-right:0}
+.statstrip .sv{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.5px}
+.statstrip .sl{font-size:11px;color:var(--muted);margin-top:3px}
+/* lista de conexiuni (Reteaua) */
+.connrow{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;cursor:pointer;box-shadow:var(--shadow);transition:transform .15s var(--ease)}
+.connrow:hover{transform:translateY(-1px);box-shadow:var(--shadow-lg)}
+.connrow .ci{flex:1;min-width:0}
+.connrow .cn{font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.connrow .cr{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.connrow .cmeta{font-size:12px;color:var(--primary-dim);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.connrow .cdate{font-size:11px;color:var(--muted);flex:none}
+.mapwrap{margin-top:18px;border-top:1px solid var(--line);padding-top:6px}
+.mapwrap>summary{font-size:13px;font-weight:600;color:var(--primary);cursor:pointer;list-style:none;padding:10px 0}
+.mapwrap>summary::-webkit-details-marker{display:none}
 </style>
 </head>
 <body>
@@ -320,16 +337,12 @@ details.why2>summary::-webkit-details-marker{display:none}
 <main>
   <!-- ACASA -->
   <section id="acasa" class="view on">
-    <div class="digest"><div class="e">Focus Digest · azi</div><div class="g" id="digG"></div><p id="digP"></p><div id="trend"></div></div>
-    <div class="sec">Pe scurt azi</div>
-    <p class="sub" style="margin:-6px 0 10px">Estimari orientative — indicatori de colaborare, nu valori financiare garantate.</p>
-    <div class="kpis" id="kpis"></div>
-    <div class="sec">Sanatatea retelei</div>
-    <div class="pulse" id="pulse"></div>
-    <div class="sec">Conexiuni confirmate<a data-go="retea">reteaua →</a></div>
-    <div class="ledger" id="ledger"></div>
+    <div class="digest"><div class="e">Azi</div><div class="g" id="digG"></div><p id="digP"></p></div>
+    <div class="statstrip" id="kpis"></div>
     <div class="sec">Persoane de contactat<a data-go="potriviri">toate →</a></div>
     <div id="topMatches"></div>
+    <div class="sec">Conexiuni recente<a data-go="retea">reteaua →</a></div>
+    <div class="ledger" id="ledger"></div>
   </section>
 
   <!-- POTRIVIRI -->
@@ -341,11 +354,13 @@ details.why2>summary::-webkit-details-marker{display:none}
 
   <!-- RETEA -->
   <section id="retea" class="view">
-    <div class="eyebrow">Network Capital</div><h2 class="title">Reteaua</h2>
-    <p class="sub">Conexiunile confirmate. Nodul tau in centru; firele = legaturi deschise prin Cercul.</p>
-    <div class="searchbar"><span class="ic">⌕</span><input id="netSearch" placeholder="Cauta membru sau domeniu…" aria-label="Cauta in retea" oninput="net()"></div>
-    <div class="netwrap"><div id="netHost"></div></div>
-    <div class="netlegend"><span><i style="background:var(--primary)"></i>Conexiune</span><span><i style="background:var(--line2)"></i>Membru</span></div>
+    <div class="eyebrow">Reteaua ta</div><h2 class="title">Conexiunile tale</h2>
+    <p class="sub">Oamenii cu care te-ai conectat. O conexiune apare doar dupa ce ambele parti accepta o introducere.</p>
+    <div class="searchbar"><span class="ic">⌕</span><input id="netSearch" placeholder="Cauta o persoana…" aria-label="Cauta in retea" oninput="renderConn()"></div>
+    <div id="connList"></div>
+    <details class="mapwrap" id="mapDet"><summary>Vezi harta retelei ⌄</summary>
+      <p class="sub" style="margin-top:8px">Fiecare bulina e un membru; tu esti evidentiat in centru. O <b>linie</b> intre doua buline inseamna o <b>conexiune confirmata</b> (ambele parti au acceptat). Trage nodurile ca sa explorezi.</p>
+      <div class="netwrap"><div id="netHost"></div></div></details>
   </section>
 
   <!-- SECRETARA AI -->
@@ -585,7 +600,7 @@ function setView(v){if(PROC){toast("Asteapta — Secretara AI proceseaza…");re
 function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("div",{class:"sk l w80"}),h("div",{class:"sk l w40"}));}
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
 function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
-  if(VIEW==="acasa")home();else if(VIEW==="potriviri")setKids($("#matchList"),pipeline(myMatches()));else if(VIEW==="retea")net();else if(VIEW==="profil")prof();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
+  if(VIEW==="acasa")home();else if(VIEW==="potriviri")setKids($("#matchList"),pipeline(myMatches()));else if(VIEW==="retea"){renderConn();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="profil")prof();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 function emp(){return h("div",{class:"estate"},
   svgEl("svg",{viewBox:"0 0 64 64",fill:"none",stroke:"currentColor","stroke-width":"2"},
     svgEl("circle",{cx:27,cy:27,r:15}),svgEl("path",{d:"M38 38 L53 53","stroke-linecap":"round"}),
@@ -595,20 +610,31 @@ function emp(){return h("div",{class:"estate"},
 
 function home(){const me=mem(ME),mm=myMatches();
   const prop=mm.filter(m=>m.status==="propus").length,con=mm.filter(m=>m.status==="conectat").length;
+  const avg=mm.length?Math.round(mm.reduce((s,m)=>s+m.score,0)/mm.length):0;
   $("#digG").textContent="Buna ziua, "+me.name.split(" ")[0]+".";
-  $("#digP").textContent=`Ai ${prop} oportunitati noi de mare afinitate si ${con} conexiuni active. Ti-am grupat tot intr-un singur rezumat — fara intreruperi pe parcursul zilei.`;
-  const avg=mm.length?Math.round(mm.reduce((s,m)=>s+m.score,0)/mm.length):0,tot=con+prop;
-  const trend=[Math.max(0,tot-4),Math.max(0,tot-3),Math.max(1,tot-2),Math.max(1,tot-1),tot,tot+1].map(Math.round);
-  setKids($("#trend"),h("div",{style:{fontSize:"9px",letterSpacing:"1.5px",textTransform:"uppercase",color:"var(--primary-dim)",marginTop:"8px"},text:"Activitatea ta recenta"}),sparkline(trend));
-  const kc=(l,id,d)=>h("div",{class:"kpi"},h("div",{class:"l",text:l}),h("div",{class:"v",id},"0"),h("div",{class:"d",text:d}));
-  setKids($("#kpis"),kc("Conexiuni active","kpiCon","persoane"),kc("Sugestii noi","kpiSug","de verificat"),kc("Profil","kpiTrust","verificat"),kc("Potrivire medie","kpiAff","din 99"));
-  countUp($("#kpiCon"),con,"");countUp($("#kpiSug"),prop,"");countUp($("#kpiTrust"),me.trust,"");countUp($("#kpiAff"),avg,"");
-  const reach=Math.min(100,40+con*9),depth=Math.min(100,30+con*12),fresh=Math.min(100,55+prop*5);
-  setKids($("#pulse"),pl("Acoperire retea",reach),pl("Adancime relatii",depth),pl("Prospetime oportunitati",fresh));
+  $("#digP").textContent=prop?`Ai ${prop} ${prop===1?"sugestie noua":"sugestii noi"} de verificat si ${con} ${con===1?"conexiune":"conexiuni"}.`
+    :`Ai ${con} ${con===1?"conexiune activa":"conexiuni active"}. Adauga ce cauti sau ce oferi ca sa primesti sugestii.`;
+  const stat=(v,l)=>h("div",{class:"st"},h("div",{class:"sv",text:String(v)}),h("div",{class:"sl",text:l}));
+  setKids($("#kpis"),stat(con,"Conexiuni"),stat(prop,"Sugestii noi"),stat(avg||"—","Potrivire medie"));
   const conx=mm.filter(m=>m.status==="conectat").sort((a,b)=>(b.at||0)-(a.at||0));
   renderLedger(conx);
   const top=mm.filter(m=>m.status!=="conectat").slice(0,2),list=top.length?top:mm.slice(0,2);
   setKids($("#topMatches"),list.length?matches(list):emp());
+}
+function renderConn(){const host=$("#connList");if(!host)return;
+  const q=(($("#netSearch")||{}).value||"").trim();
+  const conn=DB.matches.filter(m=>m.status==="conectat"&&(m.offer_member===ME||m.seek_member===ME)).sort((a,b)=>(b.at||0)-(a.at||0));
+  const rows=conn.map(m=>{const cel=mem(m.offer_member===ME?m.seek_member:m.offer_member);if(!cel)return null;
+    if(q&&!fuzzy(q,cel.name+" "+(cel.industry||"")))return null;
+    const common=(m.common||[]).join(", ");
+    const av=h("div",{class:"av sq",style:{width:"44px",height:"44px",fontSize:"15px"}},ini(cel.name));av.style.background=cel.color||"#6366F1";
+    return h("div",{class:"connrow","data-act":"msg","data-id":m.id},av,
+      h("div",{class:"ci"},h("div",{class:"cn",text:cel.name}),h("div",{class:"cr",text:cel.role}),
+        h("div",{class:"cmeta",text:common?"prin interes comun: "+common:"conexiune confirmata"})),
+      h("div",{class:"cdate",text:m.at?new Date(m.at).toLocaleDateString("ro-RO",{day:"numeric",month:"short"}):""}));}).filter(Boolean);
+  setKids(host, rows.length?rows:h("div",{class:"estate",style:{padding:"30px"}},
+    h("div",{class:"t",text:q?"Niciun rezultat":"Inca nicio conexiune"}),
+    h("div",{style:{fontSize:"12px",marginTop:"4px"},text:q?"Incearca alt nume.":"Conexiunile apar aici dupa ce accepti o introducere in „Cine merita contactat”."})));
 }
 /* Trust Ledger cu hash-chain REAL, verificabil + exportabil (audit: nu "security theater") */
 async function renderLedger(conx){const host=$("#ledger");if(!host)return;
@@ -811,6 +837,7 @@ function loadMembers(){setKids($("#member"),...DB.members.map(m=>h("option",{val
 $("#member").onchange=e=>{ME=+e.target.value;render();};
 $$(".tab").forEach(t=>t.onclick=()=>setView(t.dataset.v));
 $$("[data-go]").forEach(a=>a.onclick=()=>setView(a.dataset.go));
+{const d=$("#mapDet");if(d)d.addEventListener("toggle",()=>{if(d.open)net();else stopNet();});} // harta retelei la cerere
 // delegare pt. continut generat dinamic -> 0 handler-e JS inline derivate din date (audit s5r #3)
 document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");if(!el)return;
   const id=+el.dataset.id,a=el.dataset.act;
