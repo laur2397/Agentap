@@ -598,10 +598,13 @@ details.why2>summary::-webkit-details-marker{display:none}
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
           <button class="btn ghost sm" data-act="copyConnCode">⧉ Copiază codul meu</button>
           <button class="btn ghost sm" data-act="toggleQR">▦ Arată QR</button>
-          <button class="btn gold sm" data-act="addByCode">＋ Adaugă pe cineva (lipește cod)</button>
         </div>
         <div id="connQR" class="connqr"></div>
-        <p class="sub" style="margin-top:8px;font-size:11px">QR-ul îl scanează celălalt cu <b>camera telefonului</b> → îi apare codul → îl lipește la „Adaugă pe cineva". Util ca să nu tastați manual codul lung.</p>
+        <p class="sub" style="margin-top:6px;font-size:11px">QR-ul îl scanează celălalt cu <b>camera telefonului</b> → îi apare codul → îl lipește mai jos. Util ca să nu tastați manual codul lung.</p>
+        <hr style="border:none;border-top:1px solid var(--line);margin:14px 0">
+        <label class="mfl" for="pasteCode">Ai primit un cod? Lipește-l aici</label>
+        <textarea id="pasteCode" rows="3" placeholder="EIE1:…" aria-label="Lipeste codul de conexiune primit" style="width:100%;font-size:11px"></textarea>
+        <div style="margin-top:8px"><button class="btn gold sm" data-act="addByCode">＋ Adaugă în rețea</button></div>
       </div></details>
     <div class="searchbar"><span class="ic">⌕</span><input id="netSearch" placeholder="Cauta o persoana…" aria-label="Cauta in retea"></div>
     <div id="activeNet"></div>
@@ -1107,14 +1110,17 @@ function copyConnCode(){const code=connCode();if(!code){toast("Cod indisponibil"
   const t=$("#myConnCode");if(t)t.select();toast("Selectează și copiază codul");}
 function parseConnCode(s){s=String(s||"").trim();if(!s.startsWith("EIE1:"))return null;
   try{const o=JSON.parse(unb64utf8(s.slice(5)));if(o&&o.n)return o;}catch(_){}return null;}
-function addByCode(){const raw=prompt("Lipește codul de conexiune primit (începe cu EIE1:):");if(raw===null)return;
+function addByCode(){const fld=$("#pasteCode");
+  let raw=fld&&fld.value&&fld.value.trim()?fld.value:null;
+  if(raw===null){if(fld){fld.focus();toast("Lipește întâi un cod (EIE1:…)");return;}raw=prompt("Lipește codul de conexiune primit (începe cu EIE1:):");if(raw===null)return;}
   const card=parseConnCode(raw);if(!card){toast("Cod invalid sau deteriorat");return;}
   const nm=clean(card.n).slice(0,80);if(!nm){toast("Cod fără nume");return;}
-  if((DB.members||[]).some(m=>m.via==="code"&&m.name===nm)){toast(nm+" e deja adăugat prin cod");return;}
+  if((DB.members||[]).some(m=>m.via==="code"&&m.name===nm)){if(fld)fld.value="";toast(nm+" e deja adăugat prin cod");return;}
   const id=DB.seq++,color=PAL[id%PAL.length];
   DB.members.push({id,name:nm,industry:clean(card.d||"").slice(0,60),role:clean(card.r||"").slice(0,80)||"Adăugat prin cod",trust:60,color,via:"code"});
   (card.o||[]).slice(0,5).forEach(t=>{const tx=clean(String(t)).slice(0,140);if(tx)DB.items.push({id:DB.seq++,member_id:id,kind:"ofer",text:tx,visible:1,source:"cod de conexiune"});});
   DB.matches.push({id:DB.seq++,offer_member:id,seek_member:ME,status:"conectat",at:Date.now(),common:[],score:70,via:"code"});
+  if(fld)fld.value="";
   logA("Conexiune adăugată prin cod: "+nm);save();loadMembers();$("#member").value=ME;render();toast(nm+" a fost adăugat în rețea");}
 /* loop4 #6: encoder QR (byte mode, EC-L, versiuni 1-10) — fara biblioteci; verificat cu decoder real */
 const QR=(function(){
