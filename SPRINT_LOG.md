@@ -22,3 +22,4 @@
 - 2026-05-31 · AUDIT item 15 (loop15): APROBAT 6/6 + CAE.
 - 2026-05-31 · Item 16 (Ultima activitate per conexiune) · mesajele primesc timestamp; lista Reteaua arata 'activ <timp>' (max mesaj sau data conexiunii); validat, 0 erori.
 - 2026-05-31 · Item 17 (Contrast dark pe carduri noi) · token --warn-ink (light #B45309 / dark #FCD34D) inlocuieste amber hardcodat in pastila 'In asteptare'; validat, 0 erori.
+- 2026-05-31 · Item 18 (Debounce la cautari) · listeneri input debounce-uiti (160-180ms) pe netSearch/noteSearch/globalSearch in loc de oninput inline; validat, 0 erori.

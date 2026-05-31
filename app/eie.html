@@ -427,7 +427,7 @@ details.why2>summary::-webkit-details-marker{display:none}
   <section id="retea" class="view">
     <div class="eyebrow">Reteaua ta</div><h2 class="title">Conexiunile tale</h2>
     <p class="sub">Oamenii cu care te-ai conectat. O conexiune apare doar dupa ce ambele parti accepta o introducere.</p>
-    <div class="searchbar"><span class="ic">⌕</span><input id="netSearch" placeholder="Cauta o persoana…" aria-label="Cauta in retea" oninput="renderConn()"></div>
+    <div class="searchbar"><span class="ic">⌕</span><input id="netSearch" placeholder="Cauta o persoana…" aria-label="Cauta in retea"></div>
     <div id="connList"></div>
     <details class="mapwrap" id="mapDet"><summary>Vezi harta retelei ⌄</summary>
       <p class="sub" style="margin-top:8px">Fiecare bulina e un membru; tu esti evidentiat in centru. O <b>linie</b> intre doua buline inseamna o <b>conexiune confirmata</b> (ambele parti au acceptat). Trage nodurile ca sa explorezi.</p>
@@ -456,7 +456,7 @@ details.why2>summary::-webkit-details-marker{display:none}
     <div id="taskList" style="margin-top:6px"></div>
     <div class="sec" style="margin-top:26px">Jurnalul tau</div>
     <p class="sub">Idei, notite si lucruri de tinut minte. Cauta-le oricand; brief-ul de intalnire le foloseste.</p>
-    <div class="searchbar"><span class="ic">⌕</span><input id="noteSearch" placeholder="Cauta in notite…" aria-label="Cauta in notite" oninput="renderNotes()"></div>
+    <div class="searchbar"><span class="ic">⌕</span><input id="noteSearch" placeholder="Cauta in notite…" aria-label="Cauta in notite"></div>
     <div class="addrow"><input id="noteText" placeholder="Scrie o idee… foloseste #tag-uri (ex: #client)" aria-label="Notita noua" onkeydown="if(event.key==='Enter')addNote()"><button class="btn gold sm" data-act="addnote" aria-label="Adauga notita">+</button></div>
     <div class="filters" id="noteFilters" style="margin-top:10px"></div>
     <div id="notesList" style="margin-top:8px"></div>
@@ -536,7 +536,7 @@ details.why2>summary::-webkit-details-marker{display:none}
 <div class="searchov" id="searchOv">
   <div class="searchov-h">
     <span class="ic">⌕</span>
-    <input id="globalSearch" placeholder="Cauta persoane, notite, task-uri…" aria-label="Cautare globala" oninput="runSearch()" onkeydown="if(event.key==='Escape')closeSearch()">
+    <input id="globalSearch" placeholder="Cauta persoane, notite, task-uri…" aria-label="Cautare globala" onkeydown="if(event.key==='Escape')closeSearch()">
     <button class="sclose" onclick="closeSearch()" aria-label="Inchide">×</button>
   </div>
   <div id="searchRes" class="searchov-res"></div>
@@ -1190,6 +1190,11 @@ $("#member").onchange=e=>{ME=+e.target.value;render();};
 $$(".tab").forEach(t=>t.onclick=()=>setView(t.dataset.v));
 $$("[data-go]").forEach(a=>a.onclick=()=>setView(a.dataset.go));
 {const d=$("#mapDet");if(d)d.addEventListener("toggle",()=>{if(d.open)net();else stopNet();});} // harta retelei la cerere
+// backlog #18: debounce la cautari (performanta)
+function debounce(fn,ms){let t;return function(){clearTimeout(t);t=setTimeout(fn,ms);};}
+{const a=$("#netSearch");if(a)a.addEventListener("input",debounce(renderConn,180));
+ const bn=$("#noteSearch");if(bn)bn.addEventListener("input",debounce(renderNotes,180));
+ const c=$("#globalSearch");if(c)c.addEventListener("input",debounce(runSearch,160));}
 // delegare pt. continut generat dinamic -> 0 handler-e JS inline derivate din date (audit s5r #3)
 document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");if(!el)return;
   const id=+el.dataset.id,a=el.dataset.act;
