@@ -316,6 +316,11 @@ details.why2>summary::-webkit-details-marker{display:none}
 .connrow .cr{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .connrow .cmeta{font-size:12px;color:var(--primary-dim);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .connrow .cdate{font-size:11px;color:var(--muted);flex:none}
+.connrow .crt{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none}
+.relpill{border:0;border-radius:30px;padding:4px 10px;font-size:11px;font-weight:600;cursor:pointer}
+.relpill.relrece{background:var(--card2);color:var(--muted)}
+.relpill.relactiv{background:var(--success-soft);color:var(--success)}
+.relpill.relprio{background:var(--warn-soft);color:var(--warn-ink)}
 .mapwrap{margin-top:18px;border-top:1px solid var(--line);padding-top:6px}
 .mapwrap>summary{font-size:13px;font-weight:600;color:var(--primary);cursor:pointer;list-style:none;padding:10px 0}
 .mapwrap>summary::-webkit-details-marker{display:none}
@@ -435,6 +440,7 @@ details.why2>summary::-webkit-details-marker{display:none}
     <div class="eyebrow">Reteaua ta</div><h2 class="title">Conexiunile tale</h2>
     <p class="sub">Oamenii cu care te-ai conectat. O conexiune apare doar dupa ce ambele parti accepta o introducere.</p>
     <div class="searchbar"><span class="ic">⌕</span><input id="netSearch" placeholder="Cauta o persoana…" aria-label="Cauta in retea"></div>
+    <div class="filters" id="connFilters"></div>
     <div id="connList"></div>
     <details class="mapwrap" id="mapDet"><summary>Vezi harta retelei ⌄</summary>
       <p class="sub" style="margin-top:8px">Fiecare bulina e un membru; tu esti evidentiat in centru. O <b>linie</b> intre doua buline inseamna o <b>conexiune confirmata</b> (ambele parti au acceptat). Trage nodurile ca sa explorezi.</p>
@@ -561,7 +567,7 @@ const SEEK={0:[["Investitor pentru proiect imobiliar","dictare"],["Furnizor de c
 const COLORS=["#6366F1","#10B981","#F59E0B","#8B5CF6","#EC4899","#0EA5E9","#14B8A6","#F97316","#EF4444","#22C55E"];
 const STOP=new Set("si sau de la in un o cu pe pentru din ca care este are am ai vreau caut ofer cineva zona bun buna nou noua a al ale lui langa".split(" "));
 const KEY="cercul_eie_v5",TKEY="cercul_theme",SKEY="cercul_salt";
-let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false,MATCHFILTER="all",NOTEFILTER="all",EDITTASK=null,EDITNOTE=null;
+let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false,MATCHFILTER="all",NOTEFILTER="all",EDITTASK=null,EDITNOTE=null,CONNFILTER="all";
 // suprascrie cu zerouri bufferele pe care le controlam (audit s5r #1). CryptoKey-urile sunt
 // non-extractabile/opace (WebCrypto nu expune heap-ul lor) -> le eliberam pt. GC; parolele sunt
 // string-uri imutabile in JS si nu pot fi zeroizate — limitare documentata, nu ascunsa.
@@ -655,7 +661,7 @@ function validDB(d){if(!d||typeof d!=="object")return false;
   d.tasks=d.tasks.filter(t=>t&&typeof t==="object"&&t.id!=null);
   d.tasks.forEach(t=>{t.text=clean(t.text);t.member_id=+t.member_id;t.done=t.done?1:0;t.due=clean(t.due||"").slice(0,10);t.t=+t.t||Date.now();t.prio=t.prio?1:0;});
   if(!d.members.length)return false;
-  d.members.forEach(m=>{m.trust=Math.max(0,Math.min(100,+m.trust||0));m.name=clean(m.name).slice(0,80)||"?";m.id=+m.id;m.industry=clean(m.industry||"");m.role=clean(m.role||"Membru");});
+  d.members.forEach(m=>{m.trust=Math.max(0,Math.min(100,+m.trust||0));m.name=clean(m.name).slice(0,80)||"?";m.id=+m.id;m.industry=clean(m.industry||"");m.role=clean(m.role||"Membru");if(m.rel&&["rece","activ","prioritar"].indexOf(m.rel)<0)m.rel="activ";});
   d.items.forEach(i=>{i.text=clean(i.text);i.visible=i.visible?1:0;i.member_id=+i.member_id;});
   if(typeof d.seq!=="number"||d.seq<1)d.seq=Math.max(d.members.length,...d.members.map(m=>m.id))+1;
   if(!Array.isArray(d.audit))d.audit=[];return true;}
@@ -787,18 +793,27 @@ function home(){const me=mem(ME),mm=myMatches();
   const top=mm.filter(m=>m.status!=="conectat").slice(0,2),list=top.length?top:mm.slice(0,2);
   setKids($("#topMatches"),list.length?matches(list):emp());
 }
+const relOf=cel=>cel.rel||"activ";
+const REL={rece:["Rece","relrece"],activ:["Activ","relactiv"],prioritar:["Prioritar","relprio"]};
 function renderConn(){const host=$("#connList");if(!host)return;
   const q=(($("#netSearch")||{}).value||"").trim();
   const conn=DB.matches.filter(m=>m.status==="conectat"&&(m.offer_member===ME||m.seek_member===ME)).sort((a,b)=>(b.at||0)-(a.at||0));
+  // chips de filtrare pe status relatie
+  const fh=$("#connFilters");
+  if(fh){const chip=(f,l)=>h("button",{class:"chip"+(CONNFILTER===f?" on":""),"data-act":"connfilter","data-f":f,text:l});
+    setKids(fh, conn.length?[chip("all","Toate"),chip("prioritar","Prioritar"),chip("activ","Activ"),chip("rece","Rece")]:[]);}
   const rows=conn.map(m=>{const cel=mem(m.offer_member===ME?m.seek_member:m.offer_member);if(!cel)return null;
     if(q&&!fuzzy(q,cel.name+" "+(cel.industry||"")))return null;
-    const common=(m.common||[]).join(", ");
+    if(CONNFILTER!=="all"&&relOf(cel)!==CONNFILTER)return null;
+    const common=(m.common||[]).join(", "),rel=relOf(cel),rl=REL[rel];
     const ts=DB.messages.filter(x=>x.match_id===m.id&&x.t).map(x=>x.t),lastA=ts.length?Math.max(...ts):(m.at||0);
     const av=h("div",{class:"av sq",style:{width:"44px",height:"44px",fontSize:"15px"}},ini(cel.name));av.style.background=cel.color||"#6366F1";
     return h("div",{class:"connrow","data-act":"msg","data-id":m.id,tabindex:"0",role:"button","aria-label":"Deschide conversatia cu "+cel.name},av,
       h("div",{class:"ci"},h("div",{class:"cn",text:cel.name}),h("div",{class:"cr",text:cel.role}),
         h("div",{class:"cmeta",text:common?"prin interes comun: "+common:"conexiune confirmata"})),
-      h("div",{class:"cdate",text:lastA?"activ "+relTime(lastA):""}));}).filter(Boolean);
+      h("div",{class:"crt"},
+        h("button",{class:"relpill "+rl[1],"data-act":"relcycle","data-id":cel.id,"aria-label":"Status relatie: "+rl[0],title:"Schimba statusul relatiei",text:rl[0]}),
+        h("div",{class:"cdate",text:lastA?"activ "+relTime(lastA):""})));}).filter(Boolean);
   setKids(host, rows.length?rows:estateBox(q?"Niciun rezultat":"Inca nicio conexiune", q?"Incearca alt nume.":"Conexiunile apar aici dupa ce accepti o introducere in „Cine merita contactat”."));
 }
 /* Trust Ledger cu hash-chain REAL, verificabil + exportabil (audit: nu "security theater") */
@@ -1026,6 +1041,8 @@ function addNote(){if(!DB)return;const inp=$("#noteText"),t=clean((inp&&inp.valu
   logA("Notita adaugata in jurnal");save();renderNotes();toast("Notita salvata");}
 function delNote(id){if(!confirm("Stergi aceasta notita?"))return;const n=(DB.notes||[]).find(x=>x.id===id);DB.notes=(DB.notes||[]).filter(x=>x.id!==id);if(n)logA("Notita stearsa din jurnal");save();renderNotes();}
 function togglePin(id){const n=(DB.notes||[]).find(x=>x.id===id);if(!n)return;n.pin=n.pin?0:1;logA(n.pin?"Notita fixata":"Notita defixata");save();renderNotes();}
+function relCycle(id){const c=mem(id);if(!c)return;const order=["rece","activ","prioritar"];c.rel=order[(order.indexOf(relOf(c))+1)%3];logA("Status relatie "+REL[c.rel][0]+" pentru "+c.name);save();renderConn();}
+function setConnFilter(f){CONNFILTER=f;renderConn();}
 function editNote(id){EDITNOTE=id;renderNotes();}
 function cancelNoteEdit(){EDITNOTE=null;renderNotes();}
 function saveNote(id){const n=(DB.notes||[]).find(x=>x.id===id);if(!n){EDITNOTE=null;renderNotes();return;}
@@ -1286,6 +1303,8 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="tasksave")saveTask(id);
   else if(a==="taskcancel")cancelTaskEdit();
   else if(a==="notepin")togglePin(id);
+  else if(a==="relcycle")relCycle(id);
+  else if(a==="connfilter")setConnFilter(el.dataset.f);
   else if(a==="noteedit")editNote(id);
   else if(a==="notesave")saveNote(id);
   else if(a==="notecancel")cancelNoteEdit();

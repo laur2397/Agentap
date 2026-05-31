@@ -9,3 +9,4 @@
 - 2026-05-31 · Item 6 (Quick-add cu data) · parseDue() detecteaza azi/maine/poimaine/zi-saptamana/'in N zile' din text si seteaza termenul; validat, 0 erori.
 - 2026-05-31 · AUDIT item 6 (secloop6): APROBAT 6/6 + CAE.
 - 2026-05-31 · Item 7 (Pin notite) · buton 📌 fixeaza notita sus (sort pin desc), marcaj vizual; validat, 0 erori.
+- 2026-05-31 · Item 8 (Status relatie) · pastila Rece/Activ/Prioritar pe conexiune (tap cicleaza, nu deschide conversatia) + chips de filtrare in Reteaua; validat, 0 erori.
