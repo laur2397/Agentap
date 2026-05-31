@@ -358,6 +358,13 @@ details.why2>summary::-webkit-details-marker{display:none}
 .todayrow .tdc{flex:1;min-width:0}
 .todayrow .tdt{font-size:14px;font-weight:600;color:var(--ink)}
 .todayrow .tds{font-size:12px;color:var(--muted);margin-top:2px}
+/* loop2 #14: timeline per persoana in brief */
+.timeline{margin:6px 0 2px;border-left:2px solid var(--line);padding-left:12px}
+.tlrow{display:flex;gap:8px;align-items:flex-start;margin:7px 0;position:relative}
+.tlrow .tlic{font-size:13px;line-height:1.3;flex:none}
+.tlrow .tlc{flex:1;min-width:0}
+.tlrow .tlt{font-size:12.5px;color:var(--ink);word-break:break-word}
+.tlrow .tld{font-size:11px;color:var(--muted);margin-top:1px}
 /* loop2 #13: rezumat antet secretara */
 .secsum{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 2px}
 .secsum .ss{display:inline-flex;align-items:center;gap:6px;background:var(--primary-soft);color:var(--primary-dim);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:600}
@@ -1153,6 +1160,16 @@ function buildBrief(m){const cel=mem(ME===m.offer_member?m.seek_member:m.offer_m
     :h("div",{class:"bl",style:{color:"var(--muted)"}},"Nu ai notite legate de aceasta persoana. Adauga in Jurnal."));
   const myTasks=(DB.tasks||[]).filter(t=>t.member_id===ME&&!t.done&&t.text.toLowerCase().includes(fn)).map(t=>t.text);
   if(myTasks.length)rows.push(h("div",{class:"bl"},h("b",{},"Task-uri deschise: "),myTasks.join(" · ")));
+  // loop2 #14: istoric cronologic (notite + task-uri + intalniri legate de persoana)
+  const ev=[];
+  (DB.notes||[]).filter(n=>n.member_id===ME&&n.text.toLowerCase().includes(fn)).forEach(n=>ev.push({t:n.t||0,ic:"📝",txt:n.text}));
+  (DB.tasks||[]).filter(t=>t.member_id===ME&&t.text.toLowerCase().includes(fn)).forEach(t=>ev.push({t:t.t||0,ic:t.done?"☑":"✅",txt:t.text+(t.due?" · termen "+fmtWhen(t.due):"")}));
+  (DB.meetings||[]).filter(x=>(x.a===ME||x.b===ME)&&(x.a===cel.id||x.b===cel.id)).forEach(x=>{const st={propus:"propusa",confirmat:"confirmata",refuzat:"refuzata"}[x.status]||x.status;ev.push({t:x.at||0,ic:"📅",txt:"Intalnire "+fmtWhen(x.when)+" · "+st});});
+  ev.sort((a,b)=>(b.t||0)-(a.t||0));
+  if(ev.length){rows.push(h("div",{class:"bl"},h("b",{},"Istoric:")));
+    rows.push(h("div",{class:"timeline"},...ev.slice(0,6).map(e=>
+      h("div",{class:"tlrow"},h("span",{class:"tlic"},e.ic),
+        h("div",{class:"tlc"},h("div",{class:"tlt",text:e.txt}),e.t?h("div",{class:"tld",text:relTime(e.t)}):null)))));}
   const d=h("details",{class:"brief"},h("summary",{text:"📋 Brief de 1 minut ⌄"}),h("div",{class:"bbody"},...rows));d.open=true;return d;}
 
 /* ---- Secretara iteratia 2: calendar & programare (double-opt-in) ---- */
