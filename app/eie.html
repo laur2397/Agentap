@@ -413,6 +413,19 @@ details.why2>summary::-webkit-details-marker{display:none}
 .searchov-h .sclose{background:none;border:0;color:var(--muted);font-size:26px;cursor:pointer;min-width:44px;min-height:44px}
 .searchov-res{flex:1;overflow:auto;padding:10px 14px;max-width:440px;width:100%;margin:0 auto}
 .srhead{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);font-weight:700;margin:14px 4px 6px}
+/* loop2 #12: quick-add global */
+.quickov{position:fixed;inset:0;z-index:56;background:rgba(12,14,22,.45);display:none;align-items:flex-end;justify-content:center}
+.quickov.on{display:flex}
+.quicksheet{background:var(--card);border-radius:18px 18px 0 0;width:100%;max-width:440px;padding:18px 18px 24px;box-shadow:0 -12px 44px rgba(0,0,0,.22);animation:qup .18s ease}
+@keyframes qup{from{transform:translateY(28px);opacity:.6}to{transform:none;opacity:1}}
+.quicksheet .qh{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.quicksheet .qh h3{margin:0;font-size:16px;color:var(--ink)}
+.quicksheet .qclose{background:none;border:0;color:var(--muted);font-size:24px;cursor:pointer;min-width:44px;min-height:44px}
+.qseg{display:flex;gap:8px;margin-bottom:12px}
+.qseg .chip{flex:1;justify-content:center}
+.quicksheet input{width:100%;margin-bottom:10px}
+.quicksheet .qactions{display:flex;gap:9px;margin-top:4px}
+.quicksheet .qactions .btn{flex:1}
 .srrow{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:12px;cursor:pointer}
 .srrow:hover{background:var(--card2)}
 .srrow .sric{width:34px;height:34px;display:grid;place-items:center;font-size:18px;flex:none}
@@ -427,6 +440,7 @@ details.why2>summary::-webkit-details-marker{display:none}
   <div class="htop">
     <div class="brand"><div class="mk">C</div><div class="t">Cercul EIE<small>Network Capital</small></div></div>
     <div class="hright">
+      <button class="themebtn" id="quickBtn" title="Adauga rapid (tasta N)" aria-label="Adauga rapid notita sau task" onclick="openQuick()">＋</button>
       <button class="themebtn" id="searchBtn" title="Cauta" aria-label="Cauta global" onclick="openSearch()">⌕</button>
       <button class="themebtn" id="lockBtnHd" title="Blocheaza acum (sterge cheia din memorie)" onclick="lockNow()">🔒</button>
       <button class="themebtn" id="themeBtn" title="Comuta tema" onclick="toggleTheme()">☾</button>
@@ -580,6 +594,21 @@ details.why2>summary::-webkit-details-marker{display:none}
     <button class="sclose" onclick="closeSearch()" aria-label="Inchide">×</button>
   </div>
   <div id="searchRes" class="searchov-res"></div>
+</div>
+<div class="quickov" id="quickOv" onclick="if(event.target===this)closeQuick()">
+  <div class="quicksheet" role="dialog" aria-label="Adauga rapid">
+    <div class="qh"><h3>Adauga rapid</h3><button class="qclose" onclick="closeQuick()" aria-label="Inchide">×</button></div>
+    <div class="qseg" id="quickSeg">
+      <button class="chip on" data-k="nota" onclick="setQuickKind('nota')">📝 Notita</button>
+      <button class="chip" data-k="task" onclick="setQuickKind('task')">✅ Task</button>
+    </div>
+    <input id="quickText" placeholder="Scrie o idee… #tag" aria-label="Text" onkeydown="if(event.key==='Enter')quickSave();if(event.key==='Escape')closeQuick()">
+    <div id="quickDueWrap" style="display:none"><input id="quickDue" type="date" aria-label="Termen (optional)"></div>
+    <div class="qactions">
+      <button class="btn ghost" onclick="closeQuick()">Renunta</button>
+      <button class="btn gold" onclick="quickSave()">Salveaza</button>
+    </div>
+  </div>
 </div>
 <div class="procmask" id="procMask" role="status" aria-live="polite"><span class="spin"></span> Procesez…</div>
 <div class="toast" id="toast"></div>
@@ -1284,6 +1313,21 @@ function mailtoBody(subj,body){return "mailto:?subject="+encodeURIComponent(subj
 /* ---- backlog #6: cautare globala ---- */
 function openSearch(){if(!DB)return;$("#searchOv").classList.add("on");const i=$("#globalSearch");if(i){i.value="";setTimeout(()=>i.focus(),80);}runSearch();}
 function closeSearch(){$("#searchOv").classList.remove("on");}
+/* loop2 #12: quick-add global (notita sau task de oriunde) */
+let QUICKKIND="nota";
+function openQuick(){if(!DB)return;const ov=$("#quickOv");if(!ov)return;ov.classList.add("on");setQuickKind(QUICKKIND);
+  const i=$("#quickText");if(i){i.value="";setTimeout(()=>i.focus(),80);}const d=$("#quickDue");if(d)d.value="";}
+function closeQuick(){const ov=$("#quickOv");if(ov)ov.classList.remove("on");}
+function setQuickKind(k){QUICKKIND=k;$$("#quickSeg .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===k));
+  const dw=$("#quickDueWrap");if(dw)dw.style.display=k==="task"?"block":"none";
+  const i=$("#quickText");if(i)i.placeholder=k==="task"?"ex: Suna-l pe Darius maine":"Scrie o idee… #tag";}
+function quickSave(){if(!DB)return;const t=clean((($("#quickText")||{}).value||"").trim());if(!t)return;
+  if(QUICKKIND==="task"){let due=clean((($("#quickDue")||{}).value||"")).slice(0,10);let auto=false;
+    if(!due){const p=parseDue(t);if(p){due=p;auto=true;}}
+    DB.tasks.push({id:DB.seq++,member_id:ME,text:t,due,done:0,prio:0,t:Date.now()});
+    logA("Task adaugat (rapid): "+t);save();updateBadges();toast(auto?"Task adaugat · termen: "+fmtWhen(due):"Task adaugat");}
+  else{DB.notes.push({id:DB.seq++,member_id:ME,text:t,t:Date.now()});logA("Notita adaugata (rapid)");save();toast("Notita salvata");}
+  closeQuick();if(VIEW==="secretara")render();}
 function runSearch(){const host=$("#searchRes");if(!host||!DB)return;
   const q=(($("#globalSearch")||{}).value||"").toLowerCase().trim();
   if(!q){setKids(host,estateBox("Cauta in cercul tau","Scrie un nume, o notita sau un task."));return;}
@@ -1401,6 +1445,12 @@ document.addEventListener("keydown",e=>{if(e.key!=="Enter"&&e.key!==" ")return;
   const t=e.target;if(t&&(t.tagName==="INPUT"||t.tagName==="TEXTAREA"||t.tagName==="BUTTON"||t.tagName==="SELECT"||t.isContentEditable))return;
   const el=t&&t.closest&&t.closest("[data-act],.sw");
   if(el&&el.tagName!=="BUTTON"){e.preventDefault();el.click();}});
+// loop2 #12: tasta "n" deschide quick-add de oriunde (cand nu scrii intr-un camp)
+document.addEventListener("keydown",e=>{if(e.key!=="n"&&e.key!=="N")return;if(e.ctrlKey||e.metaKey||e.altKey)return;
+  const t=e.target;if(t&&(t.tagName==="INPUT"||t.tagName==="TEXTAREA"||t.tagName==="SELECT"||t.isContentEditable))return;
+  if(!DB)return;const lk=$("#lock");if(lk&&lk.classList.contains("on"))return;
+  if($("#quickOv")&&$("#quickOv").classList.contains("on"))return;
+  e.preventDefault();openQuick();});
 
 // error boundary global (remediaza constatarea de audit #4)
 function safeReset(){try{if(PROC)hideProc();pendingLock=false;}catch(_){}} // reset determinist al starii async (audit s5r2 #3)

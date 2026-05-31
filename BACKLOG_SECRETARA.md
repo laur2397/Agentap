@@ -19,7 +19,7 @@ Validare: node --check + smoke Playwright zero erori. Audit (examples/audit.py) 
 9. [x] Vizualizare saptamanala a intalnirilor (mini-calendar pe 7 zile).
 10. [x] Notita de rezultat atasata unei intalniri confirmate („cum a mers”).
 11. [x] Mod Focus: ascunde tot, lasa doar notita activa + input rapid.
-12. [ ] Quick-add global (buton + / tasta) pentru notita sau task de oriunde.
+12. [x] Quick-add global (buton + / tasta) pentru notita sau task de oriunde.
 13. [ ] Rezumat in antetul Secretarei: N task-uri active · M intalniri viitoare.
 14. [ ] Timeline per persoana: notite + task-uri + intalniri, cronologic, in brief.
 15. [ ] Remindere intalniri: evidentiaza intalnirile din urmatoarele 24h.
