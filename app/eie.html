@@ -542,7 +542,7 @@ const SEEK={0:[["Investitor pentru proiect imobiliar","dictare"],["Furnizor de c
 const COLORS=["#6366F1","#10B981","#F59E0B","#8B5CF6","#EC4899","#0EA5E9","#14B8A6","#F97316","#EF4444","#22C55E"];
 const STOP=new Set("si sau de la in un o cu pe pentru din ca care este are am ai vreau caut ofer cineva zona bun buna nou noua a al ale lui langa".split(" "));
 const KEY="cercul_eie_v5",TKEY="cercul_theme",SKEY="cercul_salt";
-let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active";
+let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false;
 // suprascrie cu zerouri bufferele pe care le controlam (audit s5r #1). CryptoKey-urile sunt
 // non-extractabile/opace (WebCrypto nu expune heap-ul lor) -> le eliberam pt. GC; parolele sunt
 // string-uri imutabile in JS si nu pot fi zeroizate — limitare documentata, nu ascunsa.
@@ -888,13 +888,22 @@ function netFocus(id){const host=$("#netHost");if(!host)return;
 function fuzzy(q,s){q=(q||"").toLowerCase().trim();if(!q)return true;s=(s||"").toLowerCase();if(s.includes(q))return true;let i=0;for(const c of s){if(c===q[i])i++;if(i>=q.length)return true;}return false;}
 
 function prof(){const me=mem(ME),con=DB.matches.filter(x=>x.status==="conectat"&&(x.offer_member===ME||x.seek_member===ME)).length;
-  setKids($("#phead"),h("div",{style:{display:"flex",gap:"14px",alignItems:"center"}},
-    donut(me.trust),
-    h("div",{},h("div",{style:{fontSize:"23px",fontWeight:"800",letterSpacing:"-.4px",color:"var(--ink)"},text:me.name}),
-      h("div",{style:{color:"var(--ink2)",fontSize:"13px"},text:me.role}),
-      h("div",{style:{marginTop:"8px",display:"flex",alignItems:"center",gap:"8px"}},
-        h("span",{class:"hbadge v",text:"✓ Profil verificat"}),
-        h("span",{style:{color:"var(--muted)",fontSize:"12px"},text:con+" conexiuni"})))));
+  if(EDITPROF){setKids($("#phead"),
+    h("div",{style:{display:"flex",gap:"14px",alignItems:"center"}},donut(me.trust),
+      h("div",{style:{flex:"1",minWidth:"0"}},
+        h("input",{id:"epName",value:me.name,"aria-label":"Nume",style:{width:"100%",marginBottom:"8px"}}),
+        h("input",{id:"epInd",value:me.industry||"",placeholder:"Domeniu (ex: Imobiliare)","aria-label":"Domeniu",style:{width:"100%"}}))),
+    h("div",{style:{display:"flex",gap:"8px",marginTop:"12px"}},
+      h("button",{class:"btn gold sm","data-act":"profsave",text:"Salveaza"}),
+      h("button",{class:"btn ghost sm","data-act":"profcancel",text:"Renunta"})));
+  }else{setKids($("#phead"),
+    h("div",{style:{display:"flex",gap:"14px",alignItems:"center"}},donut(me.trust),
+      h("div",{style:{flex:"1",minWidth:"0"}},h("div",{style:{fontSize:"23px",fontWeight:"800",letterSpacing:"-.4px",color:"var(--ink)"},text:me.name}),
+        h("div",{style:{color:"var(--ink2)",fontSize:"13px"},text:me.role}),
+        h("div",{style:{marginTop:"8px",display:"flex",alignItems:"center",gap:"8px",flexWrap:"wrap"}},
+          h("span",{class:"hbadge v",text:"✓ Profil verificat"}),
+          h("span",{style:{color:"var(--muted)",fontSize:"12px"},text:con+" conexiuni"}))),
+      h("button",{class:"btn ghost sm","data-act":"profedit",text:"✎ Editeaza"})));}
   const r=(k,elid)=>{const l=DB.items.filter(i=>i.member_id===ME&&i.kind===k);
     setKids($(elid), l.length?l.map(i=>h("div",{class:"linei"},
         h("div",{},h("div",{text:i.text}),h("div",{class:"meta",text:"sursa: "+i.source})),
@@ -902,6 +911,13 @@ function prof(){const me=mem(ME),con=DB.matches.filter(x=>x.status==="conectat"&
   r("ofer","#oferList");r("caut","#cautList");
   const au=(DB.audit||[]).filter(a=>a.me===ME).slice(0,12);
   setKids($("#auditList"), au.length?au.map(a=>h("div",{class:"arow"},h("span",{class:"at",text:relTime(a.t)}),h("span",{text:a.a}))):h("div",{class:"empty",style:{padding:"10px",fontSize:"14px"},text:"Nicio actiune inregistrata."}));}
+/* backlog #9: editare profil */
+function editProfile(){EDITPROF=true;prof();}
+function cancelProfile(){EDITPROF=false;prof();}
+function saveProfile(){const me=mem(ME);if(!me)return;
+  const nm=clean((($("#epName")||{}).value||"").trim()).slice(0,80),ind=clean((($("#epInd")||{}).value||"").trim()).slice(0,60);
+  if(nm)me.name=nm; if(ind){me.industry=ind;me.role="Membru, "+ind;}
+  EDITPROF=false;logA("Profil editat");save();loadMembers();$("#member").value=ME;prof();toast("Profil actualizat");}
 function addItem(k){if(PROC)return;const t=clean($("#"+k+"Text").value.trim());if(!t)return;
   DB.items.push({id:DB.seq++,member_id:ME,kind:k,text:t,visible:k==="ofer"?1:0,source:"profil"});$("#"+k+"Text").value="";
   logA("Adaugat in „"+(k==="ofer"?"ce ofer":"ce caut")+"”: "+t);
@@ -1161,6 +1177,9 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="srperson"){closeSearch();openMemberMatch(id);}
   else if(a==="srgo"){closeSearch();setView(el.dataset.v);}
   else if(a==="importbtn")importData();
+  else if(a==="profedit")editProfile();
+  else if(a==="profsave")saveProfile();
+  else if(a==="profcancel")cancelProfile();
   else if(a==="go")setView(el.dataset.v);});
 
 // error boundary global (remediaza constatarea de audit #4)
