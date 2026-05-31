@@ -562,6 +562,8 @@ details.why2>summary::-webkit-details-marker{display:none}
   <!-- PROFIL -->
   <section id="profil" class="view">
     <div id="phead" class="panel" style="margin-top:0"></div>
+    <div class="panel"><h3>Echilibrul tău</h3><div id="valueRadar"></div>
+      <p style="font-size:11.5px;color:var(--muted);line-height:1.5;margin:8px 2px 0">O imagine calmă a ce dai și ce ceri în cerc — nu un scor, ci un reper pentru tine.</p></div>
     <div class="panel"><h3>Ce ofer <span class="badge vis">vizibil</span></h3><div id="oferList"></div>
       <div class="addrow"><input id="oferText" placeholder="ce oferi…"><button class="btn gold sm" onclick="addItem('ofer')">+</button></div></div>
     <div class="panel"><h3>Ce caut <span class="badge priv">privat</span></h3><div id="cautList"></div>
@@ -1094,8 +1096,24 @@ function prof(){const me=mem(ME),con=DB.matches.filter(x=>x.status==="conectat"&
         h("div",{},h("div",{text:i.text}),h("div",{class:"meta",text:"sursa: "+i.source})),
         h("button",{class:"x","data-act":"del","data-id":i.id,"aria-label":"Sterge",text:"×"}))):h("div",{class:"empty",style:{padding:"12px",fontSize:"14px"},text:"Nimic inca."}));};
   r("ofer","#oferList");r("caut","#cautList");
+  renderValueRadar();
   const au=(DB.audit||[]).filter(a=>a.me===ME).slice(0,12);
   setKids($("#auditList"), au.length?au.map(a=>h("div",{class:"arow"},h("span",{class:"at",text:relTime(a.t)}),h("span",{text:a.a}))):h("div",{class:"empty",style:{padding:"10px",fontSize:"14px"},text:"Nicio actiune inregistrata."}));}
+/* loop3 #6: radar de valoare (SVG) — echilibru calm ofer vs caut, fara scor-trofeu */
+function renderValueRadar(){const host=$("#valueRadar");if(!host)return;
+  const off=(DB.items||[]).filter(i=>i.member_id===ME&&i.kind==="ofer").length;
+  const seek=(DB.items||[]).filter(i=>i.member_id===ME&&i.kind==="caut").length;
+  const W=280,H=92,cx=W/2,half=cx-26,max=Math.max(1,off,seek);
+  const ow=(off/max*half),sw=(seek/max*half);
+  const cP=cssv("--primary"),cS=cssv("--success"),cL=cssv("--line2"),cM=cssv("--muted"),cI=cssv("--ink2");
+  const svg=svgEl("svg",{viewBox:`0 0 ${W} ${H}`,width:"100%",style:"display:block",role:"img",
+      "aria-label":`Echilibru: oferi ${off} ${off===1?"lucru":"lucruri"}, cauti ${seek}.`},
+    svgEl("line",{x1:cx,y1:12,x2:cx,y2:H-12,stroke:cL,"stroke-width":"1"}),
+    svgEl("rect",{x:(cx-ow).toFixed(1),y:"26",width:Math.max(0,ow).toFixed(1),height:"16",rx:"8",fill:cP}),
+    svgEl("rect",{x:String(cx),y:String(H-42),width:Math.max(0,sw).toFixed(1),height:"16",rx:"8",fill:cS}),
+    svgEl("text",{x:"6",y:"22",fill:cI,"font-size":"11","font-weight":"600"},svgSafe("Ofer · "+off)),
+    svgEl("text",{x:String(W-6),y:String(H-46),"text-anchor":"end",fill:cI,"font-size":"11","font-weight":"600"},svgSafe("Caut · "+seek)));
+  setKids(host,svg);}
 /* backlog #9: editare profil */
 function editProfile(){EDITPROF=true;prof();}
 function cancelProfile(){EDITPROF=false;prof();}
@@ -1628,7 +1646,7 @@ function lockNow(){if(!CK||LOCKING)return;
   if(PROC){pendingLock=true;toast("Se blocheaza dupa finalizarea procesarii…");return;} // atomic: nu intrerupe operatiuni (audit s4 #1)
   LOCKING=true;stopNet();clearTimeout(idleT);wipe();
   CK=null;HK=null;DB=null;ME=null;LEDGER_CHAIN=[];CHAT=null;FSIM=null; // elibereaza cheile din RAM (best-effort; datele pe disc raman criptate, recuperabile doar cu parola)
-  ["#matchList","#netHost","#ledger","#kpis","#topMatches","#phead","#mMsgs","#dictRes","#oferList","#cautList","#auditList"]
+  ["#matchList","#netHost","#ledger","#kpis","#topMatches","#phead","#mMsgs","#dictRes","#oferList","#cautList","#auditList","#valueRadar","#ahaCard"]
     .forEach(s=>{const el=$(s);if(el)el.replaceChildren();}); // sanitizare DOM, fara innerHTML (audit s4 #5 / s5r2)
   $("#overlay").classList.remove("on");$("#lockPass").value="";showLock("unlock");LOCKING=false;
   toast("Blocat — cheile eliberate din memorie (best-effort)");}
