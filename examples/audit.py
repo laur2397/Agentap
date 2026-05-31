@@ -22,6 +22,15 @@ def P(f): return os.path.join(ROOT,f)
 
 # Descrierea EXACTA a solutiei auditate (iteratia 2 + remedieri runda 1). Onesta — doar ce e implementat.
 SOLUTIE=(
+ "SECRETARA — ITERATIA 3 din roadmap (Task-uri + Follow-up), ULTIMA. Verificat cu Playwright, zero erori, "
+ "DOM API (zero innerHTML), TrustedTypes activ.\n"
+ "(s3-taskuri) Sectiune 'De facut' in Secretara: adaugi sarcini cu termen optional, le bifezi finalizate, "
+ "le stergi; cele scadente (due<=azi) sunt evidentiate vizual. Sanitizate, criptate, persistente.\n"
+ "(s3-reminder) BADGE pe tab-ul Secretara cu numarul de task-uri scadente/restante -> reminder vizual "
+ "ne-intruziv (fara push/notificari false). Se actualizeaza la orice schimbare.\n"
+ "(s3-followup) Buton 'Follow-up' pe intalnirile confirmate -> genereaza un SABLON post-intalnire "
+ "(fill-in-the-blanks) si il copiaza in clipboard (fallback: deschide email cu textul). User-initiated, "
+ "app-ul nu trimite nimic.\n\n"
  "EXPORT CALENDAR/EMAIL (peste iteratia 2, verificat cu Playwright, zero erori, TrustedTypes activ):\n"
  "Pe intalnirile CONFIRMATE apar 3 actiuni: (1) 'Google Calendar' -> deschide calendar.google.com/render "
  "precompletat (titlu/data/loc) intr-un tab nou; (2) '.ics' -> descarca un fisier iCalendar standard "
