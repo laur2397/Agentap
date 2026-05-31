@@ -47,6 +47,10 @@ Secretara AI a Cercului EIE devine **Chief-of-Staff-ul tău personal**, un siste
 ---
 
 ## 6bis. PROTOCOALE DE SIGURANTA (cerute de audit — integrate in arhitectura existenta)
+*   **Terminologie corecta „Trust Ledger”:** Este un **jurnal local tamper-evident** (lant HMAC-SHA256 cheiat de parola), **NU** un blockchain cu consens/semnaturi asimetrice. Revocarea **nu sterge verigi** (asta ar rupe lantul) — adauga o **veriga noua de tip „revocare”**, pastrand integritatea. Verificarea lantului ruleaza la fiecare deschidere.
+*   **Import/Export semnat digital (anti „sync poisoning”):** Pe langa validarea de schema, fisierele exportate se **semneaza ECDSA P-256** (WebCrypto, cheie a membrului, fara backend); la import se verifica **semnatura + schema** inainte de acceptare -> un JSON modificat/malitios e respins ca sursa neincrezatoare.
+*   **Recuperare („Master Key”):** La setup se genereaza o **fraza de recuperare** (afisata o singura data, pastrata OFFLINE de utilizator) care permite re-derivarea cheii daca uita parola. Fara ea, pierderea parolei = pierdere de date (declarat onest). Elimina „blocarea permanenta dintr-o greseala de tastare”.
+*   **Upgrade criptografic:** Iteratii **PBKDF2 ridicate la 600.000** (OWASP 2023) pentru cheia derivata din parola.
 *   **Criptare la repaus:** Toate datele Secretarei (notite, intalniri, task-uri) se stocheaza in aceeasi baza criptata **AES-GCM** cu cheie **PBKDF2 (150k)** derivata din parola, doar in RAM (auto-lock + `wipe()`).
 *   **Sanitizare input (anti-XSS):** Orice text introdus trece prin `clean()` la intrare si e randat exclusiv prin `textContent`/DOM API (zero `innerHTML`). Follow-up-urile/brief-urile nu contin markup.
 *   **Validare schema la import:** Fisierele JSON importate (sync manual) trec printr-un validator de schema (`validDB` extins pt. notite/intalniri/task-uri) care filtreaza intrarile null/alterate; la esec -> respingere cu backup, fara coruperea bazei.
