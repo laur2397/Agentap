@@ -10,6 +10,8 @@ Foloseste fisele din fise/Dep_*.md (parsate pe rol). Gemini, multi-cheie, ritmat
 """
 from __future__ import annotations
 import asyncio, json, os, re, sys, time, urllib.request, urllib.error, itertools, glob
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from audit import audit_gate  # poarta de audit obligatorie la final
 
 KEYS=[k.strip() for k in os.environ.get("GEMINI_KEYS","").split(",") if k.strip()]
 _rr=itertools.cycle(KEYS)
@@ -139,7 +141,11 @@ async def main():
     sem=asyncio.Semaphore(LOT); t0=time.time()
     contrib=await faza_a(sem)
     depts=await faza_b(sem,contrib)
-    await faza_c(sem,depts)
-    print(f"\nSEDINTA_DONE in {time.time()-t0:.0f}s",flush=True)
+    txt=await faza_c(sem,depts)
+    # FAZA D — poarta de audit: sedinta NU se incheie pana cand CAE nu aproba
+    print("FAZA D — poarta de audit pe rezultatul sedintei",flush=True)
+    g=await audit_gate(sem, solutie="SPEC PROPUS DE SEDINTA (de evaluat critic):\n"+txt, runda="s1")
+    print(("SEDINTA_DONE — AUDIT APROBAT" if g["aprobat"] else
+           "SEDINTA_INCHISA_NU — AUDIT RESPINS")+f" in {time.time()-t0:.0f}s",flush=True)
 
 if __name__=="__main__": asyncio.run(main())
