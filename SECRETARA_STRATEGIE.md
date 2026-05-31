@@ -10,9 +10,9 @@ Secretara AI a Cercului EIE devine **Chief-of-Staff-ul tău personal**, un siste
 ## 2. CAPABILITATI
 *   **(a) Calendar & Întâlniri:** Vizualizarea ferestrelor de disponibilitate setate manual. Nu sincronizăm, ci gestionăm intern „sloturile de networking” marcate ca libere.
 *   **(b) Idei & Notițe:** Jurnal de bord unde introduci manual insight-uri. Sistemul le indexează automat după etichete (keywords) pentru a fi regăsite instantaneu.
-*   **(c) Remindere & Follow-up:** Sistem bazat pe task-uri cu deadline. Generare de text (fill-in-the-blanks) pentru mesaje de follow-up post-întâlnire, gata de copiat în orice canal extern.
-*   **(d) Agenda & Pregătire:** „Brief-ul de 1 minut” generat din istoricul local: ce ai căutat/oferit data trecută, ce acțiuni au rămas deschise, care sunt punctele comune cu partenerul.
-*   **(e) Programare între membri (Double-Opt-In):** Flux de cerere-confirmare. Propui o fereastră, celălalt acceptă în aplicația sa; ambele părți primesc confirmarea în „Jurnalul de Întâlniri”.
+*   **(c) Remindere & Follow-up:** Sistem bazat pe task-uri cu deadline. Generare de text (fill-in-the-blanks) pentru mesaje de follow-up post-întâlnire, gata de copiat — **sanitizat strict (textContent), fără linkuri auto-generate**.
+*   **(d) Agenda & Pregătire:** „Brief-ul de 1 minut” generat **DOAR din interacțiunile tale directe**: ce ai notat TU, ce ai căutat/oferit TU, ce acțiuni AI lăsat deschise. NU agregă profilul țintei fără consimțământul ei — afișează doar date publice asumate (ce oferă vizibil).
+*   **(e) Programare între membri (Double-Opt-In):** Flux de cerere-confirmare **strict in-app** (fără QR/link extern cu date sensibile). Propui o fereastră, celălalt acceptă în aplicația sa; orice întâlnire **confirmată se scrie imuabil în Trust Ledger** (hash-chain) ca audit trail anti-dispută.
 
 ---
 
@@ -39,8 +39,21 @@ Secretara AI a Cercului EIE devine **Chief-of-Staff-ul tău personal**, un siste
 *   **„Tu deții controlul”:** Datele tale părăsesc dispozitivul doar prin acțiunea ta explicită (export/share).
 *   **„Fără Magie”:** Secretara nu ghicește ce vrei. Ea procesează strict ceea ce ai introdus. Dacă nu ai notat, nu există.
 *   **„Erori de Human-Input”:** Acuratețea recomandărilor depinde de calitatea notițelor tale. Sistemul te încurajează să fii precis în cuvinte-cheie.
+*   **„Brief doar despre tine”:** Brief-ul de întâlnire agregă DOAR interacțiunile tale directe, niciodată profilul privat al celuilalt fără consimțământ.
+*   **„Fără artefacte externe”:** Programarea se face exclusiv prin consimțământul in-app; nu generăm QR/linkuri care ar putea scurge date.
+*   **„Audit trail imuabil”:** Orice întâlnire confirmată intră în Trust Ledger (hash-chain HMAC), deci nu poate fi negată/alterată.
+*   **Sanitizare:** Tot textul generat (follow-up, brief) trece prin `textContent` — fără vectori de injecție.
 
 ---
+
+## 6bis. PROTOCOALE DE SIGURANTA (cerute de audit — integrate in arhitectura existenta)
+*   **Criptare la repaus:** Toate datele Secretarei (notite, intalniri, task-uri) se stocheaza in aceeasi baza criptata **AES-GCM** cu cheie **PBKDF2 (150k)** derivata din parola, doar in RAM (auto-lock + `wipe()`).
+*   **Sanitizare input (anti-XSS):** Orice text introdus trece prin `clean()` la intrare si e randat exclusiv prin `textContent`/DOM API (zero `innerHTML`). Follow-up-urile/brief-urile nu contin markup.
+*   **Validare schema la import:** Fisierele JSON importate (sync manual) trec printr-un validator de schema (`validDB` extins pt. notite/intalniri/task-uri) care filtreaza intrarile null/alterate; la esec -> respingere cu backup, fara coruperea bazei.
+*   **Error handling & stocare:** Scriere tranzactionala (temp->validare->commit) cu rollback la `QuotaExceededError`; error boundary global; reset determinist al starii async.
+*   **First Run:** Fluxul de initializare cand nu exista date — ecran de setare parola -> seed gol -> onboarding 3 pasi; toate functiile Secretarei trateaza starea goala (empty-states).
+*   **Revocarea consimtamantului & „dreptul de a fi uitat” (P2P):** Orice intalnire/partajare poate fi **revocata**; revocarea: (a) sterge local datele partajate, (b) marcheaza in Trust Ledger un eveniment de revocare (imuabil), (c) cere explicit celeilalte parti stergerea copiei la urmatoarea sincronizare. Local-Only inseamna ca nu exista copie pe server de sters.
+*   **Jurnal de audit local:** Fiecare actiune a Secretarei (creare task, propunere intalnire, follow-up, revocare) se scrie in jurnalul read-only existent, cu marca de timp.
 
 ## 6. ROADMAP
 1. **Iterația 1: „Sistemul de Indexare”** — Implementarea sistemului de notițe structurate și extragere de cuvinte-cheie (keywords) pentru crearea brief-ului de întâlnire.
