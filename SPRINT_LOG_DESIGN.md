@@ -2,6 +2,7 @@
 
 - 2026-05-31 · Item 8 (Reteaua activa) · banda orizontala curata cu avatarele persoanelor cu interactiune in ultimele 30 zile (max 8, sortate dupa recenta), contor verde, tap -> conversatie; complement pozitiv la "De reconectat"; validat Playwright (widget + 3 itemi + header), 0 erori.
 - 2026-05-31 · Item 7 (De reconectat) · sectiune sus in Reteaua cu pana la 3 conexiuni fara contact de peste 30 zile (frecventa, nu volum), prompt cald "Reia →" care deschide conversatia; dispare cand contactul e recent; validat Playwright (apare la 60 zile, dispare la contact recent), 0 erori.
+- 2026-05-31 · AUDIT item 9 (designloop9): APROBAT 6/6 + CAE.
 - 2026-05-31 · Item 9 (Deschis spre conexiuni) · comutator in Profil (me.open, persistat); cand e activ apare pastila verde in antetul de profil; copy onest "marcaj personal, asincron — fara tracking" (Local-Only, fara broadcast real); validat Playwright (on->pastila+persist, off->scos), 0 erori.
 - 2026-05-31 · AUDIT item 6 (designloop6): APROBAT 6/6 + CAE.
 - 2026-05-31 · Item 6 (Echilibrul tau / radar valoare) · panou nou in Profil cu SVG calm: bara "Ofer" (stanga) vs "Caut" (dreapta), proportional, cu aria-label si caption onest ("nu un scor, un reper"); fara scor-trofeu; adaugat #valueRadar la curatarea la blocare; validat Playwright (SVG + 2 bare + label), 0 erori.
