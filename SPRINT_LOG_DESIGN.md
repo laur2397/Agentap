@@ -2,6 +2,7 @@
 
 - 2026-05-31 · Item 8 (Reteaua activa) · banda orizontala curata cu avatarele persoanelor cu interactiune in ultimele 30 zile (max 8, sortate dupa recenta), contor verde, tap -> conversatie; complement pozitiv la "De reconectat"; validat Playwright (widget + 3 itemi + header), 0 erori.
 - 2026-05-31 · Item 7 (De reconectat) · sectiune sus in Reteaua cu pana la 3 conexiuni fara contact de peste 30 zile (frecventa, nu volum), prompt cald "Reia →" care deschide conversatia; dispare cand contactul e recent; validat Playwright (apare la 60 zile, dispare la contact recent), 0 erori.
+- 2026-05-31 · AUDIT item 12 (designloop12): APROBAT 6/6 + CAE.
 - 2026-05-31 · Item 12 (Audit de control / slider) · slider Relevanta↔Diversitate pe Potriviri (MATCHDIV persistat), reordonare greedy explicabila (penalizeaza domeniile repetate proportional cu w), hint text care explica ce face; control manual, transparent, fara algoritm opac; validat Playwright (rel: A,A,B,A,C → div: A,B,C,A,A; primele 3 domenii unice), 0 erori.
 - 2026-05-31 · Item 11 (Scopul intalnirii) · camp optional "🎯 Adauga scopul intalnirii" pe intalnirile confirmate (m.goal, adauga/editeaza/afiseaza "Scop: …"), complement pre-meeting la nota de rezultat post-meeting; validat Playwright (buton -> salveaza -> afisat), 0 erori.
 - 2026-05-31 · Item 10 (Progres intrinsec) · rand calm pe Acasa "Până acum: N idei notate · M task-uri duse la capăt · K întâlniri confirmate" (activitate reala, acord gramatical, fara streak/gamificare); dispare cand nu e nimic; validat Playwright (text corect), 0 erori.
