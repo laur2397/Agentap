@@ -553,7 +553,9 @@ details.why2>summary::-webkit-details-marker{display:none}
       <div class="toggle"><span>Reduce animatiile <span style="color:var(--muted);font-size:11px">(accesibilitate)</span></span>
         <div class="sw" id="rmSw" role="switch" tabindex="0" aria-label="Reduce animatiile" onclick="toggleRM()"><i></i></div></div>
       <div class="toggle"><span>Date absolute <span style="color:var(--muted);font-size:11px">(15 iun, nu „acum/2h”)</span></span>
-        <div class="sw" id="daSw" role="switch" tabindex="0" aria-label="Date absolute" onclick="toggleDateAbs()"><i></i></div></div></div>
+        <div class="sw" id="daSw" role="switch" tabindex="0" aria-label="Date absolute" onclick="toggleDateAbs()"><i></i></div></div>
+      <div class="toggle"><span>Notificari task-uri scadente <span style="color:var(--muted);font-size:11px">(doar cat timp aplicatia e deschisa — fara server/push)</span></span>
+        <div class="sw" id="ntSw" role="switch" tabindex="0" aria-label="Notificari task-uri scadente" onclick="toggleNotify()"><i></i></div></div></div>
   </section>
 </main>
 
@@ -674,6 +676,23 @@ let RM=false;
 const anim=()=>!RM&&!matchMedia("(prefers-reduced-motion: reduce)").matches;
 function applyRM(){document.body.classList.toggle("reduce-motion",RM);const sw=$("#rmSw");if(sw){sw.classList.toggle("on",RM);sw.setAttribute("aria-checked",RM);}}
 function toggleRM(){RM=!RM;localStorage.setItem("cercul_rm",RM?"1":"0");applyRM();if(VIEW)render();}
+/* loop2 #16: notificari browser opt-in pentru task-uri scadente (onest: doar cat aplicatia e deschisa) */
+let NOTIFY=false;const NOTIFIED=new Set();
+function notifSupported(){return typeof Notification!=="undefined";}
+function applyNotify(){const sw=$("#ntSw");if(sw){sw.classList.toggle("on",NOTIFY);sw.setAttribute("aria-checked",NOTIFY?"true":"false");}}
+function toggleNotify(){
+  if(!NOTIFY){
+    if(!notifSupported()){toast("Browserul tau nu suporta notificari");return;}
+    let pr;try{pr=Notification.requestPermission();}catch(e){toast("Notificarile nu pot fi activate aici");return;}
+    const done=perm=>{if(perm==="granted"){NOTIFY=true;localStorage.setItem("cercul_notify","1");applyNotify();toast("Notificari activate — apar doar cat aplicatia e deschisa");checkTaskNotifs();}
+      else{NOTIFY=false;localStorage.setItem("cercul_notify","0");applyNotify();toast(perm==="denied"?"Permisiune refuzata din browser":"Permisiune neacordata");}};
+    if(pr&&typeof pr.then==="function")pr.then(done).catch(()=>done("default"));else done(pr||(notifSupported()?Notification.permission:"default"));
+  }else{NOTIFY=false;localStorage.setItem("cercul_notify","0");applyNotify();toast("Notificari oprite");}
+}
+function checkTaskNotifs(){if(!NOTIFY||!DB||!notifSupported()||Notification.permission!=="granted")return;const td=today();
+  (DB.tasks||[]).filter(t=>t.member_id===ME&&!t.done&&t.due&&t.due<=td).forEach(t=>{
+    if(NOTIFIED.has(t.id))return;NOTIFIED.add(t.id);
+    try{new Notification("Task scadent — Cercul EIE",{body:t.text+(t.due<td?" (intarziat)":" (azi)"),tag:"cercul-task-"+t.id});}catch(_){}});}
 function countUp(el,target,suffix){if(!el)return;target=+target||0;suffix=suffix||"";
   if(!anim()){el.textContent=target+suffix;return;}
   const t0=performance.now(),dur=750;
@@ -1338,7 +1357,8 @@ function updateBadges(){if(!DB)return;const td=today();
   const tab=document.querySelector('.tab[data-v="secretara"]');if(!tab)return;
   let b=tab.querySelector(".navbadge");
   if(n>0){if(!b){b=h("span",{class:"navbadge"});tab.appendChild(b);}b.textContent=String(n);}
-  else if(b)b.remove();}
+  else if(b)b.remove();
+  checkTaskNotifs();}
 /* follow-up post-intalnire: sablon gata de copiat */
 function followUp(id,kind){const m=(DB.meetings||[]).find(x=>x.id===id);if(!m)return;
   const cel=mem(ME===m.a?m.b:m.a)||{name:""},me=mem(ME)||{name:""},fn=cel.name.split(" ")[0],w=fmtWhen(m.when);
@@ -1541,6 +1561,7 @@ function resetIdle(){if(!CK)return;clearTimeout(idleT);idleT=setTimeout(lockNow,
 applyTheme(localStorage.getItem(TKEY)||"light");
 RM=localStorage.getItem("cercul_rm")==="1";applyRM();
 DATEABS=localStorage.getItem("cercul_dateabs")==="1";applyDateAbs();
+NOTIFY=localStorage.getItem("cercul_notify")==="1"&&notifSupported()&&Notification.permission==="granted";applyNotify();
 showLock(localStorage.getItem(SKEY)&&localStorage.getItem(KEY)?"unlock":"setup");
 </script>
 </body>
