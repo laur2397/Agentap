@@ -1,0 +1,128 @@
+[
+  {
+    "cod": "3.1",
+    "rol": "QA Lead",
+    "dep": "Departamentul 3. QA / Asigurarea calitatii (14 persoane, 6 roluri)",
+    "input": "**DIRECTIE:** Sofisticare caldă (Warm Minimalism). Eliminăm contrastul obositor pentru o experiență fluidă, „premium-accessible”.\n\n**CULORI:** Fond crem-piatră (#F4F1ED), accente bronz-mat (#A68966), detalii text antracit (#2D2D2D).\n\n**DE CE:** Reduce oboseala vizuală și erorile de interpretare UX, crescând retenția (time-in-app). Un design aerisit scade rata de abandon, facilitând testarea accesibilității și claritatea interfeței.",
+    "ok": true
+  },
+  {
+    "cod": "2.1",
+    "rol": "DevOps Lead",
+    "dep": "Departamentul 2. DevOps / Infrastructure / Cloud (13 persoane, 7 roluri)",
+    "input": "DIRECTIE: \"Modern Executive Lounge\" – echilibru între autoritate și accesibilitate.\n\nCULORI: Fond \"Midnight Navy\" (#121625), accente \"Champagne Gold\" (#d4af37), text \"Soft Off-white\" (#f8f9fa).\n\nDE CE: Reduce oboseala vizuală și scade rata de bounce. O interfață clară, cu contrast optimizat, scade timpul de procesare cognitivă, crescând retenția și eficiența utilizatorului.",
+    "ok": true
+  },
+  {
+    "cod": "9.1",
+    "rol": "Behavioral Science Lead",
+    "dep": "Departamentul 7b. Behavioral Science & Ethical Product Design (10 persoane, 9 roluri)",
+    "input": "**DIRECTIE:** Caldă, sofisticată, echilibrată. Trecem de la „seif” la „salon exclusivist”.\n\n**CULORI:** Fond crem-nisipiu (#F7F4F0), accente bronz-cupru (#B8860B), accente sage-green (#8A9A8B).\n\n**DE CE:** Reduce anxietatea vizuală, favorizând încrederea. Tonurile pământii scade rezistența psihologică la utilizare prelungită, crescând retenția prin confort cognitiv, nu prin dependență dopaminergică.",
+    "ok": true
+  },
+  {
+    "cod": "7.1",
+    "rol": "Head of Product / CPO Deputy",
+    "dep": "Departamentul 6. Produs / Product (13 persoane, 6 roluri)",
+    "input": "**DIRECTIE:** Minimalist-organic, „Quiet Luxury”. Trecem de la „seif bancar” la „club exclusivist primitor”, cu un contrast mai blând.\n\n**CULORI:** Fond off-white/warm gray (#F8F7F4), accente cupru-auriu (#B8860B), text gri-antracit (#1A1A1A).\n\n**DE CE:** Reduce oboseala vizuală și crește retenția. Designul cald umanizează tehnologia, sporind încrederea utilizatorilor.",
+    "ok": true
+  },
+  {
+    "cod": "11.1",
+    "rol": "Marketing Lead",
+    "dep": "Departamentul 9. Marketing (13 persoane, 11 roluri)",
+    "input": "**DIRECTIE:** Minimalist-sofisticat, tip \"Quiet Luxury\". Trecem de la „seif bancar” la „galerie de artă contemporană”.\n\n**CULORI:** Fond crem-nisipiu (#F8F5F2), accente bronz-șampanie (#B89A75), gri antracit cald (#2D2D2D).\n\n**DE CE:** Reduce oboseala vizuală și bariera psihologică de „acces interzis”. Crește timpul de retenție (engagement) și conversia prin percepția de exclusivitate caldă, nu intimidantă.",
+    "ok": true
+  },
+  {
+    "cod": "5.1",
+    "rol": "Data / AI Lead",
+    "dep": "Departamentul 5. Date, AI si Analytics (11 persoane, 8 roluri)",
+    "input": "**DIRECTIE:** Minimalist-organic, „Quiet Luxury”. Trecerea de la contrastul agresiv la o paletă caldă, aerisită, care reduce oboseala vizuală.\n\n**CULORI:** Bej nisipiu (#F5F2ED), Gri ardezie cald (#2D3436), Accente bronz mat (#B8860B).\n\n**DE CE:** O interfață relaxată crește timpul de retenție (session duration) și calitatea engagementului, facilitând analiza predictivă a comportamentului utilizatorului fără bias-ul stresului vizual.",
+    "ok": true
+  },
+  {
+    "cod": "17.1",
+    "rol": "Internal IT Manager",
+    "dep": "Departamentul 15. IT intern / Internal IT (6 persoane, 4 roluri)",
+    "input": "DIRECTIE: „Modern Executive” — luminozitate caldă, aerisită, care reduce oboseala vizuală.\n\nCULORI: Fond crem-nisipiu (#F7F4EF), accente bronz-mat (#A68966), detalii navy-profund (#1A2B3C).\n\nDE CE: Un mediu vizual mai luminos și intuitiv scade „frecarea” utilizatorului, crescând adopția și rata de retenție, esențiale pentru eficiența echipei și scalabilitatea aplicației.",
+    "ok": true
+  },
+  {
+    "cod": "15.1",
+    "rol": "Finance Director / CFO Deputy",
+    "dep": "Departamentul 13. Finance (10 persoane, 6 roluri)",
+    "input": "DIRECTIE: „Modern Executive” – aer sofisticat, dar cald și accesibil.\n\nCULORI: Fond crem-nisipiu (#F5F3EF), gri-ardezie profund (#2D3436), accent cupru-auriu mat (#B8860B).\n\nDE CE: Reduce oboseala vizuală și bariera psihologică de „elitism rece”, optimizând rata de retenție (LTV) și costul de achiziție utilizator (CAC).",
+    "ok": true
+  },
+  {
+    "cod": "6.1",
+    "rol": "Head of AI",
+    "dep": "Departamentul 5b. Artificial Intelligence — AI (14 persoane, 10 roluri)",
+    "input": "**DIRECTIE:** Modern-sofisticat, aerisit și empatic. Trecem de la „seif” la „salon exclusivist”.\n\n**CULORI:** Fond „Midnight Sand” (#1a1d26), accente „Champagne Gold” (#d4af37) și „Soft Slate” (#94a3b8).\n\n**DE CE:** Reduce oboseala cognitivă, crescând timpul de retenție. Contrastul cald umanizează AI-ul, sporind încrederea utilizatorilor în recomandările algoritmice.",
+    "ok": true
+  },
+  {
+    "cod": "8.1",
+    "rol": "Design Lead",
+    "dep": "Departamentul 7. Design / UX (10 persoane, 7 roluri)",
+    "input": "**DIRECTIE:** Minimalist-cald, \"Modern Executive\". Înlocuim opresiunea negrului cu o eleganță aerisită, luminoasă, care inspiră încredere și claritate.\n\n**CULORI:** Off-white #F8F7F4 (fundal), Charcoal Soft #2D3035 (text), Șampanie Aurie #D4AF37 (accent).\n\n**DE CE:** Reduce oboseala vizuală și crește retenția. Paleta neutră elimină bariera psihologică de „club închis/rece”, facilitând adopția fără a compromite prestigiul.",
+    "ok": true
+  },
+  {
+    "cod": "13.1",
+    "rol": "Customer Success Lead",
+    "dep": "Departamentul 11. Customer Success & Support (18 persoane, 6 roluri)",
+    "input": "**DIRECTIE:** Minimalist-cald, sofisticare primitoare (tip „Private Club Lounge”).\n\n**CULORI:** Fond grej deschis (#F5F4F0), accente cupru-bronz (#B87333), text cărbune (#2D2D2D).\n\n**DE CE:** Reduce oboseala vizuală și bariera psihologică de „elitism inaccesibil”. Un mediu luminos crește timpul de retenție (stickiness) și facilitează utilizarea zilnică a funcțiilor AI.",
+    "ok": true
+  },
+  {
+    "cod": "1.1",
+    "rol": "Head of Engineering / VP Engineering",
+    "dep": "Departamentul 1. Engineering / Dezvoltare software (32 persoane, 10 roluri)",
+    "input": "**DIRECTIE:** Minimalist-sofisticat, tip „Modern Heritage”. Trecem de la „seif bancar” la „club privat de elită” cu lumină naturală.\n\n**CULORI:** Fond crem-nisipiu (#F7F4F0), accente bronz-mat (#B88E56), text antracit cald (#2D2D2D).\n\n**DE CE:** Reduce oboseala vizuală și crește timpul de retenție cu 20% (KPI UX), păstrând prestigiul prin contrast și eleganță tactilă.",
+    "ok": true
+  },
+  {
+    "cod": "4.1",
+    "rol": "CISO Deputy / Security Lead",
+    "dep": "Departamentul 4. Securitate (10 persoane, 6 roluri)",
+    "input": "DIRECTIE: „Modern Executive” – luminoasă, aerisită, de încredere.\n\nCULORI: Fond crem-nisipiu (#F7F4EF), Text antracit-mat (#2D313A), Accente bronz-cupru (#B8860B).\n\nDE CE: Contrastul ridicat și tonurile calde reduc oboseala vizuală, crescând retenția. O interfață vizibil sigură și transparentă construiește încrederea necesară conformității SOC 2, fiind primitoare pentru utilizatori.",
+    "ok": true
+  },
+  {
+    "cod": "10.1",
+    "rol": "Head of PMO",
+    "dep": "Departamentul 8. Project & Program Management — PMO (10 persoane, 5 roluri)",
+    "input": "DIRECTIE: „Modern Executive” — caldă, aerisită, premium accesibil.\n\nCULORI: Fond crem-nisipiu (#F5F2ED), accente bronz-cupru (#B8860B), text gri-antracit (#2D3142).\n\nDE CE: Reducem încărcătura vizuală, crescând timpul de retenție (Time-in-App) prin lizibilitate sporită și o atmosferă primitoare, esențială pentru adopția utilizatorilor într-un ecosistem de networking scalabil.",
+    "ok": true
+  },
+  {
+    "cod": "12.1",
+    "rol": "Sales Director",
+    "dep": "Departamentul 10. Sales / Vanzari (10 persoane, 6 roluri)",
+    "input": "DIRECTIE: „Modern Executive” — luminoasă, fluidă, cu contrast rafinat.\n\nCULORI: Fond crem-nisipiu (#F7F4EF), accente bronz-șampanie (#B89C76), navy profund (#1B263B).\n\nDE CE: Reducem „greutatea” vizuală pentru a crește retenția. Un mediu cald scade fricțiunea psihologică în achiziție, transformând percepția de „bunker exclusivist” în „hub strategic” accesibil.",
+    "ok": true
+  },
+  {
+    "cod": "14.1",
+    "rol": "HR Director / Head of People",
+    "dep": "Departamentul 12. HR / People (11 persoane, 8 roluri)",
+    "input": "**DIRECTIE:** Profesionalism cald și accesibil (Modern Executive).\n\n**CULORI:** Deep Navy (#121926), Champagne Gold (#D4AF37), Soft Sand (#F4F1EA).\n\n**DE CE:** Reducem „răceala” dark mode-ului. O interfață luminoasă și echilibrată crește retenția utilizatorilor, scade oboseala vizuală și transmite încredere, facilitând o cultură deschisă și conexiuni umane autentice.",
+    "ok": true
+  },
+  {
+    "cod": "16.1",
+    "rol": "Head of Legal",
+    "dep": "Departamentul 14. Legal & Compliance (5 persoane, 5 roluri)",
+    "input": "DIRECTIE: \"Modern Executive\" — echilibru între autoritate și accesibilitate, trecând de la \"seif\" la \"office premium\".\n\nCULORI: Fond crem-nisipiu (#F7F4EF), Text gri-ardezie intens (#1A202C), Accent auriu-bronz (#B8860B).\n\nDE CE: Reduce oboseala vizuală și anxietatea utilizatorului; transmite transparență și încredere, esențiale pentru conformitate și adopția utilizatorilor noi.",
+    "ok": true
+  },
+  {
+    "cod": "18.1",
+    "rol": "Head of Operations / COO Deputy",
+    "dep": "Departamentul 16. Operations / Business Operations (10 persoane, 6 roluri)",
+    "input": "**DIRECTIE:** Minimalist-organic, „Quiet Luxury”. Atmosferă luminoasă, aerisită, care reduce fricțiunea vizuală.\n\n**CULORI:** Fond crem-nisipiu (#F7F4F0), accente șampanie (#D4AF37), text gri-antracit (#2D2E33).\n\n**DE CE:** Reduce oboseala vizuală și bariera psihologică de intrare. Un mediu „calm” crește retenția și timpul petrecut în app, scalând engagementul utilizatorilor premium fără a părea intimidant.",
+    "ok": true
+  }
+]

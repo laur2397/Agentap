@@ -1,142 +1,193 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="ro" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cercul EIE — Ecosistem de Inteligenta Executiva</title>
+<title>Cercul EIE — Network Capital</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+/* ====== PALETA "Executive Hybrid" — decisa de board (directori + Cxx) ====== */
 :root{
-  --bg:#0a0b0f;--bg2:#0f1118;--card:#14161f;--card2:#1b1e2a;--line:#262a39;--line2:#343a4f;
-  --ink:#f2efe7;--ink2:#b6b2a6;--muted:#7c8092;
-  --gold:#c9a227;--gold2:#e0c463;--gold-dim:#8a7530;--gold-soft:rgba(201,162,39,.12);
-  --teal:#54c2a0;--teal-soft:rgba(84,194,160,.13);--blue:#6ea8fe;--red:#e0736b;
+  /* LIGHT — Quiet Luxury Sand (implicit, daytime) */
+  --bg:#F7F4EF;--bg2:#EDEAE5;--card:#FFFFFF;--card2:#F5F3EF;--line:#E5E0D8;--line2:#D8D2C8;
+  --ink:#1A202C;--ink2:#4A5568;--muted:#9aa0ad;
+  --primary:#B88E56;--primary2:#cda468;--primary-dim:#9a743f;--primary-soft:rgba(184,142,86,.14);
+  --accent:#1A2B3C;--accent-soft:rgba(26,43,60,.07);
+  --success:#2E7D32;--success-soft:rgba(46,125,50,.12);--warn:#D97706;
+  --on-primary:#ffffff;
+  --shadow:0 4px 20px rgba(40,30,10,.07);--shadow-lg:0 12px 36px rgba(40,30,10,.12);
+  --glow:rgba(184,142,86,.14);
+  /* alias-uri (folosite mai jos) */
+  --gold:var(--primary);--gold2:var(--primary2);--gold-dim:var(--primary-dim);--gold-soft:var(--primary-soft);
+  --teal:var(--success);--teal-soft:var(--success-soft);
   --serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',system-ui,sans-serif;--ease:cubic-bezier(.22,1,.36,1);
 }
+[data-theme="dark"]{
+  /* SOFT-DARK — Navy lounge (night) */
+  --bg:#121625;--bg2:#1A202C;--card:#1E2536;--card2:#252D3E;--line:#2D3748;--line2:#3a4660;
+  --ink:#F8F9FA;--ink2:#CBD5E0;--muted:#718096;
+  --primary:#D4AF37;--primary2:#e6c85f;--primary-dim:#9a7d28;--primary-soft:rgba(212,175,55,.14);
+  --accent:#94A3B8;--accent-soft:rgba(148,163,184,.12);
+  --success:#54C2A0;--success-soft:rgba(84,194,160,.14);--warn:#F6AD55;
+  --on-primary:#15110a;
+  --shadow:0 4px 20px rgba(0,0,0,.3);--shadow-lg:0 14px 40px rgba(0,0,0,.45);
+  --glow:rgba(212,175,55,.12);
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#000;color:var(--ink);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased}
+body{background:var(--bg2);color:var(--ink);font-family:var(--sans);font-weight:400;-webkit-font-smoothing:antialiased}
 .shell{max-width:440px;margin:0 auto;min-height:100vh;position:relative;overflow:hidden;
-  background:radial-gradient(130% 60% at 50% -10%,rgba(201,162,39,.10),transparent 55%),linear-gradient(180deg,#0c0d12,#0a0b0f 340px)}
-header{padding:24px 20px 14px;position:sticky;top:0;z-index:9;background:rgba(10,11,15,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-.htop{display:flex;justify-content:space-between;align-items:center}
+  background:radial-gradient(130% 55% at 50% -8%,var(--glow),transparent 55%),var(--bg);transition:background .5s var(--ease)}
+header{padding:22px 20px 14px;position:sticky;top:0;z-index:9;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.htop{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .brand{display:flex;align-items:center;gap:11px}
-.brand .mk{width:40px;height:40px;border-radius:50%;border:1px solid var(--gold);color:var(--gold);display:grid;place-items:center;font-family:var(--serif);font-size:20px;font-weight:700;background:radial-gradient(circle at 30% 30%,rgba(201,162,39,.2),transparent)}
-.brand .t{font-family:var(--serif);font-size:21px;font-weight:700;line-height:1}
-.brand .t small{display:block;font-family:var(--sans);font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim);margin-top:2px}
-.memsel{background:var(--card2);border:1px solid var(--line2);border-radius:30px;padding:7px 11px;color:var(--ink);font:inherit;font-size:12px;max-width:120px}
+.brand .mk{width:40px;height:40px;border-radius:50%;border:1px solid var(--primary);color:var(--primary);display:grid;place-items:center;font-family:var(--serif);font-size:20px;font-weight:700;background:radial-gradient(circle at 30% 30%,var(--primary-soft),transparent)}
+.brand .t{font-family:var(--serif);font-size:21px;font-weight:700;line-height:1;color:var(--ink)}
+.brand .t small{display:block;font-family:var(--sans);font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--primary-dim);margin-top:2px}
+.hright{display:flex;align-items:center;gap:8px}
+.themebtn{width:34px;height:34px;border-radius:50%;border:1px solid var(--line2);background:var(--card);color:var(--ink2);font-size:15px;cursor:pointer;display:grid;place-items:center;transition:.3s var(--ease)}
+.themebtn:active{transform:scale(.92)}
+.memsel{background:var(--card);border:1px solid var(--line2);border-radius:30px;padding:7px 11px;color:var(--ink);font:inherit;font-size:12px;max-width:112px}
 main{padding:20px 18px 92px;animation:rise .4s var(--ease)}
 @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .view{display:none}.view.on{display:block}
-.eyebrow{font-size:9.5px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim)}
-h2.title{font-family:var(--serif);font-size:27px;font-weight:600;margin:2px 0 14px}
+.eyebrow{font-size:9.5px;letter-spacing:3px;text-transform:uppercase;color:var(--primary-dim)}
+h2.title{font-family:var(--serif);font-size:27px;font-weight:600;margin:2px 0 14px;color:var(--ink)}
 .sub{color:var(--muted);font-size:12px;margin:-10px 0 16px}
-.sec{font-family:var(--serif);font-size:18px;font-weight:600;margin:24px 0 11px;display:flex;justify-content:space-between;align-items:baseline}
-.sec a{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);cursor:pointer}
+.sec{font-family:var(--serif);font-size:18px;font-weight:600;margin:24px 0 11px;display:flex;justify-content:space-between;align-items:baseline;color:var(--ink)}
+.sec a{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--primary);cursor:pointer}
 
 /* digest */
-.digest{background:linear-gradient(135deg,rgba(201,162,39,.10),transparent);border:1px solid var(--gold-dim);border-radius:16px;padding:16px 18px}
-.digest .e{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold)}
-.digest .g{font-family:var(--serif);font-size:21px;font-weight:600;margin:4px 0 6px}
+.digest{background:linear-gradient(135deg,var(--primary-soft),transparent);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
+.digest .e{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--primary)}
+.digest .g{font-family:var(--serif);font-size:21px;font-weight:600;margin:4px 0 6px;color:var(--ink)}
 .digest p{font-size:13px;color:var(--ink2);line-height:1.55}
 
 /* kpi exec-concierge */
 .kpis{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:14px}
-.kpi{border:1px solid var(--line);border-radius:14px;padding:14px;background:linear-gradient(180deg,var(--card),#101219)}
+.kpi{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--card);box-shadow:var(--shadow)}
 .kpi .l{font-size:9.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
-.kpi .v{font-family:var(--serif);font-size:26px;font-weight:700;color:var(--gold);margin-top:4px;line-height:1}
-.kpi .d{font-size:11px;color:var(--teal);margin-top:3px}
+.kpi .v{font-family:var(--serif);font-size:26px;font-weight:700;color:var(--primary-dim);margin-top:4px;line-height:1}
+.kpi .d{font-size:11px;color:var(--success);margin-top:3px}
 
 /* pulse */
-.pulse{border:1px solid var(--line);border-radius:14px;padding:15px 17px;background:var(--card);margin-top:12px}
-.pulse .row{display:flex;justify-content:space-between;align-items:center;font-size:13px;margin:7px 0}
+.pulse{border:1px solid var(--line);border-radius:14px;padding:15px 17px;background:var(--card);margin-top:12px;box-shadow:var(--shadow)}
+.pulse .row{display:flex;justify-content:space-between;align-items:center;font-size:13px;margin:7px 0;color:var(--ink2)}
 .bar{height:6px;border-radius:4px;background:var(--line);overflow:hidden;margin-top:4px}
-.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold))}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--primary-dim),var(--primary));transition:width .8s var(--ease)}
+
+/* ledger */
+.ledger{border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden;box-shadow:var(--shadow)}
+.ledger .lrow{display:flex;align-items:center;gap:11px;padding:12px 15px;border-bottom:1px solid var(--line);font-size:13px}
+.ledger .lrow:last-child{border-bottom:0}
+.ledger .dot{width:7px;height:7px;border-radius:50%;background:var(--success);flex:none}
+.ledger .lr-name{font-weight:500;color:var(--ink)}
+.ledger .lr-meta{font-size:11px;color:var(--muted)}
+.ledger .lr-date{margin-left:auto;font-size:10.5px;color:var(--primary-dim);white-space:nowrap}
 
 /* match cards */
-.card{background:linear-gradient(180deg,var(--card),#101219);border:1px solid var(--line);border-radius:18px;padding:17px;margin-bottom:13px;position:relative;overflow:hidden;transition:.4s var(--ease)}
-.card.match::before{content:"";position:absolute;inset:0;border-radius:18px;padding:1px;background:linear-gradient(140deg,rgba(201,162,39,.45),transparent 42%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
-.card.conectat::before{background:linear-gradient(140deg,rgba(84,194,160,.5),transparent 42%)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px;margin-bottom:13px;position:relative;overflow:hidden;transition:.4s var(--ease);box-shadow:var(--shadow)}
+.card.match::before{content:"";position:absolute;inset:0;border-radius:18px;padding:1px;background:linear-gradient(140deg,var(--primary-soft),transparent 42%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.card.conectat::before{background:linear-gradient(140deg,var(--success-soft),transparent 42%)}
 .mtop{display:flex;align-items:center;gap:12px}
-.av{border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-weight:700;flex:none;background:#000;border:1px solid var(--gold-dim);color:var(--gold2)}
-.nm{font-family:var(--serif);font-size:18px;font-weight:600;line-height:1.1}
+.av{border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-weight:700;flex:none;background:var(--card2);border:1px solid var(--primary-dim);color:var(--primary-dim)}
+.nm{font-family:var(--serif);font-size:18px;font-weight:600;line-height:1.1;color:var(--ink)}
 .co{font-size:11px;color:var(--muted);margin-top:2px}
 .sc{margin-left:auto;text-align:center}
-.sc .n{font-family:var(--serif);font-size:25px;font-weight:700;color:var(--gold);line-height:1}
+.sc .n{font-family:var(--serif);font-size:25px;font-weight:700;color:var(--primary-dim);line-height:1}
 .sc .l{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
-.trust{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;color:var(--teal);background:var(--teal-soft);border-radius:20px;padding:3px 9px;margin-top:8px}
+.trust{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;color:var(--success);background:var(--success-soft);border-radius:20px;padding:3px 9px;margin-top:8px}
 .pair{font-size:13px;margin:12px 0 0}
 .pair .r{display:flex;gap:9px;padding:4px 0}
-.pair .tag{min-width:70px;font-size:9px;letter-spacing:.8px;text-transform:uppercase;color:var(--gold-dim);font-weight:600;padding-top:3px}
-.pair b{color:#fff;font-weight:400}
+.pair .tag{min-width:70px;font-size:9px;letter-spacing:.8px;text-transform:uppercase;color:var(--primary-dim);font-weight:600;padding-top:3px}
+.pair b{color:var(--ink);font-weight:500}
 .why{margin-top:11px}
-.why summary{cursor:pointer;color:var(--gold);font-size:10px;letter-spacing:1.4px;text-transform:uppercase;list-style:none}
+.why summary{cursor:pointer;color:var(--primary);font-size:10px;letter-spacing:1.4px;text-transform:uppercase;list-style:none}
 .why summary::-webkit-details-marker{display:none}
 .why summary::before{content:"— "}
-.why .b{margin-top:9px;font-size:12.5px;color:var(--ink2);border-left:1px solid var(--gold-dim);padding-left:11px;line-height:1.55}
+.why .b{margin-top:9px;font-size:12.5px;color:var(--ink2);border-left:2px solid var(--primary-dim);padding-left:11px;line-height:1.55}
 .src{margin-top:13px;padding-top:12px;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}
-.src .seal{color:var(--gold)}
+.src .seal{color:var(--primary)}
 .acts{display:flex;gap:9px;margin-top:14px;align-items:center;flex-wrap:wrap}
 .btn{border:0;border-radius:30px;padding:10px 18px;font:inherit;font-size:13px;font-weight:500;letter-spacing:.4px;cursor:pointer;transition:.35s var(--ease)}
-.btn.gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1404;font-weight:600}
+.btn.gold{background:linear-gradient(135deg,var(--primary),var(--primary-dim));color:var(--on-primary);font-weight:600;box-shadow:0 4px 14px var(--primary-soft)}
+.btn.gold:active{transform:translateY(1px)}
 .btn.ghost{background:transparent;color:var(--ink2);border:1px solid var(--line2)}
 .btn.sm{padding:8px 14px;font-size:12px}
 .pill{font-size:9px;padding:3px 11px;border-radius:30px;font-weight:600;letter-spacing:.8px;text-transform:uppercase}
-.pill.propus{background:var(--gold-soft);color:var(--gold)}.pill.conectat{background:var(--teal-soft);color:var(--teal)}
+.pill.propus{background:var(--primary-soft);color:var(--primary-dim)}.pill.conectat{background:var(--success-soft);color:var(--success)}
 .empty{color:var(--muted);font-style:italic;text-align:center;padding:28px;font-family:var(--serif);font-size:15px}
 
 /* members */
 .filters{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px;margin-bottom:14px;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}
-.chip{flex:none;border:1px solid var(--line2);border-radius:30px;padding:6px 14px;font-size:12px;color:var(--ink2);cursor:pointer;white-space:nowrap}
-.chip.on{background:var(--gold);color:#1a1404;border-color:var(--gold);font-weight:500}
-.mcard{background:linear-gradient(180deg,var(--card),#101219);border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:11px;cursor:pointer;transition:.35s var(--ease)}
-.mcard:active{transform:scale(.99)}
-.mcard .h{display:flex;gap:12px;align-items:center}
-.mcard .off{margin-top:11px;font-size:12px;color:var(--ink2)}
-.mcard .off .o{padding-left:13px;position:relative;margin:3px 0}.mcard .off .o::before{content:"◦";position:absolute;left:0;color:var(--gold-dim)}
+.chip{flex:none;border:1px solid var(--line2);border-radius:30px;padding:6px 14px;font-size:12px;color:var(--ink2);cursor:pointer;white-space:nowrap;background:var(--card)}
+.chip.on{background:var(--primary);color:var(--on-primary);border-color:var(--primary);font-weight:500}
 
 /* network */
-.netwrap{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--card),#0c0d12);padding:6px;overflow:hidden}
+.netwrap{border:1px solid var(--line);border-radius:18px;background:var(--card);padding:6px;overflow:hidden;box-shadow:var(--shadow)}
 .netlegend{display:flex;gap:15px;flex-wrap:wrap;margin-top:12px;font-size:11px;color:var(--ink2)}
 .netlegend i{display:inline-block;width:12px;height:2px;border-radius:2px;margin-right:5px;vertical-align:middle}
 svg text{font-family:var(--sans);font-size:9px;fill:var(--ink2)}
 
 /* profile / dictare */
-.panel{border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,var(--card),#101219);padding:17px;margin-top:13px}
-.panel h3{font-family:var(--serif);font-size:17px;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.panel{border:1px solid var(--line);border-radius:16px;background:var(--card);padding:17px;margin-top:13px;box-shadow:var(--shadow)}
+.panel h3{font-family:var(--serif);font-size:17px;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:12px;color:var(--ink)}
 .badge{font-size:8.5px;padding:3px 9px;border-radius:30px;font-weight:600;letter-spacing:.6px;text-transform:uppercase}
-.badge.vis{background:var(--teal-soft);color:var(--teal)}.badge.priv{background:var(--gold-soft);color:var(--gold)}
-.linei{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
+.badge.vis{background:var(--success-soft);color:var(--success)}.badge.priv{background:var(--primary-soft);color:var(--primary-dim)}
+.linei{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink)}
 .linei .meta{font-size:11px;color:var(--muted);margin-top:2px}.linei .x{background:none;border:0;color:var(--muted);font-size:17px;cursor:pointer}
 .addrow{display:flex;gap:7px;margin-top:12px}
-input,textarea{background:var(--card2);border:1px solid var(--line2);border-radius:10px;padding:10px 12px;color:var(--ink);font:inherit;font-size:13px}
+input,textarea,select{background:var(--card2);border:1px solid var(--line2);border-radius:10px;padding:10px 12px;color:var(--ink);font:inherit;font-size:13px}
 .addrow input{flex:1}textarea{width:100%}
+.audit{font-size:12px;color:var(--ink2)}
+.audit .arow{display:flex;gap:8px;padding:7px 0;border-bottom:1px dashed var(--line)}
+.audit .arow:last-child{border-bottom:0}
+.audit .at{color:var(--muted);min-width:54px;font-size:11px}
+
+/* spinner */
+.spin{display:inline-block;width:15px;height:15px;border:2px solid var(--primary-soft);border-top-color:var(--primary);border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.proc{display:flex;align-items:center;gap:9px;color:var(--ink2);font-size:13px;padding:10px 0}
 
 /* nav */
-nav{position:sticky;bottom:0;z-index:9;background:rgba(8,9,12,.92);backdrop-filter:blur(18px);border-top:1px solid var(--line)}
+nav{position:sticky;bottom:0;z-index:9;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(18px);border-top:1px solid var(--line)}
 .navin{display:flex}
 .tab{flex:1;background:none;border:0;padding:12px 3px 13px;display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--muted);font-size:9.5px;letter-spacing:.3px;cursor:pointer;transition:.3s var(--ease);position:relative}
 .tab .ic{font-size:17px;line-height:1}
-.tab.on{color:var(--gold)}.tab.on::before{content:"";position:absolute;top:0;width:22px;height:2px;background:var(--gold);border-radius:2px}
+.tab.on{color:var(--primary-dim)}.tab.on::before{content:"";position:absolute;top:0;width:22px;height:2px;background:var(--primary);border-radius:2px}
 
 /* modal */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(5px);display:none;align-items:flex-end;justify-content:center;z-index:30}
+.overlay{position:fixed;inset:0;background:rgba(15,18,28,.55);backdrop-filter:blur(5px);display:none;align-items:flex-end;justify-content:center;z-index:30}
 .overlay.on{display:flex}
-.modal{background:var(--bg2);border:1px solid var(--line2);border-radius:24px 24px 0 0;width:100%;max-width:440px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;animation:up .45s var(--ease)}
+.modal{background:var(--card);border:1px solid var(--line2);border-radius:24px 24px 0 0;width:100%;max-width:440px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;animation:up .45s var(--ease);box-shadow:var(--shadow-lg)}
 @keyframes up{from{transform:translateY(100%)}to{transform:none}}
 .modal .h{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
-.modal .h .t{font-family:var(--serif);font-size:18px;font-weight:600}.modal .h .s{font-size:11px;color:var(--muted)}
+.modal .h .t{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--ink)}.modal .h .s{font-size:11px;color:var(--muted)}
 .modal .h button{background:none;border:0;color:var(--muted);font-size:24px;cursor:pointer}
 .msgs{flex:1;overflow:auto;padding:16px 18px;display:flex;flex-direction:column;gap:9px}
 .msg{max-width:82%;padding:9px 13px;border-radius:15px;font-size:13px;line-height:1.5}
-.msg.app{align-self:center;max-width:96%;text-align:center;border:1px solid var(--gold-dim);color:var(--ink2);font-family:var(--serif);font-style:italic}
-.msg.me{align-self:flex-end;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1404}
-.msg.them{align-self:flex-start;background:var(--card2);border:1px solid var(--line)}
-.msg .nm2{font-size:10px;color:var(--gold);font-weight:600;display:block;margin-bottom:2px}
+.msg.app{align-self:center;max-width:96%;text-align:center;border:1px solid var(--primary-dim);color:var(--ink2);font-family:var(--serif);font-style:italic;background:var(--card2)}
+.msg.me{align-self:flex-end;background:linear-gradient(135deg,var(--primary),var(--primary-dim));color:var(--on-primary)}
+.msg.them{align-self:flex-start;background:var(--card2);border:1px solid var(--line);color:var(--ink)}
+.msg .nm2{font-size:10px;color:var(--primary-dim);font-weight:600;display:block;margin-bottom:2px}
 .cinput{display:flex;gap:8px;padding:13px 16px;border-top:1px solid var(--line)}.cinput input{flex:1}
-.toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%) translateY(70px);background:#000;border:1px solid var(--gold-dim);color:var(--gold2);padding:11px 20px;border-radius:30px;font-size:13px;opacity:0;transition:.45s var(--ease);z-index:50;white-space:nowrap}
+.toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--accent);border:1px solid var(--primary-dim);color:#fff;padding:11px 20px;border-radius:30px;font-size:13px;opacity:0;transition:.45s var(--ease);z-index:50;white-space:nowrap;box-shadow:var(--shadow-lg)}
 .toast.on{transform:translateX(-50%) translateY(0);opacity:1}
+
+/* onboarding */
+.ob{position:fixed;inset:0;background:var(--bg);z-index:60;display:none;flex-direction:column;align-items:center;justify-content:center;padding:30px 26px;text-align:center}
+.ob.on{display:flex}
+.ob .mk{width:58px;height:58px;border-radius:50%;border:1px solid var(--primary);color:var(--primary);display:grid;place-items:center;font-family:var(--serif);font-size:28px;font-weight:700;margin-bottom:18px;background:radial-gradient(circle at 30% 30%,var(--primary-soft),transparent)}
+.ob h1{font-family:var(--serif);font-size:30px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.ob .lead{color:var(--ink2);font-size:14px;max-width:300px;line-height:1.55;margin-bottom:22px}
+.ob .step{width:100%;max-width:340px;text-align:left;display:none}
+.ob .step.on{display:block;animation:rise .4s var(--ease)}
+.ob label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary-dim);display:block;margin:0 0 7px}
+.ob input{width:100%;font-size:15px;padding:13px 14px;margin-bottom:18px}
+.ob .nav2{display:flex;gap:10px;justify-content:space-between;align-items:center;max-width:340px;width:100%}
+.ob .dots{display:flex;gap:6px}.ob .dots i{width:7px;height:7px;border-radius:50%;background:var(--line2)}.ob .dots i.on{background:var(--primary)}
+.ob .skip{background:none;border:0;color:var(--muted);font-size:12px;cursor:pointer;margin-top:16px}
 </style>
 </head>
 <body>
@@ -144,18 +195,23 @@ nav{position:sticky;bottom:0;z-index:9;background:rgba(8,9,12,.92);backdrop-filt
 <header>
   <div class="htop">
     <div class="brand"><div class="mk">C</div><div class="t">Cercul EIE<small>Network Capital</small></div></div>
-    <select class="memsel" id="member"></select>
+    <div class="hright">
+      <button class="themebtn" id="themeBtn" title="Comuta tema" onclick="toggleTheme()">☾</button>
+      <select class="memsel" id="member"></select>
+    </div>
   </div>
 </header>
 
 <main>
-  <!-- ACASA: Focus Digest + Exec-Concierge + Network Health -->
+  <!-- ACASA -->
   <section id="acasa" class="view on">
     <div class="digest"><div class="e">Focus Digest · azi</div><div class="g" id="digG"></div><p id="digP"></p></div>
     <div class="sec">Exec-Concierge</div>
     <div class="kpis" id="kpis"></div>
     <div class="sec">Network Health Pulse</div>
     <div class="pulse" id="pulse"></div>
+    <div class="sec">Trust Ledger<a data-go="retea">reteaua →</a></div>
+    <div class="ledger" id="ledger"></div>
     <div class="sec">Oportunitati de top<a data-go="potriviri">toate →</a></div>
     <div id="topMatches"></div>
   </section>
@@ -163,24 +219,24 @@ nav{position:sticky;bottom:0;z-index:9;background:rgba(8,9,12,.92);backdrop-filt
   <!-- POTRIVIRI -->
   <section id="potriviri" class="view">
     <div class="eyebrow">Graph Matchmaker</div><h2 class="title">Potriviri</h2>
-    <p class="sub">Afinitati reale calculate semantic. Dublu consimtamant, sursa citata, Trust Score verificat.</p>
+    <p class="sub">Afinitati calculate semantic (TF-IDF / cosine). Dublu consimtamant, sursa citata, Trust Score verificat.</p>
     <div id="matchList"></div>
   </section>
 
   <!-- RETEA -->
   <section id="retea" class="view">
     <div class="eyebrow">Network Capital</div><h2 class="title">Reteaua</h2>
-    <p class="sub">Conexiunile confirmate. Nodul tau in centru; firele aurii = legaturi prin Cercul.</p>
+    <p class="sub">Conexiunile confirmate. Nodul tau in centru; firele = legaturi deschise prin Cercul.</p>
     <div class="netwrap"><div id="netHost"></div></div>
-    <div class="netlegend"><span><i style="background:var(--gold)"></i>Conexiune</span><span><i style="background:var(--line2)"></i>Membru</span></div>
+    <div class="netlegend"><span><i style="background:var(--primary)"></i>Conexiune</span><span><i style="background:var(--line2)"></i>Membru</span></div>
   </section>
 
-  <!-- SECRETARA AI (dictare + intent extraction) -->
+  <!-- SECRETARA AI -->
   <section id="secretara" class="view">
     <div class="eyebrow">Secretara AI</div><h2 class="title">Dicteaza dupa apel</h2>
-    <p class="sub">Vorbeste/scrie dupa o discutie. Extrag automat „intentiile de business” (ofer/caut) si le adaug in profil.</p>
+    <p class="sub">Scrie dupa o discutie. Extrag automat „intentiile de business” (ofer/caut) si le adaug in profil.</p>
     <textarea id="dictText" rows="5" placeholder="ex: Am vorbit cu un investitor interesat de energie. Eu caut un contabil bun si ofer spatii comerciale."></textarea>
-    <div style="margin-top:10px"><button class="btn gold" onclick="dicteaza()">Extrage intentiile</button></div>
+    <div style="margin-top:10px"><button class="btn gold" id="dictBtn" onclick="dicteaza()">Extrage intentiile</button></div>
     <div id="dictRes" style="margin-top:14px"></div>
   </section>
 
@@ -191,6 +247,9 @@ nav{position:sticky;bottom:0;z-index:9;background:rgba(8,9,12,.92);backdrop-filt
       <div class="addrow"><input id="oferText" placeholder="ce oferi…"><button class="btn gold sm" onclick="addItem('ofer')">+</button></div></div>
     <div class="panel"><h3>Ce caut <span class="badge priv">privat</span></h3><div id="cautList"></div>
       <div class="addrow"><input id="cautText" placeholder="ce cauti…"><button class="btn gold sm" onclick="addItem('caut')">+</button></div></div>
+    <div class="panel"><h3>Jurnal de activitate <span class="badge priv">audit</span></h3>
+      <p style="font-size:11px;color:var(--muted);margin:-6px 0 8px">Read-only · fiecare actiune e inregistrata cu marca de timp (conformitate).</p>
+      <div class="audit" id="auditList"></div></div>
   </section>
 </main>
 
@@ -201,6 +260,20 @@ nav{position:sticky;bottom:0;z-index:9;background:rgba(8,9,12,.92);backdrop-filt
   <button class="tab" data-v="secretara"><span class="ic">✎</span>Secretara</button>
   <button class="tab" data-v="profil"><span class="ic">◷</span>Profil</button>
 </div></nav>
+</div>
+
+<!-- ONBOARDING WIZARD -->
+<div class="ob" id="ob">
+  <div class="mk">C</div>
+  <h1>Bun venit in Cerc</h1>
+  <div class="lead">Trei intrebari scurte si esti inauntru. Iti pregatim profilul si primele potriviri din prima secunda.</div>
+  <div class="step on" data-s="0"><label>Cum te numim?</label><input id="obName" placeholder="Nume si prenume" autocomplete="off">
+    <label>Domeniul tau</label><input id="obInd" placeholder="ex: Imobiliare, IT, Energie…" autocomplete="off"></div>
+  <div class="step" data-s="1"><label>Ce oferi cercului?</label><input id="obOff" placeholder="ex: spatii comerciale in centru" autocomplete="off"></div>
+  <div class="step" data-s="2"><label>Ce cauti?</label><input id="obSeek" placeholder="ex: un investitor pentru un proiect" autocomplete="off"></div>
+  <div class="nav2"><div class="dots" id="obDots"><i class="on"></i><i></i><i></i></div>
+    <button class="btn gold" id="obNext" onclick="obNext()">Continua →</button></div>
+  <button class="skip" onclick="obSkip()">Doar explorez deocamdata</button>
 </div>
 
 <div class="overlay" id="overlay"><div class="modal">
@@ -214,63 +287,82 @@ nav{position:sticky;bottom:0;z-index:9;background:rgba(8,9,12,.92);backdrop-filt
 const SEED=[["Ana Popescu","Director, Popescu Imobiliare","Imobiliare",92],["Bogdan Marin","Fondator, Marin Energy","Energie",88],["Cristina Ilie","CEO, Excavari Ilie","Constructii",90],["Darius Enache","Investitor privat","Finante",95],["Elena Voicu","Owner, Voicu Logistic","Transport",84],["Florin Dobre","Antreprenor, AgriFarm","Agricultura",80],["Gabriela Stan","Avocat, Stan & Asociatii","Juridic",93],["Horia Lungu","Director, NordSoft","IT",87],["Irina Pavel","Contabil-sef, FinPro","Finante",89],["Janos Kovacs","Importator, Kovacs Trade","Comert",78],["Liviu Toma","Dezvoltator, Toma Construct","Constructii",85],["Maria Radu","Marketing, Radu Media","Marketing",82],["Nicolae Barbu","Producator, Barbu Mobila","Productie",81],["Oana Dinu","HR, TalentHub","HR",86],["Paul Georgescu","Broker, AsigPlus","Asigurari",83],["Raluca Neagu","Owner, Neagu Catering","HoReCa",79],["Sorin Apostol","Inginer, Apostol Instalatii","Constructii",84],["Teodora Mihai","Designer, Mihai Studio","Creative",88],["Victor Stoica","Distribuitor, Stoica Auto","Auto",80],["Bianca Lazar","Fondator, Lazar Cosmetics","Productie",85]];
 const OFF={0:[["Spatii comerciale de inchiriat in centru","profil"],["Teren intravilan langa centura","nota 4 mai"]],1:[["Cariera de carbune in zona Gorj","nota 3 martie"],["Contracte furnizare energie firme","profil"]],2:[["Utilaje de excavat in Brasov","audio 12 ian"]],3:[["Capital pentru investitii energie si imobiliare","profil"]],4:[["Flota transport marfa national si UE","profil"]],5:[["Cereale en-gros la pret de producator","profil"]],6:[["Consultanta juridica M&A si contracte","profil"]],7:[["Dezvoltare software si AI la comanda","profil"]],8:[["Contabilitate si fiscalitate firme","profil"]],9:[["Import produse din Asia, logistica","profil"]],10:[["Antrepriza constructii rezidentiale","profil"]],11:[["Campanii marketing si productie video","profil"]],12:[["Mobilier la comanda HoReCa si birouri","profil"]],13:[["Recrutare IT si management","profil"]],14:[["Asigurari de firma si flote","profil"]],15:[["Catering evenimente corporate","profil"]],16:[["Instalatii electrice industriale","profil"]],17:[["Branding premium si identitate","profil"]],18:[["Distributie piese auto","profil"]],19:[["Productie cosmetice private-label","profil"]]};
 const SEEK={0:[["Investitor pentru proiect imobiliar","dictare"],["Furnizor de carbune pentru centrala","nota 2 mai"]],1:[["Investitor pentru proiect energetic","apel"],["Transport marfa agabaritic","profil"]],2:[["Contabil bun pentru firma","nota"],["Asigurare pentru flota utilaje","profil"]],3:[["Oportunitati in energie si agricultura","profil"]],4:[["Spatii de depozitare in vest","profil"]],5:[["Utilaje agricole si excavatoare","apel"]],6:[["Clienti firme pentru retainer juridic","profil"]],7:[["Investitor pentru produs SaaS","profil"]],8:[["Clienti noi pentru contabilitate","profil"]],9:[["Spatii de depozitare Bucuresti","profil"]],10:[["Teren pentru dezvoltare","profil"],["Materiale de constructii en-gros","nota"]],11:[["Clienti corporate","profil"]],12:[["Distribuitor mobilier","profil"]],13:[["Firme care recruteaza","profil"]],14:[["Firme cu flote de asigurat","profil"]],15:[["Spatii pentru evenimente","profil"]],16:[["Proiecte cu instalatii","profil"]],17:[["Clienti pentru rebranding","profil"]],18:[["Firme cu flote auto","profil"]],19:[["Distribuitor cosmetice si showroom","nota"]]};
-const COLORS=["#c9a227","#54c2a0","#b08a5a","#a78bca","#cf7a6e","#6fa8c9","#c9a227","#7db38a"];
+const COLORS=["#B88E56","#2E7D32","#1A2B3C","#8a6fa8","#cf7a6e","#3d7ea6","#b08a5a","#4f9d77"];
 const STOP=new Set("si sau de la in un o cu pe pentru din ca care este are am ai vreau caut ofer cineva zona bun buna nou noua a al ale lui langa".split(" "));
-const KEY="cercul_eie_v1";
-let DB=null,ME=null,VIEW="acasa",CHAT=null,FILTER="Toate",T0=Date.now();
+const KEY="cercul_eie_v2",TKEY="cercul_theme";
+let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0;
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
 const esc=s=>(s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
-const ini=n=>{const p=n.trim().split(/\s+/);return(p[0][0]+(p[1]?p[1][0]:"")).toUpperCase();};
+const ini=n=>{const p=n.trim().split(/\s+/);return((p[0][0]||"?")+(p[1]?p[1][0]:"")).toUpperCase();};
 const today=()=>new Date().toISOString().slice(0,10);
+const cssv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+function relTime(t){const s=(Date.now()-t)/1000;if(s<60)return"acum";if(s<3600)return Math.floor(s/60)+"m";if(s<86400)return Math.floor(s/3600)+"h";return Math.floor(s/86400)+"z";}
 function save(){localStorage.setItem(KEY,JSON.stringify(DB));}
-function load(){const r=localStorage.getItem(KEY);DB=r?JSON.parse(r):seed();}
+function load(){const r=localStorage.getItem(KEY);DB=r?JSON.parse(r):seed();if(!DB.audit)DB.audit=[];}
+function logA(action){DB.audit.unshift({t:Date.now(),me:ME,a:action});if(DB.audit.length>60)DB.audit.pop();}
+
 function seed(){
-  const d={members:[],items:[],matches:[],messages:[],seq:1};
+  const d={members:[],items:[],matches:[],messages:[],audit:[],seq:1};
   SEED.forEach((m,i)=>d.members.push({id:i+1,name:m[0],role:m[1],industry:m[2],trust:m[3],color:COLORS[i%COLORS.length]}));
   d.seq=d.members.length+1;
   const ai=(m,k,arr)=>(arr||[]).forEach(([t,s])=>d.items.push({id:d.seq++,member_id:m,kind:k,text:t,visible:k==="ofer"?1:0,source:s}));
   SEED.forEach((_,i)=>{ai(i+1,"ofer",OFF[i]);ai(i+1,"caut",SEEK[i]);});
-  DB=d;runMatching();[[1,2],[3,1],[5,4],[2,3],[7,3],[3,5]].forEach(([a,b])=>preConnect(a,b));save();return d;
+  DB=d;buildIDF();runMatching();[[1,2],[3,1],[5,4],[2,3],[7,3],[3,5]].forEach(([a,b])=>preConnect(a,b));save();return d;
 }
-function preConnect(a,b){const m=DB.matches.find(x=>(x.offer_member===a&&x.seek_member===b)||(x.offer_member===b&&x.seek_member===a));if(m){m.offer_consent=1;m.seek_consent=1;m.status="conectat";if(!DB.messages.some(x=>x.match_id===m.id))ctx(m);}}
+function preConnect(a,b){const m=DB.matches.find(x=>(x.offer_member===a&&x.seek_member===b)||(x.offer_member===b&&x.seek_member===a));if(m){m.offer_consent=1;m.seek_consent=1;m.status="conectat";if(!m.at)m.at=Date.now()-Math.floor(Math.random()*9+1)*864e5;if(!DB.messages.some(x=>x.match_id===m.id))ctx(m);}}
 function tok(t){return new Set((t.toLowerCase().match(/[a-z0-9]+/g)||[]).filter(w=>w.length>=3&&!STOP.has(w)));}
 function mem(id){return DB.members.find(m=>m.id===id);}
 function name(id){const m=mem(id);return m?m.name:"?";}
-function runMatching(){const ca=DB.items.filter(i=>i.kind==="caut"),of=DB.items.filter(i=>i.kind==="ofer"&&i.visible);
+
+/* ---- matching: TF-IDF + cosine similarity ---- */
+function buildIDF(){const docs=DB.items.map(i=>tok(i.text));const df={};docs.forEach(s=>s.forEach(w=>df[w]=(df[w]||0)+1));const N=docs.length||1;IDF={};for(const w in df)IDF[w]=Math.log(1+N/df[w]);}
+function vnorm(set){let s=0;for(const w of set){const v=IDF[w]||1;s+=v*v;}return Math.sqrt(s)||1;}
+function cosine(a,b){const common=[...a].filter(w=>b.has(w));let dot=0;for(const w of common){const v=IDF[w]||1;dot+=v*v;}return{cos:dot/(vnorm(a)*vnorm(b)),common};}
+function runMatching(){buildIDF();const ca=DB.items.filter(i=>i.kind==="caut"),of=DB.items.filter(i=>i.kind==="ofer"&&i.visible);
   for(const s of ca)for(const o of of){if(o.member_id===s.member_id)continue;
-    const st=tok(s.text),ot=tok(o.text),common=[...st].filter(w=>ot.has(w));if(!common.length)continue;
-    if(DB.matches.some(m=>m.offer_item===o.id&&m.seek_item===s.id))continue;
-    DB.matches.push({id:DB.seq++,offer_item:o.id,seek_item:s.id,offer_member:o.member_id,seek_member:s.member_id,score:Math.min(99,46+common.length*20+(o.id*7+s.id*5)%9),common,status:"propus",offer_consent:0,seek_consent:0});}
+    const {cos,common}=cosine(tok(s.text),tok(o.text));if(!common.length)continue;
+    const ex=DB.matches.find(m=>m.offer_item===o.id&&m.seek_item===s.id);
+    const score=Math.max(52,Math.min(99,Math.round(55+cos*42+common.length*2)));
+    if(ex){ex.score=ex.status==="conectat"?ex.score:score;continue;}
+    DB.matches.push({id:DB.seq++,offer_item:o.id,seek_item:s.id,offer_member:o.member_id,seek_member:s.member_id,score,common,status:"propus",offer_consent:0,seek_consent:0});}
   save();}
 function ctx(m){const o=DB.items.find(i=>i.id===m.offer_item),s=DB.items.find(i=>i.id===m.seek_item);
   DB.messages.push({id:DB.seq++,match_id:m.id,sender:null,text:`Cercul v-a pus in legatura. ${name(m.seek_member)} cauta „${s.text}”, iar ${name(m.offer_member)} ofera „${o.text}”. Sursa: ${o.source}. Trust Score verificat.`});}
 function consent(mid,a){const m=DB.matches.find(x=>x.id===mid);if(!m)return;
-  if(!a){m.status="respins";save();render();toast("Refuzat");return;}
+  const cel=mem(ME===m.offer_member?m.seek_member:m.offer_member);
+  if(!a){m.status="respins";logA("Refuz potrivire cu "+cel.name);save();render();toast("Refuzat");return;}
   if(ME===m.offer_member)m.offer_consent=1;else if(ME===m.seek_member)m.seek_consent=1;else m.offer_consent=1;
+  logA("Consimtamant „Prezinta-ma” cu "+cel.name);
   const other=ME===m.offer_member?"seek":"offer";
   if(m.offer_consent&&m.seek_consent)fin(m);
   else{toast("Acceptat — asteptam confirmarea");setTimeout(()=>{m[other+"_consent"]=1;fin(m);save();render();},1400);}
   save();render();}
-function fin(m){if(m.status==="conectat")return;m.status="conectat";ctx(m);toast("✦ Conexiune deschisa cu "+(ME===m.offer_member?name(m.seek_member):name(m.offer_member)));}
+function fin(m){if(m.status==="conectat")return;m.status="conectat";m.at=Date.now();ctx(m);
+  const cel=mem(ME===m.offer_member?m.seek_member:m.offer_member);logA("Conexiune deschisa cu "+cel.name);
+  toast("✦ Conexiune deschisa cu "+cel.name.split(" ")[0]);}
 function myMatches(){return DB.matches.filter(m=>(m.offer_member===ME||m.seek_member===ME)&&m.status!=="respins").sort((a,b)=>b.score-a.score);}
 
 function setView(v){VIEW=v;$$(".tab").forEach(t=>t.classList.toggle("on",t.dataset.v===v));$$(".view").forEach(s=>s.classList.toggle("on",s.id===v));window.scrollTo(0,0);render();}
-function render(){if(VIEW==="acasa")home();else if(VIEW==="potriviri")$("#matchList").innerHTML=matches(myMatches())||emp();else if(VIEW==="retea")net();else if(VIEW==="secretara"){}else if(VIEW==="profil")prof();}
+function render(){if(VIEW==="acasa")home();else if(VIEW==="potriviri")$("#matchList").innerHTML=matches(myMatches())||emp();else if(VIEW==="retea")net();else if(VIEW==="profil")prof();}
 function emp(){return'<div class="empty">Nicio potrivire. Adauga in profil sau dicteaza.</div>';}
 
 function home(){const me=mem(ME),mm=myMatches();
   const prop=mm.filter(m=>m.status==="propus").length,con=mm.filter(m=>m.status==="conectat").length;
   $("#digG").textContent="Buna ziua, "+me.name.split(" ")[0]+".";
   $("#digP").textContent=`Ai ${prop} oportunitati noi de mare afinitate si ${con} conexiuni active. Ti-am grupat tot intr-un singur rezumat — fara intreruperi pe parcursul zilei.`;
-  const dealflow=con*42+prop*12; const roi=(con*3.4).toFixed(1);
+  const dealflow=con*42+prop*12,roi=(con*3.4).toFixed(1);
   const k=(l,v,d)=>`<div class="kpi"><div class="l">${l}</div><div class="v">${v}</div><div class="d">${d}</div></div>`;
   $("#kpis").innerHTML=k("Network Capital","€"+dealflow+"k","deal flow estimat")+k("ROI conexiuni",roi+"x","vs. timp investit")
-    +k("Trust Score","100","verificat")+k("Afinitate medie",(mm.length?Math.round(mm.reduce((s,m)=>s+m.score,0)/mm.length):0),"din 99");
-  const reach=Math.min(100,40+con*9), depth=Math.min(100,30+con*12), fresh=Math.min(100,55+prop*5);
+    +k("Trust Score",me.trust,"verificat")+k("Afinitate medie",(mm.length?Math.round(mm.reduce((s,m)=>s+m.score,0)/mm.length):0),"din 99");
+  const reach=Math.min(100,40+con*9),depth=Math.min(100,30+con*12),fresh=Math.min(100,55+prop*5);
   $("#pulse").innerHTML=pl("Acoperire retea",reach)+pl("Adancime relatii",depth)+pl("Prospetime oportunitati",fresh);
-  $("#topMatches").innerHTML=matches(mm.slice(0,2))||emp();
+  const conx=mm.filter(m=>m.status==="conectat").sort((a,b)=>(b.at||0)-(a.at||0));
+  $("#ledger").innerHTML=conx.length?conx.slice(0,4).map(m=>{const cel=mem(m.offer_member===ME?m.seek_member:m.offer_member);
+    return`<div class="lrow"><span class="dot"></span><div><div class="lr-name">${esc(cel.name)}</div><div class="lr-meta">${esc(cel.role)}</div></div><span class="lr-date">${m.at?new Date(m.at).toLocaleDateString("ro-RO",{day:"numeric",month:"short"}):""}</span></div>`;}).join("")
+    :'<div class="empty" style="padding:18px">Nicio conexiune confirmata inca.</div>';
+  $("#topMatches").innerHTML=matches(mm.filter(m=>m.status!=="conectat").slice(0,2))||matches(mm.slice(0,2))||emp();
 }
-function pl(l,v){return`<div><div class="row"><span>${l}</span><span style="color:var(--gold)">${v}%</span></div><div class="bar"><i style="width:${v}%"></i></div></div>`;}
+function pl(l,v){return`<div><div class="row"><span>${l}</span><span style="color:var(--primary-dim)">${v}%</span></div><div class="bar"><i style="width:${v}%"></i></div></div>`;}
 
 function matches(list){if(!list.length)return'';
   return list.map(m=>{const o=DB.items.find(i=>i.id===m.offer_item),s=DB.items.find(i=>i.id===m.seek_item);
@@ -294,33 +386,41 @@ function matches(list){if(!list.length)return'';
 function net(){const W=400,H=400,cx=W/2,cy=H/2,R=150,others=DB.members.filter(m=>m.id!==ME),pos={};pos[ME]=[cx,cy];
   others.forEach((m,i)=>{const a=(i/others.length)*Math.PI*2-Math.PI/2;pos[m.id]=[cx+R*Math.cos(a),cy+R*Math.sin(a)];});
   const conn=DB.matches.filter(m=>m.status==="conectat");let e="",n="";
-  conn.forEach(m=>{const a=pos[m.offer_member],b=pos[m.seek_member];if(a&&b)e+=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="#c9a227" stroke-width="1.5" opacity=".7"/>`;});
+  const cPri=cssv("--primary"),cCard=cssv("--card2"),cLine=cssv("--line2"),cInk=cssv("--ink2"),cBg=cssv("--bg2");
+  conn.forEach(m=>{const a=pos[m.offer_member],b=pos[m.seek_member];if(a&&b)e+=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="${cPri}" stroke-width="1.5" opacity=".7"/>`;});
   DB.members.forEach(m=>{const p=pos[m.id];if(!p)return;const me=m.id===ME,deg=conn.filter(c=>c.offer_member===m.id||c.seek_member===m.id).length,r=me?22:11+Math.min(7,deg*2);
-    n+=`<g onclick="openMemberMatch(${m.id})" style="cursor:pointer"><circle cx="${p[0]}" cy="${p[1]}" r="${r}" fill="${me?'#1a1404':'#14161f'}" stroke="${me?'#c9a227':'#343a4f'}" stroke-width="${me?2.5:1.5}"/>
-      <text x="${p[0]}" y="${p[1]+4}" text-anchor="middle" fill="${me?'#e0c463':'#b6b2a6'}" font-weight="600">${ini(m.name)}</text>
+    n+=`<g onclick="openMemberMatch(${m.id})" style="cursor:pointer"><circle cx="${p[0]}" cy="${p[1]}" r="${r}" fill="${me?cPri:cCard}" stroke="${me?cPri:cLine}" stroke-width="${me?2.5:1.5}"/>
+      <text x="${p[0]}" y="${p[1]+4}" text-anchor="middle" fill="${me?cBg:cInk}" font-weight="600">${ini(m.name)}</text>
       <text x="${p[0]}" y="${p[1]+r+12}" text-anchor="middle">${esc(m.name.split(" ")[0])}</text></g>`;});
   $("#netHost").innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block">${e}${n}</svg>`;}
 
 function prof(){const me=mem(ME),con=DB.matches.filter(x=>x.status==="conectat"&&(x.offer_member===ME||x.seek_member===ME)).length;
   $("#phead").innerHTML=`<div style="display:flex;gap:14px;align-items:center"><div class="av" style="width:60px;height:60px;font-size:22px">${ini(me.name)}</div>
-    <div><div style="font-family:var(--serif);font-size:23px;font-weight:600">${esc(me.name)}</div><div style="color:var(--ink2);font-size:13px">${esc(me.role)}</div>
+    <div><div style="font-family:var(--serif);font-size:23px;font-weight:600;color:var(--ink)">${esc(me.name)}</div><div style="color:var(--ink2);font-size:13px">${esc(me.role)}</div>
     <div style="margin-top:7px"><span class="trust">✦ Trust Score ${me.trust}/100</span> <span style="color:var(--muted);font-size:12px;margin-left:6px">${con} conexiuni</span></div></div></div>`;
   const r=(k,el)=>{const l=DB.items.filter(i=>i.member_id===ME&&i.kind===k);
     $(el).innerHTML=l.map(i=>`<div class="linei"><div><div>${esc(i.text)}</div><div class="meta">sursa: ${esc(i.source)}</div></div><button class="x" onclick="delItem(${i.id})">×</button></div>`).join("")||'<div class="empty" style="padding:12px;font-size:14px">Nimic inca.</div>';};
-  r("ofer","#oferList");r("caut","#cautList");}
-function addItem(k){const t=$("#"+k+"Text").value.trim();if(!t)return;DB.items.push({id:DB.seq++,member_id:ME,kind:k,text:t,visible:k==="ofer"?1:0,source:"profil"});$("#"+k+"Text").value="";runMatching();save();render();toast("Adaugat — am recalculat afinitatile");}
-function delItem(id){DB.items=DB.items.filter(i=>i.id!==id);save();render();}
+  r("ofer","#oferList");r("caut","#cautList");
+  const au=(DB.audit||[]).filter(a=>a.me===ME).slice(0,12);
+  $("#auditList").innerHTML=au.length?au.map(a=>`<div class="arow"><span class="at">${relTime(a.t)}</span><span>${esc(a.a)}</span></div>`).join(""):'<div class="empty" style="padding:10px;font-size:14px">Nicio actiune inregistrata.</div>';}
+function addItem(k){const t=$("#"+k+"Text").value.trim();if(!t)return;DB.items.push({id:DB.seq++,member_id:ME,kind:k,text:t,visible:k==="ofer"?1:0,source:"profil"});$("#"+k+"Text").value="";logA("Adaugat in „"+(k==="ofer"?"ce ofer":"ce caut")+"”: "+t);runMatching();save();render();toast("Adaugat — am recalculat afinitatile");}
+function delItem(id){const it=DB.items.find(i=>i.id===id);DB.items=DB.items.filter(i=>i.id!==id);if(it)logA("Sters: "+it.text);save();render();}
 
-// Secretara AI — intent extraction
+/* Secretara AI — cu indicator de procesare */
 function dicteaza(){const text=$("#dictText").value.trim();if(!text)return;
-  const out=[];
-  for(const part of text.split(/[.\n;,]+/)){const p=part.trim();if(p.length<5)continue;const low=p.toLowerCase();
-    if(["caut","am nevoie","vreau","imi trebuie","interesat"].some(k=>low.includes(k)))out.push(["caut",p]);
-    else if(["ofer","am un","am o","vand","detin","furnizor","cunosc","dispun"].some(k=>low.includes(k)))out.push(["ofer",p]);}
-  out.forEach(([k,t])=>DB.items.push({id:DB.seq++,member_id:ME,kind:k,text:t,visible:k==="ofer"?1:0,source:"dictare "+today()}));
-  save();runMatching();
-  $("#dictRes").innerHTML='<div class="sec" style="margin-top:4px">Intentii extrase</div>'+(out.length?out.map(([k,t])=>`<div class="linei"><div>${esc(t)}</div><span class="badge ${k==="ofer"?"vis":"priv"}">${k}</span></div>`).join(""):'<div class="empty">Nu am gasit intentii clare.</div>')+(out.length?'<div style="margin-top:10px"><button class="btn ghost sm" onclick="setView(\'potriviri\')">Vezi potrivirile noi →</button></div>':'');
-  $("#dictText").value="";}
+  const btn=$("#dictBtn");btn.disabled=true;
+  $("#dictRes").innerHTML='<div class="proc"><span class="spin"></span> Secretara AI proceseaza apelul si extrage intentiile…</div>';
+  setTimeout(()=>{
+    const out=[];
+    for(const part of text.split(/[.\n;,]+/)){const p=part.trim();if(p.length<5)continue;const low=p.toLowerCase();
+      if(["caut","am nevoie","vreau","imi trebuie","interesat"].some(k=>low.includes(k)))out.push(["caut",p]);
+      else if(["ofer","am un","am o","vand","detin","furnizor","cunosc","dispun"].some(k=>low.includes(k)))out.push(["ofer",p]);}
+    out.forEach(([k,t])=>DB.items.push({id:DB.seq++,member_id:ME,kind:k,text:t,visible:k==="ofer"?1:0,source:"dictare "+today()}));
+    if(out.length)logA("Secretara AI a extras "+out.length+" intentii din dictare");
+    save();runMatching();
+    $("#dictRes").innerHTML='<div class="sec" style="margin-top:4px">Intentii extrase</div>'+(out.length?out.map(([k,t])=>`<div class="linei"><div>${esc(t)}</div><span class="badge ${k==="ofer"?"vis":"priv"}">${k}</span></div>`).join(""):'<div class="empty">Nu am gasit intentii clare.</div>')+(out.length?'<div style="margin-top:10px"><button class="btn ghost sm" onclick="setView(\'potriviri\')">Vezi potrivirile noi →</button></div>':'');
+    $("#dictText").value="";btn.disabled=false;
+  },950);}
 
 function openMemberMatch(mid){if(mid===ME){setView("profil");return;}
   let m=DB.matches.find(x=>x.status!=="respins"&&((x.offer_member===ME&&x.seek_member===mid)||(x.offer_member===mid&&x.seek_member===ME)));
@@ -338,11 +438,34 @@ function closeModal(){$("#overlay").classList.remove("on");CHAT=null;}
 $("#mInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendMsg();});
 function toast(t){const el=$("#toast");el.textContent=t;el.classList.add("on");clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove("on"),2500);}
 
+/* theme */
+function applyTheme(t){document.documentElement.setAttribute("data-theme",t);$("#themeBtn").textContent=t==="dark"?"☀":"☾";localStorage.setItem(TKEY,t);if(VIEW==="retea")net();}
+function toggleTheme(){applyTheme(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark");}
+
+/* onboarding */
+function obShow(){$("#ob").classList.add("on");}
+function obDots(){$$("#obDots i").forEach((d,i)=>d.classList.toggle("on",i<=obStep));}
+function obGo(s){obStep=s;$$(".ob .step").forEach(e=>e.classList.toggle("on",+e.dataset.s===s));obDots();$("#obNext").textContent=s===2?"Intra in Cerc ✦":"Continua →";}
+function obNext(){
+  if(obStep===0){if(!$("#obName").value.trim()){$("#obName").focus();return;}}
+  if(obStep<2){obGo(obStep+1);return;}
+  const nm=$("#obName").value.trim()||"Tu",ind=$("#obInd").value.trim()||"Business",off=$("#obOff").value.trim(),seek=$("#obSeek").value.trim();
+  const id=DB.seq++;DB.members.push({id,name:nm,role:"Membru, "+ind,industry:ind,trust:75,color:COLORS[id%COLORS.length]});
+  if(off)DB.items.push({id:DB.seq++,member_id:id,kind:"ofer",text:off,visible:1,source:"onboarding"});
+  if(seek)DB.items.push({id:DB.seq++,member_id:id,kind:"caut",text:seek,visible:0,source:"onboarding"});
+  ME=id;logA("Profil creat prin onboarding");runMatching();save();loadMembers();$("#member").value=ME;
+  $("#ob").classList.remove("on");setView("acasa");toast("Bun venit, "+nm.split(" ")[0]+"!");}
+function obSkip(){$("#ob").classList.remove("on");localStorage.setItem(KEY+"_seen","1");}
+
 function loadMembers(){$("#member").innerHTML=DB.members.map(m=>`<option value="${m.id}">${esc(m.name)}</option>`).join("");if(!ME)ME=DB.members[0].id;$("#member").value=ME;}
 $("#member").onchange=e=>{ME=+e.target.value;render();};
 $$(".tab").forEach(t=>t.onclick=()=>setView(t.dataset.v));
 $$("[data-go]").forEach(a=>a.onclick=()=>setView(a.dataset.go));
+
+applyTheme(localStorage.getItem(TKEY)||"light");
+const fresh=!localStorage.getItem(KEY);
 load();loadMembers();render();
+if(fresh&&!localStorage.getItem(KEY+"_seen")){obGo(0);obShow();}
 </script>
 </body>
 </html>
