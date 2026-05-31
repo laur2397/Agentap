@@ -1127,6 +1127,8 @@ function toggleTask(id){const x=(DB.tasks||[]).find(t=>t.id===id);if(!x)return;x
   logA(x.done?"Task finalizat":"Task redeschis");save();renderTasks();updateBadges();}
 function delTask(id){if(!confirm("Stergi acest task?"))return;DB.tasks=(DB.tasks||[]).filter(t=>t.id!==id);logA("Task sters");save();renderTasks();updateBadges();}
 function toggleTaskPrio(id){const t=(DB.tasks||[]).find(x=>x.id===id);if(!t)return;t.prio=t.prio?0:1;logA(t.prio?"Task marcat important":"Task: prioritate scoasa");save();renderTasks();}
+function addDays(d,n){const x=(d?new Date(d+"T00:00"):new Date());if(isNaN(x))return today();x.setDate(x.getDate()+n);return x.toISOString().slice(0,10);}
+function snoozeTask(id){const t=(DB.tasks||[]).find(x=>x.id===id);if(!t)return;const base=(t.due&&t.due>today())?t.due:today();t.due=addDays(base,1);logA("Task amanat cu o zi");save();renderTasks();updateBadges();toast("Amanat pana "+fmtWhen(t.due));}
 function editTask(id){EDITTASK=id;renderTasks();}
 function cancelTaskEdit(){EDITTASK=null;renderTasks();}
 function saveTask(id){const t=(DB.tasks||[]).find(x=>x.id===id);if(!t){EDITTASK=null;renderTasks();return;}
@@ -1148,6 +1150,7 @@ function renderTasks(){const host=$("#taskList");if(!host)return;
     return h("div",{class:"taskcard"+(t.done?" done":"")},
       h("button",{class:"tcheck"+(t.done?" on":""),"data-act":"tasktoggle","data-id":t.id,role:"checkbox","aria-checked":t.done?"true":"false","aria-label":"Marcheaza finalizat"},t.done?"✓":""),
       h("div",{class:"ti"},h("div",{class:"ttx",text:t.text}),t.due?h("div",{class:"tdue"+(overdue?" over":""),text:(overdue?"scadent: ":"termen: ")+fmtWhen(t.due)}):null),
+      h("button",{class:"x","data-act":"tasksnooze","data-id":t.id,"aria-label":"Amana o zi",title:"Amana +1 zi",text:"⏰"}),
       h("button",{class:"x"+(t.prio?" prio":""),"data-act":"taskprio","data-id":t.id,"aria-label":t.prio?"Scoate prioritatea":"Marcheaza important",title:"Prioritate",text:t.prio?"★":"☆"}),
       h("button",{class:"x","data-act":"taskedit","data-id":t.id,"aria-label":"Editeaza task",text:"✎"}),
       h("button",{class:"x","data-act":"deltask","data-id":t.id,"aria-label":"Sterge task",text:"×"}));};
@@ -1263,6 +1266,7 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="tasktoggle")toggleTask(id);
   else if(a==="deltask")delTask(id);
   else if(a==="tfilter")setTaskFilter(el.dataset.f);
+  else if(a==="tasksnooze")snoozeTask(id);
   else if(a==="taskprio")toggleTaskPrio(id);
   else if(a==="taskedit")editTask(id);
   else if(a==="tasksave")saveTask(id);
