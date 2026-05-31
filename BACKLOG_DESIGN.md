@@ -14,7 +14,7 @@ Reguli per item: schimbare mica, izolata; ZERO innerHTML (DOM API); criptare/CSP
 Validare: node --check + smoke Playwright zero erori. Audit (examples/audit.py) la fiecare al 3-lea item.
 
 ## Prioritizat
-1. [ ] „De ce esti aici": un rand de pozitionare cald pe Acasa (valoarea aplicatiei, fara jargon).
+1. [x] „De ce esti aici": un rand de pozitionare cald pe Acasa (valoarea aplicatiei, fara jargon).
 2. [ ] Momentul „aha" la prima deschidere: empty-state Acasa cu valoare imediata + 1 next-step clar.
 3. [ ] Badge permanent discret „Local-Only · 0 date trimise" (incredere, click -> explicatie scurta).
 4. [ ] Explicabilitate potriviri: pe card, „De ce o vezi" — interesele comune listate clar (algoritm transparent).
