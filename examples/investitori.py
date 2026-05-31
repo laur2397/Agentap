@@ -14,14 +14,20 @@ N=int(os.environ.get("PANEL_N","100"))
 STARE=(
  "PRODUS evaluat: 'Cercul EIE / Network Capital' — aplicatie mobila premium de business networking. "
  "ARHITECTURA: single-file HTML/JS, 100% client-side, Local-Only, criptata (AES-GCM, cheie in RAM, "
- "PBKDF2), CSP strict (connect-src 'none'), zero backend, zero LLM real (potrivire euristica locala pe "
- "cuvinte-cheie). FUNCTII: profil 'ce ofer / ce caut'; sugestii de conexiuni cu dublu consimtamant; "
- "harta retelei; Secretara (calendar, intalniri cu remindere, task-uri, jurnal de notite, brief de 1 min, "
+ "PBKDF2 150k), CSP strict (connect-src 'none'), zero backend, zero LLM real (potrivire euristica locala pe "
+ "cuvinte-cheie). FUNCTII DE BAZA: profil 'ce ofer / ce caut'; sugestii de conexiuni cu dublu consimtamant; "
+ "harta retelei; Secretara (calendar, intalniri cu remindere, task-uri, jurnal de notite cu SABLOANE, brief de 1 min, "
  "mod focus, quick-add); export Google Calendar/.ics/email initiat de user; design system 'Bloom'; "
  "control de ordonare relevanta<->diversitate; pagina de transparenta anti dark-pattern. "
- "MODEL DE AFACERI: momentan NEDEFINIT (fara monetizare clara, fara backend deci fara network effects "
- "server-side, fara sincronizare intre dispozitive, fara achizitie de useri). Pozitionare: 'cerc privat' "
- "premium, confidentialitate radicala (datele nu parasesc dispozitivul).")
+ "IMBUNATATIRI RECENTE (raspuns la un panel anterior care a dat 0/100), TOATE FARA server: "
+ "(1) BACKUP CRIPTAT PORTABIL .eie cu parola proprie + restaurare + TRANSFER pe alt dispozitiv (multi-device MANUAL, fara cloud) — atenueaza pierderea datelor; "
+ "(2) SCHIMB DE CONTACTE P2P FARA SERVER: 'cod de conexiune' (doar cardul public: nume/domeniu/ce oferi, niciodata 'ce caut') partajabil ca text SI ca QR generat IN-APP (encoder QR propriu, verificat scanabil) — celalalt il scaneaza/lipeste si te adauga in retea; discovery MANUAL la intalniri fata-in-fata; "
+ "(3) reminder bland anti-pierdere de backup; (4) suport 'Add to Home Screen' pe iOS (se comporta ca un app); "
+ "(5) pozitionare ICP clara ('pentru cine e' + 'de ce Local-Only'). "
+ "CE RAMANE NEREZOLVAT, ONEST: MODEL DE AFACERI inca NEDEFINIT (fara monetizare clara); networking-ul e MANUAL, "
+ "1-la-1 (NU exista masa critica server-side, NU exista discovery automat al strainilor, NU exista viralitate); "
+ "sincronizarea intre dispozitive e manuala (export/import), nu automata; fara canal de achizitie de useri. "
+ "Pozitionare: 'cerc privat' premium, confidentialitate radicala (datele nu parasesc dispozitivul).")
 
 # arhetipuri de investitori — fiecare cu lentila lui dura
 ARCH=[
