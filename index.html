@@ -856,6 +856,41 @@ nav::after{content:"";display:block;width:124px;height:5px;border-radius:3px;
     z-index:40;pointer-events:none}
   header{padding-top:30px}
 }
+
+/* ===== micro-interactiuni native ===== */
+html{touch-action:manipulation}
+*{-webkit-tap-highlight-color:transparent}
+/* textul nu se selecteaza ca intr-un document; campurile editabile raman selectabile */
+body{-webkit-user-select:none;user-select:none}
+input,textarea,select,[contenteditable]{-webkit-user-select:text;user-select:text}
+/* pe mobil: campuri >=16px ca iOS sa nu mai dea zoom la focus (fara !important: stilurile inline raman) */
+@media (max-width:760px){input,textarea,select{font-size:16px}}
+/* tab bar: tinta de atingere generoasa + feedback la apasare */
+.tab{min-height:50px}
+.tab .ic{transition:background .3s var(--ease),transform .16s var(--ease)}
+.tab:active .ic{transform:scale(.85)}
+/* toast sta deasupra tab bar-ului, urmarind home indicator-ul */
+.toast{bottom:calc(76px + env(safe-area-inset-bottom))}
+/* toast & procmask sunt acum in interiorul shell-ului: le ancoram la el (corect si in rama de desktop) */
+.shell>.toast,.shell>.procmask{position:absolute}
+/* quick-add: suprafata opaca + blur (in dark nu mai transpare pagina) */
+.quickov{-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);background:rgba(8,10,16,.5)}
+.quicksheet{background:var(--bg2);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px)}
+/* cautarea ramane in cadrul telefonului, nu pe toata latimea ecranului */
+.searchov{max-width:440px;left:0;right:0;margin:0 auto}
+/* schimbarea de ecran e instant/snappy (fara cascada lunga pe fiecare tap) */
+.view.on>*{animation-duration:.3s!important;animation-delay:0s!important}
+
+/* ===== header: incape mereu, fara sa taie controale ===== */
+header{padding-left:16px;padding-right:16px}
+.brand .mk{flex:none}
+.brand .t{white-space:nowrap}
+.hright{gap:7px}
+/* selectorul de persoana sta pe randul lui, doar cand exista mai multi membri (altfel umple bara de sus) */
+.hmember{display:none;align-items:center;gap:8px;margin-top:11px}
+header.multi .hmember{display:flex}
+.hmember-l{font-size:11px;color:var(--muted);font-weight:600;flex:none}
+.hmember .memsel{flex:1;max-width:none;width:auto}
 </style>
 </head>
 <body>
@@ -865,14 +900,13 @@ nav::after{content:"";display:block;width:124px;height:5px;border-radius:3px;
   <div class="htop">
     <div class="brand"><div class="mk">C</div><div class="t">Cercul EIE<small>Network Capital</small></div></div>
     <div class="hright">
-      <button class="trustchip" id="trustChip" data-act="trustinfo" title="Local-Only · 0 date trimise" aria-label="Confidentialitate"><span class="tdot"></span><span id="trustChipL">Local</span></button>
-      <button class="themebtn" id="quickBtn" title="Adauga rapid (tasta N)" aria-label="Adauga rapid notita sau task" onclick="openQuick()">＋</button>
-      <button class="themebtn" id="searchBtn" title="Cauta" aria-label="Cauta global" onclick="openSearch()">⌕</button>
-      <button class="themebtn" id="lockBtnHd" title="Blocheaza acum (sterge cheia din memorie)" onclick="lockNow()">🔒</button>
-      <button class="themebtn" id="themeBtn" title="Comuta tema" onclick="toggleTheme()">☾</button>
-      <select class="memsel" id="member"></select>
+      <button class="trustchip" id="trustChip" data-act="trustinfo" title="Local-Only · 0 date trimise" aria-label="Confidențialitate"><span class="tdot"></span><span id="trustChipL">Local</span></button>
+      <button class="themebtn" id="quickBtn" title="Adaugă rapid (tasta N)" aria-label="Adaugă rapid o notiță sau un task" onclick="openQuick()">＋</button>
+      <button class="themebtn" id="searchBtn" title="Caută" aria-label="Caută global" onclick="openSearch()">⌕</button>
+      <button class="themebtn" id="lockBtnHd" title="Blochează acum (șterge cheia din memorie)" aria-label="Blochează acum" onclick="lockNow()">🔒</button>
     </div>
   </div>
+  <div class="hmember"><label class="hmember-l" for="member">Vezi ca:</label><select class="memsel" id="member" aria-label="Schimbă persoana activă"></select></div>
 </header>
 
 <main id="mainContent" role="main" tabindex="-1">
@@ -1042,6 +1076,8 @@ nav::after{content:"";display:block;width:124px;height:5px;border-radius:3px;
   <!-- PROFIL -->
   <section id="profil" class="view">
     <div id="phead" class="panel" style="margin-top:0"></div>
+    <div class="panel"><div class="toggle"><span>Aspect <span style="color:var(--muted);font-size:11px">(temă deschisă / întunecată)</span></span>
+      <button class="themebtn" id="themeBtn" title="Comută tema" aria-label="Comută tema deschisă/întunecată" onclick="toggleTheme()">☾</button></div></div>
     <div class="panel"><div class="toggle"><span>Deschis spre conexiuni <span style="color:var(--muted);font-size:11px">(marcaj personal, asincron — fără tracking)</span></span>
       <div class="sw" id="ocSw" role="switch" tabindex="0" aria-label="Deschis spre conexiuni" onclick="toggleOpenConnect()"><i></i></div></div></div>
     <div id="privacyHealth"></div>
@@ -1121,12 +1157,14 @@ nav::after{content:"";display:block;width:124px;height:5px;border-radius:3px;
 </main>
 
 <nav role="navigation" aria-label="Navigare principala"><div class="navin">
-  <button class="tab on" data-v="acasa"><span class="ic">◈</span>Acasa</button>
+  <button class="tab on" data-v="acasa" aria-current="page"><span class="ic">◈</span>Acasă</button>
   <button class="tab" data-v="potriviri"><span class="ic">✦</span>Potriviri</button>
-  <button class="tab" data-v="retea"><span class="ic">⬡</span>Reteaua</button>
-  <button class="tab" data-v="secretara"><span class="ic">✎</span>Secretara</button>
+  <button class="tab" data-v="retea"><span class="ic">⬡</span>Rețeaua</button>
+  <button class="tab" data-v="secretara"><span class="ic">✎</span>Secretară</button>
   <button class="tab" data-v="profil"><span class="ic">◷</span>Profil</button>
 </div></nav>
+<div class="procmask" id="procMask" role="status" aria-live="polite"><span class="spin"></span> Procesez…</div>
+<div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 </div>
 
 <!-- LOCK / SETUP (cheie derivata din parola, doar in RAM) -->
@@ -1142,13 +1180,13 @@ nav::after{content:"";display:block;width:124px;height:5px;border-radius:3px;
   </div>
   <div class="nav2" style="justify-content:flex-end"><button class="btn gold" id="lockBtn" onclick="lockSubmit()">Deblocheaza →</button></div>
   <button class="skip" id="lockReset" onclick="lockReset()" style="display:none">Am uitat parola — reseteaza (pastreaza backup criptat)</button>
-  <p style="font-size:11px;color:var(--muted);max-width:320px;margin-top:16px">Cheia AES-GCM se deriveaza din parola (PBKDF2, 150k iteratii) si nu se salveaza niciodata pe disc. Prototip Local-Only: nu introduce date critice.</p>
+  <p style="font-size:11px;color:var(--muted);max-width:320px;margin-top:16px">Parola ta deblochează datele, care rămân criptate pe acest dispozitiv. Parola nu se salvează nicăieri — dacă o uiți, datele nu pot fi recuperate. (Detalii tehnice în Profil → Confidențialitate.) Prototip — nu introduce date cu adevărat sensibile.</p>
 </div>
 
 <!-- ONBOARDING WIZARD -->
 <div class="ob" id="ob">
   <div class="mk">C</div>
-  <h1>Bun venit in Cerc</h1>
+  <h1>Bun venit în Cerc</h1>
   <div class="lead">Găsește oamenii potriviți și fă conexiuni care contează — în câteva secunde. (Datele tale rămân criptate și sub controlul tău.)</div>
   <div class="step on" data-s="0"><label>Cum te numim?</label><input id="obName" placeholder="Nume si prenume" autocomplete="off">
     <label>Domeniul tau</label><input id="obInd" placeholder="ex: Imobiliare, IT, Energie…" autocomplete="off"></div>
@@ -1157,11 +1195,11 @@ nav::after{content:"";display:block;width:124px;height:5px;border-radius:3px;
   <div class="step" data-s="3"><label>O prima notita sau idee (optional)</label><input id="obNote" placeholder="ex: De sunat partenerul saptamana viitoare" autocomplete="off"></div>
   <div class="nav2"><div class="dots" id="obDots"><i class="on"></i><i></i><i></i><i></i></div>
     <button class="btn gold" id="obNext" onclick="obNext()">Continua →</button></div>
-  <button class="skip" onclick="obSkip()">Doar explorez deocamdata</button>
+  <button class="skip" onclick="obSkip()">Doar explorez deocamdată</button>
 </div>
 
-<div class="overlay" id="overlay"><div class="modal">
-  <div class="h"><div><div class="t" id="mTitle"></div><div class="s" id="mSub"></div></div><button onclick="closeModal()">×</button></div>
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()"><div class="modal">
+  <div class="h"><div><div class="t" id="mTitle"></div><div class="s" id="mSub"></div></div><button onclick="closeModal()" aria-label="Închide">×</button></div>
   <div class="msgs" id="mMsgs"></div>
   <div class="cinput"><input id="mInput" placeholder="Scrie un mesaj..."><button class="btn gold sm" onclick="sendMsg()">→</button></div>
 </div></div>
@@ -1188,8 +1226,6 @@ nav::after{content:"";display:block;width:124px;height:5px;border-radius:3px;
     </div>
   </div>
 </div>
-<div class="procmask" id="procMask" role="status" aria-live="polite"><span class="spin"></span> Procesez…</div>
-<div class="toast" id="toast"></div>
 
 <script>
 /* Trusted Types: politica DEFAULT fail-closed — orice incercare de sink HTML/script arunca.
@@ -1438,8 +1474,8 @@ function myMatches(){return DB.matches.filter(m=>(m.offer_member===ME||m.seek_me
 
 function setView(v){if(PROC){toast("Asteapta — Secretara AI proceseaza…");return;}
   if(VIEW==="retea"&&v!=="retea")stopNet();
-  VIEW=v;$$(".tab").forEach(t=>t.classList.toggle("on",t.dataset.v===v));
-  transition(()=>{$$(".view").forEach(s=>s.classList.toggle("on",s.id===v));window.scrollTo(0,0);const mc=$("#mainContent");if(mc)mc.scrollTop=0;});
+  VIEW=v;$$(".tab").forEach(t=>{const on=t.dataset.v===v;t.classList.toggle("on",on);if(on)t.setAttribute("aria-current","page");else t.removeAttribute("aria-current");});
+  transition(()=>{$$(".view").forEach(s=>s.classList.toggle("on",s.id===v));const mc=$("#mainContent");if(mc)mc.scrollTop=0;});
   skeleton(v);setTimeout(render,anim()?170:0);}
 function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("div",{class:"sk l w80"}),h("div",{class:"sk l w40"}));}
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
@@ -1820,7 +1856,8 @@ function recTimeStr(){const s=Math.floor((Date.now()-REC.t0)/1000);return String
 function updRecTimer(){const el=$("#recTimer");if(el)el.textContent=recTimeStr();}
 function recConsent(){DB.rec=DB.rec||{};DB.rec.consent=true;if(!DB.rec.transcript)DB.rec.transcript="";save();renderRec();}
 function recGoAI(){const c=$("#aiCfg");if(c)c.open=true;const w=$("#aiWrap");if(w)w.scrollIntoView({behavior:"smooth",block:"start"});
-  const sel=$("#aiProvider");if(sel&&(!aiOn()))sel.value="gemini";aiProviderChange();toast("Am ales Google Gemini — pune cheia gratuită, apoi Salvează și Testează");}
+  if(aiOn()){toast("Setări asistent deschise");return;}
+  const sel=$("#aiProvider");if(sel)sel.value="gemini";aiProviderChange();toast("Am ales Google Gemini — pune cheia gratuită, apoi Salvează și Testează");}
 function renderRec(){const host=$("#recBody");if(!host)return;const r=DB.rec||{};
   if(!r.consent){setKids(host,
     h("p",{class:"aihint-intro",text:"⚖ Asigură-te că ai dreptul/acordul să înregistrezi (în multe țări e nevoie de consimțământul ambelor părți). Pune apelul pe difuzor pentru ambele voci."}),
@@ -1840,8 +1877,9 @@ function renderRec(){const host=$("#recBody");if(!host)return;const r=DB.rec||{}
       h("div",{class:"recsetup-t",text:"⚠ Întâi configurează un asistent AI"}),
       h("div",{class:"recsetup-p",text:"Fără el pot înregistra, dar nu am cu ce să transcriu și să rezum. Gemini are cheie gratuită — durează 1 minut."}),
       h("button",{class:"btn gold sm","data-act":"recGoAI",onclick:()=>recGoAI(),text:"⚙ Configurează asistentul AI"})));
+  }else{
+    kids.push(h("div",{class:"recctrl"},h("button",{class:"btn gold sm","data-act":"recStart",onclick:()=>recStart(),text:"● Înregistrează apel"})));
   }
-  kids.push(h("div",{class:"recctrl"},h("button",{class:"btn gold sm","data-act":"recStart",onclick:()=>recStart(),text:"● Înregistrează apel"})));
   if(r.transcript){kids.push(h("textarea",{id:"recText",class:"rectext",rows:"6","aria-label":"Transcriere editabilă"}));
     const others=(DB.members||[]).filter(m=>m.id!==ME);
     kids.push(h("div",{class:"recwho"},h("label",{class:"mfl",for:"recWho",text:"Leagă de un contact — OPȚIONAL (sări peste dacă nu e în aplicație)"}),
@@ -2246,7 +2284,7 @@ function prof(){const me=mem(ME),con=DB.matches.filter(x=>x.status==="conectat"&
         h("div",{style:{marginTop:"8px",display:"flex",alignItems:"center",gap:"8px",flexWrap:"wrap"}},
           h("span",{class:"hbadge v",text:"✓ Profil verificat"}),
           me.open?h("span",{class:"hbadge v",text:"🟢 Deschis spre conexiuni"}):null,
-          h("span",{style:{color:"var(--muted)",fontSize:"12px"},text:con+" conexiuni"}))),
+          h("span",{style:{color:"var(--muted)",fontSize:"12px"},text:con+(con===1?" conexiune":" conexiuni")}))),
       h("button",{class:"btn ghost sm","data-act":"profedit",text:"✎ Editeaza"})));}
   applyOC();
   const r=(k,elid)=>{const l=DB.items.filter(i=>i.member_id===ME&&i.kind===k);
@@ -2730,9 +2768,10 @@ function obNext(){
   $("#ob").classList.remove("on");setView("acasa");toast("Bun venit, "+nm.split(" ")[0]+"!");}
 function obSkip(){$("#ob").classList.remove("on");localStorage.setItem(KEY+"_seen","1");}
 
-function loadMembers(){setKids($("#member"),...DB.members.map(m=>h("option",{value:m.id,text:m.name})));if(!ME)ME=DB.members[0].id;$("#member").value=ME;}
+function loadMembers(){setKids($("#member"),...DB.members.map(m=>h("option",{value:m.id,text:m.name})));if(!ME)ME=DB.members[0].id;$("#member").value=ME;
+  const hd=document.querySelector("header");if(hd)hd.classList.toggle("multi",(DB.members||[]).length>1);}
 $("#member").onchange=e=>{ME=+e.target.value;render();};
-$$(".tab").forEach(t=>t.onclick=()=>setView(t.dataset.v));
+$$(".tab").forEach(t=>t.onclick=()=>{try{navigator.vibrate&&navigator.vibrate(8);}catch(_){}setView(t.dataset.v);});
 $$("[data-go]").forEach(a=>a.onclick=()=>setView(a.dataset.go));
 {const d=$("#mapDet");if(d)d.addEventListener("toggle",()=>{if(d.open)net();else stopNet();});} // harta retelei la cerere
 // backlog #18: debounce la cautari (performanta)
@@ -2835,9 +2874,18 @@ document.addEventListener("keydown",e=>{if(e.key!=="Enter"&&e.key!==" ")return;
 // loop2 #12: tasta "n" deschide quick-add de oriunde (cand nu scrii intr-un camp)
 document.addEventListener("keydown",e=>{if(e.key!=="n"&&e.key!=="N")return;if(e.ctrlKey||e.metaKey||e.altKey)return;
   const t=e.target;if(t&&(t.tagName==="INPUT"||t.tagName==="TEXTAREA"||t.tagName==="SELECT"||t.isContentEditable))return;
-  if(!DB)return;const lk=$("#lock");if(lk&&lk.classList.contains("on"))return;
-  if($("#quickOv")&&$("#quickOv").classList.contains("on"))return;
+  if(!DB)return;
+  // nu deschide peste un alt strat deja deschis (lock, onboarding, cautare, chat, quick-add, procesare)
+  const onTop=id=>{const el=$(id);return el&&el.classList.contains("on");};
+  if(onTop("#lock")||onTop("#ob")||onTop("#searchOv")||onTop("#overlay")||onTop("#quickOv")||onTop("#procMask"))return;
   e.preventDefault();openQuick();});
+// Escape inchide stratul de deasupra, indiferent unde e focusul
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;
+  const onTop=id=>{const el=$(id);return el&&el.classList.contains("on");};
+  if(onTop("#quickOv"))return closeQuick();
+  if(onTop("#searchOv"))return closeSearch();
+  if(onTop("#overlay"))return closeModal();
+  if(onTop("#ob"))return obSkip();});
 
 // error boundary global (remediaza constatarea de audit #4)
 function safeReset(){try{if(PROC)hideProc();pendingLock=false;}catch(_){}} // reset determinist al starii async (audit s5r2 #3)
