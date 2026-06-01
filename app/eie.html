@@ -21,14 +21,14 @@
 /* ====== PALETA "Bloom" — luminos, social, modern (redesign sedinta 7, 220 agenti) ====== */
 :root{
   /* LIGHT — bright & airy */
-  --bg:#FAFAFB;--bg2:#F1F2F6;--card:#FFFFFF;--card2:#F5F6FA;--line:#ECEDF2;--line2:#E0E2EC;
-  --ink:#1E293B;--ink2:#475569;--muted:#64748B;
+  --bg:#FAFAFB;--bg2:#F1F2F6;--card:#FFFFFF;--card2:#F5F6FA;--line:#E7E9F0;--line2:#D8DBE6;
+  --ink:#161E2E;--ink2:#3E4A5F;--muted:#586273;
   --primary:#6366F1;--primary2:#818CF8;--primary-dim:#4F46E5;--primary-soft:rgba(99,102,241,.10);
   --accent:#4F46E5;--accent-soft:rgba(99,102,241,.08);
   --success:#10B981;--success-soft:rgba(16,185,129,.12);--warn:#F59E0B;--warn-soft:rgba(245,158,11,.13);--warn-ink:#B45309;
   --on-primary:#ffffff;
-  --shadow:0 1px 2px rgba(16,24,40,.04),0 6px 16px -6px rgba(16,24,40,.10);
-  --shadow-lg:0 12px 40px -8px rgba(16,24,40,.22);
+  --shadow:0 1px 2px rgba(16,24,40,.03);
+  --shadow-lg:0 10px 30px -10px rgba(16,24,40,.16);
   --glow:rgba(99,102,241,.10);
   --gold:var(--primary);--gold2:var(--primary2);--gold-dim:var(--primary-dim);--gold-soft:var(--primary-soft);
   --teal:var(--success);--teal-soft:var(--success-soft);
@@ -47,7 +47,7 @@
   --glow:rgba(129,140,248,.14);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg2);color:var(--ink);font-family:var(--sans);font-weight:400;-webkit-font-smoothing:antialiased}
+body{background:var(--bg2);color:var(--ink);font-family:var(--sans);font-weight:400;line-height:1.55;-webkit-font-smoothing:antialiased}
 .shell{max-width:440px;margin:0 auto;min-height:100vh;position:relative;overflow:hidden;
   background:radial-gradient(130% 55% at 50% -8%,var(--glow),transparent 55%),var(--bg);transition:background .5s var(--ease)}
 header{padding:22px 20px 14px;position:sticky;top:0;z-index:9;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
@@ -141,7 +141,7 @@ h2.title{font-family:var(--serif);font-size:27px;font-weight:600;margin:2px 0 14
 .ledger .lr-date{margin-left:auto;font-size:10.5px;color:var(--primary-dim);white-space:nowrap}
 
 /* match cards */
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px;margin-bottom:13px;position:relative;overflow:hidden;transition:.4s var(--ease);box-shadow:var(--shadow)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:16px;position:relative;overflow:hidden;transition:.4s var(--ease);box-shadow:var(--shadow)}
 .card.match::before{content:"";position:absolute;inset:0;border-radius:18px;padding:1px;background:linear-gradient(140deg,var(--primary-soft),transparent 42%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
 .card.conectat::before{background:linear-gradient(140deg,var(--success-soft),transparent 42%)}
 .mtop{display:flex;align-items:center;gap:12px}
@@ -185,7 +185,9 @@ h2.title{font-family:var(--serif);font-size:27px;font-weight:600;margin:2px 0 14
 svg text{font-family:var(--sans);font-size:9px;fill:var(--ink2)}
 
 /* profile / dictare */
-.panel{border:1px solid var(--line);border-radius:16px;background:var(--card);padding:17px;margin-top:13px;box-shadow:var(--shadow)}
+.panel{border:1px solid var(--line);border-radius:16px;background:var(--card);padding:22px;margin-top:16px;box-shadow:var(--shadow)}
+.panel h3{letter-spacing:-.2px;margin-bottom:6px}
+.panel>p,.panel .sub{line-height:1.6}
 .panel h3{font-family:var(--serif);font-size:17px;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:12px;color:var(--ink)}
 .badge{font-size:8.5px;padding:3px 9px;border-radius:30px;font-weight:600;letter-spacing:.6px;text-transform:uppercase}
 .badge.vis{background:var(--success-soft);color:var(--success)}.badge.priv{background:var(--primary-soft);color:var(--primary-dim)}
@@ -317,10 +319,11 @@ h2.title{font-weight:800;font-size:24px;letter-spacing:-.5px;margin:2px 0 4px}
 .sub{font-size:13px;line-height:1.5}
 .digest .g,.kpi .v,.nm,.modal .h .t,.panel h3,.ob h1,.estate .t,.lr-name{font-family:var(--sans)}
 .kpi .v{font-weight:800;letter-spacing:-.5px}
-.btn{border-radius:11px;min-height:44px;font-weight:600;letter-spacing:0;display:inline-flex;align-items:center;justify-content:center;gap:6px}
-.btn.gold{background:linear-gradient(135deg,var(--primary),var(--primary-dim));box-shadow:0 4px 12px rgba(99,102,241,.28)}
+.btn{border-radius:12px;min-height:46px;padding:11px 20px;font-weight:600;letter-spacing:0;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.btn.gold{background:linear-gradient(135deg,var(--primary),var(--primary-dim));box-shadow:0 6px 18px -4px rgba(79,70,229,.45),0 2px 6px rgba(79,70,229,.20);font-weight:700}
 .btn.gold:active{transform:scale(.97)}
-.btn.sm{min-height:38px;border-radius:10px}
+.btn.ghost{background:var(--card2);border:1px solid var(--line2);color:var(--ink2);box-shadow:none}
+.btn.sm{min-height:40px;border-radius:11px}
 .card{border-radius:18px;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
 .card.match::before,.card.conectat::before{display:none}
 .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
@@ -602,15 +605,15 @@ details.why2>summary::-webkit-details-marker{display:none}
   <section id="retea" class="view">
     <div class="eyebrow">Reteaua ta</div><h2 class="title">Conexiunile tale</h2>
     <p class="sub">Oamenii cu care te-ai conectat. O conexiune apare doar dupa ce ambele parti accepta o introducere.</p>
-    <details class="exchwrap" id="exchDet"><summary>🤝 Schimbă contacte la o întâlnire ⌄</summary>
+    <details class="exchwrap" id="exchDet"><summary>Schimbă contacte la o întâlnire ⌄</summary>
       <div class="exchbody">
-        <p class="sub" style="margin:8px 0 10px">Codul tău conține doar <b>cardul public</b> (nume, domeniu, ce oferi) — niciodată „ce cauți". Îl dai cuiva pe care îl întâlnești; el îl lipește la el și te adaugă. Totul local, fără server.</p>
+        <p class="sub" style="margin:8px 0 12px">Doar <b>cardul tău public</b> (nume, domeniu, ce oferi) — niciodată „ce cauți". Îl dai cuiva, îl lipește, te adaugă.</p>
         <label class="mfl" for="myConnCode">Codul tău de conexiune</label>
         <textarea id="myConnCode" rows="3" readonly aria-label="Codul tau de conexiune" style="width:100%;font-size:11px"></textarea>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
-          <button class="btn gold sm" data-act="invite">✉️ Invită pe cineva</button>
-          <button class="btn ghost sm" data-act="copyConnCode">⧉ Copiază codul meu</button>
-          <button class="btn ghost sm" data-act="toggleQR">▦ Arată QR</button>
+          <button class="btn gold sm" data-act="invite">Invită pe cineva</button>
+          <button class="btn ghost sm" data-act="copyConnCode">Copiază codul meu</button>
+          <button class="btn ghost sm" data-act="toggleQR">Arată codul QR</button>
         </div>
         <div id="connQR" class="connqr"></div>
         <p class="sub" style="margin-top:6px;font-size:11px">QR-ul îl scanează celălalt cu <b>camera telefonului</b> → îi apare codul → îl lipește mai jos. Util ca să nu tastați manual codul lung.</p>
@@ -619,7 +622,7 @@ details.why2>summary::-webkit-details-marker{display:none}
         <textarea id="pasteCode" rows="3" placeholder="EIE1:…" aria-label="Lipeste codul de conexiune primit" style="width:100%;font-size:11px"></textarea>
         <div style="margin-top:8px"><button class="btn gold sm" data-act="addByCode">＋ Adaugă în rețea</button></div>
       </div></details>
-    <details class="exchwrap" id="discDet"><summary>🔎 Descoperă oameni (director public) ⌄</summary>
+    <details class="exchwrap" id="discDet"><summary>Descoperă oameni ⌄</summary>
       <div class="exchbody">
         <p class="sub" style="margin:8px 0 10px">Caută în directorul public, <b>opt-in</b>. Aici serverul vede cardurile publice ca să le poată căuta — <b>„ce cauți" rămâne mereu privat</b> și nu se publică niciodată. Necesită releu activ.</p>
         <div style="display:flex;gap:8px">
@@ -717,18 +720,18 @@ details.why2>summary::-webkit-details-marker{display:none}
     <div class="panel"><h3>Backup criptat &amp; transfer <span class="badge priv">.eie</span></h3>
       <p style="font-size:12px;color:var(--ink2);line-height:1.55">Un fișier <b>.eie</b> criptat cu o parolă aleasă de tine. Folosește-l ca să nu pierzi datele dacă schimbi telefonul sau ștergi browserul — îl restaurezi pe orice dispozitiv cu aceeași parolă. Nimic nu pleacă spre vreun server.</p>
       <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn gold sm" data-act="backupEnc">🔒 Backup criptat (.eie)</button>
-        <button class="btn ghost sm" data-act="restoreEnc">↺ Restaurează din .eie</button>
+        <button class="btn gold sm" data-act="backupEnc">Backup criptat (.eie)</button>
+        <button class="btn ghost sm" data-act="restoreEnc">Restaurează din .eie</button>
         <input type="file" id="restoreFile" accept=".eie,application/octet-stream" style="display:none" onchange="handleRestore(event)" aria-label="Fisier backup criptat">
       </div></div>
     <div class="panel"><h3>Sincronizare <span class="badge priv">beta · opt-in</span></h3>
-      <p style="font-size:12px;color:var(--ink2);line-height:1.55">Sincronizează automat cu contactele tale printr-un <b>releu zero-knowledge</b>: serverul transportă doar text <b>criptat end-to-end</b> (E2EE) — nu vede numele, notele sau „ce cauți". Implicit <b>oprit</b> — rămâi Local-Only până activezi tu. Necesită o cheie publică în codul de conexiune (format EIE2).</p>
+      <p style="font-size:12.5px;color:var(--ink2)">Sincronizare automată cu contactele tale, <b>criptată end-to-end</b> — serverul nu vede conținutul. Implicit <b>oprită</b> (rămâi Local-Only). <span class="sub" style="display:inline">Detalii în „De ce e sigur".</span></p>
       <label class="mfl" for="relayUrl" style="margin-top:8px">Adresa releului</label>
       <input id="relayUrl" placeholder="http://127.0.0.1:8787" aria-label="Adresa releului" style="width:100%;font-size:12px">
       <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
         <button class="btn ghost sm" data-act="relaySave">Salvează adresa</button>
         <button class="btn sm" id="relayToggleBtn" data-act="relayToggle">Activează sync</button>
-        <button class="btn gold sm" data-act="syncNow">⟳ Sync acum</button>
+        <button class="btn gold sm" data-act="syncNow">Sincronizează acum</button>
       </div>
       <p id="relayStatus" style="font-size:11px;color:var(--muted);margin-top:9px"></p></div>
     <div class="panel"><h3>Plan <span class="badge priv">freemium</span></h3>
