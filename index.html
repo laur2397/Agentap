@@ -575,35 +575,47 @@ details.why2>summary::-webkit-details-marker{display:none}
    AURORA 2026 — limbaj vizual nou: canvas cinematic + mesh, glass, display type,
    accente cu glow, nav flotant de sticla. Aplicat global (peste light/dark).
    ============================================================================ */
+/* AURORA tokens — LIGHT luxury (implicit) */
 :root{
+  --bg:#F3F3FB;--bg2:#F3F3FB;--card:rgba(255,255,255,.82);--card2:rgba(255,255,255,.62);
+  --line:rgba(28,27,58,.09);--line2:rgba(28,27,58,.15);
+  --ink:#15172B;--ink2:#414765;--muted:#6C7390;
+  --primary:#7C3AED;--primary2:#6D28D9;--primary-dim:#6D28D9;--primary-soft:rgba(124,58,237,.10);
+  --accent:#7C3AED;--accent-soft:rgba(124,58,237,.10);--cyan:#0891B2;
+  --success:#059669;--success-soft:rgba(5,150,105,.12);--warn:#D97706;--warn-soft:rgba(217,119,6,.14);--warn-ink:#B45309;
+  --on-primary:#ffffff;
+  --shadow:0 2px 10px rgba(28,27,58,.06),0 14px 34px -16px rgba(28,27,58,.16);--shadow-lg:0 28px 64px -18px rgba(28,27,58,.26);
+  --gold:var(--primary);--gold2:var(--primary2);--gold-dim:var(--primary-dim);--gold-soft:var(--primary-soft);
+  --hi:rgba(255,255,255,.7);--glass-input:rgba(255,255,255,.72);
+  --title-grad:linear-gradient(100deg,#15172B 25%,#7C3AED);--num-grad:linear-gradient(120deg,#1b1d36,#7C3AED);
+  --nav-bg:linear-gradient(to top,rgba(243,243,251,.95),rgba(243,243,251,.62));
+  --mesh:radial-gradient(58% 42% at 12% -2%,rgba(124,58,237,.13),transparent 60%),radial-gradient(50% 40% at 98% 4%,rgba(8,145,178,.10),transparent 58%),radial-gradient(55% 48% at 88% 98%,rgba(236,72,153,.07),transparent 58%),radial-gradient(48% 40% at 4% 102%,rgba(59,130,246,.07),transparent 58%),#F3F3FB;
+}
+/* AURORA tokens — DARK cinematic */
+[data-theme="dark"]{
   --bg:#07070D;--bg2:#07070D;--card:rgba(255,255,255,.045);--card2:rgba(255,255,255,.07);
   --line:rgba(255,255,255,.10);--line2:rgba(255,255,255,.16);
-  --ink:#F5F6FC;--ink2:#C4C9DC;--muted:#8A91AC;
+  --ink:#F5F6FC;--ink2:#C4C9DC;--muted:#9499B4;
   --primary:#A78BFA;--primary2:#C4B5FD;--primary-dim:#8B5CF6;--primary-soft:rgba(167,139,250,.16);
   --accent:#8B5CF6;--accent-soft:rgba(139,92,246,.16);--cyan:#22D3EE;
   --success:#34D399;--success-soft:rgba(52,211,153,.16);--warn:#FBBF24;--warn-soft:rgba(251,191,36,.16);--warn-ink:#FBBF24;
   --on-primary:#0A0A12;
   --shadow:0 2px 10px rgba(0,0,0,.35);--shadow-lg:0 26px 60px -14px rgba(0,0,0,.75);
-  --gold:var(--primary);--gold2:var(--primary2);--gold-dim:var(--primary-dim);--gold-soft:var(--primary-soft);
+  --hi:rgba(255,255,255,.08);--glass-input:rgba(255,255,255,.05);
+  --title-grad:linear-gradient(100deg,#fff 30%,#C4B5FD);--num-grad:linear-gradient(120deg,#fff,#C4B5FD);
+  --nav-bg:linear-gradient(to top,rgba(7,7,13,.92),rgba(7,7,13,.55));
+  --mesh:radial-gradient(58% 42% at 12% -2%,rgba(139,92,246,.34),transparent 60%),radial-gradient(50% 40% at 98% 6%,rgba(34,211,238,.20),transparent 58%),radial-gradient(55% 48% at 88% 96%,rgba(236,72,153,.18),transparent 58%),radial-gradient(48% 40% at 4% 102%,rgba(59,130,246,.16),transparent 58%),#07070D;
 }
-html,body{background:#07070D}
-body{
-  background:
-    radial-gradient(58% 42% at 12% -2%,rgba(139,92,246,.34),transparent 60%),
-    radial-gradient(50% 40% at 98% 6%,rgba(34,211,238,.20),transparent 58%),
-    radial-gradient(55% 48% at 88% 96%,rgba(236,72,153,.18),transparent 58%),
-    radial-gradient(48% 40% at 4% 102%,rgba(59,130,246,.16),transparent 58%),
-    #07070D;
-  background-attachment:fixed;color:var(--ink)}
+body{background:var(--mesh);background-attachment:fixed;color:var(--ink)}
 /* suprafete glass */
 .card,.panel,.statstrip,.exchwrap,.modal .box,.estate,.digest{
   -webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%)}
 .card,.panel{background:var(--card);border:1px solid var(--line);border-radius:24px;
-  box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.07)}
-.statstrip{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.07)}
+  box-shadow:var(--shadow),inset 0 1px 0 var(--hi)}
+.statstrip{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow),inset 0 1px 0 var(--hi)}
 .statstrip .st{border-right:1px solid var(--line)}
 .statstrip .sv{font-size:30px;font-weight:800;letter-spacing:-1px;
-  background:linear-gradient(120deg,#fff,#C4B5FD);-webkit-background-clip:text;background-clip:text;color:transparent}
+  background:var(--num-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .statstrip .sl{color:var(--muted)}
 /* HERO cinematic */
 .digest{background:
@@ -619,19 +631,19 @@ body{
 .digest p{font-size:14px;line-height:1.6;color:rgba(255,255,255,.9);max-width:42ch;margin:0}
 /* titluri display cu gradient pe canvas inchis */
 .title{font-size:30px;font-weight:800;letter-spacing:-1px;line-height:1.05;
-  background:linear-gradient(100deg,#fff 30%,#C4B5FD);-webkit-background-clip:text;background-clip:text;color:transparent}
+  background:var(--title-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .eyebrow{color:var(--primary2);letter-spacing:3px}
 .sec{font-size:18px;font-weight:800;letter-spacing:-.4px;color:var(--ink);margin:30px 0 14px}
 .sec a{color:var(--primary2)}
 /* butoane cu glow */
 .btn.gold{background:linear-gradient(135deg,#A78BFA,#7C3AED);color:#fff;font-weight:700;
   box-shadow:0 10px 28px -8px rgba(139,92,246,.7),inset 0 1px 0 rgba(255,255,255,.25)}
-.btn.ghost{background:rgba(255,255,255,.055);border:1px solid var(--line2);color:var(--ink);box-shadow:none}
-.btn.ghost:hover{background:rgba(255,255,255,.10)}
+.btn.ghost{background:var(--card2);border:1px solid var(--line2);color:var(--ink);box-shadow:none}
+.btn.ghost:hover{background:var(--card)}
 /* nav flotant de sticla */
-nav{position:sticky;bottom:0;background:linear-gradient(to top,rgba(7,7,13,.92),rgba(7,7,13,.55));
+nav{position:sticky;bottom:0;background:var(--nav-bg);
   -webkit-backdrop-filter:blur(26px) saturate(160%);backdrop-filter:blur(26px) saturate(160%);
-  border-top:1px solid rgba(255,255,255,.10)}
+  border-top:1px solid var(--line)}
 .tab .ic{width:46px;height:30px;border-radius:14px}
 .tab.on{color:#fff}
 .tab.on .ic{background:linear-gradient(135deg,rgba(167,139,250,.35),rgba(124,58,237,.25));
@@ -640,12 +652,12 @@ nav{position:sticky;bottom:0;background:linear-gradient(to top,rgba(7,7,13,.92),
 .brand .mk{background:linear-gradient(135deg,#A78BFA,#7C3AED);color:#fff;box-shadow:0 6px 18px -4px rgba(139,92,246,.6)}
 .brand .t{color:var(--ink)}.brand .t small{color:var(--primary2)}
 /* inputs/textarea pe canvas inchis */
-input,textarea,select{background:rgba(255,255,255,.05)!important;border:1px solid var(--line2)!important;color:var(--ink)!important;border-radius:13px!important}
+input,textarea,select{background:var(--glass-input)!important;border:1px solid var(--line2)!important;color:var(--ink)!important;border-radius:13px!important}
 input::placeholder,textarea::placeholder{color:var(--muted)}
 /* badge-uri discrete */
 .badge{backdrop-filter:blur(8px)}
 /* carduri: hover lift mai dramatic */
-.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg),inset 0 1px 0 rgba(255,255,255,.08)}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg),inset 0 1px 0 var(--hi)}
 /* ===== AURORA componente — redesign pe toate ecranele ===== */
 /* avataruri cu glow */
 .av{box-shadow:0 8px 20px -6px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.25)}
@@ -664,17 +676,18 @@ input::placeholder,textarea::placeholder{color:var(--muted)}
   border:1px solid rgba(167,139,250,.30);border-radius:30px;padding:5px 12px;font-weight:600}
 .whylead{color:var(--muted)}
 /* bridge ofer↔caut glass cu divider gradient */
-.bridge{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:16px;padding:14px;gap:12px}
+
+.bridge{background:var(--card2);border:1px solid var(--line);border-radius:16px;padding:14px;gap:12px}
 .bridge .barrow{color:var(--primary2);font-size:18px}
 .bridge .btxt{color:var(--ink)}
 /* shield discret */
 .shield{color:var(--muted);gap:6px;margin-top:14px}
 /* carduri-accent pe Acasa */
-.ahacard{background:linear-gradient(135deg,rgba(167,139,250,.16),rgba(124,58,237,.06));border:1px solid rgba(167,139,250,.32);border-radius:20px;padding:18px;box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.08)}
+.ahacard{background:linear-gradient(135deg,rgba(167,139,250,.16),rgba(124,58,237,.06));border:1px solid rgba(167,139,250,.32);border-radius:20px;padding:18px;box-shadow:var(--shadow),inset 0 1px 0 var(--hi)}
 .ahacard .ahat{font-size:15.5px;font-weight:800;color:var(--ink)}
 .nextmeet{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--primary);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
 .nextmeet .nmwhen{font-size:21px;font-weight:800;color:var(--ink)}
-.intrinsic{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:12px 14px;color:var(--ink2)}
+.intrinsic{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:12px 14px;color:var(--ink2)}
 /* header de sectiune cu bara-accent */
 .sec{position:relative;padding-left:14px}
 .sec::before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:4px;border-radius:4px;background:linear-gradient(to bottom,#A78BFA,#22D3EE)}
@@ -684,7 +697,7 @@ input::placeholder,textarea::placeholder{color:var(--muted)}
 /* graf retea cu glow */
 #mapHost svg,.netgraph svg,#netGraph{filter:drop-shadow(0 0 22px rgba(139,92,246,.30))}
 /* chip filtre */
-.chip{background:rgba(255,255,255,.05);border:1px solid var(--line2);color:var(--ink2);border-radius:30px}
+.chip{background:var(--card2);border:1px solid var(--line2);color:var(--ink2);border-radius:30px}
 .chip.on{background:linear-gradient(135deg,#A78BFA,#7C3AED);color:#fff;border-color:transparent;box-shadow:0 6px 16px -4px rgba(139,92,246,.6)}
 /* ===== intrare animata, in cascada, pe fiecare ecran (alive) ===== */
 @keyframes auroraRise{from{opacity:0;transform:translateY(16px) scale(.99)}to{opacity:1;transform:none}}
