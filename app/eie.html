@@ -738,6 +738,12 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
 .aitoggle{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink2);margin-top:12px;cursor:pointer}
 .aiwarn{font-size:11px;color:var(--warn-ink);margin-top:9px;line-height:1.5}
 .aihint{font-size:11.5px;color:var(--ink2);margin:6px 0 2px;line-height:1.5}
+.aihint-intro{font-size:12px;color:var(--muted);margin:10px 0 14px;line-height:1.5}
+.aibtns{margin-top:14px;display:flex;gap:8px}
+.aibtns .btn{flex:1}
+.linklike{display:inline-block;margin-top:12px;background:none;border:0;color:var(--muted);font:inherit;font-size:11.5px;text-decoration:underline;cursor:pointer;padding:2px 0}
+.aicfg summary{padding:4px 0}
+.aicfgbody label.mfl{margin-top:14px}
 .aichat{display:flex;flex-direction:column;gap:9px;margin-top:14px;max-height:340px;overflow-y:auto;padding:2px}
 .aimsg{max-width:86%;padding:10px 13px;border-radius:16px;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word}
 .aimsg.u{align-self:flex-end;background:var(--accent-grad);color:var(--on-gold);border-bottom-right-radius:5px}
@@ -851,34 +857,34 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
         <span class="aibadge" id="aiBadge">Dezactivat</span>
         <button class="btn ghost sm" data-act="aiSettings" id="aiCfgBtn" style="margin-left:auto">⚙ Setări</button>
       </div>
-      <details class="aicfg" id="aiCfg"><summary>Configurează asistentul AI</summary>
+      <details class="aicfg" id="aiCfg"><summary>⚙ Configurează asistentul</summary>
         <div class="aicfgbody">
-          <p class="sub" style="margin:8px 0 10px">Alege furnizorul. <b>Local</b> = rămâne pe dispozitiv (privat). <b>Cloud</b> = conversația pleacă la furnizor, cu cheia <b>ta</b> (stocată criptat doar local). Implicit oprit.</p>
+          <p class="aihint-intro"><b>Standard</b> sau cu <b>cheia ta</b> merg pe telefon. <b>Local</b> doar pe calculator (Ollama). Implicit oprit.</p>
           <label class="mfl" for="aiProvider">Furnizor</label>
           <select id="aiProvider" aria-label="Furnizor AI" onchange="aiProviderChange()">
             <option value="off">Dezactivat</option>
-            <option value="managed">Standard — prin releu (fără configurare)</option>
-            <option value="local">Local — Ollama / LM Studio (doar pe calculator)</option>
+            <option value="managed">Standard — fără configurare</option>
+            <option value="local">Local — Ollama (doar pe calculator)</option>
             <option value="openai">OpenAI (cheia ta)</option>
             <option value="anthropic">Anthropic Claude (cheia ta)</option>
             <option value="gemini">Google Gemini (cheia ta)</option>
             <option value="openrouter">OpenRouter (cheia ta)</option>
-            <option value="custom">Endpoint OpenAI-compatibil (custom)</option>
+            <option value="custom">Endpoint OpenAI-compatibil</option>
           </select>
           <p class="aihint" id="aiHint"></p>
           <label class="mfl" for="aiBase" id="aiBaseLbl">Adresă (Base URL)</label>
           <input id="aiBase" placeholder="http://localhost:11434/v1" aria-label="Base URL">
-          <label class="mfl" for="aiKey" id="aiKeyLbl">Cheie API (rămâne criptată local)</label>
-          <input id="aiKey" type="password" placeholder="sk-… (nu e nevoie la Local)" aria-label="Cheie API" autocomplete="off">
+          <label class="mfl" for="aiKey" id="aiKeyLbl">Cheie API</label>
+          <input id="aiKey" type="password" placeholder="sk-…" aria-label="Cheie API" autocomplete="off">
           <label class="mfl" for="aiModel">Model</label>
-          <input id="aiModel" placeholder="ex: llama3.1 / gpt-4o-mini / claude-… / gemini-…" aria-label="Model">
-          <label class="aitoggle"><input type="checkbox" id="aiCtx"> Permite asistentului să vadă rezumatul tău local (task-uri, întâlniri) în conversație</label>
-          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+          <input id="aiModel" placeholder="ex: gpt-4o-mini" aria-label="Model">
+          <label class="aitoggle"><input type="checkbox" id="aiCtx"> Lasă asistentul să-ți vadă rezumatul (task-uri, întâlniri)</label>
+          <div class="aibtns">
             <button class="btn gold sm" data-act="aiSave">Salvează</button>
-            <button class="btn ghost sm" data-act="aiTest">Testează conexiunea</button>
-            <button class="btn ghost sm" data-act="aiClear">Șterge configurarea</button>
+            <button class="btn ghost sm" data-act="aiTest">Testează</button>
           </div>
           <p class="aiwarn" id="aiPriv"></p>
+          <button class="linklike" data-act="aiClear">Șterge configurarea</button>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -889,11 +895,11 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
     <div class="sec">Azi</div>
     <div id="todayBox"></div>
     <div class="sec" style="margin-top:24px">Intalniri</div>
-    <p class="sub">Programezi din conversatia cu o conexiune; se confirma doar cand ambele parti accepta. La cele confirmate poti adauga in Google Calendar / descarca .ics / trimite email — <b>tu</b> alegi sa predai datele, aplicatia nu trimite nimic singura.</p>
+    <p class="sub">Se confirmă doar când ambele părți acceptă. La cele confirmate: Google Calendar, .ics sau email — tu alegi.</p>
     <div id="weekcal"></div>
     <div id="meetList"></div>
     <div class="sec" style="margin-top:26px">Noteaza dupa o intalnire</div>
-    <p class="sub">Scrie cu cuvintele tale ce ai discutat. Iti notez singur ce cauti si ce oferi, si caut potriviri.</p>
+    <p class="sub">Scrie cu cuvintele tale ce ai discutat — îți extrag ce cauți/oferi și caut potriviri.</p>
     <textarea id="dictText" rows="5" placeholder="ex: Am vorbit cu un investitor interesat de energie. Eu caut un contabil bun si ofer spatii comerciale."></textarea>
     <div style="margin-top:10px"><button class="btn gold" id="dictBtn" onclick="dicteaza()">Noteaza si cauta potriviri</button></div>
     <div id="dictRes" style="margin-top:14px"></div>
@@ -1604,15 +1610,18 @@ function renderAi(){const c=aiCfg();
   const mdl=$("#aiModel");if(mdl&&document.activeElement!==mdl)mdl.value=c.model||"";
   const ctx=$("#aiCtx");if(ctx)ctx.checked=!!c.ctx;
   const hint=$("#aiHint");if(hint)hint.textContent=aiOn()?(AI_HINT[c.provider]||""):"";
-  const noKey=(c.provider==="local"||c.provider==="managed");
+  const noKey=(c.provider==="local"||c.provider==="managed"||c.provider==="off");
+  const hideBase=(c.provider==="managed"||c.provider==="off");
   const kl=$("#aiKeyLbl");if(kl)kl.style.display=noKey?"none":"";
   const ki=$("#aiKey");if(ki)ki.style.display=noKey?"none":"";
-  const bl=$("#aiBaseLbl");if(bl)bl.style.display=(c.provider==="managed")?"none":"";
-  const bi=$("#aiBase");if(bi)bi.style.display=(c.provider==="managed")?"none":"";
+  const bl=$("#aiBaseLbl");if(bl)bl.style.display=hideBase?"none":"";
+  const bi=$("#aiBase");if(bi)bi.style.display=hideBase?"none":"";
   const priv=$("#aiPriv");if(priv)priv.textContent=!aiOn()?"":(c.provider==="local"
     ?"🔒 Local: conversația rămâne pe dispozitivul tău; nimic nu pleacă spre cloud."
     :c.provider==="managed"?"ℹ Standard: conversația trece prin releul tău (proxy), nu prin browserul userului direct. Releul vede prompturile."
     :"⚠ Cloud: conversația pleacă la "+(AI_LBL[c.provider]||c.provider)+" cu cheia ta. Cheia e stocată criptat doar local.");
+  const row=$("#aiInput")?$("#aiInput").parentElement:null;if(row)row.style.display=aiOn()?"flex":"none";
+  const cfg=$("#aiCfg");if(cfg&&!aiOn())cfg.open=true; // daca e oprit, arata setarile ca sa-l poata porni
   renderAiChat();}
 async function aiTest(){const p=($("#aiProvider")||{}).value||"off";if(p==="off"){toast("Alege un furnizor");return;}
   // salveaza apoi pinguie
