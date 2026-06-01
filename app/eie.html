@@ -759,6 +759,49 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
 .seccard>.sub{margin:0 0 14px}
 .sec .si{margin-right:8px;font-size:14px;opacity:.9;filter:saturate(.7)}
 .sec.nobar{padding-left:0}.sec.nobar::before{display:none}
+/* ============================================================================
+   LOOP 20 — polish pe toată aplicația (token-driven, ambele teme)
+   ============================================================================ */
+/* 1. toast rebrandat */
+.toast{background:rgba(16,20,16,.95);color:#F4F6F2;border:1px solid var(--gold-dim);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 16px 40px -10px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.04)}
+/* 2. slider branded */
+.ctrlrow input[type=range]{-webkit-appearance:none;appearance:none;height:6px;border-radius:6px;background:linear-gradient(90deg,var(--primary),var(--gold));outline:none}
+.ctrlrow input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;border:2px solid var(--primary-dim);box-shadow:0 2px 8px var(--glow);cursor:pointer}
+.ctrlrow input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#fff;border:2px solid var(--primary-dim);box-shadow:0 2px 8px var(--glow);cursor:pointer}
+/* 3. scrollbar subtila */
+*{scrollbar-width:thin;scrollbar-color:var(--line2) transparent}
+::-webkit-scrollbar{width:9px;height:9px}::-webkit-scrollbar-thumb{background:var(--line2);border-radius:9px;border:2px solid transparent;background-clip:content-box}::-webkit-scrollbar-track{background:transparent}
+/* 4. switch branded */
+.sw.on{background:var(--av-grad)}.sw.on i{box-shadow:0 1px 4px var(--glow)}
+/* 5+6. inputs & search focus ring brand */
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)!important;box-shadow:0 0 0 3px var(--primary-soft)}
+.searchbar:focus-within{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-soft)}
+/* 7. modal handle + glass */
+.modal{border-radius:28px 28px 0 0;-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px)}
+.modal::before{content:"";display:block;width:40px;height:4px;border-radius:4px;background:var(--line2);margin:10px auto 0}
+.modal .h .t{font-weight:800;letter-spacing:-.3px}
+/* 8. buttons states */
+.btn{transition:transform .18s var(--ease),box-shadow .3s var(--ease),filter .25s var(--ease),background .25s var(--ease)}
+.btn:active{transform:scale(.97)}
+.btn:disabled{opacity:.5;cursor:default;filter:saturate(.6)}
+.btn.ghost:active{background:var(--card2)}
+/* 9. nav active label */
+.tab.on{font-weight:700}
+/* 10. secsum chips glass */
+.secsum .ss{background:var(--primary-soft);color:var(--primary);border:1px solid var(--line2);backdrop-filter:blur(8px)}
+/* 11. ledger rows */
+.ledger .lrow{transition:background .25s var(--ease);border-radius:10px}
+.ledger .lrow:hover{background:var(--card2)}
+/* 12. task checkbox */
+.tcheck{transition:.2s var(--ease)}.tcheck.on{background:var(--av-grad);border-color:transparent;box-shadow:0 2px 8px var(--glow)}
+/* 13. section links hover */
+.sec a{transition:opacity .2s}.sec a:hover{opacity:.6}
+/* 17. empty-state icon glow consistent */
+.estate svg{filter:drop-shadow(0 8px 22px var(--glow))}
+/* 18. card tap feedback */
+.card:active{transform:scale(.995)}
+/* 20. weekcal day cells breathing */
+.weekcal{gap:7px}
 </style>
 </head>
 <body>
@@ -1360,7 +1403,8 @@ function emp(){return h("div",{class:"estate"},
 function home(){const me=mem(ME),mm=myMatches();
   const prop=mm.filter(m=>m.status==="propus").length,con=mm.filter(m=>m.status==="conectat").length;
   const avg=mm.length?Math.round(mm.reduce((s,m)=>s+m.score,0)/mm.length):0;
-  $("#digG").textContent="Buna ziua, "+me.name.split(" ")[0]+".";
+  const _h=new Date().getHours();const _sal=_h<12?"Bună dimineața":_h<18?"Bună ziua":"Bună seara";
+  $("#digG").textContent=_sal+", "+me.name.split(" ")[0]+".";
   $("#digP").textContent=prop?`Ai ${prop} ${prop===1?"sugestie noua":"sugestii noi"} de verificat si ${con} ${con===1?"conexiune":"conexiuni"}.`
     :`Ai ${con} ${con===1?"conexiune activa":"conexiuni active"}. Adauga ce cauti sau ce oferi ca sa primesti sugestii.`;
   // loop3 #2: momentul "aha" — daca n-ai spus inca ce oferi/cauti, un singur next-step clar
