@@ -821,6 +821,41 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .card:active{transform:scale(.995)}
 /* 20. weekcal day cells breathing */
 .weekcal{gap:7px}
+
+/* ===== NATIVE APP-SHELL — senzatie de aplicatie, nu de pagina web ===== */
+html{height:100%}
+/* pagina nu mai face scroll global; doar continutul (fara rubber-band pe tot documentul) */
+body{height:100%;overflow:hidden;position:fixed;inset:0}
+.shell{height:100vh;height:100dvh;max-width:440px;margin:0 auto;
+  display:flex;flex-direction:column;overflow:hidden;border-radius:0}
+/* bara de sus = chrome fix al aplicatiei (cu safe-area pentru notch) */
+header{flex:0 0 auto;position:relative;top:auto;
+  padding-top:calc(16px + env(safe-area-inset-top))}
+/* singura zona care deruleaza, cu inertie ca pe mobil */
+main{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  overscroll-behavior-y:contain;padding:18px 18px 26px;scrollbar-width:none}
+main::-webkit-scrollbar{width:0;height:0;display:none}
+/* bara de jos = tab bar fix, cu safe-area pentru home indicator */
+nav{flex:0 0 auto;position:relative;bottom:auto;
+  padding-bottom:env(safe-area-inset-bottom)}
+nav::after{content:"";display:block;width:124px;height:5px;border-radius:3px;
+  background:var(--line2);opacity:.55;
+  margin:1px auto calc(7px + env(safe-area-inset-bottom))}
+
+/* ===== DESKTOP / ecran lat: il aratam ca pe un telefon, nu ca pe un site intins ===== */
+@media (min-width:760px){
+  body{display:grid;place-items:center;animation:none!important;
+    background:radial-gradient(120% 90% at 50% -5%,#1b2030,#0a0c12 62%)!important}
+  .shell{height:min(100dvh - 48px,884px);width:404px;max-width:404px;
+    border-radius:48px;overflow:hidden;
+    box-shadow:0 0 0 11px #0a0c11,0 0 0 13px #262c3e,
+      0 50px 120px -28px rgba(0,0,0,.85),0 0 90px -22px var(--glow)}
+  /* notch */
+  .shell::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:142px;height:25px;background:#0a0c11;border-radius:0 0 17px 17px;
+    z-index:40;pointer-events:none}
+  header{padding-top:30px}
+}
 </style>
 </head>
 <body>
@@ -1404,7 +1439,7 @@ function myMatches(){return DB.matches.filter(m=>(m.offer_member===ME||m.seek_me
 function setView(v){if(PROC){toast("Asteapta — Secretara AI proceseaza…");return;}
   if(VIEW==="retea"&&v!=="retea")stopNet();
   VIEW=v;$$(".tab").forEach(t=>t.classList.toggle("on",t.dataset.v===v));
-  transition(()=>{$$(".view").forEach(s=>s.classList.toggle("on",s.id===v));window.scrollTo(0,0);});
+  transition(()=>{$$(".view").forEach(s=>s.classList.toggle("on",s.id===v));window.scrollTo(0,0);const mc=$("#mainContent");if(mc)mc.scrollTop=0;});
   skeleton(v);setTimeout(render,anim()?170:0);}
 function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("div",{class:"sk l w80"}),h("div",{class:"sk l w40"}));}
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
