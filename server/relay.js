@@ -22,9 +22,13 @@ const CORS=process.env.CORS_ORIGIN||"*";
 const MBOX=/^[0-9a-f]{16,128}$/;                       // id opac (hex)
 
 let store=Object.create(null);                          // mailbox -> {seq, items:[{seq,ct,t}]}
-if(FILE){try{store=JSON.parse(fs.readFileSync(FILE,"utf8"));}catch(_){}}
+let dir=Object.create(null);                            // pub -> {pub, card, t}  (DIRECTOR public, NU E2EE — opt-in)
+if(FILE){try{const o=JSON.parse(fs.readFileSync(FILE,"utf8"));store=o.store||o;dir=o.dir||Object.create(null);}catch(_){}}
+const PUBRE=/^[A-Za-z0-9+/=]{40,200}$/;
+function readBody(req,res,cb){let len=0;const ch=[];req.on("data",c=>{len+=c.length;if(len>MAXBYTES)res.destroy();else ch.push(c);});req.on("end",()=>cb(Buffer.concat(ch).toString("utf8")));}
+function dirText(e){const c=e.card||{};return [c.n,c.d,c.r,(c.o||[]).join(" ")].join(" ").toLowerCase();}
 let dirty=false;
-if(FILE)setInterval(()=>{if(dirty){try{fs.writeFileSync(FILE,JSON.stringify(store));dirty=false;}catch(_){}}},2000).unref();
+if(FILE)setInterval(()=>{if(dirty){try{fs.writeFileSync(FILE,JSON.stringify({store,dir}));dirty=false;}catch(_){}}},2000).unref();
 
 function send(res,code,obj){const b=Buffer.from(JSON.stringify(obj));
   res.writeHead(code,{"Content-Type":"application/json","Access-Control-Allow-Origin":CORS,
@@ -34,7 +38,23 @@ function send(res,code,obj){const b=Buffer.from(JSON.stringify(obj));
 const srv=http.createServer((req,res)=>{
   const u=url.parse(req.url,true);
   if(req.method==="OPTIONS")return send(res,204,{});
-  if(u.pathname==="/health")return send(res,200,{ok:true,mailboxes:Object.keys(store).length});
+  if(u.pathname==="/health")return send(res,200,{ok:true,mailboxes:Object.keys(store).length,directory:Object.keys(dir).length});
+  // ---- DIRECTOR public (discovery opt-in; NU E2EE — doar carduri publice) ----
+  if(u.pathname==="/dir/search"&&req.method==="GET"){const q=String(u.query.q||"").trim().toLowerCase();
+    let out=Object.values(dir);
+    if(q)out=out.filter(e=>dirText(e).includes(q));
+    out=out.sort((a,b)=>b.t-a.t).slice(0,30).map(e=>({pub:e.pub,card:e.card}));
+    return send(res,200,{results:out});}
+  if(u.pathname==="/dir"&&req.method==="POST")return readBody(req,res,body=>{
+    let o;try{o=JSON.parse(body);}catch(_){return send(res,400,{error:"json"});}
+    if(!o||!PUBRE.test(o.pub||"")||!o.card||typeof o.card!=="object")return send(res,400,{error:"invalid"});
+    const c=o.card,card={n:String(c.n||"").slice(0,80),d:String(c.d||"").slice(0,60),r:String(c.r||"").slice(0,80),
+      o:Array.isArray(c.o)?c.o.slice(0,5).map(x=>String(x).slice(0,140)):[]};
+    if(!card.n)return send(res,400,{error:"nume gol"});
+    dir[o.pub]={pub:o.pub,card,t:Date.now()};dirty=true;return send(res,200,{ok:true});});
+  if(u.pathname==="/dir/del"&&req.method==="POST")return readBody(req,res,body=>{
+    let o;try{o=JSON.parse(body);}catch(_){return send(res,400,{error:"json"});}
+    if(o&&o.pub&&dir[o.pub]){delete dir[o.pub];dirty=true;}return send(res,200,{ok:true});});
   const m=u.pathname.match(/^\/m\/([^/]+)$/);
   if(!m)return send(res,404,{error:"not found"});
   const id=m[1];

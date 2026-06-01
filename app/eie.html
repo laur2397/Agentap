@@ -370,6 +370,14 @@ h2.title{font-weight:800;font-size:24px;letter-spacing:-.5px;margin:2px 0 4px}
 .exchwrap>summary::-webkit-details-marker{display:none}
 .exchwrap .exchbody{padding:0 15px 15px}
 .exchwrap textarea{background:var(--card2);border:1px solid var(--line);border-radius:10px;color:var(--ink2);padding:9px 11px;resize:none}
+.exchwrap input{background:var(--card2);border:1px solid var(--line);border-radius:10px;color:var(--ink);padding:9px 11px}
+.discitem{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.discitem:last-child{border-bottom:none}
+.discitem .di-main{flex:1;min-width:0}
+.discitem .di-name{font-weight:700;font-size:13px}
+.discitem .di-sub{font-size:11px;color:var(--muted)}
+.discitem .di-off{font-size:11px;color:var(--ink2);margin-top:2px}
+.discitem .di-known{font-size:11px;color:var(--success);font-weight:600;flex:none}
 /* loop4 #8: sabloane notite */
 .ntpl{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:9px}
 .ntpl-lbl{font-size:11px;color:var(--muted)}
@@ -609,6 +617,20 @@ details.why2>summary::-webkit-details-marker{display:none}
         <label class="mfl" for="pasteCode">Ai primit un cod? Lipește-l aici</label>
         <textarea id="pasteCode" rows="3" placeholder="EIE1:…" aria-label="Lipeste codul de conexiune primit" style="width:100%;font-size:11px"></textarea>
         <div style="margin-top:8px"><button class="btn gold sm" data-act="addByCode">＋ Adaugă în rețea</button></div>
+      </div></details>
+    <details class="exchwrap" id="discDet"><summary>🔎 Descoperă oameni (director public) ⌄</summary>
+      <div class="exchbody">
+        <p class="sub" style="margin:8px 0 10px">Caută în directorul public, <b>opt-in</b>. Aici serverul vede cardurile publice ca să le poată căuta — <b>„ce cauți" rămâne mereu privat</b> și nu se publică niciodată. Necesită releu activ.</p>
+        <div style="display:flex;gap:8px">
+          <input id="discoverQ" placeholder="ex: imobiliare, investitor, IT…" aria-label="Caută în director" style="flex:1;font-size:12px" onkeydown="if(event.key==='Enter')discoverSearch()">
+          <button class="btn ghost sm" data-act="discsearch">Caută</button>
+        </div>
+        <div id="discoverResults" style="margin-top:10px"></div>
+        <hr style="border:none;border-top:1px solid var(--line);margin:14px 0">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <button class="btn sm" id="publishBtn" data-act="togglePublish">Publică-mă în director</button>
+          <span class="sub" style="font-size:11px;flex:1;min-width:120px">Apari ca găsibil de alții (doar cardul public).</span>
+        </div>
       </div></details>
     <div class="searchbar"><span class="ic">⌕</span><input id="netSearch" placeholder="Cauta o persoana…" aria-label="Cauta in retea"></div>
     <div id="activeNet"></div>
@@ -1050,7 +1072,7 @@ function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("di
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
 function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
   updateTrustChip();
-  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();applyMatchDiv();setKids($("#matchList"),pipeline(orderMatches(myMatches().filter(matchIndOk))));}else if(VIEW==="retea"){renderConn();renderExchange();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();}}else if(VIEW==="profil"){prof();renderRelay();}
+  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();applyMatchDiv();setKids($("#matchList"),pipeline(orderMatches(myMatches().filter(matchIndOk))));}else if(VIEW==="retea"){renderConn();renderExchange();renderDiscover();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();}}else if(VIEW==="profil"){prof();renderRelay();}
   updateBadges();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 // backlog #7: empty-state ilustrat, consistent
 function estateBox(title,sub,action){return h("div",{class:"estate",style:{padding:"26px 20px"}},
@@ -1136,19 +1158,22 @@ function copyConnCode(){connCode().then(code=>{if(!code){toast("Cod indisponibil
 function parseConnCode(s){s=String(s||"").trim();
   for(const p of ["EIE2:","EIE1:"])if(s.startsWith(p)){try{const o=JSON.parse(unb64utf8(s.slice(5)));if(o&&o.n)return o;}catch(_){}}
   return null;}
+// adauga un card parsat (folosit si de cod, si de director) — returneaza {ok,name|msg,dup?}
+function addParsedCard(card){const nm=clean(card.n).slice(0,80);if(!nm)return {ok:false,msg:"Card fără nume"};
+  if((DB.members||[]).some(m=>m.via==="code"&&m.name===nm))return {ok:false,dup:true,msg:nm+" e deja în rețea"};
+  const id=DB.seq++,color=PAL[id%PAL.length];
+  const pub=(typeof card.k==="string"&&/^[A-Za-z0-9+/=]{40,200}$/.test(card.k))?card.k:null; // cheie publica ECDH (loop5)
+  DB.members.push({id,name:nm,industry:clean(card.d||"").slice(0,60),role:clean(card.r||"").slice(0,80)||"Adăugat",trust:60,color,via:"code",pub,cursor:0});
+  (card.o||[]).slice(0,5).forEach(t=>{const tx=clean(String(t)).slice(0,140);if(tx)DB.items.push({id:DB.seq++,member_id:id,kind:"ofer",text:tx,visible:1,source:"cod de conexiune"});});
+  DB.matches.push({id:DB.seq++,offer_member:id,seek_member:ME,status:"conectat",at:Date.now(),common:[],score:70,via:"code"});
+  logA("Conexiune adăugată: "+nm);return {ok:true,name:nm};}
 function addByCode(){const fld=$("#pasteCode");
   let raw=fld&&fld.value&&fld.value.trim()?fld.value:null;
   if(raw===null){if(fld){fld.focus();toast("Lipește întâi un cod (EIE1:…)");return;}raw=prompt("Lipește codul de conexiune primit (începe cu EIE1:):");if(raw===null)return;}
   const card=parseConnCode(raw);if(!card){toast("Cod invalid sau deteriorat");return;}
-  const nm=clean(card.n).slice(0,80);if(!nm){toast("Cod fără nume");return;}
-  if((DB.members||[]).some(m=>m.via==="code"&&m.name===nm)){if(fld)fld.value="";toast(nm+" e deja adăugat prin cod");return;}
-  const id=DB.seq++,color=PAL[id%PAL.length];
-  const pub=(typeof card.k==="string"&&/^[A-Za-z0-9+/=]{40,200}$/.test(card.k))?card.k:null; // cheie publica ECDH (loop5)
-  DB.members.push({id,name:nm,industry:clean(card.d||"").slice(0,60),role:clean(card.r||"").slice(0,80)||"Adăugat prin cod",trust:60,color,via:"code",pub,cursor:0});
-  (card.o||[]).slice(0,5).forEach(t=>{const tx=clean(String(t)).slice(0,140);if(tx)DB.items.push({id:DB.seq++,member_id:id,kind:"ofer",text:tx,visible:1,source:"cod de conexiune"});});
-  DB.matches.push({id:DB.seq++,offer_member:id,seek_member:ME,status:"conectat",at:Date.now(),common:[],score:70,via:"code"});
+  const res=addParsedCard(card);if(!res.ok){if(fld&&res.dup)fld.value="";toast(res.msg);return;}
   if(fld)fld.value="";
-  logA("Conexiune adăugată prin cod: "+nm);save();loadMembers();$("#member").value=ME;render();toast(nm+" a fost adăugat în rețea");}
+  save();loadMembers();$("#member").value=ME;render();toast(res.name+" a fost adăugat în rețea");}
 /* loop4 #6: encoder QR (byte mode, EC-L, versiuni 1-10) — fara biblioteci; verificat cu decoder real */
 const QR=(function(){
   const EXP=new Array(512),LOG=new Array(256);
@@ -1308,6 +1333,36 @@ async function syncNow(){if(!relayOn()){toast("Activează mai întâi sync-ul (P
     DB.relay.last=Date.now();save();loadMembers();render();hideProc();
     toast("Sync: trimis către "+pushed+", primite "+got+(self?", dispozitiv actualizat":""));
   }catch(e){hideProc();toast("Sync eșuat — verifică adresa releului");}}
+/* loop5 M3: DISCOVERY — director public OPT-IN (NU E2EE; doar carduri publice). Raspuns la #1 (network effects). */
+let DISCOVER=[];
+async function publishMe(){if(!relayBase()){toast("Setează întâi releul (Profil → Sincronizare)");return;}
+  await ensureIdentity();
+  try{const r=await fetch(relayBase()+"/dir",{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify({pub:DB.identity.pub,card:myPublicCard()})});
+    if(!r.ok)throw 0;DB.dir=DB.dir||{};DB.dir.published=true;save();renderDiscover();toast("Ești în director (doar card public, opt-in)");}
+  catch(_){toast("Publicare eșuată");}}
+async function unpublishMe(){if(!relayBase())return;await ensureIdentity();
+  try{await fetch(relayBase()+"/dir/del",{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify({pub:DB.identity.pub})});}catch(_){}
+  DB.dir=DB.dir||{};DB.dir.published=false;save();renderDiscover();toast("Scos din director");}
+function togglePublish(){if(DB.dir&&DB.dir.published)unpublishMe();else publishMe();}
+async function discoverSearch(){if(!relayBase()){toast("Setează întâi releul (Profil → Sincronizare)");return;}
+  const q=clean((($("#discoverQ")||{}).value||"").trim());showProc();
+  try{const r=await fetch(relayBase()+"/dir/search?q="+encodeURIComponent(q));const d=await r.json();hideProc();
+    DISCOVER=d.results||[];renderDiscoverResults();}
+  catch(e){hideProc();toast("Căutare eșuată");}}
+function renderDiscoverResults(){const host=$("#discoverResults");if(!host)return;
+  const mine=DB.identity&&DB.identity.pub,list=DISCOVER.filter(e=>e.pub!==mine);
+  if(!list.length){setKids(host,estateBox("Niciun rezultat","Încearcă alt cuvânt-cheie sau invită oameni să se publice."));return;}
+  setKids(host,...list.map(e=>{const known=(DB.members||[]).some(m=>m.pub===e.pub);
+    return h("div",{class:"discitem"},
+      h("div",{class:"di-main"},h("div",{class:"di-name",text:e.card.n||"?"}),
+        h("div",{class:"di-sub",text:[e.card.r,e.card.d].filter(Boolean).join(" · ")||"—"}),
+        (e.card.o&&e.card.o.length)?h("div",{class:"di-off",text:"Oferă: "+e.card.o.join(", ")}):null),
+      known?h("span",{class:"di-known",text:"în rețea ✓"}):h("button",{class:"btn gold sm","data-act":"discadd","data-pub":e.pub,text:"+ Adaugă"}));}));}
+function discAdd(pub){const e=DISCOVER.find(x=>x.pub===pub);if(!e){toast("Rezultat expirat — caută din nou");return;}
+  const res=addParsedCard(Object.assign({},e.card,{k:pub}));if(!res.ok){toast(res.msg);return;}
+  save();loadMembers();$("#member").value=ME;render();renderDiscoverResults();toast(res.name+" adăugat din director");}
+function renderDiscover(){const b=$("#publishBtn");if(!b)return;const on=!!(DB.dir&&DB.dir.published);
+  b.textContent=on?"În director ✓ — scoate-mă":"Publică-mă în director";b.classList.toggle("gold",on);}
 function renderConn(){const host=$("#connList");if(!host)return;
   const q=(($("#netSearch")||{}).value||"").trim();
   const conn=DB.matches.filter(m=>m.status==="conectat"&&(m.offer_member===ME||m.seek_member===ME)).sort((a,b)=>(b.at||0)-(a.at||0));
@@ -2073,6 +2128,9 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="copyConnCode")copyConnCode();
   else if(a==="toggleQR")toggleConnQR();
   else if(a==="addByCode")addByCode();
+  else if(a==="discsearch")discoverSearch();
+  else if(a==="discadd")discAdd(el.dataset.pub);
+  else if(a==="togglePublish")togglePublish();
   else if(a==="profedit")editProfile();
   else if(a==="profsave")saveProfile();
   else if(a==="profcancel")cancelProfile();
