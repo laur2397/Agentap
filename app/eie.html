@@ -765,7 +765,8 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
 .recdot{width:9px;height:9px;border-radius:50%;background:#ef4444;display:inline-block;margin-right:7px;animation:recpulse 1.1s ease-in-out infinite;vertical-align:middle}
 @keyframes recpulse{0%,100%{opacity:1}50%{opacity:.25}}
 .rectimer{font-variant-numeric:tabular-nums;font-weight:800;font-size:15px;color:var(--ink)}
-.recstat{font-size:11.5px;color:var(--muted)}
+.recstat{font-size:12px;color:var(--primary);font-weight:600;margin-top:10px}
+.rechint{font-size:11px;color:var(--muted);margin-top:4px}
 .rectext{width:100%;margin-top:12px;resize:vertical}
 .recacts{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
 .recsum{margin-top:14px;background:var(--primary-soft);border:1px solid var(--line2);border-radius:14px;padding:14px}
@@ -955,7 +956,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
     <div class="focusbar"><button class="btn ghost sm" data-act="focus" aria-label="Comuta modul Focus">🎯 Focus</button></div>
     <div id="focusPanel"></div>
     <div class="seccard" id="recCard"><div class="sec nobar"><span class="si">🎙️</span>Reportofon apel</div>
-      <p class="sub">Captăm prin <b>microfon</b> (pune apelul pe <b>difuzor</b> ca să prindă ambele voci) și-ți facem un rezumat. Nu putem accesa direct apelul telefonic sau WhatsApp. Audio-ul nu se păstrează după transcriere; transcrierea live folosește servicii ale browserului — fragmente pot fi procesate de browser, în afara controlului aplicației.</p>
+      <p class="sub">Merge cu <b>orice apel</b> (Signal, WhatsApp, telefon) pus pe <b>difuzor</b> — captăm prin microfon și transcriem ce se vorbește, apoi facem rezumatul. <b>Nu salvăm audio</b> de redat. Notă onestă: pe un singur telefon trebuie să ții Cercul deschis pe ecran (când treci în altă aplicație, telefonul oprește microfonul); ideal pe difuzor sau pe un al 2-lea dispozitiv.</p>
       <div id="recBody"></div>
     </div>
     <div class="seccard"><div class="sec"><span class="si">📅</span>Azi</div>
@@ -1774,10 +1775,11 @@ function renderRec(){const host=$("#recBody");if(!host)return;const r=DB.rec||{}
   if(REC.on){setKids(host,
     h("div",{class:"recctrl"},
       h("button",{class:"btn sm recbtn rec","data-act":"recStop"},h("span",{class:"recdot"}),h("span",{text:"Stop"})),
-      h("span",{class:"rectimer",id:"recTimer",text:recTimeStr()}),
-      h("span",{class:"recstat",text:REC.sr?"Ascult… vorbiți normal":"Înregistrez (transcriere la stop)"})),
-    h("textarea",{id:"recText",class:"rectext",rows:"6","aria-label":"Transcriere",readonly:"",text:r.transcript||"Transcrierea apare aici…"}));
-    const t=$("#recText");if(t)t.value=r.transcript||"";return;}
+      h("span",{class:"rectimer",id:"recTimer",text:recTimeStr()})),
+    h("div",{class:"recstat",text:REC.sr?"🎧 Transcriu live — nu se salvează audio":"🎙️ Înregistrez (audio temporar, doar pentru transcriere, șters după)"}),
+    h("div",{class:"rechint",text:"Pune apelul pe difuzor și ține Cercul deschis pe ecran."}),
+    h("textarea",{id:"recText",class:"rectext",rows:"7","aria-label":"Transcriere live",readonly:""}));
+    const t=$("#recText");if(t){t.value=r.transcript||"";t.scrollTop=t.scrollHeight;}return;}
   // oprit
   const kids=[h("div",{class:"recctrl"},h("button",{class:"btn gold sm","data-act":"recStart",text:"● Înregistrează"}),
     (!srCtor()?h("span",{class:"recstat",text:"Transcriere live indisponibilă aici → folosim AI la stop"}):null))];
@@ -1802,25 +1804,34 @@ async function recStart(){if(REC.on)return;
   try{REC.stream=await navigator.mediaDevices.getUserMedia({audio:true});}
   catch(e){toast("Acces la microfon refuzat — permite-l din setările browserului");return;}
   REC.chunks=[];REC.audioBlob=null;DB.rec=DB.rec||{};DB.rec.summary="";
+  // tine ecranul aprins cat inregistrezi (mai stabil)
+  try{if(navigator.wakeLock){REC.wake=await navigator.wakeLock.request("screen");}}catch(_){}
   // QA: permisiune revocată / microfon întrerupt din OS în timpul sesiunii -> oprire grațioasă
   try{REC.stream.getTracks().forEach(t=>{t.onended=()=>{if(REC.on){toast("Microfon întrerupt — am oprit înregistrarea");recStop();}};});}catch(_){}
-  try{REC.mr=new MediaRecorder(REC.stream);REC.mr.ondataavailable=e=>{if(e.data&&e.data.size)REC.chunks.push(e.data);};
-    REC.mr.onstop=()=>{try{REC.audioBlob=new Blob(REC.chunks,{type:REC.mr.mimeType||"audio/webm"});}catch(_){}renderRec();};
-    REC.mr.onerror=()=>{if(REC.on){toast("Eroare la înregistrare — am oprit");recStop();}};
-    REC.mr.start();}catch(_){REC.mr=null;}
-  const SR=srCtor();
-  if(SR){try{const rec=new SR();rec.lang="ro-RO";rec.continuous=true;rec.interimResults=true;
-    rec.onresult=ev=>{let fin="";for(let i=ev.resultIndex;i<ev.results.length;i++){if(ev.results[i].isFinal)fin+=ev.results[i][0].transcript+" ";}
-      if(fin){DB.rec.transcript=(DB.rec.transcript||"")+fin;const t=$("#recText");if(t)t.value=DB.rec.transcript;}};
-    rec.onerror=ev=>{const e=ev&&ev.error;if(e==="not-allowed"||e==="service-not-allowed"){REC.sr=null;}}; // permisiune STT refuzată -> renunțăm la live, rămâne MediaRecorder
-    rec.onend=()=>{if(REC.on&&REC.sr){try{rec.start();}catch(_){}}};
-    rec.start();REC.sr=rec;}catch(_){REC.sr=null;}}
+  const SR=srCtor();REC.live=!!SR;
+  if(SR){ // TRANSCRIERE LIVE — fara audio salvat (preferat)
+    try{const rec=new SR();rec.lang="ro-RO";rec.continuous=true;rec.interimResults=true;
+      rec.onresult=ev=>{let fin="";for(let i=ev.resultIndex;i<ev.results.length;i++){if(ev.results[i].isFinal)fin+=ev.results[i][0].transcript+" ";}
+        if(fin){DB.rec.transcript=(DB.rec.transcript||"")+fin;const t=$("#recText");if(t){t.value=DB.rec.transcript;t.scrollTop=t.scrollHeight;}}};
+      rec.onerror=ev=>{const e=ev&&ev.error;if(e==="not-allowed"||e==="service-not-allowed"){REC.sr=null;}};
+      rec.onend=()=>{if(REC.on&&REC.sr){try{rec.start();}catch(_){}}};
+      rec.start();REC.sr=rec;}catch(_){REC.sr=null;REC.live=false;}}
+  if(!REC.live){ // fara STT live (ex. iPhone) -> inregistram audio TEMPORAR doar pt. transcriere AI, sters dupa
+    try{REC.mr=new MediaRecorder(REC.stream);REC.mr.ondataavailable=e=>{if(e.data&&e.data.size)REC.chunks.push(e.data);};
+      REC.mr.onstop=()=>{try{REC.audioBlob=new Blob(REC.chunks,{type:REC.mr.mimeType||"audio/webm"});}catch(_){}renderRec();};
+      REC.mr.onerror=()=>{if(REC.on){toast("Eroare la înregistrare — am oprit");recStop();}};
+      REC.mr.start();}catch(_){REC.mr=null;}}
+  // daca pleci din app (treci la apel), browserul suspenda microfonul -> reluam la revenire
+  REC._vis=()=>{if(!document.hidden&&REC.on&&REC.sr){try{REC.sr.start();}catch(_){}}};
+  document.addEventListener("visibilitychange",REC._vis);
   REC.on=true;REC.t0=Date.now();REC.timer=setInterval(updRecTimer,1000);renderRec();}
 function recStop(){if(!REC.on)return;REC.on=false;clearInterval(REC.timer);
+  try{if(REC._vis){document.removeEventListener("visibilitychange",REC._vis);REC._vis=null;}}catch(_){}
+  try{if(REC.wake){REC.wake.release();REC.wake=null;}}catch(_){}
   try{if(REC.sr)REC.sr.stop();}catch(_){}REC.sr=null;
   try{if(REC.mr&&REC.mr.state!=="inactive")REC.mr.stop();}catch(_){}
   try{if(REC.stream)REC.stream.getTracks().forEach(t=>t.stop());}catch(_){}
-  save();renderRec();toast("Înregistrare oprită");}
+  save();renderRec();toast("Oprit — fac rezumatul când vrei");}
 async function recTr(){if(!REC.audioBlob){toast("Nu există audio de transcris");return;}
   if(!aiOn()){toast("Configurează întâi asistentul AI (pentru transcriere)");return;}
   showProc();try{const txt=await aiTranscribe(REC.audioBlob);DB.rec.transcript=(txt||"").trim();
