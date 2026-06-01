@@ -958,7 +958,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
     </div>
     <div class="focusbar"><button class="btn ghost sm" data-act="focus" aria-label="Comuta modul Focus">🎯 Focus</button></div>
     <div id="focusPanel"></div>
-    <div class="seccard" id="recCard"><div class="sec nobar"><span class="si">🎙️</span>Reportofon apel <span class="recver">v3.2</span></div>
+    <div class="seccard" id="recCard"><div class="sec nobar"><span class="si">🎙️</span>Reportofon apel <span class="recver">v3.3</span></div>
       <p class="sub">Merge cu <b>orice apel</b> (Signal, WhatsApp, telefon) pus pe <b>difuzor</b> — captăm prin microfon și transcriem ce se vorbește, apoi facem rezumatul. <b>Nu salvăm audio</b> de redat. Notă onestă: pe un singur telefon trebuie să ții Cercul deschis pe ecran (când treci în altă aplicație, telefonul oprește microfonul); ideal pe difuzor sau pe un al 2-lea dispozitiv.</p>
       <div id="recBody"></div>
     </div>
@@ -1659,7 +1659,7 @@ const AI_LBL={managed:"Standard (prin releu)",local:"Local — rămâne pe dispo
 const AI_MODEL={openai:"gpt-4o-mini",anthropic:"claude-3-5-sonnet-latest",gemini:"gemini-2.0-flash",openrouter:"openai/gpt-4o-mini",local:"llama3.1",managed:"",custom:""};
 const AI_HINT={
   managed:"AI gata configurat, fără cheie — merge pe telefon. Necesită ca releul (Profil → Sincronizare) să fie deployat cu o cheie AI. Conversația trece prin releul tău.",
-  local:"⚠ Doar pe un CALCULATOR cu Ollama/LM Studio pornit (nu funcționează pe telefon). Pornește Ollama cu OLLAMA_ORIGINS='*'.",
+  local:"⚠ Offline, doar pe un CALCULATOR (nu pe telefon). Ollama face REZUMATUL. Pentru TRANSCRIERE offline pune Base URL la un server Whisper local OpenAI-compatibil (LocalAI sau whisper.cpp, ex. http://localhost:8080/v1). Ollama singur nu transcrie audio.",
   openai:"Pune cheia ta OpenAI (platform.openai.com). Merge pe telefon. Conversația pleacă la OpenAI.",
   anthropic:"Pune cheia ta Anthropic (console.anthropic.com). Merge pe telefon. Conversația pleacă la Anthropic.",
   gemini:"Pune cheia ta Google AI Studio (aistudio.google.com). Merge pe telefon. Conversația pleacă la Google.",
@@ -1839,7 +1839,13 @@ async function recStart(){if(REC.on)return;
     rec.start();REC.sr=rec;}catch(_){REC.sr=null;}}
   REC._vis=()=>{if(!document.hidden&&REC.on&&REC.sr){try{REC.sr.start();}catch(_){}}};
   document.addEventListener("visibilitychange",REC._vis);
+  recBeep(); // ton audibil la start = notificare de consimtamant (ambele parti aud ca se inregistreaza)
   REC.on=true;REC.t0=Date.now();REC.timer=setInterval(updRecTimer,1000);renderRec();}
+function recBeep(){try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;const ac=new AC();
+  const beep=(t,f)=>{const o=ac.createOscillator(),g=ac.createGain();o.type="sine";o.frequency.value=f;o.connect(g);g.connect(ac.destination);
+    g.gain.setValueAtTime(0.0001,ac.currentTime+t);g.gain.exponentialRampToValueAtTime(0.18,ac.currentTime+t+0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001,ac.currentTime+t+0.18);o.start(ac.currentTime+t);o.stop(ac.currentTime+t+0.2);};
+  beep(0,880);beep(0.22,1100);setTimeout(()=>{try{ac.close();}catch(_){}},900);}catch(_){}}
 function recStop(){if(!REC.on)return;REC.on=false;clearInterval(REC.timer);
   try{if(REC._vis){document.removeEventListener("visibilitychange",REC._vis);REC._vis=null;}}catch(_){}
   try{if(REC.wake){REC.wake.release();REC.wake=null;}}catch(_){}
@@ -1881,7 +1887,7 @@ function recSave(){const r=DB.rec||{};const who=r.who?mem(+r.who):null;
   logA("Rezumat de apel salvat în Jurnal"+(who?(" (cu "+who.name+")"):""));save();
   toast(who?("Salvat — apare și în brief-ul lui "+who.name.split(" ")[0]):"Salvat în Jurnal (#apel)");}
 function recClear(){if(!confirm("Ștergi transcrierea și rezumatul curent?"))return;DB.rec=DB.rec||{};DB.rec.transcript="";DB.rec.summary="";REC.audioBlob=null;save();renderRec();}
-function aiAudioOk(){const p=aiCfg().provider;return p==="openai"||p==="managed"||p==="gemini"||p==="custom";}
+function aiAudioOk(){const p=aiCfg().provider;return p==="openai"||p==="managed"||p==="gemini"||p==="custom"||p==="local";}
 async function blobB64(blob){return new Promise((res,rej)=>{const fr=new FileReader();fr.onerror=()=>rej(new Error("citire audio"));fr.onload=()=>res(String(fr.result).split(",")[1]||"");fr.readAsDataURL(blob);});}
 async function aiTranscribe(blob){const c=aiCfg();
   // GEMINI: transcriere prin audio inline (are tier gratuit)
