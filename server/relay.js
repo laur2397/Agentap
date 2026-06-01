@@ -53,6 +53,18 @@ const srv=http.createServer((req,res)=>{
   const u=url.parse(req.url,true);
   if(req.method==="OPTIONS")return send(res,204,{});
   if(u.pathname==="/health")return send(res,200,{ok:true,mailboxes:Object.keys(store).length,directory:Object.keys(dir).length,ai:!!process.env.AI_KEY});
+  // ---- AI transcribe (Whisper) prin releu: forward raw multipart catre furnizor cu cheia server ----
+  if(u.pathname==="/ai/transcribe"&&req.method==="POST"){
+    if(!process.env.AI_KEY)return send(res,402,{error:"AI neconfigurat pe releu"});
+    const ch=[];let len=0;req.on("data",c=>{len+=c.length;if(len>26214400)req.destroy();else ch.push(c);}); // 25MB cap
+    req.on("end",async()=>{const buf=Buffer.concat(ch);
+      const aiBase=(process.env.AI_BASE||"https://api.openai.com/v1").replace(/\/+$/,"");
+      try{const up=await fetch(aiBase+"/audio/transcriptions",{method:"POST",
+        headers:{"Authorization":"Bearer "+process.env.AI_KEY,"Content-Type":req.headers["content-type"]||"application/octet-stream"},body:buf});
+        if(!up.ok)return send(res,502,{error:"transcriere furnizor HTTP "+up.status});
+        const d=await up.json();return send(res,200,{text:d.text||""});
+      }catch(e){return send(res,502,{error:"proxy transcribe esuat: "+(e&&e.message||e)});}});
+    return;}
   // ---- AI proxy „Standard" (optional): foloseste cheia AI de pe server (env), nu cea a userului ----
   // Config env: AI_KEY (obligatoriu pt. activare), AI_BASE (def OpenAI), AI_MODEL (def gpt-4o-mini).
   if(u.pathname==="/ai/chat"&&req.method==="POST")return readBody(req,res,async body=>{
