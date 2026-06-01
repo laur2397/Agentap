@@ -729,6 +729,17 @@ details.why2>summary::-webkit-details-marker{display:none}
         <button class="btn gold sm" data-act="syncNow">⟳ Sync acum</button>
       </div>
       <p id="relayStatus" style="font-size:11px;color:var(--muted);margin-top:9px"></p></div>
+    <div class="panel"><h3>Plan <span class="badge priv">freemium</span></h3>
+      <p id="planLine" style="font-size:12.5px;color:var(--ink2);line-height:1.55"></p>
+      <div class="about-col" style="margin-top:4px"><div class="about-h good">Free</div>
+        <ul class="about-list"><li>Local-Only + backup criptat — pentru totdeauna.</li><li>Sync E2EE cu până la 3 contacte.</li><li>Discovery: căutare + publicare.</li></ul></div>
+      <div class="about-col"><div class="about-h good">Pro</div>
+        <ul class="about-list"><li>Sync nelimitat cu toate contactele.</li><li>Multi-device (mai multe telefoane/laptop).</li><li>Prioritate la suport.</li></ul></div>
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn gold sm" id="planProBtn" data-act="planPro">Treci la Pro</button>
+        <button class="btn ghost sm" id="planFreeBtn" data-act="planFree" style="display:none">Revino la Free</button>
+      </div>
+      <p style="font-size:11px;color:var(--warn);margin-top:9px">Demo: upgrade-ul nu e conectat la o plată reală încă. În producție, Pro se validează <b>server-side</b> (token de drept semnat) + procesator de plăți (ex. Stripe).</p></div>
     <div class="panel"><h3>Preferinte <span class="badge vis">acces</span></h3>
       <div class="toggle"><span>Reduce animatiile <span style="color:var(--muted);font-size:11px">(accesibilitate)</span></span>
         <div class="sw" id="rmSw" role="switch" tabindex="0" aria-label="Reduce animatiile" onclick="toggleRM()"><i></i></div></div>
@@ -1072,7 +1083,7 @@ function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("di
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
 function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
   updateTrustChip();
-  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();applyMatchDiv();setKids($("#matchList"),pipeline(orderMatches(myMatches().filter(matchIndOk))));}else if(VIEW==="retea"){renderConn();renderExchange();renderDiscover();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();}}else if(VIEW==="profil"){prof();renderRelay();}
+  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();applyMatchDiv();setKids($("#matchList"),pipeline(orderMatches(myMatches().filter(matchIndOk))));}else if(VIEW==="retea"){renderConn();renderExchange();renderDiscover();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();}}else if(VIEW==="profil"){prof();renderRelay();renderPlan();}
   updateBadges();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 // backlog #7: empty-state ilustrat, consistent
 function estateBox(title,sub,action){return h("div",{class:"estate",style:{padding:"26px 20px"}},
@@ -1325,14 +1336,26 @@ async function syncSelfPull(){await ensureIdentity();const mb=await mailboxId(DB
     const me=mem(ME);if(me&&newest.prof){me.name=clean(newest.prof.name||me.name).slice(0,80)||me.name;me.industry=clean(newest.prof.industry||"").slice(0,60);me.role=clean(newest.prof.role||me.role).slice(0,80)||me.role;}
     DB.selfV=newest.t;save();APPLYING=false;return 1;}
   return 0;}
+// loop5 M3b: freemium (monetizare, #3). Gating client-side (UX); enforcement REAL = server-side (vezi PIVOT_DESIGN).
+const FREE_SYNC_CAP=3;
+function planTier(){return (DB.plan&&DB.plan.tier)==="pro"?"pro":"free";}
+function isPro(){return planTier()==="pro";}
+function setPlan(t){DB.plan={tier:(t==="pro"?"pro":"free"),since:Date.now()};save();renderPlan();
+  toast(t==="pro"?"Plan Pro activ (demo — fără plată reală încă)":"Revenit la Free");}
 async function syncNow(){if(!relayOn()){toast("Activează mai întâi sync-ul (Profil → Sincronizare)");return;}
-  const peers=(DB.members||[]).filter(m=>m.via==="code"&&m.pub);
+  const allPeers=(DB.members||[]).filter(m=>m.via==="code"&&m.pub);
+  const peers=isPro()?allPeers:allPeers.slice(0,FREE_SYNC_CAP);
+  const capped=allPeers.length>peers.length;
   let pushed=0,got=0,self=0;showProc();
   try{for(const m of peers){try{if(await syncPushTo(m))pushed++;got+=await syncPullFrom(m);}catch(_){}}
-    try{await syncSelfPush();self=await syncSelfPull();}catch(_){}
+    if(isPro()){try{await syncSelfPush();self=await syncSelfPull();}catch(_){}} // multi-device = Pro
     DB.relay.last=Date.now();save();loadMembers();render();hideProc();
-    toast("Sync: trimis către "+pushed+", primite "+got+(self?", dispozitiv actualizat":""));
+    toast("Sync: trimis către "+pushed+", primite "+got+(self?", dispozitiv actualizat":"")
+      +(capped?" · Plan Free: 3 contacte (Pro = nelimitat)":""));
   }catch(e){hideProc();toast("Sync eșuat — verifică adresa releului");}}
+function renderPlan(){const line=$("#planLine");if(!line)return;const pro=isPro();
+  line.textContent=pro?"Ești pe Pro: sync nelimitat + multi-device.":("Ești pe Free: sync cu max "+FREE_SYNC_CAP+" contacte, fără multi-device.");
+  const bp=$("#planProBtn"),bf=$("#planFreeBtn");if(bp)bp.style.display=pro?"none":"";if(bf)bf.style.display=pro?"":"none";}
 /* loop5 M3: DISCOVERY — director public OPT-IN (NU E2EE; doar carduri publice). Raspuns la #1 (network effects). */
 let DISCOVER=[];
 async function publishMe(){if(!relayBase()){toast("Setează întâi releul (Profil → Sincronizare)");return;}
@@ -2131,6 +2154,8 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="discsearch")discoverSearch();
   else if(a==="discadd")discAdd(el.dataset.pub);
   else if(a==="togglePublish")togglePublish();
+  else if(a==="planPro")setPlan("pro");
+  else if(a==="planFree")setPlan("free");
   else if(a==="profedit")editProfile();
   else if(a==="profsave")saveProfile();
   else if(a==="profcancel")cancelProfile();
