@@ -5,7 +5,7 @@
 <!-- CSP: connect-src restrans STRICT la origin-ul releului (loop5: implicit doar localhost; self-host isi adauga domeniul).
      Local-Only ramane default (sync e opt-in). Releul e zero-knowledge: vede doar ciphertext E2EE, nu continut.
      'unsafe-inline' la script e necesar pt. arhitectura single-file; exfiltrarea catre ALTE domenii ramane blocata. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; connect-src http://127.0.0.1:* http://localhost:*; base-uri 'none'; form-action 'none'; frame-src 'none'; object-src 'none'; require-trusted-types-for 'script'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; connect-src http://127.0.0.1:* http://localhost:* https://api.openai.com https://api.anthropic.com https://generativelanguage.googleapis.com https://openrouter.ai; base-uri 'none'; form-action 'none'; frame-src 'none'; object-src 'none'; require-trusted-types-for 'script'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Cercul EIE — Network Capital</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -727,6 +727,24 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
 .digest>*{position:relative;z-index:1}
 .btn.gold{transition:transform .2s var(--ease),box-shadow .3s var(--ease),filter .3s var(--ease)}
 .btn.gold:hover{filter:brightness(1.04);box-shadow:0 14px 34px -8px var(--glow),inset 0 1px 0 rgba(255,255,255,.5)}
+/* ===== Asistent AI ===== */
+.aiwrap{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px;box-shadow:var(--shadow),inset 0 1px 0 var(--hi);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
+.aibar{display:flex;align-items:center;gap:8px}
+.aibadge{font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:4px 11px;border-radius:30px;background:var(--card2);color:var(--muted);border:1px solid var(--line)}
+.aibadge.on{background:var(--primary-soft);color:var(--primary);border-color:var(--line2)}
+.aicfg{margin-top:12px}.aicfg summary{cursor:pointer;font-size:12.5px;color:var(--primary);font-weight:600;list-style:none}
+.aicfg summary::-webkit-details-marker{display:none}
+.aicfgbody{padding-top:8px}
+.aitoggle{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink2);margin-top:12px;cursor:pointer}
+.aiwarn{font-size:11px;color:var(--warn-ink);margin-top:9px;line-height:1.5}
+.aichat{display:flex;flex-direction:column;gap:9px;margin-top:14px;max-height:340px;overflow-y:auto;padding:2px}
+.aimsg{max-width:86%;padding:10px 13px;border-radius:16px;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word}
+.aimsg.u{align-self:flex-end;background:var(--accent-grad);color:var(--on-gold);border-bottom-right-radius:5px}
+.aimsg.a{align-self:flex-start;background:var(--card2);color:var(--ink);border:1px solid var(--line);border-bottom-left-radius:5px}
+.aimsg.sys{align-self:center;background:transparent;color:var(--muted);font-size:11.5px;text-align:center;max-width:100%}
+.airow{display:flex;gap:8px;margin-top:12px}
+.airow input{flex:1}
+.aiempty{color:var(--muted);font-size:12.5px;text-align:center;padding:18px 8px}
 </style>
 </head>
 <body>
@@ -826,6 +844,42 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
     <div class="eyebrow">Asistent</div><h2 class="title">Secretara ta</h2>
     <p class="sub">Intalniri, notite si pregatire — intr-un singur loc.</p>
     <div id="secSummary" class="secsum"></div>
+    <div class="sec" style="margin-top:6px">Asistent AI</div>
+    <div class="aiwrap" id="aiWrap">
+      <div class="aibar">
+        <span class="aibadge" id="aiBadge">Dezactivat</span>
+        <button class="btn ghost sm" data-act="aiSettings" id="aiCfgBtn" style="margin-left:auto">⚙ Setări</button>
+      </div>
+      <details class="aicfg" id="aiCfg"><summary>Configurează asistentul AI</summary>
+        <div class="aicfgbody">
+          <p class="sub" style="margin:8px 0 10px">Alege furnizorul. <b>Local</b> = rămâne pe dispozitiv (privat). <b>Cloud</b> = conversația pleacă la furnizor, cu cheia <b>ta</b> (stocată criptat doar local). Implicit oprit.</p>
+          <label class="mfl" for="aiProvider">Furnizor</label>
+          <select id="aiProvider" aria-label="Furnizor AI">
+            <option value="off">Dezactivat</option>
+            <option value="local">Local — Ollama / LM Studio (privat)</option>
+            <option value="openai">OpenAI (cheia ta)</option>
+            <option value="anthropic">Anthropic Claude (cheia ta)</option>
+            <option value="gemini">Google Gemini (cheia ta)</option>
+            <option value="openrouter">OpenRouter (cheia ta)</option>
+            <option value="custom">Endpoint OpenAI-compatibil (custom)</option>
+          </select>
+          <label class="mfl" for="aiBase" id="aiBaseLbl">Adresă (Base URL)</label>
+          <input id="aiBase" placeholder="http://localhost:11434/v1" aria-label="Base URL">
+          <label class="mfl" for="aiKey" id="aiKeyLbl">Cheie API (rămâne criptată local)</label>
+          <input id="aiKey" type="password" placeholder="sk-… (nu e nevoie la Local)" aria-label="Cheie API" autocomplete="off">
+          <label class="mfl" for="aiModel">Model</label>
+          <input id="aiModel" placeholder="ex: llama3.1 / gpt-4o-mini / claude-… / gemini-…" aria-label="Model">
+          <label class="aitoggle"><input type="checkbox" id="aiCtx"> Permite asistentului să vadă rezumatul tău local (task-uri, întâlniri) în conversație</label>
+          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn gold sm" data-act="aiSave">Salvează</button>
+            <button class="btn ghost sm" data-act="aiClear">Șterge configurarea</button>
+          </div>
+          <p class="aiwarn" id="aiPriv"></p>
+        </div>
+      </details>
+      <div id="aiChat" class="aichat"></div>
+      <div class="airow"><input id="aiInput" placeholder="Întreabă asistentul…" aria-label="Mesaj către asistent" onkeydown="if(event.key==='Enter')aiSend()"><button class="btn gold sm" data-act="aiSend" id="aiSendBtn">Trimite</button></div>
+    </div>
     <div class="focusbar"><button class="btn ghost sm" data-act="focus" aria-label="Comuta modul Focus">🎯 Focus</button></div>
     <div id="focusPanel"></div>
     <div class="sec">Azi</div>
@@ -1266,7 +1320,7 @@ function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("di
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
 function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
   updateTrustChip();
-  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();applyMatchDiv();setKids($("#matchList"),pipeline(orderMatches(myMatches().filter(matchIndOk))));}else if(VIEW==="retea"){renderConn();renderExchange();renderDiscover();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();}}else if(VIEW==="profil"){prof();renderRelay();renderPlan();}
+  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();applyMatchDiv();setKids($("#matchList"),pipeline(orderMatches(myMatches().filter(matchIndOk))));}else if(VIEW==="retea"){renderConn();renderExchange();renderDiscover();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderAi();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();}}else if(VIEW==="profil"){prof();renderRelay();renderPlan();}
   updateBadges();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 // backlog #7: empty-state ilustrat, consistent
 function estateBox(title,sub,action){return h("div",{class:"estate",style:{padding:"26px 20px"}},
@@ -1511,6 +1565,75 @@ function relaySave(){const url=$("#relayUrl");if(!url)return;const v=clean(url.v
 function relayToggle(){DB.relay=DB.relay||{};
   if(!DB.relay.on&&!relayBase()){toast("Întâi salvează adresa releului");return;}
   DB.relay.on=!DB.relay.on;save();renderRelay();toast(DB.relay.on?"Sync activat (opt-in)":"Sync oprit — Local-Only");}
+/* ===== Asistent AI (loop6): furnizor plugabil, local-first, opt-in ===== */
+const AI_DEF={local:"http://localhost:11434/v1",openai:"https://api.openai.com/v1",openrouter:"https://openrouter.ai/api/v1",anthropic:"https://api.anthropic.com",gemini:"https://generativelanguage.googleapis.com"};
+const AI_LBL={local:"Local — rămâne pe dispozitiv (privat)",openai:"OpenAI",anthropic:"Anthropic Claude",gemini:"Google Gemini",openrouter:"OpenRouter",custom:"endpoint custom"};
+function aiCfg(){return DB.ai||{provider:"off"};}
+function aiOn(){const c=aiCfg();return c.provider&&c.provider!=="off";}
+function aiKind(p){return p==="anthropic"?"anthropic":p==="gemini"?"gemini":"openai";} // familia de API
+function aiBaseFor(c){return (c.base&&c.base.trim())||AI_DEF[c.provider]||"";}
+function renderAi(){const c=aiCfg();
+  const badge=$("#aiBadge");if(badge){badge.textContent=aiOn()?(c.provider==="local"?"Local · privat":"Cloud · "+(AI_LBL[c.provider]||c.provider)):"Dezactivat";badge.classList.toggle("on",aiOn());}
+  const prov=$("#aiProvider");if(prov&&document.activeElement!==prov)prov.value=c.provider||"off";
+  const base=$("#aiBase");if(base&&document.activeElement!==base)base.value=c.base||"";if(base)base.placeholder=AI_DEF[c.provider]||"http://localhost:11434/v1";
+  const key=$("#aiKey");if(key&&document.activeElement!==key)key.value=c.key||"";
+  const mdl=$("#aiModel");if(mdl&&document.activeElement!==mdl)mdl.value=c.model||"";
+  const ctx=$("#aiCtx");if(ctx)ctx.checked=!!c.ctx;
+  const kl=$("#aiKeyLbl");if(kl)kl.style.display=(c.provider==="local")?"none":"";
+  const ki=$("#aiKey");if(ki)ki.style.display=(c.provider==="local")?"none":"";
+  const priv=$("#aiPriv");if(priv)priv.textContent=!aiOn()?"":(c.provider==="local"
+    ?"🔒 Local: conversația rămâne pe dispozitivul tău; nimic nu pleacă spre cloud."
+    :"⚠ Cloud: conversația va pleca la "+(AI_LBL[c.provider]||c.provider)+" cu cheia ta. Cheia e stocată criptat doar local.");
+  renderAiChat();}
+function aiSettings(){const d=$("#aiCfg");if(d)d.open=!d.open;}
+function aiSave(){const p=($("#aiProvider")||{}).value||"off";
+  DB.ai={provider:p,base:clean(($("#aiBase")||{}).value||"").trim().slice(0,200),
+    key:(($("#aiKey")||{}).value||"").trim().slice(0,400),model:clean(($("#aiModel")||{}).value||"").trim().slice(0,80),
+    ctx:!!($("#aiCtx")||{}).checked};
+  if(p!=="off"&&p!=="local"&&!DB.ai.key){toast("Pune cheia API pentru "+(AI_LBL[p]||p));return;}
+  save();renderAi();toast(p==="off"?"Asistent dezactivat":"Asistent configurat ("+(AI_LBL[p]||p)+")");}
+function aiClear(){DB.ai={provider:"off"};DB.aichat=[];save();renderAi();toast("Configurare AI ștearsă");}
+function renderAiChat(){const host=$("#aiChat");if(!host)return;const msgs=DB.aichat||[];
+  if(!aiOn()){setKids(host,h("div",{class:"aiempty",text:"Configurează un asistent (local sau cu cheia ta) ca să începi o conversație."}));return;}
+  if(!msgs.length){setKids(host,h("div",{class:"aiempty",text:"Salut! Sunt secretara ta AI. Întreabă-mă despre întâlniri, mesaje de trimis, idei de abordare…"}));return;}
+  setKids(host,...msgs.map(m=>h("div",{class:"aimsg "+(m.role==="user"?"u":m.role==="system"?"sys":"a"),text:m.content})));
+  host.scrollTop=host.scrollHeight;}
+function aiContext(){const me=mem(ME)||{};const td=today();
+  const tasks=(DB.tasks||[]).filter(t=>t.member_id===ME&&!t.done).slice(0,8).map(t=>"- "+t.text+(t.due?" (termen "+t.due+")":"")).join("\n");
+  const meets=(DB.meetings||[]).filter(x=>x.status==="confirmat"&&(x.a===ME||x.b===ME)&&(x.when||"").slice(0,10)>=td).slice(0,5)
+    .map(x=>{const c=mem(x.a===ME?x.b:x.a)||{};return "- "+fmtWhen(x.when)+" cu "+(c.name||"?");}).join("\n");
+  return `Utilizator: ${me.name||"?"} (${me.industry||"—"}).\nTask-uri active:\n${tasks||"(niciunul)"}\nÎntâlniri viitoare:\n${meets||"(niciuna)"}`;}
+async function aiSend(){if(!aiOn()){toast("Configurează întâi asistentul (⚙ Setări)");return;}
+  const inp=$("#aiInput");const text=clean((inp&&inp.value||"").trim());if(!text)return;
+  inp.value="";DB.aichat=DB.aichat||[];DB.aichat.push({role:"user",content:text});renderAiChat();
+  const sys="Ești secretara AI a unei aplicații private de business networking numite Cercul. Răspunde concis, util și practic, în limba română."+(aiCfg().ctx?("\n\nContext local (folosește-l doar dacă e relevant):\n"+aiContext()):"");
+  const msgs=[{role:"system",content:sys},...DB.aichat.filter(m=>m.role!=="system").slice(-12)];
+  const btn=$("#aiSendBtn");if(btn){btn.disabled=true;btn.textContent="…";}
+  const host=$("#aiChat");if(host){host.appendChild(h("div",{class:"aimsg a",id:"aiTyping",text:"scrie…"}));host.scrollTop=host.scrollHeight;}
+  try{const reply=await aiCall(msgs);DB.aichat.push({role:"assistant",content:reply||"(răspuns gol)"});save();renderAiChat();}
+  catch(e){const t=$("#aiTyping");if(t)t.remove();
+    DB.aichat.push({role:"system",content:"Eroare: "+(e&&e.message||e)+". Verifică furnizorul/cheia/adresa (și CORS la endpoint local)."});save();renderAiChat();}
+  finally{if(btn){btn.disabled=false;btn.textContent="Trimite";}}}
+async function aiCall(messages){const c=aiCfg();const base=aiBaseFor(c).replace(/\/+$/,"");const model=c.model||"";
+  const kind=aiKind(c.provider);
+  if(kind==="anthropic"){
+    const sys=messages.find(m=>m.role==="system");const conv=messages.filter(m=>m.role!=="system");
+    const r=await fetch(base+"/v1/messages",{method:"POST",headers:{"Content-Type":"application/json","x-api-key":c.key,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
+      body:JSON.stringify({model:model||"claude-3-5-sonnet-latest",max_tokens:1024,system:sys?sys.content:undefined,messages:conv.map(m=>({role:m.role,content:m.content}))})});
+    if(!r.ok)throw new Error("HTTP "+r.status);const d=await r.json();return (d.content||[]).map(p=>p.text||"").join("").trim();}
+  if(kind==="gemini"){
+    const sys=messages.find(m=>m.role==="system");const conv=messages.filter(m=>m.role!=="system");
+    const r=await fetch(base+"/v1beta/models/"+(model||"gemini-2.0-flash")+":generateContent?key="+encodeURIComponent(c.key),
+      {method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({systemInstruction:sys?{parts:[{text:sys.content}]}:undefined,contents:conv.map(m=>({role:m.role==="assistant"?"model":"user",parts:[{text:m.content}]}))})});
+    if(!r.ok)throw new Error("HTTP "+r.status);const d=await r.json();const c0=(d.candidates||[])[0];
+    return ((c0&&c0.content&&c0.content.parts)||[]).map(p=>p.text||"").join("").trim();}
+  // openai-compatibil (local/openai/openrouter/custom)
+  const hdr={"Content-Type":"application/json"};if(c.key)hdr.Authorization="Bearer "+c.key;
+  const r=await fetch(base+"/chat/completions",{method:"POST",headers:hdr,
+    body:JSON.stringify({model:model||"llama3.1",messages:messages.map(m=>({role:m.role,content:m.content})),temperature:0.6})});
+  if(!r.ok)throw new Error("HTTP "+r.status);const d=await r.json();
+  return ((d.choices||[])[0]||{}).message?.content?.trim()||"";}
 // loop5 M2: sincronizare multi-device proprie ("mailbox de sine", ECDH cu propria cheie)
 // Dispozitivele care iti impart identitatea (prin transferul .eie) sincronizeaza notele/task-urile/profilul tau.
 // Semantica: last-writer-wins la nivel de dispozitiv (snapshot cel mai recent castiga) — simplu si propaga edit+delete.
@@ -2367,6 +2490,10 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="togglePublish")togglePublish();
   else if(a==="planPro")setPlan("pro");
   else if(a==="planFree")setPlan("free");
+  else if(a==="aiSettings")aiSettings();
+  else if(a==="aiSave")aiSave();
+  else if(a==="aiClear")aiClear();
+  else if(a==="aiSend")aiSend();
   else if(a==="profedit")editProfile();
   else if(a==="profsave")saveProfile();
   else if(a==="profcancel")cancelProfile();

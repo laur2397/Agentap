@@ -22,6 +22,15 @@ def P(f): return os.path.join(ROOT,f)
 
 # Descrierea EXACTA a solutiei auditate. Onesta — doar ce e implementat si verificat.
 SOLUTIE=(
+ "ASISTENT AI in Secretara (loop6) — chat AI OPT-IN, furnizor PLUGABIL, local-first. Implicit DEZACTIVAT.\n"
+ "(ai-furnizor) 3 adaptoare: openai-compatibil (Ollama/LM Studio/OpenAI/OpenRouter local sau cloud), Anthropic, Gemini. "
+ "Implicit recomandat LOCAL (Ollama http://localhost:11434/v1) -> datele NU pleaca de pe dispozitiv. Cloud = BYOK: userul isi pune "
+ "propria cheie, stocata DOAR local in DB-ul criptat (AES-GCM), niciodata trimisa la releu/noi.\n"
+ "(ai-privacy) Opt-in explicit; eticheta de confidentialitate per mod (Local=privat; Cloud=conversatia pleaca la furnizor cu cheia ta). "
+ "Context local (task-uri/intalniri) inclus in prompt DOAR daca userul bifeaza explicit; niciodata implicit. CSP connect-src extins STRICT "
+ "la originile AI cunoscute (api.openai.com, api.anthropic.com, generativelanguage.googleapis.com, openrouter.ai) + localhost; nimic altceva.\n"
+ "(ai-securitate) Mesajele se randeaza prin textContent (white-space:pre-wrap) — fara innerHTML/markdown-HTML -> Trusted Types intact, fara XSS. "
+ "Verificat end-to-end pe localhost cu un mock OpenAI-compatibil (model + context corecte, persistenta, 0 erori). Furnizorii cloud nu sunt accesibili din sandbox.\n\n"
  "PIVOT E2EE (loop5) — sincronizare/discovery/freemium FARA ca serverul sa vada datele. TOTUL implementat in cod "
  "si VERIFICAT end-to-end pe localhost cu Playwright (2-3 contexte de browser + releu local), 0 erori de consola, "
  "0 innerHTML, Trusted Types activ. Local-Only ramane MODUL IMPLICIT; sync e OPT-IN.\n"
