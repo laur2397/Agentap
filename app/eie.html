@@ -1151,6 +1151,13 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 <div class="toast" id="toast"></div>
 
 <script>
+/* Trusted Types: politica DEFAULT fail-closed — orice incercare de sink HTML/script arunca.
+   App-ul nu foloseste niciun sink HTML (0 innerHTML; randare doar prin createElement/textContent),
+   deci politica nu e niciodata invocata in flux normal; e o plasa de siguranta determinista. */
+try{if(window.trustedTypes&&trustedTypes.createPolicy){trustedTypes.createPolicy("default",{
+  createHTML:()=>{throw new TypeError("HTML dinamic interzis (Trusted Types)");},
+  createScript:()=>{throw new TypeError("script dinamic interzis");},
+  createScriptURL:()=>{throw new TypeError("URL de script interzis");}});}}catch(_){}
 const SEED=[["Ana Popescu","Director, Popescu Imobiliare","Imobiliare",92],["Bogdan Marin","Fondator, Marin Energy","Energie",88],["Cristina Ilie","CEO, Excavari Ilie","Constructii",90],["Darius Enache","Investitor privat","Finante",95],["Elena Voicu","Owner, Voicu Logistic","Transport",84],["Florin Dobre","Antreprenor, AgriFarm","Agricultura",80],["Gabriela Stan","Avocat, Stan & Asociatii","Juridic",93],["Horia Lungu","Director, NordSoft","IT",87],["Irina Pavel","Contabil-sef, FinPro","Finante",89],["Janos Kovacs","Importator, Kovacs Trade","Comert",78],["Liviu Toma","Dezvoltator, Toma Construct","Constructii",85],["Maria Radu","Marketing, Radu Media","Marketing",82],["Nicolae Barbu","Producator, Barbu Mobila","Productie",81],["Oana Dinu","HR, TalentHub","HR",86],["Paul Georgescu","Broker, AsigPlus","Asigurari",83],["Raluca Neagu","Owner, Neagu Catering","HoReCa",79],["Sorin Apostol","Inginer, Apostol Instalatii","Constructii",84],["Teodora Mihai","Designer, Mihai Studio","Creative",88],["Victor Stoica","Distribuitor, Stoica Auto","Auto",80],["Bianca Lazar","Fondator, Lazar Cosmetics","Productie",85]];
 const OFF={0:[["Spatii comerciale de inchiriat in centru","profil"],["Teren intravilan langa centura","nota 4 mai"]],1:[["Cariera de carbune in zona Gorj","nota 3 martie"],["Contracte furnizare energie firme","profil"]],2:[["Utilaje de excavat in Brasov","audio 12 ian"]],3:[["Capital pentru investitii energie si imobiliare","profil"]],4:[["Flota transport marfa national si UE","profil"]],5:[["Cereale en-gros la pret de producator","profil"]],6:[["Consultanta juridica M&A si contracte","profil"]],7:[["Dezvoltare software si AI la comanda","profil"]],8:[["Contabilitate si fiscalitate firme","profil"]],9:[["Import produse din Asia, logistica","profil"]],10:[["Antrepriza constructii rezidentiale","profil"]],11:[["Campanii marketing si productie video","profil"]],12:[["Mobilier la comanda HoReCa si birouri","profil"]],13:[["Recrutare IT si management","profil"]],14:[["Asigurari de firma si flote","profil"]],15:[["Catering evenimente corporate","profil"]],16:[["Instalatii electrice industriale","profil"]],17:[["Branding premium si identitate","profil"]],18:[["Distributie piese auto","profil"]],19:[["Productie cosmetice private-label","profil"]]};
 const SEEK={0:[["Investitor pentru proiect imobiliar","dictare"],["Furnizor de carbune pentru centrala","nota 2 mai"]],1:[["Investitor pentru proiect energetic","apel"],["Transport marfa agabaritic","profil"]],2:[["Contabil bun pentru firma","nota"],["Asigurare pentru flota utilaje","profil"]],3:[["Oportunitati in energie si agricultura","profil"]],4:[["Spatii de depozitare in vest","profil"]],5:[["Utilaje agricole si excavatoare","apel"]],6:[["Clienti firme pentru retainer juridic","profil"]],7:[["Investitor pentru produs SaaS","profil"]],8:[["Clienti noi pentru contabilitate","profil"]],9:[["Spatii de depozitare Bucuresti","profil"]],10:[["Teren pentru dezvoltare","profil"],["Materiale de constructii en-gros","nota"]],11:[["Clienti corporate","profil"]],12:[["Distribuitor mobilier","profil"]],13:[["Firme care recruteaza","profil"]],14:[["Firme cu flote de asigurat","profil"]],15:[["Spatii pentru evenimente","profil"]],16:[["Proiecte cu instalatii","profil"]],17:[["Clienti pentru rebranding","profil"]],18:[["Firme cu flote auto","profil"]],19:[["Distribuitor cosmetice si showroom","nota"]]};
@@ -1729,9 +1736,12 @@ async function aiSend(){if(!aiOn()){toast("Configurează întâi asistentul (⚙
   catch(e){const t=$("#aiTyping");if(t)t.remove();
     DB.aichat.push({role:"system",content:"Eroare: "+(e&&e.message||e)+". Verifică furnizorul/cheia/adresa (și CORS la endpoint local)."});save();renderAiChat();}
   finally{if(btn){btn.disabled=false;btn.textContent="Trimite";}}}
-async function aiFetch(url,opts,who){let r;
-  try{r=await fetch(url,opts);}
-  catch(e){throw new Error("nu am putut contacta "+who+" — rețea/CORS/mixed-content. Pe telefon, modul Local nu merge; alege un furnizor cloud sau Standard.");}
+function withTimeout(opts,ms){const ac=new AbortController();const to=setTimeout(()=>ac.abort(),ms||60000);
+  return {opts:Object.assign({signal:ac.signal},opts),done:()=>clearTimeout(to),ac};}
+async function aiFetch(url,opts,who){let r;const T=withTimeout(opts,(opts&&opts._timeout)||60000);
+  try{r=await fetch(url,T.opts);}
+  catch(e){throw new Error("nu am putut contacta "+who+(T.ac.signal.aborted?" — a expirat (timeout)":" — rețea/CORS/mixed-content. Pe telefon, modul Local nu merge; alege un furnizor cloud sau Standard")+".");}
+  finally{T.done();}
   if(!r.ok){const s=r.status;
     if(s===401||s===403)throw new Error("cheie respinsă de "+who+" (401/403) — verifică cheia API.");
     if(s===404)throw new Error("model sau adresă inexistentă la "+who+" (404) — verifică modelul/Base URL.");
@@ -1774,15 +1784,14 @@ function renderRec(){const host=$("#recBody");if(!host)return;const r=DB.rec||{}
     h("button",{class:"btn gold sm","data-act":"recConsent",text:"Am înțeles — activează reportofonul"}));return;}
   if(REC.on){setKids(host,
     h("div",{class:"recctrl"},
-      h("button",{class:"btn sm recbtn rec","data-act":"recStop"},h("span",{class:"recdot"}),h("span",{text:"Stop"})),
+      h("button",{class:"btn sm recbtn rec","data-act":"recStop",onclick:()=>recStop()},h("span",{class:"recdot"}),h("span",{text:"Stop și rezumă"})),
       h("span",{class:"rectimer",id:"recTimer",text:recTimeStr()})),
-    h("div",{class:"recstat",text:REC.sr?"🎧 Transcriu live — nu se salvează audio":"🎙️ Înregistrez (audio temporar, doar pentru transcriere, șters după)"}),
-    h("div",{class:"rechint",text:"Pune apelul pe difuzor și ține Cercul deschis pe ecran."}),
-    h("textarea",{id:"recText",class:"rectext",rows:"7","aria-label":"Transcriere live",readonly:""}));
+    h("div",{class:"recstat",text:"🎙️ Înregistrez — la Stop transcriu și rezum (audio temporar, șters după)"}),
+    h("div",{class:"rechint",text:"Pune apelul pe difuzor și ține Cercul deschis pe ecran. Prinde ambele voci."}),
+    h("textarea",{id:"recText",class:"rectext",rows:"7","aria-label":"Transcriere live",readonly:"",placeholder:"Transcrierea apare aici (live pe Android; pe iPhone, la Stop)…"}));
     const t=$("#recText");if(t){t.value=r.transcript||"";t.scrollTop=t.scrollHeight;}return;}
   // oprit
-  const kids=[h("div",{class:"recctrl"},h("button",{class:"btn gold sm","data-act":"recStart",text:"● Înregistrează"}),
-    (!srCtor()?h("span",{class:"recstat",text:"Transcriere live indisponibilă aici → folosim AI la stop"}):null))];
+  const kids=[h("div",{class:"recctrl"},h("button",{class:"btn gold sm","data-act":"recStart",onclick:()=>recStart(),text:"● Înregistrează apel"}))];
   if(r.transcript){kids.push(h("textarea",{id:"recText",class:"rectext",rows:"6","aria-label":"Transcriere editabilă"}));
     const others=(DB.members||[]).filter(m=>m.id!==ME);
     kids.push(h("div",{class:"recwho"},h("label",{class:"mfl",for:"recWho",text:"Cu cine a fost apelul? (opțional)"}),
@@ -1801,27 +1810,26 @@ function renderRec(){const host=$("#recBody");if(!host)return;const r=DB.rec||{}
 function recEdit(v){DB.rec=DB.rec||{};DB.rec.transcript=v;}
 async function recStart(){if(REC.on)return;
   if(!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia)){toast("Microfonul nu e disponibil în acest browser");return;}
+  if(!aiOn())toast("Ai nevoie de asistentul AI (⚙ Setări) pentru transcriere + rezumat");
   try{REC.stream=await navigator.mediaDevices.getUserMedia({audio:true});}
-  catch(e){toast("Acces la microfon refuzat — permite-l din setările browserului");return;}
-  REC.chunks=[];REC.audioBlob=null;DB.rec=DB.rec||{};DB.rec.summary="";
-  // tine ecranul aprins cat inregistrezi (mai stabil)
+  catch(e){toast("Acces la microfon refuzat — permite-l din setările telefonului/browserului");return;}
+  REC.chunks=[];REC.audioBlob=null;REC._finalize=false;DB.rec=DB.rec||{};DB.rec.summary="";DB.rec.transcript=DB.rec.transcript||"";
   try{if(navigator.wakeLock){REC.wake=await navigator.wakeLock.request("screen");}}catch(_){}
-  // QA: permisiune revocată / microfon întrerupt din OS în timpul sesiunii -> oprire grațioasă
-  try{REC.stream.getTracks().forEach(t=>{t.onended=()=>{if(REC.on){toast("Microfon întrerupt — am oprit înregistrarea");recStop();}};});}catch(_){}
-  const SR=srCtor();REC.live=!!SR;
-  if(SR){ // TRANSCRIERE LIVE — fara audio salvat (preferat)
-    try{const rec=new SR();rec.lang="ro-RO";rec.continuous=true;rec.interimResults=true;
-      rec.onresult=ev=>{let fin="";for(let i=ev.resultIndex;i<ev.results.length;i++){if(ev.results[i].isFinal)fin+=ev.results[i][0].transcript+" ";}
-        if(fin){DB.rec.transcript=(DB.rec.transcript||"")+fin;const t=$("#recText");if(t){t.value=DB.rec.transcript;t.scrollTop=t.scrollHeight;}}};
-      rec.onerror=ev=>{const e=ev&&ev.error;if(e==="not-allowed"||e==="service-not-allowed"){REC.sr=null;}};
-      rec.onend=()=>{if(REC.on&&REC.sr){try{rec.start();}catch(_){}}};
-      rec.start();REC.sr=rec;}catch(_){REC.sr=null;REC.live=false;}}
-  if(!REC.live){ // fara STT live (ex. iPhone) -> inregistram audio TEMPORAR doar pt. transcriere AI, sters dupa
-    try{REC.mr=new MediaRecorder(REC.stream);REC.mr.ondataavailable=e=>{if(e.data&&e.data.size)REC.chunks.push(e.data);};
-      REC.mr.onstop=()=>{try{REC.audioBlob=new Blob(REC.chunks,{type:REC.mr.mimeType||"audio/webm"});}catch(_){}renderRec();};
-      REC.mr.onerror=()=>{if(REC.on){toast("Eroare la înregistrare — am oprit");recStop();}};
-      REC.mr.start();}catch(_){REC.mr=null;}}
-  // daca pleci din app (treci la apel), browserul suspenda microfonul -> reluam la revenire
+  try{REC.stream.getTracks().forEach(t=>{t.onended=()=>{if(REC.on){toast("Microfon întrerupt — am oprit");recStop();}};});}catch(_){}
+  // ÎNREGISTRARE audio TEMPORARĂ (pt. transcriere AI la Stop — merge si pe iPhone). Stearsa imediat dupa transcriere.
+  REC.mr=null;
+  try{REC.mr=new MediaRecorder(REC.stream);REC.mr.ondataavailable=e=>{if(e.data&&e.data.size)REC.chunks.push(e.data);};
+    REC.mr.onstop=()=>{try{REC.audioBlob=new Blob(REC.chunks,{type:REC.mr.mimeType||"audio/webm"});}catch(_){}if(REC._finalize)recFinalize();};
+    REC.mr.onerror=()=>{if(REC.on){toast("Eroare la înregistrare — am oprit");recStop();}};
+    REC.mr.start(1000);}catch(_){REC.mr=null;}
+  // Transcriere LIVE optionala (feedback instant pe Android/Chrome; pe iPhone e adesea goala -> ne bazam pe AI la Stop)
+  const SR=srCtor();REC.sr=null;
+  if(SR){try{const rec=new SR();rec.lang="ro-RO";rec.continuous=true;rec.interimResults=true;
+    rec.onresult=ev=>{let fin="";for(let i=ev.resultIndex;i<ev.results.length;i++){if(ev.results[i].isFinal)fin+=ev.results[i][0].transcript+" ";}
+      if(fin){DB.rec.transcript=(DB.rec.transcript||"")+fin;const t=$("#recText");if(t){t.value=DB.rec.transcript;t.scrollTop=t.scrollHeight;}}};
+    rec.onerror=ev=>{const e=ev&&ev.error;if(e==="not-allowed"||e==="service-not-allowed")REC.sr=null;};
+    rec.onend=()=>{if(REC.on&&REC.sr){try{rec.start();}catch(_){}}};
+    rec.start();REC.sr=rec;}catch(_){REC.sr=null;}}
   REC._vis=()=>{if(!document.hidden&&REC.on&&REC.sr){try{REC.sr.start();}catch(_){}}};
   document.addEventListener("visibilitychange",REC._vis);
   REC.on=true;REC.t0=Date.now();REC.timer=setInterval(updRecTimer,1000);renderRec();}
@@ -1829,9 +1837,23 @@ function recStop(){if(!REC.on)return;REC.on=false;clearInterval(REC.timer);
   try{if(REC._vis){document.removeEventListener("visibilitychange",REC._vis);REC._vis=null;}}catch(_){}
   try{if(REC.wake){REC.wake.release();REC.wake=null;}}catch(_){}
   try{if(REC.sr)REC.sr.stop();}catch(_){}REC.sr=null;
-  try{if(REC.mr&&REC.mr.state!=="inactive")REC.mr.stop();}catch(_){}
-  try{if(REC.stream)REC.stream.getTracks().forEach(t=>t.stop());}catch(_){}
-  save();renderRec();toast("Oprit — fac rezumatul când vrei");}
+  renderRec();toast("Oprit — pregătesc transcrierea…");
+  if(REC.mr&&REC.mr.state!=="inactive"){REC._finalize=true;try{REC.mr.stop();}catch(_){REC._finalize=false;recFinalize();}}
+  else recFinalize();}
+async function recFinalize(){REC._finalize=false;
+  try{if(REC.stream)REC.stream.getTracks().forEach(t=>t.stop());}catch(_){}REC.stream=null;
+  const liveLen=(DB.rec&&DB.rec.transcript||"").trim().length;
+  // Transcriere AI (autoritativă; necesară pe iPhone unde live e gol). Doar dacă live n-a prins destul.
+  try{
+    if(REC.audioBlob&&aiOn()&&liveLen<20){showProc();
+      try{const t=await aiTranscribe(REC.audioBlob);if(t&&t.trim())DB.rec.transcript=t.trim();}
+      catch(e){toast("Transcriere AI eșuată: "+(e&&e.message||e));}
+      finally{hideProc();}}
+  }finally{REC.audioBlob=null;REC.chunks=[];REC.mr=null;} // GARANTAT aruncăm audio (chiar și la eroare/timeout)
+  save();renderRec();
+  // Rezumat automat
+  if((DB.rec.transcript||"").trim()&&aiOn()){await recSum();}
+  else if(!(DB.rec.transcript||"").trim()){toast("N-am prins text. Verifică: apel pe difuzor + asistent AI configurat (Standard/OpenAI).");}}
 async function recTr(){if(!REC.audioBlob){toast("Nu există audio de transcris");return;}
   if(!aiOn()){toast("Configurează întâi asistentul AI (pentru transcriere)");return;}
   showProc();try{const txt=await aiTranscribe(REC.audioBlob);DB.rec.transcript=(txt||"").trim();
@@ -1854,12 +1876,13 @@ function recSave(){const r=DB.rec||{};const who=r.who?mem(+r.who):null;
   toast(who?("Salvat — apare și în brief-ul lui "+who.name.split(" ")[0]):"Salvat în Jurnal (#apel)");}
 function recClear(){if(!confirm("Ștergi transcrierea și rezumatul curent?"))return;DB.rec=DB.rec||{};DB.rec.transcript="";DB.rec.summary="";REC.audioBlob=null;save();renderRec();}
 async function aiTranscribe(blob){const c=aiCfg();const fd=new FormData();fd.append("file",blob,"audio.webm");fd.append("model","whisper-1");
-  if(c.provider==="managed"){const rb=relayBase();if(!rb)throw new Error("releul nu e setat");
-    const r=await fetch(rb+"/ai/transcribe",{method:"POST",body:fd});if(!r.ok)throw new Error("releu HTTP "+r.status);return (await r.json()).text||"";}
-  if(aiKind(c.provider)!=="openai")throw new Error("transcrierea AI cere OpenAI-compatibil sau modul Standard");
-  const base=aiBaseFor(c).replace(/\/+$/,"");const hdr={};if(c.key)hdr.Authorization="Bearer "+c.key;
-  const r=await fetch(base+"/audio/transcriptions",{method:"POST",headers:hdr,body:fd});if(!r.ok)throw new Error("HTTP "+r.status);
-  return (await r.json()).text||"";}
+  let url,hdr={};
+  if(c.provider==="managed"){const rb=relayBase();if(!rb)throw new Error("releul nu e setat");url=rb+"/ai/transcribe";}
+  else{if(aiKind(c.provider)!=="openai")throw new Error("transcrierea AI cere OpenAI-compatibil sau modul Standard");
+    url=aiBaseFor(c).replace(/\/+$/,"")+"/audio/transcriptions";if(c.key)hdr.Authorization="Bearer "+c.key;}
+  const T=withTimeout({method:"POST",headers:hdr,body:fd},120000); // timeout 120s -> nu atârnă indefinit
+  let r;try{r=await fetch(url,T.opts);}catch(e){throw new Error(T.ac.signal.aborted?"transcrierea a expirat (timeout)":"rețea/CORS");}finally{T.done();}
+  if(!r.ok)throw new Error("HTTP "+r.status);return (await r.json()).text||"";}
 // loop5 M2: sincronizare multi-device proprie ("mailbox de sine", ECDH cu propria cheie)
 // Dispozitivele care iti impart identitatea (prin transferul .eie) sincronizeaza notele/task-urile/profilul tau.
 // Semantica: last-writer-wins la nivel de dispozitiv (snapshot cel mai recent castiga) — simplu si propaga edit+delete.
