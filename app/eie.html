@@ -571,6 +571,81 @@ details.why2>summary::-webkit-details-marker{display:none}
 .tab.on::before{display:none}
 .tab.on .ic{background:var(--primary-soft);transform:translateY(-1px)}
 .title{font-size:25px;font-weight:800;letter-spacing:-.7px;line-height:1.1;margin:6px 0 8px}
+/* ============================================================================
+   AURORA 2026 — limbaj vizual nou: canvas cinematic + mesh, glass, display type,
+   accente cu glow, nav flotant de sticla. Aplicat global (peste light/dark).
+   ============================================================================ */
+:root{
+  --bg:#07070D;--bg2:#07070D;--card:rgba(255,255,255,.045);--card2:rgba(255,255,255,.07);
+  --line:rgba(255,255,255,.10);--line2:rgba(255,255,255,.16);
+  --ink:#F5F6FC;--ink2:#C4C9DC;--muted:#8A91AC;
+  --primary:#A78BFA;--primary2:#C4B5FD;--primary-dim:#8B5CF6;--primary-soft:rgba(167,139,250,.16);
+  --accent:#8B5CF6;--accent-soft:rgba(139,92,246,.16);--cyan:#22D3EE;
+  --success:#34D399;--success-soft:rgba(52,211,153,.16);--warn:#FBBF24;--warn-soft:rgba(251,191,36,.16);--warn-ink:#FBBF24;
+  --on-primary:#0A0A12;
+  --shadow:0 2px 10px rgba(0,0,0,.35);--shadow-lg:0 26px 60px -14px rgba(0,0,0,.75);
+  --gold:var(--primary);--gold2:var(--primary2);--gold-dim:var(--primary-dim);--gold-soft:var(--primary-soft);
+}
+html,body{background:#07070D}
+body{
+  background:
+    radial-gradient(58% 42% at 12% -2%,rgba(139,92,246,.34),transparent 60%),
+    radial-gradient(50% 40% at 98% 6%,rgba(34,211,238,.20),transparent 58%),
+    radial-gradient(55% 48% at 88% 96%,rgba(236,72,153,.18),transparent 58%),
+    radial-gradient(48% 40% at 4% 102%,rgba(59,130,246,.16),transparent 58%),
+    #07070D;
+  background-attachment:fixed;color:var(--ink)}
+/* suprafete glass */
+.card,.panel,.statstrip,.exchwrap,.modal .box,.estate,.digest{
+  -webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%)}
+.card,.panel{background:var(--card);border:1px solid var(--line);border-radius:24px;
+  box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.07)}
+.statstrip{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.07)}
+.statstrip .st{border-right:1px solid var(--line)}
+.statstrip .sv{font-size:30px;font-weight:800;letter-spacing:-1px;
+  background:linear-gradient(120deg,#fff,#C4B5FD);-webkit-background-clip:text;background-clip:text;color:transparent}
+.statstrip .sl{color:var(--muted)}
+/* HERO cinematic */
+.digest{background:
+    radial-gradient(120% 140% at 0% 0%,rgba(139,92,246,.95),transparent 55%),
+    radial-gradient(120% 140% at 100% 100%,rgba(34,211,238,.55),transparent 55%),
+    linear-gradient(135deg,#6D28D9,#7C3AED 45%,#4F46E5);
+  border:1px solid rgba(255,255,255,.14);border-radius:28px;padding:32px 24px 30px;color:#fff;
+  position:relative;overflow:hidden;box-shadow:0 30px 70px -22px rgba(124,58,237,.7),inset 0 1px 0 rgba(255,255,255,.18)}
+.digest::after{content:"";position:absolute;inset:-40% -25% auto auto;width:70%;height:190%;
+  background:radial-gradient(circle at 70% 30%,rgba(255,255,255,.28),transparent 60%);pointer-events:none}
+.digest .e{font-size:10.5px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.78);font-weight:700}
+.digest .g{font-size:38px;font-weight:800;letter-spacing:-1.2px;line-height:1.02;margin:10px 0 11px;color:#fff;text-shadow:0 2px 30px rgba(0,0,0,.2)}
+.digest p{font-size:14px;line-height:1.6;color:rgba(255,255,255,.9);max-width:42ch;margin:0}
+/* titluri display cu gradient pe canvas inchis */
+.title{font-size:30px;font-weight:800;letter-spacing:-1px;line-height:1.05;
+  background:linear-gradient(100deg,#fff 30%,#C4B5FD);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{color:var(--primary2);letter-spacing:3px}
+.sec{font-size:18px;font-weight:800;letter-spacing:-.4px;color:var(--ink);margin:30px 0 14px}
+.sec a{color:var(--primary2)}
+/* butoane cu glow */
+.btn.gold{background:linear-gradient(135deg,#A78BFA,#7C3AED);color:#fff;font-weight:700;
+  box-shadow:0 10px 28px -8px rgba(139,92,246,.7),inset 0 1px 0 rgba(255,255,255,.25)}
+.btn.ghost{background:rgba(255,255,255,.055);border:1px solid var(--line2);color:var(--ink);box-shadow:none}
+.btn.ghost:hover{background:rgba(255,255,255,.10)}
+/* nav flotant de sticla */
+nav{position:sticky;bottom:0;background:linear-gradient(to top,rgba(7,7,13,.92),rgba(7,7,13,.55));
+  -webkit-backdrop-filter:blur(26px) saturate(160%);backdrop-filter:blur(26px) saturate(160%);
+  border-top:1px solid rgba(255,255,255,.10)}
+.tab .ic{width:46px;height:30px;border-radius:14px}
+.tab.on{color:#fff}
+.tab.on .ic{background:linear-gradient(135deg,rgba(167,139,250,.35),rgba(124,58,237,.25));
+  box-shadow:0 0 18px -2px rgba(139,92,246,.55),inset 0 0 0 1px rgba(167,139,250,.4)}
+/* topbar brand */
+.brand .mk{background:linear-gradient(135deg,#A78BFA,#7C3AED);color:#fff;box-shadow:0 6px 18px -4px rgba(139,92,246,.6)}
+.brand .t{color:var(--ink)}.brand .t small{color:var(--primary2)}
+/* inputs/textarea pe canvas inchis */
+input,textarea,select{background:rgba(255,255,255,.05)!important;border:1px solid var(--line2)!important;color:var(--ink)!important;border-radius:13px!important}
+input::placeholder,textarea::placeholder{color:var(--muted)}
+/* badge-uri discrete */
+.badge{backdrop-filter:blur(8px)}
+/* carduri: hover lift mai dramatic */
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg),inset 0 1px 0 rgba(255,255,255,.08)}
 </style>
 </head>
 <body>
