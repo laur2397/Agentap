@@ -706,6 +706,7 @@ details.why2>summary::-webkit-details-marker{display:none}
       <div class="audit" id="auditList"></div></div>
     <div class="panel"><h3>Confidentialitate <span class="badge vis">Local-Only</span></h3>
       <p style="font-size:12px;color:var(--ink2);line-height:1.55">Datele tale traiesc <b>doar in acest browser</b>, criptate la repaus cu <b>AES-GCM</b>. Cheia se deriveaza din parola ta (<b>PBKDF2</b>, 150k iteratii) cu un <b>salt unic per utilizator</b>, generat la prima rulare si stocat local (salt-ul nu e secret — previne rainbow tables); <b>cheia ramane strict in RAM</b> si nu se scrie niciodata pe disc. La blocare cheia e <b>eliberata din memorie (best-effort)</b> — JS nu garanteaza zeroing imediat al heap-ului; datele pe disc raman criptate si se redeschid doar cu parola. Scrierea e tranzactionala (temp→validare→commit). Integritate: checksum <b>SHA-256</b>; Trust Ledger pe lant <b>HMAC-SHA256</b> cheiat de parola. „Ce caut” se dezvaluie <b>doar dupa dublu consimtamant</b>.</p>
+      <p style="font-size:12px;color:var(--ink2);line-height:1.55;margin-top:8px"><b>Model de amenintare, onest:</b> datele stocate local (salt + ciphertext) pot fi citite de un script malitios care ruleaza pe <b>aceeasi origine</b> (ex. o extensie de browser compromisa) si sparte <b>offline</b> prin brute-force — incetinit de PBKDF2, dar nu imposibil. Protectia ta principala e o <b>parola unica si puternica</b> (ideal dintr-un manager de parole). Pentru o <b>curatare completa a memoriei (RAM)</b>, inchide tab-ul sau browserul dupa blocare — JavaScript (V8) nu garanteaza eliminarea imediata din heap, deci nu e protectie de nivel hardware/HSM. Toate IV-urile si salt-urile sunt generate exclusiv cu <b>crypto.getRandomValues</b> (Web Crypto), niciodata cu Math.random.</p>
       <p style="font-size:11px;color:var(--muted);line-height:1.5;margin-top:8px">Securitatea finala depinde de <b>taria parolei tale</b>: la un dump complet al stocarii, un atacator are doar salt+ciphertext (nu si parola) si trebuie sa o sparga prin brute-force incetinit de PBKDF2. Foloseste o parola lunga (ideal dintr-un manager de parole). Acest prototip nu adauga un „pepper” extern (n-ar avea unde, fiind Local-Only fara server).</p>
       <p style="font-size:11px;color:var(--warn);line-height:1.5;margin-top:8px">⚠ Prototip de cercetare, client-side: un script malitios pe aceeasi origine (XSS/extensie) are oricum acces direct la memorie cat sesiunea e deblocata — de aceea apararea reala e auto-lock-ul si parola, nu obscuritatea. Declansatoarele de matching sunt mascate de o durata fixa de procesare (anti timing). <b>Nu introduce date cu adevarat sensibile</b>; tu esti responsabil de backup.</p>
       <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
@@ -916,7 +917,10 @@ function sparkline(vals){const w=300,hh=34,mx=Math.max(...vals,1),mn=Math.min(..
   const area=line+` L ${w} ${hh} L 0 ${hh} Z`;
   return svgEl("svg",{class:"spark",viewBox:`0 0 ${w} ${hh}`,preserveAspectRatio:"none","aria-hidden":"true"},
     svgEl("path",{class:"area",d:area}),svgEl("path",{class:"line",d:line}));}
-/* ==== criptare la repaus: AES-GCM cu cheie derivata PBKDF2 din parola, DOAR in RAM (audit R3 #1) ==== */
+/* ==== criptare la repaus: AES-GCM cu cheie derivata PBKDF2 din parola, DOAR in RAM (audit R3 #1) ====
+   Randomness: TOATE IV-urile (12B) si salt-urile (16B) vin EXCLUSIV din crypto.getRandomValues (CSPRNG Web Crypto).
+   Math.random apare DOAR cosmetic (jitter pozitii graf, date demo) — niciodata in cripto. Niciun sink DOMParser/
+   parseFromString/innerHTML in tot fisierul: randarea e 100% prin createElement/textContent (Trusted Types trece curat). */
 const b64=b=>btoa(String.fromCharCode(...new Uint8Array(b))),unb64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 const clean=s=>String(s==null?"":s).replace(/[\x00-\x1f\x7f]/g,"").replace(/[<>]/g,"").slice(0,400); // sanitizare input
 async function deriveKey(pass,salt){
