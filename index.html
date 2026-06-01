@@ -941,7 +941,8 @@ async function commit(){if(!CK||!DB)return;let blob;
     if(e&&e.name==="QuotaExceededError")toast("Stocare plina — modificarea nu a fost salvata, datele vechi sunt pastrate.");
     else console.warn("commit esuat (rollback)",e);
   }finally{try{localStorage.removeItem(KEY+"_tmp");}catch(_){}}}
-function save(){if(!CK)return;clearTimeout(saveTimer);saveTimer=setTimeout(commit,120);}
+let APPLYING=false; // loop5 M2: suprima bump-ul de versiune cand aplicam un snapshot remote
+function save(){if(!CK)return;if(DB&&!APPLYING)DB.selfV=Date.now();clearTimeout(saveTimer);saveTimer=setTimeout(commit,120);}
 async function flush(){return commit();}
 function backupRaw(){const raw=localStorage.getItem(KEY);if(raw)localStorage.setItem(KEY+"_backup_"+Date.now(),raw);} // anti-pierdere (audit R3 #4)
 function exportData(){try{const blob=new Blob([JSON.stringify(DB,null,2)],{type:"application/json"});
@@ -1281,13 +1282,31 @@ function relaySave(){const url=$("#relayUrl");if(!url)return;const v=clean(url.v
 function relayToggle(){DB.relay=DB.relay||{};
   if(!DB.relay.on&&!relayBase()){toast("Întâi salvează adresa releului");return;}
   DB.relay.on=!DB.relay.on;save();renderRelay();toast(DB.relay.on?"Sync activat (opt-in)":"Sync oprit — Local-Only");}
+// loop5 M2: sincronizare multi-device proprie ("mailbox de sine", ECDH cu propria cheie)
+// Dispozitivele care iti impart identitatea (prin transferul .eie) sincronizeaza notele/task-urile/profilul tau.
+// Semantica: last-writer-wins la nivel de dispozitiv (snapshot cel mai recent castiga) — simplu si propaga edit+delete.
+async function syncSelfPush(){await ensureIdentity();const mb=await mailboxId(DB.identity.pub);
+  const me=mem(ME)||{};
+  const snap={t:DB.selfV||Date.now(),notes:(DB.notes||[]).filter(n=>n.member_id===ME),
+    tasks:(DB.tasks||[]).filter(t=>t.member_id===ME),prof:{name:me.name,industry:me.industry||"",role:me.role||""}};
+  await relayPost(mb,await sealFor(DB.identity.pub,{self:1,snap}));}
+async function syncSelfPull(){await ensureIdentity();const mb=await mailboxId(DB.identity.pub);
+  const res=await relayGet(mb,DB.selfCursor||0);let newest=null;
+  for(const it of (res.items||[])){DB.selfCursor=it.seq;
+    try{const env=await openFrom(DB.identity.pub,it.ct);if(env&&env.self&&env.snap&&(!newest||env.snap.t>newest.t))newest=env.snap;}catch(_){}}
+  if(newest&&newest.t>(DB.selfV||0)){APPLYING=true;
+    DB.notes=(DB.notes||[]).filter(n=>n.member_id!==ME).concat((newest.notes||[]).map(n=>({...n,member_id:ME})));
+    DB.tasks=(DB.tasks||[]).filter(t=>t.member_id!==ME).concat((newest.tasks||[]).map(t=>({...t,member_id:ME})));
+    const me=mem(ME);if(me&&newest.prof){me.name=clean(newest.prof.name||me.name).slice(0,80)||me.name;me.industry=clean(newest.prof.industry||"").slice(0,60);me.role=clean(newest.prof.role||me.role).slice(0,80)||me.role;}
+    DB.selfV=newest.t;save();APPLYING=false;return 1;}
+  return 0;}
 async function syncNow(){if(!relayOn()){toast("Activează mai întâi sync-ul (Profil → Sincronizare)");return;}
   const peers=(DB.members||[]).filter(m=>m.via==="code"&&m.pub);
-  if(!peers.length){toast("Niciun contact cu sync (adaugă prin cod EIE2)");return;}
-  let pushed=0,got=0;showProc();
+  let pushed=0,got=0,self=0;showProc();
   try{for(const m of peers){try{if(await syncPushTo(m))pushed++;got+=await syncPullFrom(m);}catch(_){}}
+    try{await syncSelfPush();self=await syncSelfPull();}catch(_){}
     DB.relay.last=Date.now();save();loadMembers();render();hideProc();
-    toast("Sync: trimis către "+pushed+", actualizări primite "+got);
+    toast("Sync: trimis către "+pushed+", primite "+got+(self?", dispozitiv actualizat":""));
   }catch(e){hideProc();toast("Sync eșuat — verifică adresa releului");}}
 function renderConn(){const host=$("#connList");if(!host)return;
   const q=(($("#netSearch")||{}).value||"").trim();

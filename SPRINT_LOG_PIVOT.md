@@ -4,6 +4,7 @@ Decizie fondator dupa al 2-lea panel investitori (tot 0/100): PIVOT REAL — syn
 fara ca serverul sa vada datele (zero-knowledge). Local-Only ramane DEFAULT; sync e OPT-IN. Design: PIVOT_DESIGN.md.
 Limitare mediu: sandbox cu retea pe allowlist -> NU pot hosta releu live; verific pe localhost; deploy-ul = fondatorul.
 
+- 2026-06-01 · M2 MULTI-DEVICE PROPRIU (verificat pe localhost) · sync E2EE "cu tine insuti": dispozitivele care iti impart identitatea (prin transferul .eie) folosesc un "mailbox de sine" = mailboxId(propria cheie publica), cu cheie de canal ECDH(priv,propriul pub). syncSelfPush/syncSelfPull trimit un snapshot (note+task-uri proprii + profil) sigilat E2EE; merge = last-writer-wins la nivel de dispozitiv (snapshot cel mai recent castiga; versiune DB.selfV bumpata in save(), suprimata la aplicarea unui snapshot remote via APPLYING). Integrat in syncNow alaturi de sync-ul pereche. VALIDAT Playwright (2 dispozitive cu identitate comuna): A adauga nota+task -> B le primeste; B sterge task-ul + adauga nota proprie -> A converge (are nota lui B, stergerea s-a propagat, nota lui A pastrata). 0 erori. Propaga create+edit+delete.
 - 2026-06-01 · M1 FUNDATIE E2EE (verificat pe localhost) ·
   (1) identitate ECDH P-256 (ensureIdentity): cheie privata stocata criptat in DB (la repaus AES-GCM), cheie publica partajabila;
   (2) format cod/QR EIE2 cu cheie publica (k), back-compat EIE1; addByCode stocheaza member.pub+cursor;
