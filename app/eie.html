@@ -958,8 +958,8 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
     </div>
     <div class="focusbar"><button class="btn ghost sm" data-act="focus" aria-label="Comuta modul Focus">🎯 Focus</button></div>
     <div id="focusPanel"></div>
-    <div class="seccard" id="recCard"><div class="sec nobar"><span class="si">🎙️</span>Reportofon apel <span class="recver">v3.3</span></div>
-      <p class="sub">Merge cu <b>orice apel</b> (Signal, WhatsApp, telefon) pus pe <b>difuzor</b> — captăm prin microfon și transcriem ce se vorbește, apoi facem rezumatul. <b>Nu salvăm audio</b> de redat. Notă onestă: pe un singur telefon trebuie să ții Cercul deschis pe ecran (când treci în altă aplicație, telefonul oprește microfonul); ideal pe difuzor sau pe un al 2-lea dispozitiv.</p>
+    <div class="seccard" id="recCard"><div class="sec nobar"><span class="si">🎙️</span>Reportofon apel <span class="recver">v3.4</span></div>
+      <p class="sub">Merge cu <b>orice apel</b>, cu <b>oricine</b> — persoana <b>nu trebuie să fie în aplicație</b>. Pui apelul pe <b>difuzor</b>, captăm prin microfon și transcriem ce se vorbește, apoi facem rezumatul. <b>Nu salvăm audio</b>. Notă onestă: pe un singur telefon trebuie să ții Cercul deschis pe ecran (când treci în altă aplicație, telefonul oprește microfonul) — ideal pe difuzor sau pe un al 2-lea dispozitiv.</p>
       <div id="recBody"></div>
     </div>
     <div class="seccard"><div class="sec"><span class="si">📅</span>Azi</div>
@@ -1799,7 +1799,7 @@ function renderRec(){const host=$("#recBody");if(!host)return;const r=DB.rec||{}
   kids.push(h("div",{class:"recctrl"},h("button",{class:"btn gold sm","data-act":"recStart",onclick:()=>recStart(),text:"● Înregistrează apel"})));
   if(r.transcript){kids.push(h("textarea",{id:"recText",class:"rectext",rows:"6","aria-label":"Transcriere editabilă"}));
     const others=(DB.members||[]).filter(m=>m.id!==ME);
-    kids.push(h("div",{class:"recwho"},h("label",{class:"mfl",for:"recWho",text:"Cu cine a fost apelul? (opțional)"}),
+    kids.push(h("div",{class:"recwho"},h("label",{class:"mfl",for:"recWho",text:"Leagă de un contact — OPȚIONAL (sări peste dacă nu e în aplicație)"}),
       h("select",{id:"recWho","aria-label":"Contact apel"},
         h("option",{value:"",text:"— niciun contact —"}),
         ...others.map(m=>h("option",{value:String(m.id),text:m.name})))));
