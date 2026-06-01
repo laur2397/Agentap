@@ -2,9 +2,10 @@
 <html lang="ro" data-theme="light">
 <head>
 <meta charset="utf-8">
-<!-- CSP: blocheaza orice retea (connect-src 'none' -> fara exfiltrare), fara obiecte/iframe/eval.
-     'unsafe-inline' la script e necesar pt. arhitectura single-file; exfiltrarea ramane blocata. (audit s5 #2) -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'; object-src 'none'; require-trusted-types-for 'script'">
+<!-- CSP: connect-src restrans STRICT la origin-ul releului (loop5: implicit doar localhost; self-host isi adauga domeniul).
+     Local-Only ramane default (sync e opt-in). Releul e zero-knowledge: vede doar ciphertext E2EE, nu continut.
+     'unsafe-inline' la script e necesar pt. arhitectura single-file; exfiltrarea catre ALTE domenii ramane blocata. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; connect-src http://127.0.0.1:* http://localhost:*; base-uri 'none'; form-action 'none'; frame-src 'none'; object-src 'none'; require-trusted-types-for 'script'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Cercul EIE — Network Capital</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -549,7 +550,7 @@ details.why2>summary::-webkit-details-marker{display:none}
   <div class="htop">
     <div class="brand"><div class="mk">C</div><div class="t">Cercul EIE<small>Network Capital</small></div></div>
     <div class="hright">
-      <button class="trustchip" data-act="trustinfo" title="Local-Only · 0 date trimise" aria-label="Confidentialitate: Local-Only, zero date trimise"><span class="tdot"></span>Local</button>
+      <button class="trustchip" id="trustChip" data-act="trustinfo" title="Local-Only · 0 date trimise" aria-label="Confidentialitate"><span class="tdot"></span><span id="trustChipL">Local</span></button>
       <button class="themebtn" id="quickBtn" title="Adauga rapid (tasta N)" aria-label="Adauga rapid notita sau task" onclick="openQuick()">＋</button>
       <button class="themebtn" id="searchBtn" title="Cauta" aria-label="Cauta global" onclick="openSearch()">⌕</button>
       <button class="themebtn" id="lockBtnHd" title="Blocheaza acum (sterge cheia din memorie)" onclick="lockNow()">🔒</button>
@@ -696,6 +697,16 @@ details.why2>summary::-webkit-details-marker{display:none}
         <button class="btn ghost sm" data-act="restoreEnc">↺ Restaurează din .eie</button>
         <input type="file" id="restoreFile" accept=".eie,application/octet-stream" style="display:none" onchange="handleRestore(event)" aria-label="Fisier backup criptat">
       </div></div>
+    <div class="panel"><h3>Sincronizare <span class="badge priv">beta · opt-in</span></h3>
+      <p style="font-size:12px;color:var(--ink2);line-height:1.55">Sincronizează automat cu contactele tale printr-un <b>releu zero-knowledge</b>: serverul transportă doar text <b>criptat end-to-end</b> (E2EE) — nu vede numele, notele sau „ce cauți". Implicit <b>oprit</b> — rămâi Local-Only până activezi tu. Necesită o cheie publică în codul de conexiune (format EIE2).</p>
+      <label class="mfl" for="relayUrl" style="margin-top:8px">Adresa releului</label>
+      <input id="relayUrl" placeholder="http://127.0.0.1:8787" aria-label="Adresa releului" style="width:100%;font-size:12px">
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <button class="btn ghost sm" data-act="relaySave">Salvează adresa</button>
+        <button class="btn sm" id="relayToggleBtn" data-act="relayToggle">Activează sync</button>
+        <button class="btn gold sm" data-act="syncNow">⟳ Sync acum</button>
+      </div>
+      <p id="relayStatus" style="font-size:11px;color:var(--muted);margin-top:9px"></p></div>
     <div class="panel"><h3>Preferinte <span class="badge vis">acces</span></h3>
       <div class="toggle"><span>Reduce animatiile <span style="color:var(--muted);font-size:11px">(accesibilitate)</span></span>
         <div class="sw" id="rmSw" role="switch" tabindex="0" aria-label="Reduce animatiile" onclick="toggleRM()"><i></i></div></div>
@@ -715,7 +726,7 @@ details.why2>summary::-webkit-details-marker{display:none}
         </ul></div>
       <div class="about-col"><div class="about-h bad">Ce NU face — promisiunea noastră</div>
         <ul class="about-list">
-          <li>Nu trimite datele tale către niciun server (Local-Only).</li>
+          <li>Implicit Local-Only: nu trimite nimic. Sync-ul e <b>opt-in</b> și E2EE — releul nu vede conținutul.</li>
           <li>Nu vinde și nu partajează datele; nu are reclame.</li>
           <li>Nu folosește streak-uri, FOMO sau notificări intruzive.</li>
           <li>Nu ascunde butonul de export sau ștergere — pleci oricând cu datele tale.</li>
@@ -1037,7 +1048,8 @@ function setView(v){if(PROC){toast("Asteapta — Secretara AI proceseaza…");re
 function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("div",{class:"sk l w80"}),h("div",{class:"sk l w40"}));}
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
 function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
-  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();applyMatchDiv();setKids($("#matchList"),pipeline(orderMatches(myMatches().filter(matchIndOk))));}else if(VIEW==="retea"){renderConn();renderExchange();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();}}else if(VIEW==="profil")prof();
+  updateTrustChip();
+  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();applyMatchDiv();setKids($("#matchList"),pipeline(orderMatches(myMatches().filter(matchIndOk))));}else if(VIEW==="retea"){renderConn();renderExchange();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();}}else if(VIEW==="profil"){prof();renderRelay();}
   updateBadges();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 // backlog #7: empty-state ilustrat, consistent
 function estateBox(title,sub,action){return h("div",{class:"estate",style:{padding:"26px 20px"}},
@@ -1114,13 +1126,15 @@ const unb64utf8=b=>new TextDecoder().decode(Uint8Array.from(atob(b),c=>c.charCod
 function myPublicCard(){const me=mem(ME)||{name:"?"};
   const offers=(DB.items||[]).filter(i=>i.member_id===ME&&i.kind==="ofer"&&i.visible).map(i=>i.text).slice(0,5);
   return {v:1,n:me.name,d:me.industry||"",r:me.role||"",o:offers};}
-function connCode(){try{return "EIE1:"+b64utf8(JSON.stringify(myPublicCard()));}catch(_){return"";}}
-function renderExchange(){const t=$("#myConnCode");if(t)t.value=connCode();}
-function copyConnCode(){const code=connCode();if(!code){toast("Cod indisponibil");return;}
+// loop5: EIE2 = cod cu cheie publica ECDH (pt. canal E2EE); EIE1 ramane acceptat (fara sync)
+async function connCode(){try{await ensureIdentity();const card=myPublicCard();card.k=DB.identity.pub;return "EIE2:"+b64utf8(JSON.stringify(card));}catch(_){return "EIE1:"+b64utf8(JSON.stringify(myPublicCard()));}}
+function renderExchange(){const t=$("#myConnCode");if(t)connCode().then(c=>{t.value=c;});}
+function copyConnCode(){connCode().then(code=>{if(!code){toast("Cod indisponibil");return;}
   try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(code).then(()=>toast("Cod copiat — dă-l persoanei pe care o întâlnești")).catch(()=>{const t=$("#myConnCode");if(t)t.select();});return;}}catch(_){}
-  const t=$("#myConnCode");if(t)t.select();toast("Selectează și copiază codul");}
-function parseConnCode(s){s=String(s||"").trim();if(!s.startsWith("EIE1:"))return null;
-  try{const o=JSON.parse(unb64utf8(s.slice(5)));if(o&&o.n)return o;}catch(_){}return null;}
+  const t=$("#myConnCode");if(t)t.select();toast("Selectează și copiază codul");});}
+function parseConnCode(s){s=String(s||"").trim();
+  for(const p of ["EIE2:","EIE1:"])if(s.startsWith(p)){try{const o=JSON.parse(unb64utf8(s.slice(5)));if(o&&o.n)return o;}catch(_){}}
+  return null;}
 function addByCode(){const fld=$("#pasteCode");
   let raw=fld&&fld.value&&fld.value.trim()?fld.value:null;
   if(raw===null){if(fld){fld.focus();toast("Lipește întâi un cod (EIE1:…)");return;}raw=prompt("Lipește codul de conexiune primit (începe cu EIE1:):");if(raw===null)return;}
@@ -1128,7 +1142,8 @@ function addByCode(){const fld=$("#pasteCode");
   const nm=clean(card.n).slice(0,80);if(!nm){toast("Cod fără nume");return;}
   if((DB.members||[]).some(m=>m.via==="code"&&m.name===nm)){if(fld)fld.value="";toast(nm+" e deja adăugat prin cod");return;}
   const id=DB.seq++,color=PAL[id%PAL.length];
-  DB.members.push({id,name:nm,industry:clean(card.d||"").slice(0,60),role:clean(card.r||"").slice(0,80)||"Adăugat prin cod",trust:60,color,via:"code"});
+  const pub=(typeof card.k==="string"&&/^[A-Za-z0-9+/=]{40,200}$/.test(card.k))?card.k:null; // cheie publica ECDH (loop5)
+  DB.members.push({id,name:nm,industry:clean(card.d||"").slice(0,60),role:clean(card.r||"").slice(0,80)||"Adăugat prin cod",trust:60,color,via:"code",pub,cursor:0});
   (card.o||[]).slice(0,5).forEach(t=>{const tx=clean(String(t)).slice(0,140);if(tx)DB.items.push({id:DB.seq++,member_id:id,kind:"ofer",text:tx,visible:1,source:"cod de conexiune"});});
   DB.matches.push({id:DB.seq++,offer_member:id,seek_member:ME,status:"conectat",at:Date.now(),common:[],score:70,via:"code"});
   if(fld)fld.value="";
@@ -1202,14 +1217,78 @@ function renderQRsvg(host,mat){while(host.firstChild)host.removeChild(host.first
   let d="";for(let r=0;r<n;r++)for(let c=0;c<n;c++)if(mat[r][c])d+="M"+(c+q)+" "+(r+q)+"h1v1h-1z";
   const path=document.createElementNS(NS,"path");path.setAttribute("d",d);path.setAttribute("fill","#000000");svg.appendChild(path);
   host.appendChild(svg);}
-function toggleConnQR(){const host=$("#connQR");if(!host)return;
+async function toggleConnQR(){const host=$("#connQR");if(!host)return;
   if(host.firstChild){while(host.firstChild)host.removeChild(host.firstChild);return;}
-  let text=connCode(),mat=null;
+  let text=await connCode(),mat=null;
   try{mat=QR.encode(text);}catch(_){const me=mem(ME)||{name:"?"};
     text="EIE1:"+b64utf8(JSON.stringify({v:1,n:me.name,d:me.industry||"",r:me.role||"",o:[]}));
     try{mat=QR.encode(text);}catch(e2){toast("Cod prea lung pentru QR");return;}
     toast("QR-ul conține doar identitatea — codul complet e la butonul Copiază.");}
   renderQRsvg(host,mat);}
+/* ===== loop5 / PIVOT E2EE: identitate ECDH, canal pereche, releu zero-knowledge, sync ===== */
+async function ensureIdentity(){if(DB.identity&&DB.identity.pub&&DB.identity.priv)return DB.identity;
+  const kp=await crypto.subtle.generateKey({name:"ECDH",namedCurve:"P-256"},true,["deriveBits"]);
+  const pub=await crypto.subtle.exportKey("raw",kp.publicKey),priv=await crypto.subtle.exportKey("pkcs8",kp.privateKey);
+  DB.identity={pub:b64(pub),priv:b64(priv)};save();return DB.identity;}
+async function _ecPriv(){return crypto.subtle.importKey("pkcs8",unb64(DB.identity.priv),{name:"ECDH",namedCurve:"P-256"},false,["deriveBits"]);}
+async function _ecPub(b){return crypto.subtle.importKey("raw",unb64(b),{name:"ECDH",namedCurve:"P-256"},false,[]);}
+async function channelKey(theirPub){await ensureIdentity();
+  const bits=await crypto.subtle.deriveBits({name:"ECDH",public:await _ecPub(theirPub)},await _ecPriv(),256);
+  const base=await crypto.subtle.importKey("raw",bits,"HKDF",false,["deriveKey"]);
+  return crypto.subtle.deriveKey({name:"HKDF",hash:"SHA-256",salt:new Uint8Array(0),info:new TextEncoder().encode("cercul-channel-v1")},base,{name:"AES-GCM",length:256},false,["encrypt","decrypt"]);}
+async function mailboxId(theirPub){await ensureIdentity();const pair=[DB.identity.pub,theirPub].sort();
+  const h=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(pair[0]+"|"+pair[1]));
+  return [...new Uint8Array(h)].map(z=>z.toString(16).padStart(2,"0")).join("");}
+async function sealFor(theirPub,obj){const key=await channelKey(theirPub),iv=crypto.getRandomValues(new Uint8Array(12));
+  const ct=await crypto.subtle.encrypt({name:"AES-GCM",iv},key,new TextEncoder().encode(JSON.stringify(obj)));
+  return b64(iv)+"."+b64(ct);}
+async function openFrom(theirPub,blob){const i=blob.indexOf(".");if(i<0)throw new Error("fmt");
+  const key=await channelKey(theirPub);
+  const pt=await crypto.subtle.decrypt({name:"AES-GCM",iv:unb64(blob.slice(0,i))},key,unb64(blob.slice(i+1)));
+  return JSON.parse(new TextDecoder().decode(pt));}
+// transport catre releu (opt-in). connect-src din CSP limiteaza strict originile permise.
+function relayBase(){const u=(DB.relay&&DB.relay.url)||"";return u.replace(/\/+$/,"");}
+function relayOn(){return !!(DB.relay&&DB.relay.on&&relayBase());}
+async function relayPost(mb,blob){const r=await fetch(relayBase()+"/m/"+mb,{method:"POST",headers:{"Content-Type":"text/plain"},body:blob});if(!r.ok)throw new Error("relay "+r.status);return r.json();}
+async function relayGet(mb,since){const r=await fetch(relayBase()+"/m/"+mb+"?since="+(since||0));if(!r.ok)throw new Error("relay "+r.status);return r.json();}
+// faza 1: sincronizare pereche a cardului public — contactele tale primesc automat ultima ta versiune
+async function syncPushTo(m){if(!m||!m.pub)return false;await ensureIdentity();
+  const mb=await mailboxId(m.pub);const card=myPublicCard();card.k=DB.identity.pub;
+  const blob=await sealFor(m.pub,{from:DB.identity.pub,card,t:Date.now()});
+  await relayPost(mb,blob);return true;}
+async function syncPullFrom(m){if(!m||!m.pub)return 0;await ensureIdentity();
+  const mb=await mailboxId(m.pub);const res=await relayGet(mb,m.cursor||0);let applied=0;
+  for(const it of (res.items||[])){m.cursor=it.seq;
+    try{const env=await openFrom(m.pub,it.ct);
+      if(!env||env.from===DB.identity.pub)continue; // ignora propriile ecouri
+      const c=env.card||{};m.name=clean(c.n||m.name).slice(0,80)||m.name;m.industry=clean(c.d||"").slice(0,60);m.role=clean(c.r||m.role).slice(0,80)||m.role;
+      // inlocuieste ofertele lui cu cele primite
+      DB.items=(DB.items||[]).filter(i=>!(i.member_id===m.id&&i.source==="cod de conexiune"));
+      (c.o||[]).slice(0,5).forEach(t=>{const tx=clean(String(t)).slice(0,140);if(tx)DB.items.push({id:DB.seq++,member_id:m.id,kind:"ofer",text:tx,visible:1,source:"cod de conexiune"});});
+      applied++;
+    }catch(_){}}
+  return applied;}
+function updateTrustChip(){const l=$("#trustChipL"),c=$("#trustChip");const on=relayOn();
+  if(l)l.textContent=on?"Sync E2EE":"Local";
+  if(c)c.title=on?("Sync opt-in activat · E2EE prin releu zero-knowledge ("+relayBase()+")"):"Local-Only · 0 date trimise";}
+function renderRelay(){updateTrustChip();const url=$("#relayUrl");if(url&&document.activeElement!==url)url.value=relayBase()||"";
+  const btn=$("#relayToggleBtn");if(btn){const on=!!(DB.relay&&DB.relay.on);btn.textContent=on?"Sync activ ✓":"Activează sync";btn.classList.toggle("gold",on);}
+  const st=$("#relayStatus");if(st){const r=DB.relay||{};
+    st.textContent=relayOn()?("Activ. Releu: "+relayBase()+(r.last?(" · ultimul sync: "+new Date(r.last).toLocaleString("ro-RO")):" · încă fără sync")):"Oprit — rămâi Local-Only.";}}
+function relaySave(){const url=$("#relayUrl");if(!url)return;const v=clean(url.value).trim().slice(0,200);
+  if(v&&!/^https?:\/\//.test(v)){toast("Adresa trebuie să înceapă cu http:// sau https://");return;}
+  DB.relay=DB.relay||{};DB.relay.url=v;save();renderRelay();toast(v?"Adresă releu salvată":"Adresă ștearsă");}
+function relayToggle(){DB.relay=DB.relay||{};
+  if(!DB.relay.on&&!relayBase()){toast("Întâi salvează adresa releului");return;}
+  DB.relay.on=!DB.relay.on;save();renderRelay();toast(DB.relay.on?"Sync activat (opt-in)":"Sync oprit — Local-Only");}
+async function syncNow(){if(!relayOn()){toast("Activează mai întâi sync-ul (Profil → Sincronizare)");return;}
+  const peers=(DB.members||[]).filter(m=>m.via==="code"&&m.pub);
+  if(!peers.length){toast("Niciun contact cu sync (adaugă prin cod EIE2)");return;}
+  let pushed=0,got=0;showProc();
+  try{for(const m of peers){try{if(await syncPushTo(m))pushed++;got+=await syncPullFrom(m);}catch(_){}}
+    DB.relay.last=Date.now();save();loadMembers();render();hideProc();
+    toast("Sync: trimis către "+pushed+", actualizări primite "+got);
+  }catch(e){hideProc();toast("Sync eșuat — verifică adresa releului");}}
 function renderConn(){const host=$("#connList");if(!host)return;
   const q=(($("#netSearch")||{}).value||"").trim();
   const conn=DB.matches.filter(m=>m.status==="conectat"&&(m.offer_member===ME||m.seek_member===ME)).sort((a,b)=>(b.at||0)-(a.at||0));
@@ -1932,7 +2011,9 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="gcal"){const mt=(DB.meetings||[]).find(x=>x.id===id);if(mt){openExt(gcalUrl(mt));logA("Deschis Google Calendar pt. o intalnire");}}
   else if(a==="ics"){const mt=(DB.meetings||[]).find(x=>x.id===id);if(mt)downloadICS(mt);}
   else if(a==="exportAgenda")exportAllICS();
-  else if(a==="trustinfo")toast("Local-Only: datele tale raman criptate pe acest dispozitiv. Aplicatia nu trimite nimic catre niciun server.");
+  else if(a==="trustinfo")toast(relayOn()
+    ?"Sync activat (opt-in): datele se sincronizează cu contactele tale criptate end-to-end printr-un releu zero-knowledge — serverul vede doar text criptat, nu conținutul. Oprești oricând din Profil → Sincronizare."
+    :"Local-Only: datele tale raman criptate pe acest dispozitiv. Aplicatia nu trimite nimic catre niciun server.");
   else if(a==="email"){const mt=(DB.meetings||[]).find(x=>x.id===id);if(mt){openExt(mailtoUrl(mt));logA("Deschis email pt. o intalnire");}}
   else if(a==="fu")followUp(id,el.dataset.fk);
   else if(a==="addtask")addTask();
@@ -1966,6 +2047,9 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="importbtn")importData();
   else if(a==="backupEnc")exportEncrypted();
   else if(a==="restoreEnc")restoreEncrypted();
+  else if(a==="relaySave")relaySave();
+  else if(a==="relayToggle")relayToggle();
+  else if(a==="syncNow")syncNow();
   else if(a==="dismissBackup")dismissBackup();
   else if(a==="copyConnCode")copyConnCode();
   else if(a==="toggleQR")toggleConnQR();
