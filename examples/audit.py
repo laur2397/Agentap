@@ -28,6 +28,7 @@ SOLUTIE=(
  "(b) Trusted Types e DEFENSE-IN-DEPTH peste o baza FARA sink-uri (0 innerHTML/outerHTML/document.write/DOMParser, verificat): pe browsere fara TT NU apare sink nou, apararea primara (textContent peste tot) ramane fail-safe. "
  "(c) wipe() = best-effort recunoscut (V8/GC nu garanteaza zeroing; buffere interne Web Speech in afara controlului) — documentat, fara security theater; curatare completa = inchiderea tab-ului. "
  "(d) Export .ics/mailto/Google Calendar: continut DOAR din campuri sanitizate cu clean(), descarcat ca Blob text/calendar cu nume fix; URL-uri codate cu encodeURIComponent/URLSearchParams -> fara injectare. Handoff-uri user-initiate.\n"
+ "(recorder-contact) Rezumatul de apel poate fi LEGAT de un contact (selector 'Cu cine a fost apelul?'): nota salvata primeste about=member_id + numele in text -> apare automat in brief-ul de 1 minut al persoanei (filtru pe about-id SAU nume). Verificat e2e (selector, salvare cu about+#apel, aparitie in brief, 0 erori).\n"
  "ASISTENT AI in Secretara (loop6) — chat AI OPT-IN, furnizor PLUGABIL, local-first. Implicit DEZACTIVAT.\n"
  "(ai-furnizor) 3 adaptoare: openai-compatibil (Ollama/LM Studio/OpenAI/OpenRouter local sau cloud), Anthropic, Gemini. "
  "Implicit recomandat LOCAL (Ollama http://localhost:11434/v1) -> datele NU pleaca de pe dispozitiv. Cloud = BYOK: userul isi pune "

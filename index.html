@@ -1782,6 +1782,11 @@ function renderRec(){const host=$("#recBody");if(!host)return;const r=DB.rec||{}
   const kids=[h("div",{class:"recctrl"},h("button",{class:"btn gold sm","data-act":"recStart",text:"● Înregistrează"}),
     (!srCtor()?h("span",{class:"recstat",text:"Transcriere live indisponibilă aici → folosim AI la stop"}):null))];
   if(r.transcript){kids.push(h("textarea",{id:"recText",class:"rectext",rows:"6","aria-label":"Transcriere editabilă"}));
+    const others=(DB.members||[]).filter(m=>m.id!==ME);
+    kids.push(h("div",{class:"recwho"},h("label",{class:"mfl",for:"recWho",text:"Cu cine a fost apelul? (opțional)"}),
+      h("select",{id:"recWho","aria-label":"Contact apel"},
+        h("option",{value:"",text:"— niciun contact —"}),
+        ...others.map(m=>h("option",{value:String(m.id),text:m.name})))));
     kids.push(h("div",{class:"recacts"},
       h("button",{class:"btn gold sm","data-act":"recSum",text:"✨ Rezumă cu AI"}),
       h("button",{class:"btn ghost sm","data-act":"recSave",text:"Salvează în Jurnal"}),
@@ -1789,7 +1794,8 @@ function renderRec(){const host=$("#recBody");if(!host)return;const r=DB.rec||{}
   } else if(REC.audioBlob){kids.push(h("div",{class:"recacts"},h("button",{class:"btn gold sm","data-act":"recTr",text:"Transcrie cu AI"})));}
   if(r.summary){kids.push(h("div",{class:"recsum"},h("div",{class:"recsum-h",text:"Rezumat"}),h("div",{class:"recsum-b",text:r.summary})));}
   setKids(host,...kids);
-  const t=$("#recText");if(t){t.value=r.transcript||"";t.oninput=()=>recEdit(t.value);}}
+  const t=$("#recText");if(t){t.value=r.transcript||"";t.oninput=()=>recEdit(t.value);}
+  const w=$("#recWho");if(w){w.value=r.who||"";w.onchange=()=>{DB.rec.who=w.value;save();};}}
 function recEdit(v){DB.rec=DB.rec||{};DB.rec.transcript=v;}
 async function recStart(){if(REC.on)return;
   if(!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia)){toast("Microfonul nu e disponibil în acest browser");return;}
@@ -1827,10 +1833,14 @@ async function recSum(){const tx=(DB.rec&&DB.rec.transcript||"").trim();if(!tx){
       {role:"user",content:"Rezumă acest apel. Format:\n• Rezumat (2-3 fraze)\n• Ce a oferit/cerut fiecare parte\n• Decizii\n• Pași următori\n\nTranscriere:\n"+tx.slice(0,8000)}];
     const s=await aiCall(msgs);DB.rec.summary=(s||"").trim();save();hideProc();renderRec();
   }catch(e){hideProc();toast("Rezumat eșuat: "+(e&&e.message||e));}}
-function recSave(){const r=DB.rec||{};const body=(r.summary?("Rezumat apel:\n"+r.summary):("Transcriere apel:\n"+(r.transcript||""))).slice(0,4000);
-  if(!body.trim()){toast("Nimic de salvat");return;}
-  DB.notes=DB.notes||[];DB.notes.push({id:DB.seq++,member_id:ME,text:body+" #apel",t:Date.now()});
-  logA("Rezumat de apel salvat în Jurnal");save();toast("Salvat în Jurnal (#apel)");}
+function recSave(){const r=DB.rec||{};const who=r.who?mem(+r.who):null;
+  const head=who?("Apel cu "+who.name+" — "):"Apel — ";
+  const core=r.summary?("Rezumat:\n"+r.summary):("Transcriere:\n"+(r.transcript||""));
+  const body=(head+"\n"+core).slice(0,4000);
+  if(!core.trim()){toast("Nimic de salvat");return;}
+  DB.notes=DB.notes||[];DB.notes.push({id:DB.seq++,member_id:ME,text:body+" #apel",t:Date.now(),about:who?who.id:undefined});
+  logA("Rezumat de apel salvat în Jurnal"+(who?(" (cu "+who.name+")"):""));save();
+  toast(who?("Salvat — apare și în brief-ul lui "+who.name.split(" ")[0]):"Salvat în Jurnal (#apel)");}
 function recClear(){if(!confirm("Ștergi transcrierea și rezumatul curent?"))return;DB.rec=DB.rec||{};DB.rec.transcript="";DB.rec.summary="";REC.audioBlob=null;save();renderRec();}
 async function aiTranscribe(blob){const c=aiCfg();const fd=new FormData();fd.append("file",blob,"audio.webm");fd.append("model","whisper-1");
   if(c.provider==="managed"){const rb=relayBase();if(!rb)throw new Error("releul nu e setat");
@@ -2302,7 +2312,7 @@ function buildBrief(m){const cel=mem(ME===m.offer_member?m.seek_member:m.offer_m
   DB.matches.filter(x=>(x.offer_member===ME&&x.seek_member===cel.id)||(x.offer_member===cel.id&&x.seek_member===ME)).forEach(x=>(x.common||[]).forEach(w=>common.add(w)));
   const theirOffers=DB.items.filter(i=>i.member_id===cel.id&&i.kind==="ofer"&&i.visible).map(i=>i.text);
   const fn=cel.name.split(" ")[0].toLowerCase();
-  const myNotes=(DB.notes||[]).filter(n=>n.member_id===ME&&n.text.toLowerCase().includes(fn)).map(n=>n.text);
+  const myNotes=(DB.notes||[]).filter(n=>n.member_id===ME&&(n.about===cel.id||n.text.toLowerCase().includes(fn))).map(n=>n.text);
   const rows=[h("div",{class:"bl"},h("b",{},"Conexiune din: "),(m.at?new Date(m.at).toLocaleDateString("ro-RO",{day:"numeric",month:"long"}):"recent"))];
   if(common.size)rows.push(h("div",{class:"bl"},h("b",{},"Interese comune: "),[...common].join(", ")));
   if(theirOffers.length)rows.push(h("div",{class:"bl"},h("b",{},cel.name.split(" ")[0]+" ofera: "),theirOffers.join("; ")));
@@ -2312,7 +2322,7 @@ function buildBrief(m){const cel=mem(ME===m.offer_member?m.seek_member:m.offer_m
   if(myTasks.length)rows.push(h("div",{class:"bl"},h("b",{},"Task-uri deschise: "),myTasks.join(" · ")));
   // loop2 #14: istoric cronologic (notite + task-uri + intalniri legate de persoana)
   const ev=[];
-  (DB.notes||[]).filter(n=>n.member_id===ME&&n.text.toLowerCase().includes(fn)).forEach(n=>ev.push({t:n.t||0,ic:"📝",txt:n.text}));
+  (DB.notes||[]).filter(n=>n.member_id===ME&&(n.about===cel.id||n.text.toLowerCase().includes(fn))).forEach(n=>ev.push({t:n.t||0,ic:"📝",txt:n.text}));
   (DB.tasks||[]).filter(t=>t.member_id===ME&&t.text.toLowerCase().includes(fn)).forEach(t=>ev.push({t:t.t||0,ic:t.done?"☑":"✅",txt:t.text+(t.due?" · termen "+fmtWhen(t.due):"")}));
   (DB.meetings||[]).filter(x=>(x.a===ME||x.b===ME)&&(x.a===cel.id||x.b===cel.id)).forEach(x=>{const st={propus:"propusa",confirmat:"confirmata",refuzat:"refuzata"}[x.status]||x.status;ev.push({t:x.at||0,ic:"📅",txt:"Intalnire "+fmtWhen(x.when)+" · "+st});});
   ev.sort((a,b)=>(b.t||0)-(a.t||0));
