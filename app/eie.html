@@ -752,6 +752,13 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
 .airow{display:flex;gap:8px;margin-top:12px}
 .airow input{flex:1}
 .aiempty{color:var(--muted);font-size:12.5px;text-align:center;padding:18px 8px}
+/* ===== Secretara: sectiuni in carduri, titluri cu icon ===== */
+.seccard{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;margin-top:16px;box-shadow:var(--shadow),inset 0 1px 0 var(--hi);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
+.seccard>.sec{margin:0 0 12px;padding-left:0;justify-content:flex-start;align-items:center}
+.seccard>.sec::before{display:none}
+.seccard>.sub{margin:0 0 14px}
+.sec .si{margin-right:8px;font-size:14px;opacity:.9;filter:saturate(.7)}
+.sec.nobar{padding-left:0}.sec.nobar::before{display:none}
 </style>
 </head>
 <body>
@@ -851,7 +858,7 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
     <div class="eyebrow">Asistent</div><h2 class="title">Secretara ta</h2>
     <p class="sub">Intalniri, notite si pregatire — intr-un singur loc.</p>
     <div id="secSummary" class="secsum"></div>
-    <div class="sec" style="margin-top:6px">Asistent AI</div>
+    <div class="sec nobar" style="margin-top:18px;justify-content:flex-start;align-items:center"><span class="si">✨</span>Asistent AI</div>
     <div class="aiwrap" id="aiWrap">
       <div class="aibar">
         <span class="aibadge" id="aiBadge">Dezactivat</span>
@@ -892,43 +899,43 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
     </div>
     <div class="focusbar"><button class="btn ghost sm" data-act="focus" aria-label="Comuta modul Focus">🎯 Focus</button></div>
     <div id="focusPanel"></div>
-    <div class="sec">Azi</div>
-    <div id="todayBox"></div>
-    <div class="sec" style="margin-top:24px">Intalniri</div>
-    <p class="sub">Se confirmă doar când ambele părți acceptă. La cele confirmate: Google Calendar, .ics sau email — tu alegi.</p>
-    <div id="weekcal"></div>
-    <div id="meetList"></div>
-    <div class="sec" style="margin-top:26px">Noteaza dupa o intalnire</div>
-    <p class="sub">Scrie cu cuvintele tale ce ai discutat — îți extrag ce cauți/oferi și caut potriviri.</p>
-    <textarea id="dictText" rows="5" placeholder="ex: Am vorbit cu un investitor interesat de energie. Eu caut un contabil bun si ofer spatii comerciale."></textarea>
-    <div style="margin-top:10px"><button class="btn gold" id="dictBtn" onclick="dicteaza()">Noteaza si cauta potriviri</button></div>
-    <div id="dictRes" style="margin-top:14px"></div>
-    <div class="sec" style="margin-top:26px">De facut</div>
-    <p class="sub">Sarcini cu termen. Cele scadente apar evidentiate, iar numarul lor apare pe tab-ul Secretara.</p>
-    <div class="addrow"><input id="taskText" placeholder="ex: Trimite oferta lui Bogdan" aria-label="Task nou" onkeydown="if(event.key==='Enter')addTask()"><input id="taskDue" type="date" style="max-width:144px" aria-label="Termen"><button class="btn gold sm" data-act="addtask" aria-label="Adauga task">+</button></div>
-    <div class="filters" id="taskFilters" style="margin-top:12px">
-      <button class="chip" data-act="tfilter" data-f="all">Toate</button>
-      <button class="chip on" data-act="tfilter" data-f="active">Active</button>
-      <button class="chip" data-act="tfilter" data-f="due">Scadente</button>
-      <button class="btn ghost sm" data-act="bulkdone" style="margin-left:auto" aria-label="Marcheaza toate task-urile vizibile ca finalizate">✓ Finalizeaza vizibile</button></div>
-    <div id="taskList" style="margin-top:6px"></div>
-    <div class="sec" style="margin-top:26px">Jurnalul tau</div>
-    <p class="sub">Idei, notite si lucruri de tinut minte. Cauta-le oricand; brief-ul de intalnire le foloseste.</p>
-    <div class="searchbar"><span class="ic">⌕</span><input id="noteSearch" placeholder="Cauta in notite…" aria-label="Cauta in notite"></div>
-    <div class="addrow"><input id="noteText" placeholder="Scrie o idee… foloseste #tag-uri (ex: #client)" aria-label="Notita noua" onkeydown="if(event.key==='Enter')addNote()"><button class="btn gold sm" data-act="addnote" aria-label="Adauga notita">+</button></div>
-    <div class="ntpl">
-      <span class="ntpl-lbl">Șabloane:</span>
-      <button class="chip" data-act="notetpl" data-tpl="După apel cu @: discutat — ; pași — ; #follow-up">📞 După apel</button>
-      <button class="chip" data-act="notetpl" data-tpl="Follow-up cu @: de făcut — ; termen — ; #follow-up">↩ Follow-up</button>
-      <button class="chip" data-act="notetpl" data-tpl="Idee: — ; util pentru — ; #idee">💡 Idee</button>
-      <button class="chip" data-act="notetpl" data-tpl="Întâlnire cu @: context — ; next — ; #intalnire">🗓 Întâlnire</button>
-    </div>
-    <div class="filters" id="noteRange" style="margin-top:10px">
-      <button class="chip" data-act="nrange" data-r="today">Azi</button>
-      <button class="chip" data-act="nrange" data-r="week">Saptamana</button>
-      <button class="chip on" data-act="nrange" data-r="all">Tot</button></div>
-    <div class="filters" id="noteFilters" style="margin-top:10px"></div>
-    <div id="notesList" style="margin-top:8px"></div>
+    <div class="seccard"><div class="sec"><span class="si">📅</span>Azi</div>
+      <div id="todayBox"></div></div>
+    <div class="seccard"><div class="sec"><span class="si">🤝</span>Întâlniri</div>
+      <p class="sub">Se confirmă doar când ambele părți acceptă. La cele confirmate: Google Calendar, .ics sau email — tu alegi.</p>
+      <div id="weekcal"></div>
+      <div id="meetList"></div></div>
+    <div class="seccard"><div class="sec"><span class="si">📝</span>Notează după o întâlnire</div>
+      <p class="sub">Scrie cu cuvintele tale ce ai discutat — îți extrag ce cauți/oferi și caut potriviri.</p>
+      <textarea id="dictText" rows="5" placeholder="ex: Am vorbit cu un investitor interesat de energie. Eu caut un contabil bun si ofer spatii comerciale."></textarea>
+      <div style="margin-top:12px"><button class="btn gold" id="dictBtn" onclick="dicteaza()">Notează și caută potriviri</button></div>
+      <div id="dictRes" style="margin-top:14px"></div></div>
+    <div class="seccard"><div class="sec"><span class="si">✓</span>De făcut</div>
+      <p class="sub">Sarcini cu termen. Cele scadente apar evidențiate și numărate pe tab.</p>
+      <div class="addrow"><input id="taskText" placeholder="ex: Trimite oferta lui Bogdan" aria-label="Task nou" onkeydown="if(event.key==='Enter')addTask()"><input id="taskDue" type="date" style="max-width:144px" aria-label="Termen"><button class="btn gold sm" data-act="addtask" aria-label="Adauga task">+</button></div>
+      <div class="filters" id="taskFilters" style="margin-top:12px">
+        <button class="chip" data-act="tfilter" data-f="all">Toate</button>
+        <button class="chip on" data-act="tfilter" data-f="active">Active</button>
+        <button class="chip" data-act="tfilter" data-f="due">Scadente</button>
+        <button class="btn ghost sm" data-act="bulkdone" style="margin-left:auto" aria-label="Marcheaza toate task-urile vizibile ca finalizate">✓ Finalizează vizibile</button></div>
+      <div id="taskList" style="margin-top:10px"></div></div>
+    <div class="seccard"><div class="sec"><span class="si">📓</span>Jurnalul tău</div>
+      <p class="sub">Idei și lucruri de ținut minte. Caută-le oricând; brief-ul de întâlnire le folosește.</p>
+      <div class="searchbar"><span class="ic">⌕</span><input id="noteSearch" placeholder="Cauta in notite…" aria-label="Cauta in notite"></div>
+      <div class="addrow" style="margin-top:10px"><input id="noteText" placeholder="Scrie o idee… foloseste #tag-uri (ex: #client)" aria-label="Notita noua" onkeydown="if(event.key==='Enter')addNote()"><button class="btn gold sm" data-act="addnote" aria-label="Adauga notita">+</button></div>
+      <div class="ntpl">
+        <span class="ntpl-lbl">Șabloane:</span>
+        <button class="chip" data-act="notetpl" data-tpl="După apel cu @: discutat — ; pași — ; #follow-up">📞 După apel</button>
+        <button class="chip" data-act="notetpl" data-tpl="Follow-up cu @: de făcut — ; termen — ; #follow-up">↩ Follow-up</button>
+        <button class="chip" data-act="notetpl" data-tpl="Idee: — ; util pentru — ; #idee">💡 Idee</button>
+        <button class="chip" data-act="notetpl" data-tpl="Întâlnire cu @: context — ; next — ; #intalnire">🗓 Întâlnire</button>
+      </div>
+      <div class="filters" id="noteRange" style="margin-top:10px">
+        <button class="chip" data-act="nrange" data-r="today">Azi</button>
+        <button class="chip" data-act="nrange" data-r="week">Saptamana</button>
+        <button class="chip on" data-act="nrange" data-r="all">Tot</button></div>
+      <div class="filters" id="noteFilters" style="margin-top:10px"></div>
+      <div id="notesList" style="margin-top:10px"></div></div>
   </section>
 
   <!-- PROFIL -->
