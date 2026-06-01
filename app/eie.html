@@ -737,6 +737,7 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
 .aicfgbody{padding-top:8px}
 .aitoggle{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink2);margin-top:12px;cursor:pointer}
 .aiwarn{font-size:11px;color:var(--warn-ink);margin-top:9px;line-height:1.5}
+.aihint{font-size:11.5px;color:var(--ink2);margin:6px 0 2px;line-height:1.5}
 .aichat{display:flex;flex-direction:column;gap:9px;margin-top:14px;max-height:340px;overflow-y:auto;padding:2px}
 .aimsg{max-width:86%;padding:10px 13px;border-radius:16px;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word}
 .aimsg.u{align-self:flex-end;background:var(--accent-grad);color:var(--on-gold);border-bottom-right-radius:5px}
@@ -854,15 +855,17 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
         <div class="aicfgbody">
           <p class="sub" style="margin:8px 0 10px">Alege furnizorul. <b>Local</b> = rămâne pe dispozitiv (privat). <b>Cloud</b> = conversația pleacă la furnizor, cu cheia <b>ta</b> (stocată criptat doar local). Implicit oprit.</p>
           <label class="mfl" for="aiProvider">Furnizor</label>
-          <select id="aiProvider" aria-label="Furnizor AI">
+          <select id="aiProvider" aria-label="Furnizor AI" onchange="aiProviderChange()">
             <option value="off">Dezactivat</option>
-            <option value="local">Local — Ollama / LM Studio (privat)</option>
+            <option value="managed">Standard — prin releu (fără configurare)</option>
+            <option value="local">Local — Ollama / LM Studio (doar pe calculator)</option>
             <option value="openai">OpenAI (cheia ta)</option>
             <option value="anthropic">Anthropic Claude (cheia ta)</option>
             <option value="gemini">Google Gemini (cheia ta)</option>
             <option value="openrouter">OpenRouter (cheia ta)</option>
             <option value="custom">Endpoint OpenAI-compatibil (custom)</option>
           </select>
+          <p class="aihint" id="aiHint"></p>
           <label class="mfl" for="aiBase" id="aiBaseLbl">Adresă (Base URL)</label>
           <input id="aiBase" placeholder="http://localhost:11434/v1" aria-label="Base URL">
           <label class="mfl" for="aiKey" id="aiKeyLbl">Cheie API (rămâne criptată local)</label>
@@ -872,6 +875,7 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
           <label class="aitoggle"><input type="checkbox" id="aiCtx"> Permite asistentului să vadă rezumatul tău local (task-uri, întâlniri) în conversație</label>
           <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
             <button class="btn gold sm" data-act="aiSave">Salvează</button>
+            <button class="btn ghost sm" data-act="aiTest">Testează conexiunea</button>
             <button class="btn ghost sm" data-act="aiClear">Șterge configurarea</button>
           </div>
           <p class="aiwarn" id="aiPriv"></p>
@@ -1567,11 +1571,31 @@ function relayToggle(){DB.relay=DB.relay||{};
   DB.relay.on=!DB.relay.on;save();renderRelay();toast(DB.relay.on?"Sync activat (opt-in)":"Sync oprit — Local-Only");}
 /* ===== Asistent AI (loop6): furnizor plugabil, local-first, opt-in ===== */
 const AI_DEF={local:"http://localhost:11434/v1",openai:"https://api.openai.com/v1",openrouter:"https://openrouter.ai/api/v1",anthropic:"https://api.anthropic.com",gemini:"https://generativelanguage.googleapis.com"};
-const AI_LBL={local:"Local — rămâne pe dispozitiv (privat)",openai:"OpenAI",anthropic:"Anthropic Claude",gemini:"Google Gemini",openrouter:"OpenRouter",custom:"endpoint custom"};
+const AI_LBL={managed:"Standard (prin releu)",local:"Local — rămâne pe dispozitiv (privat)",openai:"OpenAI",anthropic:"Anthropic Claude",gemini:"Google Gemini",openrouter:"OpenRouter",custom:"endpoint custom"};
+const AI_MODEL={openai:"gpt-4o-mini",anthropic:"claude-3-5-sonnet-latest",gemini:"gemini-2.0-flash",openrouter:"openai/gpt-4o-mini",local:"llama3.1",managed:"",custom:""};
+const AI_HINT={
+  managed:"AI gata configurat, fără cheie — merge pe telefon. Necesită ca releul (Profil → Sincronizare) să fie deployat cu o cheie AI. Conversația trece prin releul tău.",
+  local:"⚠ Doar pe un CALCULATOR cu Ollama/LM Studio pornit (nu funcționează pe telefon). Pornește Ollama cu OLLAMA_ORIGINS='*'.",
+  openai:"Pune cheia ta OpenAI (platform.openai.com). Merge pe telefon. Conversația pleacă la OpenAI.",
+  anthropic:"Pune cheia ta Anthropic (console.anthropic.com). Merge pe telefon. Conversația pleacă la Anthropic.",
+  gemini:"Pune cheia ta Google AI Studio (aistudio.google.com). Merge pe telefon. Conversația pleacă la Google.",
+  openrouter:"Pune cheia ta OpenRouter (openrouter.ai). Acces la multe modele. Conversația pleacă la OpenRouter.",
+  custom:"Orice endpoint OpenAI-compatibil (base URL + cheie + model)."};
 function aiCfg(){return DB.ai||{provider:"off"};}
 function aiOn(){const c=aiCfg();return c.provider&&c.provider!=="off";}
-function aiKind(p){return p==="anthropic"?"anthropic":p==="gemini"?"gemini":"openai";} // familia de API
+function aiKind(p){return p==="anthropic"?"anthropic":p==="gemini"?"gemini":p==="managed"?"managed":"openai";}
 function aiBaseFor(c){return (c.base&&c.base.trim())||AI_DEF[c.provider]||"";}
+function aiProviderChange(){const p=($("#aiProvider")||{}).value||"off";
+  const base=$("#aiBase"),mdl=$("#aiModel"),hint=$("#aiHint");
+  if(base&&!base.value)base.value=AI_DEF[p]||"";
+  if(mdl&&!mdl.value&&AI_MODEL[p])mdl.value=AI_MODEL[p];
+  if(hint)hint.textContent=AI_HINT[p]||"";
+  // arata/ascunde campuri irelevante
+  const isLocalOrManaged=(p==="local"||p==="managed"||p==="off");
+  const kl=$("#aiKeyLbl"),ki=$("#aiKey"),bl=$("#aiBaseLbl"),bi=$("#aiBase");
+  if(kl)kl.style.display=isLocalOrManaged?"none":"";if(ki)ki.style.display=isLocalOrManaged?"none":"";
+  const hideBase=(p==="managed"||p==="off");
+  if(bl)bl.style.display=hideBase?"none":"";if(bi)bi.style.display=hideBase?"none":"";}
 function renderAi(){const c=aiCfg();
   const badge=$("#aiBadge");if(badge){badge.textContent=aiOn()?(c.provider==="local"?"Local · privat":"Cloud · "+(AI_LBL[c.provider]||c.provider)):"Dezactivat";badge.classList.toggle("on",aiOn());}
   const prov=$("#aiProvider");if(prov&&document.activeElement!==prov)prov.value=c.provider||"off";
@@ -1579,18 +1603,32 @@ function renderAi(){const c=aiCfg();
   const key=$("#aiKey");if(key&&document.activeElement!==key)key.value=c.key||"";
   const mdl=$("#aiModel");if(mdl&&document.activeElement!==mdl)mdl.value=c.model||"";
   const ctx=$("#aiCtx");if(ctx)ctx.checked=!!c.ctx;
-  const kl=$("#aiKeyLbl");if(kl)kl.style.display=(c.provider==="local")?"none":"";
-  const ki=$("#aiKey");if(ki)ki.style.display=(c.provider==="local")?"none":"";
+  const hint=$("#aiHint");if(hint)hint.textContent=aiOn()?(AI_HINT[c.provider]||""):"";
+  const noKey=(c.provider==="local"||c.provider==="managed");
+  const kl=$("#aiKeyLbl");if(kl)kl.style.display=noKey?"none":"";
+  const ki=$("#aiKey");if(ki)ki.style.display=noKey?"none":"";
+  const bl=$("#aiBaseLbl");if(bl)bl.style.display=(c.provider==="managed")?"none":"";
+  const bi=$("#aiBase");if(bi)bi.style.display=(c.provider==="managed")?"none":"";
   const priv=$("#aiPriv");if(priv)priv.textContent=!aiOn()?"":(c.provider==="local"
     ?"🔒 Local: conversația rămâne pe dispozitivul tău; nimic nu pleacă spre cloud."
-    :"⚠ Cloud: conversația va pleca la "+(AI_LBL[c.provider]||c.provider)+" cu cheia ta. Cheia e stocată criptat doar local.");
+    :c.provider==="managed"?"ℹ Standard: conversația trece prin releul tău (proxy), nu prin browserul userului direct. Releul vede prompturile."
+    :"⚠ Cloud: conversația pleacă la "+(AI_LBL[c.provider]||c.provider)+" cu cheia ta. Cheia e stocată criptat doar local.");
   renderAiChat();}
+async function aiTest(){const p=($("#aiProvider")||{}).value||"off";if(p==="off"){toast("Alege un furnizor");return;}
+  // salveaza apoi pinguie
+  aiSave();if(!aiOn())return;
+  const btn=document.querySelector('[data-act="aiTest"]');if(btn){btn.disabled=true;btn.textContent="Testez…";}
+  try{const r=await aiCall([{role:"user",content:"ping — răspunde cu un singur cuvânt: ok"}]);
+    toast(r?("Conexiune OK ✓ ("+(r.slice(0,30))+")"):"Răspuns gol — verifică modelul");}
+  catch(e){toast("Test eșuat: "+(e&&e.message||e));}
+  finally{if(btn){btn.disabled=false;btn.textContent="Testează conexiunea";}}}
 function aiSettings(){const d=$("#aiCfg");if(d)d.open=!d.open;}
 function aiSave(){const p=($("#aiProvider")||{}).value||"off";
   DB.ai={provider:p,base:clean(($("#aiBase")||{}).value||"").trim().slice(0,200),
     key:(($("#aiKey")||{}).value||"").trim().slice(0,400),model:clean(($("#aiModel")||{}).value||"").trim().slice(0,80),
     ctx:!!($("#aiCtx")||{}).checked};
-  if(p!=="off"&&p!=="local"&&!DB.ai.key){toast("Pune cheia API pentru "+(AI_LBL[p]||p));return;}
+  if(p!=="off"&&p!=="local"&&p!=="managed"&&!DB.ai.key){toast("Pune cheia API pentru "+(AI_LBL[p]||p));return;}
+  if(p==="managed"&&!relayBase()){toast("Setează întâi releul (Profil → Sincronizare) pentru modul Standard");return;}
   save();renderAi();toast(p==="off"?"Asistent dezactivat":"Asistent configurat ("+(AI_LBL[p]||p)+")");}
 function aiClear(){DB.ai={provider:"off"};DB.aichat=[];save();renderAi();toast("Configurare AI ștearsă");}
 function renderAiChat(){const host=$("#aiChat");if(!host)return;const msgs=DB.aichat||[];
@@ -1614,25 +1652,38 @@ async function aiSend(){if(!aiOn()){toast("Configurează întâi asistentul (⚙
   catch(e){const t=$("#aiTyping");if(t)t.remove();
     DB.aichat.push({role:"system",content:"Eroare: "+(e&&e.message||e)+". Verifică furnizorul/cheia/adresa (și CORS la endpoint local)."});save();renderAiChat();}
   finally{if(btn){btn.disabled=false;btn.textContent="Trimite";}}}
+async function aiFetch(url,opts,who){let r;
+  try{r=await fetch(url,opts);}
+  catch(e){throw new Error("nu am putut contacta "+who+" — rețea/CORS/mixed-content. Pe telefon, modul Local nu merge; alege un furnizor cloud sau Standard.");}
+  if(!r.ok){const s=r.status;
+    if(s===401||s===403)throw new Error("cheie respinsă de "+who+" (401/403) — verifică cheia API.");
+    if(s===404)throw new Error("model sau adresă inexistentă la "+who+" (404) — verifică modelul/Base URL.");
+    if(s===429)throw new Error(who+" a refuzat: prea multe cereri / fără credit (429).");
+    if(s===402)throw new Error("Standard indisponibil: releul nu are o cheie AI configurată (402).");
+    throw new Error(who+" a returnat HTTP "+s+".");}
+  return r;}
 async function aiCall(messages){const c=aiCfg();const base=aiBaseFor(c).replace(/\/+$/,"");const model=c.model||"";
   const kind=aiKind(c.provider);
+  if(kind==="managed"){const rb=relayBase();if(!rb)throw new Error("releul nu e setat (Profil → Sincronizare).");
+    const r=await aiFetch(rb+"/ai/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages})},"releul");
+    const d=await r.json();return (d.reply||"").trim();}
   if(kind==="anthropic"){
     const sys=messages.find(m=>m.role==="system");const conv=messages.filter(m=>m.role!=="system");
-    const r=await fetch(base+"/v1/messages",{method:"POST",headers:{"Content-Type":"application/json","x-api-key":c.key,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
-      body:JSON.stringify({model:model||"claude-3-5-sonnet-latest",max_tokens:1024,system:sys?sys.content:undefined,messages:conv.map(m=>({role:m.role,content:m.content}))})});
-    if(!r.ok)throw new Error("HTTP "+r.status);const d=await r.json();return (d.content||[]).map(p=>p.text||"").join("").trim();}
+    const r=await aiFetch(base+"/v1/messages",{method:"POST",headers:{"Content-Type":"application/json","x-api-key":c.key,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
+      body:JSON.stringify({model:model||"claude-3-5-sonnet-latest",max_tokens:1024,system:sys?sys.content:undefined,messages:conv.map(m=>({role:m.role,content:m.content}))})},"Anthropic");
+    const d=await r.json();return (d.content||[]).map(p=>p.text||"").join("").trim();}
   if(kind==="gemini"){
     const sys=messages.find(m=>m.role==="system");const conv=messages.filter(m=>m.role!=="system");
-    const r=await fetch(base+"/v1beta/models/"+(model||"gemini-2.0-flash")+":generateContent?key="+encodeURIComponent(c.key),
+    const r=await aiFetch(base+"/v1beta/models/"+(model||"gemini-2.0-flash")+":generateContent?key="+encodeURIComponent(c.key),
       {method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({systemInstruction:sys?{parts:[{text:sys.content}]}:undefined,contents:conv.map(m=>({role:m.role==="assistant"?"model":"user",parts:[{text:m.content}]}))})});
-    if(!r.ok)throw new Error("HTTP "+r.status);const d=await r.json();const c0=(d.candidates||[])[0];
+      body:JSON.stringify({systemInstruction:sys?{parts:[{text:sys.content}]}:undefined,contents:conv.map(m=>({role:m.role==="assistant"?"model":"user",parts:[{text:m.content}]}))})},"Gemini");
+    const d=await r.json();const c0=(d.candidates||[])[0];
     return ((c0&&c0.content&&c0.content.parts)||[]).map(p=>p.text||"").join("").trim();}
   // openai-compatibil (local/openai/openrouter/custom)
   const hdr={"Content-Type":"application/json"};if(c.key)hdr.Authorization="Bearer "+c.key;
-  const r=await fetch(base+"/chat/completions",{method:"POST",headers:hdr,
-    body:JSON.stringify({model:model||"llama3.1",messages:messages.map(m=>({role:m.role,content:m.content})),temperature:0.6})});
-  if(!r.ok)throw new Error("HTTP "+r.status);const d=await r.json();
+  const r=await aiFetch(base+"/chat/completions",{method:"POST",headers:hdr,
+    body:JSON.stringify({model:model||"llama3.1",messages:messages.map(m=>({role:m.role,content:m.content})),temperature:0.6})},c.provider==="local"?"Ollama/LM Studio (local)":(AI_LBL[c.provider]||"furnizorul"));
+  const d=await r.json();
   return ((d.choices||[])[0]||{}).message?.content?.trim()||"";}
 // loop5 M2: sincronizare multi-device proprie ("mailbox de sine", ECDH cu propria cheie)
 // Dispozitivele care iti impart identitatea (prin transferul .eie) sincronizeaza notele/task-urile/profilul tau.
@@ -2492,6 +2543,7 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="planFree")setPlan("free");
   else if(a==="aiSettings")aiSettings();
   else if(a==="aiSave")aiSave();
+  else if(a==="aiTest")aiTest();
   else if(a==="aiClear")aiClear();
   else if(a==="aiSend")aiSend();
   else if(a==="profedit")editProfile();

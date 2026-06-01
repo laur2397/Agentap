@@ -52,7 +52,24 @@ function send(res,code,obj){const b=Buffer.from(JSON.stringify(obj));
 const srv=http.createServer((req,res)=>{
   const u=url.parse(req.url,true);
   if(req.method==="OPTIONS")return send(res,204,{});
-  if(u.pathname==="/health")return send(res,200,{ok:true,mailboxes:Object.keys(store).length,directory:Object.keys(dir).length});
+  if(u.pathname==="/health")return send(res,200,{ok:true,mailboxes:Object.keys(store).length,directory:Object.keys(dir).length,ai:!!process.env.AI_KEY});
+  // ---- AI proxy „Standard" (optional): foloseste cheia AI de pe server (env), nu cea a userului ----
+  // Config env: AI_KEY (obligatoriu pt. activare), AI_BASE (def OpenAI), AI_MODEL (def gpt-4o-mini).
+  if(u.pathname==="/ai/chat"&&req.method==="POST")return readBody(req,res,async body=>{
+    if(!process.env.AI_KEY)return send(res,402,{error:"AI neconfigurat pe releu (lipseste AI_KEY)"});
+    let o;try{o=JSON.parse(body);}catch(_){return send(res,400,{error:"json"});}
+    const msgs=Array.isArray(o.messages)?o.messages.slice(-16):[];
+    const aiBase=(process.env.AI_BASE||"https://api.openai.com/v1").replace(/\/+$/,"");
+    const model=process.env.AI_MODEL||"gpt-4o-mini";
+    try{
+      const up=await fetch(aiBase+"/chat/completions",{method:"POST",
+        headers:{"Content-Type":"application/json","Authorization":"Bearer "+process.env.AI_KEY},
+        body:JSON.stringify({model,messages:msgs,temperature:0.6})});
+      if(!up.ok)return send(res,502,{error:"furnizor AI: HTTP "+up.status});
+      const d=await up.json();const reply=(((d.choices||[])[0]||{}).message||{}).content||"";
+      return send(res,200,{reply});
+    }catch(e){return send(res,502,{error:"proxy AI esuat: "+(e&&e.message||e)});}
+  });
   // ---- DIRECTOR public (discovery opt-in; NU E2EE — doar carduri publice) ----
   if(u.pathname==="/dir/search"&&req.method==="GET"){const q=String(u.query.q||"").trim().toLowerCase();
     let out=Object.values(dir);

@@ -29,6 +29,7 @@ SOLUTIE=(
  "(ai-privacy) Opt-in explicit; eticheta de confidentialitate per mod (Local=privat; Cloud=conversatia pleaca la furnizor cu cheia ta). "
  "Context local (task-uri/intalniri) inclus in prompt DOAR daca userul bifeaza explicit; niciodata implicit. CSP connect-src extins STRICT "
  "la originile AI cunoscute (api.openai.com, api.anthropic.com, generativelanguage.googleapis.com, openrouter.ai) + localhost; nimic altceva.\n"
+ "(ai-managed) Mod STANDARD optional: releul proxy /ai/chat foloseste o cheie AI server-side (env AI_KEY) -> userii primesc AI fara nicio cheie/configurare (merge pe telefon). ONEST: in acest mod releul VEDE prompturile (nu e E2EE pt. AI) — documentat in UI. Erori clare/actionabile (retea/CORS/401/404/429/402) + buton Testeaza + autocompletare model/base + ghidare ca Local merge doar pe calculator cu Ollama. Verificat e2e pe localhost (managed proxy + eroare Local clara).\n"
  "(ai-securitate) Mesajele se randeaza prin textContent (white-space:pre-wrap) — fara innerHTML/markdown-HTML -> Trusted Types intact, fara XSS. "
  "Verificat end-to-end pe localhost cu un mock OpenAI-compatibil (model + context corecte, persistenta, 0 erori). Furnizorii cloud nu sunt accesibili din sandbox.\n\n"
  "PIVOT E2EE (loop5) — sincronizare/discovery/freemium FARA ca serverul sa vada datele. TOTUL implementat in cod "
