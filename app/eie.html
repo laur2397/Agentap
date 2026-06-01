@@ -646,6 +646,58 @@ input::placeholder,textarea::placeholder{color:var(--muted)}
 .badge{backdrop-filter:blur(8px)}
 /* carduri: hover lift mai dramatic */
 .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg),inset 0 1px 0 rgba(255,255,255,.08)}
+/* ===== AURORA componente — redesign pe toate ecranele ===== */
+/* avataruri cu glow */
+.av{box-shadow:0 8px 20px -6px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.25)}
+.av:not(.sq){background:linear-gradient(135deg,#A78BFA,#7C3AED);border:0;color:#fff}
+.av.sq{box-shadow:0 8px 22px -6px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.3)}
+/* card de potrivire = card de lux */
+.card.match{border-radius:26px;padding:24px}
+.ghead .gn{font-size:19px;font-weight:800;letter-spacing:-.4px;color:var(--ink)}
+.ghead .gt{font-size:13px;color:var(--muted)}
+.gline{font-size:15px;color:var(--ink);line-height:1.55;margin:16px 0 2px}
+.pill{font-size:9px;padding:4px 12px;font-weight:700;letter-spacing:.6px;border:1px solid var(--line2);backdrop-filter:blur(8px)}
+.pill.propus{background:var(--primary-soft);color:var(--primary2);border-color:rgba(167,139,250,.35)}
+.pill.conectat{background:var(--success-soft);color:var(--success);border-color:rgba(52,211,153,.35)}
+/* chips „de ce" cu glow */
+.whychip{font-size:11.5px;color:var(--primary2);background:linear-gradient(135deg,rgba(167,139,250,.18),rgba(124,58,237,.10));
+  border:1px solid rgba(167,139,250,.30);border-radius:30px;padding:5px 12px;font-weight:600}
+.whylead{color:var(--muted)}
+/* bridge ofer↔caut glass cu divider gradient */
+.bridge{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:16px;padding:14px;gap:12px}
+.bridge .barrow{color:var(--primary2);font-size:18px}
+.bridge .btxt{color:var(--ink)}
+/* shield discret */
+.shield{color:var(--muted);gap:6px;margin-top:14px}
+/* carduri-accent pe Acasa */
+.ahacard{background:linear-gradient(135deg,rgba(167,139,250,.16),rgba(124,58,237,.06));border:1px solid rgba(167,139,250,.32);border-radius:20px;padding:18px;box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.08)}
+.ahacard .ahat{font-size:15.5px;font-weight:800;color:var(--ink)}
+.nextmeet{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--primary);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+.nextmeet .nmwhen{font-size:21px;font-weight:800;color:var(--ink)}
+.intrinsic{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:12px 14px;color:var(--ink2)}
+/* header de sectiune cu bara-accent */
+.sec{position:relative;padding-left:14px}
+.sec::before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:4px;border-radius:4px;background:linear-gradient(to bottom,#A78BFA,#22D3EE)}
+/* empty state premium */
+.estate{padding:42px 22px}.estate .t{font-size:18px;font-weight:700;color:var(--ink2)}
+.estate svg{opacity:.5;filter:drop-shadow(0 6px 18px rgba(139,92,246,.4))}
+/* graf retea cu glow */
+#mapHost svg,.netgraph svg,#netGraph{filter:drop-shadow(0 0 22px rgba(139,92,246,.30))}
+/* chip filtre */
+.chip{background:rgba(255,255,255,.05);border:1px solid var(--line2);color:var(--ink2);border-radius:30px}
+.chip.on{background:linear-gradient(135deg,#A78BFA,#7C3AED);color:#fff;border-color:transparent;box-shadow:0 6px 16px -4px rgba(139,92,246,.6)}
+/* ===== intrare animata, in cascada, pe fiecare ecran (alive) ===== */
+@keyframes auroraRise{from{opacity:0;transform:translateY(16px) scale(.99)}to{opacity:1;transform:none}}
+.view.on>*{animation:auroraRise .5s var(--ease) both}
+.view.on>*:nth-child(1){animation-delay:.03s}.view.on>*:nth-child(2){animation-delay:.07s}
+.view.on>*:nth-child(3){animation-delay:.11s}.view.on>*:nth-child(4){animation-delay:.15s}
+.view.on>*:nth-child(5){animation-delay:.19s}.view.on>*:nth-child(6){animation-delay:.23s}
+.view.on>*:nth-child(7){animation-delay:.27s}.view.on>*:nth-child(8){animation-delay:.31s}
+.view.on>*:nth-child(n+9){animation-delay:.34s}
+#matchList>.card,#topMatches>.card,#connList>*{animation:auroraRise .5s var(--ease) both}
+#matchList>.card:nth-child(2),#topMatches>.card:nth-child(2){animation-delay:.06s}
+#matchList>.card:nth-child(3),#topMatches>.card:nth-child(3){animation-delay:.12s}
+#matchList>.card:nth-child(4){animation-delay:.18s}#matchList>.card:nth-child(n+5){animation-delay:.22s}
 </style>
 </head>
 <body>
