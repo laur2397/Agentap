@@ -958,7 +958,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
     </div>
     <div class="focusbar"><button class="btn ghost sm" data-act="focus" aria-label="Comuta modul Focus">🎯 Focus</button></div>
     <div id="focusPanel"></div>
-    <div class="seccard" id="recCard"><div class="sec nobar"><span class="si">🎙️</span>Reportofon apel <span class="recver">v3.1</span></div>
+    <div class="seccard" id="recCard"><div class="sec nobar"><span class="si">🎙️</span>Reportofon apel <span class="recver">v3.2</span></div>
       <p class="sub">Merge cu <b>orice apel</b> (Signal, WhatsApp, telefon) pus pe <b>difuzor</b> — captăm prin microfon și transcriem ce se vorbește, apoi facem rezumatul. <b>Nu salvăm audio</b> de redat. Notă onestă: pe un singur telefon trebuie să ții Cercul deschis pe ecran (când treci în altă aplicație, telefonul oprește microfonul); ideal pe difuzor sau pe un al 2-lea dispozitiv.</p>
       <div id="recBody"></div>
     </div>
@@ -1794,7 +1794,9 @@ function renderRec(){const host=$("#recBody");if(!host)return;const r=DB.rec||{}
     h("textarea",{id:"recText",class:"rectext",rows:"7","aria-label":"Transcriere live",readonly:"",placeholder:"Transcrierea apare aici (live pe Android; pe iPhone, la Stop)…"}));
     const t=$("#recText");if(t){t.value=r.transcript||"";t.scrollTop=t.scrollHeight;}return;}
   // oprit
-  const kids=[h("div",{class:"recctrl"},h("button",{class:"btn gold sm","data-act":"recStart",onclick:()=>recStart(),text:"● Înregistrează apel"}))];
+  const kids=[];
+  if(!aiOn())kids.push(h("p",{class:"aiwarn",text:"⚠ Pentru transcriere + rezumat ai nevoie de un asistent AI care acceptă audio (OpenAI, Gemini sau Standard-prin-releu). Configurează-l mai sus la Asistent AI → ⚙ Setări."}));
+  kids.push(h("div",{class:"recctrl"},h("button",{class:"btn gold sm","data-act":"recStart",onclick:()=>recStart(),text:"● Înregistrează apel"})));
   if(r.transcript){kids.push(h("textarea",{id:"recText",class:"rectext",rows:"6","aria-label":"Transcriere editabilă"}));
     const others=(DB.members||[]).filter(m=>m.id!==ME);
     kids.push(h("div",{class:"recwho"},h("label",{class:"mfl",for:"recWho",text:"Cu cine a fost apelul? (opțional)"}),
@@ -1847,18 +1849,17 @@ function recStop(){if(!REC.on)return;REC.on=false;clearInterval(REC.timer);
   else recFinalize();}
 async function recFinalize(){REC._finalize=false;
   try{if(REC.stream)REC.stream.getTracks().forEach(t=>t.stop());}catch(_){}REC.stream=null;
-  const liveLen=(DB.rec&&DB.rec.transcript||"").trim().length;
-  // Transcriere AI (autoritativă; necesară pe iPhone unde live e gol). Doar dacă live n-a prins destul.
+  // Transcriere AI = sursa de adevăr (live STT pe iPhone e gunoi). Folosim AI ori de câte ori e posibil.
   try{
-    if(REC.audioBlob&&aiOn()&&liveLen<20){showProc();
+    if(REC.audioBlob&&aiOn()&&aiAudioOk()){showProc();
       try{const t=await aiTranscribe(REC.audioBlob);if(t&&t.trim())DB.rec.transcript=t.trim();}
       catch(e){toast("Transcriere AI eșuată: "+(e&&e.message||e));}
       finally{hideProc();}}
-  }finally{REC.audioBlob=null;REC.chunks=[];REC.mr=null;} // GARANTAT aruncăm audio (chiar și la eroare/timeout)
+    else if(REC.audioBlob&&!aiOn()){toast("Pune un asistent AI (OpenAI/Gemini/Standard) ca să transcriu — ⚙ Setări.");}
+  }finally{REC.audioBlob=null;REC.chunks=[];REC.mr=null;} // GARANTAT aruncăm audio
   save();renderRec();
-  // Rezumat automat
   if((DB.rec.transcript||"").trim()&&aiOn()){await recSum();}
-  else if(!(DB.rec.transcript||"").trim()){toast("N-am prins text. Verifică: apel pe difuzor + asistent AI configurat (Standard/OpenAI).");}}
+  else if(!(DB.rec.transcript||"").trim()){toast("N-am prins text. Verifică: apel pe difuzor + asistent AI (OpenAI/Gemini/Standard).");}}
 async function recTr(){if(!REC.audioBlob){toast("Nu există audio de transcris");return;}
   if(!aiOn()){toast("Configurează întâi asistentul AI (pentru transcriere)");return;}
   showProc();try{const txt=await aiTranscribe(REC.audioBlob);DB.rec.transcript=(txt||"").trim();
@@ -1880,12 +1881,24 @@ function recSave(){const r=DB.rec||{};const who=r.who?mem(+r.who):null;
   logA("Rezumat de apel salvat în Jurnal"+(who?(" (cu "+who.name+")"):""));save();
   toast(who?("Salvat — apare și în brief-ul lui "+who.name.split(" ")[0]):"Salvat în Jurnal (#apel)");}
 function recClear(){if(!confirm("Ștergi transcrierea și rezumatul curent?"))return;DB.rec=DB.rec||{};DB.rec.transcript="";DB.rec.summary="";REC.audioBlob=null;save();renderRec();}
-async function aiTranscribe(blob){const c=aiCfg();const fd=new FormData();fd.append("file",blob,"audio.webm");fd.append("model","whisper-1");
-  let url,hdr={};
+function aiAudioOk(){const p=aiCfg().provider;return p==="openai"||p==="managed"||p==="gemini"||p==="custom";}
+async function blobB64(blob){return new Promise((res,rej)=>{const fr=new FileReader();fr.onerror=()=>rej(new Error("citire audio"));fr.onload=()=>res(String(fr.result).split(",")[1]||"");fr.readAsDataURL(blob);});}
+async function aiTranscribe(blob){const c=aiCfg();
+  // GEMINI: transcriere prin audio inline (are tier gratuit)
+  if(c.provider==="gemini"){const b64a=await blobB64(blob);const base=aiBaseFor(c).replace(/\/+$/,"");
+    const mt=(blob.type||"audio/webm").split(";")[0];
+    const T=withTimeout({method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({contents:[{parts:[{inlineData:{mimeType:mt,data:b64a}},{text:"Transcrie integral acest audio în limba română. Răspunde DOAR cu transcrierea, fără comentarii."}]}]})},120000);
+    let r;try{r=await fetch(base+"/v1beta/models/"+(c.model||"gemini-2.0-flash")+":generateContent?key="+encodeURIComponent(c.key),T.opts);}
+    catch(e){throw new Error(T.ac.signal.aborted?"transcriere expirată":"rețea/CORS");}finally{T.done();}
+    if(!r.ok)throw new Error("Gemini HTTP "+r.status+(r.status===400?" (format audio nesuportat — încearcă OpenAI/Standard)":""));
+    const d=await r.json();const c0=(d.candidates||[])[0];return ((c0&&c0.content&&c0.content.parts)||[]).map(p=>p.text||"").join("").trim();}
+  // OpenAI-compatibil / Managed (Whisper) — cel mai tolerant la format
+  const fd=new FormData();fd.append("file",blob,"audio.webm");fd.append("model","whisper-1");let url,hdr={};
   if(c.provider==="managed"){const rb=relayBase();if(!rb)throw new Error("releul nu e setat");url=rb+"/ai/transcribe";}
-  else{if(aiKind(c.provider)!=="openai")throw new Error("transcrierea AI cere OpenAI-compatibil sau modul Standard");
+  else{if(aiKind(c.provider)!=="openai")throw new Error("transcrierea cere OpenAI, Gemini sau modul Standard");
     url=aiBaseFor(c).replace(/\/+$/,"")+"/audio/transcriptions";if(c.key)hdr.Authorization="Bearer "+c.key;}
-  const T=withTimeout({method:"POST",headers:hdr,body:fd},120000); // timeout 120s -> nu atârnă indefinit
+  const T=withTimeout({method:"POST",headers:hdr,body:fd},120000);
   let r;try{r=await fetch(url,T.opts);}catch(e){throw new Error(T.ac.signal.aborted?"transcrierea a expirat (timeout)":"rețea/CORS");}finally{T.done();}
   if(!r.ok)throw new Error("HTTP "+r.status);return (await r.json()).text||"";}
 // loop5 M2: sincronizare multi-device proprie ("mailbox de sine", ECDH cu propria cheie)
