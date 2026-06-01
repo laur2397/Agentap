@@ -20,8 +20,32 @@ LOT=4; PACE=8
 ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def P(f): return os.path.join(ROOT,f)
 
-# Descrierea EXACTA a solutiei auditate (iteratia 2 + remedieri runda 1). Onesta — doar ce e implementat.
+# Descrierea EXACTA a solutiei auditate. Onesta — doar ce e implementat si verificat.
 SOLUTIE=(
+ "PIVOT E2EE (loop5) — sincronizare/discovery/freemium FARA ca serverul sa vada datele. TOTUL implementat in cod "
+ "si VERIFICAT end-to-end pe localhost cu Playwright (2-3 contexte de browser + releu local), 0 erori de consola, "
+ "0 innerHTML, Trusted Types activ. Local-Only ramane MODUL IMPLICIT; sync e OPT-IN.\n"
+ "(M1 identitate+canal) Fiecare instalare genereaza o pereche ECDH P-256; cheia PRIVATA e stocata criptata in DB-ul "
+ "local (la repaus AES-GCM) si NU pleaca niciodata; cheia publica intra in codul/QR de conexiune (format EIE2, "
+ "back-compat EIE1). Cheie de canal pereche = ECDH(privA,pubB)->HKDF->AES-GCM; mailbox id = SHA-256(sort(pubA,pubB)) opac. "
+ "Envelope E2EE (AES-GCM, IV per mesaj). VERIFICAT: A->releu->B, B decripteaza si aplica; releul a stocat DOAR ciphertext "
+ "(fara scurgere de nume/rol/oferta in clar).\n"
+ "(M1 releu zero-knowledge) server/relay.js de referinta (Node built-in, fara dependinte): append-only pe mailbox-uri "
+ "opace (POST /m/:id, GET /m/:id?since=N), NU detine chei, NU poate decripta. CSP connect-src restrans STRICT la "
+ "origin-ul releului (anti-exfiltrare catre alte domenii pastrat); implicit doar localhost, self-host isi adauga domeniul.\n"
+ "(M2 multi-device) Sincronizare E2EE 'cu tine insuti': dispozitivele care iti impart identitatea (prin transferul .eie) "
+ "folosesc un mailbox de sine; snapshot (note+task-uri+profil) sigilat E2EE; merge last-writer-wins la nivel de dispozitiv. "
+ "VERIFICAT: A si B converg — create, edit SI delete se propaga. Gated ca functie Pro.\n"
+ "(M3a discovery) Director public OPT-IN pe releu (POST /dir, GET /dir/search, POST /dir/del): cauti necunoscuti dupa "
+ "cuvant-cheie si ii adaugi (cu cheia lor publica -> sync pereche posibil). ONEST: directorul NU e E2EE (serverul vede "
+ "cardurile publice ca sa le caute) -> strict opt-in, DOAR card public; 'ce caut' nu se publica NICIODATA. "
+ "VERIFICAT: C cauta -> gaseste, 'ce caut' NU apare in director/UI; releul nu contine textul privat.\n"
+ "(M3b freemium) Tier-uri Free/Pro + gating client-side + UI de plan. Free=Local-Only+backup pe veci, sync cu max 3 "
+ "contacte, discovery; Pro=sync nelimitat + multi-device. ONEST: upgrade-ul e DEMO (fara plata reala); UI declara explicit "
+ "ca enforcement-ul REAL cere token de drept semnat server-side + procesator de plati (Stripe) — NU pretindem ca e gata.\n"
+ "(onestitate claim-uri) Trustchip arata 'Local' implicit si 'Sync E2EE' cand e activat; textul de transparenta si pagina "
+ "'Despre' au fost nuantate: nu se mai pretinde '0 date trimise' neconditionat, ci 'implicit Local-Only; sync opt-in E2EE, "
+ "releul nu vede continutul'. LIMITARE ONESTA: nu e deployat live (verificare pe localhost); billing nereal; discovery nu e E2EE.\n\n"
  "SECRETARA — ITERATIA 3 din roadmap (Task-uri + Follow-up), ULTIMA. Verificat cu Playwright, zero erori, "
  "DOM API (zero innerHTML), TrustedTypes activ.\n"
  "(s3-taskuri) Sectiune 'De facut' in Secretara: adaugi sarcini cu termen optional, le bifezi finalizate, "

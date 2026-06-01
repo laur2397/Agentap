@@ -608,6 +608,7 @@ details.why2>summary::-webkit-details-marker{display:none}
         <label class="mfl" for="myConnCode">Codul tău de conexiune</label>
         <textarea id="myConnCode" rows="3" readonly aria-label="Codul tau de conexiune" style="width:100%;font-size:11px"></textarea>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+          <button class="btn gold sm" data-act="invite">✉️ Invită pe cineva</button>
           <button class="btn ghost sm" data-act="copyConnCode">⧉ Copiază codul meu</button>
           <button class="btn ghost sm" data-act="toggleQR">▦ Arată QR</button>
         </div>
@@ -797,7 +798,7 @@ details.why2>summary::-webkit-details-marker{display:none}
 <div class="ob" id="ob">
   <div class="mk">C</div>
   <h1>Bun venit in Cerc</h1>
-  <div class="lead">Trei intrebari scurte si esti inauntru. Iti pregatim profilul si primele potriviri din prima secunda.</div>
+  <div class="lead">Găsește oamenii potriviți și fă conexiuni care contează — în câteva secunde. (Datele tale rămân criptate și sub controlul tău.)</div>
   <div class="step on" data-s="0"><label>Cum te numim?</label><input id="obName" placeholder="Nume si prenume" autocomplete="off">
     <label>Domeniul tau</label><input id="obInd" placeholder="ex: Imobiliare, IT, Energie…" autocomplete="off"></div>
   <div class="step" data-s="1"><label>Ce oferi cercului?</label><input id="obOff" placeholder="ex: spatii comerciale in centru" autocomplete="off"></div>
@@ -1163,6 +1164,12 @@ function myPublicCard(){const me=mem(ME)||{name:"?"};
 // loop5: EIE2 = cod cu cheie publica ECDH (pt. canal E2EE); EIE1 ramane acceptat (fara sync)
 async function connCode(){try{await ensureIdentity();const card=myPublicCard();card.k=DB.identity.pub;return "EIE2:"+b64utf8(JSON.stringify(card));}catch(_){return "EIE1:"+b64utf8(JSON.stringify(myPublicCard()));}}
 function renderExchange(){const t=$("#myConnCode");if(t)connCode().then(c=>{t.value=c;});}
+// loop5 R2: bucla virala — invita pe cineva (share nativ / clipboard) cu pitch + cod
+async function inviteSomeone(){const code=await connCode();const me=mem(ME)||{name:""};
+  const msg="Te invit în Cercul meu — o rețea de business unde TU controlezi datele (criptate, nu sunt vândute).\n\nAdaugă-mă cu acest cod:\n"+code+"\n\nDeschide app-ul Cercul → Rețea → «Adaugă în rețea» și lipește codul. Apoi trimite-mi codul tău și suntem conectați.";
+  try{if(navigator.share){await navigator.share({title:"Invitație în Cerc",text:msg});logA("Invitație trimisă");return;}}catch(_){}
+  try{if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(msg);logA("Invitație copiată");toast("Invitație copiată — trimite-o pe WhatsApp/email/SMS");return;}}catch(_){}
+  toast("Copiază codul de mai sus și trimite-l unui contact");}
 function copyConnCode(){connCode().then(code=>{if(!code){toast("Cod indisponibil");return;}
   try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(code).then(()=>toast("Cod copiat — dă-l persoanei pe care o întâlnești")).catch(()=>{const t=$("#myConnCode");if(t)t.select();});return;}}catch(_){}
   const t=$("#myConnCode");if(t)t.select();toast("Selectează și copiază codul");});}
@@ -1359,6 +1366,10 @@ function renderPlan(){const line=$("#planLine");if(!line)return;const pro=isPro(
 /* loop5 M3: DISCOVERY — director public OPT-IN (NU E2EE; doar carduri publice). Raspuns la #1 (network effects). */
 let DISCOVER=[];
 async function publishMe(){if(!relayBase()){toast("Setează întâi releul (Profil → Sincronizare)");return;}
+  // R2 compliance: consimtamant explicit GDPR-style inainte de a publica in directorul public
+  if(!(DB.dir&&DB.dir.consent)){
+    const ok=confirm("Publicare în directorul public\n\nVei fi GĂSIBIL de alți utilizatori după nume, domeniu și ce oferi (cardul public). «Ce cauți», notele și contactele tale NU se publică niciodată.\n\nAcestea sunt date pe care serverul le poate citi (ca să le poată căuta) — spre deosebire de restul, care e criptat E2EE. Te poți scoate oricând din director, instant.\n\nConfirmi publicarea cardului public?");
+    if(!ok)return;DB.dir=DB.dir||{};DB.dir.consent=true;save();}
   await ensureIdentity();
   try{const r=await fetch(relayBase()+"/dir",{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify({pub:DB.identity.pub,card:myPublicCard()})});
     if(!r.ok)throw 0;DB.dir=DB.dir||{};DB.dir.published=true;save();renderDiscover();toast("Ești în director (doar card public, opt-in)");}
@@ -2151,6 +2162,7 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="copyConnCode")copyConnCode();
   else if(a==="toggleQR")toggleConnQR();
   else if(a==="addByCode")addByCode();
+  else if(a==="invite")inviteSomeone();
   else if(a==="discsearch")discoverSearch();
   else if(a==="discadd")discAdd(el.dataset.pub);
   else if(a==="togglePublish")togglePublish();
@@ -2185,7 +2197,7 @@ window.addEventListener("pagehide",()=>{try{wipe();}catch(_){}}); // curatare de
 function showLock(mode){LOCKMODE=mode;
   $("#lockTitle").textContent=mode==="setup"?"Bun venit — seteaza o parola":"Deblocheaza Cercul";
   $("#lockLead").textContent=mode==="setup"
-    ?"Cercul tău privat de afaceri rămâne pe acest dispozitiv — relațiile, notițele și planurile tale nu pleacă spre niciun server, nu sunt vândute și nu hrănesc reclame. Alege o parolă de sesiune: din ea derivăm cheia de criptare (PBKDF2), care NU se salvează pe disc."
+    ?"Rețeaua ta de business: găsești oameni, ții minte relațiile, primești potriviri. Datele tale sunt criptate și sub controlul tău — nu sunt vândute, nu hrănesc reclame (sincronizarea e opt-in și criptată end-to-end). Alege o parolă de sesiune: din ea derivăm cheia de criptare (PBKDF2), care NU se salvează pe disc."
     :"Introdu parola de sesiune ca sa decriptezi datele. Cheia se deriveaza in memorie; nu e stocata nicaieri.";
   $("#lockBtn").textContent=mode==="setup"?"Creeaza si intra →":"Deblocheaza →";
   $("#lockReset").style.display=mode==="setup"?"none":"block";
