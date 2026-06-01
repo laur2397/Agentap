@@ -770,6 +770,9 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
 .recstat{font-size:12px;color:var(--primary);font-weight:600;margin-top:10px}
 .rechint{font-size:11px;color:var(--muted);margin-top:4px}
 .recver{font-size:10px;font-weight:700;color:var(--gold-dim);background:var(--gold-soft);padding:2px 7px;border-radius:20px;vertical-align:middle}
+.recsetup{background:var(--gold-soft);border:1px solid var(--line2);border-radius:16px;padding:16px;margin-bottom:14px}
+.recsetup-t{font-weight:800;font-size:14px;color:var(--ink);margin-bottom:5px}
+.recsetup-p{font-size:12.5px;color:var(--ink2);line-height:1.5;margin-bottom:12px}
 .rectext{width:100%;margin-top:12px;resize:vertical}
 .recacts{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
 .recsum{margin-top:14px;background:var(--primary-soft);border:1px solid var(--line2);border-radius:14px;padding:14px}
@@ -958,7 +961,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
     </div>
     <div class="focusbar"><button class="btn ghost sm" data-act="focus" aria-label="Comuta modul Focus">🎯 Focus</button></div>
     <div id="focusPanel"></div>
-    <div class="seccard" id="recCard"><div class="sec nobar"><span class="si">🎙️</span>Reportofon apel <span class="recver">v3.4</span></div>
+    <div class="seccard" id="recCard"><div class="sec nobar"><span class="si">🎙️</span>Reportofon apel <span class="recver">v3.5</span></div>
       <p class="sub">Merge cu <b>orice apel</b>, cu <b>oricine</b> — persoana <b>nu trebuie să fie în aplicație</b>. Pui apelul pe <b>difuzor</b>, captăm prin microfon și transcriem ce se vorbește, apoi facem rezumatul. <b>Nu salvăm audio</b>. Notă onestă: pe un singur telefon trebuie să ții Cercul deschis pe ecran (când treci în altă aplicație, telefonul oprește microfonul) — ideal pe difuzor sau pe un al 2-lea dispozitiv.</p>
       <div id="recBody"></div>
     </div>
@@ -1781,6 +1784,8 @@ function srCtor(){return window.SpeechRecognition||window.webkitSpeechRecognitio
 function recTimeStr(){const s=Math.floor((Date.now()-REC.t0)/1000);return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");}
 function updRecTimer(){const el=$("#recTimer");if(el)el.textContent=recTimeStr();}
 function recConsent(){DB.rec=DB.rec||{};DB.rec.consent=true;if(!DB.rec.transcript)DB.rec.transcript="";save();renderRec();}
+function recGoAI(){const c=$("#aiCfg");if(c)c.open=true;const w=$("#aiWrap");if(w)w.scrollIntoView({behavior:"smooth",block:"start"});
+  const sel=$("#aiProvider");if(sel&&(!aiOn()))sel.value="gemini";aiProviderChange();toast("Am ales Google Gemini — pune cheia gratuită, apoi Salvează și Testează");}
 function renderRec(){const host=$("#recBody");if(!host)return;const r=DB.rec||{};
   if(!r.consent){setKids(host,
     h("p",{class:"aihint-intro",text:"⚖ Asigură-te că ai dreptul/acordul să înregistrezi (în multe țări e nevoie de consimțământul ambelor părți). Pune apelul pe difuzor pentru ambele voci."}),
@@ -1795,7 +1800,12 @@ function renderRec(){const host=$("#recBody");if(!host)return;const r=DB.rec||{}
     const t=$("#recText");if(t){t.value=r.transcript||"";t.scrollTop=t.scrollHeight;}return;}
   // oprit
   const kids=[];
-  if(!aiOn())kids.push(h("p",{class:"aiwarn",text:"⚠ Pentru transcriere + rezumat ai nevoie de un asistent AI care acceptă audio (OpenAI, Gemini sau Standard-prin-releu). Configurează-l mai sus la Asistent AI → ⚙ Setări."}));
+  if(!aiOn()){
+    kids.push(h("div",{class:"recsetup"},
+      h("div",{class:"recsetup-t",text:"⚠ Întâi configurează un asistent AI"}),
+      h("div",{class:"recsetup-p",text:"Fără el pot înregistra, dar nu am cu ce să transcriu și să rezum. Gemini are cheie gratuită — durează 1 minut."}),
+      h("button",{class:"btn gold sm","data-act":"recGoAI",onclick:()=>recGoAI(),text:"⚙ Configurează asistentul AI"})));
+  }
   kids.push(h("div",{class:"recctrl"},h("button",{class:"btn gold sm","data-act":"recStart",onclick:()=>recStart(),text:"● Înregistrează apel"})));
   if(r.transcript){kids.push(h("textarea",{id:"recText",class:"rectext",rows:"6","aria-label":"Transcriere editabilă"}));
     const others=(DB.members||[]).filter(m=>m.id!==ME);
