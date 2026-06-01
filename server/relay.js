@@ -13,7 +13,21 @@
  * Pornire: node server/relay.js   (PORT, RELAY_FILE, CORS_ORIGIN din env)
  */
 "use strict";
-const http=require("http"),fs=require("fs"),url=require("url");
+const http=require("http"),fs=require("fs"),url=require("url"),crypto=require("crypto");
+// Entitlement (loop5 R3): token Pro semnat HMAC -> enforcement REAL server-side (nu se poate pirata fara secret).
+// In productie /entitlement/grant e apelat de webhook-ul de plata (Stripe); aici e stub de dezvoltare.
+const SECRET=process.env.RELAY_SECRET||crypto.randomBytes(32).toString("hex");
+function signPro(pub){const exp=Date.now()+30*864e5,payload=pub+"|pro|"+exp;
+  const sig=crypto.createHmac("sha256",SECRET).update(payload).digest("hex");
+  return Buffer.from(payload).toString("base64")+"."+sig;}
+function verifyPro(token){try{const[b,sig]=String(token||"").split(".");if(!b||!sig)return false;
+  const payload=Buffer.from(b,"base64").toString("utf8"),[pub,tier,exp]=payload.split("|");
+  const good=crypto.createHmac("sha256",SECRET).update(payload).digest("hex");
+  if(sig.length!==good.length||!crypto.timingSafeEqual(Buffer.from(sig),Buffer.from(good)))return false;
+  return tier==="pro"&&Date.now()<+exp;}catch(_){return false;}}
+const RATE=Object.create(null); // ip -> [timestamps] pentru /dir (anti-spam/Sybil)
+function rateOk(ip){const now=Date.now(),w=RATE[ip]=(RATE[ip]||[]).filter(t=>now-t<600000);
+  if(w.length>=10)return false;w.push(now);return true;}
 const PORT=+(process.env.PORT||8787);
 const MAXBYTES=+(process.env.RELAY_MAXBYTES||65536);   // 64KB / mesaj
 const MAXITEMS=+(process.env.RELAY_MAXITEMS||500);     // inel per mailbox
@@ -32,7 +46,7 @@ if(FILE)setInterval(()=>{if(dirty){try{fs.writeFileSync(FILE,JSON.stringify({sto
 
 function send(res,code,obj){const b=Buffer.from(JSON.stringify(obj));
   res.writeHead(code,{"Content-Type":"application/json","Access-Control-Allow-Origin":CORS,
-    "Access-Control-Allow-Methods":"GET,POST,OPTIONS","Access-Control-Allow-Headers":"Content-Type"});
+    "Access-Control-Allow-Methods":"GET,POST,OPTIONS","Access-Control-Allow-Headers":"Content-Type, X-Pro"});
   res.end(b);}
 
 const srv=http.createServer((req,res)=>{
@@ -45,7 +59,16 @@ const srv=http.createServer((req,res)=>{
     if(q)out=out.filter(e=>dirText(e).includes(q));
     out=out.sort((a,b)=>b.t-a.t).slice(0,30).map(e=>({pub:e.pub,card:e.card}));
     return send(res,200,{results:out});}
+  // ---- ENTITLEMENT Pro (token semnat HMAC) ----
+  if(u.pathname==="/entitlement/grant"&&req.method==="POST")return readBody(req,res,body=>{
+    let o;try{o=JSON.parse(body);}catch(_){return send(res,400,{error:"json"});}
+    if(!o||!PUBRE.test(o.pub||""))return send(res,400,{error:"pub invalid"});
+    return send(res,200,{token:signPro(o.pub),tier:"pro"});}); // (in prod: doar dupa plata confirmata)
+  if(u.pathname==="/entitlement/verify"&&req.method==="GET")
+    return send(res,200,{valid:verifyPro(u.query.token)});
   if(u.pathname==="/dir"&&req.method==="POST")return readBody(req,res,body=>{
+    const ip=(req.headers["x-forwarded-for"]||req.socket.remoteAddress||"?").split(",")[0].trim();
+    if(!rateOk(ip))return send(res,429,{error:"prea multe publicari — reincearca mai tarziu"});
     let o;try{o=JSON.parse(body);}catch(_){return send(res,400,{error:"json"});}
     if(!o||!PUBRE.test(o.pub||"")||!o.card||typeof o.card!=="object")return send(res,400,{error:"invalid"});
     const c=o.card,card={n:String(c.n||"").slice(0,80),d:String(c.d||"").slice(0,60),r:String(c.r||"").slice(0,80),
@@ -55,9 +78,11 @@ const srv=http.createServer((req,res)=>{
   if(u.pathname==="/dir/del"&&req.method==="POST")return readBody(req,res,body=>{
     let o;try{o=JSON.parse(body);}catch(_){return send(res,400,{error:"json"});}
     if(o&&o.pub&&dir[o.pub]){delete dir[o.pub];dirty=true;}return send(res,200,{ok:true});});
-  const m=u.pathname.match(/^\/m\/([^/]+)$/);
+  // MAILBOX: /m/:id (sync pereche) sau /self/:id (multi-device Pro -> necesita token Pro VALID, altfel 402)
+  const m=u.pathname.match(/^\/(m|self)\/([^/]+)$/);
   if(!m)return send(res,404,{error:"not found"});
-  const id=m[1];
+  if(m[1]==="self"&&!verifyPro(req.headers["x-pro"]))return send(res,402,{error:"pro necesar (multi-device)"});
+  const id=m[2];
   if(!MBOX.test(id))return send(res,400,{error:"mailbox invalid"});
 
   if(req.method==="GET"){

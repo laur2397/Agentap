@@ -1299,6 +1299,10 @@ function relayBase(){const u=(DB.relay&&DB.relay.url)||"";return u.replace(/\/+$
 function relayOn(){return !!(DB.relay&&DB.relay.on&&relayBase());}
 async function relayPost(mb,blob){const r=await fetch(relayBase()+"/m/"+mb,{method:"POST",headers:{"Content-Type":"text/plain"},body:blob});if(!r.ok)throw new Error("relay "+r.status);return r.json();}
 async function relayGet(mb,since){const r=await fetch(relayBase()+"/m/"+mb+"?since="+(since||0));if(!r.ok)throw new Error("relay "+r.status);return r.json();}
+// R3: mailbox Pro multi-device -> /self, gated server-side de token Pro semnat (enforcement real)
+function proHdr(){return (DB.plan&&DB.plan.token)||"";}
+async function relaySelfPost(mb,blob){const r=await fetch(relayBase()+"/self/"+mb,{method:"POST",headers:{"Content-Type":"text/plain","X-Pro":proHdr()},body:blob});if(r.status===402)throw new Error("pro");if(!r.ok)throw new Error("relay "+r.status);return r.json();}
+async function relaySelfGet(mb,since){const r=await fetch(relayBase()+"/self/"+mb+"?since="+(since||0),{headers:{"X-Pro":proHdr()}});if(r.status===402)throw new Error("pro");if(!r.ok)throw new Error("relay "+r.status);return r.json();}
 // faza 1: sincronizare pereche a cardului public — contactele tale primesc automat ultima ta versiune
 async function syncPushTo(m){if(!m||!m.pub)return false;await ensureIdentity();
   const mb=await mailboxId(m.pub);const card=myPublicCard();card.k=DB.identity.pub;
@@ -1336,9 +1340,9 @@ async function syncSelfPush(){await ensureIdentity();const mb=await mailboxId(DB
   const me=mem(ME)||{};
   const snap={t:DB.selfV||Date.now(),notes:(DB.notes||[]).filter(n=>n.member_id===ME),
     tasks:(DB.tasks||[]).filter(t=>t.member_id===ME),prof:{name:me.name,industry:me.industry||"",role:me.role||""}};
-  await relayPost(mb,await sealFor(DB.identity.pub,{self:1,snap}));}
+  await relaySelfPost(mb,await sealFor(DB.identity.pub,{self:1,snap}));}
 async function syncSelfPull(){await ensureIdentity();const mb=await mailboxId(DB.identity.pub);
-  const res=await relayGet(mb,DB.selfCursor||0);let newest=null;
+  const res=await relaySelfGet(mb,DB.selfCursor||0);let newest=null;
   for(const it of (res.items||[])){DB.selfCursor=it.seq;
     try{const env=await openFrom(DB.identity.pub,it.ct);if(env&&env.self&&env.snap&&(!newest||env.snap.t>newest.t))newest=env.snap;}catch(_){}}
   if(newest&&newest.t>(DB.selfV||0)){APPLYING=true;
@@ -1351,8 +1355,16 @@ async function syncSelfPull(){await ensureIdentity();const mb=await mailboxId(DB
 const FREE_SYNC_CAP=3;
 function planTier(){return (DB.plan&&DB.plan.tier)==="pro"?"pro":"free";}
 function isPro(){return planTier()==="pro";}
-function setPlan(t){DB.plan={tier:(t==="pro"?"pro":"free"),since:Date.now()};save();renderPlan();
-  toast(t==="pro"?"Plan Pro activ (demo — fără plată reală încă)":"Revenit la Free");}
+async function setPlan(t){
+  if(t==="pro"){
+    if(relayBase()){try{await ensureIdentity();
+      const r=await fetch(relayBase()+"/entitlement/grant",{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify({pub:DB.identity.pub})});
+      const d=await r.json();if(!d.token)throw 0;DB.plan={tier:"pro",since:Date.now(),token:d.token};
+      toast("Plan Pro activ — enforcement real prin token semnat de releu (plata: demo, fără Stripe încă)");
+    }catch(_){toast("Nu am putut activa Pro (releu indisponibil)");return;}}
+    else{DB.plan={tier:"pro",since:Date.now()};toast("Pro activat local (fără releu — demo)");}
+  }else{DB.plan={tier:"free",since:Date.now()};toast("Revenit la Free");}
+  save();renderPlan();}
 async function syncNow(){if(!relayOn()){toast("Activează mai întâi sync-ul (Profil → Sincronizare)");return;}
   const allPeers=(DB.members||[]).filter(m=>m.via==="code"&&m.pub);
   const peers=isPro()?allPeers:allPeers.slice(0,FREE_SYNC_CAP);
@@ -1388,14 +1400,18 @@ async function discoverSearch(){if(!relayBase()){toast("Setează întâi releul 
     DISCOVER=d.results||[];renderDiscoverResults();}
   catch(e){hideProc();toast("Căutare eșuată");}}
 function renderDiscoverResults(){const host=$("#discoverResults");if(!host)return;
-  const mine=DB.identity&&DB.identity.pub,list=DISCOVER.filter(e=>e.pub!==mine);
+  const mine=DB.identity&&DB.identity.pub,blocked=DB.blocked||[];
+  const list=DISCOVER.filter(e=>e.pub!==mine&&!blocked.includes(e.pub));
   if(!list.length){setKids(host,estateBox("Niciun rezultat","Încearcă alt cuvânt-cheie sau invită oameni să se publice."));return;}
   setKids(host,...list.map(e=>{const known=(DB.members||[]).some(m=>m.pub===e.pub);
     return h("div",{class:"discitem"},
       h("div",{class:"di-main"},h("div",{class:"di-name",text:e.card.n||"?"}),
         h("div",{class:"di-sub",text:[e.card.r,e.card.d].filter(Boolean).join(" · ")||"—"}),
         (e.card.o&&e.card.o.length)?h("div",{class:"di-off",text:"Oferă: "+e.card.o.join(", ")}):null),
-      known?h("span",{class:"di-known",text:"în rețea ✓"}):h("button",{class:"btn gold sm","data-act":"discadd","data-pub":e.pub,text:"+ Adaugă"}));}));}
+      known?h("span",{class:"di-known",text:"în rețea ✓"}):h("button",{class:"btn gold sm","data-act":"discadd","data-pub":e.pub,text:"+ Adaugă"}),
+      h("button",{class:"btn ghost sm","data-act":"discblock","data-pub":e.pub,title:"Raportează / blochează acest profil",text:"⚑"}));}));}
+function discBlock(pub){if(!pub)return;DB.blocked=DB.blocked||[];if(!DB.blocked.includes(pub))DB.blocked.push(pub);
+  save();renderDiscoverResults();toast("Profil blocat — nu îl mai vezi în căutări");}
 function discAdd(pub){const e=DISCOVER.find(x=>x.pub===pub);if(!e){toast("Rezultat expirat — caută din nou");return;}
   const res=addParsedCard(Object.assign({},e.card,{k:pub}));if(!res.ok){toast(res.msg);return;}
   save();loadMembers();$("#member").value=ME;render();renderDiscoverResults();toast(res.name+" adăugat din director");}
@@ -2169,6 +2185,7 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="invite")inviteSomeone();
   else if(a==="discsearch")discoverSearch();
   else if(a==="discadd")discAdd(el.dataset.pub);
+  else if(a==="discblock")discBlock(el.dataset.pub);
   else if(a==="togglePublish")togglePublish();
   else if(a==="planPro")setPlan("pro");
   else if(a==="planFree")setPlan("free");
