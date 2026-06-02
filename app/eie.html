@@ -1045,6 +1045,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-02c · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -1801,6 +1802,10 @@ function renderAi(){const c=aiCfg();
   renderAiChat();}
 function aiStatus(msg,ok){const el=$("#aiTestStatus");if(!el)return;el.style.display="block";el.textContent=msg;el.style.color=ok?"var(--success)":"var(--warn-ink)";}
 async function aiTest(){const p=($("#aiProvider")||{}).value||"off";if(p==="off"){toast("Alege un furnizor");return;}
+  // verificare rapida a formei cheii inainte de a contacta furnizorul
+  const k=(($("#aiKey")||{}).value||"").trim();
+  if(p==="gemini"&&k&&!/^AIza[\w-]{30,}$/.test(k)){aiStatus("Cheia nu pare o cheie Google Gemini. O cheie corectă începe cu AIza și are ~39 de caractere. Ia una nouă de la aistudio.google.com → Get API key.",false);return;}
+  if((p==="openai"||p==="openrouter")&&k&&!/^sk-/.test(k)){aiStatus("Cheia "+(AI_LBL[p]||p)+" începe de obicei cu sk-. Verifică ce ai lipit.",false);return;}
   // salveaza apoi pinguie
   aiSave();if(!aiOn())return;
   const btn=document.querySelector('[data-act="aiTest"]');if(btn){btn.disabled=true;btn.textContent="Testez…";}
