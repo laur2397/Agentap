@@ -1051,7 +1051,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-02d · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-02e · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -1775,6 +1775,13 @@ function aiKind(p){return p==="anthropic"?"anthropic":p==="gemini"?"gemini":p===
 // furnizorii cloud au adresa FIXA — ignoram orice e scris in Base URL (previne cheia pusa din greseala acolo)
 function aiBaseFor(c){if(c.provider==="openai"||c.provider==="anthropic"||c.provider==="gemini"||c.provider==="openrouter")return AI_DEF[c.provider]||"";
   return (c.base&&c.base.trim())||AI_DEF[c.provider]||"";}
+// Gemini accepta DOUA tipuri de credentiale: cheie API "AIza…" (prin ?key=) SAU token de acces "AQ.…"/"ya29.…" (prin Authorization: Bearer)
+function geminiReq(c,extraHeaders){const k=(c.key||"").trim();const base=aiBaseFor(c).replace(/\/+$/,"");
+  const url=base+"/v1beta/models/"+(c.model||"gemini-2.5-flash")+":generateContent";
+  const isApiKey=/^AIza/.test(k);
+  const headers=Object.assign({"Content-Type":"application/json"},extraHeaders||{});
+  if(!isApiKey&&k)headers.Authorization="Bearer "+k;
+  return {url:url+(isApiKey?("?key="+encodeURIComponent(k)):""),headers};}
 function aiProviderChange(){const p=($("#aiProvider")||{}).value||"off";
   const base=$("#aiBase"),mdl=$("#aiModel"),hint=$("#aiHint");
   // Base URL conteaza DOAR la Local si Endpoint custom; pentru rest il golim ca sa nu ramana gunoi
@@ -1811,10 +1818,6 @@ function renderAi(){const c=aiCfg();
   renderAiChat();}
 function aiStatus(msg,ok){const el=$("#aiTestStatus");if(!el)return;el.style.display="block";el.textContent=msg;el.style.color=ok?"var(--success)":"var(--warn-ink)";}
 async function aiTest(){const p=($("#aiProvider")||{}).value||"off";if(p==="off"){toast("Alege un furnizor");return;}
-  // verificare rapida a formei cheii inainte de a contacta furnizorul
-  const k=(($("#aiKey")||{}).value||"").trim();
-  if(p==="gemini"&&k&&!/^AIza[\w-]{30,}$/.test(k)){aiStatus("Cheia nu pare o cheie Google Gemini. O cheie corectă începe cu AIza și are ~39 de caractere. Ia una nouă de la aistudio.google.com → Get API key.",false);return;}
-  if((p==="openai"||p==="openrouter")&&k&&!/^sk-/.test(k)){aiStatus("Cheia "+(AI_LBL[p]||p)+" începe de obicei cu sk-. Verifică ce ai lipit.",false);return;}
   // salveaza apoi pinguie
   aiSave();if(!aiOn())return;
   const btn=document.querySelector('[data-act="aiTest"]');if(btn){btn.disabled=true;btn.textContent="Testez…";}
@@ -1892,8 +1895,8 @@ async function aiCall(messages){const c=aiCfg();const base=aiBaseFor(c).replace(
     const d=await r.json();return (d.content||[]).map(p=>p.text||"").join("").trim();}
   if(kind==="gemini"){
     const sys=messages.find(m=>m.role==="system");const conv=messages.filter(m=>m.role!=="system");
-    const r=await aiFetch(base+"/v1beta/models/"+(model||"gemini-2.5-flash")+":generateContent?key="+encodeURIComponent(c.key),
-      {method:"POST",headers:{"Content-Type":"application/json"},
+    const G=geminiReq(c);
+    const r=await aiFetch(G.url,{method:"POST",headers:G.headers,
       body:JSON.stringify({systemInstruction:sys?{parts:[{text:sys.content}]}:undefined,contents:conv.map(m=>({role:m.role==="assistant"?"model":"user",parts:[{text:m.content}]}))})},"Gemini");
     const d=await r.json();const c0=(d.candidates||[])[0];
     return ((c0&&c0.content&&c0.content.parts)||[]).map(p=>p.text||"").join("").trim();}
@@ -2032,13 +2035,13 @@ function aiAudioOk(){const p=aiCfg().provider;return p==="openai"||p==="managed"
 async function blobB64(blob){return new Promise((res,rej)=>{const fr=new FileReader();fr.onerror=()=>rej(new Error("citire audio"));fr.onload=()=>res(String(fr.result).split(",")[1]||"");fr.readAsDataURL(blob);});}
 async function aiTranscribe(blob){const c=aiCfg();
   // GEMINI: transcriere prin audio inline (are tier gratuit)
-  if(c.provider==="gemini"){const b64a=await blobB64(blob);const base=aiBaseFor(c).replace(/\/+$/,"");
+  if(c.provider==="gemini"){const b64a=await blobB64(blob);const G=geminiReq(c);
     const mt=(blob.type||"audio/webm").split(";")[0];
-    const T=withTimeout({method:"POST",headers:{"Content-Type":"application/json"},
+    const T=withTimeout({method:"POST",headers:G.headers,
       body:JSON.stringify({contents:[{parts:[{inlineData:{mimeType:mt,data:b64a}},{text:"Transcrie integral acest audio în limba română. Răspunde DOAR cu transcrierea, fără comentarii."}]}]})},120000);
-    let r;try{r=await fetch(base+"/v1beta/models/"+(c.model||"gemini-2.5-flash")+":generateContent?key="+encodeURIComponent(c.key),T.opts);}
+    let r;try{r=await fetch(G.url,T.opts);}
     catch(e){throw new Error(T.ac.signal.aborted?"transcriere expirată":"rețea/CORS");}finally{T.done();}
-    if(!r.ok)throw new Error("Gemini HTTP "+r.status+(r.status===400?" (format audio nesuportat — încearcă OpenAI/Standard)":""));
+    if(!r.ok){let dt="";try{dt=(await r.text()||"").slice(0,160);}catch(_){}throw new Error("Gemini HTTP "+r.status+(r.status===400?" (format audio nesuportat sau cheie greșită — încearcă Standard prin releu)":"")+(dt?" — "+dt:""));}
     const d=await r.json();const c0=(d.candidates||[])[0];return ((c0&&c0.content&&c0.content.parts)||[]).map(p=>p.text||"").join("").trim();}
   // OpenAI-compatibil / Managed (Whisper) — cel mai tolerant la format
   const fd=new FormData();fd.append("file",blob,"audio.webm");fd.append("model","whisper-1");let url,hdr={};
@@ -2949,7 +2952,7 @@ document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;
 function safeReset(){try{if(PROC)hideProc();pendingLock=false;}catch(_){}} // reset determinist al starii async (audit s5r2 #3)
 window.addEventListener("error",e=>{console.error("global",e.error||e.message);safeReset();try{toast("A aparut o eroare — am prevenit blocarea aplicatiei.");}catch(_){}});
 window.addEventListener("unhandledrejection",e=>{console.error("promise",e.reason);safeReset();});
-window.addEventListener("pagehide",()=>{try{wipe();}catch(_){}}); // curatare determinista a bufferelor la inchidere/navigare
+window.addEventListener("pagehide",()=>{if(typeof REC!=="undefined"&&REC&&REC.on)return;try{wipe();}catch(_){}}); // curatare la inchidere/navigare (nu in timpul inregistrarii: promptul de microfon pe iOS declanseaza pagehide)
 
 /* ---- lock/setup: cheie derivata din parola, doar in RAM (audit R3 #1) ---- */
 function showLock(mode){LOCKMODE=mode;
@@ -2987,7 +2990,11 @@ function lockNow(){if(!CK||LOCKING)return;
     .forEach(s=>{const el=$(s);if(el)el.replaceChildren();}); // sanitizare DOM, fara innerHTML (audit s4 #5 / s5r2)
   $("#overlay").classList.remove("on");$("#lockPass").value="";showLock("unlock");LOCKING=false;
   toast("Blocat — cheile eliberate din memorie (best-effort)");}
-function resetIdle(){if(!CK)return;clearTimeout(idleT);idleT=setTimeout(lockNow,IDLE_MS);}
+function resetIdle(){if(!CK)return;clearTimeout(idleT);idleT=setTimeout(()=>{
+  // nu bloca in timpul unei inregistrari (utilizatorul nu atinge ecranul in apel) — doar reprogrameaza
+  if(typeof REC!=="undefined"&&REC&&REC.on){resetIdle();return;}
+  lockNow();
+},IDLE_MS);}
 ["pointerdown","keydown","touchstart"].forEach(ev=>window.addEventListener(ev,resetIdle,{passive:true}));
 
 applyTheme(localStorage.getItem(TKEY)||"light");
