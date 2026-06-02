@@ -1051,7 +1051,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-02e · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-02f · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -1775,13 +1775,31 @@ function aiKind(p){return p==="anthropic"?"anthropic":p==="gemini"?"gemini":p===
 // furnizorii cloud au adresa FIXA — ignoram orice e scris in Base URL (previne cheia pusa din greseala acolo)
 function aiBaseFor(c){if(c.provider==="openai"||c.provider==="anthropic"||c.provider==="gemini"||c.provider==="openrouter")return AI_DEF[c.provider]||"";
   return (c.base&&c.base.trim())||AI_DEF[c.provider]||"";}
-// Gemini accepta DOUA tipuri de credentiale: cheie API "AIza…" (prin ?key=) SAU token de acces "AQ.…"/"ya29.…" (prin Authorization: Bearer)
-function geminiReq(c,extraHeaders){const k=(c.key||"").trim();const base=aiBaseFor(c).replace(/\/+$/,"");
-  const url=base+"/v1beta/models/"+(c.model||"gemini-2.5-flash")+":generateContent";
-  const isApiKey=/^AIza/.test(k);
-  const headers=Object.assign({"Content-Type":"application/json"},extraHeaders||{});
-  if(!isApiKey&&k)headers.Authorization="Bearer "+k;
-  return {url:url+(isApiKey?("?key="+encodeURIComponent(k)):""),headers};}
+// Gemini: nu putem ghici din prefix cum se autentifica o cheie (AIza vs AQ. vs token).
+// Incercam pe rand toate metodele si o tinem minte pe cea care merge.
+async function geminiFetch(c,bodyObj,timeoutMs){
+  const base=aiBaseFor(c).replace(/\/+$/,"");
+  const model=c.model||"gemini-2.5-flash";const k=(c.key||"").trim();
+  const u=base+"/v1beta/models/"+model+":generateContent";
+  const methods=[
+    {url:u+"?key="+encodeURIComponent(k),headers:{"Content-Type":"application/json"}},                 // cheie API clasica (?key=)
+    {url:u,headers:{"Content-Type":"application/json","x-goog-api-key":k}},                             // cheie API prin header
+    {url:u,headers:{"Content-Type":"application/json","Authorization":"Bearer "+k}}                     // token de acces (AQ./ya29.)
+  ];
+  // daca stim deja metoda buna, o incercam prima
+  const idx=[0,1,2];if(c._gauth!=null){idx.splice(idx.indexOf(c._gauth),1);idx.unshift(c._gauth);}
+  let lastErr="cheie/rețea";
+  for(const i of idx){const m=methods[i];
+    const T=withTimeout({method:"POST",headers:m.headers,body:JSON.stringify(bodyObj)},timeoutMs||60000);
+    let r;try{r=await fetch(m.url,T.opts);}
+    catch(e){lastErr=T.ac.signal.aborted?"a expirat (timeout)":"rețea/CORS/mixed-content";T.done();continue;}
+    finally{T.done();}
+    if(r.ok){if(DB.ai)DB.ai._gauth=i;return r;}
+    let dt="";try{dt=(await r.text()||"").slice(0,200);}catch(_){}
+    lastErr="HTTP "+r.status+(dt?" — "+dt:"");
+    // 400/401/403 = posibil metoda gresita -> incercam urmatoarea; alt cod (429/5xx) = problema reala, iesim
+    if(r.status!==400&&r.status!==401&&r.status!==403)throw new Error("Gemini "+lastErr);}
+  throw new Error("Gemini a respins cheia ("+lastErr+"). Dacă tokenul AQ. e temporar, ia unul nou; ideal o cheie API permanentă (Create API key în aistudio.google.com).");}
 function aiProviderChange(){const p=($("#aiProvider")||{}).value||"off";
   const base=$("#aiBase"),mdl=$("#aiModel"),hint=$("#aiHint");
   // Base URL conteaza DOAR la Local si Endpoint custom; pentru rest il golim ca sa nu ramana gunoi
@@ -1895,9 +1913,7 @@ async function aiCall(messages){const c=aiCfg();const base=aiBaseFor(c).replace(
     const d=await r.json();return (d.content||[]).map(p=>p.text||"").join("").trim();}
   if(kind==="gemini"){
     const sys=messages.find(m=>m.role==="system");const conv=messages.filter(m=>m.role!=="system");
-    const G=geminiReq(c);
-    const r=await aiFetch(G.url,{method:"POST",headers:G.headers,
-      body:JSON.stringify({systemInstruction:sys?{parts:[{text:sys.content}]}:undefined,contents:conv.map(m=>({role:m.role==="assistant"?"model":"user",parts:[{text:m.content}]}))})},"Gemini");
+    const r=await geminiFetch(c,{systemInstruction:sys?{parts:[{text:sys.content}]}:undefined,contents:conv.map(m=>({role:m.role==="assistant"?"model":"user",parts:[{text:m.content}]}))},60000);
     const d=await r.json();const c0=(d.candidates||[])[0];
     return ((c0&&c0.content&&c0.content.parts)||[]).map(p=>p.text||"").join("").trim();}
   // openai-compatibil (local/openai/openrouter/custom)
@@ -2035,13 +2051,9 @@ function aiAudioOk(){const p=aiCfg().provider;return p==="openai"||p==="managed"
 async function blobB64(blob){return new Promise((res,rej)=>{const fr=new FileReader();fr.onerror=()=>rej(new Error("citire audio"));fr.onload=()=>res(String(fr.result).split(",")[1]||"");fr.readAsDataURL(blob);});}
 async function aiTranscribe(blob){const c=aiCfg();
   // GEMINI: transcriere prin audio inline (are tier gratuit)
-  if(c.provider==="gemini"){const b64a=await blobB64(blob);const G=geminiReq(c);
+  if(c.provider==="gemini"){const b64a=await blobB64(blob);
     const mt=(blob.type||"audio/webm").split(";")[0];
-    const T=withTimeout({method:"POST",headers:G.headers,
-      body:JSON.stringify({contents:[{parts:[{inlineData:{mimeType:mt,data:b64a}},{text:"Transcrie integral acest audio în limba română. Răspunde DOAR cu transcrierea, fără comentarii."}]}]})},120000);
-    let r;try{r=await fetch(G.url,T.opts);}
-    catch(e){throw new Error(T.ac.signal.aborted?"transcriere expirată":"rețea/CORS");}finally{T.done();}
-    if(!r.ok){let dt="";try{dt=(await r.text()||"").slice(0,160);}catch(_){}throw new Error("Gemini HTTP "+r.status+(r.status===400?" (format audio nesuportat sau cheie greșită — încearcă Standard prin releu)":"")+(dt?" — "+dt:""));}
+    const r=await geminiFetch(c,{contents:[{parts:[{inlineData:{mimeType:mt,data:b64a}},{text:"Transcrie integral acest audio în limba română. Răspunde DOAR cu transcrierea, fără comentarii."}]}]},120000);
     const d=await r.json();const c0=(d.candidates||[])[0];return ((c0&&c0.content&&c0.content.parts)||[]).map(p=>p.text||"").join("").trim();}
   // OpenAI-compatibil / Managed (Whisper) — cel mai tolerant la format
   const fd=new FormData();fd.append("file",blob,"audio.webm");fd.append("model","whisper-1");let url,hdr={};
