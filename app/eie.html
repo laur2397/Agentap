@@ -1059,7 +1059,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-03a · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-03b · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -1412,7 +1412,9 @@ function sparkline(vals){const w=300,hh=34,mx=Math.max(...vals,1),mn=Math.min(..
    Math.random apare DOAR cosmetic (jitter pozitii graf, date demo) — niciodata in cripto. Niciun sink DOMParser/
    parseFromString/innerHTML in tot fisierul: randarea e 100% prin createElement/textContent (Trusted Types trece curat). */
 const b64=b=>btoa(String.fromCharCode(...new Uint8Array(b))),unb64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
-const clean=s=>String(s==null?"":s).replace(/[\x00-\x1f\x7f]/g,"").replace(/[<>]/g,"").slice(0,400); // sanitizare input
+const clean=s=>String(s==null?"":s).replace(/[\x00-\x1f\x7f]/g,"").replace(/[<>]/g,"").slice(0,400); // sanitizare input (campuri scurte)
+// pentru texte lungi (notite, transcrieri, rezumate): pastram newline-urile si un plafon generos, ca sa NU pierdem date
+const cleanLong=(s,n)=>String(s==null?"":s).replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g,"").replace(/[<>]/g,"").slice(0,n||8000);
 async function deriveKey(pass,salt){
   const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(pass),"PBKDF2",false,["deriveKey"]);
   return crypto.subtle.deriveKey({name:"PBKDF2",salt,iterations:150000,hash:"SHA-256"},base,
@@ -1440,6 +1442,10 @@ function rnd(n){return crypto.getRandomValues(new Uint8Array(n));}
 function canon(s){return String(s||"").toUpperCase().replace(/[^A-Z0-9]/g,"");} // normalizare cod recuperare
 function genRecovery(){const a=rnd(15),al="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let s="";for(let i=0;i<15;i++)s+=al[a[i]%32];return s.match(/.{1,5}/g).join("-");}
 function detectId(s){s=String(s||"").trim();if(/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(s))return"email";if(/^\+?[\d][\d\s().-]{6,}$/.test(s))return"phone";return null;}
+// eticheta mascata stocata necriptat (doar pentru afisarea pe ecranul de deblocare); identificatorul COMPLET sta criptat in DB
+function maskId(id,type){id=String(id||"").trim();if(!id)return"";
+  if(type==="email"){const i=id.indexOf("@");return i>1?(id[0]+"***"+id.slice(i)):(id[0]+"***");}
+  const d=id.replace(/\D/g,"");return (id[0]==="+"?"+":"")+"***"+d.slice(-4);}
 async function importMK(raw){return crypto.subtle.importKey("raw",raw,{name:"AES-GCM"},false,["encrypt","decrypt"]);}
 async function importHK(raw){return crypto.subtle.importKey("raw",raw,{name:"HMAC",hash:"SHA-256"},false,["sign"]);}
 async function kekFrom(secret,salt){const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(secret),"PBKDF2",false,["deriveKey"]);
@@ -1453,8 +1459,8 @@ function setAcct(a){localStorage.setItem(ACCT_KEY,JSON.stringify(a));}
 async function establishMK(mkRaw){MKRAW=mkRaw;CK=await importMK(mkRaw);HK=await importHK(mkRaw);}
 // creeaza un cont nou (din mkRaw existent) cu invelis de parola + cod de recuperare
 async function buildAcct(mkRaw,id,idtype,pass){const rec=genRecovery(),sp=rnd(16),sr=rnd(16);
-  setAcct({v:2,id:id||"",idtype:idtype||"",salt_pw:b64(sp),w_pw:await wrapMK(mkRaw,pass,sp),
-    salt_rc:b64(sr),w_rc:await wrapMK(mkRaw,canon(rec),sr),created:Date.now()});return rec;}
+  setAcct({v:2,id:maskId(id,idtype),idtype:idtype||"",salt_pw:b64(sp),w_pw:await wrapMK(mkRaw,pass,sp),
+    salt_rc:b64(sr),w_rc:await wrapMK(mkRaw,canon(rec),sr),created:Date.now()});return rec;} // id stocat = MASCAT
 // deblocheaza cu parola: cont nou (unwrap MK) SAU format vechi (deriveKey) cu migrare automata la modelul cu cont
 async function unlockWithPassword(pass){const acct=getAcct();
   if(acct&&acct.w_pw){const mkRaw=await unwrapMK(acct.w_pw,pass,unb64(acct.salt_pw)); // arunca daca parola e gresita
@@ -1476,18 +1482,20 @@ function validDB(d){if(!d||typeof d!=="object")return false;
   d.messages=d.messages.filter(x=>x&&typeof x==="object");
   if(!Array.isArray(d.notes))d.notes=[];
   d.notes=d.notes.filter(n=>n&&typeof n==="object"&&n.id!=null);
-  d.notes.forEach(n=>{n.text=clean(n.text);n.member_id=+n.member_id;n.t=+n.t||Date.now();n.pin=n.pin?1:0;});
+  d.notes.forEach(n=>{n.text=cleanLong(n.text,8000);n.member_id=+n.member_id;n.t=+n.t||Date.now();n.pin=n.pin?1:0;});
   if(!Array.isArray(d.meetings))d.meetings=[];
   d.meetings=d.meetings.filter(x=>x&&typeof x==="object"&&x.id!=null);
-  d.meetings.forEach(x=>{x.a=+x.a;x.b=+x.b;x.place=clean(x.place||"");x.when=clean(x.when||"").slice(0,16);
-    if(["propus","confirmat","refuzat"].indexOf(x.status)<0)x.status="propus";x.outcome=clean(x.outcome||"");});
+  d.meetings.forEach(x=>{x.a=+x.a;x.b=(x.b==null?null:+x.b);x.guest=clean(x.guest||"");x.personal=x.personal?1:0;
+    x.place=clean(x.place||"");x.when=clean(x.when||"").slice(0,16);
+    if(["propus","confirmat","refuzat"].indexOf(x.status)<0)x.status="propus";x.outcome=cleanLong(x.outcome||"",2000);x.goal=cleanLong(x.goal||"",2000);});
   if(!Array.isArray(d.tasks))d.tasks=[];
   d.tasks=d.tasks.filter(t=>t&&typeof t==="object"&&t.id!=null);
-  d.tasks.forEach(t=>{t.text=clean(t.text);t.member_id=+t.member_id;t.done=t.done?1:0;t.due=clean(t.due||"").slice(0,10);t.t=+t.t||Date.now();t.prio=t.prio?1:0;});
+  d.tasks.forEach(t=>{t.text=cleanLong(t.text,1000);t.member_id=+t.member_id;t.done=t.done?1:0;t.due=clean(t.due||"").slice(0,10);t.t=+t.t||Date.now();t.prio=t.prio?1:0;});
   if(!d.members.length)return false;
   d.members.forEach(m=>{m.trust=Math.max(0,Math.min(100,+m.trust||0));m.name=clean(m.name).slice(0,80)||"?";m.id=+m.id;m.industry=clean(m.industry||"");m.role=clean(m.role||"Membru");if(m.rel&&["rece","activ","prioritar"].indexOf(m.rel)<0)m.rel="activ";});
-  d.items.forEach(i=>{i.text=clean(i.text);i.visible=i.visible?1:0;i.member_id=+i.member_id;});
-  if(typeof d.seq!=="number"||d.seq<1)d.seq=Math.max(d.members.length,...d.members.map(m=>m.id))+1;
+  d.items.forEach(i=>{i.text=cleanLong(i.text,2000);i.visible=i.visible?1:0;i.member_id=+i.member_id;});
+  if(typeof d.seq!=="number"||d.seq<1)d.seq=Math.max(d.members.length,...d.members.map(m=>m.id),...d.notes.map(n=>+n.id||0),...d.tasks.map(t=>+t.id||0),...d.meetings.map(x=>+x.id||0),...d.items.map(i=>+i.id||0))+1;
+  if(d.account&&typeof d.account==="object"){d.account.id=clean(d.account.id||"");d.account.idtype=clean(d.account.idtype||"");}
   if(!Array.isArray(d.audit))d.audit=[];return true;}
 let saveTimer=null;
 // commit tranzactional: scrie in key temporara -> valideaza roundtrip -> suprascrie key principal (audit s5 cond.1)
@@ -1649,14 +1657,14 @@ function home(){const me=mem(ME),mm=myMatches();
   renderBackupNudge();
   // urmatoarea intalnire confirmata (backlog #2)
   const td=today(),up=(DB.meetings||[]).filter(x=>x.status==="confirmat"&&(x.a===ME||x.b===ME)&&(x.when||"").slice(0,10)>=td).sort((a,b)=>String(a.when).localeCompare(String(b.when)));
-  if(up[0]){const x=up[0],cel=mem(x.a===ME?x.b:x.a)||{name:"?"};
+  if(up[0]){const x=up[0],cel=mem(x.a===ME?x.b:x.a)||{name:x.guest||"?"};
     setKids($("#nextMeet"),h("div",{class:"nextmeet"},
       h("div",{class:"nmlabel",text:"📅 Urmatoarea intalnire"}),
       h("div",{class:"nmwhen",text:fmtWhen(x.when)}),
       h("div",{class:"nmwho",text:"cu "+cel.name+(x.place?" · "+x.place:"")}),
       h("div",{class:"calrow"},
         h("button",{class:"btn ghost sm","data-act":"gcal","data-id":x.id,text:"📅 Calendar"}),
-        h("button",{class:"btn ghost sm","data-act":"msg","data-id":x.match_id,text:"Conversatie"}))));
+        x.match_id?h("button",{class:"btn ghost sm","data-act":"msg","data-id":x.match_id,text:"Conversatie"}):null)));
   }else setKids($("#nextMeet"));
   const stat=(v,l)=>h("div",{class:"st"},h("div",{class:"sv",text:String(v)}),h("div",{class:"sl",text:l}));
   setKids($("#kpis"),stat(con,"Conexiuni"),stat(prop,"Sugestii noi"),stat(avg||"—","Potrivire medie"));
@@ -1973,7 +1981,7 @@ function renderAiChat(){const host=$("#aiChat");if(!host)return;const msgs=DB.ai
 function aiContext(){const me=mem(ME)||{};const td=today();
   const tasks=(DB.tasks||[]).filter(t=>t.member_id===ME&&!t.done).slice(0,8).map(t=>"- "+t.text+(t.due?" (termen "+t.due+")":"")).join("\n");
   const meets=(DB.meetings||[]).filter(x=>x.status==="confirmat"&&(x.a===ME||x.b===ME)&&(x.when||"").slice(0,10)>=td).slice(0,5)
-    .map(x=>{const c=mem(x.a===ME?x.b:x.a)||{};return "- "+fmtWhen(x.when)+" cu "+(c.name||"?");}).join("\n");
+    .map(x=>{const c=mem(x.a===ME?x.b:x.a)||{name:x.guest||"?"};return "- "+fmtWhen(x.when)+" cu "+(c.name||"?");}).join("\n");
   return `Utilizator: ${me.name||"?"} (${me.industry||"—"}).\nTask-uri active:\n${tasks||"(niciunul)"}\nÎntâlniri viitoare:\n${meets||"(niciuna)"}`;}
 async function aiSend(){if(!aiOn()){toast("Configurează întâi asistentul (⚙ Setări)");return;}
   const inp=$("#aiInput");const text=clean((inp&&inp.value||"").trim());if(!text)return;
@@ -2445,8 +2453,8 @@ function netFocus(id){const host=$("#netHost");if(!host)return;
 function fuzzy(q,s){q=(q||"").toLowerCase().trim();if(!q)return true;s=(s||"").toLowerCase();if(s.includes(q))return true;let i=0;for(const c of s){if(c===q[i])i++;if(i>=q.length)return true;}return false;}
 
 function prof(){const me=mem(ME),con=DB.matches.filter(x=>x.status==="conectat"&&(x.offer_member===ME||x.seek_member===ME)).length;
-  const ai=$("#acctInfo");if(ai){const acct=getAcct();
-    if(acct&&acct.id)setKids(ai,h("div",{},h("b",{text:(acct.idtype==="phone"?"📱 ":"✉ ")+acct.id}),h("div",{style:{color:"var(--muted)",fontSize:"11.5px",marginTop:"3px"},text:"Cont local pe acest dispozitiv · criptat cu parola ta"})));
+  const ai=$("#acctInfo");if(ai){const acct=getAcct();const full=(DB.account&&DB.account.id)||"";const idt=(DB.account&&DB.account.idtype)||(acct&&acct.idtype);
+    if(full||(acct&&acct.id))setKids(ai,h("div",{},h("b",{text:(idt==="phone"?"📱 ":"✉ ")+(full||acct.id)}),h("div",{style:{color:"var(--muted)",fontSize:"11.5px",marginTop:"3px"},text:"Cont local pe acest dispozitiv · criptat cu parola ta"})));
     else setKids(ai,h("div",{style:{color:"var(--muted)"},text:"Cont local (fără email/telefon). Poți reseta parola cu codul de recuperare."}));}
   if(EDITPROF){setKids($("#phead"),
     h("div",{style:{display:"flex",gap:"14px",alignItems:"center"}},donut(me.trust),
@@ -2543,7 +2551,7 @@ function renderToday(){const host=$("#todayBox");if(!host)return;const td=today(
   const meets=(DB.meetings||[]).filter(m=>m.status==="confirmat"&&(m.a===ME||m.b===ME)&&(m.when||"").slice(0,10)===td);
   const tasks=(DB.tasks||[]).filter(t=>t.member_id===ME&&!t.done&&t.due===td);
   const out=[];
-  meets.forEach(m=>{const cel=mem(m.a===ME?m.b:m.a)||{name:"?"};out.push(h("div",{class:"todayrow"},h("span",{class:"tdi"},"📅"),
+  meets.forEach(m=>{const cel=mem(m.a===ME?m.b:m.a)||{name:m.guest||"?"};out.push(h("div",{class:"todayrow"},h("span",{class:"tdi"},"📅"),
     h("div",{class:"tdc"},h("div",{class:"tdt",text:fmtWhen(m.when)+" · "+cel.name}),m.place?h("div",{class:"tds",text:m.place}):null)));});
   tasks.forEach(t=>out.push(h("div",{class:"todayrow"},h("span",{class:"tdi"},"✅"),
     h("div",{class:"tdc"},h("div",{class:"tdt",text:t.text}),h("div",{class:"tds",text:"task scadent azi"})))));
@@ -2686,7 +2694,7 @@ function renderWeekCal(){const host=$("#weekcal");if(!host)return;const td=today
 function weekDay(iso){const d=$("#mAddDate");if(d){d.value=iso;}const w=$("#mAddWho");if(w)w.focus(); // pre-completeaza ziua in formular ca sa programezi rapid
   const ms=(DB.meetings||[]).filter(m=>m.status==="confirmat"&&(m.a===ME||m.b===ME)&&(m.when||"").slice(0,10)===iso);
   if(!ms.length){toast(fmtWhen(iso)+": liber — completează cine și ora, apoi + Adaugă");return;}
-  toast(ms.map(m=>{const cel=mem(m.a===ME?m.b:m.a)||{name:m.guest||"?"};return ((m.when.split("T")[1])||"")+" "+cel.name.split(" ")[0];}).join(" · "));}
+  toast(ms.map(m=>{const cel=mem(m.a===ME?m.b:m.a)||{name:m.guest||"?"};return ((String(m.when||"").split("T")[1])||"")+" "+String(cel.name||"?").split(" ")[0];}).join(" · "));}
 // adaugare manuala de intalnire (personala / pe orice zi) — apare direct ca o programare a ta
 function addMeetingManual(){if(!DB)return;
   const who=clean((($("#mAddWho")||{}).value||"").trim()).slice(0,60);
@@ -2925,7 +2933,7 @@ function openMemberMatch(mid){if(mid===ME){setView("profil");return;}
   if(m&&m.status==="conectat"){openMatch(m.id);return;}
   if(m){setView("potriviri");setTimeout(()=>{const el=[...$$(".match")].find(e=>e.textContent.includes(name(mid)));if(el)el.scrollIntoView({behavior:"smooth",block:"center"});},250);}
   else toast("Nicio potrivire directa cu "+name(mid));}
-function openMatch(id){CHAT=id;const m=DB.matches.find(x=>x.id===id),cel=mem(ME===m.offer_member?m.seek_member:m.offer_member);
+function openMatch(id){const m=DB.matches.find(x=>x.id===id);if(!m){toast("Conversație indisponibilă pentru această întâlnire");return;}CHAT=id;const cel=mem(ME===m.offer_member?m.seek_member:m.offer_member);
   $("#mTitle").textContent=cel.name;$("#mSub").textContent=cel.role+" · Trust "+cel.trust+"/100";$("#overlay").classList.add("on");loadChat();}
 function loadChat(){const mt=DB.matches.find(x=>x.id===CHAT),msgs=DB.messages.filter(m=>m.match_id===CHAT);
   const br=mt?buildBrief(mt):null,mf=mt&&mt.status==="conectat"?meetingForm(mt):null;
@@ -3116,7 +3124,7 @@ async function lockSubmit(){const err=$("#lockErr");err.style.display="none";con
       if(pass!==pass2){fail("Parolele nu coincid.");return;}
       const mkRaw=rnd(32);await establishMK(mkRaw);
       const rec=await buildAcct(mkRaw,clean(id),idtype,pass);
-      DB=seed();SESSPASS=pass;await flush();
+      DB=seed();DB.account={id:clean(id),idtype};SESSPASS=pass;await flush(); // identificatorul COMPLET, criptat in DB
       finishUnlock(false);PENDING_ONBOARD=true;showRecovery(rec);
     }else{
       const pass=$("#lockPass").value;if(pass.length<1){fail("Introdu parola.");return;}
