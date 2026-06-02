@@ -6,7 +6,11 @@
      Local-Only ramane default (sync e opt-in). Releul e zero-knowledge: vede doar ciphertext E2EE, nu continut.
      'unsafe-inline' la script e necesar pt. arhitectura single-file; exfiltrarea catre ALTE domenii ramane blocata. -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; manifest-src 'self'; connect-src http://127.0.0.1:* http://localhost:* https://api.openai.com https://api.anthropic.com https://generativelanguage.googleapis.com https://openrouter.ai; base-uri 'none'; form-action 'none'; frame-src 'none'; object-src 'none'; require-trusted-types-for 'script'">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Cercul EIE">
 <title>Cercul EIE — Network Capital</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -886,6 +890,11 @@ header{padding-left:16px;padding-right:16px}
 .brand .mk{flex:none}
 .brand .t{white-space:nowrap}
 .hright{gap:7px}
+/* pe ecrane inguste, trust chip-ul devine doar punctul (eticheta "Local" ramane pentru screen-reader) */
+@media (max-width:430px){
+  #trustChipL{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .trustchip{padding:0 10px}
+}
 /* selectorul de persoana sta pe randul lui, doar cand exista mai multi membri (altfel umple bara de sus) */
 .hmember{display:none;align-items:center;gap:8px;margin-top:11px}
 header.multi .hmember{display:flex}
@@ -900,9 +909,10 @@ header.multi .hmember{display:flex}
   <div class="htop">
     <div class="brand"><div class="mk">C</div><div class="t">Cercul EIE<small>Network Capital</small></div></div>
     <div class="hright">
-      <button class="trustchip" id="trustChip" data-act="trustinfo" title="Local-Only · 0 date trimise" aria-label="Confidențialitate"><span class="tdot"></span><span id="trustChipL">Local</span></button>
+      <button class="trustchip" id="trustChip" data-act="trustinfo" title="Local-Only · 0 date trimise" aria-label="Confidențialitate: Local-Only, 0 date trimise"><span class="tdot"></span><span id="trustChipL">Local</span></button>
       <button class="themebtn" id="quickBtn" title="Adaugă rapid (tasta N)" aria-label="Adaugă rapid o notiță sau un task" onclick="openQuick()">＋</button>
       <button class="themebtn" id="searchBtn" title="Caută" aria-label="Caută global" onclick="openSearch()">⌕</button>
+      <button class="themebtn" id="themeBtn" title="Comută tema" aria-label="Comută tema deschisă/întunecată" onclick="toggleTheme()">☾</button>
       <button class="themebtn" id="lockBtnHd" title="Blochează acum (șterge cheia din memorie)" aria-label="Blochează acum" onclick="lockNow()">🔒</button>
     </div>
   </div>
@@ -1021,6 +1031,7 @@ header.multi .hmember{display:flex}
             <button class="btn gold sm" data-act="aiSave">Salvează</button>
             <button class="btn ghost sm" data-act="aiTest">Testează</button>
           </div>
+          <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
         </div>
@@ -1076,8 +1087,6 @@ header.multi .hmember{display:flex}
   <!-- PROFIL -->
   <section id="profil" class="view">
     <div id="phead" class="panel" style="margin-top:0"></div>
-    <div class="panel"><div class="toggle"><span>Aspect <span style="color:var(--muted);font-size:11px">(temă deschisă / întunecată)</span></span>
-      <button class="themebtn" id="themeBtn" title="Comută tema" aria-label="Comută tema deschisă/întunecată" onclick="toggleTheme()">☾</button></div></div>
     <div class="panel"><div class="toggle"><span>Deschis spre conexiuni <span style="color:var(--muted);font-size:11px">(marcaj personal, asincron — fără tracking)</span></span>
       <div class="sw" id="ocSw" role="switch" tabindex="0" aria-label="Deschis spre conexiuni" onclick="toggleOpenConnect()"><i></i></div></div></div>
     <div id="privacyHealth"></div>
@@ -1775,14 +1784,19 @@ function renderAi(){const c=aiCfg();
   const row=$("#aiInput")?$("#aiInput").parentElement:null;if(row)row.style.display=aiOn()?"flex":"none";
   const cfg=$("#aiCfg");if(cfg&&!aiOn())cfg.open=true; // daca e oprit, arata setarile ca sa-l poata porni
   renderAiChat();}
+function aiStatus(msg,ok){const el=$("#aiTestStatus");if(!el)return;el.style.display="block";el.textContent=msg;el.style.color=ok?"var(--success)":"var(--warn-ink)";}
 async function aiTest(){const p=($("#aiProvider")||{}).value||"off";if(p==="off"){toast("Alege un furnizor");return;}
   // salveaza apoi pinguie
   aiSave();if(!aiOn())return;
   const btn=document.querySelector('[data-act="aiTest"]');if(btn){btn.disabled=true;btn.textContent="Testez…";}
+  aiStatus("Testez conexiunea…",true);
   try{const r=await aiCall([{role:"user",content:"ping — răspunde cu un singur cuvânt: ok"}]);
-    toast(r?("Conexiune OK ✓ ("+(r.slice(0,30))+")"):"Răspuns gol — verifică modelul");}
-  catch(e){toast("Test eșuat: "+(e&&e.message||e));}
-  finally{if(btn){btn.disabled=false;btn.textContent="Testează conexiunea";}}}
+    if(r){aiStatus("Conexiune OK ✓ — asistentul răspunde. Acum poți folosi chat-ul și reportofonul.",true);toast("Conexiune OK ✓");}
+    else{aiStatus("Răspuns gol — verifică numele modelului (ex: gemini-2.0-flash).",false);}}
+  catch(e){const m=(e&&e.message||String(e));
+    const hint=/CORS|rețea|network|Failed to fetch/i.test(m)?" — pare blocaj de rețea/CORS. Pe iPhone, OpenAI/Anthropic adesea NU merg direct din browser; încearcă Google Gemini (merge din browser) sau modul Standard prin releu.":/401|403|key|cheia/i.test(m)?" — cheia API pare greșită sau fără acces. Verifică-o.":/404/.test(m)?" — model negăsit; verifică numele modelului.":"";
+    aiStatus("Test eșuat: "+m+hint,false);toast("Test eșuat");}
+  finally{if(btn){btn.disabled=false;btn.textContent="Testează";}}}
 function aiSettings(){const d=$("#aiCfg");if(d)d.open=!d.open;}
 function aiSave(){const p=($("#aiProvider")||{}).value||"off";
   DB.ai={provider:p,base:clean(($("#aiBase")||{}).value||"").trim().slice(0,200),
