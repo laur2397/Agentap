@@ -480,6 +480,14 @@ details.why2>summary::-webkit-details-marker{display:none}
 .secsum{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 2px}
 .secsum .ss{display:inline-flex;align-items:center;gap:6px;background:var(--primary-soft);color:var(--primary-dim);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:600}
 .secsum .ss b{font-weight:800}
+.secsum button.ss{cursor:pointer;font:inherit;font-size:12.5px;font-weight:600}
+.secsum button.ss:active{transform:scale(.95)}
+.addmeet{display:flex;flex-direction:column;gap:8px;margin:4px 0 14px}
+.addmeet input{width:100%}
+.addmeet-row{display:flex;gap:8px;align-items:center}
+.addmeet-row #mAddDate{flex:1;min-width:0}
+.addmeet-row #mAddTime{width:120px;flex:none}
+.addmeet-row .btn{flex:none}
 /* loop2 #11: mod focus */
 .focusbar{display:flex;justify-content:flex-end;margin:2px 0 6px}
 #focusPanel{display:none}
@@ -1051,7 +1059,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-02g · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-02h · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -1065,8 +1073,16 @@ header.multi .hmember{display:flex}
     </div>
     <div class="seccard"><div class="sec"><span class="si">📅</span>Azi</div>
       <div id="todayBox"></div></div>
-    <div class="seccard"><div class="sec"><span class="si">🤝</span>Întâlniri</div>
-      <p class="sub">Se confirmă doar când ambele părți acceptă. La cele confirmate: Google Calendar, .ics sau email — tu alegi.</p>
+    <div class="seccard" id="meetCard"><div class="sec"><span class="si">🤝</span>Întâlniri</div>
+      <p class="sub">Adaugă-ți întâlnirile pe orice zi. Cele cu membri din Cerc se confirmă când acceptă și cealaltă parte; cele personale apar direct.</p>
+      <div class="addmeet">
+        <input id="mAddWho" placeholder="Cu cine (nume)" aria-label="Cu cine">
+        <div class="addmeet-row">
+          <input id="mAddDate" type="date" aria-label="Ziua întâlnirii">
+          <input id="mAddTime" type="time" aria-label="Ora întâlnirii">
+          <button class="btn gold sm" data-act="addmeet" aria-label="Adaugă întâlnire">+ Adaugă</button>
+        </div>
+      </div>
       <div id="weekcal"></div>
       <div id="meetList"></div></div>
     <div class="seccard"><div class="sec"><span class="si">📝</span>Notează după o întâlnire</div>
@@ -1074,7 +1090,7 @@ header.multi .hmember{display:flex}
       <textarea id="dictText" rows="5" placeholder="ex: Am vorbit cu un investitor interesat de energie. Eu caut un contabil bun si ofer spatii comerciale."></textarea>
       <div style="margin-top:12px"><button class="btn gold" id="dictBtn" onclick="dicteaza()">Notează și caută potriviri</button></div>
       <div id="dictRes" style="margin-top:14px"></div></div>
-    <div class="seccard"><div class="sec"><span class="si">✓</span>De făcut</div>
+    <div class="seccard" id="taskCard"><div class="sec"><span class="si">✓</span>De făcut</div>
       <p class="sub">Sarcini cu termen. Cele scadente apar evidențiate și numărate pe tab.</p>
       <div class="addrow"><input id="taskText" placeholder="ex: Trimite oferta lui Bogdan" aria-label="Task nou" onkeydown="if(event.key==='Enter')addTask()"><input id="taskDue" type="date" style="max-width:144px" aria-label="Termen"><button class="btn gold sm" data-act="addtask" aria-label="Adauga task">+</button></div>
       <div class="filters" id="taskFilters" style="margin-top:12px">
@@ -2449,8 +2465,8 @@ function renderSecSummary(){const host=$("#secSummary");if(!host)return;const td
   const tlabel=tActive===1?"task activ":"task-uri active";
   const mlabel=mFuture===1?"intalnire viitoare":"intalniri viitoare";
   setKids(host,[
-    h("span",{class:"ss"},"✅ ",h("b",{text:String(tActive)})," "+tlabel),
-    h("span",{class:"ss"},"📅 ",h("b",{text:String(mFuture)})," "+mlabel)]);}
+    h("button",{class:"ss","aria-label":"Vezi sarcinile",onclick:()=>{const e=$("#taskCard");if(e)e.scrollIntoView({behavior:"smooth",block:"start"});}},"✅ ",h("b",{text:String(tActive)})," "+tlabel),
+    h("button",{class:"ss","aria-label":"Vezi întâlnirile",onclick:()=>{const e=$("#meetCard");if(e)e.scrollIntoView({behavior:"smooth",block:"start"});const w=$("#mAddWho");if(w)setTimeout(()=>w.focus(),350);}},"📅 ",h("b",{text:String(mFuture)})," "+mlabel)]);}
 /* loop2 #11: mod Focus — ascunde tot, lasa input rapid + notitele active */
 function toggleFocus(){FOCUS=!FOCUS;logA(FOCUS?"Mod Focus pornit":"Mod Focus oprit");render();
   if(FOCUS)setTimeout(()=>{const i=$("#focusQuick");if(i)i.focus();},60);}
@@ -2577,9 +2593,22 @@ function renderWeekCal(){const host=$("#weekcal");if(!host)return;const td=today
     cells.push(h("button",{class:"wcell"+(i===0?" today":"")+(cnt?" has":""),"data-act":"weekday","data-d":iso,"aria-label":wd[dt.getDay()]+" "+dt.getDate()+(cnt?(", "+cnt+" intalniri"):", liber")},
       h("div",{class:"wd",text:wd[dt.getDay()]}),h("div",{class:"wn",text:String(dt.getDate())}),cnt?h("div",{class:"wdot",text:cnt>1?String(cnt):""}):null));}
   setKids(host,h("div",{class:"weekcal"},...cells));}
-function weekDay(iso){const ms=(DB.meetings||[]).filter(m=>m.status==="confirmat"&&(m.a===ME||m.b===ME)&&(m.when||"").slice(0,10)===iso);
-  if(!ms.length){toast("Liber pe "+fmtWhen(iso));return;}
-  toast(ms.map(m=>{const cel=mem(m.a===ME?m.b:m.a)||{name:"?"};return ((m.when.split("T")[1])||"")+" "+cel.name.split(" ")[0];}).join(" · "));}
+function weekDay(iso){const d=$("#mAddDate");if(d){d.value=iso;}const w=$("#mAddWho");if(w)w.focus(); // pre-completeaza ziua in formular ca sa programezi rapid
+  const ms=(DB.meetings||[]).filter(m=>m.status==="confirmat"&&(m.a===ME||m.b===ME)&&(m.when||"").slice(0,10)===iso);
+  if(!ms.length){toast(fmtWhen(iso)+": liber — completează cine și ora, apoi + Adaugă");return;}
+  toast(ms.map(m=>{const cel=mem(m.a===ME?m.b:m.a)||{name:m.guest||"?"};return ((m.when.split("T")[1])||"")+" "+cel.name.split(" ")[0];}).join(" · "));}
+// adaugare manuala de intalnire (personala / pe orice zi) — apare direct ca o programare a ta
+function addMeetingManual(){if(!DB)return;
+  const who=clean((($("#mAddWho")||{}).value||"").trim()).slice(0,60);
+  const date=($("#mAddDate")||{}).value||"",time=($("#mAddTime")||{}).value||"";
+  if(!date){toast("Alege o zi pentru întâlnire");const d=$("#mAddDate");if(d)d.focus();return;}
+  if(!who){toast("Scrie cu cine e întâlnirea");const w=$("#mAddWho");if(w)w.focus();return;}
+  DB.meetings=DB.meetings||[];
+  DB.meetings.push({id:DB.seq++,a:ME,b:null,guest:who,when:date+(time?("T"+time):""),place:"",status:"confirmat",personal:1,at:Date.now()});
+  logA("Întâlnire adăugată manual cu "+who);save();
+  const w=$("#mAddWho");if(w)w.value="";const tm=$("#mAddTime");if(tm)tm.value="";
+  renderSecSummary();renderWeekCal();renderMeetings();renderToday();
+  toast("Întâlnire adăugată: "+fmtWhen(date+(time?("T"+time):"")));}
 // loop3 #11: scopul intalnirii (pre-meeting) — camp optional "ce vrei sa obtii"
 function editMeetGoal(id){EDITGOAL=id;renderMeetings();}
 function cancelMeetGoal(){EDITGOAL=null;renderMeetings();}
@@ -2599,7 +2628,7 @@ function renderMeetings(){const host=$("#meetList");if(!host)return;
   const toAccept=mine.filter(x=>x.status==="propus"&&x.b===ME);
   const waiting=mine.filter(x=>x.status==="propus"&&x.a===ME);
   const confirmed=mine.filter(x=>x.status==="confirmat").sort((a,b)=>String(a.when).localeCompare(String(b.when)));
-  const card=(x,kind)=>{const otherId=x.a===ME?x.b:x.a,cel=mem(otherId)||{name:"?"};
+  const card=(x,kind)=>{const otherId=x.a===ME?x.b:x.a,cel=mem(otherId)||{name:x.guest||"?"};
     const acts=kind==="accept"?h("div",{class:"adock"},h("button",{class:"btn gold","data-act":"meetyes","data-id":x.id,text:"Accept"}),h("button",{class:"btn ghost","data-act":"meetno","data-id":x.id,text:"Refuz"}))
       :kind==="wait"?h("div",{class:"waiting",text:"⏳ Asteapta confirmarea lui "+cel.name.split(" ")[0]})
       :h("div",{},h("div",{class:"shield",text:"🛡 Confirmata · semnatura "+(x.hash||"").slice(0,10)+"…"}),
@@ -2657,7 +2686,7 @@ function meetDates(w){const[d,t]=String(w).split("T");const tm=t||"09:00";
   const f=x=>x.getFullYear()+pad2(x.getMonth()+1)+pad2(x.getDate())+"T"+pad2(x.getHours())+pad2(x.getMinutes())+"00";
   return[f(s),f(e)];}
 const icsEsc=s=>String(s).replace(/([\\;,])/g,"\\$1").replace(/\n/g,"\\n");
-function meetTitle(m){const cel=mem(ME===m.a?m.b:m.a)||{name:"?"};return "Intalnire cu "+cel.name;}
+function meetTitle(m){const cel=mem(ME===m.a?m.b:m.a)||{name:m.guest||"?"};return "Intalnire cu "+cel.name;}
 function veventFor(m){const[s,e]=meetDates(m.when);
   return["BEGIN:VEVENT","UID:meet-"+m.id+"@cercul","DTSTART:"+s,"DTEND:"+e,"SUMMARY:"+icsEsc(meetTitle(m)),
     m.place?"LOCATION:"+icsEsc(m.place):"","DESCRIPTION:"+icsEsc("Programata prin Cercul EIE"),"END:VEVENT"].filter(Boolean);}
@@ -2890,6 +2919,7 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="relcycle")relCycle(id);
   else if(a==="connfilter")setConnFilter(el.dataset.f);
   else if(a==="weekday")weekDay(el.dataset.d);
+  else if(a==="addmeet")addMeetingManual();
   else if(a==="focus")toggleFocus();
   else if(a==="focusadd")focusAdd();
   else if(a==="mgedit")editMeetGoal(id);
