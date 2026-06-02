@@ -844,9 +844,9 @@ html{height:100%}
 body{height:100%;overflow:hidden;position:fixed;inset:0}
 .shell{height:100vh;height:100dvh;max-width:440px;margin:0 auto;
   display:flex;flex-direction:column;overflow:hidden;border-radius:0}
-/* bara de sus = chrome fix al aplicatiei (cu safe-area pentru notch) */
+/* bara de sus = chrome fix al aplicatiei (cu safe-area pentru notch), compacta */
 header{flex:0 0 auto;position:relative;top:auto;
-  padding-top:calc(16px + env(safe-area-inset-top))}
+  padding-top:calc(10px + env(safe-area-inset-top));padding-bottom:10px}
 /* singura zona care deruleaza, cu inertie ca pe mobil */
 main{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
   overscroll-behavior-y:contain;padding:18px 18px 26px;scrollbar-width:none}
@@ -880,9 +880,14 @@ body{-webkit-user-select:none;user-select:none}
 input,textarea,select,[contenteditable]{-webkit-user-select:text;user-select:text}
 /* pe mobil: campuri >=16px ca iOS sa nu mai dea zoom la focus (fara !important: stilurile inline raman) */
 @media (max-width:760px){input,textarea,select{font-size:16px}}
-/* tab bar: tinta de atingere generoasa + feedback la apasare */
-.tab{min-height:50px}
-.tab .ic{transition:background .3s var(--ease),transform .16s var(--ease)}
+/* tab bar: mai inalt, butoane clar vizibile, stare activa evidenta */
+nav{background:var(--nav-bg);border-top:1px solid var(--line2)}
+nav::after{display:none!important} /* iOS deseneaza propriul home-indicator; al nostru doar inghesuia bara */
+.navin{padding:6px 2px 2px}
+.tab{min-height:58px;padding:7px 2px 6px;gap:5px;font-size:11px;font-weight:600;color:var(--muted)}
+.tab .ic{font-size:21px;width:54px;height:32px;display:grid;place-items:center;border-radius:14px;transition:background .25s var(--ease),transform .16s var(--ease)}
+.tab.on{color:var(--primary-dim);font-weight:800}
+.tab.on .ic{background:var(--primary-soft)}
 .tab:active .ic{transform:scale(.85)}
 /* toast sta deasupra tab bar-ului, urmarind home indicator-ul */
 .toast{bottom:calc(76px + env(safe-area-inset-bottom))}
@@ -935,7 +940,6 @@ header.multi .hmember{display:flex}
       <button class="themebtn" id="lockBtnHd" title="Blochează acum (șterge cheia din memorie)" aria-label="Blochează acum" onclick="lockNow()">🔒</button>
     </div>
   </div>
-  <div class="hmember"><label class="hmember-l" for="member">Vezi ca:</label><select class="memsel" id="member" aria-label="Schimbă persoana activă"></select></div>
 </header>
 
 <main id="mainContent" role="main" tabindex="-1">
@@ -1059,7 +1063,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-03b · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-03c · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -1123,6 +1127,10 @@ header.multi .hmember{display:flex}
     <div id="phead" class="panel" style="margin-top:0"></div>
     <div class="panel"><h3>Cont &amp; securitate</h3>
       <div id="acctInfo" style="font-size:12.5px;color:var(--ink2);line-height:1.6;margin-bottom:10px"></div>
+      <div id="viewAsWrap" style="display:none;margin-bottom:12px">
+        <label class="mfl" for="member">Vezi rețeaua ca (demo)</label>
+        <select class="memsel" id="member" aria-label="Schimbă persoana activă" style="width:100%"></select>
+      </div>
       <details class="aicfg"><summary>🔑 Schimbă parola</summary>
         <div class="aicfgbody">
           <label class="mfl" for="cpCur">Parola actuală</label><input id="cpCur" type="password" autocomplete="current-password">
@@ -2969,7 +2977,7 @@ function obNext(){
 function obSkip(){$("#ob").classList.remove("on");localStorage.setItem(KEY+"_seen","1");}
 
 function loadMembers(){setKids($("#member"),...DB.members.map(m=>h("option",{value:m.id,text:m.name})));if(!ME)ME=DB.members[0].id;$("#member").value=ME;
-  const hd=document.querySelector("header");if(hd)hd.classList.toggle("multi",(DB.members||[]).length>1);}
+  const va=$("#viewAsWrap");if(va)va.style.display=(DB.members||[]).length>1?"block":"none";}
 $("#member").onchange=e=>{ME=+e.target.value;render();};
 $$(".tab").forEach(t=>t.onclick=()=>{try{navigator.vibrate&&navigator.vibrate(8);}catch(_){}setView(t.dataset.v);});
 $$("[data-go]").forEach(a=>a.onclick=()=>setView(a.dataset.go));
