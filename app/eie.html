@@ -891,9 +891,13 @@ main{padding-left:calc(18px + env(safe-area-inset-left));padding-right:calc(18px
 .htop{gap:8px}
 .brand{min-width:0}
 .brand .mk{flex:none}
-.brand .t{white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.brand .t{white-space:nowrap}
 .hright{gap:7px;flex:none}
-@media (max-width:360px){.themebtn{width:32px;height:32px}.hright{gap:5px}}
+/* pe ecrane foarte inguste lasam brandul sa se trunchieze ca sa nu taie controalele */
+@media (max-width:380px){
+  .brand .t{min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .themebtn{width:32px;height:32px}.hright{gap:5px}
+}
 /* pe ecrane inguste, trust chip-ul devine doar punctul (eticheta "Local" ramane pentru screen-reader) */
 @media (max-width:430px){
   #trustChipL{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
