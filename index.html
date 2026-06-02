@@ -1059,7 +1059,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-02h · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-03a · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -1121,6 +1121,23 @@ header.multi .hmember{display:flex}
   <!-- PROFIL -->
   <section id="profil" class="view">
     <div id="phead" class="panel" style="margin-top:0"></div>
+    <div class="panel"><h3>Cont &amp; securitate</h3>
+      <div id="acctInfo" style="font-size:12.5px;color:var(--ink2);line-height:1.6;margin-bottom:10px"></div>
+      <details class="aicfg"><summary>🔑 Schimbă parola</summary>
+        <div class="aicfgbody">
+          <label class="mfl" for="cpCur">Parola actuală</label><input id="cpCur" type="password" autocomplete="current-password">
+          <label class="mfl" for="cpNew">Parolă nouă (min 6)</label><input id="cpNew" type="password" autocomplete="new-password">
+          <label class="mfl" for="cpNew2">Confirmă parola nouă</label><input id="cpNew2" type="password" autocomplete="new-password">
+          <div style="margin-top:12px"><button class="btn gold sm" data-act="changepass">Schimbă parola</button></div>
+        </div>
+      </details>
+      <details class="aicfg"><summary>🆘 Cod de recuperare</summary>
+        <div class="aicfgbody">
+          <p style="font-size:12px;color:var(--ink2);line-height:1.55">Codul de recuperare îți permite să-ți resetezi parola dacă o uiți. Nu se salvează în clar — dacă l-ai pierdut, generează unul nou (vechiul devine invalid).</p>
+          <div style="margin-top:12px"><button class="btn ghost sm" data-act="regenrec">Generează un cod nou</button></div>
+        </div>
+      </details>
+    </div>
     <div class="panel"><div class="toggle"><span>Deschis spre conexiuni <span style="color:var(--muted);font-size:11px">(marcaj personal, asincron — fără tracking)</span></span>
       <div class="sw" id="ocSw" role="switch" tabindex="0" aria-label="Deschis spre conexiuni" onclick="toggleOpenConnect()"><i></i></div></div></div>
     <div id="privacyHealth"></div>
@@ -1213,17 +1230,53 @@ header.multi .hmember{display:flex}
 <!-- LOCK / SETUP (cheie derivata din parola, doar in RAM) -->
 <div class="ob" id="lock">
   <div class="mk">C</div>
-  <h1 id="lockTitle">Deblocheaza Cercul</h1>
+  <h1 id="lockTitle">Deblochează Cercul</h1>
   <div class="lead" id="lockLead"></div>
-  <div class="step on" style="max-width:340px;width:100%">
-    <label>Parola de sesiune</label>
-    <input id="lockPass" type="password" placeholder="parola ta" autocomplete="off"
+  <div class="step on" id="lockMain" style="max-width:340px;width:100%">
+    <div id="lockIdWrap" style="display:none">
+      <label for="lockId">Email sau număr de telefon</label>
+      <input id="lockId" type="text" inputmode="email" placeholder="nume@email.com sau +407…" autocomplete="username">
+    </div>
+    <label for="lockPass" id="lockPassLbl">Parolă</label>
+    <input id="lockPass" type="password" placeholder="parola ta" autocomplete="current-password"
       onkeydown="if(event.key==='Enter')lockSubmit()">
+    <div id="lockPass2Wrap" style="display:none">
+      <label for="lockPass2">Confirmă parola</label>
+      <input id="lockPass2" type="password" placeholder="încă o dată" autocomplete="new-password"
+        onkeydown="if(event.key==='Enter')lockSubmit()">
+    </div>
     <div id="lockErr" style="color:var(--warn);font-size:12px;margin:-8px 0 12px;display:none"></div>
+    <div class="nav2" style="justify-content:space-between;align-items:center;max-width:340px">
+      <button class="skip" id="lockForgot" onclick="showReset()" style="display:none;margin:0;padding:0">Am uitat parola</button>
+      <button class="btn gold" id="lockBtn" onclick="lockSubmit()" style="margin-left:auto">Deblochează →</button>
+    </div>
   </div>
-  <div class="nav2" style="justify-content:flex-end"><button class="btn gold" id="lockBtn" onclick="lockSubmit()">Deblocheaza →</button></div>
-  <button class="skip" id="lockReset" onclick="lockReset()" style="display:none">Am uitat parola — reseteaza (pastreaza backup criptat)</button>
-  <p style="font-size:11px;color:var(--muted);max-width:320px;margin-top:16px">Parola ta deblochează datele, care rămân criptate pe acest dispozitiv. Parola nu se salvează nicăieri — dacă o uiți, datele nu pot fi recuperate. (Detalii tehnice în Profil → Confidențialitate.) Prototip — nu introduce date cu adevărat sensibile.</p>
+  <div class="step" id="lockResetStep" style="max-width:340px;width:100%;display:none">
+    <label for="recCode">Cod de recuperare</label>
+    <input id="recCode" type="text" placeholder="XXXXX-XXXXX-XXXXX" autocomplete="off" autocapitalize="characters">
+    <label for="recNewPass">Parolă nouă</label>
+    <input id="recNewPass" type="password" placeholder="parola nouă (min 6)" autocomplete="new-password"
+      onkeydown="if(event.key==='Enter')resetWithRecovery()">
+    <div id="resetErr" style="color:var(--warn);font-size:12px;margin:-8px 0 12px;display:none"></div>
+    <div class="nav2" style="justify-content:space-between;align-items:center;max-width:340px">
+      <button class="skip" onclick="hideReset()" style="margin:0;padding:0">← Înapoi</button>
+      <button class="btn gold" onclick="resetWithRecovery()" style="margin-left:auto">Resetează parola</button>
+    </div>
+  </div>
+  <button class="skip" id="lockReset" onclick="lockReset()" style="display:none">Nu am cod de recuperare — șterge și pornește din nou</button>
+  <p style="font-size:11px;color:var(--muted);max-width:320px;margin-top:16px">Contul tău e <b>local pe acest dispozitiv</b>, criptat cu parola ta. Email/telefonul e doar eticheta contului (nu se trimite nicăieri). La creare primești un <b>cod de recuperare</b> — singura cale de a-ți reseta parola fără server. Prototip — nu introduce date cu adevărat sensibile.</p>
+</div>
+
+<!-- COD DE RECUPERARE (afisat o singura data) -->
+<div class="ob" id="recModal">
+  <div class="mk">🔑</div>
+  <h1>Codul tău de recuperare</h1>
+  <div class="lead">Notează-l acum și ține-l într-un loc sigur. Cu el îți poți reseta parola dacă o uiți. <b>Nu îl putem recupera</b> — nu se salvează nicăieri în clar.</div>
+  <div id="recCodeShow" style="font-family:ui-monospace,monospace;font-size:22px;font-weight:800;letter-spacing:2px;background:var(--card2);border:1px solid var(--line2);border-radius:14px;padding:16px 18px;margin:6px 0 14px;text-align:center;color:var(--ink);user-select:all"></div>
+  <div class="nav2" style="max-width:340px;width:100%;gap:10px">
+    <button class="btn ghost" onclick="copyRecovery()">⧉ Copiază</button>
+    <button class="btn gold" onclick="closeRecovery()" style="margin-left:auto">Am salvat codul →</button>
+  </div>
 </div>
 
 <!-- ONBOARDING WIZARD -->
@@ -1284,7 +1337,8 @@ const SEEK={0:[["Investitor pentru proiect imobiliar","dictare"],["Furnizor de c
 const COLORS=["#6366F1","#10B981","#F59E0B","#8B5CF6","#EC4899","#0EA5E9","#14B8A6","#F97316","#EF4444","#22C55E"];
 const STOP=new Set("si sau de la in un o cu pe pentru din ca care este are am ai vreau caut ofer cineva zona bun buna nou noua a al ale lui langa".split(" "));
 const KEY="cercul_eie_v5",TKEY="cercul_theme",SKEY="cercul_salt";
-let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false,MATCHFILTER="all",NOTEFILTER="all",EDITTASK=null,EDITNOTE=null,CONNFILTER="all",EDITMEET=null,FOCUS=false,NOTERANGE="all",EDITGOAL=null,JUSTDONE=null;
+let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false,MATCHFILTER="all",NOTEFILTER="all",EDITTASK=null,EDITNOTE=null,CONNFILTER="all",EDITMEET=null,FOCUS=false,NOTERANGE="all",EDITGOAL=null,JUSTDONE=null,MKRAW=null,PENDING_RECOVERY=null,PENDING_ONBOARD=false;
+const ACCT_KEY="cercul_acct";
 // suprascrie cu zerouri bufferele pe care le controlam (audit s5r #1). CryptoKey-urile sunt
 // non-extractabile/opace (WebCrypto nu expune heap-ul lor) -> le eliberam pt. GC; parolele sunt
 // string-uri imutabile in JS si nu pot fi zeroizate — limitare documentata, nu ascunsa.
@@ -1379,6 +1433,39 @@ async function decJSON(blob){const o=JSON.parse(blob);if(!o||!o.ct||!o.iv)throw 
   const w=JSON.parse(new TextDecoder().decode(pt));
   if(await sha(JSON.stringify(w.d))!==w.s)throw new Error("checksum"); // integritate SHA-256 (audit R3 #2)
   return w.d;}
+/* ==== CONT + cheie-master (MK) + recuperare ====
+   Datele se cripteaza cu o cheie-master MK aleatoare. MK e INVELITA separat de (a) parola si (b) un cod de recuperare.
+   => poti SCHIMBA / RESETA parola fara sa re-criptezi datele si fara server. Email/telefon = eticheta de cont locala. */
+function rnd(n){return crypto.getRandomValues(new Uint8Array(n));}
+function canon(s){return String(s||"").toUpperCase().replace(/[^A-Z0-9]/g,"");} // normalizare cod recuperare
+function genRecovery(){const a=rnd(15),al="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let s="";for(let i=0;i<15;i++)s+=al[a[i]%32];return s.match(/.{1,5}/g).join("-");}
+function detectId(s){s=String(s||"").trim();if(/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(s))return"email";if(/^\+?[\d][\d\s().-]{6,}$/.test(s))return"phone";return null;}
+async function importMK(raw){return crypto.subtle.importKey("raw",raw,{name:"AES-GCM"},false,["encrypt","decrypt"]);}
+async function importHK(raw){return crypto.subtle.importKey("raw",raw,{name:"HMAC",hash:"SHA-256"},false,["sign"]);}
+async function kekFrom(secret,salt){const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(secret),"PBKDF2",false,["deriveKey"]);
+  return crypto.subtle.deriveKey({name:"PBKDF2",salt,iterations:150000,hash:"SHA-256"},base,{name:"AES-GCM",length:256},false,["encrypt","decrypt"]);}
+async function wrapMK(mkRaw,secret,salt){const k=await kekFrom(secret,salt),iv=rnd(12);
+  const ct=await crypto.subtle.encrypt({name:"AES-GCM",iv},k,mkRaw);return {iv:b64(iv),ct:b64(ct)};}
+async function unwrapMK(w,secret,salt){const k=await kekFrom(secret,salt);
+  const pt=await crypto.subtle.decrypt({name:"AES-GCM",iv:unb64(w.iv)},k,unb64(w.ct));return new Uint8Array(pt);}
+function getAcct(){try{return JSON.parse(localStorage.getItem(ACCT_KEY)||"null");}catch(_){return null;}}
+function setAcct(a){localStorage.setItem(ACCT_KEY,JSON.stringify(a));}
+async function establishMK(mkRaw){MKRAW=mkRaw;CK=await importMK(mkRaw);HK=await importHK(mkRaw);}
+// creeaza un cont nou (din mkRaw existent) cu invelis de parola + cod de recuperare
+async function buildAcct(mkRaw,id,idtype,pass){const rec=genRecovery(),sp=rnd(16),sr=rnd(16);
+  setAcct({v:2,id:id||"",idtype:idtype||"",salt_pw:b64(sp),w_pw:await wrapMK(mkRaw,pass,sp),
+    salt_rc:b64(sr),w_rc:await wrapMK(mkRaw,canon(rec),sr),created:Date.now()});return rec;}
+// deblocheaza cu parola: cont nou (unwrap MK) SAU format vechi (deriveKey) cu migrare automata la modelul cu cont
+async function unlockWithPassword(pass){const acct=getAcct();
+  if(acct&&acct.w_pw){const mkRaw=await unwrapMK(acct.w_pw,pass,unb64(acct.salt_pw)); // arunca daca parola e gresita
+    await establishMK(mkRaw);const d=await decJSON(localStorage.getItem(KEY));if(!validDB(d))throw new Error("schema");
+    DB=d;SESSPASS=pass;return;}
+  // ---- format vechi (doar SKEY+KEY): deschide, apoi MIGREAZA la MK + cont ----
+  const salt=unb64(localStorage.getItem(SKEY));CK=await deriveKey(pass,salt);HK=await deriveHMAC(pass,salt);
+  const d=await decJSON(localStorage.getItem(KEY));if(!validDB(d))throw new Error("schema");
+  const mkRaw=rnd(32);await establishMK(mkRaw);DB=d;SESSPASS=pass;
+  const rec=await buildAcct(mkRaw,"","",pass);await flush(); // re-cripteaza cu MK
+  PENDING_RECOVERY=rec;}
 /* ---- validare schema + sanitizare la incarcare (audit R1 #4 / R3) ---- */
 function validDB(d){if(!d||typeof d!=="object")return false;
   for(const f of ["members","items","matches","messages"])if(!Array.isArray(d[f]))return false;
@@ -2358,6 +2445,9 @@ function netFocus(id){const host=$("#netHost");if(!host)return;
 function fuzzy(q,s){q=(q||"").toLowerCase().trim();if(!q)return true;s=(s||"").toLowerCase();if(s.includes(q))return true;let i=0;for(const c of s){if(c===q[i])i++;if(i>=q.length)return true;}return false;}
 
 function prof(){const me=mem(ME),con=DB.matches.filter(x=>x.status==="conectat"&&(x.offer_member===ME||x.seek_member===ME)).length;
+  const ai=$("#acctInfo");if(ai){const acct=getAcct();
+    if(acct&&acct.id)setKids(ai,h("div",{},h("b",{text:(acct.idtype==="phone"?"📱 ":"✉ ")+acct.id}),h("div",{style:{color:"var(--muted)",fontSize:"11.5px",marginTop:"3px"},text:"Cont local pe acest dispozitiv · criptat cu parola ta"})));
+    else setKids(ai,h("div",{style:{color:"var(--muted)"},text:"Cont local (fără email/telefon). Poți reseta parola cu codul de recuperare."}));}
   if(EDITPROF){setKids($("#phead"),
     h("div",{style:{display:"flex",gap:"14px",alignItems:"center"}},donut(me.trust),
       h("div",{style:{flex:"1",minWidth:"0"}},
@@ -2933,6 +3023,8 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="notecancel")cancelNoteEdit();
   else if(a==="srperson"){closeSearch();openMemberMatch(id);}
   else if(a==="srgo"){closeSearch();setView(el.dataset.v);}
+  else if(a==="changepass")changePassword();
+  else if(a==="regenrec")regenRecovery();
   else if(a==="importbtn")importData();
   else if(a==="backupEnc")exportEncrypted();
   else if(a==="restoreEnc")restoreEncrypted();
@@ -2997,31 +3089,80 @@ window.addEventListener("unhandledrejection",e=>{console.error("promise",e.reaso
 window.addEventListener("pagehide",()=>{if(typeof REC!=="undefined"&&REC&&REC.on)return;try{wipe();}catch(_){}}); // curatare la inchidere/navigare (nu in timpul inregistrarii: promptul de microfon pe iOS declanseaza pagehide)
 
 /* ---- lock/setup: cheie derivata din parola, doar in RAM (audit R3 #1) ---- */
-function showLock(mode){LOCKMODE=mode;
-  $("#lockTitle").textContent=mode==="setup"?"Bun venit — seteaza o parola":"Deblocheaza Cercul";
+function showLock(mode){LOCKMODE=mode;hideReset();const acct=getAcct();
+  $("#lockTitle").textContent=mode==="setup"?"Creează-ți contul":"Bine ai revenit";
   $("#lockLead").textContent=mode==="setup"
-    ?"Rețeaua ta de business: găsești oameni, ții minte relațiile, primești potriviri. Datele tale sunt criptate și sub controlul tău — nu sunt vândute, nu hrănesc reclame (sincronizarea e opt-in și criptată end-to-end). Alege o parolă de sesiune: din ea derivăm cheia de criptare (PBKDF2), care NU se salvează pe disc."
-    :"Introdu parola de sesiune ca sa decriptezi datele. Cheia se deriveaza in memorie; nu e stocata nicaieri.";
-  $("#lockBtn").textContent=mode==="setup"?"Creeaza si intra →":"Deblocheaza →";
+    ?"Pune un email sau un număr de telefon și alege o parolă. Contul rămâne local pe acest dispozitiv, criptat cu parola ta — nimic nu se trimite la vreun server."
+    :((acct&&acct.id?("Cont: "+acct.id+". "):"")+"Introdu parola ca să-ți deblochezi datele.");
+  $("#lockBtn").textContent=mode==="setup"?"Creează cont și intră →":"Deblochează →";
+  $("#lockIdWrap").style.display=mode==="setup"?"block":"none";
+  $("#lockPass2Wrap").style.display=mode==="setup"?"block":"none";
+  $("#lockPassLbl").textContent=mode==="setup"?"Alege o parolă (min 6)":"Parolă";
+  // "Am uitat parola" doar la deblocare si doar daca exista cod de recuperare
+  $("#lockForgot").style.display=(mode!=="setup"&&acct&&acct.w_rc)?"inline":"none";
   $("#lockReset").style.display=mode==="setup"?"none":"block";
-  $("#lock").classList.add("on");setTimeout(()=>$("#lockPass").focus(),120);}
-async function lockSubmit(){const pass=$("#lockPass").value,err=$("#lockErr");err.style.display="none";
-  if(pass.length<4){err.style.display="block";err.textContent="Minim 4 caractere.";return;}
+  $("#lock").classList.add("on");setTimeout(()=>$(mode==="setup"?"#lockId":"#lockPass").focus(),120);}
+function finishUnlock(isSetup){$("#lockPass").value="";$("#lockPass2").value="";$("#lockId").value="";
+  $("#lock").classList.remove("on");loadMembers();render();resetIdle();
+  if(isSetup){obGo(0);obShow();}}
+async function lockSubmit(){const err=$("#lockErr");err.style.display="none";const fail=m=>{err.style.display="block";err.textContent=m;};
   $("#lockBtn").disabled=true;
   try{
-    if(LOCKMODE==="setup"){const salt=crypto.getRandomValues(new Uint8Array(16));SALTBUF=salt;
-      CK=await deriveKey(pass,salt);HK=await deriveHMAC(pass,salt);localStorage.setItem(SKEY,b64(salt));SESSPASS=pass;
-      DB=seed();await flush();$("#lockPass").value="";$("#lock").classList.remove("on");
-      loadMembers();render();obGo(0);obShow();resetIdle();}
-    else{const salt=unb64(localStorage.getItem(SKEY));SALTBUF=salt;CK=await deriveKey(pass,salt);HK=await deriveHMAC(pass,salt);SESSPASS=pass;
-      const d=await decJSON(localStorage.getItem(KEY));if(!validDB(d))throw new Error("schema");DB=d;
-      $("#lockPass").value="";$("#lock").classList.remove("on");loadMembers();render();resetIdle();}
-  }catch(e){console.warn("lock",e);CK=null;err.style.display="block";
-    err.textContent=LOCKMODE==="setup"?"Eroare la initializare. Reincearca.":"Parola gresita sau date alterate/corupte.";}
-  $("#lockBtn").disabled=false;}
-function lockReset(){if(!confirm("Reseteaza? Datele criptate actuale raman ca backup in browser, dar vei porni un cont nou."))return;
-  backupRaw();localStorage.removeItem(KEY);localStorage.removeItem(SKEY);CK=null;
+    if(LOCKMODE==="setup"){
+      const id=String($("#lockId").value||"").trim(),idtype=detectId(id);
+      const pass=$("#lockPass").value,pass2=$("#lockPass2").value;
+      if(!idtype){fail("Pune un email valid (nume@email.com) sau un număr de telefon.");return;}
+      if(pass.length<6){fail("Parola: minim 6 caractere.");return;}
+      if(pass!==pass2){fail("Parolele nu coincid.");return;}
+      const mkRaw=rnd(32);await establishMK(mkRaw);
+      const rec=await buildAcct(mkRaw,clean(id),idtype,pass);
+      DB=seed();SESSPASS=pass;await flush();
+      finishUnlock(false);PENDING_ONBOARD=true;showRecovery(rec);
+    }else{
+      const pass=$("#lockPass").value;if(pass.length<1){fail("Introdu parola.");return;}
+      await unlockWithPassword(pass);finishUnlock(false);
+      if(PENDING_RECOVERY){const r=PENDING_RECOVERY;PENDING_RECOVERY=null;showRecovery(r);}
+    }
+  }catch(e){console.warn("lock",e);CK=null;HK=null;MKRAW=null;
+    fail(LOCKMODE==="setup"?"Eroare la creare. Reîncearcă.":"Parolă greșită sau date corupte.");}
+  finally{$("#lockBtn").disabled=false;}}
+function showReset(){const acct=getAcct();if(!acct||!acct.w_rc){toast("Nu există cod de recuperare pentru acest cont.");return;}
+  $("#lockMain").style.display="none";$("#lockReset").style.display="none";$("#lockResetStep").style.display="block";
+  $("#lockTitle").textContent="Resetează parola";$("#lockLead").textContent="Introdu codul de recuperare primit la creare și alege o parolă nouă.";
+  $("#resetErr").style.display="none";setTimeout(()=>$("#recCode").focus(),100);}
+function hideReset(){const s=$("#lockResetStep");if(s)s.style.display="none";const m=$("#lockMain");if(m)m.style.display="block";
+  const r=$("#recCode");if(r)r.value="";const np=$("#recNewPass");if(np)np.value="";}
+async function resetWithRecovery(){const acct=getAcct(),err=$("#resetErr");err.style.display="none";const fail=m=>{err.style.display="block";err.textContent=m;};
+  if(!acct||!acct.w_rc){fail("Cont indisponibil.");return;}
+  const code=canon($("#recCode").value),np=$("#recNewPass").value;
+  if(!code){fail("Introdu codul de recuperare.");return;}
+  if(np.length<6){fail("Parola nouă: minim 6 caractere.");return;}
+  try{const mkRaw=await unwrapMK(acct.w_rc,code,unb64(acct.salt_rc)); // arunca daca codul e gresit
+    await establishMK(mkRaw);const d=await decJSON(localStorage.getItem(KEY));if(!validDB(d))throw new Error("schema");DB=d;
+    const sp=rnd(16);acct.salt_pw=b64(sp);acct.w_pw=await wrapMK(mkRaw,np,sp);setAcct(acct);
+    SESSPASS=np;await flush();hideReset();finishUnlock(false);toast("Parolă resetată — ești conectat ✓");
+  }catch(e){console.warn("reset",e);CK=null;HK=null;MKRAW=null;fail("Cod de recuperare greșit sau date corupte.");}}
+function showRecovery(code){const el=$("#recCodeShow");if(el)el.textContent=code;el&&(el.dataset.code=code);$("#recModal").classList.add("on");}
+function copyRecovery(){const el=$("#recCodeShow");const code=el?(el.dataset.code||el.textContent):"";
+  try{navigator.clipboard.writeText(code);toast("Cod copiat");}catch(_){toast("Selectează și copiază manual codul");}}
+function closeRecovery(){$("#recModal").classList.remove("on");if(PENDING_ONBOARD){PENDING_ONBOARD=false;obGo(0);obShow();}}
+function lockReset(){if(!confirm("Ștergi contul de pe acest dispozitiv și pornești din nou? Datele criptate actuale rămân ca backup ascuns în browser, dar vei avea nevoie de un backup .eie ca să le recuperezi."))return;
+  backupRaw();localStorage.removeItem(KEY);localStorage.removeItem(SKEY);localStorage.removeItem(ACCT_KEY);CK=null;HK=null;MKRAW=null;
   $("#lockPass").value="";$("#lockErr").style.display="none";showLock("setup");}
+// schimbare parola din Profil (utilizator deja deblocat)
+async function changePassword(){const acct=getAcct();if(!acct||!acct.w_pw){toast("Cont indisponibil");return;}
+  const cur=$("#cpCur").value,np=$("#cpNew").value,np2=$("#cpNew2").value;
+  if(np.length<6){toast("Parola nouă: minim 6 caractere");return;}
+  if(np!==np2){toast("Parolele noi nu coincid");return;}
+  let mkRaw;try{mkRaw=await unwrapMK(acct.w_pw,cur,unb64(acct.salt_pw));}catch(e){toast("Parola actuală e greșită");return;}
+  const sp=rnd(16);acct.salt_pw=b64(sp);acct.w_pw=await wrapMK(mkRaw,np,sp);setAcct(acct);SESSPASS=np;
+  $("#cpCur").value="";$("#cpNew").value="";$("#cpNew2").value="";logA("Parolă schimbată");toast("Parolă schimbată ✓");}
+// regenereaza codul de recuperare (necesita parola curenta) si il afiseaza
+async function regenRecovery(){const acct=getAcct();if(!acct){toast("Cont indisponibil");return;}
+  const cur=prompt("Confirmă parola ca să generez un cod nou:");if(cur==null)return;
+  let mkRaw;try{mkRaw=await unwrapMK(acct.w_pw,cur,unb64(acct.salt_pw));}catch(e){toast("Parolă greșită");return;}
+  const rec=genRecovery(),sr=rnd(16);acct.salt_rc=b64(sr);acct.w_rc=await wrapMK(mkRaw,canon(rec),sr);setAcct(acct);
+  logA("Cod de recuperare regenerat");showRecovery(rec);}
 /* ---- auto-lock: best-effort clearing al cheilor din RAM la inactivitate (nu garanteaza zeroing in JS managed-memory) ---- */
 let idleT=null;const IDLE_MS=180000;let SESSPASS=null;const RECOVER_KEY="eie_rec_recover";
 function isStandalone(){try{return window.navigator.standalone===true||(window.matchMedia&&matchMedia("(display-mode: standalone)").matches);}catch(_){return false;}}
@@ -3034,13 +3175,11 @@ async function tryRecRecover(){
   if(!raw)return false;try{sessionStorage.removeItem(RECOVER_KEY);}catch(_){}
   let o;try{o=JSON.parse(raw);}catch(_){return false;}
   if(!o||!o.pw||(Date.now()-(o.t||0))>120000)return false; // fereastra scurta: doar reload-ul de la record
-  try{const salt=unb64(localStorage.getItem(SKEY));SALTBUF=salt;
-    CK=await deriveKey(o.pw,salt);HK=await deriveHMAC(o.pw,salt);
-    const d=await decJSON(localStorage.getItem(KEY));if(!validDB(d))throw 0;
-    DB=d;SESSPASS=o.pw;$("#lock").classList.remove("on");loadMembers();resetIdle();setView("secretara");
+  try{await unlockWithPassword(o.pw);
+    $("#lock").classList.remove("on");loadMembers();resetIdle();setView("secretara");
     setTimeout(()=>toast("Te-am reconectat — microfonul e gata acum. Apasă din nou Înregistrează."),350);
     return true;
-  }catch(e){CK=null;HK=null;DB=null;SESSPASS=null;return false;}}
+  }catch(e){CK=null;HK=null;DB=null;MKRAW=null;SESSPASS=null;return false;}}
 function lockNow(){if(!CK||LOCKING)return;
   if(PROC){pendingLock=true;toast("Se blocheaza dupa finalizarea procesarii…");return;} // atomic: nu intrerupe operatiuni (audit s4 #1)
   LOCKING=true;stopNet();clearTimeout(idleT);wipe();recRecoverDisarm();
@@ -3062,7 +3201,7 @@ DATEABS=localStorage.getItem("cercul_dateabs")==="1";applyDateAbs();
 NOTIFY=localStorage.getItem("cercul_notify")==="1"&&notifSupported()&&Notification.permission==="granted";applyNotify();
 MATCHDIV=Math.max(0,Math.min(100,+(localStorage.getItem("cercul_matchdiv")||0)));applyMatchDiv();
 (async()=>{
-  const hasAcct=localStorage.getItem(SKEY)&&localStorage.getItem(KEY);
+  const hasAcct=getAcct()||(localStorage.getItem(SKEY)&&localStorage.getItem(KEY));
   if(hasAcct){try{if(await tryRecRecover())return;}catch(_){}} // reconectare automata dupa reload-ul de la microfon (iPhone-PWA)
   showLock(hasAcct?"unlock":"setup");
 })();
