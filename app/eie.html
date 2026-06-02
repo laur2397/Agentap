@@ -883,10 +883,10 @@ input,textarea,select,[contenteditable]{-webkit-user-select:text;user-select:tex
 /* tab bar: icoane SVG (dimensiune fixa, identice pe orice telefon), butoane clare */
 nav{background:var(--nav-bg);border-top:1px solid var(--line2)}
 nav::after{display:none!important} /* iOS deseneaza propriul home-indicator; al nostru doar inghesuia bara */
-.navin{padding:7px 2px 3px}
-.tab{min-height:60px;padding:6px 2px 6px;gap:4px;font-size:11px;font-weight:600;color:var(--muted)}
-.tab .ic{width:56px;height:32px;display:grid;place-items:center;border-radius:16px;font-size:0;transition:background .25s var(--ease),transform .16s var(--ease)}
-.tab .ic svg{width:26px;height:26px;display:block}
+.navin{padding:10px 2px 4px}
+.tab{min-height:74px;padding:10px 2px 8px;gap:6px;font-size:12px;font-weight:600;color:var(--muted)}
+.tab .ic{width:64px;height:38px;display:grid;place-items:center;border-radius:18px;font-size:0;transition:background .25s var(--ease),transform .16s var(--ease)}
+.tab .ic svg{width:30px;height:30px;display:block}
 .tab.on{color:var(--primary-dim);font-weight:800}
 .tab.on .ic{background:var(--primary-soft)}
 .tab:active .ic{transform:scale(.9)}
@@ -1064,7 +1064,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-03d · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-03e · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
