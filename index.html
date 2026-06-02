@@ -310,7 +310,7 @@ nav{position:sticky;bottom:0;z-index:9;background:color-mix(in srgb,var(--bg) 88
 .ob .step{width:100%;max-width:340px;text-align:left;display:none}
 .ob .step.on{display:block;animation:rise .4s var(--ease)}
 .ob label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary-dim);display:block;margin:0 0 7px}
-.ob input{width:100%;font-size:15px;padding:13px 14px;margin-bottom:18px}
+.ob input{width:100%;font-size:16px;padding:13px 14px;margin-bottom:18px}
 .ob .nav2{display:flex;gap:10px;justify-content:space-between;align-items:center;max-width:340px;width:100%}
 .ob .dots{display:flex;gap:6px}.ob .dots i{width:7px;height:7px;border-radius:50%;background:var(--line2)}.ob .dots i.on{background:var(--primary)}
 .ob .skip{background:none;border:0;color:var(--muted);font-size:12px;cursor:pointer;margin-top:16px}
@@ -777,6 +777,7 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
 .recsetup{background:var(--gold-soft);border:1px solid var(--line2);border-radius:16px;padding:16px;margin-bottom:14px}
 .recsetup-t{font-weight:800;font-size:14px;color:var(--ink);margin-bottom:5px}
 .recsetup-p{font-size:12.5px;color:var(--ink2);line-height:1.5;margin-bottom:12px}
+.recerr{background:var(--warn-soft);border:1px solid var(--warn);border-radius:14px;padding:12px 14px;margin:12px 0;font-size:12.5px;line-height:1.5;color:var(--warn-ink)}
 .rectext{width:100%;margin-top:12px;resize:vertical}
 .recacts{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
 .recsum{margin-top:14px;background:var(--primary-soft);border:1px solid var(--line2);border-radius:14px;padding:14px}
@@ -843,11 +844,10 @@ main::-webkit-scrollbar{width:0;height:0;display:none}
 nav{flex:0 0 auto;position:relative;bottom:auto;
   padding-bottom:env(safe-area-inset-bottom)}
 nav::after{content:"";display:block;width:124px;height:5px;border-radius:3px;
-  background:var(--line2);opacity:.55;
-  margin:1px auto calc(7px + env(safe-area-inset-bottom))}
+  background:var(--line2);opacity:.55;margin:1px auto 7px}
 
-/* ===== DESKTOP / ecran lat: il aratam ca pe un telefon, nu ca pe un site intins ===== */
-@media (min-width:760px){
+/* ===== DESKTOP / ecran lat (doar mouse, nu telefon in landscape): il aratam ca pe un telefon ===== */
+@media (min-width:760px) and (hover:hover) and (pointer:fine){
   body{display:grid;place-items:center;animation:none!important;
     background:radial-gradient(120% 90% at 50% -5%,#1b2030,#0a0c12 62%)!important}
   .shell{height:min(100dvh - 48px,884px);width:404px;max-width:404px;
@@ -885,11 +885,15 @@ input,textarea,select,[contenteditable]{-webkit-user-select:text;user-select:tex
 /* schimbarea de ecran e instant/snappy (fara cascada lunga pe fiecare tap) */
 .view.on>*{animation-duration:.3s!important;animation-delay:0s!important}
 
-/* ===== header: incape mereu, fara sa taie controale ===== */
-header{padding-left:16px;padding-right:16px}
+/* ===== header: incape mereu, fara sa taie controale (inclusiv pe iPhone SE/Mini la 320px) ===== */
+header{padding-left:calc(16px + env(safe-area-inset-left));padding-right:calc(16px + env(safe-area-inset-right))}
+main{padding-left:calc(18px + env(safe-area-inset-left));padding-right:calc(18px + env(safe-area-inset-right))}
+.htop{gap:8px}
+.brand{min-width:0}
 .brand .mk{flex:none}
-.brand .t{white-space:nowrap}
-.hright{gap:7px}
+.brand .t{white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.hright{gap:7px;flex:none}
+@media (max-width:360px){.themebtn{width:32px;height:32px}.hright{gap:5px}}
 /* pe ecrane inguste, trust chip-ul devine doar punctul (eticheta "Local" ramane pentru screen-reader) */
 @media (max-width:430px){
   #trustChipL{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -957,7 +961,7 @@ header.multi .hmember{display:flex}
       <div class="exchbody">
         <p class="sub" style="margin:8px 0 12px">Doar <b>cardul tău public</b> (nume, domeniu, ce oferi) — niciodată „ce cauți". Îl dai cuiva, îl lipește, te adaugă.</p>
         <label class="mfl" for="myConnCode">Codul tău de conexiune</label>
-        <textarea id="myConnCode" rows="3" readonly aria-label="Codul tau de conexiune" style="width:100%;font-size:11px"></textarea>
+        <textarea id="myConnCode" rows="3" readonly aria-label="Codul tau de conexiune" style="width:100%"></textarea>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
           <button class="btn gold sm" data-act="invite">Invită pe cineva</button>
           <button class="btn ghost sm" data-act="copyConnCode">Copiază codul meu</button>
@@ -967,14 +971,14 @@ header.multi .hmember{display:flex}
         <p class="sub" style="margin-top:6px;font-size:11px">QR-ul îl scanează celălalt cu <b>camera telefonului</b> → îi apare codul → îl lipește mai jos. Util ca să nu tastați manual codul lung.</p>
         <hr style="border:none;border-top:1px solid var(--line);margin:14px 0">
         <label class="mfl" for="pasteCode">Ai primit un cod? Lipește-l aici</label>
-        <textarea id="pasteCode" rows="3" placeholder="EIE1:…" aria-label="Lipeste codul de conexiune primit" style="width:100%;font-size:11px"></textarea>
+        <textarea id="pasteCode" rows="3" placeholder="EIE1:…" aria-label="Lipeste codul de conexiune primit" style="width:100%"></textarea>
         <div style="margin-top:8px"><button class="btn gold sm" data-act="addByCode">＋ Adaugă în rețea</button></div>
       </div></details>
     <details class="exchwrap" id="discDet"><summary>Descoperă oameni ⌄</summary>
       <div class="exchbody">
         <p class="sub" style="margin:8px 0 10px">Caută în directorul public, <b>opt-in</b>. Aici serverul vede cardurile publice ca să le poată căuta — <b>„ce cauți" rămâne mereu privat</b> și nu se publică niciodată. Necesită releu activ.</p>
         <div style="display:flex;gap:8px">
-          <input id="discoverQ" placeholder="ex: imobiliare, investitor, IT…" aria-label="Caută în director" style="flex:1;font-size:12px" onkeydown="if(event.key==='Enter')discoverSearch()">
+          <input id="discoverQ" placeholder="ex: imobiliare, investitor, IT…" aria-label="Caută în director" style="flex:1" onkeydown="if(event.key==='Enter')discoverSearch()">
           <button class="btn ghost sm" data-act="discsearch">Caută</button>
         </div>
         <div id="discoverResults" style="margin-top:10px"></div>
@@ -1009,24 +1013,24 @@ header.multi .hmember{display:flex}
         <div class="aicfgbody">
           <p class="aihint-intro"><b>Standard</b> sau cu <b>cheia ta</b> merg pe telefon. <b>Local</b> doar pe calculator (Ollama). Implicit oprit.</p>
           <label class="mfl" for="aiProvider">Furnizor</label>
-          <select id="aiProvider" aria-label="Furnizor AI" onchange="aiProviderChange()">
+          <select id="aiProvider" aria-label="Furnizor AI" onchange="aiProviderChange();aiAutoSave()">
             <option value="off">Dezactivat</option>
-            <option value="managed">Standard — fără configurare</option>
+            <option value="gemini">Google Gemini — recomandat pe telefon (cheia ta, gratis)</option>
+            <option value="managed">Standard — prin releu (fără cheie)</option>
+            <option value="openai">OpenAI (cheia ta · de obicei doar pe calculator)</option>
+            <option value="anthropic">Anthropic Claude (cheia ta · doar pe calculator)</option>
+            <option value="openrouter">OpenRouter (cheia ta · doar pe calculator)</option>
             <option value="local">Local — Ollama (doar pe calculator)</option>
-            <option value="openai">OpenAI (cheia ta)</option>
-            <option value="anthropic">Anthropic Claude (cheia ta)</option>
-            <option value="gemini">Google Gemini (cheia ta)</option>
-            <option value="openrouter">OpenRouter (cheia ta)</option>
             <option value="custom">Endpoint OpenAI-compatibil</option>
           </select>
           <p class="aihint" id="aiHint"></p>
           <label class="mfl" for="aiBase" id="aiBaseLbl">Adresă (Base URL)</label>
-          <input id="aiBase" placeholder="http://localhost:11434/v1" aria-label="Base URL">
+          <input id="aiBase" placeholder="http://localhost:11434/v1" aria-label="Base URL" onchange="aiAutoSave()">
           <label class="mfl" for="aiKey" id="aiKeyLbl">Cheie API</label>
-          <input id="aiKey" type="password" placeholder="sk-…" aria-label="Cheie API" autocomplete="off">
+          <input id="aiKey" type="password" placeholder="lipește cheia aici" aria-label="Cheie API" autocomplete="off" onchange="aiAutoSave()">
           <label class="mfl" for="aiModel">Model</label>
-          <input id="aiModel" placeholder="ex: gpt-4o-mini" aria-label="Model">
-          <label class="aitoggle"><input type="checkbox" id="aiCtx"> Lasă asistentul să-ți vadă rezumatul (task-uri, întâlniri)</label>
+          <input id="aiModel" placeholder="ex: gemini-2.0-flash" aria-label="Model" onchange="aiAutoSave()">
+          <label class="aitoggle"><input type="checkbox" id="aiCtx" onchange="aiAutoSave()"> Lasă asistentul să-ți vadă rezumatul (task-uri, întâlniri)</label>
           <div class="aibtns">
             <button class="btn gold sm" data-act="aiSave">Salvează</button>
             <button class="btn ghost sm" data-act="aiTest">Testează</button>
@@ -1119,7 +1123,7 @@ header.multi .hmember{display:flex}
     <div class="panel"><h3>Sincronizare <span class="badge priv">beta · opt-in</span></h3>
       <p style="font-size:12.5px;color:var(--ink2)">Sincronizare automată cu contactele tale, <b>criptată end-to-end</b> — serverul nu vede conținutul. Implicit <b>oprită</b> (rămâi Local-Only). <span class="sub" style="display:inline">Detalii în „De ce e sigur".</span></p>
       <label class="mfl" for="relayUrl" style="margin-top:8px">Adresa releului</label>
-      <input id="relayUrl" placeholder="http://127.0.0.1:8787" aria-label="Adresa releului" style="width:100%;font-size:12px">
+      <input id="relayUrl" placeholder="http://127.0.0.1:8787" aria-label="Adresa releului" style="width:100%">
       <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
         <button class="btn ghost sm" data-act="relaySave">Salvează adresa</button>
         <button class="btn sm" id="relayToggleBtn" data-act="relayToggle">Activează sync</button>
@@ -1743,10 +1747,10 @@ const AI_MODEL={openai:"gpt-4o-mini",anthropic:"claude-3-5-sonnet-latest",gemini
 const AI_HINT={
   managed:"AI gata configurat, fără cheie — merge pe telefon. Necesită ca releul (Profil → Sincronizare) să fie deployat cu o cheie AI. Conversația trece prin releul tău.",
   local:"⚠ Offline, doar pe un CALCULATOR (nu pe telefon). Ollama face REZUMATUL. Pentru TRANSCRIERE offline pune Base URL la un server Whisper local OpenAI-compatibil (LocalAI sau whisper.cpp, ex. http://localhost:8080/v1). Ollama singur nu transcrie audio.",
-  openai:"Pune cheia ta OpenAI (platform.openai.com). Merge pe telefon. Conversația pleacă la OpenAI.",
-  anthropic:"Pune cheia ta Anthropic (console.anthropic.com). Merge pe telefon. Conversația pleacă la Anthropic.",
-  gemini:"Pune cheia ta Google AI Studio (aistudio.google.com). Merge pe telefon. Conversația pleacă la Google.",
-  openrouter:"Pune cheia ta OpenRouter (openrouter.ai). Acces la multe modele. Conversația pleacă la OpenRouter.",
+  openai:"⚠ Cheia OpenAI (platform.openai.com). De obicei NU merge direct din browser pe telefon (blocaj CORS) — folosește pe telefon Gemini sau Standard. Pe calculator poate merge.",
+  anthropic:"⚠ Cheia Anthropic (console.anthropic.com). Pe telefon poate fi blocat (CORS) și NU transcrie apeluri. Pentru telefon: Gemini sau Standard.",
+  gemini:"✓ Recomandat pe telefon. Cheie gratuită de la Google AI Studio (aistudio.google.com). Merge din browser. Conversația pleacă la Google.",
+  openrouter:"⚠ Cheia OpenRouter (openrouter.ai). Poate fi blocat din browser (CORS). Pe telefon: Gemini sau Standard.",
   custom:"Orice endpoint OpenAI-compatibil (base URL + cheie + model)."};
 function aiCfg(){return DB.ai||{provider:"off"};}
 function aiOn(){const c=aiCfg();return c.provider&&c.provider!=="off";}
@@ -1798,13 +1802,19 @@ async function aiTest(){const p=($("#aiProvider")||{}).value||"off";if(p==="off"
     aiStatus("Test eșuat: "+m+hint,false);toast("Test eșuat");}
   finally{if(btn){btn.disabled=false;btn.textContent="Testează";}}}
 function aiSettings(){const d=$("#aiCfg");if(d)d.open=!d.open;}
-function aiSave(){const p=($("#aiProvider")||{}).value||"off";
-  DB.ai={provider:p,base:clean(($("#aiBase")||{}).value||"").trim().slice(0,200),
+function aiSave(quiet){const p=($("#aiProvider")||{}).value||"off";
+  const next={provider:p,base:clean(($("#aiBase")||{}).value||"").trim().slice(0,200),
     key:(($("#aiKey")||{}).value||"").trim().slice(0,400),model:clean(($("#aiModel")||{}).value||"").trim().slice(0,80),
     ctx:!!($("#aiCtx")||{}).checked};
-  if(p!=="off"&&p!=="local"&&p!=="managed"&&!DB.ai.key){toast("Pune cheia API pentru "+(AI_LBL[p]||p));return;}
-  if(p==="managed"&&!relayBase()){toast("Setează întâi releul (Profil → Sincronizare) pentru modul Standard");return;}
-  save();renderAi();toast(p==="off"?"Asistent dezactivat":"Asistent configurat ("+(AI_LBL[p]||p)+")");}
+  const needKey=(p!=="off"&&p!=="local"&&p!=="managed");
+  if(needKey&&!next.key){if(quiet){aiStatus("Lipește cheia API ca să activez "+(AI_LBL[p]||p)+".",false);}else{toast("Pune cheia API pentru "+(AI_LBL[p]||p));}return false;}
+  if(p==="managed"&&!relayBase()){const msg="Pentru Standard, setează întâi releul în Profil → Sincronizare.";if(quiet)aiStatus(msg,false);else toast(msg);return false;}
+  DB.ai=next;save();renderAi();
+  if(p==="off"){aiStatus("",true);const el=$("#aiTestStatus");if(el)el.style.display="none";if(!quiet)toast("Asistent dezactivat");}
+  else{aiStatus("Configurat ✓ — "+(AI_LBL[p]||p)+". Apasă butonul Testează ca să confirmi că răspunde.",true);if(!quiet)toast("Asistent configurat");}
+  return true;}
+// auto-salvare la schimbarea oricarui camp: utilizatorul nu mai trebuie sa-si aminteasca sa apese Salveaza
+function aiAutoSave(){aiSave(true);}
 function aiClear(){DB.ai={provider:"off"};DB.aichat=[];save();renderAi();toast("Configurare AI ștearsă");}
 function renderAiChat(){const host=$("#aiChat");if(!host)return;const msgs=DB.aichat||[];
   if(!aiOn()){setKids(host,h("div",{class:"aiempty",text:"Configurează un asistent (local sau cu cheia ta) ca să începi o conversație."}));return;}
@@ -1894,6 +1904,7 @@ function renderRec(){const host=$("#recBody");if(!host)return;const r=DB.rec||{}
   }else{
     kids.push(h("div",{class:"recctrl"},h("button",{class:"btn gold sm","data-act":"recStart",onclick:()=>recStart(),text:"● Înregistrează apel"})));
   }
+  if(r.err){kids.push(h("div",{class:"recerr"},h("span",{text:"⚠ "+r.err})));}
   if(r.transcript){kids.push(h("textarea",{id:"recText",class:"rectext",rows:"6","aria-label":"Transcriere editabilă"}));
     const others=(DB.members||[]).filter(m=>m.id!==ME);
     kids.push(h("div",{class:"recwho"},h("label",{class:"mfl",for:"recWho",text:"Leagă de un contact — OPȚIONAL (sări peste dacă nu e în aplicație)"}),
@@ -1912,7 +1923,8 @@ function renderRec(){const host=$("#recBody");if(!host)return;const r=DB.rec||{}
 function recEdit(v){DB.rec=DB.rec||{};DB.rec.transcript=v;}
 async function recStart(){if(REC.on)return;
   if(!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia)){toast("Microfonul nu e disponibil în acest browser");return;}
-  if(!aiOn())toast("Ai nevoie de asistentul AI (⚙ Setări) pentru transcriere + rezumat");
+  if(!aiOn()){toast("Ai nevoie de asistentul AI (⚙ Setări) pentru transcriere + rezumat");return;}
+  DB.rec=DB.rec||{};DB.rec.err="";
   // IMPORTANT: oprim anularea ecoului/zgomotului — altfel microfonul ar STERGE vocea celuilalt venita din difuzor
   try{REC.stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});}
   catch(e){try{REC.stream=await navigator.mediaDevices.getUserMedia({audio:true});}
@@ -1950,24 +1962,26 @@ function recStop(){if(!REC.on)return;REC.on=false;clearInterval(REC.timer);
   renderRec();toast("Oprit — pregătesc transcrierea…");
   if(REC.mr&&REC.mr.state!=="inactive"){REC._finalize=true;try{REC.mr.stop();}catch(_){REC._finalize=false;recFinalize();}}
   else recFinalize();}
-async function recFinalize(){REC._finalize=false;
+async function recFinalize(){REC._finalize=false;DB.rec=DB.rec||{};DB.rec.err="";
   try{if(REC.stream)REC.stream.getTracks().forEach(t=>t.stop());}catch(_){}REC.stream=null;
-  // Transcriere AI = sursa de adevăr (live STT pe iPhone e gunoi). Folosim AI ori de câte ori e posibil.
-  try{
-    if(REC.audioBlob&&aiOn()&&aiAudioOk()){showProc();
-      try{const t=await aiTranscribe(REC.audioBlob);if(t&&t.trim())DB.rec.transcript=t.trim();}
-      catch(e){toast("Transcriere AI eșuată: "+(e&&e.message||e));}
-      finally{hideProc();}}
-    else if(REC.audioBlob&&!aiOn()){toast("Pune un asistent AI (OpenAI/Gemini/Standard) ca să transcriu — ⚙ Setări.");}
-  }finally{REC.audioBlob=null;REC.chunks=[];REC.mr=null;} // GARANTAT aruncăm audio
+  REC.chunks=[];REC.mr=null;
+  let ok=false;
+  // Transcriere AI = sursa de adevar (live STT pe iPhone e gunoi). Folosim AI ori de cate ori e posibil.
+  if(REC.audioBlob&&aiOn()&&aiAudioOk()){showProc();
+    try{const t=await aiTranscribe(REC.audioBlob);if(t&&t.trim()){DB.rec.transcript=t.trim();ok=true;}else DB.rec.err="Transcriere goală — n-am prins text. Verifică: apel pe difuzor, voce clară, asistent care merge (testează-l în ⚙ Setări).";}
+    catch(e){DB.rec.err="Transcriere eșuată: "+(e&&e.message||e)+". Audio-ul e păstrat — apasă Reîncearcă mai jos. Pe iPhone, dacă Gemini respinge formatul, folosește modul Standard prin releu.";}
+    finally{hideProc();}}
+  else if(REC.audioBlob&&!aiOn()){DB.rec.err="Pune un asistent AI (Gemini sau Standard) ca să transcriu — ⚙ Setări.";}
+  // pastram audio-ul DOAR daca a esuat, ca sa poata reincerca; la reusita il aruncam
+  if(ok){REC.audioBlob=null;}
   save();renderRec();
-  if((DB.rec.transcript||"").trim()&&aiOn()){await recSum();}
-  else if(!(DB.rec.transcript||"").trim()){toast("N-am prins text. Verifică: apel pe difuzor + asistent AI (OpenAI/Gemini/Standard).");}}
+  if(ok&&(DB.rec.transcript||"").trim()){await recSum();}}
 async function recTr(){if(!REC.audioBlob){toast("Nu există audio de transcris");return;}
   if(!aiOn()){toast("Configurează întâi asistentul AI (pentru transcriere)");return;}
-  showProc();try{const txt=await aiTranscribe(REC.audioBlob);DB.rec.transcript=(txt||"").trim();
-    REC.audioBlob=null;REC.chunks=[];save();hideProc();renderRec(); // QA: eliberăm buffer-ul audio după transcriere
-    toast(txt?"Transcriere gata":"Transcriere goală");}catch(e){hideProc();renderRec();toast("Transcriere eșuată: "+(e&&e.message||e));}}
+  DB.rec=DB.rec||{};showProc();try{const txt=await aiTranscribe(REC.audioBlob);DB.rec.transcript=(txt||"").trim();
+    if(DB.rec.transcript){REC.audioBlob=null;DB.rec.err="";}else DB.rec.err="Transcriere goală — n-am prins text.";
+    save();hideProc();renderRec();
+    toast(txt?"Transcriere gata":"Transcriere goală");}catch(e){DB.rec.err="Transcriere eșuată: "+(e&&e.message||e);save();hideProc();renderRec();toast("Transcriere eșuată");}}
 async function recSum(){const tx=(DB.rec&&DB.rec.transcript||"").trim();if(!tx){toast("Nu există transcript de rezumat");return;}
   if(!aiOn()){toast("Configurează întâi asistentul AI");return;}
   showProc();try{
@@ -1983,7 +1997,7 @@ function recSave(){const r=DB.rec||{};const who=r.who?mem(+r.who):null;
   DB.notes=DB.notes||[];DB.notes.push({id:DB.seq++,member_id:ME,text:body+" #apel",t:Date.now(),about:who?who.id:undefined});
   logA("Rezumat de apel salvat în Jurnal"+(who?(" (cu "+who.name+")"):""));save();
   toast(who?("Salvat — apare și în brief-ul lui "+who.name.split(" ")[0]):"Salvat în Jurnal (#apel)");}
-function recClear(){if(!confirm("Ștergi transcrierea și rezumatul curent?"))return;DB.rec=DB.rec||{};DB.rec.transcript="";DB.rec.summary="";REC.audioBlob=null;save();renderRec();}
+function recClear(){if(!confirm("Ștergi transcrierea și rezumatul curent?"))return;DB.rec=DB.rec||{};DB.rec.transcript="";DB.rec.summary="";DB.rec.err="";REC.audioBlob=null;save();renderRec();}
 function aiAudioOk(){const p=aiCfg().provider;return p==="openai"||p==="managed"||p==="gemini"||p==="custom"||p==="local";}
 async function blobB64(blob){return new Promise((res,rej)=>{const fr=new FileReader();fr.onerror=()=>rej(new Error("citire audio"));fr.onload=()=>res(String(fr.result).split(",")[1]||"");fr.readAsDataURL(blob);});}
 async function aiTranscribe(blob){const c=aiCfg();
