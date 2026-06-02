@@ -1051,7 +1051,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-02f · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-02g · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -1973,7 +1973,7 @@ function recEdit(v){DB.rec=DB.rec||{};DB.rec.transcript=v;}
 async function recStart(){if(REC.on)return;
   if(!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia)){toast("Microfonul nu e disponibil în acest browser");return;}
   if(!aiOn()){toast("Ai nevoie de asistentul AI (⚙ Setări) pentru transcriere + rezumat");return;}
-  DB.rec=DB.rec||{};DB.rec.err="";
+  DB.rec=DB.rec||{};DB.rec.err="";recRecoverArm(); // pe iPhone-PWA: daca promptul de microfon reincarca pagina, ne reconectam automat
   // IMPORTANT: oprim anularea ecoului/zgomotului — altfel microfonul ar STERGE vocea celuilalt venita din difuzor
   try{REC.stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});}
   catch(e){try{REC.stream=await navigator.mediaDevices.getUserMedia({audio:true});}
@@ -2011,7 +2011,7 @@ function recStop(){if(!REC.on)return;REC.on=false;clearInterval(REC.timer);
   renderRec();toast("Oprit — pregătesc transcrierea…");
   if(REC.mr&&REC.mr.state!=="inactive"){REC._finalize=true;try{REC.mr.stop();}catch(_){REC._finalize=false;recFinalize();}}
   else recFinalize();}
-async function recFinalize(){REC._finalize=false;DB.rec=DB.rec||{};DB.rec.err="";
+async function recFinalize(){REC._finalize=false;DB.rec=DB.rec||{};DB.rec.err="";recRecoverDisarm();
   try{if(REC.stream)REC.stream.getTracks().forEach(t=>t.stop());}catch(_){}REC.stream=null;
   REC.chunks=[];REC.mr=null;
   let ok=false;
@@ -2980,10 +2980,10 @@ async function lockSubmit(){const pass=$("#lockPass").value,err=$("#lockErr");er
   $("#lockBtn").disabled=true;
   try{
     if(LOCKMODE==="setup"){const salt=crypto.getRandomValues(new Uint8Array(16));SALTBUF=salt;
-      CK=await deriveKey(pass,salt);HK=await deriveHMAC(pass,salt);localStorage.setItem(SKEY,b64(salt));
+      CK=await deriveKey(pass,salt);HK=await deriveHMAC(pass,salt);localStorage.setItem(SKEY,b64(salt));SESSPASS=pass;
       DB=seed();await flush();$("#lockPass").value="";$("#lock").classList.remove("on");
       loadMembers();render();obGo(0);obShow();resetIdle();}
-    else{const salt=unb64(localStorage.getItem(SKEY));SALTBUF=salt;CK=await deriveKey(pass,salt);HK=await deriveHMAC(pass,salt);
+    else{const salt=unb64(localStorage.getItem(SKEY));SALTBUF=salt;CK=await deriveKey(pass,salt);HK=await deriveHMAC(pass,salt);SESSPASS=pass;
       const d=await decJSON(localStorage.getItem(KEY));if(!validDB(d))throw new Error("schema");DB=d;
       $("#lockPass").value="";$("#lock").classList.remove("on");loadMembers();render();resetIdle();}
   }catch(e){console.warn("lock",e);CK=null;err.style.display="block";
@@ -2993,11 +2993,28 @@ function lockReset(){if(!confirm("Reseteaza? Datele criptate actuale raman ca ba
   backupRaw();localStorage.removeItem(KEY);localStorage.removeItem(SKEY);CK=null;
   $("#lockPass").value="";$("#lockErr").style.display="none";showLock("setup");}
 /* ---- auto-lock: best-effort clearing al cheilor din RAM la inactivitate (nu garanteaza zeroing in JS managed-memory) ---- */
-let idleT=null;const IDLE_MS=180000;
+let idleT=null;const IDLE_MS=180000;let SESSPASS=null;const RECOVER_KEY="eie_rec_recover";
+function isStandalone(){try{return window.navigator.standalone===true||(window.matchMedia&&matchMedia("(display-mode: standalone)").matches);}catch(_){return false;}}
+// pe iPhone, in modul PWA, promptul de microfon poate reincarca pagina -> pierde cheia din RAM (te scoate la parola).
+// armam o reconectare automata DOAR cat dureaza inregistrarea (parola sta in sessionStorage, sters imediat dupa).
+function recRecoverArm(){try{if(SESSPASS&&isStandalone())sessionStorage.setItem(RECOVER_KEY,JSON.stringify({pw:SESSPASS,t:Date.now()}));}catch(_){}}
+function recRecoverDisarm(){try{sessionStorage.removeItem(RECOVER_KEY);}catch(_){}}
+async function tryRecRecover(){
+  let raw;try{raw=sessionStorage.getItem(RECOVER_KEY);}catch(_){return false;}
+  if(!raw)return false;try{sessionStorage.removeItem(RECOVER_KEY);}catch(_){}
+  let o;try{o=JSON.parse(raw);}catch(_){return false;}
+  if(!o||!o.pw||(Date.now()-(o.t||0))>120000)return false; // fereastra scurta: doar reload-ul de la record
+  try{const salt=unb64(localStorage.getItem(SKEY));SALTBUF=salt;
+    CK=await deriveKey(o.pw,salt);HK=await deriveHMAC(o.pw,salt);
+    const d=await decJSON(localStorage.getItem(KEY));if(!validDB(d))throw 0;
+    DB=d;SESSPASS=o.pw;$("#lock").classList.remove("on");loadMembers();resetIdle();setView("secretara");
+    setTimeout(()=>toast("Te-am reconectat — microfonul e gata acum. Apasă din nou Înregistrează."),350);
+    return true;
+  }catch(e){CK=null;HK=null;DB=null;SESSPASS=null;return false;}}
 function lockNow(){if(!CK||LOCKING)return;
   if(PROC){pendingLock=true;toast("Se blocheaza dupa finalizarea procesarii…");return;} // atomic: nu intrerupe operatiuni (audit s4 #1)
-  LOCKING=true;stopNet();clearTimeout(idleT);wipe();
-  CK=null;HK=null;DB=null;ME=null;LEDGER_CHAIN=[];CHAT=null;FSIM=null; // elibereaza cheile din RAM (best-effort; datele pe disc raman criptate, recuperabile doar cu parola)
+  LOCKING=true;stopNet();clearTimeout(idleT);wipe();recRecoverDisarm();
+  CK=null;HK=null;DB=null;ME=null;SESSPASS=null;LEDGER_CHAIN=[];CHAT=null;FSIM=null; // elibereaza cheile din RAM (best-effort; datele pe disc raman criptate, recuperabile doar cu parola)
   ["#matchList","#netHost","#ledger","#kpis","#topMatches","#phead","#mMsgs","#dictRes","#oferList","#cautList","#auditList","#valueRadar","#ahaCard","#intrinsic","#activeNet","#reconnect","#privacyHealth","#backupNudge"]
     .forEach(s=>{const el=$(s);if(el)el.replaceChildren();}); // sanitizare DOM, fara innerHTML (audit s4 #5 / s5r2)
   $("#overlay").classList.remove("on");$("#lockPass").value="";showLock("unlock");LOCKING=false;
@@ -3014,7 +3031,11 @@ RM=localStorage.getItem("cercul_rm")==="1";applyRM();
 DATEABS=localStorage.getItem("cercul_dateabs")==="1";applyDateAbs();
 NOTIFY=localStorage.getItem("cercul_notify")==="1"&&notifSupported()&&Notification.permission==="granted";applyNotify();
 MATCHDIV=Math.max(0,Math.min(100,+(localStorage.getItem("cercul_matchdiv")||0)));applyMatchDiv();
-showLock(localStorage.getItem(SKEY)&&localStorage.getItem(KEY)?"unlock":"setup");
+(async()=>{
+  const hasAcct=localStorage.getItem(SKEY)&&localStorage.getItem(KEY);
+  if(hasAcct){try{if(await tryRecRecover())return;}catch(_){}} // reconectare automata dupa reload-ul de la microfon (iPhone-PWA)
+  showLock(hasAcct?"unlock":"setup");
+})();
 </script>
 </body>
 </html>
