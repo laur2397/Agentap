@@ -6,7 +6,7 @@
      Local-Only ramane default (sync e opt-in). Releul e zero-knowledge: vede doar ciphertext E2EE, nu continut.
      'unsafe-inline' la script e necesar pt. arhitectura single-file; exfiltrarea catre ALTE domenii ramane blocata. -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; manifest-src 'self'; connect-src http://127.0.0.1:* http://localhost:* https://api.openai.com https://api.anthropic.com https://generativelanguage.googleapis.com https://openrouter.ai; base-uri 'none'; form-action 'none'; frame-src 'none'; object-src 'none'; require-trusted-types-for 'script'">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -63,11 +63,12 @@ header{padding:22px 20px 14px;position:sticky;top:0;z-index:9;background:color-m
 .brand .t{font-family:var(--serif);font-size:21px;font-weight:700;line-height:1;color:var(--ink)}
 .brand .t small{display:block;font-family:var(--sans);font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--primary-dim);margin-top:2px}
 .hright{display:flex;align-items:center;gap:8px}
-.themebtn{width:34px;height:34px;border-radius:50%;border:1px solid var(--line2);background:var(--card);color:var(--ink2);font-size:15px;cursor:pointer;display:grid;place-items:center;transition:.3s var(--ease)}
+.themebtn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line2);background:var(--card);color:var(--ink2);font-size:16px;cursor:pointer;display:grid;place-items:center;transition:.3s var(--ease)}
 .themebtn:active{transform:scale(.92)}
 /* loop3 #3: badge de incredere permanent, discret */
 .trustchip{display:inline-flex;align-items:center;gap:5px;height:34px;padding:0 10px;border-radius:30px;border:1px solid var(--line2);background:var(--card);color:var(--muted);font:inherit;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap}
 .trustchip .tdot{width:7px;height:7px;border-radius:50%;background:var(--success);flex:none}
+.trustchip.warn .tdot{background:var(--warn)}
 .trustchip:active{transform:scale(.94)}
 .memsel{background:var(--card);border:1px solid var(--line2);border-radius:30px;padding:7px 11px;color:var(--ink);font:inherit;font-size:12px;max-width:112px}
 main{padding:20px 18px 92px;animation:rise .4s var(--ease)}
@@ -290,7 +291,7 @@ nav{position:sticky;bottom:0;z-index:9;background:color-mix(in srgb,var(--bg) 88
 @keyframes up{from{transform:translateY(100%)}to{transform:none}}
 .modal .h{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
 .modal .h .t{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--ink)}.modal .h .s{font-size:11px;color:var(--muted)}
-.modal .h button{background:none;border:0;color:var(--muted);font-size:24px;cursor:pointer}
+.modal .h button{background:none;border:0;color:var(--muted);font-size:24px;cursor:pointer;min-width:40px;min-height:40px;display:grid;place-items:center;border-radius:50%}
 .msgs{flex:1;overflow:auto;padding:16px 18px;display:flex;flex-direction:column;gap:9px}
 .msg{max-width:82%;padding:9px 13px;border-radius:15px;font-size:13px;line-height:1.5}
 .msg.app{align-self:center;max-width:96%;text-align:center;border:1px solid var(--primary-dim);color:var(--ink2);font-family:var(--serif);font-style:italic;background:var(--card2)}
@@ -298,7 +299,7 @@ nav{position:sticky;bottom:0;z-index:9;background:color-mix(in srgb,var(--bg) 88
 .msg.them{align-self:flex-start;background:var(--card2);border:1px solid var(--line);color:var(--ink)}
 .msg .nm2{font-size:10px;color:var(--primary-dim);font-weight:600;display:block;margin-bottom:2px}
 .cinput{display:flex;gap:8px;padding:13px 16px;border-top:1px solid var(--line)}.cinput input{flex:1}
-.toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--accent);border:1px solid var(--primary-dim);color:#fff;padding:11px 20px;border-radius:30px;font-size:13px;opacity:0;transition:.45s var(--ease);z-index:50;white-space:nowrap;box-shadow:var(--shadow-lg)}
+.toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--accent);border:1px solid var(--primary-dim);color:#fff;padding:11px 20px;border-radius:22px;font-size:13px;line-height:1.35;opacity:0;transition:.45s var(--ease);z-index:50;white-space:normal;max-width:min(90vw,440px);text-align:center;box-shadow:var(--shadow-lg)}
 .toast.on{transform:translateX(-50%) translateY(0);opacity:1}
 
 /* onboarding */
@@ -600,7 +601,7 @@ details.why2>summary::-webkit-details-marker{display:none}
 :root{
   --bg:#FAF8F2;--bg2:#FAF8F2;--card:rgba(255,255,255,.86);--card2:rgba(255,255,255,.64);
   --line:rgba(22,36,30,.10);--line2:rgba(22,36,30,.16);
-  --ink:#16241E;--ink2:#3C4A43;--muted:#6B746C;
+  --ink:#16241E;--ink2:#3C4A43;--muted:#586058; /* mai inchis: contrast AA pe fundalul deschis */
   --primary:#0E6B50;--primary2:#0E6B50;--primary-dim:#0B5A43;--primary-soft:rgba(14,107,80,.12);
   --accent:#0E6B50;--accent-soft:rgba(14,107,80,.10);--cyan:#0E7A5B;
   --success:#0E7A5B;--success-soft:rgba(14,122,91,.13);--warn:#B7791F;--warn-soft:rgba(183,121,31,.14);--warn-ink:#8A5A12;
@@ -913,7 +914,7 @@ main{padding-left:calc(18px + env(safe-area-inset-left));padding-right:calc(18px
 /* pe ecrane foarte inguste lasam brandul sa se trunchieze ca sa nu taie controalele */
 @media (max-width:380px){
   .brand .t{min-width:0;overflow:hidden;text-overflow:ellipsis}
-  .themebtn{width:32px;height:32px}.hright{gap:5px}
+  .themebtn{width:36px;height:36px}.hright{gap:5px}
 }
 /* pe ecrane inguste, trust chip-ul devine doar punctul (eticheta "Local" ramane pentru screen-reader) */
 @media (max-width:430px){
@@ -1134,7 +1135,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-03e · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-03f · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -1296,18 +1297,18 @@ header.multi .hmember{display:flex}
 </main>
 
 <nav role="navigation" aria-label="Navigare principala"><div class="navin">
-  <button class="tab on" data-v="acasa" aria-current="page"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/></svg></span>Acasă</button>
-  <button class="tab" data-v="potriviri"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="10" r="2.6"/><path d="M3.5 19c.6-3 3-4.5 5.5-4.5S14 16 14.6 19"/><path d="M16 14.5c2 .2 3.7 1.5 4.2 3.5"/></svg></span>Potriviri</button>
-  <button class="tab" data-v="retea"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.4"/><circle cx="5" cy="18" r="2.4"/><circle cx="19" cy="18" r="2.4"/><path d="M10.5 6.8 6.4 16M13.5 6.8 17.6 16M7.4 18h9.2"/></svg></span>Rețeaua</button>
-  <button class="tab" data-v="secretara"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8 8 0 0 1-11.6 7.1L4 20l1.4-5.2A8 8 0 1 1 21 11.5Z"/><path d="M9 10.5h6M9 13.5h4"/></svg></span>Secretară</button>
-  <button class="tab" data-v="profil"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c1-3.6 3.8-5.5 7-5.5s6 1.9 7 5.5"/></svg></span>Profil</button>
+  <button class="tab on" data-v="acasa" aria-current="page"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/></svg></span>Acasă</button>
+  <button class="tab" data-v="potriviri"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="10" r="2.6"/><path d="M3.5 19c.6-3 3-4.5 5.5-4.5S14 16 14.6 19"/><path d="M16 14.5c2 .2 3.7 1.5 4.2 3.5"/></svg></span>Potriviri</button>
+  <button class="tab" data-v="retea"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.4"/><circle cx="5" cy="18" r="2.4"/><circle cx="19" cy="18" r="2.4"/><path d="M10.5 6.8 6.4 16M13.5 6.8 17.6 16M7.4 18h9.2"/></svg></span>Rețeaua</button>
+  <button class="tab" data-v="secretara"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8 8 0 0 1-11.6 7.1L4 20l1.4-5.2A8 8 0 1 1 21 11.5Z"/><path d="M9 10.5h6M9 13.5h4"/></svg></span>Secretară</button>
+  <button class="tab" data-v="profil"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c1-3.6 3.8-5.5 7-5.5s6 1.9 7 5.5"/></svg></span>Profil</button>
 </div></nav>
 <div class="procmask" id="procMask" role="status" aria-live="polite"><span class="spin"></span> Procesez…</div>
 <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 </div>
 
 <!-- LOCK / SETUP (cheie derivata din parola, doar in RAM) -->
-<div class="ob" id="lock">
+<div class="ob" id="lock" role="dialog" aria-modal="true" aria-labelledby="lockTitle">
   <div class="mk">C</div>
   <h1 id="lockTitle">Deblochează Cercul</h1>
   <div class="lead" id="lockLead"></div>
@@ -1347,7 +1348,7 @@ header.multi .hmember{display:flex}
 </div>
 
 <!-- COD DE RECUPERARE (afisat o singura data) -->
-<div class="ob" id="recModal">
+<div class="ob" id="recModal" role="dialog" aria-modal="true" aria-label="Cod de recuperare">
   <div class="mk">🔑</div>
   <h1>Codul tău de recuperare</h1>
   <div class="lead">Notează-l acum și ține-l într-un loc sigur. Cu el îți poți reseta parola dacă o uiți. <b>Nu îl putem recupera</b> — nu se salvează nicăieri în clar.</div>
@@ -1359,7 +1360,7 @@ header.multi .hmember{display:flex}
 </div>
 
 <!-- ONBOARDING WIZARD -->
-<div class="ob" id="ob">
+<div class="ob" id="ob" role="dialog" aria-modal="true" aria-label="Configurare cont">
   <div class="mk">C</div>
   <h1>Bun venit în Cerc</h1>
   <div class="lead">Găsește oamenii potriviți și fă conexiuni care contează — în câteva secunde. (Datele tale rămân criptate și sub controlul tău.)</div>
@@ -1373,12 +1374,12 @@ header.multi .hmember{display:flex}
   <button class="skip" onclick="obSkip()">Doar explorez deocamdată</button>
 </div>
 
-<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()"><div class="modal">
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
   <div class="h"><div><div class="t" id="mTitle"></div><div class="s" id="mSub"></div></div><button onclick="closeModal()" aria-label="Închide">×</button></div>
   <div class="msgs" id="mMsgs"></div>
   <div class="cinput"><input id="mInput" placeholder="Scrie un mesaj..."><button class="btn gold sm" onclick="sendMsg()">→</button></div>
 </div></div>
-<div class="searchov" id="searchOv">
+<div class="searchov" id="searchOv" role="dialog" aria-modal="true" aria-label="Căutare globală">
   <div class="searchov-h">
     <span class="ic">⌕</span>
     <input id="globalSearch" placeholder="Cauta persoane, notite, task-uri…" aria-label="Cautare globala" onkeydown="if(event.key==='Escape')closeSearch()">
@@ -1387,7 +1388,7 @@ header.multi .hmember{display:flex}
   <div id="searchRes" class="searchov-res"></div>
 </div>
 <div class="quickov" id="quickOv" onclick="if(event.target===this)closeQuick()">
-  <div class="quicksheet" role="dialog" aria-label="Adauga rapid">
+  <div class="quicksheet" role="dialog" aria-modal="true" aria-label="Adauga rapid">
     <div class="qh"><h3>Adauga rapid</h3><button class="qclose" onclick="closeQuick()" aria-label="Inchide">×</button></div>
     <div class="qseg" id="quickSeg">
       <button class="chip on" data-k="nota" onclick="setQuickKind('nota')">📝 Notita</button>
@@ -1444,17 +1445,18 @@ const svgSafe=s=>String(s||"").replace(/[^\p{L}\p{N}\s.\-]/gu,"").slice(0,40); /
 function sanitizeSVG(root){if(!root)return;root.querySelectorAll("foreignObject,script,a").forEach(n=>n.remove());
   root.querySelectorAll("*").forEach(el=>{for(const a of [...el.attributes])if(/^on/i.test(a.name)||/^(href|xlink:href)$/i.test(a.name))el.removeAttribute(a.name);});}
 const ini=n=>{const p=n.trim().split(/\s+/);return((p[0][0]||"?")+(p[1]?p[1][0]:"")).toUpperCase();};
-const today=()=>new Date().toISOString().slice(0,10);
+const ymd=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const today=()=>ymd(new Date()); /* data LOCALA (nu UTC): altfel noaptea, in RO/UTC+2, "azi" era cu o zi in urma */
 const cssv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 let DATEABS=false;
 function relTime(t){if(DATEABS){try{return new Date(t).toLocaleDateString("ro-RO",{day:"numeric",month:"short"})+" "+new Date(t).toLocaleTimeString("ro-RO",{hour:"2-digit",minute:"2-digit"});}catch(_){}}
   const s=(Date.now()-t)/1000;if(s<60)return"acum";if(s<3600)return Math.floor(s/60)+"m";if(s<86400)return Math.floor(s/3600)+"h";return Math.floor(s/86400)+"z";}
-function applyDateAbs(){const sw=$("#daSw");if(sw){sw.classList.toggle("on",DATEABS);sw.setAttribute("aria-checked",DATEABS);}}
+function applyDateAbs(){const sw=$("#daSw");if(sw){sw.classList.toggle("on",DATEABS);sw.setAttribute("aria-checked",DATEABS?"true":"false");}}
 function toggleDateAbs(){DATEABS=!DATEABS;localStorage.setItem("cercul_dateabs",DATEABS?"1":"0");applyDateAbs();if(VIEW)render();}
 /* ---- iteratia 3: motion, count-up, hash, tranzitii ---- */
 let RM=false;
 const anim=()=>!RM&&!matchMedia("(prefers-reduced-motion: reduce)").matches;
-function applyRM(){document.body.classList.toggle("reduce-motion",RM);const sw=$("#rmSw");if(sw){sw.classList.toggle("on",RM);sw.setAttribute("aria-checked",RM);}}
+function applyRM(){document.body.classList.toggle("reduce-motion",RM);const sw=$("#rmSw");if(sw){sw.classList.toggle("on",RM);sw.setAttribute("aria-checked",RM?"true":"false");}}
 function toggleRM(){RM=!RM;localStorage.setItem("cercul_rm",RM?"1":"0");applyRM();if(VIEW)render();}
 /* loop2 #16: notificari browser opt-in pentru task-uri scadente (onest: doar cat aplicatia e deschisa) */
 let NOTIFY=false;const NOTIFIED=new Set();
@@ -1931,9 +1933,16 @@ async function syncPullFrom(m){if(!m||!m.pub)return 0;await ensureIdentity();
       applied++;
     }catch(_){}}
   return applied;}
-function updateTrustChip(){const l=$("#trustChipL"),c=$("#trustChip");const on=relayOn();
-  if(l)l.textContent=on?"Sync E2EE":"Local";
-  if(c)c.title=on?("Sync opt-in activat · E2EE prin releu zero-knowledge ("+relayBase()+")"):"Local-Only · 0 date trimise";}
+// AI "extern" = pleaca de pe dispozitiv (orice furnizor in afara de cel local/Ollama)
+function aiExternal(){return aiOn()&&aiCfg().provider!=="local";}
+function updateTrustChip(){const l=$("#trustChipL"),c=$("#trustChip");if(!c)return;
+  const relay=relayOn(),ai=aiExternal();let label,title;
+  if(ai){label="AI extern";title="Asistentul AI ("+aiCfg().provider+") e activ: la fiecare cerere, contextul (nume, taskuri, întâlniri) pleacă la acest furnizor. Restul datelor rămân criptate pe dispozitiv. Schimbi din Profil → Asistent AI.";}
+  else if(relay){label="Sync E2EE";title="Sync opt-in activat · E2EE prin releu zero-knowledge ("+relayBase()+")";}
+  else{label="Local";title="Local-Only · 0 date trimise";}
+  if(l)l.textContent=label;
+  c.title=title;c.setAttribute("aria-label","Confidențialitate: "+label);
+  c.classList.toggle("warn",ai);}
 function renderRelay(){updateTrustChip();const url=$("#relayUrl");if(url&&document.activeElement!==url)url.value=relayBase()||"";
   const btn=$("#relayToggleBtn");if(btn){const on=!!(DB.relay&&DB.relay.on);btn.textContent=on?"Sync activ ✓":"Activează sync";btn.classList.toggle("gold",on);}
   const st=$("#relayStatus");if(st){const r=DB.relay||{};
@@ -2045,13 +2054,13 @@ function aiSave(quiet){const p=($("#aiProvider")||{}).value||"off";
   const needKey=(p!=="off"&&p!=="local"&&p!=="managed");
   if(needKey&&!next.key){if(quiet){aiStatus("Lipește cheia API ca să activez "+(AI_LBL[p]||p)+".",false);}else{toast("Pune cheia API pentru "+(AI_LBL[p]||p));}return false;}
   if(p==="managed"&&!relayBase()){const msg="Pentru Standard, setează întâi releul în Profil → Sincronizare.";if(quiet)aiStatus(msg,false);else toast(msg);return false;}
-  DB.ai=next;save();renderAi();
+  DB.ai=next;save();renderAi();updateTrustChip();
   if(p==="off"){aiStatus("",true);const el=$("#aiTestStatus");if(el)el.style.display="none";if(!quiet)toast("Asistent dezactivat");}
   else{aiStatus("Configurat ✓ — "+(AI_LBL[p]||p)+". Apasă butonul Testează ca să confirmi că răspunde.",true);if(!quiet)toast("Asistent configurat");}
   return true;}
 // auto-salvare la schimbarea oricarui camp: utilizatorul nu mai trebuie sa-si aminteasca sa apese Salveaza
 function aiAutoSave(){aiSave(true);}
-function aiClear(){DB.ai={provider:"off"};DB.aichat=[];save();renderAi();toast("Configurare AI ștearsă");}
+function aiClear(){DB.ai={provider:"off"};DB.aichat=[];save();renderAi();updateTrustChip();toast("Configurare AI ștearsă");}
 function renderAiChat(){const host=$("#aiChat");if(!host)return;const msgs=DB.aichat||[];
   if(!aiOn()){setKids(host,h("div",{class:"aiempty",text:"Configurează un asistent (local sau cu cheia ta) ca să începi o conversație."}));return;}
   if(!msgs.length){setKids(host,h("div",{class:"aiempty",text:"Salut! Sunt secretara ta AI. Întreabă-mă despre întâlniri, mesaje de trimis, idei de abordare…"}));return;}
@@ -2915,7 +2924,7 @@ function toggleTaskPrio(id){const t=(DB.tasks||[]).find(x=>x.id===id);if(!t)retu
 function dupTask(id){const t=(DB.tasks||[]).find(x=>x.id===id);if(!t)return;
   DB.tasks.push({id:DB.seq++,member_id:ME,text:t.text,due:"",done:0,prio:t.prio||0,t:Date.now()});
   logA("Task duplicat: "+t.text);save();renderTasks();updateBadges();toast("Task duplicat — seteaza un termen nou");}
-function addDays(d,n){const x=(d?new Date(d+"T00:00"):new Date());if(isNaN(x))return today();x.setDate(x.getDate()+n);return x.toISOString().slice(0,10);}
+function addDays(d,n){const x=(d?new Date(d+"T00:00"):new Date());if(isNaN(x))return today();x.setDate(x.getDate()+n);return ymd(x);}
 function snoozeTask(id){const t=(DB.tasks||[]).find(x=>x.id===id);if(!t)return;const base=(t.due&&t.due>today())?t.due:today();t.due=addDays(base,1);logA("Task amanat cu o zi");save();renderTasks();updateBadges();toast("Amanat pana "+fmtWhen(t.due));}
 function editTask(id){EDITTASK=id;renderTasks();}
 function cancelTaskEdit(){EDITTASK=null;renderTasks();}
@@ -3076,7 +3085,9 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="gcal"){const mt=(DB.meetings||[]).find(x=>x.id===id);if(mt){openExt(gcalUrl(mt));logA("Deschis Google Calendar pt. o intalnire");}}
   else if(a==="ics"){const mt=(DB.meetings||[]).find(x=>x.id===id);if(mt)downloadICS(mt);}
   else if(a==="exportAgenda")exportAllICS();
-  else if(a==="trustinfo")toast(relayOn()
+  else if(a==="trustinfo")toast(aiExternal()
+    ?("AI extern activ: la fiecare cerere către asistent, contextul (nume, taskuri, întâlniri) este trimis către "+aiCfg().provider+". Restul datelor rămân criptate Local-Only. Oprești din Profil → Asistent AI.")
+    :relayOn()
     ?"Sync activat (opt-in): datele se sincronizează cu contactele tale criptate end-to-end printr-un releu zero-knowledge — serverul vede doar text criptat, nu conținutul. Oprești oricând din Profil → Sincronizare."
     :"Local-Only: datele tale raman criptate pe acest dispozitiv. Aplicatia nu trimite nimic catre niciun server.");
   else if(a==="email"){const mt=(DB.meetings||[]).find(x=>x.id===id);if(mt){openExt(mailtoUrl(mt));logA("Deschis email pt. o intalnire");}}
