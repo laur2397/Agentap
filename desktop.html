@@ -1135,7 +1135,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-03f · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-03g · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -2127,18 +2127,30 @@ function srCtor(){return window.SpeechRecognition||window.webkitSpeechRecognitio
 function recTimeStr(){const s=Math.floor((Date.now()-REC.t0)/1000);return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");}
 function updRecTimer(){const el=$("#recTimer");if(el)el.textContent=recTimeStr();}
 function recConsent(){DB.rec=DB.rec||{};DB.rec.consent=true;if(!DB.rec.transcript)DB.rec.transcript="";save();renderRec();}
+// Consimtamant EXPLICIT inainte ca audio-ul sa paraseasca dispozitivul catre un AI extern.
+// AI local (Ollama) sau dezactivat => audio nu pleaca nicaieri => nu intrebam.
+// Cerut o singura data per furnizor (daca schimbi furnizorul, reintrebam).
+function recAudioConsentOK(){
+  if(!aiExternal())return true;
+  const prov=aiCfg().provider;DB.rec=DB.rec||{};
+  if(DB.rec.audioConsent===prov)return true;
+  const ok=confirm("Transcrierea folosește un asistent AI EXTERN ("+prov+").\n\nLa Stop, înregistrarea audio a apelului va fi TRIMISĂ către "+prov+" pentru transcriere — audio-ul părăsește acest dispozitiv.\n\nDacă vrei ca totul să rămână 100% local, folosește un asistent local (Ollama) din ⚙ Setări.\n\nContinui și accepți trimiterea audio către "+prov+"?");
+  if(ok){DB.rec.audioConsent=prov;save();}
+  return ok;}
 function recGoAI(){const c=$("#aiCfg");if(c)c.open=true;const w=$("#aiWrap");if(w)w.scrollIntoView({behavior:"smooth",block:"start"});
   if(aiOn()){toast("Setări asistent deschise");return;}
   const sel=$("#aiProvider");if(sel)sel.value="gemini";aiProviderChange();toast("Am ales Google Gemini — pune cheia gratuită, apoi Salvează și Testează");}
 function renderRec(){const host=$("#recBody");if(!host)return;const r=DB.rec||{};
-  if(!r.consent){setKids(host,
-    h("p",{class:"aihint-intro",text:"⚖ Asigură-te că ai dreptul/acordul să înregistrezi (în multe țări e nevoie de consimțământul ambelor părți). Pune apelul pe difuzor pentru ambele voci."}),
-    h("button",{class:"btn gold sm","data-act":"recConsent",text:"Am înțeles — activează reportofonul"}));return;}
+  if(!r.consent){const items=[
+    h("p",{class:"aihint-intro",text:"⚖ Asigură-te că ai dreptul/acordul să înregistrezi (în multe țări e nevoie de consimțământul ambelor părți). Pune apelul pe difuzor pentru ambele voci."})];
+    if(aiExternal())items.push(h("p",{class:"aihint-intro",text:"🌐 Transcrierea o face "+aiCfg().provider+" (AI extern): la Stop, audio-ul apelului pleacă la acest furnizor. Pentru 100% pe dispozitiv, alege un asistent local din ⚙ Setări."}));
+    items.push(h("button",{class:"btn gold sm","data-act":"recConsent",text:"Am înțeles — activează reportofonul"}));
+    setKids(host,...items);return;}
   if(REC.on){setKids(host,
     h("div",{class:"recctrl"},
       h("button",{class:"btn sm recbtn rec","data-act":"recStop",onclick:()=>recStop()},h("span",{class:"recdot"}),h("span",{text:"Stop și rezumă"})),
       h("span",{class:"rectimer",id:"recTimer",text:recTimeStr()})),
-    h("div",{class:"recstat",text:"🎙️ Înregistrez — la Stop transcriu și rezum (audio temporar, șters după)"}),
+    h("div",{class:"recstat",text:aiExternal()?("🎙️ Înregistrez — la Stop, audio-ul pleacă la "+aiCfg().provider+" pt. transcriere, apoi e șters"):"🎙️ Înregistrez — la Stop transcriu pe dispozitiv și rezum (audio șters după)"}),
     h("div",{class:"rechint",text:"Pune apelul pe difuzor și ține Cercul deschis pe ecran. Prinde ambele voci."}),
     h("textarea",{id:"recText",class:"rectext",rows:"7","aria-label":"Transcriere live",readonly:"",placeholder:"Transcrierea apare aici (live pe Android; pe iPhone, la Stop)…"}));
     const t=$("#recText");if(t){t.value=r.transcript||"";t.scrollTop=t.scrollHeight;}return;}
@@ -2172,6 +2184,7 @@ function recEdit(v){DB.rec=DB.rec||{};DB.rec.transcript=v;}
 async function recStart(){if(REC.on)return;
   if(!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia)){toast("Microfonul nu e disponibil în acest browser");return;}
   if(!aiOn()){toast("Ai nevoie de asistentul AI (⚙ Setări) pentru transcriere + rezumat");return;}
+  if(!recAudioConsentOK())return; // audio pleaca la AI extern doar cu acord explicit
   DB.rec=DB.rec||{};DB.rec.err="";recRecoverArm(); // pe iPhone-PWA: daca promptul de microfon reincarca pagina, ne reconectam automat
   // IMPORTANT: oprim anularea ecoului/zgomotului — altfel microfonul ar STERGE vocea celuilalt venita din difuzor
   try{REC.stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});}
@@ -2226,6 +2239,7 @@ async function recFinalize(){REC._finalize=false;DB.rec=DB.rec||{};DB.rec.err=""
   if(ok&&(DB.rec.transcript||"").trim()){await recSum();}}
 async function recTr(){if(!REC.audioBlob){toast("Nu există audio de transcris");return;}
   if(!aiOn()){toast("Configurează întâi asistentul AI (pentru transcriere)");return;}
+  if(!recAudioConsentOK())return; // audio pleaca la AI extern doar cu acord explicit
   DB.rec=DB.rec||{};showProc();try{const txt=await aiTranscribe(REC.audioBlob);DB.rec.transcript=(txt||"").trim();
     if(DB.rec.transcript){REC.audioBlob=null;DB.rec.err="";}else DB.rec.err="Transcriere goală — n-am prins text.";
     save();hideProc();renderRec();
