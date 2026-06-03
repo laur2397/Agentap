@@ -952,6 +952,7 @@ header.multi .hmember{display:flex}
     <div id="ahaCard"></div>
     <div id="backupNudge"></div>
     <div id="nextMeet"></div>
+    <div id="homeReconnect"></div>
     <div class="statstrip" id="kpis"></div>
     <div id="intrinsic"></div>
     <div id="netpulse"></div>
@@ -1065,7 +1066,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-03h · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-03i · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -1678,6 +1679,18 @@ function home(){const me=mem(ME),mm=myMatches();
         h("button",{class:"btn ghost sm","data-act":"gcal","data-id":x.id,text:"📅 Calendar"}),
         x.match_id?h("button",{class:"btn ghost sm","data-act":"msg","data-id":x.match_id,text:"Conversatie"}):null)));
   }else setKids($("#nextMeet"));
+  // Nudge "de reconectat": cea mai veche conexiune fara contact recent — valoarea-cheie a CRM-ului, adusa pe Acasa
+  (function(){const host=$("#homeReconnect");if(!host)return;const now=Date.now(),cut=30*864e5;
+    const stale=mm.filter(m=>m.status==="conectat").map(m=>{const cel=mem(m.offer_member===ME?m.seek_member:m.offer_member);if(!cel)return null;
+        const ts=(DB.messages||[]).filter(x=>x.match_id===m.id&&x.t).map(x=>x.t),lastA=ts.length?Math.max(...ts):(m.at||0);
+        return lastA&&(now-lastA)>cut?{m,cel,lastA}:null;}).filter(Boolean).sort((a,b)=>a.lastA-b.lastA)[0];
+    if(!stale){setKids(host);return;}
+    setKids(host,h("div",{class:"reconn"},
+      h("div",{class:"reconn-h",text:"💡 De reconectat"}),
+      h("div",{class:"reconn-row","data-act":"msg","data-id":stale.m.id,tabindex:"0",role:"button","aria-label":"Reia legatura cu "+stale.cel.name},
+        h("span",{class:"rci",text:"🤝"}),
+        h("div",{class:"rcc"},h("div",{class:"rcn",text:stale.cel.name}),h("div",{class:"rcd",text:"fără contact de "+relTime(stale.lastA)})),
+        h("span",{class:"rcgo",text:"Reia →"}))));})();
   const stat=(v,l)=>h("div",{class:"st"},h("div",{class:"sv",text:String(v)}),h("div",{class:"sl",text:l}));
   setKids($("#kpis"),stat(con,"Conexiuni"),stat(prop,"Sugestii noi"),stat(avg||"—","Potrivire medie"));
   // loop3 #10: progres intrinsec onest (activitate reala, fara streak/gamificare)
@@ -2000,8 +2013,10 @@ function renderAiChat(){const host=$("#aiChat");if(!host)return;const msgs=DB.ai
 function aiContext(){const me=mem(ME)||{};const td=today();
   const tasks=(DB.tasks||[]).filter(t=>t.member_id===ME&&!t.done).slice(0,8).map(t=>"- "+t.text+(t.due?" (termen "+t.due+")":"")).join("\n");
   const meets=(DB.meetings||[]).filter(x=>x.status==="confirmat"&&(x.a===ME||x.b===ME)&&(x.when||"").slice(0,10)>=td).slice(0,5)
-    .map(x=>{const c=mem(x.a===ME?x.b:x.a)||{name:x.guest||"?"};return "- "+fmtWhen(x.when)+" cu "+(c.name||"?");}).join("\n");
-  return `Utilizator: ${me.name||"?"} (${me.industry||"—"}).\nTask-uri active:\n${tasks||"(niciunul)"}\nÎntâlniri viitoare:\n${meets||"(niciuna)"}`;}
+    .map(x=>{const c=mem(x.a===ME?x.b:x.a)||{name:x.guest||"?"};return "- "+fmtWhen(x.when)+" cu "+(c.name||"?")+(x.goal?(" — scop: "+x.goal):"");}).join("\n");
+  const outs=(DB.meetings||[]).filter(x=>(x.a===ME||x.b===ME)&&x.outcome&&(x.when||"").slice(0,10)<td).slice(-3)
+    .map(x=>{const c=mem(x.a===ME?x.b:x.a)||{name:x.guest||"?"};return "- "+(c.name||"?")+": "+x.outcome;}).join("\n");
+  return `Utilizator: ${me.name||"?"} (${me.industry||"—"}).\nTask-uri active:\n${tasks||"(niciunul)"}\nÎntâlniri viitoare:\n${meets||"(niciuna)"}\nRezultate recente ale întâlnirilor:\n${outs||"(niciunul)"}`;}
 async function aiSend(){if(!aiOn()){toast("Configurează întâi asistentul (⚙ Setări)");return;}
   const inp=$("#aiInput");const text=clean((inp&&inp.value||"").trim());if(!text)return;
   inp.value="";DB.aichat=DB.aichat||[];DB.aichat.push({role:"user",content:text});renderAiChat();
@@ -2687,7 +2702,7 @@ function buildBrief(m){const cel=mem(ME===m.offer_member?m.seek_member:m.offer_m
   const ev=[];
   (DB.notes||[]).filter(n=>n.member_id===ME&&(n.about===cel.id||n.text.toLowerCase().includes(fn))).forEach(n=>ev.push({t:n.t||0,ic:"📝",txt:n.text}));
   (DB.tasks||[]).filter(t=>t.member_id===ME&&t.text.toLowerCase().includes(fn)).forEach(t=>ev.push({t:t.t||0,ic:t.done?"☑":"✅",txt:t.text+(t.due?" · termen "+fmtWhen(t.due):"")}));
-  (DB.meetings||[]).filter(x=>(x.a===ME||x.b===ME)&&(x.a===cel.id||x.b===cel.id)).forEach(x=>{const st={propus:"propusa",confirmat:"confirmata",refuzat:"refuzata"}[x.status]||x.status;ev.push({t:x.at||0,ic:"📅",txt:"Intalnire "+fmtWhen(x.when)+" · "+st});});
+  (DB.meetings||[]).filter(x=>(x.a===ME||x.b===ME)&&(x.a===cel.id||x.b===cel.id)).forEach(x=>{const st={propus:"propusa",confirmat:"confirmata",refuzat:"refuzata"}[x.status]||x.status;const extra=x.outcome?(" → "+x.outcome):(x.goal?(" · scop: "+x.goal):"");ev.push({t:x.at||0,ic:"📅",txt:"Intalnire "+fmtWhen(x.when)+" · "+st+extra});});
   ev.sort((a,b)=>(b.t||0)-(a.t||0));
   if(ev.length){rows.push(h("div",{class:"bl"},h("b",{},"Istoric:")));
     rows.push(h("div",{class:"timeline"},...ev.slice(0,6).map(e=>
@@ -3229,7 +3244,7 @@ function lockNow(){if(!CK||LOCKING)return;
   if(PROC){pendingLock=true;toast("Se blocheaza dupa finalizarea procesarii…");return;} // atomic: nu intrerupe operatiuni (audit s4 #1)
   LOCKING=true;stopNet();clearTimeout(idleT);wipe();recRecoverDisarm();
   CK=null;HK=null;DB=null;ME=null;SESSPASS=null;LEDGER_CHAIN=[];CHAT=null;FSIM=null; // elibereaza cheile din RAM (best-effort; datele pe disc raman criptate, recuperabile doar cu parola)
-  ["#matchList","#netHost","#ledger","#kpis","#topMatches","#phead","#mMsgs","#dictRes","#oferList","#cautList","#auditList","#valueRadar","#ahaCard","#intrinsic","#activeNet","#reconnect","#privacyHealth","#backupNudge"]
+  ["#matchList","#netHost","#ledger","#kpis","#topMatches","#phead","#mMsgs","#dictRes","#oferList","#cautList","#auditList","#valueRadar","#ahaCard","#intrinsic","#activeNet","#reconnect","#homeReconnect","#privacyHealth","#backupNudge"]
     .forEach(s=>{const el=$(s);if(el)el.replaceChildren();}); // sanitizare DOM, fara innerHTML (audit s4 #5 / s5r2)
   $("#overlay").classList.remove("on");$("#lockPass").value="";showLock("unlock");LOCKING=false;
   toast("Blocat — cheile eliberate din memorie (best-effort)");}
