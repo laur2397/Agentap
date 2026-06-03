@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-Generează desktop.html din app/eie.html (sursa unica de adevar pentru logica + date).
+Generează desktop.html (si index.html) din app/eie.html — sursa unica de adevar.
 
 Cum functioneaza:
   - NU modifica deloc aplicatia (app/eie.html ramane intacta).
-  - Ia continutul aplicatiei si injecteaza UN SINGUR bloc <style> ("desktop skin")
-    inainte de </head>. Skin-ul se aplica doar pe ecrane late (min-width:980px) si
-    re-aranjeaza acelasi DOM intr-un layout de desktop: bara laterala (din tab bar) +
-    bara de sus + continut lat, centrat. Pe ecran ingust, desktop.html arata exact ca
-    aplicatia de telefon (skin-ul nu se aplica).
-  - Aceleasi date: desktop.html ruleaza acelasi JS, deci foloseste acelasi localStorage
-    (acelasi cont/retea) cand e servit de pe acelasi domeniu.
+  - index.html = copie 1:1 a aplicatiei (varianta de telefon servita din radacina).
+  - desktop.html = aplicatia + UN SINGUR bloc <style> ("desktop skin") injectat inainte
+    de </head>. Skin-ul se aplica doar pe ecrane late CU MOUSE (min-width:760px si
+    pointer:fine) si re-aranjeaza acelasi DOM intr-un layout de desktop: bara laterala
+    (din tab bar) + bara de sus + continut centrat. Pe telefon/tableta-touch sau ecran
+    ingust, desktop.html arata exact ca aplicatia de telefon.
+  - Aceleasi date: ambele ruleaza acelasi JS, deci folosesc acelasi localStorage.
 
 Reruleaza dupa orice schimbare in aplicatie:  python3 tools/build-desktop.py
 """
@@ -18,17 +18,19 @@ import pathlib, re, sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = ROOT / "app" / "eie.html"
-OUT = ROOT / "desktop.html"
+OUT_DESKTOP = ROOT / "desktop.html"
+OUT_INDEX = ROOT / "index.html"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Desktop skin: re-aranjeaza acelasi DOM (header / main / nav) prin CSS Grid.
-# Totul gated pe @media (min-width:980px) ca sub el sa ramana aplicatia de telefon.
+# Gated pe (min-width:760px) and (pointer:fine) — adica doar pe desktop cu mouse.
+# Acelasi prag ca "rama de telefon" din app => fara banda intermediara confuza.
 # ─────────────────────────────────────────────────────────────────────────────
 DESKTOP_SKIN = """
 <style id="eie-desktop-skin">
 /* ===== VARIANTA DE DESKTOP — strat generat, peste stilurile aplicatiei ===== */
-/* Sub 980px ramane aplicatia de telefon, neatinsa. */
-@media (min-width:980px){
+.eie-toapp{display:none}  /* implicit ascuns; aratat doar in layout-ul de desktop */
+@media (min-width:760px) and (pointer:fine){
   /* anuleaza "rama de telefon" si revine la tot ecranul */
   body{display:block!important;place-items:initial!important;animation:none!important;
     background:radial-gradient(130% 90% at 50% -10%,#11161f,#0a0c12 60%)!important}
@@ -71,26 +73,29 @@ DESKTOP_SKIN = """
   /* badge-ul de notificare trece la capatul din dreapta al randului */
   .navbadge{position:static!important;margin-left:auto!important;top:auto!important;left:auto!important}
 
-  /* ----- CONTINUT lat, centrat ----- */
+  /* ----- CONTINUT centrat (nu intins) ----- */
   main{grid-area:main!important;overflow-y:auto;
     padding:30px 34px 64px!important}
-  main>.view{max-width:1100px;margin:0 auto;width:100%}
+  main>.view{max-width:860px;margin:0 auto;width:100%}
   /* schimbarea de ecran ramane instant pe desktop */
   .view.on>*{animation-duration:.28s!important;animation-delay:0s!important}
+  /* randurile de chip-uri se aseaza pe mai multe linii (nu scroll orizontal pe desktop) */
+  .filters,.an-strip{flex-wrap:wrap!important;overflow:visible!important}
 
-  /* overlay-uri (cautare/quick-add) centrate, nu pe toata latimea */
-  .searchov{max-width:700px}
-  .quicksheet{max-width:520px;margin-left:auto;margin-right:auto}
+  /* ----- OVERLAY-uri: centrate pe ecran, nu lipite jos (bottom-sheet pe telefon) ----- */
+  .overlay,.quickov{align-items:center!important;justify-content:center!important}
+  .modal{width:min(92vw,560px)!important;max-width:560px!important;
+    border-radius:20px!important;max-height:85vh}
+  .quicksheet{max-width:520px;width:min(92vw,520px);margin:0 auto;border-radius:20px!important}
+  .searchov{max-width:720px}
 
-  /* link discret de intoarcere la varianta de telefon (vezi marcaj jos) */
-  .eie-toapp{position:fixed;right:16px;bottom:14px;z-index:60;
-    font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;
-    padding:7px 13px;border:1px solid var(--line);border-radius:999px;
-    background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(8px)}
-  .eie-toapp:hover{color:var(--ink);border-color:var(--line2)}
+  /* link discret de intoarcere la varianta de telefon */
+  .eie-toapp{display:block;position:fixed;right:16px;bottom:14px;z-index:60;
+    font-size:12px;font-weight:700;color:var(--ink2);text-decoration:none;
+    padding:8px 14px;border:1px solid var(--line2);border-radius:999px;
+    background:var(--card);box-shadow:var(--shadow-lg)}
+  .eie-toapp:hover{color:var(--ink);border-color:var(--primary-dim)}
 }
-/* sub 980px (telefon) ascundem complet marcajul de desktop */
-@media (max-width:979.98px){.eie-toapp{display:none!important}}
 </style>
 """
 
@@ -98,27 +103,31 @@ DESKTOP_SKIN = """
 TOAPP_LINK = '\n<a class="eie-toapp" href="index.html" title="Deschide varianta de telefon">📱 Versiunea de telefon</a>\n'
 
 
+def _replace_once(text, old, new, what):
+    """Inlocuieste exact o data; daca nu gaseste, opreste build-ul (fail-loud)."""
+    if text.count(old) < 1:
+        sys.exit(f"build-desktop: nu gasesc ancora pentru {what}: {old!r}")
+    return text.replace(old, new, 1)
+
+
 def main():
     if not SRC.exists():
         sys.exit(f"Nu gasesc sursa: {SRC}")
     html = SRC.read_text(encoding="utf-8")
 
-    if "</head>" not in html:
-        sys.exit("Sursa nu are </head> — nu pot injecta skin-ul.")
+    # index.html = copie 1:1 (varianta de telefon din radacina, mereu sincronizata cu sursa)
+    OUT_INDEX.write_text(html, encoding="utf-8")
 
-    # 1) injecteaza skin-ul inainte de </head>
-    out = html.replace("</head>", DESKTOP_SKIN + "</head>", 1)
-
-    # 2) titlu distinct (nu influenteaza nimic functional)
+    # desktop.html = sursa + skin
+    out = _replace_once(html, "</head>", DESKTOP_SKIN + "</head>", "</head>")
     out = re.sub(r"<title>(.*?)</title>",
                  lambda m: f"<title>{m.group(1)} — Desktop</title>",
                  out, count=1, flags=re.S)
+    out = _replace_once(out, '<div class="shell">', '<div class="shell">' + TOAPP_LINK, '<div class="shell">')
+    OUT_DESKTOP.write_text(out, encoding="utf-8")
 
-    # 3) link de intoarcere la telefon, chiar dupa <div class="shell">
-    out = out.replace('<div class="shell">', '<div class="shell">' + TOAPP_LINK, 1)
-
-    OUT.write_text(out, encoding="utf-8")
-    print(f"OK -> {OUT.relative_to(ROOT)} ({len(out):,} bytes)")
+    print(f"OK -> {OUT_INDEX.relative_to(ROOT)} ({len(html):,} bytes)")
+    print(f"OK -> {OUT_DESKTOP.relative_to(ROOT)} ({len(out):,} bytes)")
 
 
 if __name__ == "__main__":

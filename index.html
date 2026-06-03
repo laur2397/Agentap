@@ -199,7 +199,7 @@ svg text{font-family:var(--sans);font-size:9px;fill:var(--ink2)}
 .badge{font-size:8.5px;padding:3px 9px;border-radius:30px;font-weight:600;letter-spacing:.6px;text-transform:uppercase}
 .badge.vis{background:var(--success-soft);color:var(--success)}.badge.priv{background:var(--primary-soft);color:var(--primary-dim)}
 .linei{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink)}
-.linei .meta{font-size:11px;color:var(--muted);margin-top:2px}.linei .x{background:none;border:0;color:var(--muted);font-size:17px;cursor:pointer}
+.linei .meta{font-size:11px;color:var(--muted);margin-top:2px}.linei .x{background:none;border:0;color:var(--muted);font-size:17px;cursor:pointer;min-width:44px;min-height:44px;display:grid;place-items:center;border-radius:10px}
 .addrow{display:flex;gap:7px;margin-top:12px}
 input,textarea,select{background:var(--card2);border:1px solid var(--line2);border-radius:10px;padding:10px 12px;color:var(--ink);font:inherit;font-size:13px}
 .addrow input{flex:1}textarea{width:100%}
@@ -453,7 +453,7 @@ details.why2>summary::-webkit-details-marker{display:none}
 .meetcard .mplace{font-size:12.5px;color:var(--ink2);margin-top:5px}
 .meetcard .adock,.meetcard .waiting,.meetcard .shield{margin-top:11px}
 .meetcard .moview{margin-top:10px;font-size:13px;color:var(--ink2);background:var(--card2);border-radius:10px;padding:10px 12px;display:flex;align-items:flex-start;gap:6px}
-.meetcard .moview b{color:var(--ink)}.meetcard .moview .x{margin-left:auto;background:none;border:0;color:var(--muted);cursor:pointer;font-size:15px}
+.meetcard .moview b{color:var(--ink)}.meetcard .moview .x{margin-left:auto;background:none;border:0;color:var(--muted);cursor:pointer;font-size:15px;min-width:44px;min-height:44px;display:grid;place-items:center;border-radius:10px}
 .meetcard .moedit{margin-top:10px}
 .meetcard .moview.goal{border-left:2px solid var(--primary)}
 /* loop3 #19: confirmare calda "ce urmeaza" */
@@ -1065,7 +1065,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-03g · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-03h · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -1525,7 +1525,8 @@ let APPLYING=false; // loop5 M2: suprima bump-ul de versiune cand aplicam un sna
 function save(){if(!CK)return;if(DB&&!APPLYING)DB.selfV=Date.now();clearTimeout(saveTimer);saveTimer=setTimeout(commit,120);}
 async function flush(){return commit();}
 function backupRaw(){const raw=localStorage.getItem(KEY);if(raw)localStorage.setItem(KEY+"_backup_"+Date.now(),raw);} // anti-pierdere (audit R3 #4)
-function exportData(){try{const blob=new Blob([JSON.stringify(DB,null,2)],{type:"application/json"});
+function exportData(){if(!confirm("Atenție: exportul JSON NU este criptat — oricine deschide fișierul îți vede toate datele. Pentru un backup securizat folosește exportul .eie (criptat). Continui cu JSON necriptat?"))return;
+  try{const blob=new Blob([JSON.stringify(DB,null,2)],{type:"application/json"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="cercul-export-"+today()+".json";a.click();
   setTimeout(()=>URL.revokeObjectURL(a.href),2000);logA("Export date (JSON) pentru backup");toast("Date exportate (JSON)");}catch(e){toast("Export esuat");}}
 function logA(action){if(!DB.audit)DB.audit=[];DB.audit.unshift({t:Date.now(),me:ME,a:clean(action).slice(0,160)});if(DB.audit.length>60)DB.audit.pop();}
@@ -1624,7 +1625,7 @@ function myMatches(){return DB.matches.filter(m=>(m.offer_member===ME||m.seek_me
 function setView(v){if(PROC){toast("Asteapta — Secretara AI proceseaza…");return;}
   if(VIEW==="retea"&&v!=="retea")stopNet();
   VIEW=v;$$(".tab").forEach(t=>{const on=t.dataset.v===v;t.classList.toggle("on",on);if(on)t.setAttribute("aria-current","page");else t.removeAttribute("aria-current");});
-  transition(()=>{$$(".view").forEach(s=>s.classList.toggle("on",s.id===v));const mc=$("#mainContent");if(mc)mc.scrollTop=0;});
+  transition(()=>{$$(".view").forEach(s=>s.classList.toggle("on",s.id===v));const mc=$("#mainContent");if(mc){mc.scrollTop=0;try{mc.focus({preventScroll:true});}catch(_){}}});
   skeleton(v);setTimeout(render,anim()?170:0);}
 function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("div",{class:"sk l w80"}),h("div",{class:"sk l w40"}));}
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
@@ -2061,7 +2062,7 @@ function recConsent(){DB.rec=DB.rec||{};DB.rec.consent=true;if(!DB.rec.transcrip
 // AI local (Ollama) sau dezactivat => audio nu pleaca nicaieri => nu intrebam.
 // Cerut o singura data per furnizor (daca schimbi furnizorul, reintrebam).
 function recAudioConsentOK(){
-  if(!aiExternal())return true;
+  if(!(aiExternal()&&aiAudioOk()))return true; // audio pleaca doar daca furnizorul e extern SI chiar transcrie audio
   const prov=aiCfg().provider;DB.rec=DB.rec||{};
   if(DB.rec.audioConsent===prov)return true;
   const ok=confirm("Transcrierea folosește un asistent AI EXTERN ("+prov+").\n\nLa Stop, înregistrarea audio a apelului va fi TRIMISĂ către "+prov+" pentru transcriere — audio-ul părăsește acest dispozitiv.\n\nDacă vrei ca totul să rămână 100% local, folosește un asistent local (Ollama) din ⚙ Setări.\n\nContinui și accepți trimiterea audio către "+prov+"?");
@@ -2115,6 +2116,7 @@ async function recStart(){if(REC.on)return;
   if(!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia)){toast("Microfonul nu e disponibil în acest browser");return;}
   if(!aiOn()){toast("Ai nevoie de asistentul AI (⚙ Setări) pentru transcriere + rezumat");return;}
   if(!recAudioConsentOK())return; // audio pleaca la AI extern doar cu acord explicit
+  if(aiOn()&&!aiAudioOk())toast("Furnizorul AI „"+aiCfg().provider+"” nu transcrie audio — pe telefon folosește Gemini sau Standard. Înregistrez, dar transcrierea poate rămâne goală.");
   DB.rec=DB.rec||{};DB.rec.err="";recRecoverArm(); // pe iPhone-PWA: daca promptul de microfon reincarca pagina, ne reconectam automat
   // IMPORTANT: oprim anularea ecoului/zgomotului — altfel microfonul ar STERGE vocea celuilalt venita din difuzor
   try{REC.stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});}
@@ -2163,6 +2165,7 @@ async function recFinalize(){REC._finalize=false;DB.rec=DB.rec||{};DB.rec.err=""
     catch(e){DB.rec.err="Transcriere eșuată: "+(e&&e.message||e)+". Audio-ul e păstrat — apasă Reîncearcă mai jos. Pe iPhone, dacă Gemini respinge formatul, folosește modul Standard prin releu.";}
     finally{hideProc();}}
   else if(REC.audioBlob&&!aiOn()){DB.rec.err="Pune un asistent AI (Gemini sau Standard) ca să transcriu — ⚙ Setări.";}
+  else if(REC.audioBlob&&aiOn()&&!aiAudioOk()){DB.rec.err="Furnizorul „"+aiCfg().provider+"” nu transcrie audio. Comută pe Gemini/OpenAI/Standard în ⚙ Setări, apoi apasă „Transcrie cu AI”.";}
   // pastram audio-ul DOAR daca a esuat, ca sa poata reincerca; la reusita il aruncam
   if(ok){REC.audioBlob=null;}
   save();renderRec();
@@ -3242,6 +3245,23 @@ RM=localStorage.getItem("cercul_rm")==="1";applyRM();
 DATEABS=localStorage.getItem("cercul_dateabs")==="1";applyDateAbs();
 NOTIFY=localStorage.getItem("cercul_notify")==="1"&&notifSupported()&&Notification.permission==="granted";applyNotify();
 MATCHDIV=Math.max(0,Math.min(100,+(localStorage.getItem("cercul_matchdiv")||0)));applyMatchDiv();
+
+/* A11y: cand un overlay/modal e deschis, fundalul (.shell) devine `inert` — scos din ordinea de
+   tab si din arborele de accesibilitate (nu mai poti ajunge "in spatele" dialogului). La inchidere,
+   focusul revine la elementul care a deschis dialogul. Un singur observer, fara modificari in fiecare open/close. */
+(function(){
+  const ids=["lock","ob","recModal","overlay","searchOv","quickOv"],prev={};
+  const shell=()=>document.querySelector(".shell");
+  const anyOpen=()=>ids.some(id=>{const e=document.getElementById(id);return e&&e.classList.contains("on");});
+  const refresh=()=>{const s=shell();if(s)s.inert=anyOpen();};
+  function sync(id){const e=document.getElementById(id);if(!e)return;const open=e.classList.contains("on");
+    if(open&&!e._ovOpen){e._ovOpen=true;prev[id]=document.activeElement;}
+    else if(!open&&e._ovOpen){e._ovOpen=false;const f=prev[id];prev[id]=null;const s=shell();
+      if(f&&f.focus&&document.contains(f)&&!(s&&s.inert&&s.contains(f))){try{f.focus({preventScroll:true});}catch(_){}}}}
+  ids.forEach(id=>{const e=document.getElementById(id);if(!e)return;e._ovOpen=e.classList.contains("on");
+    new MutationObserver(()=>{refresh();sync(id);}).observe(e,{attributes:true,attributeFilter:["class"]});});
+  refresh();
+})();
 (async()=>{
   const hasAcct=getAcct()||(localStorage.getItem(SKEY)&&localStorage.getItem(KEY));
   if(hasAcct){try{if(await tryRecRecover())return;}catch(_){}} // reconectare automata dupa reload-ul de la microfon (iPhone-PWA)
