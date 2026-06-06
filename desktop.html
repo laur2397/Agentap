@@ -1139,7 +1139,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-03i · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-03j · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -2162,6 +2162,7 @@ function recGoAI(){const c=$("#aiCfg");if(c)c.open=true;const w=$("#aiWrap");if(
 function renderRec(){const host=$("#recBody");if(!host)return;const r=DB.rec||{};
   if(!r.consent){const items=[
     h("p",{class:"aihint-intro",text:"⚖ Asigură-te că ai dreptul/acordul să înregistrezi (în multe țări e nevoie de consimțământul ambelor părți). Pune apelul pe difuzor pentru ambele voci."})];
+    if(iosDevice()&&isStandalone())items.push(h("p",{class:"aihint-intro",text:"📱 Pe iPhone, în aplicația de pe ecranul principal, iOS poate închide aplicația la pornirea microfonului. Pentru înregistrare stabilă, deschide Cercul în Safari (browser)."}));
     if(aiExternal())items.push(h("p",{class:"aihint-intro",text:"🌐 Transcrierea o face "+aiCfg().provider+" (AI extern): la Stop, audio-ul apelului pleacă la acest furnizor. Pentru 100% pe dispozitiv, alege un asistent local din ⚙ Setări."}));
     items.push(h("button",{class:"btn gold sm","data-act":"recConsent",text:"Am înțeles — activează reportofonul"}));
     setKids(host,...items);return;}
@@ -2205,6 +2206,11 @@ async function recStart(){if(REC.on)return;
   if(!aiOn()){toast("Ai nevoie de asistentul AI (⚙ Setări) pentru transcriere + rezumat");return;}
   if(!recAudioConsentOK())return; // audio pleaca la AI extern doar cu acord explicit
   if(aiOn()&&!aiAudioOk())toast("Furnizorul AI „"+aiCfg().provider+"” nu transcrie audio — pe telefon folosește Gemini sau Standard. Înregistrez, dar transcrierea poate rămâne goală.");
+  // iPhone instalat pe ecranul principal: iOS poate inchide aplicatia la pornirea microfonului. Avertizam o data.
+  if(iosDevice()&&isStandalone()&&localStorage.getItem("eie_rec_ios_ack")!=="1"){
+    if(!confirm("Pe iPhone, în aplicația deschisă de pe ecranul principal, iOS poate ÎNCHIDE aplicația când pornește microfonul (limitare Apple).\n\nCel mai sigur: deschide Cercul în Safari (din browser) și înregistrează acolo.\n\nÎncerc totuși aici? Dacă se închide, redeschide aplicația și deblochează — datele rămân salvate."))return;
+    localStorage.setItem("eie_rec_ios_ack","1");
+  }
   DB.rec=DB.rec||{};DB.rec.err="";recRecoverArm(); // pe iPhone-PWA: daca promptul de microfon reincarca pagina, ne reconectam automat
   // IMPORTANT: oprim anularea ecoului/zgomotului — altfel microfonul ar STERGE vocea celuilalt venita din difuzor
   try{REC.stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});}
@@ -3299,16 +3305,18 @@ async function regenRecovery(){const acct=getAcct();if(!acct){toast("Cont indisp
 /* ---- auto-lock: best-effort clearing al cheilor din RAM la inactivitate (nu garanteaza zeroing in JS managed-memory) ---- */
 let idleT=null;const IDLE_MS=180000;let SESSPASS=null;const RECOVER_KEY="eie_rec_recover";
 function isStandalone(){try{return window.navigator.standalone===true||(window.matchMedia&&matchMedia("(display-mode: standalone)").matches);}catch(_){return false;}}
+function iosDevice(){try{return /iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);}catch(_){return false;}}
 // pe iPhone, in modul PWA, promptul de microfon poate reincarca pagina -> pierde cheia din RAM (te scoate la parola).
 // armam o reconectare automata DOAR cat dureaza inregistrarea (parola sta in sessionStorage, sters imediat dupa).
-function recRecoverArm(){try{if(SESSPASS&&isStandalone())sessionStorage.setItem(RECOVER_KEY,JSON.stringify({pw:SESSPASS,t:Date.now()}));}catch(_){}}
-function recRecoverDisarm(){try{sessionStorage.removeItem(RECOVER_KEY);}catch(_){}}
+function recRecoverArm(){try{if(SESSPASS&&isStandalone()){sessionStorage.setItem(RECOVER_KEY,JSON.stringify({pw:SESSPASS,t:Date.now()}));localStorage.setItem("eie_rec_crumb",String(Date.now()));}}catch(_){}}
+function recRecoverDisarm(){try{sessionStorage.removeItem(RECOVER_KEY);localStorage.removeItem("eie_rec_crumb");}catch(_){}}
 async function tryRecRecover(){
   let raw;try{raw=sessionStorage.getItem(RECOVER_KEY);}catch(_){return false;}
   if(!raw)return false;try{sessionStorage.removeItem(RECOVER_KEY);}catch(_){}
   let o;try{o=JSON.parse(raw);}catch(_){return false;}
   if(!o||!o.pw||(Date.now()-(o.t||0))>120000)return false; // fereastra scurta: doar reload-ul de la record
   try{await unlockWithPassword(o.pw);
+    try{localStorage.removeItem("eie_rec_crumb");}catch(_){}
     $("#lock").classList.remove("on");loadMembers();resetIdle();setView("secretara");
     setTimeout(()=>toast("Te-am reconectat — microfonul e gata acum. Apasă din nou Înregistrează."),350);
     return true;
@@ -3354,6 +3362,9 @@ MATCHDIV=Math.max(0,Math.min(100,+(localStorage.getItem("cercul_matchdiv")||0)))
   const hasAcct=getAcct()||(localStorage.getItem(SKEY)&&localStorage.getItem(KEY));
   if(hasAcct){try{if(await tryRecRecover())return;}catch(_){}} // reconectare automata dupa reload-ul de la microfon (iPhone-PWA)
   showLock(hasAcct?"unlock":"setup");
+  // daca iOS a INCHIS complet aplicatia in timpul unei inregistrari (sessionStorage pierdut, dar firimitura ramane), explicam
+  try{const cr=+(localStorage.getItem("eie_rec_crumb")||0);if(cr&&Date.now()-cr<10*60000){localStorage.removeItem("eie_rec_crumb");
+    setTimeout(()=>toast("iOS a închis aplicația în timpul înregistrării (limitare Apple). Datele tale sunt salvate — deblochează. Pentru înregistrare stabilă, deschide Cercul în Safari."),700);}}catch(_){}
 })();
 </script>
 </body>
