@@ -926,6 +926,30 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
 @keyframes cardflash{0%{box-shadow:0 0 0 0 var(--primary-soft)}30%{box-shadow:0 0 0 4px var(--primary-soft),0 0 24px -2px var(--glow)}100%{box-shadow:0 0 0 0 var(--primary-soft)}}
 .seccard.flash{animation:cardflash 1.2s ease-out;border-color:var(--primary-dim)}
 .reduce-motion .seccard.flash{animation:none}
+/* ===== Spațiu comun (task-uri + jurnal partajate) ===== */
+.shpeerbar{display:flex;align-items:center;gap:9px;margin-bottom:6px}
+.shpeer-l{font-size:12.5px;color:var(--muted);flex:none}
+.shpeerbar select{flex:1;min-width:0}
+.shsync{font-size:10.5px;font-weight:700;letter-spacing:.4px;padding:3px 9px;border-radius:30px;background:var(--card2);color:var(--muted);border:1px solid var(--line);flex:none}
+.shsync.on{background:var(--primary-soft);color:var(--primary-dim);border-color:var(--primary-dim)}
+.shsec{font-family:var(--serif);font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 9px}
+.shlist{display:flex;flex-direction:column;gap:7px}
+.shrow{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:13px;background:var(--card2);border:1px solid var(--line)}
+.shrow.done .shmain{text-decoration:line-through;color:var(--muted)}
+.shchk{width:24px;height:24px;flex:none;border-radius:50%;border:2px solid var(--line2);background:transparent;color:var(--on-primary);font-size:13px;font-weight:800;cursor:pointer;display:grid;place-items:center}
+.shchk.on{background:var(--primary);border-color:var(--primary)}
+.shni{width:24px;flex:none;text-align:center;font-size:14px}
+.shtx{flex:1;min-width:0}
+.shmain{font-size:13.5px;color:var(--ink);line-height:1.35;word-wrap:break-word}
+.shmeta{font-size:10.5px;color:var(--muted);margin-top:2px}
+.shdel{flex:none;width:26px;height:26px;border-radius:8px;border:0;background:transparent;color:var(--muted);font-size:18px;line-height:1;cursor:pointer}
+.shdel:active{background:var(--card)}
+.shempty-line{font-size:12.5px;color:var(--muted);font-style:italic;padding:8px 2px}
+.shadd{margin-top:10px}
+.shared-empty{text-align:center;padding:14px 8px 6px}
+.shared-empty .se-i{font-size:30px}
+.shared-empty .se-t{font-family:var(--serif);font-size:16px;font-weight:600;color:var(--ink);margin-top:8px}
+.shared-empty .se-p{font-size:12.5px;color:var(--muted);line-height:1.5;max-width:300px;margin:6px auto 0}
 /* ============================================================================
    LOOP 20 — polish pe toată aplicația (token-driven, ambele teme)
    ============================================================================ */
@@ -1221,7 +1245,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07p · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07q · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -1230,7 +1254,7 @@ header.multi .hmember{display:flex}
     <div class="focusbar"><button class="btn ghost sm" data-act="focus" aria-label="Comuta modul Focus">🎯 Focus</button></div>
     <div id="focusPanel"></div>
     <details class="secmore" id="secMore">
-      <summary><span class="si">🗂</span>Unelte<span class="mc">&nbsp;— întâlniri · task-uri · notițe · jurnal</span><span class="chev">›</span></summary>
+      <summary><span class="si">🗂</span>Unelte<span class="mc">&nbsp;— întâlniri · task-uri · notițe · jurnal · comun</span><span class="chev">›</span></summary>
     <div class="seccard"><div class="sec"><span class="si">📅</span>Azi</div>
       <div id="todayBox"></div></div>
     <div class="seccard" id="meetCard"><div class="sec"><span class="si">🤝</span>Întâlniri</div>
@@ -1276,6 +1300,9 @@ header.multi .hmember{display:flex}
         <button class="chip on" data-act="nrange" data-r="all">Tot</button></div>
       <div class="filters" id="noteFilters" style="margin-top:10px"></div>
       <div id="notesList" style="margin-top:10px"></div></div>
+    <div class="seccard" id="sharedCard"><div class="sec"><span class="si">🤝</span>Spațiu comun</div>
+      <p class="sub">Task-uri și jurnal pe care le <b>împarți cu o persoană</b> din rețea — pentru lucruri de făcut împreună. Local imediat; se sincronizează criptat (E2EE) când amândoi aveți sync pornit.</p>
+      <div id="sharedBody"></div></div>
     </details>
   </section>
 
@@ -1786,7 +1813,7 @@ function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("di
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
 function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
   updateTrustChip();
-  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();applyMatchDiv();setKids($("#matchList"),pipeline(orderMatches(myMatches().filter(matchIndOk))));}else if(VIEW==="retea"){renderConn();renderExchange();renderDiscover();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderAi();renderRec();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();}}else if(VIEW==="profil"){prof();renderRelay();renderPlan();}
+  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();applyMatchDiv();setKids($("#matchList"),pipeline(orderMatches(myMatches().filter(matchIndOk))));}else if(VIEW==="retea"){renderConn();renderExchange();renderDiscover();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderAi();renderRec();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();renderShared();}}else if(VIEW==="profil"){prof();renderRelay();renderPlan();}
   updateBadges();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 // backlog #7: empty-state ilustrat, consistent
 function estateBox(title,sub,action){return h("div",{class:"estate",style:{padding:"26px 20px"}},
@@ -2051,7 +2078,9 @@ async function relaySelfGet(mb,since){const r=await fetch(relayBase()+"/self/"+m
 // faza 1: sincronizare pereche a cardului public — contactele tale primesc automat ultima ta versiune
 async function syncPushTo(m){if(!m||!m.pub)return false;await ensureIdentity();
   const mb=await mailboxId(m.pub);const card=myPublicCard();card.k=DB.identity.pub;
-  const blob=await sealFor(m.pub,{from:DB.identity.pub,card,t:Date.now()});
+  // spațiu comun: trimitem elementele comune cu această persoană (inclusiv ștergerile/tombstone)
+  const shared=(DB.shared||[]).filter(s=>s.peer===m.id&&s.uid).map(s=>({uid:s.uid,kind:s.kind==="note"?"note":"task",text:s.text,due:s.due||"",done:s.done?1:0,del:s.del?1:0,t:s.t||0}));
+  const blob=await sealFor(m.pub,{from:DB.identity.pub,card,shared,t:Date.now()});
   await relayPost(mb,blob);return true;}
 async function syncPullFrom(m){if(!m||!m.pub)return 0;await ensureIdentity();
   const mb=await mailboxId(m.pub);const res=await relayGet(mb,m.cursor||0);let applied=0;
@@ -2062,6 +2091,12 @@ async function syncPullFrom(m){if(!m||!m.pub)return 0;await ensureIdentity();
       // inlocuieste ofertele lui cu cele primite
       DB.items=(DB.items||[]).filter(i=>!(i.member_id===m.id&&i.source==="cod de conexiune"));
       (c.o||[]).slice(0,5).forEach(t=>{const tx=clean(String(t)).slice(0,140);if(tx)DB.items.push({id:DB.seq++,member_id:m.id,kind:"ofer",text:tx,visible:1,source:"cod de conexiune"});});
+      // spațiu comun: merge după uid (cel mai recent t câștigă; tombstone-urile propagă ștergerea)
+      if(Array.isArray(env.shared)){DB.shared=DB.shared||[];
+        for(const it of env.shared){if(!it||!it.uid)continue;
+          const ex=DB.shared.find(x=>x.uid===it.uid);
+          if(ex){if((it.t||0)>(ex.t||0)){ex.text=clean(String(it.text||"")).slice(0,400);ex.due=String(it.due||"").slice(0,20);ex.done=it.done?1:0;ex.del=it.del?1:0;ex.kind=it.kind==="note"?"note":"task";ex.t=it.t||Date.now();}}
+          else DB.shared.push({id:DB.seq++,uid:it.uid,peer:m.id,kind:it.kind==="note"?"note":"task",text:clean(String(it.text||"")).slice(0,400),due:String(it.due||"").slice(0,20),done:it.done?1:0,del:it.del?1:0,by:"them",t:it.t||Date.now()});}}
       applied++;
     }catch(_){}}
   return applied;}
@@ -3007,6 +3042,56 @@ function relCycle(id){const c=mem(id);if(!c)return;const order=["rece","activ","
 function setConnFilter(f){CONNFILTER=f;renderConn();}
 function editNote(id){EDITNOTE=id;renderNotes();}
 function cancelNoteEdit(){EDITNOTE=null;renderNotes();}
+/* ===== Spațiu comun: task-uri + jurnal partajate cu o conexiune (local-first, sync E2EE când e pornit) ===== */
+let SHAREDPEER=null;
+function suid(){try{return Array.from(crypto.getRandomValues(new Uint8Array(8))).map(b=>b.toString(16).padStart(2,"0")).join("");}catch(_){return Math.random().toString(36).slice(2)+Date.now().toString(36);}}
+function myConns(){return myMatches().filter(m=>m.status==="conectat").map(m=>{const c=mem(m.offer_member===ME?m.seek_member:m.offer_member);return c?{id:c.id,name:c.name||"?",pub:c.pub||""}:null;}).filter(Boolean);}
+function sharedFor(peer){return (DB.shared||[]).filter(s=>s.peer===peer&&!s.del).sort((a,b)=>(a.t||0)-(b.t||0));}
+function sharedPeerChange(v){SHAREDPEER=v?+v:null;renderShared();}
+function sharedAdd(kind){if(SHAREDPEER==null){toast("Alege întâi o persoană");return;}
+  const inp=$(kind==="task"?"#shTaskInput":"#shNoteInput");const tx=clean((inp&&inp.value||"").trim()).slice(0,400);if(!tx)return;
+  const due=kind==="task"?(($("#shTaskDue")||{}).value||""):"";
+  DB.shared=DB.shared||[];DB.shared.push({id:DB.seq++,uid:suid(),peer:SHAREDPEER,kind:kind,text:tx,due:due,done:0,del:0,by:"me",t:Date.now()});
+  if(inp)inp.value="";const dd=$("#shTaskDue");if(dd&&kind==="task")dd.value="";
+  logA((kind==="task"?"Task":"Notiță")+" comun adăugat");save();renderShared();maybeSyncShared();
+  toast((kind==="task"?"Task":"Notiță")+" comun adăugat"+(relayOn()?" · sincronizez":""));}
+function sharedToggle(id){const s=(DB.shared||[]).find(x=>x.id===id);if(!s)return;s.done=s.done?0:1;s.t=Date.now();save();renderShared();maybeSyncShared();}
+function sharedDel(id){const s=(DB.shared||[]).find(x=>x.id===id);if(!s)return;if(!confirm("Ștergi acest element comun? (dispare și la cealaltă persoană la următorul sync)"))return;s.del=1;s.t=Date.now();save();renderShared();maybeSyncShared();}
+function maybeSyncShared(){if(relayOn())syncNow().catch(()=>{});}
+function renderShared(){const host=$("#sharedBody");if(!host)return;const conns=myConns();
+  if(!conns.length){setKids(host,h("div",{class:"shared-empty"},
+    h("div",{class:"se-i",text:"🤝"}),
+    h("div",{class:"se-t",text:"Încă n-ai cu cine să împarți"}),
+    h("div",{class:"se-p",text:"Conectează-te cu cineva (Rețeaua → adaugă prin cod). Apoi veți putea avea task-uri și un jurnal comune."}),
+    h("button",{class:"btn gold sm","data-act":"go","data-v":"retea",style:{marginTop:"12px"},text:"Mergi la Rețea →"})));return;}
+  if(SHAREDPEER==null||!conns.some(c=>c.id===SHAREDPEER))SHAREDPEER=conns[0].id;
+  const peer=conns.find(c=>c.id===SHAREDPEER)||conns[0];
+  const items=sharedFor(SHAREDPEER),tasks=items.filter(s=>s.kind==="task"),notes=items.filter(s=>s.kind==="note");
+  const sel=h("select",{id:"shPeer","aria-label":"Cu cine împarți",onchange:e=>sharedPeerChange(e.target.value)},
+    ...conns.map(c=>h("option",{value:String(c.id),selected:c.id===SHAREDPEER?"":null,text:c.name})));
+  const who=s=>s.by==="me"?"tu":(peer.name.split(" ")[0]||peer.name);
+  const taskRows=tasks.length?tasks.map(s=>h("div",{class:"shrow"+(s.done?" done":"")},
+      h("button",{class:"shchk"+(s.done?" on":""),"data-act":"shToggle","data-id":String(s.id),"aria-label":"Bifează",text:s.done?"✓":""}),
+      h("div",{class:"shtx"},h("div",{class:"shmain",text:s.text}),h("div",{class:"shmeta",text:who(s)+(s.due?(" · scadent "+fmtWhen(s.due)):"")})),
+      h("button",{class:"shdel","data-act":"shDel","data-id":String(s.id),"aria-label":"Șterge",text:"×"}))):
+    [h("div",{class:"shempty-line",text:"Niciun task comun încă."})];
+  const noteRows=notes.length?notes.map(s=>h("div",{class:"shrow note"},
+      h("span",{class:"shni",text:"📝"}),
+      h("div",{class:"shtx"},h("div",{class:"shmain",text:s.text}),h("div",{class:"shmeta",text:who(s)+" · "+relTime(s.t)})),
+      h("button",{class:"shdel","data-act":"shDel","data-id":String(s.id),"aria-label":"Șterge",text:"×"}))):
+    [h("div",{class:"shempty-line",text:"Niciun rând în jurnalul comun încă."})];
+  setKids(host,
+    h("div",{class:"shpeerbar"},h("span",{class:"shpeer-l",text:"Împarți cu"}),sel,
+      h("span",{class:"shsync"+(relayOn()?" on":""),text:relayOn()?"⇄ sync":"local"})),
+    h("div",{class:"shsec",text:"✓ Task-uri comune"}),
+    h("div",{class:"shlist"},...taskRows),
+    h("div",{class:"addrow shadd"},h("input",{id:"shTaskInput",placeholder:"De făcut împreună…","aria-label":"Task comun",onkeydown:e=>{if(e.key==="Enter")sharedAdd("task");}}),
+      h("input",{id:"shTaskDue",type:"date",style:{maxWidth:"138px"},"aria-label":"Termen"}),
+      h("button",{class:"btn gold sm","data-act":"shAddTask","aria-label":"Adaugă task comun",text:"+"})),
+    h("div",{class:"shsec",text:"📓 Jurnal comun"}),
+    h("div",{class:"shlist"},...noteRows),
+    h("div",{class:"addrow shadd"},h("input",{id:"shNoteInput",placeholder:"Notează ceva pentru amândoi…","aria-label":"Notiță comună",onkeydown:e=>{if(e.key==="Enter")sharedAdd("note");}}),
+      h("button",{class:"btn gold sm","data-act":"shAddNote","aria-label":"Adaugă notiță comună",text:"+"})));}
 function saveNote(id){const n=(DB.notes||[]).find(x=>x.id===id);if(!n){EDITNOTE=null;renderNotes();return;}
   const nt=clean((($("#enText")||{}).value||"").trim());if(nt)n.text=nt;EDITNOTE=null;logA("Notita editata");save();renderNotes();toast("Notita actualizata");}
 /* ---- Secretara iteratia 1: brief de 1 minut (doar din datele tale) ---- */
@@ -3434,6 +3519,10 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="aiChatClear")aiChatClear();
   else if(a==="aiSug")aiSug(el.dataset.q);
   else if(a==="aiSend")aiSend();
+  else if(a==="shAddTask")sharedAdd("task");
+  else if(a==="shAddNote")sharedAdd("note");
+  else if(a==="shToggle")sharedToggle(+el.dataset.id);
+  else if(a==="shDel")sharedDel(+el.dataset.id);
   else if(a==="recConsent")recConsent();
   else if(a==="recStart")recStart();
   else if(a==="recStop")recStop();
@@ -3579,7 +3668,7 @@ function lockNow(){if(!CK||LOCKING)return;
   if(PROC){pendingLock=true;toast("Se blocheaza dupa finalizarea procesarii…");return;} // atomic: nu intrerupe operatiuni (audit s4 #1)
   LOCKING=true;stopNet();clearTimeout(idleT);wipe();recRecoverDisarm();
   CK=null;HK=null;DB=null;ME=null;SESSPASS=null;LEDGER_CHAIN=[];CHAT=null;FSIM=null; // elibereaza cheile din RAM (best-effort; datele pe disc raman criptate, recuperabile doar cu parola)
-  ["#matchList","#netHost","#ledger","#kpis","#topMatches","#phead","#mMsgs","#dictRes","#oferList","#cautList","#auditList","#valueRadar","#ahaCard","#intrinsic","#activeNet","#reconnect","#focusToday","#homePlan","#privacyHealth","#backupNudge"]
+  ["#matchList","#netHost","#ledger","#kpis","#topMatches","#phead","#mMsgs","#dictRes","#oferList","#cautList","#auditList","#valueRadar","#ahaCard","#intrinsic","#activeNet","#reconnect","#focusToday","#homePlan","#sharedBody","#privacyHealth","#backupNudge"]
     .forEach(s=>{const el=$(s);if(el)el.replaceChildren();}); // sanitizare DOM, fara innerHTML (audit s4 #5 / s5r2)
   $("#overlay").classList.remove("on");$("#lockPass").value="";showLock("unlock");LOCKING=false;
   toast("Blocat — cheile eliberate din memorie (best-effort)");}
