@@ -1114,6 +1114,19 @@ header.multi .hmember{display:flex}
 .homehero>.hh-orb::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:1px solid var(--primary-soft);pointer-events:none}
 @keyframes hhorbbreath{0%,100%{box-shadow:0 0 0 1px var(--primary-soft),0 0 28px -2px var(--glow),0 0 48px 2px var(--primary-soft),inset 0 -6px 16px rgba(0,0,0,.32);transform:scale(1)}50%{box-shadow:0 0 0 1px var(--primary-soft),0 0 40px 0 var(--glow),0 0 72px 8px var(--primary-soft),inset 0 -6px 16px rgba(0,0,0,.32);transform:scale(1.035)}}
 .reduce-motion .homehero>.hh-orb{animation:none}
+/* E. Faza 3 — polish per ecran */
+/* Rețea: graful capătă un miez viu (bloom central) + glow mai bogat pe noduri/muchii */
+#netHost{position:relative}
+#netHost::before{content:"";position:absolute;inset:6px;border-radius:20px;pointer-events:none;z-index:0;
+  background:radial-gradient(42% 42% at 50% 50%,var(--primary-soft),transparent 66%)}
+#netHost svg{position:relative;z-index:1;filter:drop-shadow(0 0 16px var(--glow)) drop-shadow(0 0 5px var(--primary-soft))}
+/* Potriviri: cea mai bună potrivire strălucește — bloom de culoare ca un card-focus */
+#matchList>.card:first-child{position:relative;overflow:hidden;border-color:var(--primary-dim)}
+#matchList>.card:first-child::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(78% 120% at 0% 0%,var(--primary-soft),transparent 56%),radial-gradient(68% 110% at 100% 100%,var(--gold-soft),transparent 58%)}
+#matchList>.card:first-child>*{position:relative;z-index:1}
+/* Profil/Rețea/Potriviri: avatarurile-smarald primesc un halo discret de jar (oameni „vii") */
+.av:not(.sq){box-shadow:0 8px 20px -6px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.25),0 0 16px -5px var(--glow)}
 </style>
 </head>
 <body>
@@ -1278,7 +1291,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07s · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07t · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
