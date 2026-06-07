@@ -1221,6 +1221,51 @@ header.multi .hmember{display:flex}
 .hh-active{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink2);margin:8px 0 2px;position:relative;z-index:1}
 .hh-dot{width:8px;height:8px;border-radius:50%;background:var(--success);box-shadow:0 0 0 3px var(--success-soft)}
 .home3{margin-top:16px}
+/* Potrivire de top — card gradient violet */
+.toppick{background:var(--accent-grad);border-radius:20px;padding:18px;color:#fff;box-shadow:0 16px 40px -16px rgba(124,77,240,.6);position:relative;overflow:hidden;margin-bottom:16px}
+.tp-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}
+.tp-eyebrow{font-size:10px;letter-spacing:1.4px;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,.85)}
+.tp-badge{font-size:11px;font-weight:700;background:rgba(255,255,255,.22);border-radius:999px;padding:4px 11px;color:#fff}
+.tp-row{display:flex;align-items:center;gap:13px}
+.tp-av{width:46px;height:46px;border-radius:13px;background:rgba(255,255,255,.2);display:grid;place-items:center;font-weight:800;font-size:16px;color:#fff;flex-shrink:0}
+.tp-name{font-size:19px;font-weight:800;letter-spacing:-.3px}
+.tp-role{font-size:12.5px;color:rgba(255,255,255,.82);margin-top:2px}
+.tp-desc{font-size:13px;line-height:1.5;color:rgba(255,255,255,.92);margin:13px 0 16px}
+.tp-cta{display:flex;gap:10px}
+.tp-go{background:#fff!important;color:var(--primary-dim)!important;font-weight:700;flex:1;border-radius:12px;padding:12px}
+.tp-later{background:rgba(255,255,255,.15)!important;color:#fff!important;font-weight:600;border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,.28)!important}
+/* Fluxul tău — feed */
+.feedrow{display:flex;align-items:center;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 15px;box-shadow:var(--shadow);margin-bottom:11px;cursor:pointer;width:100%;text-align:left}
+.feedrow:active{transform:scale(.995)}
+.fr-ic{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:17px;flex-shrink:0;background:var(--primary-soft)}
+.feedrow.de-urmarit .fr-ic{background:var(--gold-soft)}
+.fr-tx{flex:1;min-width:0}
+.fr-eyebrow{font-size:9.5px;letter-spacing:1px;font-weight:700;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
+.feedrow.vazut .fr-eyebrow{color:var(--primary)}
+.fr-main{font-size:14.5px;font-weight:700;color:var(--ink);line-height:1.3}
+.fr-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.fr-ch{color:var(--muted);font-size:20px;flex-shrink:0}
+/* Secretară — Rezumate recente */
+.srow{display:flex;align-items:center;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 15px;box-shadow:var(--shadow);margin-bottom:11px}
+.sr-ic{width:40px;height:40px;border-radius:11px;background:var(--primary-soft);color:var(--primary);display:grid;place-items:center;font-size:18px;flex-shrink:0}
+.sr-tx{flex:1;min-width:0}
+.sr-main{font-size:14.5px;font-weight:700;color:var(--ink)}
+.sr-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.sr-ch{color:var(--muted);font-size:20px;flex-shrink:0}
+/* Rețea — Harta ca preview-card cu Deschide */
+#mapDet{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:14px}
+#mapDet>summary.mapsum{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;cursor:pointer;list-style:none}
+#mapDet>summary.mapsum::-webkit-details-marker{display:none}
+.ms-t{font-size:16px;font-weight:800;color:var(--ink)}
+.ms-s{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.4;max-width:230px}
+.ms-go{font-size:13px;font-weight:700;color:#fff;background:var(--accent-grad);border-radius:999px;padding:8px 15px;white-space:nowrap;flex-shrink:0}
+#mapDet[open]>summary.mapsum .ms-go{background:var(--card2);color:var(--ink2)}
+/* Potriviri — Ordonează după (pill-uri) */
+.sortpills{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 4px}
+.sortpills .lbl{font-size:12.5px;color:var(--muted)}
+.sortpills .pills{display:flex;gap:6px;background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:3px}
+.sortpills .sp{border:0;background:none;color:var(--ink2);font-size:12.5px;font-weight:600;padding:6px 14px;border-radius:999px;cursor:pointer}
+.sortpills .sp.on{background:var(--accent-grad);color:#fff}
 </style>
 </head>
 <body>
@@ -1261,7 +1306,10 @@ header.multi .hmember{display:flex}
     </div>
     <div class="sec homesec" style="margin:18px 0 12px">Astăzi</div>
     <div id="ahaCard"></div>
+    <div id="topPick"></div>
     <div id="focusToday"></div>
+    <div class="sec homesec" id="feedHead" style="margin:20px 0 12px;display:none">Fluxul tău<a data-go="potriviri">vezi tot →</a></div>
+    <div id="homeFeed"></div>
     <div id="backupNudge"></div>
     <div id="homePlan"></div>
     <div class="sec" id="contactHead" style="display:none">Persoane de contactat<a data-go="potriviri">toate →</a></div>
@@ -1281,10 +1329,12 @@ header.multi .hmember{display:flex}
     <div class="eyebrow">Pentru tine</div><h2 class="title">Cine merita contactat</h2>
     <p class="sub">Oameni din cerc cu care ai legaturi relevante. Identitatea se dezvaluie cu acordul ambelor parti.</p>
     <div class="filters" id="matchFilters"></div>
-    <div class="ctrlrow">
-      <label for="divSlider" class="ctrllab">Ordonare: <b>Relevanță</b> ↔ <b>Diversitate</b></label>
-      <input type="range" id="divSlider" min="0" max="100" step="25" value="0" aria-label="Echilibru relevanta - diversitate" oninput="setMatchDiv(this.value)">
-      <div class="ctrlhint" id="divHint"></div>
+    <div class="sortpills">
+      <span class="lbl">Ordonează după</span>
+      <div class="pills" role="group" aria-label="Ordonare potriviri">
+        <button class="sp on" id="spRel" type="button" onclick="setMatchDiv(0)">Relevanță</button>
+        <button class="sp" id="spDiv" type="button" onclick="setMatchDiv(100)">Diversitate</button>
+      </div>
     </div>
     <div id="matchList"></div>
   </section>
@@ -1298,9 +1348,9 @@ header.multi .hmember{display:flex}
       <div class="s3"><div class="v" id="n3b">0</div><div class="l">Active 30z</div></div>
       <div class="s3"><div class="v" id="n3c">0</div><div class="l">Prioritare</div></div>
     </div>
-    <details class="mapwrap" id="mapDet"><summary>Harta rețelei ⌄</summary>
-      <p class="sub" style="margin-top:8px">Fiecare bulina e un membru; tu esti evidentiat in centru. O <b>linie</b> intre doua buline inseamna o <b>conexiune confirmata</b> (ambele parti au acceptat). Trage nodurile ca sa explorezi.</p>
-      <div class="netwrap"><div id="netHost"></div></div></details>
+    <details class="mapwrap" id="mapDet"><summary class="mapsum"><div class="ms-tx"><div class="ms-t">Harta rețelei</div><div class="ms-s">Tu ești în centru. Fiecare linie e o conexiune confirmată.</div></div><span class="ms-go">Deschide ›</span></summary>
+      <p class="sub" style="margin:0 18px 8px">Trage nodurile ca să explorezi. O <b>linie</b> între două buline înseamnă o <b>conexiune confirmată</b> (ambele părți au acceptat).</p>
+      <div class="netwrap" style="margin:0 12px 12px"><div id="netHost"></div></div></details>
     <details class="exchwrap" id="exchDet"><summary>Schimbă contacte la o întâlnire ⌄</summary>
       <div class="exchbody">
         <p class="sub" style="margin:8px 0 12px">Doar <b>cardul tău public</b> (nume, domeniu, ce oferi) — niciodată „ce cauți". Îl dai cuiva, îl lipește, te adaugă.</p>
@@ -1358,7 +1408,9 @@ header.multi .hmember{display:flex}
       <button class="btn ghost secbtn-ask" onclick="var w=document.getElementById('aiWrap'),i=document.getElementById('aiInput');if(w)w.scrollIntoView({behavior:'smooth',block:'center'});if(i)setTimeout(function(){try{i.focus()}catch(e){}},320)">💬 Întreabă</button>
     </div>
     <div class="secheading"><h3>Acțiuni de făcut</h3><span class="cnt" id="secTasksBadge">0 active</span></div>
-    <div id="secTasksTop" style="margin-bottom:18px"></div>
+    <div id="secTasksTop" style="margin-bottom:20px"></div>
+    <div class="secheading"><h3>Rezumate recente</h3></div>
+    <div id="secRecent" style="margin-bottom:18px"></div>
     <div class="seccard" id="recCard"><div class="sec nobar"><span class="si">🎙️</span>Reportofon apel <span class="recver">v3.5</span></div>
       <p class="sub" style="margin-bottom:6px">Pe <b>difuzor</b> prind ambele voci și transcriu, apoi extrag acțiuni — <b>fără să salvez audio</b>. Ține Ember deschis pe ecran în timpul apelului.</p>
       <div id="recBody"></div>
@@ -1405,7 +1457,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07y · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07z · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -1959,6 +2011,9 @@ function seedDemoTasks(d){const iso=n=>{const x=new Date();x.setDate(x.getDate()
     {id:d.seq++,member_id:1,text:"Trimite oferta către Bogdan Marin",due:iso(2),done:0,prio:1,t:now-36e5},
     {id:d.seq++,member_id:1,text:"Confirmă întâlnirea cu Andreea Pop",due:iso(1),done:0,prio:0,t:now-72e5},
     {id:d.seq++,member_id:1,text:"Reamintește-i lui Mihai de contract",due:iso(-1),done:1,prio:0,t:now-9e7});
+  d.callsummaries=[
+    {who:"Bogdan Marin",when:"Marți",min:8,actions:3},
+    {who:"Andreea Pop",when:"Luni",min:12,actions:1}];
 }
 function preConnect(a,b){const m=DB.matches.find(x=>(x.offer_member===a&&x.seek_member===b)||(x.offer_member===b&&x.seek_member===a));if(m){m.offer_consent=1;m.seek_consent=1;m.status="conectat";if(!m.at)m.at=Date.now()-Math.floor(Math.random()*9+1)*864e5;if(!DB.messages.some(x=>x.match_id===m.id))ctx(m);}}
 function tok(t){return new Set((t.toLowerCase().match(/[a-z0-9]+/g)||[]).filter(w=>w.length>=3&&!STOP.has(w)));}
@@ -2002,7 +2057,7 @@ function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("di
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
 function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
   updateTrustChip();
-  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();applyMatchDiv();setKids($("#matchList"),pipeline(orderMatches(myMatches().filter(matchIndOk))));}else if(VIEW==="retea"){renderConn();renderExchange();renderDiscover();renderNetStats();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderSecTasksTop();renderAi();renderRec();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();renderShared();}}else if(VIEW==="profil"){prof();renderRelay();renderPlan();}
+  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();applyMatchDiv();setKids($("#matchList"),pipeline(orderMatches(myMatches().filter(matchIndOk))));}else if(VIEW==="retea"){renderConn();renderExchange();renderDiscover();renderNetStats();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderSecTasksTop();renderSecRecent();renderAi();renderRec();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();renderShared();}}else if(VIEW==="profil"){prof();renderRelay();renderPlan();}
   updateBadges();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 // backlog #7: empty-state ilustrat, consistent
 function estateBox(title,sub,action){return h("div",{class:"estate",style:{padding:"26px 20px"}},
@@ -2064,6 +2119,9 @@ function home(){const me=mem(ME)||{},mm=myMatches();
   else setKids($("#ahaCard"));
   // --- CARD DE FOCUS: un singur lucru, acum ---
   setKids($("#focusToday"),homeFocus({tasksDue,meetToday,stale,topContact,prop}));
+  // Redesign V2: Potrivire de top + Fluxul tău
+  setKids($("#topPick"),homeTopPick(topContact[0]));
+  homeFeed({stale});
   renderBackupNudge();
   // --- ZIUA TA: întâlniri + task-uri scadente ---
   homePlanRender({up,tasksDue,td});
@@ -2106,11 +2164,37 @@ function homeFocus(d){
       [{cls:"btn gold sm",act:{"data-act":"gcal","data-id":x.id},txt:"📅 Calendar"}]);}
   if(d.stale){return focusCard("✦ Reaprinde o relație",d.stale.cel.name,"Fără contact de "+relTime(d.stale.lastA)+". Un mesaj scurt acum contează mult.",
       [{cls:"btn gold sm",act:{"data-act":"msg","data-id":d.stale.m.id},txt:"Scrie-i →"}]);}
-  if(d.topContact&&d.topContact.length){const m=d.topContact[0],cel=mem(m.offer_member===ME?m.seek_member:m.offer_member)||{name:"cineva"};
-    return focusCard("✦ Cunoaște pe cineva nou",cel.name,"Potrivire bună pentru ce cauți și ce oferi.",
-      [{cls:"btn gold sm",act:{"data-act":"go","data-v":"potriviri"},txt:"Vezi de ce →"}]);}
+  // Redesign V2: cazul „top match" e acoperit de cardul Potrivire de top de sub „Astăzi"
+  if(d.topContact&&d.topContact.length)return null;
   return focusCard("✦ Ești la zi","Nimic urgent acum","Profită de liniște: notează un apel recent sau adaugă o persoană în rețea.",
       [{cls:"btn gold sm",act:{"data-act":"go","data-v":"secretara"},txt:"🎙️ Notează un apel"}]);}
+/* Redesign V2: cardul gradient „Potrivire de top" (Acasă) */
+function homeTopPick(m){if(!m)return null;
+  const cel=mem(m.offer_member===ME?m.seek_member:m.offer_member)||{name:"?",role:"",industry:""};
+  const nC=(m.common||[]).length;
+  const desc="Caută exact ce oferi tu. "+(nC?(nC+(nC===1?" interes comun":" interese comune")+" și rețea complementară."):"Rețea complementară.");
+  return h("div",{class:"toppick"},
+    h("div",{class:"tp-top"},h("div",{class:"tp-eyebrow",text:"Potrivire de top · "+m.score+"%"}),h("span",{class:"tp-badge",text:"★ Top"})),
+    h("div",{class:"tp-row"},h("div",{class:"tp-av"},ini(cel.name)),
+      h("div",{class:"tp-id"},h("div",{class:"tp-name",text:cel.name}),h("div",{class:"tp-role",text:cel.role||cel.industry||"Business"}))),
+    h("div",{class:"tp-desc",text:desc}),
+    h("div",{class:"tp-cta"},
+      h("button",{class:"btn tp-go","data-act":"introduce","data-id":m.id,text:"Cere introducere"}),
+      h("button",{class:"btn tp-later","data-act":"go","data-v":"potriviri",text:"Mai târziu"})));}
+/* Redesign V2: feed „Fluxul tău" (Acasă) */
+function feedRow(ic,eyebrow,main,sub,cls,act){
+  return h("div",Object.assign({class:"feedrow "+(cls||""),role:"button",tabindex:"0"},act||{}),
+    h("span",{class:"fr-ic",text:ic}),
+    h("div",{class:"fr-tx"},h("div",{class:"fr-eyebrow",text:eyebrow}),h("div",{class:"fr-main",text:main}),sub?h("div",{class:"fr-sub",text:sub}):null),
+    h("span",{class:"fr-ch",text:"›"}));}
+function homeFeed(d){const rows=[];
+  const t=(DB.tasks||[]).filter(x=>x.member_id===ME&&!x.done).sort((a,b)=>(a.due||"9999").localeCompare(b.due||"9999"))[0];
+  if(t)rows.push(feedRow("🕐","De urmărit",t.text,t.due?("Termen: "+fmtWhen(t.due)+" · salvat de secretară"):"Salvat de secretară","de-urmarit",{"data-act":"go","data-v":"secretara"}));
+  else if(d.stale)rows.push(feedRow("🕐","De urmărit","Reaprinde relația cu "+d.stale.cel.name,"Fără contact de "+relTime(d.stale.lastA),"de-urmarit",{"data-act":"msg","data-id":d.stale.m.id}));
+  const me=mem(ME)||{},views=(me.views!=null?me.views:47),ppl=Math.max(1,Math.round(views/9));
+  rows.push(feedRow("👁","Ți-au văzut profilul",ppl+(ppl===1?" persoană în ultima săptămână":" persoane în ultima săptămână"),views+" vizualizări în total","vazut",{"data-act":"go","data-v":"profil"}));
+  const fh=$("#feedHead");if(fh)fh.style.display=rows.length?"":"none";
+  setKids($("#homeFeed"),rows);}
 function planRow(ic,main,sub,act,btn){
   return h("div",{class:"planrow"},
     h("span",{class:"plan-ic",text:ic}),
@@ -2970,7 +3054,8 @@ let MATCHDIV=0;
 function divHintText(){const w=MATCHDIV;return w<=0?"După potrivire (scor), de la cea mai relevantă.":
   w>=100?"Variație maximă de domenii — îți arăt oameni din cât mai multe industrii.":
   "Echilibru: relevanță, dar evit să-ți arăt prea mulți din același domeniu la rând.";}
-function applyMatchDiv(){const s=$("#divSlider");if(s)s.value=String(MATCHDIV);const hd=$("#divHint");if(hd)hd.textContent=divHintText();}
+function applyMatchDiv(){const s=$("#divSlider");if(s)s.value=String(MATCHDIV);const hd=$("#divHint");if(hd)hd.textContent=divHintText();
+  const rel=$("#spRel"),dv=$("#spDiv");if(rel&&dv){const d=MATCHDIV>=50;rel.classList.toggle("on",!d);dv.classList.toggle("on",d);}}
 function setMatchDiv(v){MATCHDIV=Math.max(0,Math.min(100,+v||0));localStorage.setItem("cercul_matchdiv",String(MATCHDIV));applyMatchDiv();if(VIEW==="potriviri")render();}
 function orderMatches(list){const w=MATCHDIV/100;const pool=list.slice().sort((a,b)=>b.score-a.score);
   if(w<=0)return pool; const out=[],seen={};
@@ -3183,6 +3268,15 @@ function renderSecTasksTop(){const host=$("#secTasksTop");if(!host)return;const 
     h("div",{class:"ti"},h("div",{class:"ttx",text:t.text}),t.due?h("div",{class:"tdue"+(overdue?" over":""),text:fmtWhen(t.due)}):null));};
   const rows=[...open.slice(0,3).map(mk),...recentDone.map(mk)];
   setKids(host, rows.length?rows:estateBox("Niciun task încă","Adaugă o sarcină în Unelte → De făcut, sau înregistrează un apel.",{label:"Deschide uneltele →",v:"secretara"}));}
+/* Redesign V2: Rezumate recente (Secretară) */
+function renderSecRecent(){const host=$("#secRecent");if(!host)return;
+  const sums=(DB.callsummaries||[]);
+  if(!sums.length){setKids(host,estateBox("Niciun rezumat încă","Înregistrează un apel — apare aici rezumatul cu acțiunile extrase."));return;}
+  setKids(host, sums.map(s=>h("div",{class:"srow"},
+    h("span",{class:"sr-ic",text:"🎙"}),
+    h("div",{class:"sr-tx"},h("div",{class:"sr-main",text:"Apel cu "+s.who}),
+      h("div",{class:"sr-sub",text:s.when+" · "+s.min+" min · "+s.actions+(s.actions===1?" acțiune extrasă":" acțiuni extrase")})),
+    h("span",{class:"sr-ch",text:"›"}))));}
 // chip-urile deschid sectiunea pliata 'Unelte' apoi sar la cardul potrivit (altfel scroll-ul ar duce la un card ascuns)
 function secChipGo(card){const d=$("#secMore");if(d)d.open=true;
   setTimeout(()=>{const e=$("#"+card);if(e)e.scrollIntoView({behavior:"smooth",block:"start"});
