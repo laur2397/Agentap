@@ -1106,6 +1106,14 @@ header.multi .hmember{display:flex}
   background:radial-gradient(circle at 50% 34%,var(--primary-soft),transparent 60%),radial-gradient(circle at 50% 64%,var(--gold-soft),transparent 72%),var(--card2)}
 .recmic::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:1px solid var(--primary-soft);pointer-events:none}
 .recmic svg{width:38px;height:38px}
+/* D. Faza 2 — orbul-erou pe Acasă: „energia zilei", un jar care respiră */
+.homehero>.hh-orb{position:relative;z-index:1;width:72px;height:72px;margin:4px 0 15px;border-radius:50%;
+  background:radial-gradient(circle at 50% 34%,var(--gold2),var(--gold) 36%,var(--primary-dim) 94%);
+  box-shadow:0 0 0 1px var(--primary-soft),0 0 32px -2px var(--glow),0 0 56px 4px var(--primary-soft),inset 0 -6px 16px rgba(0,0,0,.32);
+  animation:hhorbbreath 4.4s ease-in-out infinite}
+.homehero>.hh-orb::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:1px solid var(--primary-soft);pointer-events:none}
+@keyframes hhorbbreath{0%,100%{box-shadow:0 0 0 1px var(--primary-soft),0 0 28px -2px var(--glow),0 0 48px 2px var(--primary-soft),inset 0 -6px 16px rgba(0,0,0,.32);transform:scale(1)}50%{box-shadow:0 0 0 1px var(--primary-soft),0 0 40px 0 var(--glow),0 0 72px 8px var(--primary-soft),inset 0 -6px 16px rgba(0,0,0,.32);transform:scale(1.035)}}
+.reduce-motion .homehero>.hh-orb{animation:none}
 </style>
 </head>
 <body>
@@ -1134,6 +1142,7 @@ header.multi .hmember{display:flex}
         <line x1="42" y1="54" x2="118" y2="30"/><line x1="118" y1="30" x2="196" y2="74"/><line x1="248" y1="40" x2="304" y2="92"/><line x1="196" y1="74" x2="248" y2="40"/>
         <circle class="tw" cx="42" cy="54" r="1.7"/><circle class="tw2" cx="118" cy="30" r="2.1"/><circle class="tw" cx="196" cy="74" r="1.6"/><circle class="tw2" cx="248" cy="40" r="1.9"/><circle class="tw" cx="304" cy="92" r="1.5"/><circle class="tw2" cx="66" cy="110" r="1.4"/><circle class="tw" cx="330" cy="30" r="1.5"/><circle class="tw2" cx="160" cy="120" r="1.3"/>
       </svg>
+      <div class="hh-orb" aria-hidden="true"></div>
       <div class="hh-greet" id="hhGreet"></div>
       <div class="hh-day" id="hhDay"></div>
     </div>
@@ -1269,7 +1278,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07r · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07s · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
