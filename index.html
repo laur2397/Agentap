@@ -1082,7 +1082,31 @@ header.multi .hmember{display:flex}
 .hmember-l{font-size:11px;color:var(--muted);font-weight:600;flex:none}
 .hmember .memsel{flex:1;max-width:none;width:auto}
 </style>
-<style>.mk.flame{background:none!important;border:0!important;box-shadow:none!important;padding:0!important}.mk.flame svg{width:100%;height:100%;display:block}#splash{position:fixed;inset:0;z-index:300;background:radial-gradient(130% 130% at 50% 46%,#0b140f,#050706 72%);transition:opacity .4s ease}#splash.gone{opacity:0;pointer-events:none}#splashCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}.splash-name{position:absolute;left:0;right:0;top:60%;text-align:center;font-family:'Georgia','Times New Roman',serif;font-size:37px;font-weight:700;letter-spacing:1px;z-index:2;background:linear-gradient(100deg,#8f7641 16%,#FFF4D6 47%,#E6C57A 57%,#8f7641 84%);background-size:230% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;opacity:0;animation:nameFade .5s ease .3s both,nameShine 1s cubic-bezier(.4,0,.2,1) .3s 1}.splash-tag{position:absolute;left:0;right:0;top:67.5%;text-align:center;font-size:11px;letter-spacing:5px;font-weight:700;color:#8b988f;z-index:2;opacity:0;animation:nameFade .6s ease .6s both}@keyframes nameFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@keyframes nameShine{from{background-position:135% 0}to{background-position:-35% 0}}.reduce-motion .splash-name,.reduce-motion .splash-tag{animation:none;opacity:1}@media (prefers-reduced-motion:reduce){.splash-name,.splash-tag{animation:none;opacity:1}}</style>
+<style>.mk.flame{background:none!important;border:0!important;box-shadow:none!important;padding:0!important}.mk.flame svg{width:100%;height:100%;display:block}#splash{position:fixed;inset:0;z-index:300;background:radial-gradient(130% 130% at 50% 46%,#0b140f,#050706 72%);transition:opacity .4s ease}#splash.gone{opacity:0;pointer-events:none}#splashCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}.splash-name{position:absolute;left:0;right:0;top:60%;text-align:center;font-family:'Georgia','Times New Roman',serif;font-size:37px;font-weight:700;letter-spacing:1px;z-index:2;background:linear-gradient(100deg,#8f7641 16%,#FFF4D6 47%,#E6C57A 57%,#8f7641 84%);background-size:230% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;opacity:0;animation:nameFade .5s ease .3s both,nameShine 1s cubic-bezier(.4,0,.2,1) .3s 1}.splash-tag{position:absolute;left:0;right:0;top:67.5%;text-align:center;font-size:11px;letter-spacing:5px;font-weight:700;color:#8b988f;z-index:2;opacity:0;animation:nameFade .6s ease .6s both}@keyframes nameFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@keyframes nameShine{from{background-position:135% 0}to{background-position:-35% 0}}.reduce-motion .splash-name,.reduce-motion .splash-tag{animation:none;opacity:1}@media (prefers-reduced-motion:reduce){.splash-name,.splash-tag{animation:none;opacity:1}}
+/* ============================================================================
+   LIVING EMBER · Faza 1 — adâncime cinematică, jar viu, orb-reportofon.
+   Strat aditiv peste Aurora/loop6; sigur pe light+dark; respectă reduce-motion.
+   ============================================================================ */
+:root{--le-b1:rgba(14,122,91,.14);--le-b2:rgba(196,154,62,.13);--le-b3:rgba(14,107,80,.09);--le-vg:rgba(22,36,30,.05)}
+[data-theme="dark"]{--le-b1:rgba(16,185,129,.24);--le-b2:rgba(230,197,122,.17);--le-b3:rgba(14,122,91,.24);--le-vg:rgba(0,0,0,.30)}
+/* A. Adâncime: aurora cu bloom-uri luminoase + vignetă discretă doar în colțuri */
+.shell{background:
+  radial-gradient(120% 50% at 50% -10%,var(--glow),transparent 52%),
+  radial-gradient(58% 42% at 6% 2%,var(--le-b1),transparent 58%),
+  radial-gradient(54% 40% at 100% 8%,var(--le-b2),transparent 56%),
+  radial-gradient(66% 52% at 94% 101%,var(--le-b3),transparent 58%),
+  radial-gradient(118% 82% at 50% 42%,transparent 72%,var(--le-vg)),
+  var(--bg)}
+/* B. Jarul-brand care respiră — un singur punct viu, prezent pe toate ecranele */
+.brand .mk.flame{filter:drop-shadow(0 0 6px var(--glow));animation:emberpulse 3.8s ease-in-out infinite}
+@keyframes emberpulse{0%,100%{filter:drop-shadow(0 0 5px var(--glow))}50%{filter:drop-shadow(0 0 13px var(--glow))}}
+.reduce-motion .brand .mk.flame{animation:none}
+/* C. Reportofon idle = orb plin, luminos (păstrează respirația micbreath existentă) */
+.recmic{position:relative;width:104px;height:104px;margin-bottom:18px;
+  background:radial-gradient(circle at 50% 34%,var(--primary-soft),transparent 60%),radial-gradient(circle at 50% 64%,var(--gold-soft),transparent 72%),var(--card2)}
+.recmic::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:1px solid var(--primary-soft);pointer-events:none}
+.recmic svg{width:38px;height:38px}
+</style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="emberFl" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#0E6B50"/><stop offset=".5" stop-color="#C49A3E"/><stop offset="1" stop-color="#F0D894"/></linearGradient><linearGradient id="emberCore" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#C49A3E"/><stop offset="1" stop-color="#FFF3D0"/></linearGradient></defs></svg>
@@ -1245,7 +1269,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07q · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07r · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
