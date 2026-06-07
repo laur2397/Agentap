@@ -893,6 +893,35 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
 .aisug{font-size:12px;padding:8px 13px;border-radius:999px;background:var(--card2);border:1px solid var(--line2);color:var(--ink2);cursor:pointer;transition:transform .15s var(--ease),border-color .2s}
 .aisug:active{transform:scale(.96)}
 .aisug:hover{border-color:var(--primary-dim)}
+/* ===== Acasă = comandantul zilei (warm, action-first) ===== */
+.homehero{position:relative;overflow:visible;margin:-2px 0 6px;padding:10px 2px 2px}
+.homehero .constel{position:absolute;inset:-22px -28px auto -28px;height:148px;z-index:0;opacity:.6;pointer-events:none}
+.homehero .constel line{stroke:var(--primary);stroke-width:.7;opacity:.45}
+.homehero .constel circle{fill:var(--gold)}
+.homehero .constel .tw{animation:tw 4.2s ease-in-out infinite}
+.homehero .constel .tw2{animation:tw 5.6s ease-in-out infinite 1s}
+.homehero>.hh-greet,.homehero>.hh-day{position:relative;z-index:1}
+.hh-greet{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.06;background:var(--title-grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.hh-day{font-family:var(--serif);font-size:15px;color:var(--ink2);line-height:1.5;margin-top:8px;max-width:34ch}
+.focuscard{position:relative;margin-top:15px;border-radius:20px;padding:18px;background:linear-gradient(160deg,var(--primary-soft),transparent 86%),var(--card);border:1px solid var(--primary-dim);box-shadow:var(--shadow),inset 0 1px 0 var(--hi)}
+.fc-eyebrow{font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--primary-dim)}
+.fc-title{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--ink);line-height:1.18;margin-top:7px}
+.fc-sub{font-size:13px;color:var(--ink2);line-height:1.5;margin-top:7px}
+.fc-cta{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
+.homesec{font-family:var(--serif);font-size:16px;font-weight:600;color:var(--ink);margin:22px 0 10px}
+.plancard{border-radius:18px;border:1px solid var(--line);background:var(--card);overflow:hidden;box-shadow:var(--shadow)}
+.planrow{display:flex;align-items:center;gap:12px;padding:13px 15px;border-top:1px solid var(--line)}
+.planrow:first-child{border-top:0}
+.plan-ic{width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;font-size:15px;background:var(--card2);border:1px solid var(--line2)}
+.plan-t{flex:1;min-width:0}
+.plan-main{font-size:14px;color:var(--ink);font-weight:600;line-height:1.3}
+.plan-sub{font-size:11.5px;color:var(--muted);margin-top:2px}
+.homestats{margin-top:22px;border-top:1px solid var(--line);padding-top:2px}
+.homestats>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:15px 4px;font-family:var(--serif);font-size:16px;color:var(--ink)}
+.homestats>summary::-webkit-details-marker{display:none}
+.homestats>summary .si{font-size:14px}
+.homestats>summary .chev{margin-left:auto;color:var(--muted);font-size:20px;line-height:1;transition:transform .2s var(--ease)}
+.homestats[open]>summary .chev{transform:rotate(90deg)}
 /* ============================================================================
    LOOP 20 — polish pe toată aplicația (token-driven, ambele teme)
    ============================================================================ */
@@ -1048,19 +1077,28 @@ header.multi .hmember{display:flex}
 <main id="mainContent" role="main" tabindex="-1">
   <!-- ACASA -->
   <section id="acasa" class="view on">
-    <div class="digest"><div class="e">Azi</div><div class="g" id="digG"></div><p id="digP"></p></div>
-    <div class="whyhere" id="whyHere">Un spațiu privat unde construiești relații de afaceri care contează — la ritmul tău, cu datele rămase doar la tine.</div>
+    <div class="homehero">
+      <svg class="constel" viewBox="0 0 360 152" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <line x1="42" y1="54" x2="118" y2="30"/><line x1="118" y1="30" x2="196" y2="74"/><line x1="248" y1="40" x2="304" y2="92"/><line x1="196" y1="74" x2="248" y2="40"/>
+        <circle class="tw" cx="42" cy="54" r="1.7"/><circle class="tw2" cx="118" cy="30" r="2.1"/><circle class="tw" cx="196" cy="74" r="1.6"/><circle class="tw2" cx="248" cy="40" r="1.9"/><circle class="tw" cx="304" cy="92" r="1.5"/><circle class="tw2" cx="66" cy="110" r="1.4"/><circle class="tw" cx="330" cy="30" r="1.5"/><circle class="tw2" cx="160" cy="120" r="1.3"/>
+      </svg>
+      <div class="hh-greet" id="hhGreet"></div>
+      <div class="hh-day" id="hhDay"></div>
+    </div>
     <div id="ahaCard"></div>
+    <div id="focusToday"></div>
     <div id="backupNudge"></div>
-    <div id="nextMeet"></div>
-    <div id="homeReconnect"></div>
-    <div class="statstrip" id="kpis"></div>
-    <div id="intrinsic"></div>
-    <div id="netpulse"></div>
-    <div class="sec">Persoane de contactat<a data-go="potriviri">toate →</a></div>
+    <div id="homePlan"></div>
+    <div class="sec" id="contactHead" style="display:none">Persoane de contactat<a data-go="potriviri">toate →</a></div>
     <div id="topMatches"></div>
-    <div class="sec">Conexiuni recente<a data-go="retea">reteaua →</a></div>
-    <div class="ledger" id="ledger"></div>
+    <div id="intrinsic"></div>
+    <details class="homestats" id="homeStats">
+      <summary><span class="si">📊</span>Cum stă rețeaua<span class="chev">›</span></summary>
+      <div class="statstrip" id="kpis"></div>
+      <div id="netpulse"></div>
+      <div class="sec">Conexiuni recente<a data-go="retea">reteaua →</a></div>
+      <div class="ledger" id="ledger"></div>
+    </details>
   </section>
 
   <!-- POTRIVIRI -->
@@ -1179,7 +1217,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07n · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07o · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -1764,48 +1802,50 @@ function emp(){return h("div",{class:"estate"},
   h("div",{class:"t",text:"Nicio potrivire inca"}),
   h("div",{style:{fontSize:"12px",marginTop:"4px"},text:"Adauga in profil sau noteaza dupa un apel — iti gasesc pe loc oameni potriviti."}));}
 
-function home(){const me=mem(ME),mm=myMatches();
+function joinList(a){a=a.filter(Boolean);if(a.length<=1)return a[0]||"";return a.slice(0,-1).join(", ")+" și "+a[a.length-1];}
+function home(){const me=mem(ME)||{},mm=myMatches();
   const prop=mm.filter(m=>m.status==="propus").length,con=mm.filter(m=>m.status==="conectat").length;
   const avg=mm.length?Math.round(mm.reduce((s,m)=>s+m.score,0)/mm.length):0;
+  const td=today();
   const _h=new Date().getHours();const _sal=_h<12?"Bună dimineața":_h<18?"Bună ziua":"Bună seara";
-  $("#digG").textContent=_sal+", "+me.name.split(" ")[0]+".";
-  $("#digP").textContent=prop?`Ai ${prop} ${prop===1?"sugestie noua":"sugestii noi"} de verificat si ${con} ${con===1?"conexiune":"conexiuni"}.`
-    :`Ai ${con} ${con===1?"conexiune activa":"conexiuni active"}. Adauga ce cauti sau ce oferi ca sa primesti sugestii.`;
-  // loop3 #2: momentul "aha" — daca n-ai spus inca ce oferi/cauti, un singur next-step clar
+  const fname=(me.name||"").split(" ")[0]||"";
+  // --- ce contează azi ---
+  const tasksOpen=(DB.tasks||[]).filter(t=>t.member_id===ME&&!t.done);
+  const tasksDue=tasksOpen.filter(t=>t.due&&String(t.due).slice(0,10)<=td).sort((a,b)=>String(a.due).localeCompare(String(b.due)));
+  const up=(DB.meetings||[]).filter(x=>x.status==="confirmat"&&(x.a===ME||x.b===ME)&&(x.when||"").slice(0,10)>=td).sort((a,b)=>String(a.when).localeCompare(String(b.when)));
+  const meetToday=up.filter(x=>(x.when||"").slice(0,10)===td);
+  const now=Date.now(),cut=30*864e5;
+  const stale=mm.filter(m=>m.status==="conectat").map(m=>{const cel=mem(m.offer_member===ME?m.seek_member:m.offer_member);if(!cel)return null;
+      const ts=(DB.messages||[]).filter(x=>x.match_id===m.id&&x.t).map(x=>x.t),lastA=ts.length?Math.max(...ts):(m.at||0);
+      return lastA&&(now-lastA)>cut?{m,cel,lastA}:null;}).filter(Boolean).sort((a,b)=>a.lastA-b.lastA)[0];
+  const topContact=mm.filter(m=>m.status!=="conectat");
+  // --- salut cald + linia zilei ---
+  $("#hhGreet").textContent=_sal+(fname?(", "+fname):"")+".";
+  const bits=[];
+  if(meetToday.length)bits.push(meetToday.length+(meetToday.length===1?" întâlnire":" întâlniri"));
+  if(tasksDue.length)bits.push(tasksDue.length+(tasksDue.length===1?" task scadent":" task-uri scadente"));
+  if(stale)bits.push("o relație de reaprins");
+  $("#hhDay").textContent=bits.length?("Azi ai "+joinList(bits)+".")
+    :prop?("Ai "+prop+(prop===1?" sugestie nouă":" sugestii noi")+" de văzut — hai să le descoperim.")
+    :"Ești la zi. Moment bun să reaprinzi o relație sau să notezi un apel. ✨";
+  // --- onboarding aha ---
   const myItems=(DB.items||[]).filter(i=>i.member_id===ME);
   if(!myItems.length){setKids($("#ahaCard"),h("div",{class:"ahacard"},
     h("div",{class:"ahai",text:"✨"}),
-    h("div",{class:"ahab"},h("div",{class:"ahat",text:"Hai sa-ti gasim primii oameni potriviti"}),
-      h("div",{class:"ahap",text:"Spune in 2 randuri ce oferi si ce cauti — generam sugestii relevante, doar pe dispozitivul tau."}),
-      h("button",{class:"btn gold sm","data-act":"go","data-v":"profil",style:{marginTop:"10px"},text:"Completeaza profilul →"}))));}
+    h("div",{class:"ahab"},h("div",{class:"ahat",text:"Hai să-ți găsim primii oameni potriviți"}),
+      h("div",{class:"ahap",text:"Spune în 2 rânduri ce oferi și ce cauți — generăm sugestii relevante, doar pe dispozitivul tău."}),
+      h("button",{class:"btn gold sm","data-act":"go","data-v":"profil",style:{marginTop:"10px"},text:"Completează profilul →"}))));}
   else setKids($("#ahaCard"));
+  // --- CARD DE FOCUS: un singur lucru, acum ---
+  setKids($("#focusToday"),homeFocus({tasksDue,meetToday,stale,topContact,prop}));
   renderBackupNudge();
-  // urmatoarea intalnire confirmata (backlog #2)
-  const td=today(),up=(DB.meetings||[]).filter(x=>x.status==="confirmat"&&(x.a===ME||x.b===ME)&&(x.when||"").slice(0,10)>=td).sort((a,b)=>String(a.when).localeCompare(String(b.when)));
-  if(up[0]){const x=up[0],cel=mem(x.a===ME?x.b:x.a)||{name:x.guest||"?"};
-    setKids($("#nextMeet"),h("div",{class:"nextmeet"},
-      h("div",{class:"nmlabel",text:"📅 Urmatoarea intalnire"}),
-      h("div",{class:"nmwhen",text:fmtWhen(x.when)}),
-      h("div",{class:"nmwho",text:"cu "+cel.name+(x.place?" · "+x.place:"")}),
-      h("div",{class:"calrow"},
-        h("button",{class:"btn ghost sm","data-act":"gcal","data-id":x.id,text:"📅 Calendar"}),
-        x.match_id?h("button",{class:"btn ghost sm","data-act":"msg","data-id":x.match_id,text:"Conversatie"}):null)));
-  }else setKids($("#nextMeet"));
-  // Nudge "de reconectat": cea mai veche conexiune fara contact recent — valoarea-cheie a CRM-ului, adusa pe Acasa
-  (function(){const host=$("#homeReconnect");if(!host)return;const now=Date.now(),cut=30*864e5;
-    const stale=mm.filter(m=>m.status==="conectat").map(m=>{const cel=mem(m.offer_member===ME?m.seek_member:m.offer_member);if(!cel)return null;
-        const ts=(DB.messages||[]).filter(x=>x.match_id===m.id&&x.t).map(x=>x.t),lastA=ts.length?Math.max(...ts):(m.at||0);
-        return lastA&&(now-lastA)>cut?{m,cel,lastA}:null;}).filter(Boolean).sort((a,b)=>a.lastA-b.lastA)[0];
-    if(!stale){setKids(host);return;}
-    setKids(host,h("div",{class:"reconn"},
-      h("div",{class:"reconn-h",text:"💡 De reconectat"}),
-      h("div",{class:"reconn-row","data-act":"msg","data-id":stale.m.id,tabindex:"0",role:"button","aria-label":"Reia legatura cu "+stale.cel.name},
-        h("span",{class:"rci",text:"🤝"}),
-        h("div",{class:"rcc"},h("div",{class:"rcn",text:stale.cel.name}),h("div",{class:"rcd",text:"fără contact de "+relTime(stale.lastA)})),
-        h("span",{class:"rcgo",text:"Reia →"}))));})();
-  const stat=(v,l)=>h("div",{class:"st"},h("div",{class:"sv",text:String(v)}),h("div",{class:"sl",text:l}));
-  setKids($("#kpis"),stat(con,"Conexiuni"),stat(prop,"Sugestii noi"),stat(avg||"—","Potrivire medie"));
-  // loop3 #10: progres intrinsec onest (activitate reala, fara streak/gamificare)
+  // --- ZIUA TA: întâlniri + task-uri scadente ---
+  homePlanRender({up,tasksDue,td});
+  // --- persoane de contactat ---
+  const top=topContact.slice(0,3);
+  const ch=$("#contactHead");if(ch)ch.style.display=top.length?"":"none";
+  setKids($("#topMatches"),top.length?matches(top):"");
+  // --- progres bland (activitate reala, fara streak) ---
   const nNotes=(DB.notes||[]).filter(n=>n.member_id===ME).length;
   const nDone=(DB.tasks||[]).filter(t=>t.member_id===ME&&t.done).length;
   const nMeet=(DB.meetings||[]).filter(x=>x.status==="confirmat"&&(x.a===ME||x.b===ME)).length;
@@ -1815,16 +1855,48 @@ function home(){const me=mem(ME),mm=myMatches();
     if(nMeet)parts.push(nMeet+(nMeet===1?" întâlnire confirmată":" întâlniri confirmate"));
     setKids($("#intrinsic"),h("div",{class:"intrinsic"},h("span",{class:"inti",text:"🌱"}),h("span",{text:"Până acum: "+parts.join(" · ")+"."})));
   }else setKids($("#intrinsic"));
-  // pulse de retea compact & onest (raport real, backlog #14)
+  // --- statistici (pliate) ---
+  const stat=(v,l)=>h("div",{class:"st"},h("div",{class:"sv",text:String(v)}),h("div",{class:"sl",text:l}));
+  setKids($("#kpis"),stat(con,"Conexiuni"),stat(prop,"Sugestii noi"),stat(avg||"—","Potrivire medie"));
   const total=Math.max(0,DB.members.length-1),pct=total?Math.round(con/total*100):0;
   setKids($("#netpulse"),h("div",{class:"netpulse"},
-    h("div",{class:"npr"},h("span",{text:"Acoperire retea"}),h("span",{class:"npv",text:con+" din "+total+" membri"})),
+    h("div",{class:"npr"},h("span",{text:"Acoperire rețea"}),h("span",{class:"npv",text:con+" din "+total+" membri"})),
     h("div",{class:"bar"},h("i",{style:{width:pct+"%"}}))));
   const conx=mm.filter(m=>m.status==="conectat").sort((a,b)=>(b.at||0)-(a.at||0));
   renderLedger(conx);
-  const top=mm.filter(m=>m.status!=="conectat").slice(0,2),list=top.length?top:mm.slice(0,2);
-  setKids($("#topMatches"),list.length?matches(list):emp());
 }
+function focusCard(eyebrow,title,sub,btns){
+  return h("div",{class:"focuscard"},
+    h("div",{class:"fc-eyebrow",text:eyebrow}),
+    h("div",{class:"fc-title",text:title}),
+    sub?h("div",{class:"fc-sub",text:sub}):null,
+    h("div",{class:"fc-cta"},...btns.map(b=>h("button",Object.assign({class:b.cls,text:b.txt},b.act)))));}
+function homeFocus(d){
+  if(d.tasksDue&&d.tasksDue.length){const t=d.tasksDue[0],od=String(t.due).slice(0,10)<today();
+    return focusCard("✦ Primul lucru azi",t.text,od?"Era scadent — bifează-l și ești cu un pas înainte.":"Scadent azi.",
+      [{cls:"btn gold sm",act:{"data-act":"go","data-v":"secretara"},txt:"Vezi task-urile →"}]);}
+  if(d.meetToday&&d.meetToday.length){const x=d.meetToday[0],cel=mem(x.a===ME?x.b:x.a)||{name:x.guest||"cineva"};
+    return focusCard("✦ Azi te vezi cu",cel.name+(x.when?(" · "+fmtWhen(x.when)):""),x.goal?("Scop: "+x.goal):"Pregătește-te din timp — un mesaj scurt înainte ajută.",
+      [{cls:"btn gold sm",act:{"data-act":"gcal","data-id":x.id},txt:"📅 Calendar"}]);}
+  if(d.stale){return focusCard("✦ Reaprinde o relație",d.stale.cel.name,"Fără contact de "+relTime(d.stale.lastA)+". Un mesaj scurt acum contează mult.",
+      [{cls:"btn gold sm",act:{"data-act":"msg","data-id":d.stale.m.id},txt:"Scrie-i →"}]);}
+  if(d.topContact&&d.topContact.length){const m=d.topContact[0],cel=mem(m.offer_member===ME?m.seek_member:m.offer_member)||{name:"cineva"};
+    return focusCard("✦ Cunoaște pe cineva nou",cel.name,"Potrivire bună pentru ce cauți și ce oferi.",
+      [{cls:"btn gold sm",act:{"data-act":"go","data-v":"potriviri"},txt:"Vezi de ce →"}]);}
+  return focusCard("✦ Ești la zi","Nimic urgent acum","Profită de liniște: notează un apel recent sau adaugă o persoană în rețea.",
+      [{cls:"btn gold sm",act:{"data-act":"go","data-v":"secretara"},txt:"🎙️ Notează un apel"}]);}
+function planRow(ic,main,sub,act,btn){
+  return h("div",{class:"planrow"},
+    h("span",{class:"plan-ic",text:ic}),
+    h("div",{class:"plan-t"},h("div",{class:"plan-main",text:main}),sub?h("div",{class:"plan-sub",text:sub}):null),
+    h("button",Object.assign({class:"btn ghost xs",text:btn},act)));}
+function homePlanRender(d){const host=$("#homePlan");if(!host)return;const rows=[];
+  const x=d.up[0];
+  if(x){const cel=mem(x.a===ME?x.b:x.a)||{name:x.guest||"cineva"},isToday=(x.when||"").slice(0,10)===d.td;
+    rows.push(planRow("📅",fmtWhen(x.when)+(isToday?" · azi":""),"Întâlnire cu "+cel.name+(x.place?(" · "+x.place):""),{"data-act":"gcal","data-id":x.id},"Calendar"));}
+  d.tasksDue.slice(0,3).forEach(t=>rows.push(planRow("☐",t.text,t.due?("scadent "+fmtWhen(t.due)):"de făcut",{"data-act":"go","data-v":"secretara"},"Deschide")));
+  if(!rows.length){host.replaceChildren();return;}
+  setKids(host,h("div",{class:"homesec",text:"Ziua ta"}),h("div",{class:"plancard"},...rows));}
 const relOf=cel=>cel.rel||"activ";
 const REL={rece:["Rece","relrece"],activ:["Activ","relactiv"],prioritar:["Prioritar","relprio"]};
 /* loop4 #4-5: cod de conexiune (card public) + adaugare prin cod — networking fara server */
@@ -3498,7 +3570,7 @@ function lockNow(){if(!CK||LOCKING)return;
   if(PROC){pendingLock=true;toast("Se blocheaza dupa finalizarea procesarii…");return;} // atomic: nu intrerupe operatiuni (audit s4 #1)
   LOCKING=true;stopNet();clearTimeout(idleT);wipe();recRecoverDisarm();
   CK=null;HK=null;DB=null;ME=null;SESSPASS=null;LEDGER_CHAIN=[];CHAT=null;FSIM=null; // elibereaza cheile din RAM (best-effort; datele pe disc raman criptate, recuperabile doar cu parola)
-  ["#matchList","#netHost","#ledger","#kpis","#topMatches","#phead","#mMsgs","#dictRes","#oferList","#cautList","#auditList","#valueRadar","#ahaCard","#intrinsic","#activeNet","#reconnect","#homeReconnect","#privacyHealth","#backupNudge"]
+  ["#matchList","#netHost","#ledger","#kpis","#topMatches","#phead","#mMsgs","#dictRes","#oferList","#cautList","#auditList","#valueRadar","#ahaCard","#intrinsic","#activeNet","#reconnect","#focusToday","#homePlan","#privacyHealth","#backupNudge"]
     .forEach(s=>{const el=$(s);if(el)el.replaceChildren();}); // sanitizare DOM, fara innerHTML (audit s4 #5 / s5r2)
   $("#overlay").classList.remove("on");$("#lockPass").value="";showLock("unlock");LOCKING=false;
   toast("Blocat — cheile eliberate din memorie (best-effort)");}
