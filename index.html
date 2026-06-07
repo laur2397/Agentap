@@ -1066,7 +1066,8 @@ header.multi .hmember{display:flex}
     <div class="aiwrap" id="aiWrap">
       <div class="aibar">
         <span class="aibadge" id="aiBadge">Dezactivat</span>
-        <button class="btn ghost sm" data-act="aiSettings" id="aiCfgBtn" style="margin-left:auto">⚙ Setări</button>
+        <button class="btn ghost sm" data-act="aiChatClear" id="aiClearChatBtn" style="margin-left:auto">🗑 Curăță</button>
+        <button class="btn ghost sm" data-act="aiSettings" id="aiCfgBtn">⚙ Setări</button>
       </div>
       <details class="aicfg" id="aiCfg"><summary>⚙ Configurează asistentul</summary>
         <div class="aicfgbody">
@@ -1103,7 +1104,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07j · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07k · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -2038,6 +2039,10 @@ function aiSave(quiet){const p=($("#aiProvider")||{}).value||"off";
 // auto-salvare la schimbarea oricarui camp: utilizatorul nu mai trebuie sa-si aminteasca sa apese Salveaza
 function aiAutoSave(){aiSave(true);}
 function aiClear(){DB.ai={provider:"off"};DB.aichat=[];save();renderAi();updateTrustChip();toast("Configurare AI ștearsă");}
+// curata DOAR istoricul conversatiei (ex: erori vechi dintr-o versiune anterioara), pastreaza furnizorul/cheia
+function aiChatClear(){if(!(DB.aichat||[]).length){toast("Conversația e deja goală");return;}
+  if(!confirm("Ștergi conversația cu asistentul? (Configurarea — furnizor/cheie — rămâne.)"))return;
+  DB.aichat=[];save();renderAiChat();toast("Conversație ștearsă");}
 function renderAiChat(){const host=$("#aiChat");if(!host)return;const msgs=DB.aichat||[];
   if(!aiOn()){setKids(host,h("div",{class:"aiempty",text:"Configurează un asistent (local sau cu cheia ta) ca să începi o conversație."}));return;}
   if(!msgs.length){setKids(host,h("div",{class:"aiempty",text:"Salut! Sunt secretara ta AI. Întreabă-mă despre întâlniri, mesaje de trimis, idei de abordare…"}));return;}
@@ -2059,7 +2064,14 @@ async function aiSend(){if(!aiOn()){toast("Configurează întâi asistentul (⚙
   const host=$("#aiChat");if(host){host.appendChild(h("div",{class:"aimsg a",id:"aiTyping",text:"scrie…"}));host.scrollTop=host.scrollHeight;}
   try{const reply=await aiCall(msgs);DB.aichat.push({role:"assistant",content:reply||"(răspuns gol)"});save();renderAiChat();}
   catch(e){const t=$("#aiTyping");if(t)t.remove();
-    DB.aichat.push({role:"system",content:"Eroare: "+(e&&e.message||e)+". Verifică furnizorul/cheia/adresa (și CORS la endpoint local)."});save();renderAiChat();}
+    const raw=(e&&e.message||String(e)),prov=aiCfg().provider;
+    const netfail=/load failed|failed to fetch|networkerror|rețea|cors|mixed/i.test(raw);
+    let tip;
+    if(netfail){tip=(prov==="local")?" Pe telefon modul Local nu merge — alege Google Gemini sau Standard în ⚙ Setări."
+      :(prov==="openai"||prov==="anthropic"||prov==="openrouter")?" "+(AI_LBL[prov]||prov)+" e adesea blocat din browser pe telefon (CORS). Pe telefon folosește Google Gemini (merge din browser) sau Standard."
+      :" Pare o problemă de rețea. Verifică conexiunea și apasă din nou; dacă persistă, ia o cheie nouă Gemini (gratuită, aistudio.google.com) în ⚙ Setări.";}
+    else tip=" Verifică furnizorul/cheia/modelul în ⚙ Setări.";
+    DB.aichat.push({role:"system",content:"Eroare: "+raw+"."+tip});save();renderAiChat();}
   finally{if(btn){btn.disabled=false;btn.textContent="Trimite";}}}
 function withTimeout(opts,ms){const ac=new AbortController();const to=setTimeout(()=>ac.abort(),ms||60000);
   return {opts:Object.assign({signal:ac.signal},opts),done:()=>clearTimeout(to),ac};}
@@ -3217,6 +3229,7 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="aiSave")aiSave();
   else if(a==="aiTest")aiTest();
   else if(a==="aiClear")aiClear();
+  else if(a==="aiChatClear")aiChatClear();
   else if(a==="aiSend")aiSend();
   else if(a==="recConsent")recConsent();
   else if(a==="recStart")recStart();
