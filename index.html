@@ -1217,6 +1217,10 @@ header.multi .hmember{display:flex}
 .secheading{display:flex;align-items:center;justify-content:space-between;margin:4px 2px 12px}
 .secheading h3{margin:0;font-size:18px;font-weight:800;color:var(--ink)}
 .secheading .cnt{font-size:12px;font-weight:700;color:var(--gold);background:var(--gold-soft);border-radius:999px;padding:4px 11px}
+/* --- Redesign V2: Acasă (linie activă + trio) --- */
+.hh-active{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink2);margin:8px 0 2px;position:relative;z-index:1}
+.hh-dot{width:8px;height:8px;border-radius:50%;background:var(--success);box-shadow:0 0 0 3px var(--success-soft)}
+.home3{margin-top:16px}
 </style>
 </head>
 <body>
@@ -1247,8 +1251,15 @@ header.multi .hmember{display:flex}
       </svg>
       <div class="hh-orb" aria-hidden="true"></div>
       <div class="hh-greet" id="hhGreet"></div>
+      <div class="hh-active" id="hhActive"></div>
       <div class="hh-day" id="hhDay"></div>
     </div>
+    <div class="stat3 home3">
+      <div class="s3"><div class="v" id="h3a">0</div><div class="l">Conexiuni</div></div>
+      <div class="s3"><div class="v" id="h3b">0</div><div class="l">Potriviri noi</div></div>
+      <div class="s3"><div class="v" id="h3c">0</div><div class="l">De urmărit</div></div>
+    </div>
+    <div class="sec homesec" style="margin:18px 0 12px">Astăzi</div>
     <div id="ahaCard"></div>
     <div id="focusToday"></div>
     <div id="backupNudge"></div>
@@ -1282,6 +1293,14 @@ header.multi .hmember{display:flex}
   <section id="retea" class="view">
     <div class="eyebrow">Reteaua ta</div><h2 class="title">Conexiunile tale</h2>
     <p class="sub">Oamenii cu care te-ai conectat. O conexiune apare doar dupa ce ambele parti accepta o introducere.</p>
+    <div class="stat3 net3">
+      <div class="s3"><div class="v" id="n3a">0</div><div class="l">Conexiuni</div></div>
+      <div class="s3"><div class="v" id="n3b">0</div><div class="l">Active 30z</div></div>
+      <div class="s3"><div class="v" id="n3c">0</div><div class="l">Prioritare</div></div>
+    </div>
+    <details class="mapwrap" id="mapDet"><summary>Harta rețelei ⌄</summary>
+      <p class="sub" style="margin-top:8px">Fiecare bulina e un membru; tu esti evidentiat in centru. O <b>linie</b> intre doua buline inseamna o <b>conexiune confirmata</b> (ambele parti au acceptat). Trage nodurile ca sa explorezi.</p>
+      <div class="netwrap"><div id="netHost"></div></div></details>
     <details class="exchwrap" id="exchDet"><summary>Schimbă contacte la o întâlnire ⌄</summary>
       <div class="exchbody">
         <p class="sub" style="margin:8px 0 12px">Doar <b>cardul tău public</b> (nume, domeniu, ce oferi) — niciodată „ce cauți". Îl dai cuiva, îl lipește, te adaugă.</p>
@@ -1318,9 +1337,6 @@ header.multi .hmember{display:flex}
     <div id="reconnect"></div>
     <div class="filters" id="connFilters"></div>
     <div id="connList"></div>
-    <details class="mapwrap" id="mapDet"><summary>Vezi harta retelei ⌄</summary>
-      <p class="sub" style="margin-top:8px">Fiecare bulina e un membru; tu esti evidentiat in centru. O <b>linie</b> intre doua buline inseamna o <b>conexiune confirmata</b> (ambele parti au acceptat). Trage nodurile ca sa explorezi.</p>
-      <div class="netwrap"><div id="netHost"></div></div></details>
   </section>
 
   <!-- SECRETARA AI -->
@@ -1389,7 +1405,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07x · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07y · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -1986,7 +2002,7 @@ function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("di
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
 function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
   updateTrustChip();
-  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();applyMatchDiv();setKids($("#matchList"),pipeline(orderMatches(myMatches().filter(matchIndOk))));}else if(VIEW==="retea"){renderConn();renderExchange();renderDiscover();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderSecTasksTop();renderAi();renderRec();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();renderShared();}}else if(VIEW==="profil"){prof();renderRelay();renderPlan();}
+  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();applyMatchDiv();setKids($("#matchList"),pipeline(orderMatches(myMatches().filter(matchIndOk))));}else if(VIEW==="retea"){renderConn();renderExchange();renderDiscover();renderNetStats();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderSecTasksTop();renderAi();renderRec();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();renderShared();}}else if(VIEW==="profil"){prof();renderRelay();renderPlan();}
   updateBadges();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 // backlog #7: empty-state ilustrat, consistent
 function estateBox(title,sub,action){return h("div",{class:"estate",style:{padding:"26px 20px"}},
@@ -2029,6 +2045,12 @@ function home(){const me=mem(ME)||{},mm=myMatches();
   if(meetToday.length)bits.push(meetToday.length+(meetToday.length===1?" întâlnire":" întâlniri"));
   if(tasksDue.length)bits.push(tasksDue.length+(tasksDue.length===1?" task scadent":" task-uri scadente"));
   if(stale)bits.push("o relație de reaprins");
+  // Redesign V2: linia "membri activi" + trio statistici surfațate
+  const activeMembers=Math.max(0,(DB.members||[]).length-1);
+  const ha=$("#hhActive");if(ha)setKids(ha,h("span",{class:"hh-dot"}),h("span",{text:activeMembers+" membri activi în rețeaua ta"}));
+  const deUrm=tasksOpen.length+(stale?1:0);
+  const sh=(id,v)=>{const e=$(id);if(e)e.textContent=String(v);};
+  sh("#h3a",con);sh("#h3b",prop);sh("#h3c",deUrm);
   $("#hhDay").textContent=bits.length?("Azi ai "+joinList(bits)+".")
     :prop?("Ai "+prop+(prop===1?" sugestie nouă":" sugestii noi")+" de văzut — hai să le descoperim.")
     :"Ești la zi. Moment bun să reaprinzi o relație sau să notezi un apel. ✨";
@@ -2849,6 +2871,12 @@ function renderConn(){const host=$("#connList");if(!host)return;
   renderReconnect(conn);
 }
 // loop3 #8: widget "Reteaua activa" — persoane cu interactiune in ultimele 30 zile (lista curata)
+function renderNetStats(){const now=Date.now(),win=30*864e5;
+  const conns=DB.matches.filter(m=>m.status==="conectat"&&(m.offer_member===ME||m.seek_member===ME));
+  let active=0;conns.forEach(m=>{const ts=(DB.messages||[]).filter(x=>x.match_id===m.id&&x.t).map(x=>x.t);const last=ts.length?Math.max(...ts):(m.at||0);if(last&&(now-last)<=win)active++;});
+  const prio=DB.matches.filter(m=>(m.offer_member===ME||m.seek_member===ME)&&m.status==="propus").length;
+  const sv=(id,v)=>{const e=$(id);if(e)e.textContent=String(v);};
+  sv("#n3a",conns.length);sv("#n3b",active);sv("#n3c",prio);}
 function renderActiveNet(conn){const host=$("#activeNet");if(!host)return;const now=Date.now(),win=30*864e5;
   const active=conn.map(m=>{const cel=mem(m.offer_member===ME?m.seek_member:m.offer_member);if(!cel)return null;
       const ts=DB.messages.filter(x=>x.match_id===m.id&&x.t).map(x=>x.t),lastA=ts.length?Math.max(...ts):(m.at||0);
