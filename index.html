@@ -1144,6 +1144,7 @@ header.multi .hmember{display:flex}
   --ink:#1C1340;--ink2:#3E3470;--muted:#6B6394;
   --primary:#7C3AED;--primary2:#7C3AED;--primary-dim:#6D28D9;--primary-soft:rgba(124,58,237,.12);
   --accent:#7C3AED;--accent-soft:rgba(124,58,237,.10);--cyan:#0891B2;--on-primary:#ffffff;
+  --success:#0D9488;--success-soft:rgba(13,148,136,.12);
   --gold:#DB2777;--gold2:#F472B6;--gold-dim:#BE185D;--gold-soft:rgba(219,39,119,.12);
   --hi:rgba(255,255,255,.7);--glass-input:rgba(255,255,255,.74);--glow:rgba(124,58,237,.34);
   --title-grad:linear-gradient(100deg,#1C1340 20%,#7C3AED 78%,#0891B2);--num-grad:linear-gradient(120deg,#1C1340,#7C3AED);
@@ -1158,8 +1159,9 @@ header.multi .hmember{display:flex}
   --ink:#EAE6FF;--ink2:#C7C0E8;--muted:#8B82B5;
   --primary:#22D3EE;--primary2:#67E8F9;--primary-dim:#7C3AED;--primary-soft:rgba(124,58,237,.22);
   --accent:#22D3EE;--accent-soft:rgba(34,211,238,.16);--cyan:#67E8F9;--on-primary:#0A0718;
+  --success:#2DD4BF;--success-soft:rgba(45,212,191,.16);
   --gold:#F472B6;--gold2:#F9A8D4;--gold-dim:#DB2777;--gold-soft:rgba(244,114,182,.16);
-  --hi:rgba(255,255,255,.08);--glass-input:rgba(255,255,255,.05);--glow:rgba(124,58,237,.5);
+  --hi:rgba(255,255,255,.08);--glass-input:rgba(255,255,255,.05);--glow:rgba(124,58,237,.45);
   --title-grad:linear-gradient(100deg,#fff 24%,#67E8F9 58%,#C4B5FD 88%);--num-grad:linear-gradient(120deg,#fff,#67E8F9);
   --nav-bg:linear-gradient(to top,rgba(11,8,32,.94),rgba(11,8,32,.5));
   --mesh:radial-gradient(58% 44% at 10% -3%,rgba(124,58,237,.34),transparent 60%),radial-gradient(52% 42% at 100% 4%,rgba(34,211,238,.22),transparent 58%),radial-gradient(55% 50% at 92% 98%,rgba(244,114,182,.16),transparent 58%),#0B0820;
@@ -1331,7 +1333,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07u · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07v · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -1612,7 +1614,7 @@ try{if(window.trustedTypes&&trustedTypes.createPolicy){trustedTypes.createPolicy
 const SEED=[["Ana Popescu","Director, Popescu Imobiliare","Imobiliare",92],["Bogdan Marin","Fondator, Marin Energy","Energie",88],["Cristina Ilie","CEO, Excavari Ilie","Constructii",90],["Darius Enache","Investitor privat","Finante",95],["Elena Voicu","Owner, Voicu Logistic","Transport",84],["Florin Dobre","Antreprenor, AgriFarm","Agricultura",80],["Gabriela Stan","Avocat, Stan & Asociatii","Juridic",93],["Horia Lungu","Director, NordSoft","IT",87],["Irina Pavel","Contabil-sef, FinPro","Finante",89],["Janos Kovacs","Importator, Kovacs Trade","Comert",78],["Liviu Toma","Dezvoltator, Toma Construct","Constructii",85],["Maria Radu","Marketing, Radu Media","Marketing",82],["Nicolae Barbu","Producator, Barbu Mobila","Productie",81],["Oana Dinu","HR, TalentHub","HR",86],["Paul Georgescu","Broker, AsigPlus","Asigurari",83],["Raluca Neagu","Owner, Neagu Catering","HoReCa",79],["Sorin Apostol","Inginer, Apostol Instalatii","Constructii",84],["Teodora Mihai","Designer, Mihai Studio","Creative",88],["Victor Stoica","Distribuitor, Stoica Auto","Auto",80],["Bianca Lazar","Fondator, Lazar Cosmetics","Productie",85]];
 const OFF={0:[["Spatii comerciale de inchiriat in centru","profil"],["Teren intravilan langa centura","nota 4 mai"]],1:[["Cariera de carbune in zona Gorj","nota 3 martie"],["Contracte furnizare energie firme","profil"]],2:[["Utilaje de excavat in Brasov","audio 12 ian"]],3:[["Capital pentru investitii energie si imobiliare","profil"]],4:[["Flota transport marfa national si UE","profil"]],5:[["Cereale en-gros la pret de producator","profil"]],6:[["Consultanta juridica M&A si contracte","profil"]],7:[["Dezvoltare software si AI la comanda","profil"]],8:[["Contabilitate si fiscalitate firme","profil"]],9:[["Import produse din Asia, logistica","profil"]],10:[["Antrepriza constructii rezidentiale","profil"]],11:[["Campanii marketing si productie video","profil"]],12:[["Mobilier la comanda HoReCa si birouri","profil"]],13:[["Recrutare IT si management","profil"]],14:[["Asigurari de firma si flote","profil"]],15:[["Catering evenimente corporate","profil"]],16:[["Instalatii electrice industriale","profil"]],17:[["Branding premium si identitate","profil"]],18:[["Distributie piese auto","profil"]],19:[["Productie cosmetice private-label","profil"]]};
 const SEEK={0:[["Investitor pentru proiect imobiliar","dictare"],["Furnizor de carbune pentru centrala","nota 2 mai"]],1:[["Investitor pentru proiect energetic","apel"],["Transport marfa agabaritic","profil"]],2:[["Contabil bun pentru firma","nota"],["Asigurare pentru flota utilaje","profil"]],3:[["Oportunitati in energie si agricultura","profil"]],4:[["Spatii de depozitare in vest","profil"]],5:[["Utilaje agricole si excavatoare","apel"]],6:[["Clienti firme pentru retainer juridic","profil"]],7:[["Investitor pentru produs SaaS","profil"]],8:[["Clienti noi pentru contabilitate","profil"]],9:[["Spatii de depozitare Bucuresti","profil"]],10:[["Teren pentru dezvoltare","profil"],["Materiale de constructii en-gros","nota"]],11:[["Clienti corporate","profil"]],12:[["Distribuitor mobilier","profil"]],13:[["Firme care recruteaza","profil"]],14:[["Firme cu flote de asigurat","profil"]],15:[["Spatii pentru evenimente","profil"]],16:[["Proiecte cu instalatii","profil"]],17:[["Clienti pentru rebranding","profil"]],18:[["Firme cu flote auto","profil"]],19:[["Distribuitor cosmetice si showroom","nota"]]};
-const COLORS=["#6366F1","#10B981","#F59E0B","#8B5CF6","#EC4899","#0EA5E9","#14B8A6","#F97316","#EF4444","#22C55E"];
+const COLORS=["#22D3EE","#7C3AED","#F472B6","#A78BFA","#67E8F9","#6366F1","#C084FC","#0EA5E9","#E879F9","#38BDF8"];
 const STOP=new Set("si sau de la in un o cu pe pentru din ca care este are am ai vreau caut ofer cineva zona bun buna nou noua a al ale lui langa".split(" "));
 const KEY="cercul_eie_v5",TKEY="cercul_theme",SKEY="cercul_salt";
 let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false,MATCHFILTER="all",NOTEFILTER="all",EDITTASK=null,EDITNOTE=null,CONNFILTER="all",EDITMEET=null,FOCUS=false,NOTERANGE="all",EDITGOAL=null,JUSTDONE=null,MKRAW=null,PENDING_RECOVERY=null,PENDING_ONBOARD=false;
@@ -2017,7 +2019,7 @@ function homePlanRender(d){const host=$("#homePlan");if(!host)return;const rows=
 const relOf=cel=>cel.rel||"activ";
 const REL={rece:["Rece","relrece"],activ:["Activ","relactiv"],prioritar:["Prioritar","relprio"]};
 /* loop4 #4-5: cod de conexiune (card public) + adaugare prin cod — networking fara server */
-const PAL=["#6366F1","#10B981","#F59E0B","#EF4444","#8B5CF6","#06B6D4","#EC4899","#14B8A6"];
+const PAL=["#7C3AED","#22D3EE","#F472B6","#6366F1","#A78BFA","#06B6D4","#E879F9","#38BDF8"];
 const b64utf8=s=>btoa(String.fromCharCode(...new TextEncoder().encode(s)));
 const unb64utf8=b=>new TextDecoder().decode(Uint8Array.from(atob(b),c=>c.charCodeAt(0)));
 function myPublicCard(){const me=mem(ME)||{name:"?"};
