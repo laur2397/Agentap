@@ -1128,47 +1128,52 @@ header.multi .hmember{display:flex}
 /* Profil/Rețea/Potriviri: avatarurile-smarald primesc un halo discret de jar (oameni „vii") */
 .av:not(.sq){box-shadow:0 8px 20px -6px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.25),0 0 16px -5px var(--glow)}
 /* ============================================================================
-   PULSE — identitate vizuală nouă: indigo profund + cyan/violet/roz neon.
-   Strat final care suprascrie toți tokenii (light + dark). Vibe fintech modern.
+   REDESIGN V2 — violet primary + ember/coral + teal. Paleta furnizată de
+   utilizator, mapată pe tokenii app-ului (light = Tema Zi, dark = Tema Noapte).
    ============================================================================ */
 :root{ /* gradienți de brand — identici pe ambele teme */
-  --accent-grad:linear-gradient(135deg,#22D3EE,#7C3AED);
-  --av-grad:linear-gradient(135deg,#22D3EE,#7C3AED);
-  --hero-grad:radial-gradient(120% 140% at 0% 0%,rgba(124,58,237,.96),transparent 56%),radial-gradient(120% 150% at 100% 100%,rgba(34,211,238,.62),transparent 55%),linear-gradient(135deg,#3a1d8a,#5b21b6 46%,#0e7490);
-  --brandbar:linear-gradient(to bottom,#22D3EE,#7C3AED);--on-gold:#ffffff;
+  --accent-grad:linear-gradient(140deg,#8A5CFF 0%,#6B38E8 50%,#9B45D8 100%);
+  --grad-ember:linear-gradient(135deg,#FF8A52 0%,#F4517E 100%);
+  --av-grad:linear-gradient(140deg,#8A5CFF,#6B38E8 55%,#9B45D8);
+  --hero-grad:radial-gradient(120% 140% at 0% 0%,rgba(138,92,255,.96),transparent 58%),radial-gradient(120% 150% at 100% 100%,rgba(155,69,216,.55),transparent 55%),linear-gradient(140deg,#7C4DF0,#6B38E8 52%,#8A3FD0);
+  --brandbar:linear-gradient(to bottom,#8A5CFF,#6B38E8);--on-gold:#ffffff;
 }
-/* LIGHT — lavandă luminoasă */
+/* LIGHT — Tema Zi (lavandă) */
 :root{
-  --bg:#F6F5FF;--bg2:#F6F5FF;--card:rgba(255,255,255,.86);--card2:rgba(255,255,255,.62);
-  --line:rgba(40,20,90,.10);--line2:rgba(40,20,90,.16);
-  --ink:#1C1340;--ink2:#3E3470;--muted:#6B6394;
-  --primary:#7C3AED;--primary2:#7C3AED;--primary-dim:#6D28D9;--primary-soft:rgba(124,58,237,.12);
-  --accent:#7C3AED;--accent-soft:rgba(124,58,237,.10);--cyan:#0891B2;--on-primary:#ffffff;
-  --success:#0D9488;--success-soft:rgba(13,148,136,.12);
-  --gold:#DB2777;--gold2:#F472B6;--gold-dim:#BE185D;--gold-soft:rgba(219,39,119,.12);
-  --hi:rgba(255,255,255,.7);--glass-input:rgba(255,255,255,.74);--glow:rgba(124,58,237,.34);
-  --title-grad:linear-gradient(100deg,#1C1340 20%,#7C3AED 78%,#0891B2);--num-grad:linear-gradient(120deg,#1C1340,#7C3AED);
-  --nav-bg:linear-gradient(to top,rgba(246,245,255,.96),rgba(246,245,255,.6));
-  --mesh:radial-gradient(58% 44% at 10% -3%,rgba(124,58,237,.12),transparent 60%),radial-gradient(52% 42% at 100% 2%,rgba(34,211,238,.12),transparent 58%),radial-gradient(55% 50% at 92% 100%,rgba(244,114,182,.10),transparent 58%),#F6F5FF;
-  --le-b1:rgba(124,58,237,.13);--le-b2:rgba(34,211,238,.12);--le-b3:rgba(244,114,182,.10);--le-vg:rgba(40,20,90,.05);
+  --bg:#EFEDF5;--bg2:#F4F2F9;--card:rgba(255,255,255,.86);--card2:#FFFFFF;
+  --line:#EBE8F2;--line2:#E0DCEB;
+  --ink:#1A1426;--ink2:#3E3852;--muted:#857F95;
+  --primary:#6A34E0;--primary2:#7C4DF0;--primary-dim:#4A23A6;--primary-soft:#F1EBFD;
+  --accent:#6A34E0;--accent-soft:#F6F2FE;--cyan:#0FB29F;--on-primary:#ffffff;
+  --success:#0FB29F;--success-soft:#E0F6F2;--warn:#E89318;--warn-soft:#FDF0DC;--warn-ink:#B5710F;
+  --gold:#FB6A3C;--gold2:#E89318;--gold-dim:#F2517E;--gold-soft:#FFEEE6;
+  --hi:rgba(255,255,255,.9);--glass-input:rgba(255,255,255,.74);--glow:rgba(106,52,224,.28);
+  --title-grad:linear-gradient(100deg,#1A1426 22%,#6A34E0 80%,#7C4DF0);--num-grad:linear-gradient(120deg,#1A1426,#6A34E0);
+  --nav-bg:linear-gradient(to top,rgba(255,255,255,.92),rgba(255,255,255,.6));
+  --mesh:radial-gradient(620px 420px at 8% -6%,rgba(124,77,240,.16),transparent 60%),radial-gradient(560px 420px at 102% 2%,rgba(255,126,77,.14),transparent 55%),radial-gradient(700px 560px at 50% 116%,rgba(80,90,230,.12),transparent 60%),#EFEDF5;
+  --le-b1:rgba(124,77,240,.12);--le-b2:rgba(255,126,77,.10);--le-b3:rgba(15,178,159,.10);--le-vg:rgba(40,20,90,.04);
 }
-/* DARK — indigo cosmic */
+/* DARK — Tema Noapte */
 [data-theme="dark"]{
-  --bg:#0A0718;--bg2:#0B0820;--card:rgba(255,255,255,.05);--card2:rgba(255,255,255,.08);
-  --line:rgba(255,255,255,.11);--line2:rgba(255,255,255,.18);
-  --ink:#EAE6FF;--ink2:#C7C0E8;--muted:#8B82B5;
-  --primary:#22D3EE;--primary2:#67E8F9;--primary-dim:#7C3AED;--primary-soft:rgba(124,58,237,.22);
-  --accent:#22D3EE;--accent-soft:rgba(34,211,238,.16);--cyan:#67E8F9;--on-primary:#0A0718;
-  --success:#2DD4BF;--success-soft:rgba(45,212,191,.16);
-  --gold:#F472B6;--gold2:#F9A8D4;--gold-dim:#DB2777;--gold-soft:rgba(244,114,182,.16);
-  --hi:rgba(255,255,255,.08);--glass-input:rgba(255,255,255,.05);--glow:rgba(124,58,237,.45);
-  --title-grad:linear-gradient(100deg,#fff 24%,#67E8F9 58%,#C4B5FD 88%);--num-grad:linear-gradient(120deg,#fff,#67E8F9);
-  --nav-bg:linear-gradient(to top,rgba(11,8,32,.94),rgba(11,8,32,.5));
-  --mesh:radial-gradient(58% 44% at 10% -3%,rgba(124,58,237,.34),transparent 60%),radial-gradient(52% 42% at 100% 4%,rgba(34,211,238,.22),transparent 58%),radial-gradient(55% 50% at 92% 98%,rgba(244,114,182,.16),transparent 58%),#0B0820;
-  --le-b1:rgba(124,58,237,.30);--le-b2:rgba(34,211,238,.20);--le-b3:rgba(244,114,182,.16);--le-vg:rgba(0,0,0,.34);
+  --bg:#0D0A15;--bg2:#120E1E;--card:rgba(255,255,255,.045);--card2:rgba(255,255,255,.07);
+  --line:rgba(255,255,255,.08);--line2:rgba(255,255,255,.13);
+  --ink:#F5F2FB;--ink2:#CFCAE0;--muted:#A39EB6;
+  --primary:#9B6BFF;--primary2:#B79BFF;--primary-dim:#7C4DF0;--primary-soft:rgba(124,77,240,.18);
+  --accent:#9B6BFF;--accent-soft:rgba(124,77,240,.12);--cyan:#34E0C4;--on-primary:#ffffff;
+  --success:#34E0C4;--success-soft:rgba(52,224,196,.14);--warn:#F8B84E;--warn-soft:rgba(248,184,78,.16);--warn-ink:#F8B84E;
+  --gold:#FF7E4D;--gold2:#F8B84E;--gold-dim:#F4517E;--gold-soft:rgba(255,126,77,.16);
+  --hi:rgba(255,255,255,.06);--glass-input:rgba(255,255,255,.05);--glow:rgba(124,77,240,.5);
+  --title-grad:linear-gradient(100deg,#F5F2FB 28%,#B79BFF 78%,#9B6BFF);--num-grad:linear-gradient(120deg,#fff,#B79BFF);
+  --nav-bg:linear-gradient(to top,rgba(16,12,26,.92),rgba(16,12,26,.5));
+  --mesh:radial-gradient(620px 420px at 8% -6%,rgba(124,77,240,.32),transparent 60%),radial-gradient(560px 420px at 102% 4%,rgba(244,81,126,.20),transparent 55%),radial-gradient(700px 560px at 50% 116%,rgba(80,60,220,.24),transparent 60%),#0D0A15;
+  --le-b1:rgba(124,77,240,.30);--le-b2:rgba(244,81,126,.18);--le-b3:rgba(52,224,196,.14);--le-vg:rgba(0,0,0,.34);
 }
-/* butonul principal: text alb pe gradientul cyan→violet */
+/* butonul principal: text alb pe gradientul violet */
 .btn.gold,.msg.me{color:#fff!important}
+/* logo: pastilă violet cu flacără albă (ca în mockup) */
+.brand .mk.flame{background:var(--accent-grad)!important;border-radius:12px!important;box-shadow:0 6px 18px -4px rgba(124,77,240,.6)!important;padding:8px!important}
+.brand .mk.flame svg path{fill:#fff!important}
+.brand .mk.flame svg circle{fill:rgba(255,255,255,.85)!important}
 </style>
 </head>
 <body>
@@ -1333,7 +1338,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07v · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07w · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
