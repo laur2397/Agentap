@@ -802,6 +802,12 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
 .recsum{margin-top:14px;background:var(--primary-soft);border:1px solid var(--line2);border-radius:14px;padding:14px}
 .recsum-h{font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--primary);font-weight:700;margin-bottom:6px}
 .recsum-b{font-size:13px;color:var(--ink);line-height:1.55;white-space:pre-wrap}
+.recactions{margin-top:10px;background:var(--card2);border-color:var(--line2)}
+.recact-row{display:flex;align-items:center;gap:8px;margin:8px 0}
+.recact-t{flex:1;font-size:13px;color:var(--ink);line-height:1.4}
+.recact-lbl{font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--primary);font-weight:700;margin:11px 0 5px}
+.recact-row2{display:flex;gap:7px;margin-top:7px;flex-wrap:wrap}
+.btn.xs{font-size:12px;padding:7px 12px;min-height:38px}
 /* ============================================================================
    LOOP 20 — polish pe toată aplicația (token-driven, ambele teme)
    ============================================================================ */
@@ -1076,7 +1082,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07h · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07i · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -2130,12 +2136,14 @@ function renderRec(){const host=$("#recBody");if(!host)return;const r=DB.rec||{}
         ...others.map(m=>h("option",{value:String(m.id),text:m.name}))),
       h("input",{id:"recWhoFree",class:"recwhofree",placeholder:"…sau scrie un nume (dacă nu e în aplicație)","aria-label":"Nume persoană (text liber)"})));
     kids.push(h("div",{class:"recacts"},
-      h("button",{class:"btn gold sm","data-act":"recSum",text:"✨ Rezumă cu AI"}),
+      h("button",{class:"btn gold sm","data-act":"recSum",text:"✨ Rezumă + acțiuni"}),
       h("button",{class:"btn ghost sm","data-act":"recSave",text:"Salvează în Jurnal"}),
       h("button",{class:"linklike","data-act":"recClear",text:"Șterge"})));
   } else if(REC.audioBlob){kids.push(h("div",{class:"recacts"},h("button",{class:"btn gold sm","data-act":"recTr",text:"Transcrie cu AI"})));}
   if(r.summary){kids.push(h("div",{class:"recsum"},h("div",{class:"recsum-h",text:"Rezumat"}),h("div",{class:"recsum-b",text:r.summary})));}
+  var _ap=recActionsPanel(r);if(_ap)kids.push(_ap);
   setKids(host,...kids);
+  const _dr=$("#recDraft");if(_dr&&r.actions)_dr.value=r.actions.draft||"";
   const t=$("#recText");if(t){t.value=r.transcript||"";t.oninput=()=>recEdit(t.value);}
   const w=$("#recWho");if(w){w.value=r.who||"";w.onchange=()=>{DB.rec.who=w.value;if(w.value){DB.rec.whoFree="";const f=$("#recWhoFree");if(f)f.value="";}save();};}
   const wf=$("#recWhoFree");if(wf){wf.value=r.whoFree||"";wf.oninput=()=>{DB.rec.whoFree=wf.value;if(wf.value){DB.rec.who="";const sel=$("#recWho");if(sel)sel.value="";}save();};}}
@@ -2210,13 +2218,62 @@ async function recTr(){if(!REC.audioBlob){toast("Nu există audio de transcris")
     if(DB.rec.transcript){REC.audioBlob=null;DB.rec.err="";}else DB.rec.err="Transcriere goală — n-am prins text.";
     save();hideProc();renderRec();
     toast(txt?"Transcriere gata":"Transcriere goală");}catch(e){DB.rec.err="Transcriere eșuată: "+(e&&e.message||e);save();hideProc();renderRec();toast("Transcriere eșuată");}}
+function extractJSON(s){if(!s)return null;s=String(s);var i=s.indexOf("{"),j=s.lastIndexOf("}");if(i<0||j<=i)return null;try{return JSON.parse(s.slice(i,j+1));}catch(_){return null;}}
+function recActionsPanel(r){var a=r.actions;if(!a)return null;
+  var kids=[h("div",{class:"recsum-h",text:"🤖 Acțiuni propuse de secretară"})];
+  var linkedName=r.who?((mem(+r.who)||{}).name||""):(r.whoFree||"");
+  if(a.who&&a.who.toLowerCase()!==(linkedName||"").toLowerCase())
+    kids.push(h("div",{class:"recact-row"},h("span",{class:"recact-t"},"👤 Persoană detectată: "+a.who),h("button",{class:"btn ghost xs","data-act":"recActWho",text:"Folosește"})));
+  (a.tasks||[]).forEach(function(t,i){if(t.added)return;
+    kids.push(h("div",{class:"recact-row"},h("span",{class:"recact-t"},"☐ "+t.text+(t.when?(" · "+t.when):"")),h("button",{class:"btn ghost xs","data-act":"recActTask","data-id":String(i),text:"Adaugă"})));});
+  var pend=(a.tasks||[]).filter(function(t){return !t.added;});
+  if(pend.length>1)kids.push(h("button",{class:"btn gold xs","data-act":"recActAll",style:{marginTop:"4px"},text:"Adaugă toate task-urile ("+pend.length+")"}));
+  if(a.draft){kids.push(h("div",{class:"recact-lbl",text:"✉ Draft de mesaj (editabil)"}));
+    kids.push(h("textarea",{id:"recDraft",class:"rectext",rows:"4","aria-label":"Draft mesaj"}));
+    kids.push(h("div",{class:"recact-row2"},h("button",{class:"btn gold xs","data-act":"recActCopy",text:"📋 Copiază"}),h("button",{class:"btn ghost xs","data-act":"recActWa",text:"Trimite (WhatsApp/SMS)"})));}
+  if(a.meeting&&a.meeting.purpose)
+    kids.push(h("div",{class:"recact-row"},h("span",{class:"recact-t"},"📅 Întâlnire: "+a.meeting.purpose+(a.meeting.when?(" ("+a.meeting.when+")"):"")),h("button",{class:"btn ghost xs","data-act":"recActMeet",text:"Adaugă"})));
+  return h("div",{class:"recsum recactions"},kids);}
+function recActWho(){var a=DB.rec&&DB.rec.actions;if(!a||!a.who)return;
+  var m=(DB.members||[]).find(function(x){return x.id!==ME&&x.name.toLowerCase()===a.who.toLowerCase();});
+  if(m){DB.rec.who=String(m.id);DB.rec.whoFree="";toast("Legat de "+m.name);}else{DB.rec.whoFree=a.who;DB.rec.who="";toast("Nume setat: "+a.who);}
+  save();renderRec();}
+function recActTask(i){var a=DB.rec&&DB.rec.actions;if(!a||!a.tasks||!a.tasks[i])return;var t=a.tasks[i];
+  var due=parseDue(t.when||"")||parseDue(t.text||"")||"";
+  DB.tasks.push({id:DB.seq++,member_id:ME,text:t.text,due:due,done:0,prio:0,t:Date.now()});
+  t.added=true;logA("Task din apel: "+t.text);save();renderRec();toast("Task adăugat"+(due?(" · termen "+fmtWhen(due)):""));}
+function recActAllTasks(){var a=DB.rec&&DB.rec.actions;if(!a||!a.tasks)return;var n=0;
+  a.tasks.forEach(function(t){if(t.added)return;var due=parseDue(t.when||"")||"";DB.tasks.push({id:DB.seq++,member_id:ME,text:t.text,due:due,done:0,prio:0,t:Date.now()});t.added=true;n++;});
+  if(n){logA(n+" task-uri din apel");save();renderRec();toast(n+" task-uri adăugate");}}
+function recDraftText(){return (($("#recDraft")||{}).value||(DB.rec&&DB.rec.actions&&DB.rec.actions.draft)||"").trim();}
+function recActCopy(){var t=recDraftText();if(!t){toast("Nimic de copiat");return;}
+  try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){toast("Draft copiat");}).catch(function(){var d=$("#recDraft");if(d)d.select();toast("Selectează și copiază");});return;}}catch(_){}
+  var d=$("#recDraft");if(d)d.select();toast("Selectează și copiază");}
+function recActWa(){var t=recDraftText();if(!t){toast("Nimic de trimis");return;}
+  try{if(navigator.share){navigator.share({text:t}).catch(function(){});return;}}catch(_){}
+  try{window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank","noopener");}catch(_){}}
+function recActMeet(){var a=DB.rec&&DB.rec.actions;if(!a||!a.meeting)return;
+  var whoName=(DB.rec.who?((mem(+DB.rec.who)||{}).name||""):"")||DB.rec.whoFree||a.who||"";
+  var due=parseDue(a.meeting.when||"")||addDays(today(),3);
+  DB.meetings.push({id:DB.seq++,a:ME,b:null,guest:whoName||"Apel",when:due,status:"confirmat",personal:1,goal:a.meeting.purpose||"",at:Date.now()});
+  a.meeting=null;logA("Întâlnire din apel adăugată");save();renderRec();toast("Întâlnire adăugată"+(whoName?(" cu "+whoName):"")+" · "+fmtWhen(due));}
 async function recSum(){const tx=(DB.rec&&DB.rec.transcript||"").trim();if(!tx){toast("Nu există transcript de rezumat");return;}
   if(!aiOn()){toast("Configurează întâi asistentul AI");return;}
   showProc();try{
-    const msgs=[{role:"system",content:"Ești asistentul unui profesionist. Rezumă o conversație de apel (ambele părți), în română, structurat și concis."},
-      {role:"user",content:"Rezumă acest apel. Format:\n• Rezumat (2-3 fraze)\n• Ce a oferit/cerut fiecare parte\n• Decizii\n• Pași următori\n\nTranscriere:\n"+tx.slice(0,8000)}];
-    const s=await aiCall(msgs);DB.rec.summary=(s||"").trim();save();hideProc();renderRec();
-  }catch(e){hideProc();toast("Rezumat eșuat: "+(e&&e.message||e));}}
+    const sys="Ești secretara AI a unui profesionist de business. Analizezi transcrierea unui apel și extragi acțiuni concrete. Răspunzi DOAR cu JSON valid, fără markdown, fără text în plus.";
+    const schema='{"summary":"3-5 puncte scurte, fiecare pe linie nouă începând cu •","who":"numele persoanei cu care a vorbit sau gol","tasks":[{"text":"task de follow-up la imperativ","when":"azi|maine|poimaine|in N zile|luni..duminica sau gol"}],"draft":"un mesaj scurt de follow-up (2-4 fraze) cald și profesionist, în română","meeting":{"purpose":"scopul unei eventuale întâlniri","when":"sugestie sau gol"}}';
+    const msgs=[{role:"system",content:sys},{role:"user",content:"Din transcrierea de apel de mai jos, întoarce JSON cu structura:\n"+schema+"\nMaxim 3 task-uri. Dacă nu e cazul unei întâlniri, pune meeting:null. Transcriere:\n"+tx.slice(0,8000)}];
+    const raw=await aiCall(msgs);const obj=extractJSON(raw);
+    if(obj&&typeof obj==="object"){
+      DB.rec.summary=((obj.summary||"")+"").trim()||(raw||"").trim();
+      DB.rec.actions={who:((obj.who||"")+"").trim().slice(0,60),
+        tasks:(Array.isArray(obj.tasks)?obj.tasks:[]).slice(0,5).map(function(t){return {text:clean(((t&&t.text)||"")+"").slice(0,160),when:clean(((t&&t.when)||"")+"").slice(0,40)};}).filter(function(t){return t.text;}),
+        draft:cleanLong(((obj.draft||"")+"")).slice(0,600),
+        meeting:(obj.meeting&&(obj.meeting.purpose||obj.meeting.when))?{purpose:clean((obj.meeting.purpose||"")+"").slice(0,160),when:clean((obj.meeting.when||"")+"").slice(0,60)}:null};
+    }else{DB.rec.summary=(raw||"").trim();DB.rec.actions=null;}
+    save();hideProc();renderRec();
+    if(DB.rec.actions)toast("Secretara a extras acțiuni — verifică-le mai jos");
+  }catch(e){hideProc();toast("Extragere eșuată: "+(e&&e.message||e));}}
 function recSave(){const r=DB.rec||{};const who=r.who?mem(+r.who):null;
   const freeName=clean((r.whoFree||"").trim()).slice(0,60);
   const withName=who?who.name:freeName; // membru ales SAU nume scris manual (persoana din afara aplicatiei)
@@ -2227,7 +2284,7 @@ function recSave(){const r=DB.rec||{};const who=r.who?mem(+r.who):null;
   DB.notes=DB.notes||[];DB.notes.push({id:DB.seq++,member_id:ME,text:body+" #apel",t:Date.now(),about:who?who.id:undefined});
   logA("Rezumat de apel salvat în Jurnal"+(withName?(" (cu "+withName+")"):""));save();
   toast(who?("Salvat — apare și în brief-ul lui "+who.name.split(" ")[0]):(freeName?("Salvat — apel cu "+freeName):"Salvat în Jurnal (#apel)"));}
-function recClear(){if(!confirm("Ștergi transcrierea și rezumatul curent?"))return;DB.rec=DB.rec||{};DB.rec.transcript="";DB.rec.summary="";DB.rec.err="";REC.audioBlob=null;save();renderRec();}
+function recClear(){if(!confirm("Ștergi transcrierea și rezumatul curent?"))return;DB.rec=DB.rec||{};DB.rec.transcript="";DB.rec.summary="";DB.rec.err="";DB.rec.actions=null;REC.audioBlob=null;save();renderRec();}
 function aiAudioOk(){const p=aiCfg().provider;return p==="openai"||p==="managed"||p==="gemini"||p==="custom"||p==="local";}
 async function blobB64(blob){return new Promise((res,rej)=>{const fr=new FileReader();fr.onerror=()=>rej(new Error("citire audio"));fr.onload=()=>res(String(fr.result).split(",")[1]||"");fr.readAsDataURL(blob);});}
 async function aiTranscribe(blob){const c=aiCfg();
@@ -3145,6 +3202,12 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="recSum")recSum();
   else if(a==="recSave")recSave();
   else if(a==="recClear")recClear();
+  else if(a==="recActTask")recActTask(id);
+  else if(a==="recActAll")recActAllTasks();
+  else if(a==="recActCopy")recActCopy();
+  else if(a==="recActWa")recActWa();
+  else if(a==="recActWho")recActWho();
+  else if(a==="recActMeet")recActMeet();
   else if(a==="profedit")editProfile();
   else if(a==="profsave")saveProfile();
   else if(a==="profcancel")cancelProfile();
