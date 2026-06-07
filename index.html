@@ -825,6 +825,33 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
 /* panoul de acțiuni — evidențiat (din apel → acțiuni) */
 .recactions{margin-top:12px;background:linear-gradient(168deg,var(--primary-soft),transparent 90%)!important;border:1px solid var(--primary-dim)!important;border-radius:18px;padding:16px}
 .recactions>.recsum-h{color:var(--primary-dim);font-size:11.5px;letter-spacing:.6px}
+/* ===== Secretara redesign v2: hero editorial + reportofon idle premium + unelte pliabile ===== */
+.sechero{position:relative;margin:-2px 0 4px;padding:8px 2px 4px}
+.sechero::before{content:"";position:absolute;inset:-30px -40px auto -40px;height:180px;background:radial-gradient(60% 90% at 16% 0%,var(--primary-soft),transparent 70%),radial-gradient(50% 80% at 100% 10%,var(--gold-soft),transparent 72%);pointer-events:none;z-index:0}
+.sechero>*{position:relative;z-index:1}
+.sechero .eyebrow{margin-bottom:3px}
+.sechero h2.title{font-size:33px;line-height:1.04;margin:2px 0 10px;background:var(--title-grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.sechero .lead{font-family:var(--serif);font-size:15.5px;color:var(--ink2);line-height:1.5;max-width:33ch;margin:0}
+/* reportofon idle — card premium centrat */
+.recidle{text-align:center;padding:12px 6px 6px}
+.recmic{width:78px;height:78px;border-radius:50%;margin:0 auto 15px;display:grid;place-items:center;background:radial-gradient(circle at 50% 32%,var(--primary-soft),transparent 70%),var(--card2);border:1px solid var(--primary-dim);box-shadow:0 0 0 7px var(--primary-soft),0 14px 34px -12px var(--glow);cursor:pointer;transition:transform .2s var(--ease),box-shadow .3s var(--ease)}
+.recmic:hover{box-shadow:0 0 0 9px var(--primary-soft),0 16px 38px -10px var(--glow)}
+.recmic:active{transform:scale(.94)}
+.recmic svg{width:32px;height:32px;color:var(--primary-dim)}
+.recidle-t{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--ink)}
+.recidle-p{font-size:12px;color:var(--muted);line-height:1.5;max-width:280px;margin:6px auto 0}
+.recidle-cta{margin-top:16px}
+/* header sectiune serif (chat) */
+.secsec{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--ink);margin:26px 0 12px;display:flex;align-items:center;gap:9px}
+.secsec .si{font-size:16px;opacity:.92}
+/* unelte secundare — pliabile, ca topul sa ramana curat */
+.secmore{margin-top:20px;border-top:1px solid var(--line);padding-top:2px}
+.secmore>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:11px;padding:15px 4px 13px;font-family:var(--serif);font-size:17px;color:var(--ink)}
+.secmore>summary::-webkit-details-marker{display:none}
+.secmore>summary .si{font-size:15px}
+.secmore>summary .chev{margin-left:auto;color:var(--muted);font-size:20px;line-height:1;transition:transform .2s var(--ease)}
+.secmore[open]>summary .chev{transform:rotate(90deg)}
+.secmore>summary .mc{font-size:11.5px;color:var(--muted);font-family:var(--sans);font-weight:600}
 /* ============================================================================
    LOOP 20 — polish pe toată aplicația (token-driven, ambele teme)
    ============================================================================ */
@@ -1055,14 +1082,17 @@ header.multi .hmember{display:flex}
 
   <!-- SECRETARA AI -->
   <section id="secretara" class="view">
-    <div class="eyebrow">Asistent</div><h2 class="title">Secretara ta</h2>
-    <p class="sub">Intalniri, notite si pregatire — intr-un singur loc.</p>
+    <div class="sechero">
+      <div class="eyebrow">Asistent</div>
+      <h2 class="title">Secretara ta</h2>
+      <p class="lead">Pune apelul pe difuzor — îl ascult și ți-l transform în acțiuni. Sau întreabă-mă orice despre rețeaua ta.</p>
+    </div>
     <div id="secSummary" class="secsum"></div>
     <div class="seccard" id="recCard"><div class="sec nobar"><span class="si">🎙️</span>Reportofon apel <span class="recver">v3.5</span></div>
-      <p class="sub">Merge cu <b>orice apel</b>, cu <b>oricine</b> — persoana <b>nu trebuie să fie în aplicație</b>. Pui apelul pe <b>difuzor</b>, captăm prin microfon și transcriem ce se vorbește, apoi facem rezumatul. <b>Nu salvăm audio</b>. Notă onestă: pe un singur telefon trebuie să ții Ember deschis pe ecran (când treci în altă aplicație, telefonul oprește microfonul) — ideal pe difuzor sau pe un al 2-lea dispozitiv.</p>
+      <p class="sub" style="margin-bottom:6px">Pe <b>difuzor</b> prind ambele voci și transcriu, apoi extrag acțiuni — <b>fără să salvez audio</b>. Ține Ember deschis pe ecran în timpul apelului.</p>
       <div id="recBody"></div>
     </div>
-    <div class="sec nobar" style="margin-top:18px;justify-content:flex-start;align-items:center"><span class="si">✨</span>Asistent AI</div>
+    <div class="secsec"><span class="si">✨</span>Întreabă secretara</div>
     <div class="aiwrap" id="aiWrap">
       <div class="aibar">
         <span class="aibadge" id="aiBadge">Dezactivat</span>
@@ -1104,7 +1134,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07k · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07l · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -1112,6 +1142,8 @@ header.multi .hmember{display:flex}
     </div>
     <div class="focusbar"><button class="btn ghost sm" data-act="focus" aria-label="Comuta modul Focus">🎯 Focus</button></div>
     <div id="focusPanel"></div>
+    <details class="secmore">
+      <summary><span class="si">🗂</span>Unelte<span class="mc">&nbsp;— întâlniri · task-uri · notițe · jurnal</span><span class="chev">›</span></summary>
     <div class="seccard"><div class="sec"><span class="si">📅</span>Azi</div>
       <div id="todayBox"></div></div>
     <div class="seccard" id="meetCard"><div class="sec"><span class="si">🤝</span>Întâlniri</div>
@@ -1157,6 +1189,7 @@ header.multi .hmember{display:flex}
         <button class="chip on" data-act="nrange" data-r="all">Tot</button></div>
       <div class="filters" id="noteFilters" style="margin-top:10px"></div>
       <div id="notesList" style="margin-top:10px"></div></div>
+    </details>
   </section>
 
   <!-- PROFIL -->
@@ -2159,8 +2192,21 @@ function renderRec(){const host=$("#recBody");if(!host)return;const r=DB.rec||{}
       h("div",{class:"recsetup-t",text:"⚠ Întâi configurează un asistent AI"}),
       h("div",{class:"recsetup-p",text:"Fără el pot înregistra, dar nu am cu ce să transcriu și să rezum. Gemini are cheie gratuită — durează 1 minut."}),
       h("button",{class:"btn gold sm","data-act":"recGoAI",onclick:()=>recGoAI(),text:"⚙ Configurează asistentul AI"})));
+  }else if(r.transcript||r.summary){
+    // un apel a fost deja procesat -> buton compact pentru un apel nou
+    kids.push(h("div",{class:"recctrl"},h("button",{class:"btn gold sm","data-act":"recStart",onclick:()=>recStart(),text:"● Înregistrează alt apel"})));
   }else{
-    kids.push(h("div",{class:"recctrl"},h("button",{class:"btn gold sm","data-act":"recStart",onclick:()=>recStart(),text:"● Înregistrează apel"})));
+    // stare proaspata -> card premium centrat (cerc cu microfon)
+    kids.push(h("div",{class:"recidle"},
+      h("div",{class:"recmic",onclick:()=>recStart(),role:"button","aria-label":"Înregistrează apel",tabindex:"0",onkeydown:e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();recStart();}}},
+        svgEl("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":"2","stroke-linecap":"round","stroke-linejoin":"round"},
+          svgEl("rect",{x:"9",y:"2.5",width:"6",height:"11",rx:"3"}),
+          svgEl("path",{d:"M5 11a7 7 0 0 0 14 0"}),
+          svgEl("line",{x1:"12",y1:"18",x2:"12",y2:"21.5"}),
+          svgEl("line",{x1:"8.5",y1:"21.5",x2:"15.5",y2:"21.5"}))),
+      h("div",{class:"recidle-t",text:"Gata de apel"}),
+      h("div",{class:"recidle-p",text:"Apasă, pune pe difuzor și vorbește. La final îți dau rezumat + acțiuni, gata de trimis."}),
+      h("div",{class:"recidle-cta"},h("button",{class:"btn gold","data-act":"recStart",onclick:()=>recStart(),text:"● Înregistrează apel"}))));
   }
   if(r.err){kids.push(h("div",{class:"recerr"},h("span",{text:"⚠ "+r.err})));}
   if(r.transcript){kids.push(h("textarea",{id:"recText",class:"rectext",rows:"6","aria-label":"Transcriere editabilă"}));
