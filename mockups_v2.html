@@ -1,0 +1,234 @@
+<!doctype html><html lang="ro"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ember — 6 identități vizuale noi</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&family=Archivo:wght@500;600;700;800;900&family=Archivo+Black&family=Quicksand:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0c0c10;padding:34px;display:flex;flex-wrap:wrap;gap:38px;justify-content:center;align-items:flex-start;font-family:'Inter',sans-serif}
+.col{display:flex;flex-direction:column;align-items:center;gap:11px;width:340px}
+.tag{font-size:12.5px;font-weight:800;letter-spacing:.5px;color:#fff}
+.tag .pal{display:inline-flex;gap:4px;margin-left:8px;vertical-align:middle}
+.tag .pal i{width:13px;height:13px;border-radius:50%;display:inline-block}
+.tag small{display:block;color:#8a8a96;font-weight:600;font-size:11px;margin-top:4px;line-height:1.45}
+.frame{width:340px;height:720px;border-radius:40px;overflow:hidden;position:relative;box-shadow:0 40px 90px -28px #000;border:1px solid rgba(255,255,255,.1)}
+.scr{position:absolute;inset:0;display:flex;flex-direction:column}
+.nav{position:absolute;left:0;right:0;bottom:0;height:60px;display:flex;justify-content:space-around;align-items:center}
+.nv{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:8.5px;font-weight:600}
+.nv i{width:18px;height:18px;border-radius:6px;background:currentColor;opacity:.9}
+
+/* ===================== 1 · PULSE (neon, dark indigo) ===================== */
+.f1{background:radial-gradient(120% 60% at 80% -10%,#3a1d8a,transparent 55%),radial-gradient(90% 50% at 0% 100%,#0e7490,transparent 55%),#0B0820;font-family:'Space Grotesk',sans-serif;color:#EAE6FF}
+.f1 .scr{padding:30px 20px 0}
+.f1 .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}
+.f1 .mk{display:flex;align-items:center;gap:9px;font-weight:700;font-size:18px;letter-spacing:-.5px}
+.f1 .mk b{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#22D3EE,#7C3AED);display:grid;place-items:center;box-shadow:0 0 18px #7c3aedaa}
+.f1 .mk b::after{content:"";width:11px;height:11px;background:#fff;clip-path:polygon(50% 0,0 60%,45% 60%,30% 100%,100% 35%,55% 35%)}
+.f1 .ico{width:28px;height:28px;border-radius:9px;background:#ffffff14;display:grid;place-items:center;color:#b9b2e6;font-size:13px}
+.f1 .hi{font-size:13px;color:#9d96c9;letter-spacing:2px;text-transform:uppercase;font-weight:600}
+.f1 h1{font-size:33px;font-weight:700;letter-spacing:-1.2px;line-height:1.05;margin:7px 0 22px}
+.f1 h1 span{background:linear-gradient(100deg,#22D3EE,#A78BFA 55%,#F472B6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.f1 .card{border-radius:22px;padding:20px;background:linear-gradient(150deg,#ffffff10,#ffffff05);border:1px solid #ffffff1f;position:relative;overflow:hidden}
+.f1 .card::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 80% at 100% 0,#7C3AED44,transparent 60%),radial-gradient(50% 70% at 0 100%,#22D3EE33,transparent 60%)}
+.f1 .card>*{position:relative}
+.f1 .pc{display:inline-block;font-size:11px;font-weight:700;color:#22D3EE;border:1px solid #22d3ee55;border-radius:20px;padding:4px 11px;background:#22d3ee18}
+.f1 .nm{font-size:24px;font-weight:700;letter-spacing:-.6px;margin:13px 0 3px}
+.f1 .ro{font-size:12.5px;color:#9d96c9}
+.f1 .ln{font-size:14px;color:#cfc9f0;line-height:1.5;margin:14px 0 18px}
+.f1 .b{background:linear-gradient(135deg,#22D3EE,#7C3AED);color:#fff;font-weight:700;border:0;border-radius:13px;padding:13px;font-size:13.5px;width:100%;box-shadow:0 12px 30px -8px #7c3aedcc;font-family:inherit}
+.f1 .mini{display:flex;gap:11px;margin-top:13px}
+.f1 .mc{flex:1;border-radius:16px;padding:13px;background:#ffffff0d;border:1px solid #ffffff14}
+.f1 .mc .v{font-size:21px;font-weight:700;background:linear-gradient(120deg,#22D3EE,#F472B6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.f1 .mc .l{font-size:10px;color:#9d96c9;margin-top:2px}
+.f1 .nav{background:#0b0820cc;backdrop-filter:blur(16px);border-top:1px solid #ffffff14}
+.f1 .nv{color:#6b6394}.f1 .nv.on{color:#22D3EE}
+
+/* ===================== 2 · HEARTH (warm cream, coral) ===================== */
+.f2{background:radial-gradient(110% 40% at 100% 0,#FFE3CF,transparent 60%),#FFF6EE;font-family:'Nunito',sans-serif;color:#3A2A20}
+.f2 .scr{padding:30px 20px 0}
+.f2 .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.f2 .mk{display:flex;align-items:center;gap:9px;font-weight:900;font-size:19px;color:#C2492F}
+.f2 .mk b{width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFD08A,#FF6B5E);box-shadow:0 6px 14px -3px #ff6b5e88}
+.f2 .ico{width:30px;height:30px;border-radius:50%;background:#fff;box-shadow:0 4px 12px -3px #c2492f33;display:grid;place-items:center;color:#C2492F}
+.f2 .hi{font-size:13px;color:#A0714E;font-weight:700}
+.f2 h1{font-size:30px;font-weight:900;line-height:1.08;margin:4px 0 6px;letter-spacing:-.5px}
+.f2 h1 span{color:#FF6B5E}
+.f2 .sub{font-size:13.5px;color:#8a7058;font-weight:600;margin-bottom:20px}
+.f2 .card{border-radius:26px;padding:20px;background:#fff;box-shadow:0 18px 40px -16px #c2492f2e,0 3px 8px -4px #00000012}
+.f2 .row{display:flex;align-items:center;gap:13px}
+.f2 .av{width:50px;height:50px;border-radius:18px;background:linear-gradient(135deg,#FFB36B,#FF6B5E);display:grid;place-items:center;color:#fff;font-weight:900;font-size:18px}
+.f2 .nm{font-size:18px;font-weight:900}.f2 .ro{font-size:12px;color:#9c8164;font-weight:700}
+.f2 .badge{margin-left:auto;background:#FFEFD6;color:#C28A2F;font-weight:800;font-size:12px;border-radius:14px;padding:6px 11px}
+.f2 .ln{font-size:14px;color:#6b5645;line-height:1.5;margin:15px 0 16px;font-weight:600}
+.f2 .b{background:linear-gradient(135deg,#FF8A5E,#FF6B5E);color:#fff;font-weight:800;border:0;border-radius:16px;padding:13px;width:100%;font-size:14px;font-family:inherit;box-shadow:0 12px 26px -10px #ff6b5ecc}
+.f2 .pills{display:flex;gap:9px;margin-top:14px}
+.f2 .p{flex:1;background:#fff;border-radius:18px;padding:13px;text-align:center;box-shadow:0 8px 20px -12px #c2492f33;font-weight:800;font-size:12px;color:#7a6048}
+.f2 .p .e{font-size:18px;display:block;margin-bottom:4px}
+.f2 .nav{background:#fffaf4;border-top:1px solid #f0e2d4}
+.f2 .nv{color:#c2a98f}.f2 .nv.on{color:#FF6B5E}
+
+/* ===================== 3 · PRESS (brutalist mono, acid) ===================== */
+.f3{background:#F2F1EA;font-family:'Archivo',sans-serif;color:#0C0C0C}
+.f3 .scr{padding:0}
+.f3 .top{display:flex;justify-content:space-between;align-items:center;padding:22px 18px;border-bottom:2.5px solid #0C0C0C}
+.f3 .mk{font-family:'Archivo Black';font-size:20px;letter-spacing:-1px;display:flex;align-items:center;gap:8px}
+.f3 .mk b{width:26px;height:26px;background:#0C0C0C;color:#C7F000;display:grid;place-items:center;font-size:15px}
+.f3 .ico{font-weight:800;font-size:13px;border:2px solid #0c0c0c;padding:3px 8px}
+.f3 .hd{padding:22px 18px 18px;border-bottom:2.5px solid #0c0c0c}
+.f3 .k{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;background:#C7F000;display:inline-block;padding:3px 7px}
+.f3 h1{font-family:'Archivo Black';font-size:42px;line-height:.92;letter-spacing:-2px;text-transform:uppercase;margin:12px 0 0}
+.f3 .feat{padding:18px;border-bottom:2.5px solid #0c0c0c;background:#0C0C0C;color:#fff}
+.f3 .feat .t{display:flex;justify-content:space-between;align-items:baseline}
+.f3 .feat .pc{font-family:'Archivo Black';font-size:13px;color:#C7F000}
+.f3 .feat .nm{font-family:'Archivo Black';font-size:28px;letter-spacing:-1px;margin:8px 0 2px;text-transform:uppercase}
+.f3 .feat .ro{font-size:12px;font-weight:700;color:#bdbdb5;text-transform:uppercase;letter-spacing:.5px}
+.f3 .feat .b{margin-top:16px;background:#C7F000;color:#0c0c0c;border:0;font-family:'Archivo Black';font-size:14px;padding:13px;width:100%;text-transform:uppercase;letter-spacing:-.3px}
+.f3 .li{display:flex;align-items:center;gap:14px;padding:15px 18px;border-bottom:2px solid #0c0c0c}
+.f3 .li .n{font-family:'Archivo Black';font-size:20px}
+.f3 .li .tt{font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:-.3px}
+.f3 .li .ss{font-size:11px;font-weight:700;color:#6a6a62}
+.f3 .li .ar{margin-left:auto;font-weight:900;font-size:18px}
+.f3 .nav{background:#F2F1EA;border-top:2.5px solid #0c0c0c}
+.f3 .nv{color:#9a9a90;font-weight:800}.f3 .nv.on{color:#0c0c0c}.f3 .nv i{border-radius:0}
+
+/* ===================== 4 · BUBBLE (pastel claymorphism) ===================== */
+.f4{background:linear-gradient(160deg,#EDE9FE,#E0F2FE 60%,#FCE7F3);font-family:'Quicksand',sans-serif;color:#3B2F5C}
+.f4 .scr{padding:30px 20px 0}
+.f4 .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.f4 .mk{display:flex;align-items:center;gap:9px;font-weight:700;font-size:19px;color:#6D28D9}
+.f4 .mk b{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#C4B5FD,#A78BFA);box-shadow:5px 5px 12px #c9bff0,-4px -4px 10px #ffffff,inset 0 0 0 0}
+.f4 .ico{width:34px;height:34px;border-radius:50%;background:#F2EEFE;box-shadow:5px 5px 11px #cdc4ec,-4px -4px 9px #fff;display:grid;place-items:center;color:#8B5CF6}
+.f4 h1{font-size:28px;font-weight:700;line-height:1.1;margin-bottom:5px}
+.f4 h1 span{color:#8B5CF6}
+.f4 .sub{font-size:13.5px;color:#8678a8;font-weight:600;margin-bottom:22px}
+.f4 .clay{border-radius:30px;padding:22px;background:#EFEBFC;box-shadow:9px 9px 22px #c9bff0,-7px -7px 18px #ffffff}
+.f4 .row{display:flex;align-items:center;gap:13px}
+.f4 .av{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#A78BFA,#60A5FA);display:grid;place-items:center;color:#fff;font-weight:700;font-size:18px;box-shadow:4px 4px 10px #b9addf}
+.f4 .nm{font-size:18px;font-weight:700}.f4 .ro{font-size:12px;color:#9489b0;font-weight:600}
+.f4 .badge{margin-left:auto;background:linear-gradient(135deg,#FBCFE8,#F9A8D4);color:#9D174D;font-weight:700;font-size:12px;border-radius:30px;padding:6px 12px;box-shadow:3px 3px 8px #e3b9d3}
+.f4 .ln{font-size:13.5px;color:#6f6391;line-height:1.5;margin:15px 0 17px;font-weight:600}
+.f4 .b{background:linear-gradient(135deg,#A78BFA,#8B5CF6);color:#fff;font-weight:700;border:0;border-radius:20px;padding:14px;width:100%;font-size:14px;font-family:inherit;box-shadow:6px 6px 16px #c0b2e8,-3px -3px 9px #fff}
+.f4 .pills{display:flex;gap:12px;margin-top:14px}
+.f4 .p{flex:1;border-radius:24px;padding:15px;text-align:center;background:#EFEBFC;box-shadow:6px 6px 15px #cabfee,-5px -5px 12px #fff;font-weight:700;font-size:12px;color:#7a6da0}
+.f4 .p .e{font-size:19px;display:block;margin-bottom:5px}
+.f4 .nav{background:#EDE9FEcc;backdrop-filter:blur(12px)}
+.f4 .nv{color:#b3a8d4}.f4 .nv.on{color:#8B5CF6}
+
+/* ===================== 5 · TIDE (deep ocean glass) ===================== */
+.f5{background:radial-gradient(120% 50% at 50% -10%,#1E5A8A,transparent 55%),linear-gradient(180deg,#0A1A2F,#08111F);font-family:'Manrope',sans-serif;color:#DCE9F5}
+.f5 .scr{padding:30px 20px 0}
+.f5 .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.f5 .mk{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:-.3px}
+.f5 .mk b{width:30px;height:30px;border-radius:10px;background:linear-gradient(135deg,#38BDF8,#6366F1);box-shadow:0 0 20px #38bdf855}
+.f5 .ico{width:28px;height:28px;border-radius:9px;background:#ffffff12;border:1px solid #ffffff1c;display:grid;place-items:center;color:#8fb4d6;font-size:13px}
+.f5 .hi{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:#5f88ad;font-weight:700}
+.f5 h1{font-size:31px;font-weight:800;letter-spacing:-1px;line-height:1.06;margin:7px 0 22px}
+.f5 h1 span{background:linear-gradient(100deg,#7DD3FC,#818CF8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.f5 .glass{border-radius:24px;padding:21px;background:linear-gradient(150deg,#ffffff14,#ffffff07);border:1px solid #ffffff22;backdrop-filter:blur(20px);box-shadow:0 20px 50px -20px #000,inset 0 1px 0 #ffffff2e}
+.f5 .pc{display:inline-block;font-size:11px;font-weight:800;color:#38BDF8;background:#38bdf81f;border:1px solid #38bdf840;border-radius:20px;padding:4px 11px}
+.f5 .nm{font-size:23px;font-weight:800;letter-spacing:-.5px;margin:13px 0 3px}
+.f5 .ro{font-size:12.5px;color:#7e9fbe}
+.f5 .ln{font-size:13.5px;color:#b8cee2;line-height:1.5;margin:13px 0 17px}
+.f5 .b{background:linear-gradient(135deg,#38BDF8,#6366F1);color:#fff;font-weight:800;border:0;border-radius:14px;padding:13px;width:100%;font-size:13.5px;box-shadow:0 14px 32px -10px #38bdf899;font-family:inherit}
+.f5 .mini{display:flex;gap:11px;margin-top:13px}
+.f5 .mc{flex:1;border-radius:16px;padding:14px;background:#ffffff0e;border:1px solid #ffffff1a}
+.f5 .mc .v{font-size:21px;font-weight:800;color:#7DD3FC}.f5 .mc .l{font-size:10px;color:#6f93b5;margin-top:2px;font-weight:600}
+.f5 .nav{background:#08111fcc;backdrop-filter:blur(16px);border-top:1px solid #ffffff14}
+.f5 .nv{color:#557characters}.f5 .nv{color:#557da3}.f5 .nv.on{color:#38BDF8}
+
+/* ===================== 6 · VELVET (royal plum, magenta) ===================== */
+.f6{background:radial-gradient(120% 50% at 50% -8%,#4A1942,transparent 55%),linear-gradient(180deg,#1A0F1F,#140A18);font-family:'Playfair Display',serif;color:#F3E9EF}
+.f6 .scr{padding:30px 22px 0}
+.f6 .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.f6 .mk{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:.3px}
+.f6 .mk b{width:32px;height:32px;border-radius:50%;border:1.5px solid #E0AFC8;display:grid;place-items:center;font-size:16px;color:#E8D5A8;font-style:italic;background:radial-gradient(circle at 35% 30%,#9D4EDD44,transparent)}
+.f6 .ico{width:30px;height:30px;border-radius:50%;border:1px solid #ffffff26;display:grid;place-items:center;color:#cBA6c0;font-size:13px;font-family:'Manrope'}
+.f6 .hi{font-family:'Manrope';font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#C77FAE;font-weight:600}
+.f6 h1{font-size:36px;font-weight:600;line-height:1.04;margin:8px 0 8px;letter-spacing:-.5px}
+.f6 h1 em{font-style:italic;color:#E0AFC8}
+.f6 .sub{font-size:14px;color:#b79bb0;line-height:1.5;margin-bottom:22px;max-width:30ch}
+.f6 .card{border-radius:20px;padding:22px;background:linear-gradient(155deg,#ffffff10,#ffffff05);border:1px solid #E0AFC833;position:relative;overflow:hidden}
+.f6 .card::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 90% at 100% 0,#9D4EDD2e,transparent 60%)}
+.f6 .card>*{position:relative}
+.f6 .pc{font-family:'Manrope';font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#E8D5A8}
+.f6 .nm{font-size:26px;font-weight:600;margin:9px 0 2px}
+.f6 .ro{font-family:'Manrope';font-size:12px;color:#b79bb0}
+.f6 .ql{font-style:italic;font-size:16px;color:#E6D4E0;line-height:1.5;margin:15px 0 18px}
+.f6 .b{font-family:'Manrope';background:linear-gradient(135deg,#E0AFC8,#9D4EDD);color:#1A0F1F;font-weight:700;border:0;border-radius:13px;padding:13px;width:100%;font-size:13px;letter-spacing:.3px;box-shadow:0 12px 30px -10px #9d4eddaa}
+.f6 .div{height:1px;background:linear-gradient(90deg,transparent,#E0AFC840,transparent);margin:20px 0}
+.f6 .li{font-family:'Manrope';display:flex;align-items:center;gap:13px;margin-bottom:15px}
+.f6 .li .d{width:7px;height:7px;border-radius:50%;background:#E0AFC8;flex:none}
+.f6 .li .tt{font-size:13.5px;font-weight:600;color:#F3E9EF}.f6 .li .ss{font-size:11px;color:#a98aa3}
+.f6 .nav{background:#140a18cc;backdrop-filter:blur(14px);border-top:1px solid #ffffff14}
+.f6 .nv{color:#8a6f86;font-family:'Manrope'}.f6 .nv.on{color:#E0AFC8}
+</style></head>
+<body>
+
+<!-- 1 PULSE -->
+<div class="col">
+ <div class="tag">1 · PULSE<span class="pal"><i style="background:#0B0820"></i><i style="background:#7C3AED"></i><i style="background:#22D3EE"></i><i style="background:#F472B6"></i></span><small>Neon energetic, indigo profund + cyan/violet/roz. Vibe fintech modern, dinamic.</small></div>
+ <div class="frame f1"><div class="scr">
+   <div class="top"><div class="mk"><b></b>Ember</div><div class="ico">⌕</div></div>
+   <div class="hi">Bună ziua</div><h1>Ana, ai <span>4 potriviri</span> noi</h1>
+   <div class="card"><span class="pc">94% potrivire</span><div class="nm">Liviu Toma</div><div class="ro">Fondator · Construcții civile</div><div class="ln">Caută exact ce oferi — proiecte rezidențiale la cheie.</div><button class="b">Cere introducere →</button></div>
+   <div class="mini"><div class="mc"><div class="v">12</div><div class="l">CONEXIUNI</div></div><div class="mc"><div class="v">87</div><div class="l">SCOR REȚEA</div></div></div>
+ </div><div class="nav"><div class="nv on"><i></i>Acasă</div><div class="nv"><i></i>Potriviri</div><div class="nv"><i></i>Rețea</div><div class="nv"><i></i>Secretară</div><div class="nv"><i></i>Profil</div></div></div>
+</div>
+
+<!-- 2 HEARTH -->
+<div class="col">
+ <div class="tag">2 · HEARTH<span class="pal"><i style="background:#FFF6EE"></i><i style="background:#FF6B5E"></i><i style="background:#E0A82E"></i><i style="background:#A0714E"></i></span><small>Cald & uman: cremă, coral, muștar. Prietenos, luminos, accesibil. Temă light.</small></div>
+ <div class="frame f2"><div class="scr">
+   <div class="top"><div class="mk"><b></b>Ember</div><div class="ico">⌕</div></div>
+   <div class="hi">Bună ziua 👋</div><h1>Hai să-ți <span>aprindem</span> ziua, Ana</h1><div class="sub">4 oameni din cerc te-ar bucura azi.</div>
+   <div class="card"><div class="row"><div class="av">LT</div><div><div class="nm">Liviu Toma</div><div class="ro">Construcții civile</div></div><span class="badge">94%</span></div><div class="ln">Caută exact ce oferi — proiecte rezidențiale la cheie.</div><button class="b">Cere introducere</button></div>
+   <div class="pills"><div class="p"><span class="e">🎙️</span>Reportofon</div><div class="p"><span class="e">📅</span>Azi 14:30</div><div class="p"><span class="e">🔥</span>Reaprinde</div></div>
+ </div><div class="nav"><div class="nv on"><i></i>Acasă</div><div class="nv"><i></i>Potriviri</div><div class="nv"><i></i>Rețea</div><div class="nv"><i></i>Secretară</div><div class="nv"><i></i>Profil</div></div></div>
+</div>
+
+<!-- 3 PRESS -->
+<div class="col">
+ <div class="tag">3 · PRESS<span class="pal"><i style="background:#F2F1EA"></i><i style="background:#0C0C0C"></i><i style="background:#C7F000"></i></span><small>Brutalist editorial: alb/negru, accent lime acid, Archivo Black, grilă cu borduri groase. Îndrăzneț, fără rotunjiri.</small></div>
+ <div class="frame f3"><div class="scr">
+   <div class="top"><div class="mk"><b>E</b>EMBER</div><div class="ico">MENIU</div></div>
+   <div class="hd"><span class="k">Azi · 7 iun</span><h1>Bună<br>ziua,<br>Ana</h1></div>
+   <div class="feat"><div class="t"><span class="pc">94% MATCH</span><span style="font-size:11px;font-weight:700;color:#bdbdb5">01</span></div><div class="nm">Liviu Toma</div><div class="ro">Fondator · Construcții civile</div><button class="b">Cere introducere</button></div>
+   <div class="li"><span class="n">02</span><div><div class="tt">Întâlnire 14:30</div><div class="ss">Bogdan Marin</div></div><span class="ar">→</span></div>
+   <div class="li"><span class="n">03</span><div><div class="tt">Reaprinde</div><div class="ss">Elena · 32 zile</div></div><span class="ar">→</span></div>
+ </div><div class="nav"><div class="nv on"><i></i>ACASĂ</div><div class="nv"><i></i>MATCH</div><div class="nv"><i></i>REȚEA</div><div class="nv"><i></i>AI</div><div class="nv"><i></i>EU</div></div></div>
+</div>
+
+<!-- 4 BUBBLE -->
+<div class="col">
+ <div class="tag">4 · BUBBLE<span class="pal"><i style="background:#A78BFA"></i><i style="background:#60A5FA"></i><i style="background:#F9A8D4"></i><i style="background:#FDBA74"></i></span><small>Pastel claymorphism: lila/sky/roz, forme pufoase moi, jucăuș & blând. Temă light.</small></div>
+ <div class="frame f4"><div class="scr">
+   <div class="top"><div class="mk"><b></b>Ember</div><div class="ico">⌕</div></div>
+   <h1>Salut, <span>Ana</span> ✨</h1><div class="sub">4 potriviri noi te așteaptă.</div>
+   <div class="clay"><div class="row"><div class="av">LT</div><div><div class="nm">Liviu Toma</div><div class="ro">Construcții civile</div></div><span class="badge">94%</span></div><div class="ln">Caută exact ce oferi — proiecte rezidențiale la cheie.</div><button class="b">Cere introducere</button></div>
+   <div class="pills"><div class="p"><span class="e">🎙️</span>Apel</div><div class="p"><span class="e">📅</span>14:30</div><div class="p"><span class="e">🔥</span>Reaprinde</div></div>
+ </div><div class="nav"><div class="nv on"><i></i>Acasă</div><div class="nv"><i></i>Potriviri</div><div class="nv"><i></i>Rețea</div><div class="nv"><i></i>Secretară</div><div class="nv"><i></i>Profil</div></div></div>
+</div>
+
+<!-- 5 TIDE -->
+<div class="col">
+ <div class="tag">5 · TIDE<span class="pal"><i style="background:#0A1A2F"></i><i style="background:#38BDF8"></i><i style="background:#6366F1"></i><i style="background:#7DD3FC"></i></span><small>Ocean adânc, glass azur+indigo. Calm, de încredere, premium-corporate. Temă dark.</small></div>
+ <div class="frame f5"><div class="scr">
+   <div class="top"><div class="mk"><b></b>Ember</div><div class="ico">⌕</div></div>
+   <div class="hi">Bună ziua</div><h1>Ana, <span>4 conexiuni</span> te-așteaptă</h1>
+   <div class="glass"><span class="pc">94% potrivire</span><div class="nm">Liviu Toma</div><div class="ro">Fondator · Construcții civile</div><div class="ln">Caută exact ce oferi — proiecte rezidențiale la cheie.</div><button class="b">Cere introducere →</button></div>
+   <div class="mini"><div class="mc"><div class="v">12</div><div class="l">CONEXIUNI</div></div><div class="mc"><div class="v">87</div><div class="l">SCOR</div></div></div>
+ </div><div class="nav"><div class="nv on"><i></i>Acasă</div><div class="nv"><i></i>Potriviri</div><div class="nv"><i></i>Rețea</div><div class="nv"><i></i>Secretară</div><div class="nv"><i></i>Profil</div></div></div>
+</div>
+
+<!-- 6 VELVET -->
+<div class="col">
+ <div class="tag">6 · VELVET<span class="pal"><i style="background:#1A0F1F"></i><i style="background:#9D4EDD"></i><i style="background:#E0AFC8"></i><i style="background:#E8D5A8"></i></span><small>Prună regală + magenta + roz/șampanie. Club privat opulent, serif. Lux altfel decât ember. Dark.</small></div>
+ <div class="frame f6"><div class="scr">
+   <div class="top"><div class="mk"><b>E</b>Ember</div><div class="ico">⌕</div></div>
+   <div class="hi">Cercul tău</div><h1>Bună ziua,<br><em>Ana.</em></h1><div class="sub">Patru introduceri alese pentru tine astăzi.</div>
+   <div class="card"><span class="pc">Potrivirea zilei · 94%</span><div class="nm">Liviu Toma</div><div class="ro">Fondator · Construcții civile</div><div class="ql">„Caută exact ce oferi — proiecte rezidențiale la cheie.”</div><button class="b">Cere introducere</button></div>
+   <div class="div"></div>
+   <div class="li"><span class="d"></span><div><div class="tt">Întâlnire azi, 14:30</div><div class="ss">Bogdan Marin · cafenea</div></div></div>
+   <div class="li"><span class="d"></span><div><div class="tt">O relație de reaprins</div><div class="ss">Elena · acum 32 zile</div></div></div>
+ </div><div class="nav"><div class="nv on"><i></i>Acasă</div><div class="nv"><i></i>Potriviri</div><div class="nv"><i></i>Rețea</div><div class="nv"><i></i>Secretară</div><div class="nv"><i></i>Profil</div></div></div>
+</div>
+
+</body></html>

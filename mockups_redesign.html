@@ -1,0 +1,251 @@
+<!doctype html><html lang="ro"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ember — 5 direcții de redesign</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0A0F0C;--ink:#F2F6F2;--ink2:#C6D0C9;--muted:#8C988F;
+  --emer:#34D399;--emer2:#6EE7B7;--emerd:#10B981;--esoft:rgba(52,211,153,.16);
+  --gold:#E6C57A;--gold2:#F0D89A;--goldd:#C49A3E;--gsoft:rgba(230,197,122,.16);
+  --line:rgba(255,255,255,.11);--line2:rgba(255,255,255,.18);
+  --card:rgba(255,255,255,.05);--card2:rgba(255,255,255,.08);
+  --glow:rgba(230,197,122,.42);--serif:'Fraunces',Georgia,serif;--sans:'Inter',system-ui,sans-serif;
+}
+body{background:#05080699;font-family:var(--sans);color:var(--ink);padding:30px;display:flex;flex-wrap:wrap;gap:34px;justify-content:center;align-items:flex-start}
+.col{display:flex;flex-direction:column;align-items:center;gap:10px}
+.tag{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--gold2)}
+.tag small{display:block;color:var(--muted);font-weight:600;letter-spacing:.3px;text-transform:none;font-size:11px;margin-top:3px;max-width:300px;text-align:center}
+.frame{width:340px;height:720px;border-radius:38px;overflow:hidden;position:relative;
+  background:
+   radial-gradient(120% 46% at 50% -8%,var(--glow),transparent 50%),
+   radial-gradient(60% 40% at 6% 2%,rgba(16,185,129,.22),transparent 58%),
+   radial-gradient(54% 40% at 100% 8%,rgba(230,197,122,.16),transparent 56%),
+   radial-gradient(118% 80% at 50% 44%,transparent 72%,rgba(0,0,0,.32)),
+   var(--bg);
+  border:1px solid rgba(255,255,255,.12);box-shadow:0 40px 90px -30px #000,inset 0 1px 0 rgba(255,255,255,.08)}
+.scr{position:absolute;inset:0;display:flex;flex-direction:column;padding:30px 18px 0}
+.flame{filter:drop-shadow(0 0 7px var(--glow))}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.brand{display:flex;align-items:center;gap:9px}
+.bname{font-family:var(--serif);font-size:18px;font-weight:700}
+.dots{display:flex;gap:7px}.dot{width:26px;height:26px;border-radius:50%;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;font-size:11px;color:var(--muted)}
+.nav{position:absolute;left:0;right:0;bottom:0;height:62px;display:flex;justify-content:space-around;align-items:center;
+  background:linear-gradient(to top,rgba(10,15,12,.95),rgba(10,15,12,.5));backdrop-filter:blur(20px);border-top:1px solid var(--line)}
+.nv{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:9px;color:var(--muted)}
+.nv.on{color:var(--emer2)}.nv i{width:20px;height:20px;border-radius:7px;background:currentColor;opacity:.85;mask-size:contain}
+.nv.on i{box-shadow:0 0 14px -1px var(--glow)}
+.serif{font-family:var(--serif)}
+.grad{background:linear-gradient(100deg,#fff 26%,var(--emer2) 72%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.btnG{background:linear-gradient(135deg,var(--gold2),var(--goldd));color:#1c1505;font-weight:700;border:0;border-radius:14px;padding:12px;font-family:var(--sans);font-size:13px;box-shadow:0 10px 24px -8px var(--glow)}
+.chip{font-size:10px;font-weight:700;color:var(--emer2);background:var(--esoft);border:1px solid var(--line2);border-radius:20px;padding:4px 10px}
+.av{border-radius:14px;background:linear-gradient(135deg,#2FB084,#0E6B50);display:grid;place-items:center;color:#fff;font-weight:700;font-family:var(--serif);box-shadow:0 0 16px -4px var(--glow)}
+.muted{color:var(--muted)}.ink2{color:var(--ink2)}
+
+/* ============ FRAME 1 — COCKPIT (dashboard dens, modular) ============ */
+.f1 .greet{font-size:15px;color:var(--ink2);margin:14px 0 12px}.f1 .greet b{font-family:var(--serif);color:#fff;font-size:20px;display:block;font-weight:600}
+.f1 .stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}
+.f1 .st{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:11px 9px;text-align:center}
+.f1 .st .v{font-size:23px;font-weight:800;letter-spacing:-1px;background:linear-gradient(120deg,#fff,var(--emer2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.f1 .st .l{font-size:8.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.f1 .grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.f1 .mod{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:13px;min-height:96px;display:flex;flex-direction:column;justify-content:space-between}
+.f1 .mod.hot{background:linear-gradient(150deg,var(--esoft),transparent 80%);border-color:var(--emerd)}
+.f1 .mod .ic{width:30px;height:30px;border-radius:9px;background:var(--card2);display:grid;place-items:center;font-size:15px}
+.f1 .mod .mt{font-size:13px;font-weight:700;margin-top:9px}.f1 .mod .ms{font-size:10.5px;color:var(--muted);margin-top:2px}
+.f1 .mod.wide{grid-column:1/3;min-height:auto;flex-direction:row;align-items:center;gap:12px}
+
+/* ============ FRAME 2 — FOCUS (un singur lucru, deck) ============ */
+.f2 .scr{padding-top:34px}
+.f2 .kick{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--emer2);font-weight:700;text-align:center;margin-top:30px}
+.f2 .big{font-family:var(--serif);font-size:30px;font-weight:600;text-align:center;line-height:1.12;margin:10px 22px 0}
+.f2 .deck{position:relative;margin:42px 8px 0;height:330px}
+.f2 .crd{position:absolute;left:0;right:0;border-radius:26px;background:var(--card);border:1px solid var(--line);box-shadow:0 30px 60px -24px #000}
+.f2 .crd.b2{top:26px;transform:scale(.93);opacity:.5;height:300px}
+.f2 .crd.b1{top:13px;transform:scale(.965);opacity:.7;height:300px}
+.f2 .crd.f{top:0;height:312px;background:linear-gradient(160deg,rgba(255,255,255,.07),var(--card));padding:24px}
+.f2 .crd.f .av{width:62px;height:62px;font-size:24px;margin-bottom:16px}
+.f2 .nm{font-family:var(--serif);font-size:23px;font-weight:600}.f2 .ro{font-size:12px;color:var(--muted);margin-top:2px}
+.f2 .ql{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--ink2);line-height:1.5;margin:18px 0}
+.f2 .acts{display:flex;gap:10px;margin-top:8px}.f2 .acts .btnG{flex:1}.f2 .gh{flex:1;background:var(--card2);border:1px solid var(--line2);color:var(--ink);border-radius:14px;font-size:13px;font-weight:600}
+.f2 .pgn{text-align:center;color:var(--muted);font-size:11px;margin-top:24px;letter-spacing:1px}
+
+/* ============ FRAME 3 — EDITORIAL (revistă, asimetric) ============ */
+.f3 .scr{padding:30px 0 0}
+.f3 .pad{padding:0 20px}
+.f3 .kick{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold2);font-weight:700;margin:18px 0 6px}
+.f3 .head{font-family:var(--serif);font-size:40px;font-weight:600;line-height:.98;letter-spacing:-1px}
+.f3 .head em{font-style:italic;color:var(--emer2)}
+.f3 .lede{font-family:var(--serif);font-size:14px;color:var(--ink2);line-height:1.5;margin:14px 0 22px;max-width:30ch}
+.f3 .feat{position:relative;margin:0 0 18px;padding:22px 20px;background:linear-gradient(160deg,var(--esoft),transparent 70%);border-top:1px solid var(--line2);border-bottom:1px solid var(--line2)}
+.f3 .feat .lab{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--emer2);font-weight:700}
+.f3 .feat .nm{font-family:var(--serif);font-size:26px;font-weight:600;margin:8px 0 4px}
+.f3 .feat .by{font-size:12px;color:var(--muted)}
+.f3 .feat .pull{font-family:var(--serif);font-size:15px;font-style:italic;color:var(--ink);line-height:1.45;margin:14px 0}
+.f3 .feat .go{font-size:13px;font-weight:700;color:var(--gold2)}
+.f3 .toc{padding:0 20px}
+.f3 .row{display:flex;gap:14px;align-items:baseline;padding:13px 0;border-top:1px solid var(--line)}
+.f3 .row .n{font-family:var(--serif);font-size:18px;color:var(--gold2);width:24px;flex:none}
+.f3 .row .t{font-size:13.5px;font-weight:600}.f3 .row .s{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* ============ FRAME 4 — CONSTELAȚIE (hartă-first + bottom sheet) ============ */
+.f4 .scr{padding:0}
+.f4 .head4{position:absolute;top:30px;left:18px;right:18px;z-index:3;display:flex;justify-content:space-between;align-items:center}
+.f4 .lab4{position:absolute;top:78px;left:0;right:0;text-align:center;z-index:3;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+.f4 .canvas{position:absolute;inset:0;z-index:1}
+.f4 .sheet{position:absolute;left:0;right:0;bottom:62px;z-index:4;background:linear-gradient(to top,rgba(10,15,12,.97),rgba(12,18,14,.86));backdrop-filter:blur(22px);border-top:1px solid var(--line2);border-radius:26px 26px 0 0;padding:16px 18px 18px;box-shadow:0 -20px 50px -20px #000}
+.f4 .grab{width:38px;height:4px;border-radius:3px;background:var(--line2);margin:0 auto 14px}
+.f4 .sh-t{font-family:var(--serif);font-size:16px;font-weight:600;margin-bottom:10px}
+.f4 .arow{display:flex;align-items:center;gap:11px;padding:9px 0;border-top:1px solid var(--line)}
+.f4 .arow .av{width:34px;height:34px;font-size:13px}
+.f4 .arow .at{flex:1}.f4 .arow .am{font-size:12.5px;font-weight:600}.f4 .arow .as{font-size:10.5px;color:var(--muted)}
+.f4 .arow .pg{font-size:10px;color:var(--emer2);font-weight:700;background:var(--esoft);padding:4px 9px;border-radius:12px;border:1px solid var(--line2)}
+
+/* ============ FRAME 5 — CONCIERGE (timeline / feed CRM) ============ */
+.f5 .sub{display:flex;align-items:center;gap:10px;margin:14px 0 4px}
+.f5 .search{flex:1;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:9px 13px;font-size:12px;color:var(--muted)}
+.f5 .h5{font-family:var(--serif);font-size:22px;font-weight:600;margin:14px 0 4px}
+.f5 .feed{margin-top:6px;overflow:hidden}
+.f5 .it{display:flex;gap:12px;padding:13px 0;border-top:1px solid var(--line);position:relative}
+.f5 .it .av{width:40px;height:40px;font-size:15px;flex:none}
+.f5 .it .av.gold{background:linear-gradient(135deg,var(--gold2),var(--goldd));color:#1c1505}
+.f5 .it .av.fl{background:var(--card2);box-shadow:none}
+.f5 .bd{flex:1;min-width:0}
+.f5 .bb{background:var(--card);border:1px solid var(--line);border-radius:4px 16px 16px 16px;padding:11px 13px}
+.f5 .bb.hot{background:linear-gradient(150deg,var(--esoft),transparent 88%);border-color:var(--emerd)}
+.f5 .bt{font-size:13px;line-height:1.4}.f5 .bt b{color:#fff}
+.f5 .bm{font-size:10px;color:var(--muted);margin:6px 0 0 4px}
+.f5 .ba{display:flex;gap:8px;margin-top:9px}
+.f5 .miniG{background:linear-gradient(135deg,var(--gold2),var(--goldd));color:#1c1505;font-weight:700;font-size:11px;border:0;border-radius:11px;padding:7px 14px}
+.f5 .miniGh{background:var(--card2);border:1px solid var(--line2);color:var(--ink2);font-size:11px;border-radius:11px;padding:7px 14px}
+</style></head>
+<body>
+
+<!-- =================== FRAME 1 : COCKPIT =================== -->
+<div class="col">
+  <div class="tag">1 · COCKPIT<small>Dashboard dens & modular. Totul important într-o privire — statistici sus, grilă de acțiuni.</small></div>
+  <div class="frame f1">
+   <div class="scr">
+    <div class="top"><div class="brand"><svg class="flame" width="26" height="26" viewBox="0 0 24 24"><path d="M12 2c1 4 5 5 5 10a5 5 0 1 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5-1-9z" fill="url(#g1)"/><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0D89A"/><stop offset="1" stop-color="#10B981"/></linearGradient></defs></svg><span class="bname">Ember</span></div><div class="dots"><span class="dot">◔</span><span class="dot">+</span><span class="dot">⌕</span></div></div>
+    <div class="greet">Bună ziua,<b>Ana Popescu</b></div>
+    <div class="stats">
+      <div class="st"><div class="v">4</div><div class="l">Sugestii</div></div>
+      <div class="st"><div class="v">12</div><div class="l">Conexiuni</div></div>
+      <div class="st"><div class="v">87</div><div class="l">Scor</div></div>
+    </div>
+    <div class="grid">
+      <div class="mod hot"><div class="ic">✦</div><div><div class="mt">Liviu Toma</div><div class="ms">Potrivire 94% · Construcții</div></div></div>
+      <div class="mod"><div class="ic">🎙️</div><div><div class="mt">Reportofon</div><div class="ms">Apel → acțiuni</div></div></div>
+      <div class="mod"><div class="ic">📅</div><div><div class="mt">Azi</div><div class="ms">1 întâlnire, 14:30</div></div></div>
+      <div class="mod"><div class="ic">🔥</div><div><div class="mt">Reaprinde</div><div class="ms">Bogdan · 32 zile</div></div></div>
+      <div class="mod wide"><div class="ic">✓</div><div style="flex:1"><div class="mt">3 task-uri scadente</div><div class="ms">2 din apelul de ieri</div></div><span class="chip">Vezi</span></div>
+    </div>
+   </div>
+   <div class="nav"><div class="nv on"><i></i>Acasă</div><div class="nv"><i></i>Potriviri</div><div class="nv"><i></i>Rețea</div><div class="nv"><i></i>Secretară</div><div class="nv"><i></i>Profil</div></div>
+  </div>
+</div>
+
+<!-- =================== FRAME 2 : FOCUS =================== -->
+<div class="col">
+  <div class="tag">2 · FOCUS<small>Un singur lucru pe ecran. Deck de carduri — o acțiune sugerată, restul ascunse în spate.</small></div>
+  <div class="frame f2">
+   <div class="scr">
+    <div class="top"><div class="brand"><svg class="flame" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2c1 4 5 5 5 10a5 5 0 1 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5-1-9z" fill="url(#g2)"/><defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0D89A"/><stop offset="1" stop-color="#10B981"/></linearGradient></defs></svg></div><div class="dots"><span class="dot">⌕</span><span class="dot">◔</span></div></div>
+    <div class="kick">Următoarea mișcare</div>
+    <div class="big serif">O potrivire <span class="grad">care merită</span> azi</div>
+    <div class="deck">
+      <div class="crd b2"></div><div class="crd b1"></div>
+      <div class="crd f">
+        <div class="av">LT</div>
+        <div class="nm">Liviu Toma</div><div class="ro">Fondator · Construcții civile</div>
+        <div class="ql">„Caut pe cineva care a livrat proiecte rezidențiale la cheie — exact ce oferi tu.”</div>
+        <div class="acts"><button class="btnG">Cere introducere</button><button class="gh">Mai târziu</button></div>
+      </div>
+    </div>
+    <div class="pgn">● ○ ○ ○ — încă 3 sugestii</div>
+   </div>
+   <div class="nav"><div class="nv on"><i></i>Acasă</div><div class="nv"><i></i>Potriviri</div><div class="nv"><i></i>Rețea</div><div class="nv"><i></i>Secretară</div><div class="nv"><i></i>Profil</div></div>
+  </div>
+</div>
+
+<!-- =================== FRAME 3 : EDITORIAL =================== -->
+<div class="col">
+  <div class="tag">3 · EDITORIAL<small>Ca o revistă de lux. Titluri serif uriașe, asimetric, featured story + cuprins numerotat.</small></div>
+  <div class="frame f3">
+   <div class="scr">
+    <div class="pad">
+      <div class="top"><div class="brand"><svg class="flame" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2c1 4 5 5 5 10a5 5 0 1 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5-1-9z" fill="url(#g3)"/><defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0D89A"/><stop offset="1" stop-color="#10B981"/></linearGradient></defs></svg><span class="bname">Ember</span></div><span class="muted" style="font-size:11px">7 iunie</span></div>
+      <div class="kick">Ediția ta de azi</div>
+      <div class="head">Bună ziua,<br><em>Ana.</em></div>
+      <div class="lede">Patru oameni din cerc merită o privire. Iată cine.</div>
+    </div>
+    <div class="feat">
+      <div class="lab">Potrivirea zilei · 94%</div>
+      <div class="nm">Liviu Toma</div>
+      <div class="by">Fondator, Construcții civile</div>
+      <div class="pull">„Caută exact ce oferi — proiecte rezidențiale la cheie.”</div>
+      <div class="go">Cere introducere →</div>
+    </div>
+    <div class="toc">
+      <div class="row"><div class="n">02</div><div><div class="t">Întâlnire azi, 14:30</div><div class="s">Cu Bogdan Marin · cafenea</div></div></div>
+      <div class="row"><div class="n">03</div><div><div class="t">O relație de reaprins</div><div class="s">Elena · ultima oară acum 32 zile</div></div></div>
+      <div class="row"><div class="n">04</div><div><div class="t">3 task-uri din apel</div><div class="s">Notează & deleagă către Secretară</div></div></div>
+    </div>
+   </div>
+   <div class="nav"><div class="nv on"><i></i>Acasă</div><div class="nv"><i></i>Potriviri</div><div class="nv"><i></i>Rețea</div><div class="nv"><i></i>Secretară</div><div class="nv"><i></i>Profil</div></div>
+  </div>
+</div>
+
+<!-- =================== FRAME 4 : CONSTELAȚIE =================== -->
+<div class="col">
+  <div class="tag">4 · CONSTELAȚIE<small>Harta rețelei E ecranul principal. Orbitezi în jurul tău; acțiunile zilei urcă dintr-un sheet de jos.</small></div>
+  <div class="frame f4">
+   <div class="scr">
+    <svg class="canvas" viewBox="0 0 340 720" preserveAspectRatio="xMidYMid slice">
+      <defs><radialGradient id="core" cx="50%" cy="38%" r="50%"><stop offset="0" stop-color="rgba(52,211,153,.30)"/><stop offset="1" stop-color="transparent"/></radialGradient></defs>
+      <rect x="40" y="120" width="260" height="300" fill="url(#core)"/>
+      <g stroke="#34D399" stroke-width="1.4" opacity=".5">
+        <line x1="170" y1="250" x2="80" y2="160"/><line x1="170" y1="250" x2="270" y2="150"/><line x1="170" y1="250" x2="90" y2="360"/><line x1="170" y1="250" x2="265" y2="350"/><line x1="170" y1="250" x2="170" y2="120"/><line x1="80" y1="160" x2="90" y2="360"/></g>
+      <g font-family="Inter" font-weight="700" font-size="11" text-anchor="middle" fill="#fff">
+        <circle cx="170" cy="250" r="30" fill="#10B981" stroke="#6EE7B7" stroke-width="2.5" filter="drop-shadow(0 0 18px rgba(230,197,122,.6))"/><text x="170" y="254">TU</text>
+        <circle cx="80" cy="160" r="18" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.2)"/><text x="80" y="164" fill="#C6D0C9">LT</text>
+        <circle cx="270" cy="150" r="16" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.2)"/><text x="270" y="154" fill="#C6D0C9">BM</text>
+        <circle cx="90" cy="360" r="15" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.2)"/><text x="90" y="364" fill="#C6D0C9">EV</text>
+        <circle cx="265" cy="350" r="17" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.2)"/><text x="265" y="354" fill="#C6D0C9">RA</text>
+        <circle cx="170" cy="120" r="13" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.2)"/><text x="170" y="124" fill="#C6D0C9">PG</text>
+      </g>
+    </svg>
+    <div class="head4"><div class="brand"><svg class="flame" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2c1 4 5 5 5 10a5 5 0 1 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5-1-9z" fill="url(#g4)"/><defs><linearGradient id="g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0D89A"/><stop offset="1" stop-color="#10B981"/></linearGradient></defs></svg><span class="bname">Ember</span></div><span class="dot">⌕</span></div>
+    <div class="lab4">Cercul tău · 12 oameni</div>
+    <div class="sheet">
+      <div class="grab"></div>
+      <div class="sh-t">Azi în cercul tău</div>
+      <div class="arow"><div class="av">LT</div><div class="at"><div class="am">Liviu Toma vrea o introducere</div><div class="as">Potrivire 94%</div></div><span class="pg">Vezi</span></div>
+      <div class="arow"><div class="av">BM</div><div class="at"><div class="am">Întâlnire cu Bogdan</div><div class="as">Azi, 14:30</div></div><span class="pg">Hartă</span></div>
+    </div>
+   </div>
+   <div class="nav"><div class="nv"><i></i>Acasă</div><div class="nv"><i></i>Potriviri</div><div class="nv on"><i></i>Rețea</div><div class="nv"><i></i>Secretară</div><div class="nv"><i></i>Profil</div></div>
+  </div>
+</div>
+
+<!-- =================== FRAME 5 : CONCIERGE =================== -->
+<div class="col">
+  <div class="tag">5 · CONCIERGE<small>Ca un asistent care-ți scrie. Feed-timeline de bule, fiecare cu acțiuni — Ember îți raportează ziua.</small></div>
+  <div class="frame f5">
+   <div class="scr">
+    <div class="top"><div class="brand"><svg class="flame" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2c1 4 5 5 5 10a5 5 0 1 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5-1-9z" fill="url(#g5)"/><defs><linearGradient id="g5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0D89A"/><stop offset="1" stop-color="#10B981"/></linearGradient></defs></svg><span class="bname">Ember</span></div><div class="dots"><span class="dot">◔</span></div></div>
+    <div class="sub"><div class="search">⌕  Caută un om sau o ofertă…</div></div>
+    <div class="h5 serif">Bună ziua, Ana 👋</div>
+    <div class="feed">
+      <div class="it"><div class="av fl"><svg class="flame" width="20" height="20" viewBox="0 0 24 24"><path d="M12 2c1 4 5 5 5 10a5 5 0 1 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5-1-9z" fill="url(#g5)"/></svg></div>
+        <div class="bd"><div class="bb hot"><div class="bt">Am găsit o potrivire bună: <b>Liviu Toma</b> caută exact ce oferi (94%).</div><div class="ba"><button class="miniG">Cere introducere</button><button class="miniGh">Nu acum</button></div></div><div class="bm">Ember · acum</div></div></div>
+      <div class="it"><div class="av gold">BM</div>
+        <div class="bd"><div class="bb"><div class="bt">Întâlnirea cu <b>Bogdan Marin</b> e azi la 14:30.</div><div class="ba"><button class="miniGh">Vezi detalii</button></div></div><div class="bm">9:02</div></div></div>
+      <div class="it"><div class="av fl"><svg class="flame" width="20" height="20" viewBox="0 0 24 24"><path d="M12 2c1 4 5 5 5 10a5 5 0 1 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5-1-9z" fill="url(#g5)"/></svg></div>
+        <div class="bd"><div class="bb"><div class="bt">Nu ai mai vorbit cu <b>Elena</b> de 32 zile. O reaprindem?</div></div><div class="bm">Ember · 8:30</div></div></div>
+    </div>
+   </div>
+   <div class="nav"><div class="nv on"><i></i>Acasă</div><div class="nv"><i></i>Potriviri</div><div class="nv"><i></i>Rețea</div><div class="nv"><i></i>Secretară</div><div class="nv"><i></i>Profil</div></div>
+  </div>
+</div>
+
+</body></html>
