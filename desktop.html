@@ -934,7 +934,7 @@ header.multi .hmember{display:flex}
 .hmember-l{font-size:11px;color:var(--muted);font-weight:600;flex:none}
 .hmember .memsel{flex:1;max-width:none;width:auto}
 </style>
-<style>.mk.flame{background:none!important;border:0!important;box-shadow:none!important;padding:0!important}.mk.flame svg{width:100%;height:100%;display:block}#splash{position:fixed;inset:0;z-index:300;display:grid;place-items:center;background:radial-gradient(125% 125% at 50% 36%,#16271e,#070A08 64%);transition:opacity .6s ease,transform .6s ease}#splash.gone{opacity:0;transform:scale(1.08);pointer-events:none}.splash-stage{position:relative;display:flex;flex-direction:column;align-items:center;gap:22px}.splash-glow{position:absolute;top:-10px;left:50%;width:270px;height:270px;margin-left:-135px;border-radius:50%;background:radial-gradient(circle,rgba(230,197,122,.55),rgba(14,107,80,.22) 42%,transparent 70%);filter:blur(7px);animation:glowPulse 2.4s ease-in-out infinite;z-index:0}.splash-flame{position:relative;z-index:2;width:108px;height:108px;animation:splashIgnite 1s cubic-bezier(.2,1.3,.4,1) both}.splash-flame path{transform-box:fill-box;transform-origin:50% 100%}.fl-out{animation:flickerA 1.5s ease-in-out infinite}.fl-in{animation:flickerB 1.05s ease-in-out infinite}.fl-core{animation:flickerB .72s ease-in-out infinite}.splash-embers{position:absolute;inset:0;z-index:1;pointer-events:none}.splash-embers i{position:absolute;bottom:46%;border-radius:50%;background:#F0D89A;box-shadow:0 0 8px 1px rgba(230,197,122,.85);opacity:0;animation:sparkRise 1.9s ease-out infinite}.splash-name{position:relative;z-index:2;font-family:'Georgia','Times New Roman',serif;font-size:33px;font-weight:700;color:#F6F1E6;text-shadow:0 2px 34px rgba(230,197,122,.55);opacity:0;animation:nameIgnite .8s ease .35s both}@keyframes splashIgnite{0%{transform:scale(.15) translateY(22px);opacity:0;filter:blur(5px)}55%{transform:scale(1.14) translateY(0);opacity:1;filter:blur(0)}78%{transform:scale(.95)}100%{transform:scale(1)}}@keyframes nameIgnite{0%{opacity:0;transform:translateY(12px);letter-spacing:7px;filter:blur(3px)}100%{opacity:1;transform:none;letter-spacing:.5px;filter:blur(0)}}@keyframes glowPulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.2);opacity:.95}}@keyframes flickerA{0%,100%{transform:scaleY(1) scaleX(1) skewX(0) translateY(0)}25%{transform:scaleY(1.07) scaleX(.96) skewX(-2.5deg) translateY(-1px)}50%{transform:scaleY(.96) scaleX(1.04) skewX(1.5deg)}75%{transform:scaleY(1.05) scaleX(.98) skewX(2.5deg) translateY(-.6px)}}@keyframes flickerB{0%,100%{transform:scaleY(1) skewX(0)}30%{transform:scaleY(1.12) skewX(4deg) translateY(-1.5px)}60%{transform:scaleY(.9) skewX(-4deg)}}@keyframes sparkRise{0%{transform:translate(0,0) scale(1);opacity:0}12%{opacity:1}100%{transform:translate(var(--dx,0),-88px) scale(.25);opacity:0}}.reduce-motion .splash-embers{display:none}.reduce-motion .splash-glow,.reduce-motion .splash-flame,.reduce-motion .splash-flame path,.reduce-motion .splash-name{animation:none!important;opacity:1!important;transform:none!important}@media (prefers-reduced-motion:reduce){.splash-embers{display:none}.splash-glow,.splash-flame,.splash-flame path,.splash-name{animation:none!important;opacity:1!important;transform:none!important}}</style>
+<style>.mk.flame{background:none!important;border:0!important;box-shadow:none!important;padding:0!important}.mk.flame svg{width:100%;height:100%;display:block}#splash{position:fixed;inset:0;z-index:300;background:radial-gradient(130% 130% at 50% 62%,#0c1611,#050706 72%);transition:opacity .6s ease}#splash.gone{opacity:0;pointer-events:none}#splashCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}.splash-name{position:absolute;left:0;right:0;top:63%;text-align:center;font-family:'Georgia','Times New Roman',serif;font-size:34px;font-weight:700;color:#F8F3E8;text-shadow:0 0 32px rgba(240,216,148,.6),0 2px 12px rgba(0,0,0,.55);opacity:0;letter-spacing:1px;z-index:2;animation:nameIgnite 1s ease .5s both}@keyframes nameIgnite{0%{opacity:0;transform:translateY(10px);letter-spacing:10px;filter:blur(4px)}100%{opacity:1;transform:none;letter-spacing:1px;filter:blur(0)}}.reduce-motion .splash-name{animation:none;opacity:1}@media (prefers-reduced-motion:reduce){.splash-name{animation:none;opacity:1}}</style>
 
 <style id="eie-desktop-skin">
 /* ===== VARIANTA DE DESKTOP — strat generat, peste stilurile aplicatiei ===== */
@@ -1009,7 +1009,7 @@ header.multi .hmember{display:flex}
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="emberFl" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#0E6B50"/><stop offset=".5" stop-color="#C49A3E"/><stop offset="1" stop-color="#F0D894"/></linearGradient><linearGradient id="emberCore" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#C49A3E"/><stop offset="1" stop-color="#FFF3D0"/></linearGradient></defs></svg>
-<div id="splash" aria-hidden="true"><div class="splash-stage"><div class="splash-glow"></div><div class="splash-embers"><i style="left:48%;--dx:-14px;width:5px;height:5px;animation-delay:0s"></i><i style="left:44%;--dx:10px;width:4px;height:4px;animation-delay:.3s"></i><i style="left:53%;--dx:16px;width:6px;height:6px;animation-delay:.6s"></i><i style="left:50%;--dx:-8px;width:3px;height:3px;animation-delay:.9s"></i><i style="left:46%;--dx:22px;width:5px;height:5px;animation-delay:1.2s"></i><i style="left:55%;--dx:-18px;width:4px;height:4px;animation-delay:.45s"></i><i style="left:50%;--dx:4px;width:7px;height:7px;animation-delay:1.5s"></i><i style="left:42%;--dx:-4px;width:3px;height:3px;animation-delay:.75s"></i></div><svg class="splash-flame" viewBox="0 0 100 100" aria-hidden="true"><path class="fl-out" d="M50 27 C 61 43 71 52 67 65 A 18 18 0 1 1 33 65 C 30 56 36 53 41 59 C 40 46 45 37 50 27 Z" fill="url(#emberFl)"/><path class="fl-in" d="M50 40 C 57 50 63 56 60 65 A 12.5 12.5 0 1 1 40 65 C 38 58 42 56 45 60 C 44 52 47 46 50 40 Z" fill="url(#emberCore)"/><path class="fl-core" d="M50 52 C 54 58 57 61 55.5 66 A 7 7 0 1 1 44.5 66 C 44 62 46 61 48 63 C 47 58 49 55 50 52 Z" fill="#FFF6E0"/></svg><div class="splash-name">Ember</div></div></div>
+<div id="splash" aria-hidden="true"><canvas id="splashCanvas"></canvas><div class="splash-name">Ember</div></div>
 <div class="shell">
 <a class="eie-toapp" href="index.html" title="Deschide varianta de telefon">📱 Versiunea de telefon</a>
 
@@ -1149,7 +1149,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07d · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07g · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -3366,7 +3366,40 @@ function resetIdle(){if(!CK)return;clearTimeout(idleT);idleT=setTimeout(()=>{
 if(!localStorage.getItem("eie_theme_migrated")){localStorage.setItem("eie_theme_migrated","1");if(!localStorage.getItem(TKEY)||localStorage.getItem(TKEY)==="light")localStorage.setItem(TKEY,"dark");}
 applyTheme(localStorage.getItem(TKEY)||"dark");
 if("serviceWorker" in navigator){try{navigator.serviceWorker.register("sw.js").catch(()=>{});}catch(_){}}
-(function(){const sp=document.getElementById("splash");if(!sp)return;const hide=()=>{sp.classList.add("gone");setTimeout(()=>{try{sp.remove();}catch(_){}}, 650);};setTimeout(hide,1800);})();
+(function(){
+ var sp=document.getElementById('splash'); if(!sp) return;
+ var cv=document.getElementById('splashCanvas'); if(!cv||!cv.getContext) return;
+ var ctx=cv.getContext('2d'); if(!ctx) return;
+ var rm=document.body.classList.contains('reduce-motion')||(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches);
+ var DPR=Math.min(window.devicePixelRatio||1,2),W,H,cx,baseY;
+ function resize(){W=cv.width=Math.max(2,(innerWidth*DPR)|0);H=cv.height=Math.max(2,(innerHeight*DPR)|0);cx=W/2;baseY=H*0.56;}
+ resize(); window.addEventListener('resize',resize);
+ var stops=['#FFE6A6','#FAC163','#EE9A33','#C97B22','#A85E1A','#2FB084'];
+ var sprites=stops.map(function(col){var s=document.createElement('canvas');s.width=s.height=64;var c=s.getContext('2d');var g=c.createRadialGradient(32,32,0,32,32,32);g.addColorStop(0,col);g.addColorStop(.4,col);g.addColorStop(1,'rgba(0,0,0,0)');c.fillStyle=g;c.fillRect(0,0,64,64);return s;});
+ var parts=[],sparks=[],t0=performance.now(),running=true,sway=0;
+ function spawn(){
+  parts.push({x:cx+sway+(Math.random()-.5)*26*DPR,y:baseY+(Math.random()*8)*DPR,vx:(Math.random()-.5)*1.1*DPR,vy:-(1.5+Math.random()*1.8)*DPR,life:0,max:44+Math.random()*40,r:(11+Math.random()*13)*DPR});
+  if(Math.random()<0.4)sparks.push({x:cx+sway+(Math.random()-.5)*24*DPR,y:baseY*0.96,vx:(Math.random()-.5)*2.4*DPR,vy:-(3.4+Math.random()*4)*DPR,life:0,max:54+Math.random()*46,r:(1.3+Math.random()*1.5)*DPR});
+ }
+ function frame(now){
+  if(!document.getElementById('splash')){running=false;return;}
+  sway=Math.sin(now*0.0023)*9*DPR;
+  ctx.globalCompositeOperation='source-over';ctx.fillStyle='rgba(5,7,6,0.32)';ctx.fillRect(0,0,W,H);
+  ctx.globalCompositeOperation='lighter';
+  var grow=Math.min(1,(now-t0)/500),emit=rm?0:Math.round(4*grow),e;
+  for(e=0;e<emit;e++)spawn();
+  var i,p,lr,idx,size,a;
+  for(i=parts.length-1;i>=0;i--){p=parts[i];p.life++;p.vx+=(cx-p.x)*0.0006;p.x+=p.vx;p.y+=p.vy;p.vy-=0.04*DPR;p.vx*=0.99;lr=p.life/p.max;if(lr>=1){parts.splice(i,1);continue;}idx=(lr*6)|0;if(idx>5)idx=5;size=p.r*(1.0-lr*0.5);a=(1-lr)*0.20;ctx.globalAlpha=a;ctx.drawImage(sprites[idx],p.x-size,p.y-size,size*2,size*2);}
+  var j,s,sr,ss;
+  for(j=sparks.length-1;j>=0;j--){s=sparks[j];s.life++;s.x+=s.vx;s.y+=s.vy;s.vy+=0.05*DPR;sr=s.life/s.max;if(sr>=1){sparks.splice(j,1);continue;}ctx.globalAlpha=(1-sr)*(0.5+0.5*Math.sin(s.life*0.55));ss=s.r*(1-sr*0.5)*4;ctx.drawImage(sprites[1],s.x-ss,s.y-ss,ss*2,ss*2);}
+  ctx.globalAlpha=1;
+  if(running)requestAnimationFrame(frame);
+ }
+ if(!rm){requestAnimationFrame(frame);}
+ else{ctx.globalCompositeOperation='lighter';var k;for(k=0;k<70;k++)spawn();var i3,p3;for(i3=0;i3<parts.length;i3++){p3=parts[i3];ctx.globalAlpha=0.22;ctx.drawImage(sprites[2],p3.x-26,p3.y-26,52,52);}ctx.globalAlpha=1;}
+})();
+
+(function(){const sp=document.getElementById("splash");if(!sp)return;const hide=()=>{sp.classList.add("gone");setTimeout(()=>{try{sp.remove();}catch(_){}}, 650);};setTimeout(hide,2400);})();
 RM=localStorage.getItem("cercul_rm")==="1";applyRM();
 DATEABS=localStorage.getItem("cercul_dateabs")==="1";applyDateAbs();
 NOTIFY=localStorage.getItem("cercul_notify")==="1"&&notifSupported()&&Notification.permission==="granted";applyNotify();
