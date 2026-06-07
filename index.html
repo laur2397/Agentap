@@ -808,6 +808,23 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
 .recact-lbl{font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--primary);font-weight:700;margin:11px 0 5px}
 .recact-row2{display:flex;gap:7px;margin-top:7px;flex-wrap:wrap}
 .btn.xs{font-size:12px;padding:7px 12px;min-height:38px}
+/* ===== Secretara redesign: reportofon live „card premium" + acțiuni evidențiate ===== */
+.reclive{margin-top:2px;border-radius:20px;padding:24px 18px 20px;text-align:center;background:radial-gradient(82% 130% at 50% -6%,var(--primary-soft),transparent 70%),var(--card2);border:1px solid var(--line2);box-shadow:inset 0 1px 0 var(--hi)}
+.reclive-pill{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:#ef4444}
+.recwave{display:flex;align-items:flex-end;justify-content:center;gap:3px;height:56px;margin:18px 0 8px}
+.recwave i{width:4px;border-radius:3px;background:linear-gradient(var(--primary2),var(--primary));animation:recw 1s ease-in-out infinite;transform-origin:bottom}
+@keyframes recw{0%,100%{transform:scaleY(.32)}50%{transform:scaleY(1)}}
+.reduce-motion .recwave i{animation:none;transform:scaleY(.7)}
+.rectimer-big{font-family:var(--serif);font-size:36px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1;letter-spacing:.5px}
+.reclive-note{font-size:11.5px;color:var(--muted);margin-top:9px;line-height:1.45;max-width:300px;margin-left:auto;margin-right:auto}
+.recstop{margin-top:17px;display:inline-flex;align-items:center;gap:9px;padding:13px 30px;border-radius:14px;background:rgba(220,38,38,.14);border:1px solid rgba(220,38,38,.45);color:#ef4444;font-weight:800;font-size:14px;cursor:pointer;transition:transform .18s var(--ease)}
+.recstop:active{transform:scale(.97)}
+.reclive-tr{margin-top:14px}
+.reclive-tr>summary{font-size:12px;color:var(--muted);cursor:pointer;list-style:none;padding:6px 0}
+.reclive-tr>summary::-webkit-details-marker{display:none}
+/* panoul de acțiuni — evidențiat (din apel → acțiuni) */
+.recactions{margin-top:12px;background:linear-gradient(168deg,var(--primary-soft),transparent 90%)!important;border:1px solid var(--primary-dim)!important;border-radius:18px;padding:16px}
+.recactions>.recsum-h{color:var(--primary-dim);font-size:11.5px;letter-spacing:.6px}
 /* ============================================================================
    LOOP 20 — polish pe toată aplicația (token-driven, ambele teme)
    ============================================================================ */
@@ -1041,6 +1058,10 @@ header.multi .hmember{display:flex}
     <div class="eyebrow">Asistent</div><h2 class="title">Secretara ta</h2>
     <p class="sub">Intalniri, notite si pregatire — intr-un singur loc.</p>
     <div id="secSummary" class="secsum"></div>
+    <div class="seccard" id="recCard"><div class="sec nobar"><span class="si">🎙️</span>Reportofon apel <span class="recver">v3.5</span></div>
+      <p class="sub">Merge cu <b>orice apel</b>, cu <b>oricine</b> — persoana <b>nu trebuie să fie în aplicație</b>. Pui apelul pe <b>difuzor</b>, captăm prin microfon și transcriem ce se vorbește, apoi facem rezumatul. <b>Nu salvăm audio</b>. Notă onestă: pe un singur telefon trebuie să ții Ember deschis pe ecran (când treci în altă aplicație, telefonul oprește microfonul) — ideal pe difuzor sau pe un al 2-lea dispozitiv.</p>
+      <div id="recBody"></div>
+    </div>
     <div class="sec nobar" style="margin-top:18px;justify-content:flex-start;align-items:center"><span class="si">✨</span>Asistent AI</div>
     <div class="aiwrap" id="aiWrap">
       <div class="aibar">
@@ -1082,7 +1103,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07i · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07j · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -1090,10 +1111,6 @@ header.multi .hmember{display:flex}
     </div>
     <div class="focusbar"><button class="btn ghost sm" data-act="focus" aria-label="Comuta modul Focus">🎯 Focus</button></div>
     <div id="focusPanel"></div>
-    <div class="seccard" id="recCard"><div class="sec nobar"><span class="si">🎙️</span>Reportofon apel <span class="recver">v3.5</span></div>
-      <p class="sub">Merge cu <b>orice apel</b>, cu <b>oricine</b> — persoana <b>nu trebuie să fie în aplicație</b>. Pui apelul pe <b>difuzor</b>, captăm prin microfon și transcriem ce se vorbește, apoi facem rezumatul. <b>Nu salvăm audio</b>. Notă onestă: pe un singur telefon trebuie să ții Ember deschis pe ecran (când treci în altă aplicație, telefonul oprește microfonul) — ideal pe difuzor sau pe un al 2-lea dispozitiv.</p>
-      <div id="recBody"></div>
-    </div>
     <div class="seccard"><div class="sec"><span class="si">📅</span>Azi</div>
       <div id="todayBox"></div></div>
     <div class="seccard" id="meetCard"><div class="sec"><span class="si">🤝</span>Întâlniri</div>
@@ -2109,13 +2126,19 @@ function renderRec(){const host=$("#recBody");if(!host)return;const r=DB.rec||{}
     if(aiExternal())items.push(h("p",{class:"aihint-intro",text:"🌐 Transcrierea o face "+aiCfg().provider+" (AI extern): la Stop, audio-ul apelului pleacă la acest furnizor. Pentru 100% pe dispozitiv, alege un asistent local din ⚙ Setări."}));
     items.push(h("button",{class:"btn gold sm","data-act":"recConsent",text:"Am înțeles — activează reportofonul"}));
     setKids(host,...items);return;}
-  if(REC.on){setKids(host,
-    h("div",{class:"recctrl"},
-      h("button",{class:"btn sm recbtn rec","data-act":"recStop",onclick:()=>recStop()},h("span",{class:"recdot"}),h("span",{text:"Stop și rezumă"})),
-      h("span",{class:"rectimer",id:"recTimer",text:recTimeStr()})),
-    h("div",{class:"recstat",text:aiExternal()?("🎙️ Înregistrez — la Stop, audio-ul pleacă la "+aiCfg().provider+" pt. transcriere, apoi e șters"):"🎙️ Înregistrez — la Stop transcriu pe dispozitiv și rezum (audio șters după)"}),
-    h("div",{class:"rechint",text:"Pune apelul pe difuzor și ține Ember deschis pe ecran. Prinde ambele voci."}),
-    h("textarea",{id:"recText",class:"rectext",rows:"7","aria-label":"Transcriere live",readonly:"",placeholder:"Transcrierea apare aici (live pe Android; pe iPhone, la Stop)…"}));
+  if(REC.on){
+    const _wh=[14,30,52,24,40,58,20,46,34,54,18,38,50,26,44,32,48,16,42,28,36];
+    const _bars=_wh.map((hh,i)=>h("i",{style:{height:hh+"px",animationDelay:(i*0.06).toFixed(2)+"s"}}));
+    setKids(host,
+      h("div",{class:"reclive"},
+        h("div",{class:"reclive-pill"},h("span",{class:"recdot"}),h("span",{text:"Înregistrez apelul"})),
+        h("div",{class:"recwave"},_bars),
+        h("div",{class:"rectimer-big",id:"recTimer",text:recTimeStr()}),
+        h("div",{class:"reclive-note",text:aiExternal()?("📢 Difuzor · ambele voci · la Stop audio→"+aiCfg().provider+", apoi șters"):"📢 Difuzor · ambele voci · transcriu pe dispozitiv, audio șters după"}),
+        h("button",{class:"recstop","data-act":"recStop",onclick:()=>recStop()},h("span",{text:"⏹"}),h("span",{text:"Oprește și transcrie"}))),
+      h("details",{class:"reclive-tr"},
+        h("summary",{text:"Vezi transcrierea live ▾"}),
+        h("textarea",{id:"recText",class:"rectext",rows:"7","aria-label":"Transcriere live",readonly:"",placeholder:"Transcrierea apare aici (live pe Android; pe iPhone, la Stop)…"})));
     const t=$("#recText");if(t){t.value=r.transcript||"";t.scrollTop=t.scrollHeight;}return;}
   // oprit
   const kids=[];
