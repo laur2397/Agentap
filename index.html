@@ -1174,6 +1174,49 @@ header.multi .hmember{display:flex}
 .brand .mk.flame{background:var(--accent-grad)!important;border-radius:12px!important;box-shadow:0 6px 18px -4px rgba(124,77,240,.6)!important;padding:8px!important}
 .brand .mk.flame svg path{fill:#fff!important}
 .brand .mk.flame svg circle{fill:rgba(255,255,255,.85)!important}
+/* --- Redesign V2: componente Profil (trio statistici, completează, tile-uri) --- */
+.stat3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px;margin:14px 0 6px}
+.stat3 .s3{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 12px;box-shadow:var(--shadow)}
+.stat3 .s3 .v{font-size:25px;font-weight:800;letter-spacing:-.6px;color:var(--ink);line-height:1}
+.stat3 .s3 .l{font-size:11px;color:var(--muted);margin-top:5px}
+.pcomplete{background:linear-gradient(135deg,var(--primary-soft),transparent)!important;border-color:color-mix(in srgb,var(--primary) 30%,transparent)!important}
+.pc-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.pc-t{font-size:15.5px;font-weight:700;color:var(--primary)}
+.pc-s{font-size:12px;color:var(--ink2);margin-top:3px;line-height:1.4;max-width:220px}
+.pc-bar{height:7px;border-radius:99px;background:var(--card2);margin-top:14px;overflow:hidden}
+.pc-bar i{display:block;height:100%;border-radius:99px;background:var(--accent-grad);transition:width .8s var(--ease)}
+.settiles{display:flex;flex-direction:column;gap:0;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:14px}
+.settile{display:flex;align-items:center;gap:14px;padding:15px 16px;background:none;border:0;border-bottom:1px solid var(--line);width:100%;text-align:left;cursor:pointer;color:var(--ink)}
+.settile:last-child{border-bottom:0}
+.settile:active{background:var(--card2)}
+.settile .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:19px;flex-shrink:0}
+.settile .ic.v{background:var(--primary-soft);color:var(--primary)}
+.settile .ic.t{background:var(--success-soft);color:var(--success)}
+.settile .ic.e{background:var(--gold-soft);color:var(--gold)}
+.settile .tx{flex:1;min-width:0}
+.settile .tx b{display:block;font-size:15px;font-weight:700;color:var(--ink)}
+.settile .tx i{display:block;font-style:normal;font-size:12px;color:var(--muted);margin-top:2px;line-height:1.4}
+.settile .ch{color:var(--faint,var(--muted));font-size:20px;flex-shrink:0}
+/* --- Redesign V2: Secretară (hero-card, butoane, acțiuni) --- */
+.secherocard{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow);overflow:hidden;margin:2px 0 14px}
+.secherocard::before{content:"";position:absolute;inset:-30px -40px auto -40px;height:160px;background:radial-gradient(60% 90% at 16% 0%,var(--primary-soft),transparent 70%),radial-gradient(50% 80% at 100% 10%,var(--gold-soft),transparent 72%);pointer-events:none;z-index:0}
+.secherocard>*{position:relative;z-index:1}
+.shrow{display:flex;align-items:center;gap:15px}
+.shbot{width:58px;height:58px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;position:relative}
+.shbot::before{content:"";position:absolute;inset:-2px;border-radius:50%;background:conic-gradient(from 210deg,#FF7E4D,#9B6BFF,#34E0C4,#F4517E,#FF7E4D);z-index:0}
+.shbot::after{content:"";position:absolute;inset:2px;border-radius:50%;background:var(--bg2);z-index:1}
+.shbot-i{position:relative;z-index:2;font-size:25px}
+.shtx{flex:1;min-width:0}
+.secherocard .eyebrow{margin-bottom:2px}
+.secherocard h2.title{font-size:27px;margin:0;line-height:1.05}
+.shsub{font-family:var(--serif);font-size:14px;color:var(--muted);margin-top:3px}
+.secherocard .lead{font-family:var(--sans);font-size:13.5px;max-width:none;margin:14px 0 13px;color:var(--ink2);line-height:1.5}
+.secactions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 20px}
+.secbtn-rec{background:var(--grad-ember)!important;color:#fff!important;font-weight:700;padding:15px;border-radius:14px;font-size:15px;box-shadow:0 10px 26px -8px rgba(244,81,126,.5)}
+.secbtn-ask{padding:15px;border-radius:14px;font-size:15px;font-weight:600}
+.secheading{display:flex;align-items:center;justify-content:space-between;margin:4px 2px 12px}
+.secheading h3{margin:0;font-size:18px;font-weight:800;color:var(--ink)}
+.secheading .cnt{font-size:12px;font-weight:700;color:var(--gold);background:var(--gold-soft);border-radius:999px;padding:4px 11px}
 </style>
 </head>
 <body>
@@ -1282,16 +1325,24 @@ header.multi .hmember{display:flex}
 
   <!-- SECRETARA AI -->
   <section id="secretara" class="view">
-    <div class="sechero">
-      <svg class="constel" viewBox="0 0 360 152" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <line x1="42" y1="54" x2="118" y2="30"/><line x1="118" y1="30" x2="196" y2="74"/><line x1="248" y1="40" x2="304" y2="92"/><line x1="196" y1="74" x2="248" y2="40"/>
-        <circle class="tw" cx="42" cy="54" r="1.7"/><circle class="tw2" cx="118" cy="30" r="2.1"/><circle class="tw" cx="196" cy="74" r="1.6"/><circle class="tw2" cx="248" cy="40" r="1.9"/><circle class="tw" cx="304" cy="92" r="1.5"/><circle class="tw2" cx="66" cy="110" r="1.4"/><circle class="tw" cx="330" cy="30" r="1.5"/><circle class="tw2" cx="160" cy="120" r="1.3"/>
-      </svg>
-      <div class="eyebrow">Asistent</div>
-      <h2 class="title">Secretara ta</h2>
-      <p class="lead">Pune apelul pe difuzor — îl ascult și ți-l transform în acțiuni. Sau întreabă-mă orice despre rețeaua ta.</p>
+    <div class="sechero secherocard">
+      <div class="shrow">
+        <div class="shbot"><span class="shbot-i">🤖</span></div>
+        <div class="shtx">
+          <div class="eyebrow">Asistent</div>
+          <h2 class="title">Secretara ta</h2>
+          <div class="shsub">Mereu pregătită</div>
+        </div>
+      </div>
+      <p class="lead">Îți rezum apelurile și scot acțiunile automat — fără să salvez audio.</p>
+      <div id="secSummary" class="secsum"></div>
     </div>
-    <div id="secSummary" class="secsum"></div>
+    <div class="secactions">
+      <button class="btn gold secbtn-rec" data-act="recStart" onclick="var c=document.getElementById('recCard');if(c)c.scrollIntoView({behavior:'smooth',block:'center'})">● Înregistrează</button>
+      <button class="btn ghost secbtn-ask" onclick="var w=document.getElementById('aiWrap'),i=document.getElementById('aiInput');if(w)w.scrollIntoView({behavior:'smooth',block:'center'});if(i)setTimeout(function(){try{i.focus()}catch(e){}},320)">💬 Întreabă</button>
+    </div>
+    <div class="secheading"><h3>Acțiuni de făcut</h3><span class="cnt" id="secTasksBadge">0 active</span></div>
+    <div id="secTasksTop" style="margin-bottom:18px"></div>
     <div class="seccard" id="recCard"><div class="sec nobar"><span class="si">🎙️</span>Reportofon apel <span class="recver">v3.5</span></div>
       <p class="sub" style="margin-bottom:6px">Pe <b>difuzor</b> prind ambele voci și transcriu, apoi extrag acțiuni — <b>fără să salvez audio</b>. Ține Ember deschis pe ecran în timpul apelului.</p>
       <div id="recBody"></div>
@@ -1338,7 +1389,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07w · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07x · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -1402,7 +1453,28 @@ header.multi .hmember{display:flex}
   <!-- PROFIL -->
   <section id="profil" class="view">
     <div id="phead" class="panel" style="margin-top:0"></div>
-    <div class="panel"><h3>Cont &amp; securitate</h3>
+    <div class="panel pcomplete" id="profComplete" style="display:none">
+      <div class="pc-row">
+        <div><div class="pc-t">Completează profilul</div><div class="pc-s" id="pcSub">Adaugă câteva detalii ca să apari în mai multe potriviri.</div></div>
+        <button class="btn gold sm" data-act="profedit">Continuă</button>
+      </div>
+      <div class="pc-bar"><i id="pcBar" style="width:0%"></i></div>
+    </div>
+    <div class="stat3">
+      <div class="s3"><div class="v" id="stConn">0</div><div class="l">Conexiuni</div></div>
+      <div class="s3"><div class="v" id="stViews">0</div><div class="l">Vizualizări</div></div>
+      <div class="s3"><div class="v" id="stIntros">0</div><div class="l">Introduceri</div></div>
+    </div>
+    <div class="sec" style="margin:18px 0 12px">Setări</div>
+    <div class="settiles">
+      <button class="settile" type="button" onclick="document.getElementById('secCont').scrollIntoView({behavior:'smooth',block:'start'})">
+        <span class="ic v">🔒</span><span class="tx"><b>Cont &amp; securitate</b><i>Cont local, fără email. Cod de recuperare.</i></span><span class="ch">›</span></button>
+      <button class="settile" type="button" onclick="document.getElementById('secPriv').scrollIntoView({behavior:'smooth',block:'start'})">
+        <span class="ic t">🛡️</span><span class="tx"><b>Confidențialitate</b><i>Cine te poate găsi și ce vede.</i></span><span class="ch">›</span></button>
+      <button class="settile" type="button" onclick="document.getElementById('secNotif').scrollIntoView({behavior:'smooth',block:'start'})">
+        <span class="ic e">🔔</span><span class="tx"><b>Notificări</b><i>Potriviri, introduceri, vizualizări.</i></span><span class="ch">›</span></button>
+    </div>
+    <div class="panel" id="secCont"><h3>Cont &amp; securitate</h3>
       <div id="acctInfo" style="font-size:12.5px;color:var(--ink2);line-height:1.6;margin-bottom:10px"></div>
       <div id="viewAsWrap" style="display:none;margin-bottom:12px">
         <label class="mfl" for="member">Vezi rețeaua ca (demo)</label>
@@ -1435,7 +1507,7 @@ header.multi .hmember{display:flex}
     <div class="panel"><h3>Jurnal de activitate <span class="badge priv">audit</span></h3>
       <p style="font-size:11px;color:var(--muted);margin:-6px 0 8px">Read-only · fiecare actiune e inregistrata cu marca de timp (conformitate).</p>
       <div class="audit" id="auditList"></div></div>
-    <div class="panel"><h3>Confidentialitate <span class="badge vis">Local-Only</span></h3>
+    <div class="panel" id="secPriv"><h3>Confidentialitate <span class="badge vis">Local-Only</span></h3>
       <p style="font-size:12px;color:var(--ink2);line-height:1.55">Datele tale traiesc <b>doar in acest browser</b>, criptate la repaus cu <b>AES-GCM</b>. Cheia se deriveaza din parola ta (<b>PBKDF2</b>, 150k iteratii) cu un <b>salt unic per utilizator</b>, generat la prima rulare si stocat local (salt-ul nu e secret — previne rainbow tables); <b>cheia ramane strict in RAM</b> si nu se scrie niciodata pe disc. La blocare cheia e <b>eliberata din memorie (best-effort)</b> — JS nu garanteaza zeroing imediat al heap-ului; datele pe disc raman criptate si se redeschid doar cu parola. Scrierea e tranzactionala (temp→validare→commit). Integritate: checksum <b>SHA-256</b>; Trust Ledger pe lant <b>HMAC-SHA256</b> cheiat de parola. „Ce caut” se dezvaluie <b>doar dupa dublu consimtamant</b>.</p>
       <p style="font-size:12px;color:var(--ink2);line-height:1.55;margin-top:8px"><b>Model de amenintare, onest:</b> datele stocate local (salt + ciphertext) pot fi citite de un script malitios care ruleaza pe <b>aceeasi origine</b> (ex. o extensie de browser compromisa) si sparte <b>offline</b> prin brute-force — incetinit de PBKDF2, dar nu imposibil. Protectia ta principala e o <b>parola unica si puternica</b> (ideal dintr-un manager de parole). Pentru o <b>curatare completa a memoriei (RAM)</b>, inchide tab-ul sau browserul dupa blocare — JavaScript (V8) nu garanteaza eliminarea imediata din heap, deci nu e protectie de nivel hardware/HSM. Toate IV-urile si salt-urile sunt generate exclusiv cu <b>crypto.getRandomValues</b> (Web Crypto), niciodata cu Math.random.</p>
       <p style="font-size:11px;color:var(--muted);line-height:1.5;margin-top:8px">Securitatea finala depinde de <b>taria parolei tale</b>: la un dump complet al stocarii, un atacator are doar salt+ciphertext (nu si parola) si trebuie sa o sparga prin brute-force incetinit de PBKDF2. Foloseste o parola lunga (ideal dintr-un manager de parole). Acest prototip nu adauga un „pepper” extern (n-ar avea unde, fiind Local-Only fara server).</p>
@@ -1473,7 +1545,7 @@ header.multi .hmember{display:flex}
         <button class="btn ghost sm" id="planFreeBtn" data-act="planFree" style="display:none">Revino la Free</button>
       </div>
       <p style="font-size:11px;color:var(--warn);margin-top:9px">Demo: upgrade-ul nu e conectat la o plată reală încă. În producție, Pro se validează <b>server-side</b> (token de drept semnat) + procesator de plăți (ex. Stripe).</p></div>
-    <div class="panel"><h3>Preferinte <span class="badge vis">acces</span></h3>
+    <div class="panel" id="secNotif"><h3>Preferinte <span class="badge vis">acces</span></h3>
       <div class="toggle"><span>Reduce animatiile <span style="color:var(--muted);font-size:11px">(accesibilitate)</span></span>
         <div class="sw" id="rmSw" role="switch" tabindex="0" aria-label="Reduce animatiile" onclick="toggleRM()"><i></i></div></div>
       <div class="toggle"><span>Date absolute <span style="color:var(--muted);font-size:11px">(15 iun, nu „acum/2h”)</span></span>
@@ -1862,7 +1934,15 @@ function seed(){
   d.seq=d.members.length+1;
   const ai=(m,k,arr)=>(arr||[]).forEach(([t,s])=>d.items.push({id:d.seq++,member_id:m,kind:k,text:t,visible:k==="ofer"?1:0,source:s}));
   SEED.forEach((_,i)=>{ai(i+1,"ofer",OFF[i]);ai(i+1,"caut",SEEK[i]);});
-  DB=d;buildIDF();runMatching();[[1,2],[3,1],[5,4],[2,3],[7,3],[3,5]].forEach(([a,b])=>preConnect(a,b));save();return d;
+  DB=d;buildIDF();runMatching();[[1,2],[3,1],[5,4],[2,3],[7,3],[3,5]].forEach(([a,b])=>preConnect(a,b));
+  seedDemoTasks(d);save();return d;
+}
+/* Redesign V2: câteva task-uri demo pentru profilul demo (ca secretara să fie „vie") */
+function seedDemoTasks(d){const iso=n=>{const x=new Date();x.setDate(x.getDate()+n);return x.toISOString().slice(0,10);};const now=Date.now();
+  d.tasks.push(
+    {id:d.seq++,member_id:1,text:"Trimite oferta către Bogdan Marin",due:iso(2),done:0,prio:1,t:now-36e5},
+    {id:d.seq++,member_id:1,text:"Confirmă întâlnirea cu Andreea Pop",due:iso(1),done:0,prio:0,t:now-72e5},
+    {id:d.seq++,member_id:1,text:"Reamintește-i lui Mihai de contract",due:iso(-1),done:1,prio:0,t:now-9e7});
 }
 function preConnect(a,b){const m=DB.matches.find(x=>(x.offer_member===a&&x.seek_member===b)||(x.offer_member===b&&x.seek_member===a));if(m){m.offer_consent=1;m.seek_consent=1;m.status="conectat";if(!m.at)m.at=Date.now()-Math.floor(Math.random()*9+1)*864e5;if(!DB.messages.some(x=>x.match_id===m.id))ctx(m);}}
 function tok(t){return new Set((t.toLowerCase().match(/[a-z0-9]+/g)||[]).filter(w=>w.length>=3&&!STOP.has(w)));}
@@ -1906,7 +1986,7 @@ function skBlock(){return h("div",{class:"skel"},h("div",{class:"sk box"}),h("di
 function skeleton(v){if(v==="potriviri")setKids($("#matchList"),skBlock(),skBlock());else if(v==="acasa")setKids($("#topMatches"),skBlock());}
 function render(){try{if(!DB)return;if(!mem(ME)){if(DB.members[0])ME=DB.members[0].id;else return;}
   updateTrustChip();
-  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();applyMatchDiv();setKids($("#matchList"),pipeline(orderMatches(myMatches().filter(matchIndOk))));}else if(VIEW==="retea"){renderConn();renderExchange();renderDiscover();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderAi();renderRec();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();renderShared();}}else if(VIEW==="profil"){prof();renderRelay();renderPlan();}
+  if(VIEW==="acasa")home();else if(VIEW==="potriviri"){renderMatchFilters();applyMatchDiv();setKids($("#matchList"),pipeline(orderMatches(myMatches().filter(matchIndOk))));}else if(VIEW==="retea"){renderConn();renderExchange();renderDiscover();const d=$("#mapDet");if(d&&d.open)net();}else if(VIEW==="secretara"){const sc=$("#secretara");if(sc)sc.classList.toggle("focusing",FOCUS);if(FOCUS)renderFocus();else{renderSecSummary();renderSecTasksTop();renderAi();renderRec();renderToday();renderWeekCal();renderMeetings();renderTasks();renderNotes();renderShared();}}else if(VIEW==="profil"){prof();renderRelay();renderPlan();}
   updateBadges();}catch(e){console.error("render",e);toast("Eroare la afisare — am prevenit blocarea.");}}
 // backlog #7: empty-state ilustrat, consistent
 function estateBox(title,sub,action){return h("div",{class:"estate",style:{padding:"26px 20px"}},
@@ -2966,6 +3046,19 @@ function prof(){const me=mem(ME),con=DB.matches.filter(x=>x.status==="conectat"&
         h("div",{},h("div",{text:i.text}),h("div",{class:"meta",text:"sursa: "+i.source})),
         h("button",{class:"x","data-act":"del","data-id":i.id,"aria-label":"Sterge",text:"×"}))):h("div",{class:"empty",style:{padding:"12px",fontSize:"14px"},text:"Încă nimic aici — adaugă primul lucru mai jos."}));};
   r("ofer","#oferList");r("caut","#cautList");
+  // Redesign V2: trio statistici + card "Completează profilul"
+  const oferN=DB.items.filter(i=>i.member_id===ME&&i.kind==="ofer").length;
+  const cautN=DB.items.filter(i=>i.member_id===ME&&i.kind==="caut").length;
+  const views=(me.views!=null?me.views:con*7+40);
+  const intros=(me.intros!=null?me.intros:Math.max(0,con*2+3));
+  const sv=(id,val)=>{const e=$(id);if(e)e.textContent=val;};
+  sv("#stConn",con);sv("#stViews",views);sv("#stIntros",intros);
+  const fields=[!!me.name,!!(me.role||me.industry),oferN>0,cautN>0,!!me.open,!!(DB.account&&DB.account.id)];
+  const doneN=fields.filter(Boolean).length,pct=Math.round(doneN/fields.length*100),left=fields.length-doneN;
+  const pcCard=$("#profComplete"),pcBar=$("#pcBar"),pcSub=$("#pcSub");
+  if(pcCard){if(pct>=100){pcCard.style.display="none";}else{pcCard.style.display="";
+    if(pcBar)pcBar.style.width=pct+"%";
+    if(pcSub)pcSub.textContent="Adaugă "+left+(left===1?" detaliu":" detalii")+" ca să apari în mai multe potriviri.";}}
   renderValueRadar();renderPrivacyHealth();
   const au=(DB.audit||[]).filter(a=>a.me===ME).slice(0,12);
   setKids($("#auditList"), au.length?au.map(a=>h("div",{class:"arow"},h("span",{class:"at",text:relTime(a.t)}),h("span",{text:a.a}))):h("div",{class:"empty",style:{padding:"10px",fontSize:"14px"},text:"Nicio actiune inregistrata."}));}
@@ -3052,6 +3145,16 @@ function renderSecSummary(){const host=$("#secSummary");if(!host)return;const td
   setKids(host,[
     h("button",{class:"ss","aria-label":"Vezi sarcinile",onclick:()=>secChipGo("taskCard")},"✅ ",h("b",{text:String(tActive)})," "+tlabel),
     h("button",{class:"ss","aria-label":"Vezi întâlnirile",onclick:()=>secChipGo("meetCard")},"📅 ",h("b",{text:String(mFuture)})," "+mlabel)]);}
+/* Redesign V2: preview "Acțiuni de făcut" sus pe Secretară (reutilizează task-urile reale) */
+function renderSecTasksTop(){const host=$("#secTasksTop");if(!host)return;const td=today();
+  const open=(DB.tasks||[]).filter(t=>t.member_id===ME&&!t.done).sort((a,b)=>(b.prio||0)-(a.prio||0)||(a.due||"9999").localeCompare(b.due||"9999"));
+  const recentDone=(DB.tasks||[]).filter(t=>t.member_id===ME&&t.done).slice(-1);
+  const badge=$("#secTasksBadge");if(badge)badge.textContent=open.length+(open.length===1?" activ":" active");
+  const mk=t=>{const overdue=!t.done&&t.due&&t.due<td;return h("div",{class:"taskcard"+(t.done?" done":"")},
+    h("button",{class:"tcheck"+(t.done?" on":""),"data-act":"tasktoggle","data-id":t.id,role:"checkbox","aria-checked":t.done?"true":"false","aria-label":"Marcheaza finalizat"},t.done?"✓":""),
+    h("div",{class:"ti"},h("div",{class:"ttx",text:t.text}),t.due?h("div",{class:"tdue"+(overdue?" over":""),text:fmtWhen(t.due)}):null));};
+  const rows=[...open.slice(0,3).map(mk),...recentDone.map(mk)];
+  setKids(host, rows.length?rows:estateBox("Niciun task încă","Adaugă o sarcină în Unelte → De făcut, sau înregistrează un apel.",{label:"Deschide uneltele →",v:"secretara"}));}
 // chip-urile deschid sectiunea pliata 'Unelte' apoi sar la cardul potrivit (altfel scroll-ul ar duce la un card ascuns)
 function secChipGo(card){const d=$("#secMore");if(d)d.open=true;
   setTimeout(()=>{const e=$("#"+card);if(e)e.scrollIntoView({behavior:"smooth",block:"start"});
