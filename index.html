@@ -852,6 +852,47 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
 .secmore>summary .chev{margin-left:auto;color:var(--muted);font-size:20px;line-height:1;transition:transform .2s var(--ease)}
 .secmore[open]>summary .chev{transform:rotate(90deg)}
 .secmore>summary .mc{font-size:11.5px;color:var(--muted);font-family:var(--sans);font-weight:600}
+/* ===== Secretara redesign v3: constelatie + card 'apel procesat' + actiuni editoriale + mic care respira ===== */
+.sechero{overflow:visible}
+.sechero .constel{position:absolute;inset:-26px -28px auto -28px;height:152px;z-index:0;opacity:.6;pointer-events:none}
+.sechero .constel line{stroke:var(--primary);stroke-width:.7;opacity:.45}
+.sechero .constel circle{fill:var(--gold)}
+.sechero .constel .tw{animation:tw 4.2s ease-in-out infinite}
+.sechero .constel .tw2{animation:tw 5.6s ease-in-out infinite 1s}
+@keyframes tw{0%,100%{opacity:.22}50%{opacity:.95}}
+.reduce-motion .sechero .constel .tw,.reduce-motion .sechero .constel .tw2{animation:none}
+/* card APEL PROCESAT */
+.recproc{margin-top:14px;border-radius:18px;padding:15px;background:var(--card2);border:1px solid var(--line2)}
+.recproc-h{display:flex;align-items:center;gap:12px}
+.recproc-av{width:46px;height:46px;border-radius:14px;flex:none;display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:17px;color:var(--on-gold);background:var(--accent-grad)}
+.recproc-t{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--ink);line-height:1.15}
+.recproc-m{font-size:11.5px;color:var(--muted);margin-top:3px;letter-spacing:.2px}
+.recproc-b{margin-top:12px;font-size:13px;color:var(--ink2);line-height:1.65;white-space:pre-wrap}
+/* ACTIUNI PROPUSE — editorial */
+.recactions{margin-top:13px;border-radius:20px;padding:15px 16px 17px;background:linear-gradient(168deg,var(--primary-soft),transparent 92%);border:1px solid var(--primary-dim)}
+.recact-head{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--primary-dim);margin-bottom:4px}
+.recact-spark{font-size:13px}
+.recact-row{display:flex;align-items:center;gap:11px;padding:10px 0;border-top:1px solid var(--line)}
+.recact-ic{width:30px;height:30px;border-radius:9px;flex:none;display:grid;place-items:center;font-size:14px;background:var(--card);border:1px solid var(--line2)}
+.recact-t{flex:1;display:flex;flex-direction:column;gap:1px;min-width:0}
+.recact-main{font-size:13.5px;color:var(--ink);line-height:1.35;font-weight:500}
+.recact-sub{font-size:11px;color:var(--muted)}
+.recact-btn{flex:none}
+.recact-all{width:100%;margin-top:11px}
+.recact-lbl{font-size:10.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--primary-dim);font-weight:700;margin:15px 0 7px}
+.recdraft-wrap{border-left:3px solid var(--gold);background:var(--gold-soft);border-radius:0 12px 12px 0}
+.rectext.recdraft{margin:0;background:transparent;border:0;font-family:var(--serif);font-style:italic;font-size:13.5px;color:var(--ink);box-shadow:none;padding:10px 13px}
+.rectext.recdraft:focus{box-shadow:none!important;border:0!important}
+.recact-row2{margin-top:10px}
+/* microfon care respira */
+.recmic{animation:micbreath 3.6s ease-in-out infinite}
+@keyframes micbreath{0%,100%{box-shadow:0 0 0 6px var(--primary-soft),0 14px 34px -12px var(--glow)}50%{box-shadow:0 0 0 12px var(--primary-soft),0 16px 40px -10px var(--glow)}}
+.reduce-motion .recmic{animation:none}
+/* chat: sugestii in starea goala */
+.aiempty-q{display:flex;flex-wrap:wrap;gap:7px;margin-top:13px;justify-content:center}
+.aisug{font-size:12px;padding:8px 13px;border-radius:999px;background:var(--card2);border:1px solid var(--line2);color:var(--ink2);cursor:pointer;transition:transform .15s var(--ease),border-color .2s}
+.aisug:active{transform:scale(.96)}
+.aisug:hover{border-color:var(--primary-dim)}
 /* ============================================================================
    LOOP 20 — polish pe toată aplicația (token-driven, ambele teme)
    ============================================================================ */
@@ -1083,6 +1124,10 @@ header.multi .hmember{display:flex}
   <!-- SECRETARA AI -->
   <section id="secretara" class="view">
     <div class="sechero">
+      <svg class="constel" viewBox="0 0 360 152" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <line x1="42" y1="54" x2="118" y2="30"/><line x1="118" y1="30" x2="196" y2="74"/><line x1="248" y1="40" x2="304" y2="92"/><line x1="196" y1="74" x2="248" y2="40"/>
+        <circle class="tw" cx="42" cy="54" r="1.7"/><circle class="tw2" cx="118" cy="30" r="2.1"/><circle class="tw" cx="196" cy="74" r="1.6"/><circle class="tw2" cx="248" cy="40" r="1.9"/><circle class="tw" cx="304" cy="92" r="1.5"/><circle class="tw2" cx="66" cy="110" r="1.4"/><circle class="tw" cx="330" cy="30" r="1.5"/><circle class="tw2" cx="160" cy="120" r="1.3"/>
+      </svg>
       <div class="eyebrow">Asistent</div>
       <h2 class="title">Secretara ta</h2>
       <p class="lead">Pune apelul pe difuzor — îl ascult și ți-l transform în acțiuni. Sau întreabă-mă orice despre rețeaua ta.</p>
@@ -1134,7 +1179,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07m · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07n · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -2090,7 +2135,9 @@ function aiChatClear(){if(!(DB.aichat||[]).length){toast("Conversația e deja go
   DB.aichat=[];save();renderAiChat();toast("Conversație ștearsă");}
 function renderAiChat(){const host=$("#aiChat");if(!host)return;const msgs=DB.aichat||[];
   if(!aiOn()){setKids(host,h("div",{class:"aiempty",text:"Configurează un asistent (local sau cu cheia ta) ca să începi o conversație."}));return;}
-  if(!msgs.length){setKids(host,h("div",{class:"aiempty",text:"Salut! Sunt secretara ta AI. Întreabă-mă despre întâlniri, mesaje de trimis, idei de abordare…"}));return;}
+  if(!msgs.length){const sugs=["Pe cine să contactez săptămâna asta?","Scrie un mesaj de follow-up","Ce am de făcut azi?"];
+    setKids(host,h("div",{class:"aiempty",text:"Salut! Sunt secretara ta. Întreabă-mă orice — sau pornește de la:"}),
+      h("div",{class:"aiempty-q"},...sugs.map(q=>h("button",{class:"aisug","data-act":"aiSug","data-q":q,text:q}))));return;}
   setKids(host,...msgs.map(m=>h("div",{class:"aimsg "+(m.role==="user"?"u":m.role==="system"?"sys":"a"),text:m.content})));
   host.scrollTop=host.scrollHeight;}
 function aiContext(){const me=mem(ME)||{};const td=today();
@@ -2100,6 +2147,7 @@ function aiContext(){const me=mem(ME)||{};const td=today();
   const outs=(DB.meetings||[]).filter(x=>(x.a===ME||x.b===ME)&&x.outcome&&(x.when||"").slice(0,10)<td).slice(-3)
     .map(x=>{const c=mem(x.a===ME?x.b:x.a)||{name:x.guest||"?"};return "- "+(c.name||"?")+": "+x.outcome;}).join("\n");
   return `Utilizator: ${me.name||"?"} (${me.industry||"—"}).\nTask-uri active:\n${tasks||"(niciunul)"}\nÎntâlniri viitoare:\n${meets||"(niciuna)"}\nRezultate recente ale întâlnirilor:\n${outs||"(niciunul)"}`;}
+function aiSug(q){if(!q)return;const inp=$("#aiInput");if(inp){inp.value=q;}aiSend();}
 async function aiSend(){if(!aiOn()){toast("Configurează întâi asistentul (⚙ Setări)");return;}
   const inp=$("#aiInput");const text=clean((inp&&inp.value||"").trim());if(!text)return;
   inp.value="";DB.aichat=DB.aichat||[];DB.aichat.push({role:"user",content:text});renderAiChat();
@@ -2233,7 +2281,15 @@ function renderRec(){const host=$("#recBody");if(!host)return;const r=DB.rec||{}
       h("button",{class:"btn ghost sm","data-act":"recSave",text:"Salvează în Jurnal"}),
       h("button",{class:"linklike","data-act":"recClear",text:"Șterge"})));
   } else if(REC.audioBlob){kids.push(h("div",{class:"recacts"},h("button",{class:"btn gold sm","data-act":"recTr",text:"Transcrie cu AI"})));}
-  if(r.summary){kids.push(h("div",{class:"recsum"},h("div",{class:"recsum-h",text:"Rezumat"}),h("div",{class:"recsum-b",text:r.summary})));}
+  if(r.summary){
+    var snm=(r.who?((mem(+r.who)||{}).name||""):"")||r.whoFree||(r.actions&&r.actions.who)||"Apel";
+    var meta=[];if(r.dur)meta.push(r.dur>=60?(Math.round(r.dur/60)+" min"):(r.dur+"s"));if(r.at)meta.push("acum "+relTime(r.at));
+    kids.push(h("div",{class:"recproc"},
+      h("div",{class:"recproc-h"},
+        h("div",{class:"recproc-av",text:ini(snm)}),
+        h("div",{class:"recproc-id"},h("div",{class:"recproc-t",text:"Apel cu "+snm}),h("div",{class:"recproc-m",text:meta.join(" · ")||"procesat"}))),
+      h("div",{class:"recproc-b",text:r.summary})));
+  }
   var _ap=recActionsPanel(r);if(_ap)kids.push(_ap);
   setKids(host,...kids);
   const _dr=$("#recDraft");if(_dr&&r.actions)_dr.value=r.actions.draft||"";
@@ -2283,6 +2339,7 @@ function recBeep(){try{const AC=window.AudioContext||window.webkitAudioContext;i
     g.gain.exponentialRampToValueAtTime(0.0001,ac.currentTime+t+0.18);o.start(ac.currentTime+t);o.stop(ac.currentTime+t+0.2);};
   beep(0,880);beep(0.22,1100);setTimeout(()=>{try{ac.close();}catch(_){}},900);}catch(_){}}
 function recStop(){if(!REC.on)return;REC.on=false;clearInterval(REC.timer);
+  try{DB.rec=DB.rec||{};DB.rec.dur=Math.max(1,Math.floor((Date.now()-REC.t0)/1000));}catch(_){}
   try{if(REC._vis){document.removeEventListener("visibilitychange",REC._vis);REC._vis=null;}}catch(_){}
   try{if(REC.wake){REC.wake.release();REC.wake=null;}}catch(_){}
   try{if(REC.sr)REC.sr.stop();}catch(_){}REC.sr=null;
@@ -2312,21 +2369,26 @@ async function recTr(){if(!REC.audioBlob){toast("Nu există audio de transcris")
     save();hideProc();renderRec();
     toast(txt?"Transcriere gata":"Transcriere goală");}catch(e){DB.rec.err="Transcriere eșuată: "+(e&&e.message||e);save();hideProc();renderRec();toast("Transcriere eșuată");}}
 function extractJSON(s){if(!s)return null;s=String(s);var i=s.indexOf("{"),j=s.lastIndexOf("}");if(i<0||j<=i)return null;try{return JSON.parse(s.slice(i,j+1));}catch(_){return null;}}
+function recActRow(ic,txt,sub,actAttrs){
+  return h("div",{class:"recact-row"},
+    h("span",{class:"recact-ic"},ic),
+    h("span",{class:"recact-t"},h("span",{class:"recact-main",text:txt}),sub?h("span",{class:"recact-sub",text:sub}):null),
+    h("button",Object.assign({class:"btn ghost xs recact-btn"},actAttrs)));}
 function recActionsPanel(r){var a=r.actions;if(!a)return null;
-  var kids=[h("div",{class:"recsum-h",text:"🤖 Acțiuni propuse de secretară"})];
+  var kids=[h("div",{class:"recact-head"},h("span",{class:"recact-spark"},"✦"),h("span",{text:"Acțiuni propuse"}))];
   var linkedName=r.who?((mem(+r.who)||{}).name||""):(r.whoFree||"");
   if(a.who&&a.who.toLowerCase()!==(linkedName||"").toLowerCase())
-    kids.push(h("div",{class:"recact-row"},h("span",{class:"recact-t"},"👤 Persoană detectată: "+a.who),h("button",{class:"btn ghost xs","data-act":"recActWho",text:"Folosește"})));
+    kids.push(recActRow("👤","Persoană detectată",a.who,{"data-act":"recActWho",text:"Folosește"}));
   (a.tasks||[]).forEach(function(t,i){if(t.added)return;
-    kids.push(h("div",{class:"recact-row"},h("span",{class:"recact-t"},"☐ "+t.text+(t.when?(" · "+t.when):"")),h("button",{class:"btn ghost xs","data-act":"recActTask","data-id":String(i),text:"Adaugă"})));});
+    kids.push(recActRow("☐",t.text,t.when||"",{"data-act":"recActTask","data-id":String(i),text:"Adaugă"}));});
   var pend=(a.tasks||[]).filter(function(t){return !t.added;});
-  if(pend.length>1)kids.push(h("button",{class:"btn gold xs","data-act":"recActAll",style:{marginTop:"4px"},text:"Adaugă toate task-urile ("+pend.length+")"}));
-  if(a.draft){kids.push(h("div",{class:"recact-lbl",text:"✉ Draft de mesaj (editabil)"}));
-    kids.push(h("textarea",{id:"recDraft",class:"rectext",rows:"4","aria-label":"Draft mesaj"}));
-    kids.push(h("div",{class:"recact-row2"},h("button",{class:"btn gold xs","data-act":"recActCopy",text:"📋 Copiază"}),h("button",{class:"btn ghost xs","data-act":"recActWa",text:"Trimite (WhatsApp/SMS)"})));}
+  if(pend.length>1)kids.push(h("button",{class:"btn gold xs recact-all","data-act":"recActAll",text:"＋ Adaugă toate task-urile ("+pend.length+")"}));
+  if(a.draft){kids.push(h("div",{class:"recact-lbl",text:"✉ Draft de mesaj"}));
+    kids.push(h("div",{class:"recdraft-wrap"},h("textarea",{id:"recDraft",class:"rectext recdraft","aria-label":"Draft mesaj",rows:"4"})));
+    kids.push(h("div",{class:"recact-row2"},h("button",{class:"btn gold xs","data-act":"recActCopy",text:"📋 Copiază"}),h("button",{class:"btn ghost xs","data-act":"recActWa",text:"Trimite ↗"})));}
   if(a.meeting&&a.meeting.purpose)
-    kids.push(h("div",{class:"recact-row"},h("span",{class:"recact-t"},"📅 Întâlnire: "+a.meeting.purpose+(a.meeting.when?(" ("+a.meeting.when+")"):"")),h("button",{class:"btn ghost xs","data-act":"recActMeet",text:"Adaugă"})));
-  return h("div",{class:"recsum recactions"},kids);}
+    kids.push(recActRow("📅",a.meeting.purpose,a.meeting.when?("când: "+a.meeting.when):"întâlnire sugerată",{"data-act":"recActMeet",text:"Adaugă"}));
+  return h("div",{class:"recactions"},kids);}
 function recActWho(){var a=DB.rec&&DB.rec.actions;if(!a||!a.who)return;
   var m=(DB.members||[]).find(function(x){return x.id!==ME&&x.name.toLowerCase()===a.who.toLowerCase();});
   if(m){DB.rec.who=String(m.id);DB.rec.whoFree="";toast("Legat de "+m.name);}else{DB.rec.whoFree=a.who;DB.rec.who="";toast("Nume setat: "+a.who);}
@@ -2364,6 +2426,7 @@ async function recSum(){const tx=(DB.rec&&DB.rec.transcript||"").trim();if(!tx){
         draft:cleanLong(((obj.draft||"")+"")).slice(0,600),
         meeting:(obj.meeting&&(obj.meeting.purpose||obj.meeting.when))?{purpose:clean((obj.meeting.purpose||"")+"").slice(0,160),when:clean((obj.meeting.when||"")+"").slice(0,60)}:null};
     }else{DB.rec.summary=(raw||"").trim();DB.rec.actions=null;}
+    DB.rec.at=Date.now();
     save();hideProc();renderRec();
     if(DB.rec.actions)toast("Secretara a extras acțiuni — verifică-le mai jos");
   }catch(e){hideProc();toast("Extragere eșuată: "+(e&&e.message||e));}}
@@ -3288,6 +3351,7 @@ document.addEventListener("click",ev=>{const el=ev.target.closest("[data-act]");
   else if(a==="aiTest")aiTest();
   else if(a==="aiClear")aiClear();
   else if(a==="aiChatClear")aiChatClear();
+  else if(a==="aiSug")aiSug(el.dataset.q);
   else if(a==="aiSend")aiSend();
   else if(a==="recConsent")recConsent();
   else if(a==="recStart")recStart();
