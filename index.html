@@ -922,6 +922,10 @@ body{background-size:160% 160%,160% 160%,160% 160%,100% 100%;animation:meshdrift
 .homestats>summary .si{font-size:14px}
 .homestats>summary .chev{margin-left:auto;color:var(--muted);font-size:20px;line-height:1;transition:transform .2s var(--ease)}
 .homestats[open]>summary .chev{transform:rotate(90deg)}
+/* evidentiere scurta cand un chip te duce la un card (task-uri / intalniri) */
+@keyframes cardflash{0%{box-shadow:0 0 0 0 var(--primary-soft)}30%{box-shadow:0 0 0 4px var(--primary-soft),0 0 24px -2px var(--glow)}100%{box-shadow:0 0 0 0 var(--primary-soft)}}
+.seccard.flash{animation:cardflash 1.2s ease-out;border-color:var(--primary-dim)}
+.reduce-motion .seccard.flash{animation:none}
 /* ============================================================================
    LOOP 20 — polish pe toată aplicația (token-driven, ambele teme)
    ============================================================================ */
@@ -1217,7 +1221,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07o · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-07p · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -1225,7 +1229,7 @@ header.multi .hmember{display:flex}
     </div>
     <div class="focusbar"><button class="btn ghost sm" data-act="focus" aria-label="Comuta modul Focus">🎯 Focus</button></div>
     <div id="focusPanel"></div>
-    <details class="secmore">
+    <details class="secmore" id="secMore">
       <summary><span class="si">🗂</span>Unelte<span class="mc">&nbsp;— întâlniri · task-uri · notițe · jurnal</span><span class="chev">›</span></summary>
     <div class="seccard"><div class="sec"><span class="si">📅</span>Azi</div>
       <div id="todayBox"></div></div>
@@ -2918,8 +2922,13 @@ function renderSecSummary(){const host=$("#secSummary");if(!host)return;const td
   const tlabel=tActive===1?"task activ":"task-uri active";
   const mlabel=mFuture===1?"intalnire viitoare":"intalniri viitoare";
   setKids(host,[
-    h("button",{class:"ss","aria-label":"Vezi sarcinile",onclick:()=>{const e=$("#taskCard");if(e)e.scrollIntoView({behavior:"smooth",block:"start"});}},"✅ ",h("b",{text:String(tActive)})," "+tlabel),
-    h("button",{class:"ss","aria-label":"Vezi întâlnirile",onclick:()=>{const e=$("#meetCard");if(e)e.scrollIntoView({behavior:"smooth",block:"start"});const w=$("#mAddWho");if(w)setTimeout(()=>w.focus(),350);}},"📅 ",h("b",{text:String(mFuture)})," "+mlabel)]);}
+    h("button",{class:"ss","aria-label":"Vezi sarcinile",onclick:()=>secChipGo("taskCard")},"✅ ",h("b",{text:String(tActive)})," "+tlabel),
+    h("button",{class:"ss","aria-label":"Vezi întâlnirile",onclick:()=>secChipGo("meetCard")},"📅 ",h("b",{text:String(mFuture)})," "+mlabel)]);}
+// chip-urile deschid sectiunea pliata 'Unelte' apoi sar la cardul potrivit (altfel scroll-ul ar duce la un card ascuns)
+function secChipGo(card){const d=$("#secMore");if(d)d.open=true;
+  setTimeout(()=>{const e=$("#"+card);if(e)e.scrollIntoView({behavior:"smooth",block:"start"});
+    if(card==="meetCard"){const w=$("#mAddWho");if(w)setTimeout(()=>w.focus(),350);}
+    if(e){e.classList.add("flash");setTimeout(()=>e.classList.remove("flash"),1200);}},60);}
 /* loop2 #11: mod Focus — ascunde tot, lasa input rapid + notitele active */
 function toggleFocus(){FOCUS=!FOCUS;logA(FOCUS?"Mod Focus pornit":"Mod Focus oprit");render();
   if(FOCUS)setTimeout(()=>{const i=$("#focusQuick");if(i)i.focus();},60);}
