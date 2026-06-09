@@ -1082,7 +1082,7 @@ header.multi .hmember{display:flex}
 .hmember-l{font-size:11px;color:var(--muted);font-weight:600;flex:none}
 .hmember .memsel{flex:1;max-width:none;width:auto}
 </style>
-<style>.mk.flame{background:none!important;border:0!important;box-shadow:none!important;padding:0!important}.mk.flame svg{width:100%;height:100%;display:block}#splash{position:fixed;inset:0;z-index:300;background:radial-gradient(130% 130% at 50% 46%,#0d0a22,#05040c 72%);transition:opacity .4s ease}#splash.gone{opacity:0;pointer-events:none}#splashCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}.splash-name{position:absolute;left:0;right:0;top:60%;text-align:center;font-family:'Georgia','Times New Roman',serif;font-size:37px;font-weight:700;letter-spacing:1px;z-index:2;background:linear-gradient(100deg,#22D3EE 16%,#F0FBFF 47%,#A78BFA 57%,#7C3AED 84%);background-size:230% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;opacity:0;animation:nameFade .5s ease .3s both,nameShine 1s cubic-bezier(.4,0,.2,1) .3s 1}.splash-tag{position:absolute;left:0;right:0;top:67.5%;text-align:center;font-size:11px;letter-spacing:5px;font-weight:700;color:#8b988f;z-index:2;opacity:0;animation:nameFade .6s ease .6s both}@keyframes nameFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@keyframes nameShine{from{background-position:135% 0}to{background-position:-35% 0}}.reduce-motion .splash-name,.reduce-motion .splash-tag{animation:none;opacity:1}@media (prefers-reduced-motion:reduce){.splash-name,.splash-tag{animation:none;opacity:1}}
+<style>.mk.flame{background:none!important;border:0!important;box-shadow:none!important;padding:0!important}.mk.flame svg{width:100%;height:100%;display:block}#splash{position:fixed;inset:0;z-index:300;background:radial-gradient(130% 130% at 50% 46%,#0d0a22,#05040c 72%);transition:opacity .4s ease}#splash.gone{opacity:0;pointer-events:none}#splashCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}.splash-name{position:absolute;left:0;right:0;top:60%;text-align:center;font-family:'Georgia','Times New Roman',serif;font-size:37px;font-weight:700;letter-spacing:1px;z-index:2;background:linear-gradient(100deg,#9B6BFF 14%,#FFE9DC 45%,#FF8A5B 60%,#7C3AED 86%);background-size:230% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;opacity:0;animation:nameFade .5s ease .3s both,nameShine 1s cubic-bezier(.4,0,.2,1) .3s 1}.splash-tag{position:absolute;left:0;right:0;top:67.5%;text-align:center;font-size:11px;letter-spacing:5px;font-weight:700;color:#8b988f;z-index:2;opacity:0;animation:nameFade .6s ease .6s both}@keyframes nameFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@keyframes nameShine{from{background-position:135% 0}to{background-position:-35% 0}}.reduce-motion .splash-name,.reduce-motion .splash-tag{animation:none;opacity:1}@media (prefers-reduced-motion:reduce){.splash-name,.splash-tag{animation:none;opacity:1}}
 /* ============================================================================
    LIVING EMBER · Faza 1 — adâncime cinematică, jar viu, orb-reportofon.
    Strat aditiv peste Aurora/loop6; sigur pe light+dark; respectă reduce-motion.
@@ -1269,7 +1269,7 @@ header.multi .hmember{display:flex}
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="emberFl" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#7C3AED"/><stop offset=".5" stop-color="#22D3EE"/><stop offset="1" stop-color="#A5F3FC"/></linearGradient><linearGradient id="emberCore" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#22D3EE"/><stop offset="1" stop-color="#E0FBFF"/></linearGradient></defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="emberFl" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#7C3AED"/><stop offset=".5" stop-color="#FF7E4D"/><stop offset="1" stop-color="#FFE3D2"/></linearGradient><linearGradient id="emberCore" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FF7E4D"/><stop offset="1" stop-color="#FFE9DC"/></linearGradient></defs></svg>
 <div id="splash" aria-hidden="true"><canvas id="splashCanvas"></canvas><div class="splash-name">Ember</div><div class="splash-tag">CAPITAL DE RELAȚII</div></div>
 <div class="shell">
 <a href="#mainContent" class="skiplink">Sari la conținut</a>
@@ -4012,7 +4012,7 @@ if("serviceWorker" in navigator){try{navigator.serviceWorker.register("sw.js").c
  function resize(){W=cv.width=Math.max(2,(innerWidth*DPR)|0);H=cv.height=Math.max(2,(innerHeight*DPR)|0);cx=W/2;cy=H*0.42;flameH=Math.min(H*0.32,168*DPR);scale=flameH/56;}
  resize(); window.addEventListener('resize',resize);
  function sprite(col){var s=document.createElement('canvas');s.width=s.height=64;var c=s.getContext('2d');var g=c.createRadialGradient(32,32,0,32,32,32);g.addColorStop(0,col);g.addColorStop(.45,col);g.addColorStop(1,'rgba(0,0,0,0)');c.fillStyle=g;c.fillRect(0,0,64,64);return s;}
- var sFire=[sprite('#E0FBFF'),sprite('#67E8F9'),sprite('#22D3EE'),sprite('#7C3AED')],sGold=sprite('#A5B4FC');
+ var sFire=[sprite('#FFE9DC'),sprite('#FFB088'),sprite('#FF7E4D'),sprite('#9B6BFF')],sGold=sprite('#9B6BFF');
  function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
  function flameTf(s){ctx.setTransform(scale*s,0,0,scale*s,cx-50*scale*s,cy-55*scale*s);}
  var parts=[],embers=[],t0=performance.now(),running=true,sway=0;
@@ -4023,19 +4023,19 @@ if("serviceWorker" in navigator){try{navigator.serviceWorker.register("sw.js").c
   var el=now-t0; sway=Math.sin(now*0.004)*3.5;
   var ig=Math.min(1,el/380), s=0.3+0.7*ease(ig);
   ctx.setTransform(1,0,0,1,0,0);
-  ctx.globalCompositeOperation='source-over';ctx.fillStyle='rgba(5,7,6,0.40)';ctx.fillRect(0,0,W,H);
+  ctx.globalCompositeOperation='source-over';ctx.fillStyle='rgba(7,5,16,0.40)';ctx.fillRect(0,0,W,H);
   ctx.globalCompositeOperation='lighter';
   var gp=(0.5+0.12*Math.sin(now*0.005))*ig,gr=ctx.createRadialGradient(cx,cy,0,cx,cy,flameH*1.5);
-  gr.addColorStop(0,'rgba(124,58,237,'+(0.34*gp)+')');gr.addColorStop(.5,'rgba(34,211,238,'+(0.12*gp)+')');gr.addColorStop(1,'rgba(0,0,0,0)');
+  gr.addColorStop(0,'rgba(124,58,237,'+(0.34*gp)+')');gr.addColorStop(.5,'rgba(255,126,77,'+(0.13*gp)+')');gr.addColorStop(1,'rgba(0,0,0,0)');
   ctx.fillStyle=gr;ctx.fillRect(0,0,W,H);
   flameTf(s);
-  var lg=ctx.createLinearGradient(0,83,0,27);lg.addColorStop(0,'#7C3AED');lg.addColorStop(.5,'#22D3EE');lg.addColorStop(1,'#A5F3FC');
+  var lg=ctx.createLinearGradient(0,83,0,27);lg.addColorStop(0,'#7C3AED');lg.addColorStop(.5,'#FF7E4D');lg.addColorStop(1,'#FFE3D2');
   ctx.globalCompositeOperation='source-over';ctx.globalAlpha=0.92*ig;ctx.fillStyle=lg;ctx.fill(FP);
   ctx.save();ctx.clip(FP);ctx.globalCompositeOperation='lighter';
   var emit=rm?0:3,e;for(e=0;e<emit;e++)spawnFire();
   var i,p,lr,idx,sz;for(i=parts.length-1;i>=0;i--){p=parts[i];p.life++;p.x+=p.vx;p.y+=p.vy;p.vy-=0.01;lr=p.life/p.max;if(lr>=1){parts.splice(i,1);continue;}idx=(lr*4)|0;if(idx>3)idx=3;sz=p.r*(1-lr*0.35);ctx.globalAlpha=(1-lr)*0.30;ctx.drawImage(sFire[idx],p.x-sz,p.y-sz,sz*2,sz*2);}
   ctx.restore();
-  flameTf(s);ctx.globalCompositeOperation='source-over';ctx.globalAlpha=0.55*ig;ctx.lineWidth=1.2;ctx.strokeStyle='rgba(224,251,255,0.7)';ctx.stroke(FP);
+  flameTf(s);ctx.globalCompositeOperation='source-over';ctx.globalAlpha=0.55*ig;ctx.lineWidth=1.2;ctx.strokeStyle='rgba(255,227,210,0.75)';ctx.stroke(FP);
   ctx.setTransform(1,0,0,1,0,0);ctx.globalCompositeOperation='lighter';ctx.globalAlpha=1;
   if(!rm&&ig>0.5&&Math.random()<0.45)spawnEmber();
   var j,m,mr,ms;for(j=embers.length-1;j>=0;j--){m=embers[j];m.life++;m.x+=m.vx;m.y+=m.vy;m.vy+=0.035*DPR;mr=m.life/m.max;if(mr>=1){embers.splice(j,1);continue;}ctx.globalAlpha=(1-mr)*(0.5+0.5*Math.sin(m.life*0.5));ms=m.r*4;ctx.drawImage(sGold,m.x-ms,m.y-ms,ms*2,ms*2);}
@@ -4043,7 +4043,7 @@ if("serviceWorker" in navigator){try{navigator.serviceWorker.register("sw.js").c
   if(running)requestAnimationFrame(frame);
  }
  if(!rm){requestAnimationFrame(frame);}
- else{flameTf(1);var lg=ctx.createLinearGradient(0,83,0,27);lg.addColorStop(0,'#7C3AED');lg.addColorStop(.5,'#22D3EE');lg.addColorStop(1,'#A5F3FC');ctx.fillStyle=lg;ctx.fill(FP);ctx.lineWidth=1.2;ctx.strokeStyle='rgba(224,251,255,0.7)';ctx.stroke(FP);ctx.setTransform(1,0,0,1,0,0);}
+ else{flameTf(1);var lg=ctx.createLinearGradient(0,83,0,27);lg.addColorStop(0,'#7C3AED');lg.addColorStop(.5,'#FF7E4D');lg.addColorStop(1,'#FFE3D2');ctx.fillStyle=lg;ctx.fill(FP);ctx.lineWidth=1.2;ctx.strokeStyle='rgba(255,227,210,0.75)';ctx.stroke(FP);ctx.setTransform(1,0,0,1,0,0);}
 })();
 
 (function(){const sp=document.getElementById("splash");if(!sp)return;const hide=()=>{sp.classList.add("gone");setTimeout(()=>{try{sp.remove();}catch(_){}}, 650);};setTimeout(hide,1400);})();
