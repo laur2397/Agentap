@@ -493,6 +493,11 @@ details.why2>summary::-webkit-details-marker{display:none}
 .ssdot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:1px}
 .ssdot.teal{background:var(--success);box-shadow:0 0 0 3px var(--success-soft)}
 .ssdot.violet{background:var(--primary);box-shadow:0 0 0 3px var(--primary-soft)}
+/* Inel de scor pe cardul de potrivire (ca în mockup) */
+.ghead-r{display:flex;flex-direction:column;align-items:flex-end;gap:7px;flex-shrink:0}
+.scorering{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;flex-shrink:0}
+.scorering-in{width:37px;height:37px;border-radius:50%;background:var(--card);display:grid;place-items:center}
+.scorering b{font-size:11.5px;font-weight:800;color:var(--primary-dim);font-variant-numeric:tabular-nums}
 .addmeet{display:flex;flex-direction:column;gap:8px;margin:4px 0 14px}
 .addmeet input{width:100%}
 .addmeet-row{display:flex;gap:8px;align-items:center}
@@ -3019,6 +3024,8 @@ function pl(l,v){return h("div",{},
   h("div",{class:"bar"},h("i",{style:{width:v+"%"}})));}
 
 function scoreLabel(s){return s>=85?"Potrivire excelenta":s>=70?"Potrivire foarte buna":s>=60?"Potrivire buna":"Posibila potrivire";}
+function scoreRing(score){const ring=h("div",{class:"scorering","aria-label":"Potrivire "+score+"%"},h("div",{class:"scorering-in"},h("b",{text:score+"%"})));
+  ring.style.background="conic-gradient(var(--primary) "+(score*3.6)+"deg, var(--line) 0)";return ring;}
 function matches(list){return list.map(m=>{
     const o=DB.items.find(i=>i.id===m.offer_item)||{text:"",source:""},s=DB.items.find(i=>i.id===m.seek_item)||{text:"",source:""};
     const off=m.offer_member===ME,cel=mem(off?m.seek_member:m.offer_member)||{name:"?",industry:"",role:"",trust:0,color:"#6366F1"};
@@ -3053,7 +3060,7 @@ function matches(list){return list.map(m=>{
     const details=h("details",{class:"why2"},h("summary",{text:"De ce vad asta? ⌄"}),
       h("div",{class:"whybody"},why,h("div",{class:"mono",style:{marginTop:"8px"},text:`Potrivire pe ${nC} ${nC===1?"semnal comun":"semnale comune"} dintre ce ati declarat amandoi · scor ${m.score}/99 · Trust ${cel.trust}/100. Estimari, nu garantii.`})));
     return h("div",{class:"card match"+(rev?" conectat":"")},
-      h("div",{class:"ghead"},av,h("div",{class:"gi"},h("div",{class:"gn",text:nm}),h("div",{class:"gt",text:ro})),pill),
+      h("div",{class:"ghead"},av,h("div",{class:"gi"},h("div",{class:"gn",text:nm}),h("div",{class:"gt",text:ro})),h("div",{class:"ghead-r"},pill,scoreRing(m.score))),
       gline,bridge,badges,whychips,dock,details,h("div",{class:"shield",text:"🛡 Conexiune protejata"+(rev?" · sursa: "+o.source:"")}));});}
 
 /* loop3 #12: audit de control — slider explicabil relevanta <-> diversitate (ajustabil, transparent) */
