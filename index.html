@@ -1469,7 +1469,7 @@ header.multi .hmember{display:flex}
           <p id="aiTestStatus" style="font-size:12px;line-height:1.45;margin-top:10px;display:none"></p>
           <p class="aiwarn" id="aiPriv"></p>
           <button class="linklike" data-act="aiClear">Șterge configurarea</button>
-          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-08b · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:10px;opacity:.7">versiune 2026-06-08c · dacă nu vezi acest text, ești pe o versiune veche din cache</div>
         </div>
       </details>
       <div id="aiChat" class="aichat"></div>
@@ -1556,6 +1556,11 @@ header.multi .hmember{display:flex}
     </div>
     <div class="panel" id="secCont"><h3>Cont &amp; securitate</h3>
       <div id="acctInfo" style="font-size:12.5px;color:var(--ink2);line-height:1.6;margin-bottom:10px"></div>
+      <div style="margin-bottom:12px">
+        <button class="btn ghost sm" id="btnNoPass" onclick="removePassword()">🔓 Folosește fără parolă</button>
+        <button class="btn ghost sm" id="btnSetPass" onclick="setPasswordBack()" style="display:none">🔑 Pune o parolă</button>
+        <div id="nopassNote" style="font-size:11px;color:var(--muted);margin-top:7px;line-height:1.45"></div>
+      </div>
       <div id="viewAsWrap" style="display:none;margin-bottom:12px">
         <label class="mfl" for="member">Vezi rețeaua ca (demo)</label>
         <select class="memsel" id="member" aria-label="Schimbă persoana activă" style="width:100%"></select>
@@ -1687,6 +1692,7 @@ header.multi .hmember{display:flex}
       <button class="skip" id="lockForgot" onclick="showReset()" style="display:none;margin:0;padding:0">Am uitat parola</button>
       <button class="btn gold" id="lockBtn" onclick="lockSubmit()" style="margin-left:auto">Deblochează →</button>
     </div>
+    <button class="btn ghost" id="lockNoPass" onclick="noPassSetup()" style="display:none;width:100%;max-width:340px;margin-top:12px">🔓 Folosește fără parolă</button>
   </div>
   <div class="step" id="lockResetStep" style="max-width:340px;width:100%;display:none">
     <label for="recCode">Cod de recuperare</label>
@@ -1776,6 +1782,9 @@ const STOP=new Set("si sau de la in un o cu pe pentru din ca care este are am ai
 const KEY="cercul_eie_v5",TKEY="cercul_theme",SKEY="cercul_salt";
 let DB=null,ME=null,VIEW="acasa",CHAT=null,IDF={},obStep=0,CK=null,HK=null,PROC=false,LOCKMODE="unlock",LEDGER_CHAIN=[],pendingLock=false,LOCKING=false,SALTBUF=null,TASKFILTER="active",EDITPROF=false,MATCHFILTER="all",NOTEFILTER="all",EDITTASK=null,EDITNOTE=null,CONNFILTER="all",EDITMEET=null,FOCUS=false,NOTERANGE="all",EDITGOAL=null,JUSTDONE=null,MKRAW=null,PENDING_RECOVERY=null,PENDING_ONBOARD=false;
 const ACCT_KEY="cercul_acct";
+/* Mod „fără parolă": o frază-cheie internă fixă împachetează cheia master, ca app-ul să se
+   deschidă direct. NU oferă protecție reală (oricine cu acces la dispozitiv intră) — opt-in. */
+const NOPASS="ember::nopass::v1::no-real-protection";
 // suprascrie cu zerouri bufferele pe care le controlam (audit s5r #1). CryptoKey-urile sunt
 // non-extractabile/opace (WebCrypto nu expune heap-ul lor) -> le eliberam pt. GC; parolele sunt
 // string-uri imutabile in JS si nu pot fi zeroizate — limitare documentata, nu ascunsa.
@@ -3168,6 +3177,11 @@ function prof(){const me=mem(ME),con=DB.matches.filter(x=>x.status==="conectat"&
           h("span",{style:{color:"var(--muted)",fontSize:"12px"},text:con+(con===1?" conexiune":" conexiuni")}))),
       h("button",{class:"btn ghost sm","data-act":"profedit",text:"✎ Editeaza"})));}
   applyOC();
+  // mod fără parolă: comută butoanele din Cont & securitate
+  {const np=(getAcct()||{}).nopass,bn=$("#btnNoPass"),bs=$("#btnSetPass"),nt=$("#nopassNote");
+   if(bn)bn.style.display=np?"none":"";if(bs)bs.style.display=np?"":"none";
+   if(nt)nt.textContent=np?"Intri direct, fără parolă. Oricine deschide acest dispozitiv are acces — pune o parolă dacă vrei protecție."
+                          :"Renunță la ecranul de parolă pe acest dispozitiv (fără protecție — confort).";}
   const r=(k,elid)=>{const l=DB.items.filter(i=>i.member_id===ME&&i.kind===k);
     setKids($(elid), l.length?l.map(i=>h("div",{class:"linei"},
         h("div",{},h("div",{text:i.text}),h("div",{class:"meta",text:"sursa: "+i.source})),
@@ -3915,6 +3929,7 @@ function showLock(mode){LOCKMODE=mode;hideReset();const acct=getAcct();
   // "Am uitat parola" doar la deblocare si doar daca exista cod de recuperare
   $("#lockForgot").style.display=(mode!=="setup"&&acct&&acct.w_rc)?"inline":"none";
   $("#lockReset").style.display=mode==="setup"?"none":"block";
+  const nb=$("#lockNoPass");if(nb)nb.style.display=mode==="setup"?"block":"none";
   $("#lock").classList.add("on");setTimeout(()=>$(mode==="setup"?"#lockId":"#lockPass").focus(),120);}
 function finishUnlock(isSetup){$("#lockPass").value="";$("#lockPass2").value="";$("#lockId").value="";
   $("#lock").classList.remove("on");loadMembers();render();resetIdle();
@@ -3940,6 +3955,31 @@ async function lockSubmit(){const err=$("#lockErr");err.style.display="none";con
   }catch(e){console.warn("lock",e);CK=null;HK=null;MKRAW=null;
     fail(LOCKMODE==="setup"?"Eroare la creare. Reîncearcă.":"Parolă greșită sau date corupte.");}
   finally{$("#lockBtn").disabled=false;}}
+/* creează un cont local FĂRĂ parolă (cheie internă fixă) și intră direct */
+async function noPassSetup(){const err=$("#lockErr");if(err)err.style.display="none";
+  const fail=m=>{if(err){err.style.display="block";err.textContent=m;}};
+  const nb=$("#lockNoPass");$("#lockBtn").disabled=true;if(nb)nb.disabled=true;
+  try{
+    const mkRaw=rnd(32);await establishMK(mkRaw);
+    await buildAcct(mkRaw,"Cont local","local",NOPASS);
+    const acct=getAcct();acct.nopass=1;setAcct(acct);
+    DB=seed();DB.account={id:"Cont local",idtype:"local"};SESSPASS=NOPASS;await flush();
+    finishUnlock(false);toast("Gata — intri direct, fără parolă ✓");
+  }catch(e){console.warn("nopass",e);CK=null;HK=null;MKRAW=null;fail("Eroare. Reîncearcă.");}
+  finally{$("#lockBtn").disabled=false;if(nb)nb.disabled=false;}}
+/* elimină parola pentru contul curent (sesiune deblocată) — re-împachetează cheia cu fraza internă */
+async function removePassword(){const acct=getAcct();if(!acct){toast("Cont indisponibil");return;}
+  if(!MKRAW){toast("Deblochează întâi");return;}
+  if(!confirm("Elimini parola? Oricine deschide acest dispozitiv va putea intra direct. Poți pune parola la loc oricând din Profil."))return;
+  try{const sp=rnd(16);acct.salt_pw=b64(sp);acct.w_pw=await wrapMK(MKRAW,NOPASS,sp);acct.nopass=1;setAcct(acct);SESSPASS=NOPASS;
+    logA("Parolă eliminată (mod fără parolă)");try{prof();}catch(_){}toast("Gata — de acum intri direct, fără parolă ✓");
+  }catch(e){console.warn("rmpass",e);toast("Eroare");}}
+/* repune o parolă reală (dezactivează modul fără parolă) */
+async function setPasswordBack(){const acct=getAcct();if(!acct||!MKRAW){toast("Deblochează întâi");return;}
+  const np=prompt("Alege o parolă (min 6 caractere):");if(np==null)return;if(np.length<6){toast("Minim 6 caractere");return;}
+  try{const sp=rnd(16);acct.salt_pw=b64(sp);acct.w_pw=await wrapMK(MKRAW,np,sp);delete acct.nopass;setAcct(acct);SESSPASS=np;
+    logA("Parolă activată");try{prof();}catch(_){}toast("Parolă activată ✓ — o vei cere la pornire");
+  }catch(e){console.warn("setpass",e);toast("Eroare");}}
 function showReset(){const acct=getAcct();if(!acct||!acct.w_rc){toast("Nu există cod de recuperare pentru acest cont.");return;}
   $("#lockMain").style.display="none";$("#lockReset").style.display="none";$("#lockResetStep").style.display="block";
   $("#lockTitle").textContent="Resetează parola";$("#lockLead").textContent="Introdu codul de recuperare primit la creare și alege o parolă nouă.";
@@ -4083,6 +4123,9 @@ MATCHDIV=Math.max(0,Math.min(100,+(localStorage.getItem("cercul_matchdiv")||0)))
   refresh();
 })();
 (async()=>{
+  const acct0=getAcct();
+  // mod fără parolă: deblochează automat cu fraza internă, fără ecran de lock
+  if(acct0&&acct0.nopass){try{await unlockWithPassword(NOPASS);finishUnlock(false);return;}catch(_){}}
   const hasAcct=getAcct()||(localStorage.getItem(SKEY)&&localStorage.getItem(KEY));
   if(hasAcct){try{if(await tryRecRecover())return;}catch(_){}} // reconectare automata dupa reload-ul de la microfon (iPhone-PWA)
   showLock(hasAcct?"unlock":"setup");
